@@ -179,5 +179,19 @@ manual screen-reader/mobile, benchmark or real-consumer acceptance. The Storyboo
 smoke is explicitly not an approved table design. Source references were not
 available for a fresh taste/architecture inspection; the local assessment was the
 fallback. No edits to `.repo/`, Gamila, Figma, source Notion pages or product scope.
-No commits, pushes, publication or deployment performed. Maintainer review follows
-the scoped WP-01 handoff; WP-02 still needs its own execution authorization.
+No commits, pushes, publication or deployment were performed during the original
+verification run. Subsequent local snapshot and acceptance are recorded below;
+WP-02 still needs its own execution authorization.
+
+## Maintainer acceptance
+
+On 2026-11-23 the maintainer explicitly stated: “I end my review and accept WP-01.”
+TASK-003 is done and review session 1 is closed. Accepted foundation snapshot:
+`6bac5a623754f2e1b0eae292a076e15cfd31fefb`, on local `chore/setup`. Review note n1
+was applied to the canonical HeroUI component-reference guidance; temporary notes
+remain in `REVIEW.md` until clearing is requested.
+
+This accepts the bounded foundation and its documented compatibility disposition,
+not unimplemented APIs or the deferred feasibility/release boundaries above.
+Acceptance/handoff updates change documentation only; they do not rerun runtime
+tests or authorize WP-02, installs, a new commit, publication or deployment.

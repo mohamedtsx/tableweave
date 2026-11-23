@@ -7,22 +7,24 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 ## Current handoff
 
 - **2026-11-23:** TASK-002 review and authorization are complete. The maintainer
-  explicitly approved WP-01 execution; TASK-003 foundation is implemented,
-  locally verified and **in review** with the maintainer.
-- **Current owner instruction:** implement the approved WP-01 locally, including
-  reviewed dependency installation and checks. Select exact compatible tools
-  within the baseline; return incompatibilities or scope changes for review.
-  No delegation, remote writes, publication or deployment is authorized; local
-  commit permission is scoped by the current Git instruction below.
+  ended the review and explicitly accepted WP-01; TASK-003 is **done**.
+- **Current owner instruction:** “I end my review and accept WP-01.” Record the
+  scoped foundation acceptance and close review session 1. Acceptance alone does
+  not authorize WP-02 execution, new installs, delegation, publication or deployment;
+  the subsequent Git/PR instruction below authorizes only those bounded operations.
 - **Previous Git instruction:** the approved documentation changes were committed
   as `de7f1cb`; that one-time commit permission is consumed.
 - **Previous transfer instruction:** move the existing local documentation commit and
   uncommitted WP-01/review changes onto local `chore/setup` in its existing
   `/home/mohamed/Desktop/tableweave` worktree. Preserve all changed/untracked
   source files and ignored local references; no new commit, push or publication.
-- **Current Git instruction:** commit the current WP-01 foundation and review
-  documentation locally on `chore/setup`. This authorizes one local snapshot,
-  not a push, publication, WP-01 review acceptance or WP-02 execution.
+- **Previous foundation commit:** the requested WP-01 snapshot is `6bac5a6` on
+  `chore/setup`; that one-time commit permission is consumed. Acceptance now
+  applies to this foundation revision.
+- **Current Git/PR instruction:** commit the acceptance documentation, push
+  `chore/setup` to `origin/chore/setup`, then update existing PR #1 to `develop`
+  (`https://github.com/mohamedtsx/tableweave/pull/1`) to reflect accepted WP-01.
+  Preserve the PR's scope/verification caveats; no merge, release or WP-02 work.
 - **Transfer result:** `chore/setup` fast-forwarded to existing `de7f1cb`; all 62
   changed/untracked source files transferred with byte/mode verification before
   this handoff update. The session now works in `/home/mohamed/Desktop/tableweave`.
@@ -53,10 +55,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Source-ID/fingerprint/section/navigation checks pass; 16 documentation-checker
   probes pass. Final source review corrected row-grouping wording and benchmark
   sampling fidelity. No implementation or stable-release gate is claimed passed.
-- **Next action:** maintainer reviews the TASK-003 handoff/evidence and accepts
-  the foundation or requests corrections. WP-02 is next in sequence, but is not
-  authorized by WP-01 approval. A local snapshot is now requested; no push.
-- **Active review:** TASK-003 / WP-01 review session 1. Detailed numbered notes
+- **Next action:** obtain separate bounded authorization for WP-02 schema,
+  operators and conformance vectors. Its WP-01 dependency is accepted, but no
+  WP-02 implementation or dependency installation is started by this acceptance.
+- **Review closed:** TASK-003 / WP-01 review session 1. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
   second task board. Numbering restarts in each new review session. Applied
   guidance stays in its canonical docs when notes are later cleared on request.
@@ -67,7 +69,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | --- | --- | --- | --- | --- |
 | TASK-001 | Ready-to-start product and agent documentation | done | Current documentation coordinator | Supplied PRD/HLD; read-only reference |
 | TASK-002 | Review technical baseline and authorize the first implementation slice | done | Current agent coordinates; maintainer decides | TASK-001; explicit WP-01 execution approval |
-| TASK-003 | WP-01 executable workspace and package foundation | in review | Current agent; maintainer reviews | Local foundation checks passed; maintainer acceptance pending |
+| TASK-003 | WP-01 executable workspace and package foundation | done | Current agent implemented; maintainer accepted | Foundation checks and explicit maintainer acceptance |
 | TASK-004 | Record maintainer taste and architecture reference sources | done | Current documentation agent | Explicit maintainer clarification |
 
 ## TASK-001 — Documentation foundation
@@ -140,8 +142,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 ## TASK-003 — WP-01 workspace and package foundation
 
-- **Status/owner/reviewer:** in review; current agent implemented and reviewed
-  the local result; maintainer reviews/accepts the handoff. No delegation used.
+- **Status/owner/reviewer:** done; current agent implemented and reviewed the
+  local result; maintainer explicitly accepted WP-01 and ended review session 1
+  on 2026-11-23. Accepted foundation revision: `6bac5a6`. No delegation used for
+  WP-01. Acceptance preserves the evidence/compatibility limits below and is not
+  a full technical-baseline/API freeze, feature or release-gate pass.
 - **Compatibility disposition:** after research, maintainer explicitly approved
   Storybook `9.1.21`/Vite `7.3.8` and `exactOptionalPropertyTypes: false` only in
   the development Storybook app. `strict: true` and `skipLibCheck: false` stay
@@ -206,8 +211,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   no actual table, full vendor-barrel/G-01/G-05/SSR/manual AT/performance/consumer
   readiness claim. Missing local `.repo/` inspection and publication/legal inputs
   are explicit limits, not fabricated passes. Packages stay private.
-- **Next action:** maintainer accepts the scoped WP-01 handoff or requests changes.
-  If accepted and separately authorized, WP-02 starts from these package entries
+- **Next action:** with separate authorization, WP-02 starts from these accepted package entries
   with schema/operator/conformance vectors; update the scaffold-only negative
   assertions as real APIs are introduced. Do not start WP-02 yet.
 
@@ -216,7 +220,12 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   updated only this ledger, review procedure and the stack's transient-note
   reference. Existing WP-01 work remains unchanged. `python3 scripts/check_docs.py`,
   `python3 -B scripts/test_check_docs.py` (17 probes) and `git diff --check`
-  passed. Continue maintainer review; no runtime rerun or new authority implied.
+  passed when moving the notes. Review is now closed; notes are retained until
+  clearing is requested. Closure changes only this ledger, `REVIEW.md` and the
+  foundation evidence disposition. Closure checks passed:
+  `python3 scripts/check_docs.py`, `python3 -B scripts/test_check_docs.py`
+  (17 probes), and `git diff --check`. No runtime suites rerun for unchanged
+  code; no new execution authority implied.
 
 ## TASK-004 — Maintainer taste and architecture sources
 

@@ -11,7 +11,10 @@ the scratchpad does not lose the guidance. No notes are cleared by this move.
 
 ## WP-01 — review session 1
 
-Reviewing TASK-003. WP-01 remains in review; WP-02 is not started or authorized.
+**Closed:** the maintainer ended this review and accepted TASK-003 / WP-01 on
+2026-11-23. The foundation revision is `6bac5a6`; WP-02 is not started or authorized.
+Notes are retained until clearing is requested; applied guidance remains in the
+canonical documentation and skill.
 
 ### n1 — HeroUI component reference
 
@@ -28,5 +31,4 @@ Reviewing TASK-003. WP-01 remains in review; WP-02 is not started or authorized.
   `git diff --check` passed when the guidance was applied. No runtime or external
   site availability validation was claimed for that documentation-only update.
 
-Continue with the next maintainer-provided note in this session; reset numbering
-only when a new review session begins.
+This session has ended. Restart note numbering at `n1` in the next review session.
