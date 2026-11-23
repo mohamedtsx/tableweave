@@ -7,6 +7,14 @@ departures from references need annotations, not hidden Figma-only decisions.
 
 ## Authority and exact references
 
+The maintainer's [three taste sources](../reference/README.md#maintainer-taste-and-architecture-sources)
+are direct feedback, the transactions reference below and `.repo/` (currently
+`.repo/Gamila`), the **main taste and architecture reference**. Consult relevant
+local design/component patterns, compare the transactions treatment and apply
+direct feedback rather than substituting generic HeroUI or design-skill defaults.
+The Figma prototype is supplementary and exploratory, not the primary taste
+source or final visual approval. Keep all reference no-copy/read-only boundaries.
+
 | Reference | Use | Do not inherit |
 | --- | --- | --- |
 | [Transactions reference](https://shadcnuikit.com/dashboard/payment/transactions) | Quiet hierarchy, compact rows/status, segmented builder, selection replacement, pagination | Commercial code/assets, dashboard shell, Export, business terms/default dates or always-enabled tools |
@@ -14,7 +22,7 @@ departures from references need annotations, not hidden Figma-only decisions.
 | [Toolbar configurations](https://www.figma.com/design/03BxapjDU8ceJUFjx3o6Cx/better-table?node-id=2-74) | Optional tools and attribute/operator/value controls | Competing owners or all tools on by default |
 | [Segmented rules](https://www.figma.com/design/03BxapjDU8ceJUFjx3o6Cx/better-table?node-id=27-922) | Whole-rule wrapping, segments/options/typed editor | Nested Boolean groups; segments are one rule, not a subtree |
 | [Filtered table](https://www.figma.com/design/03BxapjDU8ceJUFjx3o6Cx/better-table?node-id=27-1269) | Sample active criteria/results | Assuming every sample owner map is valid |
-| [HeroUI Table](https://heroui.com/docs/components/table), [Drawer](https://heroui.com/docs/components/drawer) | Compound vocabulary, theme/focus/state affordances | Second processing owner or unsupported responsive props |
+| [HeroUI v3 Storybook](https://storybook-v3.heroui.com/?path=/docs/welcome--docs) | Primary component reference for Table/Drawer anatomy, variants, theme/focus/state affordances; verify against installed types/tagged source | Second processing owner, unsupported responsive props or assuming hosted examples match the installed release |
 | [shadcn guide](https://ui.shadcn.com/docs/components/base/data-table) | Composition/custom cells/actions | Required Base UI/Radix/shadcn dependency or only permitted theme |
 | [Notion filtering](https://www.notion.com/help/views-filters-and-sorts) | Type/operator/empty vocabulary | Nested groups/views/formulas/backend clone |
 

@@ -1,0 +1,51 @@
+{
+  "name": "@tableweave/heroui",
+  "version": "0.0.0-wp01.0",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./dist/styles.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./sortable": {
+      "types": "./dist/sortable/index.d.ts",
+      "import": "./dist/sortable/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node ../../tests/foundation/copy-styles.mjs"
+  },
+  "peerDependencies": {
+    "@heroui/react": "3.2.8",
+    "@heroui/styles": "3.2.8",
+    "@tableweave/react": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.5"
+  },
+  "devDependencies": {
+    "@heroui/react": "3.2.8",
+    "@heroui/styles": "3.2.8",
+    "@internationalized/date": "3.12.4",
+    "@react-aria/ssr": "3.10.1",
+    "@react-aria/utils": "3.34.1",
+    "@react-spectrum/provider": "3.11.1",
+    "@tableweave/react": "workspace:*",
+    "@tanstack/react-table": "9.3.1",
+    "react": "19.3.1",
+    "react-aria": "3.53.1",
+    "react-aria-components": "1.22.1",
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.5"
+  }
+}

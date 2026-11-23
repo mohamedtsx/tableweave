@@ -1,7 +1,10 @@
 # Selected technical baseline
 
 Source: HLD §3. Selected majors/generations are design decisions; exact installed
-versions and valid peers await G-01/G-05. No `package.json`/lockfile exists yet.
+versions and valid peers await G-01/G-05. WP-01 now pins an executable development
+candidate in manifests/`pnpm-lock.yaml`; see [foundation evidence](../evidence/wp-01-foundation-2026-11-23.md)
+for exact versions, reviewed tooling choices and limits. A foundation check does
+not accept the full runtime compatibility matrix.
 
 | Area | Intended baseline | Verification obligation |
 | --- | --- | --- |
@@ -38,10 +41,18 @@ Playwright WebKit is not proof of actual Safari/mobile assistive technology.
 - [TanStack Table state](https://tanstack.com/table/latest/docs/framework/react/guide/table-state)
   for controlled slices/reactive subscriptions; `latest` URLs must be checked
   against the installed version.
-- [HeroUI React](https://heroui.com/docs/react/getting-started/quick-start),
-  [Table](https://heroui.com/docs/components/table),
-  [Drawer](https://heroui.com/docs/components/drawer); if docs fail, inspect official
-  source at the matching release/tag, not an unpinned branch as compatibility proof.
+- [HeroUI v3 Storybook](https://storybook-v3.heroui.com/?path=/docs/welcome--docs)
+  is the **primary HeroUI component reference**, per maintainer instruction.
+  Use its actual component docs/stories for anatomy,
+  variants and interactions; navigate the catalog rather than guessing story IDs.
+  The maintainer reports the main HeroUI site is sometimes unresponsive; do not
+  repeatedly depend on it for component lookup. The
+  [main-site quick start](https://heroui.com/docs/react/getting-started/quick-start)
+  is supplementary setup guidance. Check Storybook examples against installed
+  package types and official source at the matching release/tag; a hosted
+  Storybook may track a different release and is not compatibility proof. If
+  Storybook is unavailable, use matching installed types/tagged source and record
+  the limitation rather than claiming the component reference was inspected.
 - [dnd-kit generation migration](https://dndkit.com/react/guides/migration) and
   [sortable state](https://dndkit.com/react/guides/sortable-state-management/).
 - [Internationalized Date](https://react-spectrum.adobe.com/internationalized/date/index.html).

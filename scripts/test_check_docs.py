@@ -87,6 +87,14 @@ class WorkspaceTests(unittest.TestCase):
         (self.root / "orphan.md").write_text("# Orphan\n", encoding="utf-8")
         self.assert_failure("unreachable Markdown from entrypoints: orphan.md")
 
+    def test_generated_runtime_artifacts_are_not_documentation_inputs(self):
+        for directory in (".artifacts", "storybook-static", "test-results", "playwright-report"):
+            path = self.root / directory / "nested" / "generated.md"
+            path.parent.mkdir(parents=True)
+            path.write_text("# Generated\n[Broken](absent.md)\n", encoding="utf-8")
+        result, output = self.run_check()
+        self.assertEqual(result, 0, output)
+
     def test_bad_skill_name_fails(self):
         path = self.root / ".agents/skills/tableweave-docs-maintenance/SKILL.md"
         path.write_text(

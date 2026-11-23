@@ -1,0 +1,40 @@
+{
+  "name": "tableweave-workspace",
+  "version": "0.0.0-wp01.0",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=24.22.0 <25",
+    "pnpm": "10.13.1"
+  },
+  "scripts": {
+    "build": "node tests/foundation/build.mjs",
+    "install:check": "node tests/foundation/clean-install.mjs",
+    "typecheck": "pnpm build && pnpm --filter @tableweave/storybook typecheck && tsc -p tests/foundation/tsconfig.json",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "test": "pnpm build && vitest run",
+    "storybook": "node tests/foundation/storybook.mjs dev",
+    "storybook:build": "node tests/foundation/storybook.mjs build",
+    "test:browser": "playwright test",
+    "pack:check": "pnpm build && node tests/foundation/packed-consumers.mjs",
+    "check:docs": "python3 scripts/check_docs.py && python3 -B scripts/test_check_docs.py",
+    "check": "pnpm install:check && pnpm lint && pnpm typecheck && pnpm test && pnpm check:docs && pnpm pack:check && pnpm storybook:build && pnpm test:browser",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@biomejs/biome": "2.6.8",
+    "@changesets/cli": "3.0.3",
+    "@playwright/test": "1.65.1",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "6.0.3",
+    "typescript-5-9": "npm:typescript@5.9.3",
+    "vite": "7.3.8",
+    "vitest": "5.1.1"
+  }
+}

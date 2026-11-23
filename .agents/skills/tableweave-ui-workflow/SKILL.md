@@ -10,8 +10,11 @@ Read affected [features](../../../product/features.md),
 and only relevant [design scenes](../../../docs/design/handoff.md).
 
 1. Confirm implementation/design authority and actual installed components. Load
-   available HeroUI v3 guidance and official version-matching component docs when
-   using that library. For actual Figma operations, follow the connected Figma
+   available HeroUI v3 guidance. Start component lookup in the official HeroUI v3
+   Storybook, not the sometimes-unresponsive main site; follow the
+   [lookup/version fallback](../../../docs/engineering/stack.md#conditional-official-lookup)
+   and verify examples against matching installed types/tagged source. For actual
+   Figma operations, follow the connected Figma
    server's session/skill/design-system workflow; this procedure grants no writes.
 2. Reuse real components/tokens and native collection semantics. Preserve one
    TanStack processing owner, valid compound table/Drawer anatomy, stable IDs,

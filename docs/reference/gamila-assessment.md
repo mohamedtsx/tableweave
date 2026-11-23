@@ -1,10 +1,20 @@
 # Read-only Gamila assessment
 
-Reviewed 2026-11-23 for Tableweave documentation practices. Optional local source:
+Reviewed 2026-11-23 for Tableweave documentation practices. Local source:
 `.repo/Gamila`; no runtime code/assets/business policy was copied. Local Git
 object HEAD and staged original submodule object both identify
 `2c7b69444480a7fbb8547db096d1628cf09ee502`. This identifies an object, not proof
 that every reference working-tree file equals that commit.
+
+## Maintainer clarification
+
+The maintainer subsequently identified `.repo/` as the **main source of taste
+and architecture**, alongside direct feedback and the transactions reference.
+Follow the [canonical reference guidance](README.md#maintainer-taste-and-architecture-sources)
+when doing new design or engineering work. This assessment is a scoped historical
+inspection, not an exhaustive account of that taste or a replacement for reading
+relevant reference files. The clarification records intent; it does not claim a
+new visual/runtime audit or authorize copying brand assets or application policy.
 
 ## Material inspected
 
@@ -32,7 +42,7 @@ full code/security audit. Historical evidence in Gamila proves only its own scop
 | Exact versions from actual manifests/lockfile | Adopt procedure | Recheck compatible peers at bootstrap; reference patch versions are not our lockfile |
 | Three app realms, bookings/finance/auth/database/outbox rules | Reject inheritance | Library owns none of those domains/services |
 | Fixed booking page size/order, deferred bulk selection, URL-authoritative app state | Reject inheritance | Tableweave approved pagination/selection and optional-only persistence govern |
-| Gamila gold/fonts/editorial/portal-specific language and primitives policy | Reject inheritance | HeroUI-aligned configurable tokens/locale, semantic markup; no copied brand or blanket HTML prohibition |
+| Gamila visual taste versus gold/fonts/editorial/portal-specific language and primitives policy | Adapt taste; no automatic brand/policy inheritance | Study relevant visual patterns as the main taste reference; retain HeroUI-aligned configurable tokens/locale and semantic markup, without copied brand assets or a blanket HTML prohibition |
 
 The inspected table recommendation explicitly distinguishes v9 `useTable`/
 registered features/subscriptions from v8 snippets; warns partial pages cannot

@@ -1,1 +1,9 @@
 .repo/
+node_modules/
+dist/
+.artifacts/
+storybook-static/
+playwright-report/
+test-results/
+*.tsbuildinfo
+__pycache__/

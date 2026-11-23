@@ -6,9 +6,12 @@ experience without rebuilding its design and interactions each time.
 Tableweave is a planned open-source React table toolkit built on TanStack Table,
 with a genuinely headless path and an optional HeroUI default experience.
 
-**Current stage: documentation foundation; no Tableweave packages are implemented
-or published here.** Names and APIs below are planned, not available exports.
-There is no installable workspace, demo server, or runtime test suite yet.
+**Current stage: WP-01 foundation, not an implemented table toolkit.** Private
+package entry/build scaffolds, a synthetic Storybook smoke scene and executable
+foundation checks exist. Feature APIs such as `DataTable` and schema helpers are
+still planned and unavailable. Nothing is published; see [TASKS.md](TASKS.md) for
+review status and [foundation evidence](docs/evidence/wp-01-foundation-2026-11-23.md)
+for actual checks and compatibility limits.
 
 ## Start here
 
@@ -63,13 +66,56 @@ The regression probes test the checker, not Tableweave. Optional
 section counts and source IDs to the manifest; normal checks need no connector
 or reference checkout. It does not fetch Notion or establish semantic equivalence.
 
-## Runtime workflow is not mounted
+## Local foundation workflow
 
-The [bootstrap packet](docs/planning/work-packets.md#wp-01-workspace-and-package-foundation)
-must create and verify real install/build/type/test/Storybook/pack commands, then
-replace this notice with the executable workflow. Do not copy commands from
-Gamila or invent passing tests. Node 24 LTS and pnpm 10 are the HLD's development
-baseline, not installed-tool claims.
+Use **Node 24.22.0** (`.node-version`) and **pnpm 10.13.1** (`packageManager`).
+Python 3.10+ and Linux `tar` are also needed for documentation/packing checks.
+Runtime dependencies and tooling are exact development candidates, not a released
+compatibility promise. Packages remain private; no backend/auth service is needed.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+pnpm check
+```
+
+On Linux CI, Playwright uses `pnpm exec playwright install --with-deps chromium`.
+This may install OS browser prerequisites; local users can provision those through
+their normal administrator workflow instead. No telemetry or remote CI execution
+is enabled by these local commands.
+
+| Command | Scope |
+| --- | --- |
+| `pnpm install:check` | Fresh manifest-only workspace install with the frozen lockfile; may reuse dependency cache |
+| `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
+| `pnpm typecheck` | Build, then check Storybook/harness sources with strict TypeScript 6 |
+| `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
+| `pnpm test` | Four emitted-boundary/guard unit tests; not table behavior |
+| `pnpm pack:check` | Inspect tarballs; isolated headless/styled installs, TS 5.9/6 declaration checks, Node import guards and Vite bundles |
+| `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
+| `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
+| `pnpm test:browser` | Chromium pointer/keyboard/style/axe smoke against the static build (run Storybook build first) |
+| `pnpm check:docs` | Structural Markdown checks and checker regression probes |
+| `pnpm check` | Full local sequence above, including fresh-install verification |
+| `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
+
+Generated consumer/tarball reports live in ignored `.artifacts/`; browser evidence
+is in ignored `test-results/`. These commands do not publish, commit or push.
+[Headless scaffold](packages/react/README.md) and [styled scaffold](packages/heroui/README.md)
+document their empty exports. Tests intentionally reject unimplemented named APIs
+and private deep imports. Update those foundation assertions as real packets add
+accepted APIs; do not implement fake exports to satisfy bootstrap checks.
+
+The reviewed tooling set uses security-patched Storybook **9.1.21** with Vite
+**7.3.8**, retaining TypeScript **6.0.3**, React **19.3.1**, TanStack Table **9.3.1**,
+HeroUI/styles **3.2.8** and Tailwind **4.3.5**. All configurations retain
+`strict: true` and `skipLibCheck: false`. Only the development Storybook app omits
+the additional exact-optional-property check, explicitly approved after upstream
+declaration failures; Tableweave packages and packed consumers retain it.
+
+This smoke is not G-01/full G-05, a full vendor-barrel declaration pass, SSR,
+Next/Start integration, complete browser/manual accessibility, performance or
+real-consumer acceptance. Final UI still needs reference-informed design review.
 
 ## Authority and licensing
 
