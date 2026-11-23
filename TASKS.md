@@ -11,9 +11,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Current owner instruction:** maintainer approved the bounded WP-02 plan and
   Valibot `1.5.0` / Internationalized Date `3.12.4` core additions. TASK-005 is
   accepted; TASK-006 independently reproduced/fixed review session 1 n1–n3 and
-  is back **in review** with full checks passing. The new instruction authorizes
-  committing this WP-02 work and creating a new PR (TASK-007), including a new
-  branch and push. No merge, delegation, npm publication or deployment authorized.
+  is back **in review** with full checks passing. The subsequent commit/new-PR
+  request is delivered through TASK-007: implementation commit `f046b9f` and
+  [PR #2](https://github.com/mohamedtsx/tableweave/pull/2). No merge, delegation,
+  npm publication, deployment or further feature execution is authorized.
 - **Previous Git instruction:** the approved documentation changes were committed
   as `de7f1cb`; that one-time commit permission is consumed.
 - **Previous transfer instruction:** move the existing local documentation commit and
@@ -61,7 +62,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   sampling fidelity. No implementation or stable-release gate is claimed passed.
 - **Next action:** maintainer reviews the corrected WP-02 snapshot and
   [review dispositions](REVIEW.md#wp-02--review-session-1) through a new stacked
-  PR. TASK-007 commits/pushes the bounded snapshot; WP-03 remains unauthorized.
+  [PR #2](https://github.com/mohamedtsx/tableweave/pull/2), targeting `chore/setup`
+  while PR #1 is open. TASK-007 is delivered; WP-03 remains unauthorized.
 - **Review closed:** TASK-003 / WP-01 review session 1. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
   second task board. Numbering restarts in each new review session. Applied
@@ -77,7 +79,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-004 | Record maintainer taste and architecture reference sources | done | Current documentation agent | Explicit maintainer clarification |
 | TASK-005 | Prepare bounded WP-02 implementation plan | done | Current planning agent; maintainer approved | Explicit plan/dependency approval |
 | TASK-006 | WP-02 schema, operators and conformance vectors | in review | Current agent reproduced/fixed n1–n3; maintainer decides | Corrected full checks passed; producer acceptance pending |
-| TASK-007 | Commit WP-02 and create a separate PR | in progress | Current agent executes; maintainer reviews PR | Explicit commit/new-PR request; existing PR #1 remains open |
+| TASK-007 | Commit WP-02 and create a separate PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #2 open; PR #1 unchanged |
 
 ## TASK-001 — Documentation foundation
 
@@ -352,7 +354,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   helpers; semantic versus request keys. [Producer contract](docs/engineering/wp-02-contracts.md)
   records consequential representation/normalization/time/privacy choices. No
   controller/React/UI/native/resource/SSR/backend/release implementation or gate
-  acceptance is claimed. Original plan/packet edits remain uncommitted/preserved.
+  acceptance is claimed. Original plan/packet edits were preserved and are now
+  committed with the implementation in TASK-007.
 - **Review correction scope:** `filters/evaluate.ts`, `filters/registry.ts`,
   `filters/dates.ts`, `contracts/types.ts`; contract regressions/independent
   translator fixture and packed consumer fixtures; REVIEW/TASKS and affected
@@ -376,8 +379,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 ## TASK-007 — Commit WP-02 and create a new PR
 
-- **Status/owner:** in progress; current agent executes and verifies the Git/PR
-  handoff; maintainer reviews. This does not accept or close TASK-006/review.
+- **Status/owner:** done; current agent delivered and verified the Git/PR handoff;
+  maintainer reviews. This does not accept or close TASK-006/review.
 - **Authorization:** explicit request: “commit and create new pr”. Create a new
   WP-02 branch, commit the known implementation/plan/review/docs/test changes,
   push it and open a new PR. No merge, force push, existing-PR edit or release.
@@ -396,5 +399,18 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Checks:** reuse the recorded 159-test full check for unchanged runtime;
   rerun documentation/whitespace checks for Git handoff edits, inspect staged
   scope and verify clean local state/remote PR metadata after push.
-- **Next action:** create the branch, commit the scoped snapshot, push/open the
-  stacked PR, then record and verify the delivered handoff.
+- **Delivered:** implementation commit
+  `f046b9f86f6ca1798bd026435edac4060f28e92a` on `feat/wp-02-contracts`, pushed with
+  upstream tracking. [PR #2](https://github.com/mohamedtsx/tableweave/pull/2) is
+  OPEN, non-draft, head `feat/wp-02-contracts`, base `chore/setup`. Verified PR
+  head and remote branch equal the implementation SHA and the worktree is clean
+  before this documentation-only completion update. PR #1 remains untouched.
+- **Verification/handoff:** staged scope inspected (50 WP-02 files), documentation
+  checks/17 probes and whitespace checks passed before the implementation commit.
+  No runtime/test/lockfile changes since the recorded 159-test full check; PR body
+  distinguishes that local evidence from remote CI and preserves all limitations.
+  This completion record is delivered as a follow-up documentation commit; it
+  does not change the implementation snapshot or imply maintainer acceptance.
+- **Next action:** maintainer reviews PR #2. After PR #1 is eventually merged,
+  retarget PR #2 to `develop` only under appropriate authority. No merge or further
+  execution follows automatically from this Git-delivery request.
