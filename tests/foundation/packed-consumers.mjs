@@ -82,6 +82,11 @@ for (const name of ["react", "heroui"]) {
             "tanstack/boundary",
             "tanstack/hook",
             "tanstack/index",
+            "resource/types",
+            "resource/view",
+            "resource/adapter",
+            "resource/hook",
+            "resource/index",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ]
       : [
@@ -243,12 +248,17 @@ for (const kind of ["headless", "styled"]) {
   }
   await cp(join(root, "tests/consumers/headless.ts"), join(dir, "headless.ts"));
   await cp(join(root, "tests/consumers/native.ts"), join(dir, "native.ts"));
+  await cp(join(root, "tests/consumers/resource.ts"), join(dir, "resource.ts"));
   if (kind === "styled")
     await cp(join(root, "tests/consumers/styled.ts"), join(dir, "styled.ts"));
   await cp(join(root, "tests/consumers/runtime.mjs"), join(dir, "runtime.mjs"));
   await cp(
     join(root, "tests/consumers/native-runtime.mjs"),
     join(dir, "native-runtime.mjs"),
+  );
+  await cp(
+    join(root, "tests/consumers/resource-runtime.mjs"),
+    join(dir, "resource-runtime.mjs"),
   );
   await writeFile(
     join(dir, "tsconfig.json"),
@@ -282,6 +292,7 @@ for (const kind of ["headless", "styled"]) {
     dir,
   );
   command(process.execPath, ["native-runtime.mjs"], dir);
+  command(process.execPath, ["resource-runtime.mjs"], dir);
   const entries =
     kind === "styled"
       ? [

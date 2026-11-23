@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-05 private resource producer — 2026-11-24](wp-05-resource-2026-11-24.md):
+  independently corrected Suspense lifetime, deterministic races and isolated full
+  workflow/public packed evidence; combined native integration remains separate.
+
 - [WP-04 native/collection candidate — 2026-11-24](wp-04-native-2026-11-24.md):
   corrected actual native/grouped collection G-01 proof, independent review and
   strict public packed/browser checks; not broader framework/device/release gates.

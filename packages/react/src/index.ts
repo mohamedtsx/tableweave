@@ -18,6 +18,27 @@ export {
   useTableweaveState,
 } from "./hooks/state.js";
 export type {
+  EmptyKind,
+  PageInfo,
+  ResourceAdapter,
+  ResourceAdapterOptions,
+  ResourceContext,
+  ResourceError,
+  ResourceErrorCode,
+  ResourceInvalidation,
+  ResourceInvalidationReason,
+  ResourceRequest,
+  ResourceRequestInput,
+  ResourceSnapshot,
+  ResourceSuccess,
+  ResourceView,
+} from "./resource/index.js";
+export {
+  createResourceAdapter,
+  projectResourceView,
+  useTableweaveResource,
+} from "./resource/index.js";
+export type {
   NativeCell,
   NativeColumn,
   NativeColumnDef,

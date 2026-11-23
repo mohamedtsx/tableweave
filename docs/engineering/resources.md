@@ -1,7 +1,52 @@
 # Resource identity, recovery and retained results
 
 Source: HLD §8; ADR-06. Implements [recovery](../../product/recovery.md) without
-becoming a fetch cache. All shapes below are proposed, not existing exports.
+becoming a fetch cache. WP-05 now supplies the private producer below; its review/
+acceptance state belongs to TASKS. The HLD envelope remains illustrative rather
+than an importable type or complete table facade.
+
+## Implemented private producer
+
+Root exports `createResourceAdapter<T,Q>`, `useTableweaveResource` and
+`projectResourceView`, with `ResourceContext`, `ResourceRequest`, `ResourceSuccess`,
+`ResourceSnapshot`, `ResourceView`, `PageInfo`, invalidation/error and adapter types.
+Exact use/constraints and executable fixtures are in the
+[WP-05 plan](../planning/wp-05-implementation-plan.md) and
+[integration notes](../../tests/resource/README.md).
+
+The context tags definition/scope/access. Application `begin` supplies an already
+accepted wire query, query/request keys and optional Retry port; each call creates
+an opaque identity-checked generation token. `succeed` only promotes fresh data
+for the exact current token; placeholders, prior generations and other contexts
+cannot enter the single last-fresh buffer. `fail` maps allowlisted error codes to
+fixed safe messages without inspecting arbitrary error payloads. `retry` creates
+a new current generation and invokes the application port; it does not fetch.
+
+The view separates requested query from the actual displayed snapshot/page and
+derives busy/stale/obsolete/action guards. New selection/reorder cannot target
+obsolete-query rows; recovery/selection Cancel remain separate. Known totals and
+unknown next-page flags are application facts, never inferred from page length.
+Fresh empty results replace old rows permanently. Queries/array containers/
+metadata are immutable copies; row values remain application-owned immutable
+references, not deep-cloned/frozen business objects.
+
+`setContext`, clear, access loss and disposal invalidate tokens before invoking
+the synchronous application port for clearing selection/details/option labels/
+transient operations. The adapter stores none of those application states and
+cannot authorize access. Callback exceptions/thenables are safely rejected and
+block new requests until an explicit successful clear. Request-side access loss
+is terminal until explicit context restoration; stale allowed hook props and
+late responses cannot revive it.
+
+One hook owns one adapter lifetime. It purely suppresses incompatible private
+data during render, commits context in layout, and connects/disconnects lifetime
+in passive effects. Suspense hide/reveal is not real unmount and must not erase
+same-scope rows or cancel the app's still-mounted request effect. Real unmount/
+StrictMode passive cleanup clears before the same component's later application
+passive cleanup; this is not a promise to clear before arbitrary layout callbacks.
+Applications explicitly invalidate authorization/scope, including while hidden.
+The stable server snapshot is initially empty, not loader dehydration or WP-06
+framework SSR proof. No automatic storage, fetch cache or Query dependency.
 
 ## Proposed envelope
 
