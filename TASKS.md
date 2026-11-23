@@ -61,8 +61,9 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Source-ID/fingerprint/section/navigation checks pass; 16 documentation-checker
   probes pass. Final source review corrected row-grouping wording and benchmark
   sampling fidelity. No implementation or stable-release gate is claimed passed.
-- **Next action:** WP-04 now has delegated technical/G-01 approval after full
-  checks and independent corrections. Finish its commit/stacked PR handoff, then
+- **Next action:** WP-04 has delegated technical/G-01 approval and implementation
+  `b165550` in [PR #4](https://github.com/mohamedtsx/tableweave/pull/4), stacked on
+  still-open PR #3. Complete its patch-material handoff push, then
   stack reviewed resource commit `71f076c` and rerun combined WP-04/WP-05 checks.
   PR #3 stays open; no PR merge. WP-06 plan/dependency research is prepared.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
@@ -86,7 +87,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-009 | Plan then implement WP-03 accepted-state coordinator | done | Main agent delivered/corrected; maintainer accepted | Explicit WP-03 acceptance after 208-test/four-browser/packed checks and n1–n2 fixes |
 | TASK-010 | Commit accepted WP-03 and create a PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #3 open to develop |
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
-| TASK-012 | WP-04 native/collection feasibility | in progress | Main completes Git handoff after independent review | Agent-approved scoped G-01; 241 unit/32 Chromium/public packed checks pass |
+| TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | in progress | Isolated resource worker; main integrates/reviews later | Independent WP-02/WP-03 dependency; G-03 |
 | TASK-014 | WP-06 Start/Query SSR integration | planned | Assigned after producer handoffs | WP-04/WP-05; G-04 |
 | TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
@@ -646,6 +647,13 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   verified defect. Main also inspected the real generated accessibility tree.
   Evidence/source fingerprints/archive hashes are recorded. Next: final docs/
   whitespace checks, commit/push and PR to `feat/wp-03-coordinator`; no merge.
+  **Git delivery:** implementation `b165550` committed/pushed on
+  `feat/wp-04-native-bridge`; [PR #4](https://github.com/mohamedtsx/tableweave/pull/4)
+  is open to `feat/wp-03-coordinator`. Initial staging omitted the already-tested
+  `patches/` directory; this follow-up includes the exact reviewed patch/license/
+  notes referenced by the lockfile, with no runtime/source-byte change. Final
+  docs/whitespace passed (77 Markdown/490 local links/18 probes). Verify final
+  pushed head/PR state, then stack resource commit `71f076c`; never merge PRs.
 
 ## TASK-013 — WP-05 independent resource producer
 
