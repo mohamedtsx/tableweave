@@ -6,7 +6,7 @@
     "declaration": true,
     "noEmitOnError": true,
     "lib": ["ES2022"],
-    "types": []
+    "types": ["node"]
   },
   "include": ["src/**/*.ts"]
 }

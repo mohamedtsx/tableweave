@@ -16,6 +16,7 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "test": "pnpm build && vitest run",
+    "test:contracts": "pnpm build && vitest run tests/contracts",
     "storybook": "node tests/foundation/storybook.mjs dev",
     "storybook:build": "node tests/foundation/storybook.mjs build",
     "test:browser": "playwright test",

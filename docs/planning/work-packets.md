@@ -49,6 +49,8 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-02 Schema, operators and conformance vectors
 
+- **Execution preparation:** [bounded implementation plan](wp-02-implementation-plan.md)
+  (proposal only; TASKS owns review and authorization).
 - **Role/dependencies:** contracts worker; WP-01 accepted.
 - **Read:** [public API](../engineering/public-api.md), [operators](../../product/operators.md),
   [security](../engineering/security.md), AC-02–AC-07/AC-23/AC-26.

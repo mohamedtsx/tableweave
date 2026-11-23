@@ -12,6 +12,7 @@ not accept the full runtime compatibility matrix.
 | Runtime | React 19, TanStack Table v9; target researched v9.3 behavior | Inspect actual v9 docs/types, per-slice control/subscriptions/row models; real packed consumer builds |
 | Styled layer | HeroUI v3, corresponding styles/React Aria peers, Tailwind v4 | Align actual versions; compound component API; no v2 Provider assumptions |
 | Dates | Internationalized Date and native Intl | Clock/timezone/date-only/DST/locale/SSR fixtures; independent Apache obligations |
+| Internal contract validation | Valibot 1.5.0, approved for WP-02 | No vendor schemas/types on the wire or in public declarations; strict packed consumers |
 | Sortable | New `@dnd-kit/react` generation, isolated optional entry | G-02 before adapter freeze; do not mix legacy core/sortable or a second Aria drag manager |
 | Builder | Scoped purpose-built flat editor/operator registry | No initial react-querybuilder dependency; revisit behind our contracts only if evidence supports it |
 | Server-data examples | Start + Router + Query, one SSR integration | Request-scoped QueryClient; Query/router not core dependencies |
@@ -23,6 +24,13 @@ release is supported. Node 24 is a development baseline, not a browser-consumer
 runtime requirement. Final peer ranges follow tested combinations, not copied
 reference patch numbers. A vendor incompatibility is recorded/reviewed, not
 silently resolved by weakening the PRD.
+
+WP-02 explicitly declares Internationalized Date `3.12.4` and Valibot `1.5.0`
+in the core package under maintainer approval. Valibot's internal declaration file
+mentions `Blob`/`File`: the private build uses existing Node 24 typings rather
+than adding DOM libs or skipping declarations. Packed consumers still compile
+without DOM/Node typings. This is an internal build choice, not a browser/global
+requirement on public contracts or proof of SSR. See [contract limits](wp-02-contracts.md).
 
 No Redux/Zustand, mandatory Query/router/i18n/ORM, react-querybuilder, nuqs,
 virtualizer, spreadsheet engine or backend service is selected for core. Optional

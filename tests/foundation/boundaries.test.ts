@@ -26,7 +26,14 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
       expect(forbiddenImports(graph, ["react", "react-dom", ...ui])).toEqual(
         [],
       );
-      expect([...graph.directives.values()]).toEqual([false]);
+      expect(graph.files.length).toBeGreaterThan(1);
+      expect(
+        [...graph.directives.values()].every((value: boolean) => !value),
+      ).toBe(true);
+      expect([...graph.externals].sort()).toEqual([
+        "@internationalized/date",
+        "valibot",
+      ]);
     }
   });
 
@@ -75,7 +82,11 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
     );
     for (const manifest of [headless, styled]) {
       expect(manifest.private).toBe(true);
-      expect(manifest.dependencies).toBeUndefined();
+      expect(manifest.dependencies).toEqual(
+        manifest === headless
+          ? { "@internationalized/date": "3.12.4", valibot: "1.5.0" }
+          : undefined,
+      );
       expect(manifest.type).toBe("module");
       for (const entry of Object.values(manifest.exports)) {
         if (typeof entry !== "string") {
