@@ -3,6 +3,13 @@
 Source: HLD §§1–2; ADR-01/ADR-10. Product invariants are owned by
 [shared rules](../../product/shared-rules.md), not duplicated here.
 
+For architecture learning and maintainer preferences, follow the
+[three reference sources](../reference/README.md#maintainer-taste-and-architecture-sources),
+with `.repo/` as the main taste and architecture reference. Study relevant local
+patterns alongside these Tableweave boundaries; adapt their rationale, not their
+application topology, business rules, runtime code or lockfile. Reference patterns
+are not integration proof; proposed departures from approved contracts need review.
+
 ```text
 Consumer application
   ├─ serializable schema + typed rendering definition

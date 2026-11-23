@@ -18,6 +18,9 @@ and a documentation checker, **not an executable library**.
 - Current explicit user instructions govern the task. The Notion PRD owns product
   intent; `product/` is the maintained local representation. The HLD owns proposed
   technical/design contracts and is ready for review, not a passed feasibility test.
+- For maintainer taste and architecture, follow the [three reference sources](docs/reference/README.md#maintainer-taste-and-architecture-sources):
+  direct feedback, the transactions reference and `.repo/` as the main taste and
+  architecture source. Generic design defaults do not replace these references.
 - Record source conflicts with URLs and affected IDs. Never weaken requirements
   to fit a dependency or an attractive visual. [Open items](product/open-questions.md)
   separates scope, engineering proof and publication inputs.

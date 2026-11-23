@@ -7,6 +7,14 @@ departures from references need annotations, not hidden Figma-only decisions.
 
 ## Authority and exact references
 
+The maintainer's [three taste sources](../reference/README.md#maintainer-taste-and-architecture-sources)
+are direct feedback, the transactions reference below and `.repo/` (currently
+`.repo/Gamila`), the **main taste and architecture reference**. Consult relevant
+local design/component patterns, compare the transactions treatment and apply
+direct feedback rather than substituting generic HeroUI or design-skill defaults.
+The Figma prototype is supplementary and exploratory, not the primary taste
+source or final visual approval. Keep all reference no-copy/read-only boundaries.
+
 | Reference | Use | Do not inherit |
 | --- | --- | --- |
 | [Transactions reference](https://shadcnuikit.com/dashboard/payment/transactions) | Quiet hierarchy, compact rows/status, segmented builder, selection replacement, pagination | Commercial code/assets, dashboard shell, Export, business terms/default dates or always-enabled tools |

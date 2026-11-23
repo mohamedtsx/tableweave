@@ -57,7 +57,10 @@ observable outcome and file ownership. Implement only when authorized. Review
 failure/race paths, verify the actual boundary, update contracts and record
 scoped evidence. Hand back a resumable next action, not an unsupported “done.”
 
-Reference repositories are optional, local-only, read-only learning material.
-The [Gamila assessment](docs/reference/gamila-assessment.md) records what was
-adopted, adapted and rejected. Nothing needs `.repo/` to run or understand this
-documentation set.
+Learn the maintainer's taste from the [three reference sources](docs/reference/README.md#maintainer-taste-and-architecture-sources):
+direct feedback, the transactions reference and `.repo/`, the main source of taste
+and architecture. Local references stay read-only and are not runtime/build
+dependencies. The [Gamila assessment](docs/reference/gamila-assessment.md) records
+prior inspection and adaptation limits; consult relevant reference material for
+new work rather than assuming that assessment covers its visual implementation.
+Nothing needs `.repo/` to run or understand this documentation set.
