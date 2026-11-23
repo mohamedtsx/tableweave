@@ -3,8 +3,13 @@
 Source: HLD §4; ADR-02. Most names/types below remain proposed contracts.
 WP-02's private `defineQuerySchema`, query/operator helpers and accessor bindings
 now exist; the [implemented WP-02 contract](wp-02-contracts.md) owns their exact
-surface and limits. No table/controller/native API is implied; maintainer packet
+surface and limits. No table/native facade is implied; maintainer packet
 review precedes producer acceptance or public API freezing.
+
+WP-02 and WP-03 are accepted. WP-03 separately implements controller/pure
+transition/snapshot/query/selector hooks; [its contract](wp-03-controller.md) owns
+their exact names, ownership and lifecycle. `defineTable`, `useTableweave`, native
+bridge/resource facade, `DataTable` and sortable integration remain unavailable.
 
 ## Schema versus rendering definition
 

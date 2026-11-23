@@ -8,10 +8,19 @@ export default defineConfig({
   reporter: "list",
   use: { baseURL: "http://127.0.0.1:6007", trace: "retain-on-failure" },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  webServer: {
-    command: "node tests/foundation/serve-storybook.mjs",
-    url: "http://127.0.0.1:6007/index.json",
-    reuseExistingServer: false,
-    timeout: 30_000,
-  },
+  webServer: [
+    {
+      command: "node tests/foundation/serve-storybook.mjs",
+      url: "http://127.0.0.1:6007/index.json",
+      reuseExistingServer: false,
+      timeout: 30_000,
+    },
+    {
+      command:
+        "pnpm exec vite --config tests/controller/vite.config.ts --host 127.0.0.1 --port 6008 --strictPort",
+      url: "http://127.0.0.1:6008/hooks.html",
+      reuseExistingServer: false,
+      timeout: 30_000,
+    },
+  ],
 });

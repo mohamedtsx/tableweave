@@ -1,10 +1,10 @@
 # Agent bootstrap
 
 Tableweave is a planned React table toolkit: TanStack behavior, a headless package
-and an optional HeroUI renderer. This repository now has private WP-01 package
-scaffolds, a synthetic Storybook smoke scene and executable foundation checks,
-**not an implemented table library**. README owns actual commands; TASKS owns
-execution/review status. Proposed feature APIs remain unavailable.
+and an optional HeroUI renderer. This repository has accepted private WP-01/WP-02
+foundation/schema/operator APIs and an accepted WP-03 controller/hook producer, **not an
+implemented table library**. README owns actual commands; TASKS owns acceptance/
+review status. Native bridge, resource/table facades and styled UI remain proposed.
 
 ## Load only what the task needs
 

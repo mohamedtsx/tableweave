@@ -8,13 +8,13 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 - **2026-11-23:** TASK-002 review and authorization are complete. The maintainer
   ended the review and explicitly accepted WP-01; TASK-003 is **done**.
-- **Current owner instruction:** maintainer approved the bounded WP-02 plan and
-  Valibot `1.5.0` / Internationalized Date `3.12.4` core additions. TASK-005 is
-  accepted; TASK-006 independently reproduced/fixed review session 1 n1–n3 and
-  is back **in review** with full checks passing. The subsequent commit/new-PR
-  request is delivered through TASK-007: implementation commit `f046b9f` and
-  [PR #2](https://github.com/mohamedtsx/tableweave/pull/2). No merge, delegation,
-  npm publication, deployment or further feature execution is authorized.
+- **Current owner instruction:** maintainer explicitly accepted WP-03 after
+  review session 1 n1–n2 corrections; TASK-009 is **done** and the session is closed.
+  Acceptance covers the reviewed local coordinator/hooks producer, not broader
+  native/UI/resource/SSR/release gates. The subsequent “commit then create pr”
+  request authorizes TASK-010's new WP-03 branch, scoped commits, push and PR to
+  `develop`. No merge, next-packet work, dependency, delegation, publication or
+  deployment is included.
 - **Previous Git instruction:** the approved documentation changes were committed
   as `de7f1cb`; that one-time commit permission is consumed.
 - **Previous transfer instruction:** move the existing local documentation commit and
@@ -50,8 +50,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   unauthorized.
 - Both supplied Notion pages were fetched. PRD v1.0 is the requirements baseline;
   HLD v1.0 is completed **for review**, with proposed APIs and unexecuted gates.
-- The repository now has accepted private WP-01 scaffolds plus WP-02 pure
-  schema/query/operator candidates, not a mounted table library. The initial commit includes the
+- The repository now has accepted private WP-01 foundation, WP-02 schema/operators
+  and WP-03 coordinator/hooks, not a mounted table library. The initial commit includes the
   current `.gitmodules` and `.gitignore`; the absent old `.repos/Gamila` index
   entry is not retained. `.repo/Gamila` remains ignored/local-only. Its existing
   Git metadata has a stale worktree path; do not repair or force-add the reference.
@@ -60,11 +60,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Source-ID/fingerprint/section/navigation checks pass; 16 documentation-checker
   probes pass. Final source review corrected row-grouping wording and benchmark
   sampling fidelity. No implementation or stable-release gate is claimed passed.
-- **Next action:** maintainer reviews the corrected WP-02 snapshot and
-  [review dispositions](REVIEW.md#wp-02--review-session-1) through a new stacked
-  [PR #2](https://github.com/mohamedtsx/tableweave/pull/2), targeting `chore/setup`
-  while PR #1 is open. TASK-007 is delivered; WP-03 remains unauthorized.
-- **Review closed:** TASK-003 / WP-01 review session 1. Detailed numbered notes
+- **Next action:** deliver TASK-010's accepted WP-03 snapshot as a new PR to
+  `develop`, preserving all verification limits. No WP-04/05 execution is implied.
+  PR #1/#2 are merged; the background worker reported zero open PRs.
+- **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
+  maintainer acceptance of each packet. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
   second task board. Numbering restarts in each new review session. Applied
   guidance stays in its canonical docs when notes are later cleared on request.
@@ -78,8 +78,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-003 | WP-01 executable workspace and package foundation | done | Current agent implemented; maintainer accepted | Foundation checks and explicit maintainer acceptance |
 | TASK-004 | Record maintainer taste and architecture reference sources | done | Current documentation agent | Explicit maintainer clarification |
 | TASK-005 | Prepare bounded WP-02 implementation plan | done | Current planning agent; maintainer approved | Explicit plan/dependency approval |
-| TASK-006 | WP-02 schema, operators and conformance vectors | in review | Current agent reproduced/fixed n1–n3; maintainer decides | Corrected full checks passed; producer acceptance pending |
+| TASK-006 | WP-02 schema, operators and conformance vectors | done | Current agent delivered; maintainer accepted | Explicit WP-02 acceptance after n1–n3 corrections |
 | TASK-007 | Commit WP-02 and create a separate PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #2 open; PR #1 unchanged |
+| TASK-008 | Merge the two open repository PRs | done | Main agent merged #1; authorized background agent merged #2 | Both checks passed; GitHub confirms both merged and zero open PRs |
+| TASK-009 | Plan then implement WP-03 accepted-state coordinator | done | Main agent delivered/corrected; maintainer accepted | Explicit WP-03 acceptance after 208-test/four-browser/packed checks and n1–n2 fixes |
+| TASK-010 | Commit accepted WP-03 and create a PR | in progress | Current agent executes/verifies Git handoff | Explicit commit-then-PR request; PR #1/#2 already merged |
 
 ## TASK-001 — Documentation foundation
 
@@ -308,8 +311,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 ## TASK-006 — WP-02 schemas, operators and conformance vectors
 
-- **Status/owner/reviewer:** in review; current agent independently reproduced
-  and corrected review session 1 n1–n3; maintainer reviews. Reports are hypotheses,
+- **Status/owner/reviewer:** done; maintainer explicitly accepted WP-02 after the
+  independently reproduced/corrected review session 1 n1–n3. Reports are hypotheses,
   not authority over product contracts. No delegation used or authorized.
 - **Authorization:** maintainer approved the presented plan and two core runtime
   additions. Local implementation, strict dependency installation and scoped/full
@@ -372,8 +375,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   probes, exact packing/peer/import checks, both TS versions and Chromium smoke.
   [Evidence](docs/evidence/wp-02-contracts-2026-11-23.md#review-session-1--n1n3-corrections)
   preserves initial failures, corrected test setup, current hashes and limits.
-- **Next action:** maintainer reviews the correction or supplies further feedback.
-  WP-03 remains blocked on producer acceptance and separate execution authority.
+- **Next action:** accepted producer feeds TASK-009's authorized WP-03 work.
+  Acceptance is packet-scoped, not G-gate, UI, SSR or publication approval.
   At correction handoff no dependency change or Git/PR write had occurred;
   subsequent authorized Git delivery is tracked in TASK-007.
 
@@ -414,3 +417,131 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Next action:** maintainer reviews PR #2. After PR #1 is eventually merged,
   retarget PR #2 to `develop` only under appropriate authority. No merge or further
   execution follows automatically from this Git-delivery request.
+
+## TASK-008 — Merge open PRs
+
+- **Status/owner:** done; main agent and authorized background agent executed the merge-all
+  request. Current open PRs are #1 (`chore/setup` → `develop`) and #2
+  (`feat/wp-02-contracts` → `chore/setup`). No other open PR was returned.
+- **Scope/authority:** merge these PRs, retarget #2 to `develop` after #1 merges,
+  and verify final remote state. No new implementation, bypass/force push, branch
+  deletion, release or deployment. Local TASKS bookkeeping is not a new commit
+  authorization; keep it uncommitted unless separately requested.
+- **Starting evidence:** working tree clean on `feat/wp-02-contracts` at
+  `a4dd2b1`; repository default is `develop`, merge commits are enabled and
+  automatic branch deletion is disabled. #1 is clean/mergeable with two successful
+  foundation checks; #2 is mergeable but its two foundation checks are running.
+- **Done when:** both PRs report MERGED, `develop` contains the implementation
+  ancestry, no open PR remains and checks/limits are accurately recorded.
+- **Progress:** PR #1 merged as `d20f7858b0c2eb5e21faa7a4cd5ad29dd638c447`;
+  fetched remote `develop` and verified foundation ancestry. PR #2 retargeted to
+  `develop` through the REST API after `gh pr edit` failed on deprecated Projects
+  Classic metadata (its base was checked before retrying with the API). Head
+  remains `a4dd2b1`; mergeability is clean of conflicts, but its push/PR foundation
+  checks are still running. Waiting via `gh pr checks --watch`; no bypass.
+- **Result:** background merge agent verified expected head/base and successful
+  pull-request run `45253173078` / push run `45253166314`, then normally merged
+  PR #2 as `21e90d29d53dc98284b49355d245aabf5d21eead`. GitHub confirms both PRs
+  MERGED, zero open PRs, and `develop`'s merge parents include PR #1's merge and
+  expected `a4dd2b1` implementation ancestry. No local files/Git metadata touched
+  by the worker. Background shell watcher independently reported both checks pass.
+- **Next action:** no further merge work; TASK-009 proceeds locally. Merge grant
+  does not authorize WP-03 remote writes or extend worker scope.
+
+## TASK-009 — Plan then implement WP-03 coordinator
+
+- **Status/owner:** done; main agent independently reproduced/fixed session 1
+  n1–n2; maintainer explicitly accepted WP-03 and closed the review. Only earlier
+  remote-merge work was delegated, not implementation.
+- **Authorization:** explicit WP-02 acceptance and “plan first for WP-03 then
+  start implementation”. Write/review the bounded plan before feature code; then
+  execute locally with installed dependencies and scoped/full checks. No new
+  dependency, commit/push/PR, reference modification or later packet authority.
+- **Inputs:** accepted wire/vector v1 at `f046b9f`/`a4dd2b1`, existing TASK-008
+  local bookkeeping, state/query/shared rules, WP-03 and AC-03/05/08–11/24/25.
+  Local branch remains `feat/wp-02-contracts` at `a4dd2b1`; remote merge status is
+  independent of the accepted artifact used by this task.
+- **Paths:** [WP-03 plan](docs/planning/wp-03-implementation-plan.md); controller
+  and hook modules; root exports; controller/type/packed/browser fixtures and
+  discovery/config needed to execute them; affected README/contracts/evidence/
+  task/review docs. No HeroUI components/native bridge/resource fetching or .repo writes.
+- **Done when:** plan precedes code; pure command/reset/validation, controlled
+  proposal/accept/reject, stable subscriptions/selectors/hooks and explicit
+  definition replacement pass scoped and packed strict TS 6/5.9 checks, React
+  fixture and full local checks; exact evidence and deferred gates recorded.
+- **Stop rules:** source conflict, partial controlled commits, unsafe errors,
+  hidden clocks/optimistic state, dependency change or native/UI/resource expansion
+  returns for review. No skipped declarations, fake exports or weakened policy.
+- **Progress:** plan written/reviewed and documentation/17 probes/whitespace
+  checked before feature edits; two initial failing vectors captured. Candidate
+  reducer/controller/proposal/subscription/replacement/hooks now implemented.
+  Scoped controller tests, local typecheck, isolated packed TS 6/5.9/runtime and
+  real React hook/browser checks passed during development. Reviewed malformed
+  commands, definition identity, listener cleanup and controlled reset paths;
+  extended coverage and final docs are ready for integrated verification.
+- **Delivered:** immutable definition/state/presentation validation, pure commands
+  and scoped resets, complete controlled proposals/accept/reject/selection override,
+  stale/cross-instance guards, subscriptions/notification failure handling,
+  explicit typed definition replacement/disposal and three React read hooks.
+  Root is no longer a scaffold; contracts/filters retain accepted server-safe
+  behavior. No dependency/peer/export-subpath or lockfile change.
+- **Initial verification (before review session 1):** `pnpm check` passed fresh frozen install, lint, strict
+  package/Storybook/harness types, **196 unit tests** (155 contracts + 37 controller
+  + four foundation), 17 docs probes, exact 46/7-file tarball allowlists, isolated
+  strict-peer/frozen installs, TS 6.0.3/5.9.3 positive/negative consumers, guarded
+  contract/runtime/controller invocation, actual packed bare React server render,
+  Vite bundles, static Storybook and **two Chromium tests** (existing vendor/axe
+  smoke plus React StrictMode accepted-state/selector fixture). Inspected emitted
+  declarations with no vendor/React/Node/DOM type leakage and reviewed changed
+  source/fixtures/exports. First full run hit the host 120s limit during isolated
+  styled install; rerun with 600s completed. No assertion failures were hidden.
+  [Evidence](docs/evidence/wp-03-controller-2026-11-23.md) records exact hashes and limits.
+- **Review scope:** `hooks/state.ts`, `controller/validation.ts`, associated
+  browser/pure/packed regressions and affected protocol/evidence/review/TASKS docs.
+  Preserve committed-versus-rendered selector distinction, valid initialization
+  defaults, invalid-command atomic rejection and all unrelated working changes.
+  No new dependency, public API, delegation or Git operation is needed.
+- **Review progress:** independently reproduced n1's inline effect count 2→3 with
+  unchanged controller state, and all four n2 null direct/functional cases failing
+  to reject. Fixed committed selector identity reuse and omitted-only defaults.
+  Final `pnpm check` passes **208 tests** (155 contracts + 49 controller + four
+  foundation), strict types/lint, 17 docs probes, exact packing/import/peer checks,
+  TS 6.0.3/5.9.3 and packed invalid-column runtime/server-render invocation, static
+  Storybook and **four Chromium tests** (three controller plus vendor/axe smoke).
+  Inspected corrected sources and declarations; no public API/type/dependency
+  change. Updated artifact fingerprints are in the scoped evidence report.
+- **Acceptance:** explicit “I accept WP-03” after the n1–n2 corrections. Accepted
+  reviewed runtime/declarations correspond to the tested core tarball SHA-256
+  `600f17bd9eedaa653d567f049e0ffbf7e9440ee419852b45df21fd477d2abf65`
+  (before acceptance-only Markdown edits). Source remains local/uncommitted on
+  `a4dd2b1`; no new immutable commit/release identity is claimed.
+- **Next action:** authorized Git delivery is tracked in TASK-010; next-packet
+  execution remains separately authorized.
+  No WP-04 native bridge, WP-05 resource, UI, full SSR/G-gate or
+  release acceptance is implied. WP-03/acceptance/merge bookkeeping stays local
+  and uncommitted at acceptance; the subsequent explicit Git grant is TASK-010.
+
+## TASK-010 — Commit accepted WP-03 and create a PR
+
+- **Status/owner:** in progress; current agent executes and verifies the bounded
+  Git handoff. TASK-009 acceptance/review closure remains unchanged.
+- **Authorization:** explicit “commit then create pr”. Create a new branch,
+  commit accepted WP-03 source/tests/plan/review/acceptance/docs and preserved merge
+  bookkeeping, push and open a PR to `develop`. No merge, force push, branch
+  deletion, new implementation, next packet, publication or deployment.
+- **Starting state:** local `feat/wp-02-contracts` at `a4dd2b1` with known WP-03
+  tracked/untracked edits. Fetched `origin/develop` at merged `21e90d2`; its tree is
+  identical to local HEAD and contains that ancestry. GitHub lists zero open PRs.
+  No local or fetched remote `feat/wp-03-coordinator` branch exists.
+- **Branch/paths:** create `feat/wp-03-coordinator` from `origin/develop`, carrying
+  the existing work without reset/discard. Stage only the reviewed controller/
+  hooks, root exports, test fixtures/config/discovery, plan, contracts, acceptance,
+  evidence and ledger changes. No ignored generated output or `.repo/` files.
+- **Done when:** scoped snapshot committed and pushed, PR open with correct
+  head/base and honest local-check scope, remote/local heads agree and worktree
+  clean. Record implementation SHA and PR URL in a documentation-only handoff.
+- **Checks:** reuse recorded 208-test/four-browser full verification for unchanged
+  runtime. Rerun actual documentation/17-probe and whitespace checks for handoff
+  edits, inspect staged scope and verify remote PR metadata. No CI pass invented.
+- **Next action:** create branch, commit and push the scoped snapshot, create the
+  PR and record/verify its final handoff. No automatic merge or further task.
