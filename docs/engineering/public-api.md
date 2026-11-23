@@ -9,7 +9,11 @@ review precedes producer acceptance or public API freezing.
 WP-02 and WP-03 are accepted. WP-03 separately implements controller/pure
 transition/snapshot/query/selector hooks; [its contract](wp-03-controller.md) owns
 their exact names, ownership and lifecycle. `defineTable`, `useTableweave`, native
-bridge/resource facade, `DataTable` and sortable integration remain unavailable.
+whole-table/resource facade, `DataTable` and sortable integration remain unavailable.
+
+The separate [WP-04 producer](wp-04-native.md) exposes bounded root native
+definition/controller/hook helpers with delegated scoped G-01 approval; this is
+not personal maintainer acceptance or the proposed whole-table/resource facade.
 
 ## Schema versus rendering definition
 

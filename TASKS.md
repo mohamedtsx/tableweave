@@ -8,13 +8,14 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 - **2026-11-23:** TASK-002 review and authorization are complete. The maintainer
   ended the review and explicitly accepted WP-01; TASK-003 is **done**.
-- **Current owner instruction:** maintainer explicitly accepted WP-03 after
-  review session 1 n1–n2 corrections; TASK-009 is **done** and the session is closed.
-  Acceptance covers the reviewed local coordinator/hooks producer, not broader
-  native/UI/resource/SSR/release gates. TASK-010 delivered the subsequent commit/
-  PR request as implementation `4f151d7` on `feat/wp-03-coordinator` and
-  [PR #3](https://github.com/mohamedtsx/tableweave/pull/3) to `develop`. No merge,
-  next-packet work, dependency, delegation, publication or deployment is included.
+- **Current owner instruction:** execute WP-04 through WP-15 in dependency order:
+  plan first, implement, review with session-local n1/n2 comments, fix/verify,
+  delegated agent engineering approval, commit and open a separate PR per packet.
+  Multiple agents are explicitly authorized. **Do not merge any PR**; maintainer
+  will personally review after delivery. Necessary dependencies are scoped/pinned
+  in each plan before installation, not blanket upgrades. No publication/deploy,
+  read-only reference mutation, invented human/real-consumer evidence or product
+  requirement waiver. Explicit input-dependent gates remain blocked when missing.
 - **Previous Git instruction:** the approved documentation changes were committed
   as `de7f1cb`; that one-time commit permission is consumed.
 - **Previous transfer instruction:** move the existing local documentation commit and
@@ -60,9 +61,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Source-ID/fingerprint/section/navigation checks pass; 16 documentation-checker
   probes pass. Final source review corrected row-grouping wording and benchmark
   sampling fidelity. No implementation or stable-release gate is claimed passed.
-- **Next action:** maintainer reviews [PR #3](https://github.com/mohamedtsx/tableweave/pull/3)
-  for Git integration; WP-03 packet acceptance remains recorded. PR #1/#2 were
-  merged earlier. No automatic merge or WP-04/05 execution is authorized.
+- **Next action:** WP-04 now has delegated technical/G-01 approval after full
+  checks and independent corrections. Finish its commit/stacked PR handoff, then
+  stack reviewed resource commit `71f076c` and rerun combined WP-04/WP-05 checks.
+  PR #3 stays open; no PR merge. WP-06 plan/dependency research is prepared.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
@@ -83,6 +85,19 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-008 | Merge the two open repository PRs | done | Main agent merged #1; authorized background agent merged #2 | Both checks passed; GitHub confirms both merged and zero open PRs |
 | TASK-009 | Plan then implement WP-03 accepted-state coordinator | done | Main agent delivered/corrected; maintainer accepted | Explicit WP-03 acceptance after 208-test/four-browser/packed checks and n1–n2 fixes |
 | TASK-010 | Commit accepted WP-03 and create a PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #3 open to develop |
+| TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
+| TASK-012 | WP-04 native/collection feasibility | in progress | Main completes Git handoff after independent review | Agent-approved scoped G-01; 241 unit/32 Chromium/public packed checks pass |
+| TASK-013 | WP-05 resource presentation/races | in progress | Isolated resource worker; main integrates/reviews later | Independent WP-02/WP-03 dependency; G-03 |
+| TASK-014 | WP-06 Start/Query SSR integration | planned | Assigned after producer handoffs | WP-04/WP-05; G-04 |
+| TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
+| TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
+| TASK-017 | WP-09 details/localization/responsive shell | planned | Assigned after producer handoffs | WP-04/WP-05 |
+| TASK-018 | WP-10 optional sortable | planned | Assigned after producer handoffs | WP-04/WP-05; G-02 |
+| TASK-019 | WP-11 examples/docs/workbench | planned | Assigned after feature handoffs | WP-06–WP-10 |
+| TASK-020 | WP-12 integrated browser/manual accessibility | planned | Verification owner assigned after WP-11 | Manual/support-matrix evidence cannot be fabricated |
+| TASK-021 | WP-13 packed compatibility/release tooling | planned | Package owner assigned after WP-11 | No publication rights inferred |
+| TASK-022 | WP-14 reproducible performance | planned | Benchmark owner assigned after WP-11/13 | Approved runner/workload required; no invented timings |
+| TASK-023 | WP-15 real consumer/stable readiness | planned | Integration reviewer assigned when inputs exist | Separate actual target/access/write inputs and WP-12–14 evidence required |
 
 ## TASK-001 — Documentation foundation
 
@@ -557,3 +572,127 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   This final record is a follow-up documentation commit, not another feature.
 - **Next action:** maintainer reviews PR #3. No merge, further Git action or
   next-packet implementation is inferred from completing this request.
+
+## TASK-011 — Delegated WP-04–WP-15 coordination
+
+- **Authorization:** current explicit user request covers plan → implementation →
+  numbered independent/self review → correction/verification → delegated agent
+  engineering approval → commit/push/new PR for each packet. It explicitly allows
+  agents and explicitly forbids merging PRs. Human personal review is later.
+- **Approval meaning:** label every disposition **agent-approved under delegated
+  authority**, never “maintainer personally reviewed/accepted”. No approval may
+  invent a gate pass, replace manual/real-consumer evidence, waive product scope
+  or override a demonstrated technical failure. Block required missing proof.
+- **Ownership:** main agent exclusively owns TASKS/REVIEW, shared entrypoints,
+  manifests/lockfile, integration and Git/PR writes. Workers receive disjoint paths
+  or worktrees; read-only research agents cannot edit or install/build.
+- **Dependency/PR policy:** accepted WP-03 is `4f151d7` plus `b2974fc` handoff.
+  PR #3 remains open. Create WP-04 from that branch, then stack subsequent packet
+  PRs without merges/rebases that discard history. Each PR states its dependency,
+  exact implemented scope/checks/limits and delegated-not-human approval.
+- **Stop boundaries:** no `.repo/` mutation or consumer modification without a
+  concrete writable target; no real data/services/secrets, npm publication,
+  deployment, legal/publisher assumption, fake manual AT/Safari/runner proof.
+- **Next action:** complete actual-release G-01 research, write the bounded WP-04
+  plan before code, allocate nonoverlapping implementation and review workers.
+
+## TASK-012 — WP-04 native/collection feasibility
+
+- **Status:** in progress; main agent coordinates. Read-only v9/v3 research is
+  complete; native worker owns `packages/react/src/tanstack/**` and `tests/native/**`
+  except `collection`; collection worker owns `packages/heroui/src/table/**` and
+  `tests/native/collection/**`. Main owns all shared paths/build/Git integration.
+  Installed HeroUI stock leaf columns do not expose grouped construction; the
+  collection worker must prove a public collection-branch adapter, including
+  uneven-depth/utility columns. A flat fallback cannot pass G-01.
+  Implementation workers have now handed back corrected candidates; main owns
+  integration/follow-up fixes and two independent reviewers are read-only. Native
+  correction uses declared exact core9.3.1 commit frames; main added coordinator
+  preacceptance constraints and visibility/group action regressions. Original
+  native n1–n3 and sorting/row n4 independently pass; group-visibility follow-up
+  and collection n6 are in final rereview. No packet approval yet.
+- **Scope/requirements:** WP-04, G-01, AC-01/03/13/23/25; actual native per-slice
+  control, composite predicate carrier, local filter/sort/page vs manual server,
+  grouped HeroUI collection and subscribed stable-ID leaves.
+- **Paths:** `packages/react/src/tanstack`, minimal `packages/heroui/src/table`,
+  exact root exports, isolated native/browser/type/consumer fixtures and bounded
+  runner/pack/config changes; plan/protocol/evidence/review/task docs.
+- **Done when:** actual installed v9/v3 evidence, pure/native/real-browser/ARIA/
+  packed checks pass and an independent numbered review is resolved. Candidate
+  bridge must not expand over G-01 failure or fake v8/global state callbacks.
+- **Next action:** synthesize read-only API research into the plan and precise
+  producer interface, then assign implementation paths before writing feature code.
+  The [bounded plan](docs/planning/wp-04-implementation-plan.md) is written before
+  feature edits. Work is on `feat/wp-04-native-bridge` from accepted `b2974fc`,
+  preserving PR #3. Supplementary prototype read was Figma-session/read-only;
+  no design artifacts or source/reference runtime files were imported.
+  Native candidate is root-integrated/preliminary-packed; independent review
+  reproduced four defects now assigned back to the native worker. Collection
+  worker integrates real native models after nine static Chromium probes; main
+  applied the planned strict declaration repair (same runtime versions) and
+  verified exact patch-only changes/frozen reapplication. G-01 remains unpassed.
+  Independent collection review added WP-04 n6: Home/End focused hidden padding;
+  worker reproduced/fixed both exact cases and passes 14 static Chromium checks.
+  Main runs complete workflow after standardizing ignored artifact paths; final
+  independent rereview and real renderer/public packed evidence remain required.
+  Collection n6 now independently resolves (14 static/96-chord matrix/ten extra
+  probes). Reviewer identified a one-commit-late test-only filtered-ID diagnostic;
+  main corrected it to an after-commit read with data/state dependencies (n7).
+  **Technical outcome:** agent-approved under delegated authority for tested
+  WP-04/G-01, not personal maintainer acceptance. `pnpm check` passes 241 unit,
+  32 Chromium, strict public unpatched TS6.0.3/5.9.3, real renderer/native tarballs,
+  reachable declaration/import/CSS/sortable guards and 18 docs probes. Both
+  independent reviewers recommend scoped correction approval with no outstanding
+  verified defect. Main also inspected the real generated accessibility tree.
+  Evidence/source fingerprints/archive hashes are recorded. Next: final docs/
+  whitespace checks, commit/push and PR to `feat/wp-03-coordinator`; no merge.
+
+## TASK-013 — WP-05 independent resource producer
+
+- **Status:** plan/implementation in progress in isolated
+  `/tmp/opencode/tableweave-wp05`, branch `feat/wp-05-resource`, from accepted
+  `b2974fc`. This packet depends on WP-02/WP-03, not G-01; no feature expansion over
+  the still-unproven collection bridge is implied. PR delivery follows WP-04.
+- **Owner/paths:** resource worker writes its plan before feature code, then only
+  `packages/react/src/resource/**` and `tests/resource/**`; main handles exports,
+  shared configuration, independent review, ledger and Git/PR delivery. Existing
+  vendor node_modules may be symlinked; no new dependencies/installs authorized.
+- **Requirements:** WP-05/G-03, AC-14–AC-17; tagged request/scope/query identity,
+  bounded last fresh presented snapshot including empty, truthful page provenance,
+  guarded uncancellable late responses, Retry current request, safe public errors,
+  synchronous access-loss suppression and lifecycle cleanup. App owns fetching,
+  permission decisions, option-label cleanup and persistence.
+- **Done when:** actual strict types and deterministic race/React lifecycle tests
+  pass, independent numbered review fixes are verified and exact limits recorded.
+  No Query cache, resource buffer persistence or placeholder promotion.
+- **Next action:** worker produces plan + tested isolated producer; main reviews
+  and integrates after WP-04 handoff without merging PRs.
+  Independent review reproduced Suspense hide being mistaken for unmount; worker
+  added failing ready/pending regressions and corrected effect lifetime. Fresh-
+  copy independent rereview passes 47 unit/11 browser, nine independent races,
+  three corrected-original/revocation checks and both TS versions; recommends
+  scoped producer approval with no residual verified defect. Main has integrated
+  isolated exports/discovery/packed probes and is running the full workflow.
+  Initial integrated run found a runner-only React resolution gap; fixed with
+  genuine installed-package aliases, not workspace Tableweave source aliases.
+  Full isolated `pnpm check` now passes: 255 unit, 15 Chromium, both unpatched
+  NodeNext packed TS versions, runtime/bundle guards and 17 baseline docs probes.
+  Main records **agent-approved under delegated authority** for the tested
+  resource/G-03 producer boundary (not personal maintainer review or combined
+  native proof). Isolated transport commit `71f076c` is ready; no push/PR yet.
+  Next: finish WP-04, create the final WP-05 stack branch, cherry-pick the reviewed
+  resource commit, reconcile shared integration paths and rerun combined checks
+  before its separate PR. Dependency symlinks were explicitly excluded from Git.
+
+## TASK-014 — WP-06 preparation only
+
+- **Status:** planned; runtime waits for WP-04/WP-05 reviewed producers.
+- **Read-only research:** compatible Start/Router/Query/SSR integration profile
+  identified on 2026-11-24 without installs: Start 1.168.61, Router 1.170.42,
+  router-core 1.171.35, Query/query-core 5.108.4 and react-router-ssr-query 1.167.3
+  with accepted Vite 7.3.8/plugin5.2.0. Current Start1.169.7 needs Vite8; do not
+  silently upgrade root/Storybook or force peers. These are candidates, not passes.
+- **Next action:** use the prepared bounded plan when producers hand off; verify
+  peer/security suitability, record exact app-only install scope, then implement
+  actual Start SSR with request-local clients, one hydration owner and packed
+  concurrent-scope proof. No core integration dependency or synthetic-SSR pass.

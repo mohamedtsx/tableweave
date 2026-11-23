@@ -12,15 +12,21 @@ hook producer. Neither is a full table implementation or release approval.
 - Root (client entry): `defineController`, `createTableState`, `reduceTableState`,
   `createTableController`, `replaceTableDefinition`, `ControllerError`,
   `useTableweaveState`, `useTableweaveQuery`, `useTableweaveSelector` and types.
-  See the [WP-03 protocol](../../docs/engineering/wp-03-controller.md). No native
-  bridge, resource/table facade or styled UI is supplied.
+  See the [WP-03 protocol](../../docs/engineering/wp-03-controller.md).
+- Root also exposes the **private WP-04 native producer**:
+  `defineNativeTable`, `createNativeColumnHelper`, `createNativeController`,
+  `useNativeTable`, `NativeBridgeError` and typed native definitions/models/views.
+  The [candidate contract](../../docs/engineering/wp-04-native.md) and
+  [producer handoff](src/tanstack/README.md) distinguish actual APIs from pending
+  recorded delegated G-01 proof/limits. No resource/table facade or styled UI is supplied here.
 
 Contracts/filters contain no client directive or React/UI import. Their only
 runtime dependencies are Valibot `1.5.0` and Internationalized Date `3.12.4`.
 Vendor validation objects/types are internal. See the repository's
 [WP-02 contract](../../docs/engineering/wp-02-contracts.md) for exact context,
 normalization, translator and privacy obligations. No fetching, persistence,
-authorization or row-processing pipeline is supplied.
+authorization is supplied. Only the WP-04 candidate root uses a native row pipeline;
+the server-safe subpaths do not import it or React.
 
 Not published or ready for application use. Peers are exact development candidates,
 not an accepted compatibility matrix. MIT is selected for owned source, but the

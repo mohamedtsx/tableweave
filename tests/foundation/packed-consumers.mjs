@@ -75,6 +75,13 @@ for (const name of ["react", "heroui"]) {
             "controller/reducer",
             "controller/store",
             "hooks/state",
+            "tanstack/types",
+            "tanstack/features",
+            "tanstack/definition",
+            "tanstack/adapter",
+            "tanstack/boundary",
+            "tanstack/hook",
+            "tanstack/index",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ]
       : [
@@ -83,6 +90,13 @@ for (const name of ["react", "heroui"]) {
           "sortable/index.js",
           "sortable/index.d.ts",
           "styles.css",
+          ...[
+            "table/group-column",
+            "table/collection-projection",
+            "table/header-navigation",
+            "table/controlled-collection",
+            "table/native-collection",
+          ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ];
   assert.deepEqual(
     [...files].sort(),
@@ -139,6 +153,20 @@ for (const name of ["react", "heroui"]) {
         : ["@dnd-kit/react"],
     ),
     [],
+  );
+  const publicTypes = await inspectGraph(
+    join(pkg, "dist/index.d.ts"),
+    join(pkg, "dist"),
+  );
+  assert.deepEqual(
+    forbiddenImports(publicTypes, [
+      "@heroui/react",
+      "@heroui/styles",
+      "react-aria",
+      "react-aria-components",
+    ]),
+    [],
+    "Public declarations leaked vendor types requiring workspace-only repairs",
   );
   reports.push({
     package: manifest.name,
@@ -214,9 +242,14 @@ for (const kind of ["headless", "styled"]) {
     );
   }
   await cp(join(root, "tests/consumers/headless.ts"), join(dir, "headless.ts"));
+  await cp(join(root, "tests/consumers/native.ts"), join(dir, "native.ts"));
   if (kind === "styled")
     await cp(join(root, "tests/consumers/styled.ts"), join(dir, "styled.ts"));
   await cp(join(root, "tests/consumers/runtime.mjs"), join(dir, "runtime.mjs"));
+  await cp(
+    join(root, "tests/consumers/native-runtime.mjs"),
+    join(dir, "native-runtime.mjs"),
+  );
   await writeFile(
     join(dir, "tsconfig.json"),
     JSON.stringify({
@@ -248,6 +281,7 @@ for (const kind of ["headless", "styled"]) {
     ["runtime.mjs", ...(kind === "styled" ? ["--styled"] : [])],
     dir,
   );
+  command(process.execPath, ["native-runtime.mjs"], dir);
   const entries =
     kind === "styled"
       ? [

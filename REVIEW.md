@@ -1,6 +1,7 @@
 # Review notes
 
-Temporary scratchpad for maintainer feedback, separate from the live task ledger
+Temporary scratchpad for maintainer feedback and delegated agent review findings,
+separate from the live task ledger
 in [TASKS.md](TASKS.md). Note numbering (`n1`, `n2`, …) restarts in each new review
 session. Keep session context while notes are retained; labels are not TASK IDs
 or acceptance of the whole work packet.
@@ -115,3 +116,138 @@ and preserved all prior guards. See [WP-03 evidence](docs/evidence/wp-03-control
 The later explicit WP-03 acceptance closes this session; broader gates remain
 unpassed. No Git writes occurred during these corrections; subsequent delivery is
 tracked in TASK-010. Restart numbering at n1 for the next session.
+
+## WP-04 — delegated agent review session 1
+
+Closed under the user's explicit WP-04–WP-15 delegation after n1–n7 corrections,
+independent native/controller and collection rereview, and the final integrated
+workflow: **241 unit tests, 32 Chromium tests, strict unpatched public TS6/5.9,
+packed/runtime/bundle/declaration guards and 18 docs probes**.
+Main **agent-approves under delegated authority** the tested WP-04/G-01 boundary.
+This is not personal maintainer review; the maintainer reviews PRs later.
+No PR may be merged. Broader SSR/manual-AT/browser/performance/release gates remain
+separate. Notes are retained; numbering restarts in the next review session.
+
+### n1 — Suspended native renders leak speculative records (P1)
+
+- **Independent report:** committed `[a]`; transition renders `[b]` then suspends
+  after `useNativeTable`. Chromium shows committed DOM/view rows still `[a]` but
+  the supported native getter returns `[b]`; selecting visible `a` throws.
+- **Disposition:** returned for a failing regression and commit-safe native model/
+  action correction. The reviewer reports an executable reproduction; implementer
+  must independently reproduce before fixing. No approval while unresolved.
+  Implementer reproduced/corrected using isolated actual-core frames; independent
+  rereview now passes original Suspense getter/raw-row action and controlled
+  accept/reject scenarios. Integrated G-01/public packing remains pending.
+
+### n2 — Native restrictions reject after controller acceptance (P1)
+
+- **Independent report:** schema-enabled/native-disabled sorting and schema-multi/
+  definition-single sorting can commit or be accepted by the controller, then
+  fail bridge projection with `native.sorting`.
+- **Disposition:** restrictions must reject before proposal/accepted publication,
+  not leave an unusable committed state. Minimal controller-contract integration
+  is main-owned if needed; no silent schema-policy weakening.
+  Main added the pure synchronous preacceptance validator at initialization,
+  reduced candidate and final acceptance. All three original native regressions
+  and seven direct constraint tests pass; independent rereview also confirms
+  rejection/pending preservation and observed async failure. Native composition
+  now also rejects runtime null/nonfunction validators consistently.
+
+### n3 — Old pager closure uses obsolete metadata (P2)
+
+- **Independent report:** capture Next with unknown `hasNextPage:true`; refresh
+  only that metadata to false, preserving the query; old Next still increments.
+- **Disposition:** callback must use current committed authority and identity,
+  with regression coverage for same-query metadata-only refresh and old closures.
+  Implemented and independently verified with committed-versus-speculative
+  metadata scenarios; old closures cannot grant/revoke based on abandoned inputs.
+
+### n4 — Native column toggles capture stale sorting/visibility (P2)
+
+- **Independent report:** two native column `toggleSorting()` calls without an
+  intervening render both accept descending; the second should advance to
+  ascending. Direct bridge functional setters already use the latest state.
+- **Disposition:** reproduce and fix the supported native column action boundary,
+  not only direct setter updaters. Verify accepted/proposed/rejected paths.
+  Main's follow-up independently reproduced the same defect in visibility:
+  two same-turn category toggles left it hidden. Added the failing regression and
+  routed toggleVisibility through the latest accepted visibility updater too.
+  Independent rereview then caught group method/handler parity: writing a group
+  ID is invalid because accepted visibility is leaf-only. Main independently
+  reproduced that failure; the correction derives intent from current descendant
+  visibility and updates hideable leaves once, preserving controller final-visible
+  guards. Added group method/default-toggle/handler/atomic-rejection regression;
+  fresh follow-up verification passes method/handler parity, required/utility/final
+  guards, accepted/controlled intent and the original n1–n4 probes. Scoped reviewer
+  recommends approval; the final combined workflow also passes.
+
+### n5 — Real collection imports fail strict vendor declarations (P1)
+
+- **Report:** full collection typing exposes three RAC exact-optional inheritance
+  errors; NodeNext also rejects HeroUI's extensionless declarations.
+- **Disposition:** exact current-stable declaration-only RAC repair plus styled-
+  package Bundler resolution is recorded in the plan/ADR-07, without weakening
+  strict flags. Main's positive/negative real-RAC checks pass TS6.0.3/5.9.3;
+  frozen fresh install reapplies the patch. Compared all 1,446 installed files to
+  an unpatched isolated consumer: only the two reviewed declarations differ;
+  runtime/license bytes match. Final unpatched public NodeNext TS6/5.9 renderer/
+  context checks and reachable declaration-graph exclusion also pass.
+
+### n6 — Home/End can focus hidden grouped-header padding (P2)
+
+- **Independent report:** uneven collection, keyboard navigation from Name →
+  Identity → Home lands on hidden `__tw_placeholder:3:selection`; End from
+  Metrics lands on hidden location padding. Existing arrow-only regression passes
+  but does not cover boundary navigation.
+- **Disposition:** returned to collection worker for independent failing repro,
+  Home/End/chord handling and actual keyboard regression. Hidden padding must not
+  become a focus target; no acceptance while unresolved. Reviewer independently
+  passed nine static tests and additional callback/selection/DOM-identity checks.
+  Worker reproduced both exact failures and fixed navigation without semantic
+  markup changes; all 14 expanded static Chromium tests pass. Fresh independent
+  rereview is pending. Generated before/after artifacts were moved to the fixture's
+  standard ignored `.artifacts/` directory so they are not documentation inputs.
+  Independent fresh-copy rereview resolves n6: original reproduction stays on
+  Identity, 14 static cases and a 96-chord matrix find no hidden focus, with ten
+  additional native/selection/DOM probes and strict type checks. Scoped renderer
+  correction approval recommended; main's final public packed/combined G-01 checks
+  subsequently pass with 21 collection cases included in 32 Chromium tests.
+
+### n7 — Native fixture diagnostic reads a committed handle during render (P2 test)
+
+- **Independent report:** filtered-ID diagnostic lags one commit after the n1
+  boundary correction. Actual filtered collection pages verify correctly; the
+  diagnostic reads the stable committed handle in render without observing its
+  commit publication.
+- **Disposition:** main moved this test-only derived read after commit, with
+  explicit input/state dependencies for data-only refreshes. It is not a second
+  row processor or managed-state owner. Full combined browser rerun and subsequent
+  strict collection typecheck pass; no library API or processing expectation was
+  weakened to fit the test.
+
+## WP-05 — delegated agent review session 1
+
+Closed for the independently reviewed isolated resource producer at `71f076c`;
+numbering restarts at n1. Main **agent-approves under delegated authority** the
+tested WP-05/G-03 producer after the full isolated workflow (255 unit/15 browser,
+both public packed TS versions/runtime probes). No personal maintainer review,
+combined native-integration, framework SSR or release approval is claimed.
+Final stacked integration still requires reruns and a separate PR, without merge.
+
+### n1 — Suspense hide incorrectly clears the resource as unmounted (P1)
+
+- **Independent report:** layout-effect disconnect during committed Suspense hide
+  clears accepted rows/pending requests and calls application `unmount` cleanup.
+  On reveal the adapter reconnects idle, but the app's still-mounted passive
+  fetch effect has not restarted; the table can remain empty indefinitely.
+- **Disposition:** independently reproduced before correction (three new
+  regressions failed), then resolved by passive lifetime ownership with layout
+  context invalidation/pure render guards unchanged. Independent fresh-copy
+  rereview verifies ready/pending hide/reveal, hidden completion/revocation and
+  real hidden-owner unmount/StrictMode cleanup. Candidate suite: 47 unit/SSR and
+  11 Chromium passed; reviewer also reran nine independent races and three
+  corrected-original/hidden-revocation checks, plus strict TS6/5.9. No residual
+  verified defect; producer approval recommended pending main packed integration.
+  Unmount cleanup is passive-phase, not before arbitrary layout callbacks;
+  application permission/scope invalidation remains explicit, including hidden UI.

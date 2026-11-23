@@ -6,6 +6,7 @@ export default defineConfig({
       "tests/foundation/**/*.test.ts",
       "tests/contracts/**/*.test.ts",
       "tests/controller/**/*.test.ts",
+      "tests/native/**/*.test.ts",
     ],
     environment: "node",
   },

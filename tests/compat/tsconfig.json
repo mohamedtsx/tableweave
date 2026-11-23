@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": [],
+    "paths": {
+      "react-aria-components": [
+        "../../packages/heroui/node_modules/react-aria-components/dist/types/exports/index.d.ts"
+      ]
+    }
+  },
+  "include": ["types.ts"]
+}

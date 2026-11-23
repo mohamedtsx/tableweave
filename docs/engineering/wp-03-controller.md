@@ -16,10 +16,12 @@ Root `@tableweave/react` remains a client entry. It now exports:
 - `useTableweaveState`, `useTableweaveQuery`, `useTableweaveSelector`;
 - state, command, proposal, controller, updater and definition types.
 
-`/contracts` and `/filters` are unchanged React-free server-safe entries. No new
-dependency, peer, subpath or vendor type leak is introduced. Root hooks require
-the existing React peer. `defineTable`, `useTableweave`, resources/native table,
-styled UI and sortable integration are still unavailable.
+`/contracts` and `/filters` are unchanged React-free server-safe entries. WP-03
+introduced no dependency, peer, subpath or vendor type leak; root hooks require
+the existing React peer. Later [WP-04 native/collection candidates](wp-04-native.md)
+and their exact dependencies are separate from this accepted baseline.
+`defineTable`, `useTableweave`, whole-table/resource facades and sortable remain
+outside WP-03's delivered surface.
 
 ```ts
 import { createTableController } from '@tableweave/react';
@@ -43,8 +45,8 @@ controller.dispatch({
 
 The definition is JSON-cloned, revalidated and frozen. Selection/details are
 opt-in. Optional column metadata contains stable leaf IDs, `hideable`, `utility`
-and `reorderGroup`, not native columns/renderers. The future bridge must derive
-it from the real definition, not maintain a competing column framework.
+and `reorderGroup`, not native columns/renderers. The native bridge derives it
+from the real definition, not a competing column framework.
 
 Initial input has one query value and optional selection/columns/details groups.
 No separate simultaneous default and controlled values exist. `controlled` fixes
@@ -153,6 +155,26 @@ do not call accept inside onRequest. Application state updates in callbacks are
 allowed, but the controller itself has no per-group controlled React mirror.
 Unexpected errors become generic `ControllerError` diagnostics; WP-02 validation
 retains safe `ContractError` issues. No exception payloads are logged by default.
+
+### WP-04 preacceptance constraint extension
+
+The WP-04 candidate adds optional `ControllerOptions.validateState(state)` to
+enforce native restrictions **before** state can become accepted or proposed.
+It is a pure synchronous constraint, not an observer or asynchronous authorization
+port. It runs for initialization, changed reduced candidates before replacing
+pending intent/calling onRequest, and final acceptance after selection override
+validation. Failure preserves accepted state/revision/notifications and any valid
+pending proposal. No-op commands do not publish or revalidate a new state.
+
+The callback must return void and throw to reject. Async/nonvoid returns reject;
+returned promises are safely observed without exposing their raw errors. Unexpected
+constraint errors use existing generic `ControllerError` handling. Mutations during
+candidate/acceptance validation remain reentrancy-guarded. Pure reducer APIs have
+no callback added. This realizes a native capability constraint, never backend
+permission; applications still authorize before reads/actions independently.
+
+This extension is reviewed with WP-04, not a claim that the maintainer personally
+reviewed it as part of the earlier WP-03 acceptance.
 
 ## React and lifecycle
 

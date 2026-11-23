@@ -6,11 +6,13 @@ experience without rebuilding its design and interactions each time.
 Tableweave is a planned open-source React table toolkit built on TanStack Table,
 with a genuinely headless path and an optional HeroUI default experience.
 
-**Current stage: private WP-03 coordinator, not an implemented table toolkit.**
+**Current stage: private native/collection producers, not a complete table toolkit.**
 WP-01–WP-03 are accepted. The root provides controller/subscription hooks;
 `/contracts` and `/filters` retain the accepted schema/operator surface. See
 [WP-03](docs/engineering/wp-03-controller.md) and [WP-02](docs/engineering/wp-02-contracts.md).
-`DataTable`, native bridge and resource facade remain unavailable. Nothing is
+WP-04's bounded native/collection producer is agent-approved under delegated
+authority for the recorded G-01 scope, not personal maintainer acceptance.
+`DataTable` and the resource facade remain unavailable on this branch. Nothing is
 published; [TASKS.md](TASKS.md) owns current acceptance/review status.
 
 ## Start here
@@ -90,13 +92,14 @@ is enabled by these local commands.
 | `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
 | `pnpm typecheck` | Build, then check Storybook/harness sources with strict TypeScript 6 |
 | `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
-| `pnpm test` | Emitted-boundary guards, contract/operator conformance and pure controller tests; not mounted table behavior |
+| `pnpm test` | Emitted-boundary guards, contract/operator conformance, controller and candidate native model tests; mounted behavior is separate |
 | `pnpm test:contracts` | Build plus schema/operator/date/identity and synthetic translator vectors |
 | `pnpm test:controller` | Build plus accepted-state/reset/controlled-transaction/lifecycle tests |
+| `pnpm test:native` | Build plus candidate v9 definition/carrier/client/manual/native transition tests; not G-01 by itself |
 | `pnpm pack:check` | Inspect tarballs; isolated headless/styled installs, TS 5.9/6 declaration checks, Node import guards and Vite bundles |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
-| `pnpm test:browser` | Chromium vendor smoke plus isolated React controller hook fixture on port 6008 (run package/Storybook builds first) |
+| `pnpm test:browser` | Chromium vendor/controller smoke, native fixture on 6011 and grouped collection fixture on 6009 (run package/Storybook builds first) |
 | `pnpm check:docs` | Structural Markdown checks and checker regression probes |
 | `pnpm check` | Full local sequence above, including fresh-install verification |
 | `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
@@ -104,8 +107,9 @@ is enabled by these local commands.
 Generated consumer/tarball reports live in ignored `.artifacts/`; browser evidence
 is in ignored `test-results/`. These commands do not publish, commit or push.
 [Headless contracts](packages/react/README.md) and [styled scaffold](packages/heroui/README.md)
-document their actual exports. Tests exercise the real contract APIs while
-rejecting still-unimplemented native/resource/UI facades and private deep imports.
+document their actual exports. The [bounded WP-04 native/collection producer](docs/engineering/wp-04-native.md)
+has recorded delegated G-01 approval; tests still reject unimplemented whole-table/
+resource facades and private deep imports. This is not a full toolkit/release gate.
 
 The reviewed tooling set uses security-patched Storybook **9.1.21** with Vite
 **7.3.8**, retaining TypeScript **6.0.3**, React **19.3.1**, TanStack Table **9.3.1**,
@@ -113,6 +117,9 @@ HeroUI/styles **3.2.8** and Tailwind **4.3.5**. All configurations retain
 `strict: true` and `skipLibCheck: false`. Only the development Storybook app omits
 the additional exact-optional-property check, explicitly approved after upstream
 declaration failures; Tableweave packages and packed consumers retain it.
+WP-04's [recorded compatibility repair](docs/engineering/wp-04-native.md#vendor-declaration-compatibility)
+uses an exact declaration-only RAC patch and HeroUI-only Bundler build resolution;
+public tarball declarations must still pass unpatched strict NodeNext consumers.
 
 This smoke is not G-01/full G-05, a full vendor-barrel declaration pass, SSR,
 Next/Start integration, complete browser/manual accessibility, performance or

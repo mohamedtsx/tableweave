@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "../../../packages/heroui/src/table/group-column.tsx",
+    "../../../packages/heroui/src/table/collection-projection.ts",
+    "../../../packages/heroui/src/table/header-navigation.ts"
+  ]
+}

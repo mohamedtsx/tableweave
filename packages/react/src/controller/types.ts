@@ -141,6 +141,8 @@ export interface ControllerOptions<S extends QuerySchema> {
   readonly controlled?: readonly StateGroup[];
   readonly registry?: OperatorRegistry;
   readonly now: () => number;
+  /** Pure synchronous constraint; throw to reject before proposal or commit. */
+  readonly validateState?: (state: TableState<S>) => void;
   readonly onRequest?: (proposal: StateProposal<S>) => void;
   readonly onCommit?: (transition: StateTransition<S>) => void;
   readonly onQueryChange?: (

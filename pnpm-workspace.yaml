@@ -4,5 +4,8 @@ packages:
 
 # Only reviewed native tool installers may run; application packages have none.
 onlyBuiltDependencies:
-  - "@tailwindcss/oxide"
+  - '@tailwindcss/oxide'
   - esbuild
+
+patchedDependencies:
+  react-aria-components@1.22.1: patches/react-aria-components@1.22.1.patch

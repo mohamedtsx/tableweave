@@ -17,3 +17,28 @@ export {
   useTableweaveSelector,
   useTableweaveState,
 } from "./hooks/state.js";
+export type {
+  NativeCell,
+  NativeColumn,
+  NativeColumnDef,
+  NativeColumnMeta,
+  NativeControllerOptions,
+  NativeDefinition,
+  NativeDefinitionInput,
+  NativeErrorCode,
+  NativeFeatures,
+  NativeHeader,
+  NativeHeaderGroup,
+  NativeInput,
+  NativePageInfo,
+  NativeRow,
+  NativeTableHandle,
+  NativeTableView,
+} from "./tanstack/index.js";
+export {
+  createNativeColumnHelper,
+  createNativeController,
+  defineNativeTable,
+  NativeBridgeError,
+  useNativeTable,
+} from "./tanstack/index.js";
