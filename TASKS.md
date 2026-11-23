@@ -8,10 +8,13 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 - **2026-11-23:** TASK-002 review and authorization are complete. The maintainer
   ended the review and explicitly accepted WP-01; TASK-003 is **done**.
-- **Current owner instruction:** “I end my review and accept WP-01.” Record the
-  scoped foundation acceptance and close review session 1. Acceptance alone does
-  not authorize WP-02 execution, new installs, delegation, publication or deployment;
-  the subsequent Git/PR instruction below authorizes only those bounded operations.
+- **Current owner instruction:** maintainer approved the bounded WP-02 plan and
+  Valibot `1.5.0` / Internationalized Date `3.12.4` core additions. TASK-005 is
+  accepted; TASK-006 independently reproduced/fixed review session 1 n1–n3 and
+  is back **in review** with full checks passing. The subsequent commit/new-PR
+  request is delivered through TASK-007: implementation commit `f046b9f` and
+  [PR #2](https://github.com/mohamedtsx/tableweave/pull/2). No merge, delegation,
+  npm publication, deployment or further feature execution is authorized.
 - **Previous Git instruction:** the approved documentation changes were committed
   as `de7f1cb`; that one-time commit permission is consumed.
 - **Previous transfer instruction:** move the existing local documentation commit and
@@ -21,10 +24,12 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Previous foundation commit:** the requested WP-01 snapshot is `6bac5a6` on
   `chore/setup`; that one-time commit permission is consumed. Acceptance now
   applies to this foundation revision.
-- **Current Git/PR instruction:** commit the acceptance documentation, push
+- **Previous Git/PR instruction:** commit the acceptance documentation, push
   `chore/setup` to `origin/chore/setup`, then update existing PR #1 to `develop`
   (`https://github.com/mohamedtsx/tableweave/pull/1`) to reflect accepted WP-01.
   Preserve the PR's scope/verification caveats; no merge, release or WP-02 work.
+  Completed as `5c11d53`, pushed to `origin/chore/setup`; PR #1 summary updated.
+  That bounded permission is consumed; no new Git/PR action is requested.
 - **Transfer result:** `chore/setup` fast-forwarded to existing `de7f1cb`; all 62
   changed/untracked source files transferred with byte/mode verification before
   this handoff update. The session now works in `/home/mohamed/Desktop/tableweave`.
@@ -45,8 +50,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   unauthorized.
 - Both supplied Notion pages were fetched. PRD v1.0 is the requirements baseline;
   HLD v1.0 is completed **for review**, with proposed APIs and unexecuted gates.
-- The repository now has private WP-01 package and smoke/check scaffolds, not
-  implemented table features. The initial commit includes the
+- The repository now has accepted private WP-01 scaffolds plus WP-02 pure
+  schema/query/operator candidates, not a mounted table library. The initial commit includes the
   current `.gitmodules` and `.gitignore`; the absent old `.repos/Gamila` index
   entry is not retained. `.repo/Gamila` remains ignored/local-only. Its existing
   Git metadata has a stale worktree path; do not repair or force-add the reference.
@@ -55,9 +60,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Source-ID/fingerprint/section/navigation checks pass; 16 documentation-checker
   probes pass. Final source review corrected row-grouping wording and benchmark
   sampling fidelity. No implementation or stable-release gate is claimed passed.
-- **Next action:** obtain separate bounded authorization for WP-02 schema,
-  operators and conformance vectors. Its WP-01 dependency is accepted, but no
-  WP-02 implementation or dependency installation is started by this acceptance.
+- **Next action:** maintainer reviews the corrected WP-02 snapshot and
+  [review dispositions](REVIEW.md#wp-02--review-session-1) through a new stacked
+  [PR #2](https://github.com/mohamedtsx/tableweave/pull/2), targeting `chore/setup`
+  while PR #1 is open. TASK-007 is delivered; WP-03 remains unauthorized.
 - **Review closed:** TASK-003 / WP-01 review session 1. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
   second task board. Numbering restarts in each new review session. Applied
@@ -71,6 +77,9 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-002 | Review technical baseline and authorize the first implementation slice | done | Current agent coordinates; maintainer decides | TASK-001; explicit WP-01 execution approval |
 | TASK-003 | WP-01 executable workspace and package foundation | done | Current agent implemented; maintainer accepted | Foundation checks and explicit maintainer acceptance |
 | TASK-004 | Record maintainer taste and architecture reference sources | done | Current documentation agent | Explicit maintainer clarification |
+| TASK-005 | Prepare bounded WP-02 implementation plan | done | Current planning agent; maintainer approved | Explicit plan/dependency approval |
+| TASK-006 | WP-02 schema, operators and conformance vectors | in review | Current agent reproduced/fixed n1–n3; maintainer decides | Corrected full checks passed; producer acceptance pending |
+| TASK-007 | Commit WP-02 and create a separate PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #2 open; PR #1 unchanged |
 
 ## TASK-001 — Documentation foundation
 
@@ -258,3 +267,150 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Next action:** apply this guidance to future authorized work. At this task's
   original handoff WP-01 was planned; subsequent execution authority is recorded
   under TASK-003. No further clarification is needed merely to record the sources.
+
+## TASK-005 — Bounded WP-02 implementation plan
+
+- **Status/owner:** done; current agent prepared/reviewed the plan; maintainer
+  explicitly approved local execution and both dependency additions.
+- **Authorization/outcome:** prepare a plan for WP-02 schemas, operators and
+  conformance vectors. Read actual contracts, relevant local references and
+  mounted foundation files; document bounded paths, dependencies, acceptance,
+  stop rules and the next authorization step. No runtime edits or installs.
+- **Paths:** `TASKS.md` and the
+  [implementation plan](docs/planning/wp-02-implementation-plan.md); add a navigation link from WP-02
+  in `docs/planning/work-packets.md`. No other writes without a demonstrated
+  in-scope documentation need; `.repo/` strictly read-only.
+- **Inputs:** WP-02 packet, product operators/shared rules, public API/state/query/
+  security contracts, AC-02–AC-07/AC-23/AC-26, accepted WP-01 files and actual
+  manifests/tests. Worktree is clean at `5c11d53` before opening this task.
+- **Done when:** maintainer can review an implementation-sized sequence with
+  real file/command boundaries, tests mapped to requirements, downstream handoff
+  and explicit exclusions/permissions. No proposed API is treated as implemented;
+  no unsupported feasibility or runtime pass is claimed.
+- **Delivered/findings:** five-step producer-contract/validation/operator/date/
+  conformance sequence with bounded files, requirement/partial-AC mapping,
+  dependency proposal, stop rules and downstream handoff. Fresh read-only Gamila
+  architecture/stack/table-plan inspection was possible in this worktree; no
+  runtime code or business policy copied. Inspected actual empty exports,
+  runner/typecheck coverage and packed/runtime guards: all need deliberate
+  updates alongside real APIs so WP-02 tests are discovered and exercised.
+- **Dependencies:** propose Valibot `1.5.0` and Internationalized Date `3.12.4`
+  as core runtime additions after explicit approval. Checked public registry
+  metadata and official guides read-only; no installation or compatibility pass
+  is claimed. Existing local TS 6/5.9, Vitest/Vite/Playwright metadata was inspected.
+- **Checks:** `python3 scripts/check_docs.py` passed; `python3 -B scripts/test_check_docs.py`
+  passed all 17 probes; `git diff --check` passed. Reviewed the plan against
+  product/operator/shared rules and public API/state/security contracts, including
+  partial AC coverage and unchanged release/feasibility limits. No runtime tests
+  or source-fingerprint comparison were run for this documentation-only task.
+- **Next action:** execute TASK-006 under the approved scope. TASK-005 itself
+  performed no feature edits, installs, Git/PR action or publication.
+
+## TASK-006 — WP-02 schemas, operators and conformance vectors
+
+- **Status/owner/reviewer:** in review; current agent independently reproduced
+  and corrected review session 1 n1–n3; maintainer reviews. Reports are hypotheses,
+  not authority over product contracts. No delegation used or authorized.
+- **Authorization:** maintainer approved the presented plan and two core runtime
+  additions. Local implementation, strict dependency installation and scoped/full
+  verification permitted; no later packet or Git/remote/publication operation.
+- **Inputs/requirements:** accepted WP-01 `6bac5a6`, acceptance `5c11d53`, approved
+  [WP-02 plan](docs/planning/wp-02-implementation-plan.md), WP-02 packet and its
+  product/contract/AC mapping. Existing TASKS/plan/packet edits are preserved.
+- **Paths/single writer:** contracts/filters/schema type bindings, their existing
+  export entries/manifests; `tests/contracts`, specified foundation/consumer/type
+  harnesses and runner; root scripts/lockfile; affected API/README/evidence/task
+  documentation as bounded by the approved plan. No HeroUI implementation or
+  `.repo/`/application changes. Work remains on the existing branch unless
+  separate branch-operation authority is supplied.
+- **Done when/checks:** real inferred schemas/query validation/operator/date/key
+  contracts, full family/custom/shared translator vectors and real packed API
+  invocation pass strict TS 6/5.9, import/contents/peer checks and the existing
+  full local check. Record exact revisions/results/limits and review actual
+  emitted consumers. No full AC/UI/SSR/G-gate claim from pure fixture checks.
+- **Stop rules:** source/peer incompatibilities, semantic parity failures, unsafe
+  diagnostics, missing required proof or scope expansion return for review; no
+  forced peers, hidden declaration skips, fake exports or weakened requirements.
+- **Progress:** installed the two approved dependencies with strict workspace
+  peers; captured three initially failing schema vectors; implemented candidate
+  wire v1/schema, operator/preset/date/evaluation/translation/inverse/identity
+  surfaces and independent synthetic translator vectors. First packed consumer
+  run passed real TS 6/5.9 and Node invocation without DOM/Node consumer typings.
+  Valibot references Blob/File internally, so the private package build uses the
+  already-installed Node typings; no vendor types leak through declarations.
+   These remain private producer candidates, not accepted/frozen release APIs.
+- **Initial verification (before review session 1):** `pnpm check` passed with unchanged frozen lockfile,
+  lint, strict package/Storybook/harness types, **149 tests** (145 contracts + four
+  foundation guards), 17 documentation probes, exact tarball allowlists, isolated
+  headless/styled strict-peer installs, TS 6.0.3/5.9.3 real positive/negative
+  consumers, guarded Node validation/date/evaluator invocation, Vite bundles,
+  static Storybook and one Chromium pointer/keyboard/style/axe smoke. Public
+  declarations inspected with no vendor/React/Node/DOM imports. `git diff --check`
+  passed. Detailed revisions, hashes, corrections, warnings and limits are in
+  [WP-02 evidence](docs/evidence/wp-02-contracts-2026-11-23.md).
+- **Delivered:** wire/vector v1; schema-specific fields/operators/custom/date/
+  accessor types; immutable unknown-input validation; all built-in families and
+  presets; explicit custom/client/translator errors; pure inverse/date/predicate
+  helpers; semantic versus request keys. [Producer contract](docs/engineering/wp-02-contracts.md)
+  records consequential representation/normalization/time/privacy choices. No
+  controller/React/UI/native/resource/SSR/backend/release implementation or gate
+  acceptance is claimed. Original plan/packet edits were preserved and are now
+  committed with the implementation in TASK-007.
+- **Review correction scope:** `filters/evaluate.ts`, `filters/registry.ts`,
+  `filters/dates.ts`, `contracts/types.ts`; contract regressions/independent
+  translator fixture and packed consumer fixtures; REVIEW/TASKS and affected
+  contract/evidence docs; worker workflow records the explicit factual-review
+  instruction so it survives clearing review notes. No dependency/public API additions. Done when
+  each confirmed reproduction fails before and passes after, literal negative
+  fixtures still reject invalid IDs, packed TS 5.9/6 and applicable checks pass.
+- **Review progress:** independently reproduced both n1 inputs, n2 after fixing
+  test setup, and n3's two TS2322 errors. Shared ID-shape/own-index validation,
+  post-timezone interval checks and optional-aware sort/tab inference now pass
+  the focused ten regressions and local strict typecheck. Added packed runtime
+  and broad/optional/literal type fixtures. Final `pnpm check` passed frozen
+  installs, lint/types, **159 tests** (155 contracts + four foundation), 17 docs
+  probes, exact packing/peer/import checks, both TS versions and Chromium smoke.
+  [Evidence](docs/evidence/wp-02-contracts-2026-11-23.md#review-session-1--n1n3-corrections)
+  preserves initial failures, corrected test setup, current hashes and limits.
+- **Next action:** maintainer reviews the correction or supplies further feedback.
+  WP-03 remains blocked on producer acceptance and separate execution authority.
+  At correction handoff no dependency change or Git/PR write had occurred;
+  subsequent authorized Git delivery is tracked in TASK-007.
+
+## TASK-007 — Commit WP-02 and create a new PR
+
+- **Status/owner:** done; current agent delivered and verified the Git/PR handoff;
+  maintainer reviews. This does not accept or close TASK-006/review.
+- **Authorization:** explicit request: “commit and create new pr”. Create a new
+  WP-02 branch, commit the known implementation/plan/review/docs/test changes,
+  push it and open a new PR. No merge, force push, existing-PR edit or release.
+- **Starting state:** `chore/setup` at `5c11d53`, with the preserved tracked and
+  untracked WP-02 changes from TASK-005/TASK-006. Fresh remote inspection confirms
+  PR #1 is still open from `chore/setup` to `develop`.
+- **Paths/dependencies:** only the reviewed WP-02 source/tests/manifests/lockfile,
+  plan, affected documentation and REVIEW/TASKS. Ignored outputs and `.repo/` stay
+  untracked/read-only. No dependency install or runtime edits needed for delivery.
+- **Branch/base:** create `feat/wp-02-contracts` from the accepted local foundation;
+  stack the new PR on `chore/setup` to keep its diff limited to WP-02 while PR #1
+  remains open. Do not merge or update PR #1 automatically.
+- **Done when:** scoped commits exist, branch pushed, new PR is open with correct
+  head/base and verification/limitations, and local/remote heads agree. Preserve
+  review-pending status; record the implementation SHA and PR URL at handoff.
+- **Checks:** reuse the recorded 159-test full check for unchanged runtime;
+  rerun documentation/whitespace checks for Git handoff edits, inspect staged
+  scope and verify clean local state/remote PR metadata after push.
+- **Delivered:** implementation commit
+  `f046b9f86f6ca1798bd026435edac4060f28e92a` on `feat/wp-02-contracts`, pushed with
+  upstream tracking. [PR #2](https://github.com/mohamedtsx/tableweave/pull/2) is
+  OPEN, non-draft, head `feat/wp-02-contracts`, base `chore/setup`. Verified PR
+  head and remote branch equal the implementation SHA and the worktree is clean
+  before this documentation-only completion update. PR #1 remains untouched.
+- **Verification/handoff:** staged scope inspected (50 WP-02 files), documentation
+  checks/17 probes and whitespace checks passed before the implementation commit.
+  No runtime/test/lockfile changes since the recorded 159-test full check; PR body
+  distinguishes that local evidence from remote CI and preserves all limitations.
+  This completion record is delivered as a follow-up documentation commit; it
+  does not change the implementation snapshot or imply maintainer acceptance.
+- **Next action:** maintainer reviews PR #2. After PR #1 is eventually merged,
+  retarget PR #2 to `develop` only under appropriate authority. No merge or further
+  execution follows automatically from this Git-delivery request.

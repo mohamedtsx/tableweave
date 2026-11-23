@@ -55,6 +55,22 @@ for (const name of ["react", "heroui"]) {
           "contracts/index.d.ts",
           "filters/index.js",
           "filters/index.d.ts",
+          ...[
+            "contracts/types",
+            "contracts/errors",
+            "contracts/json",
+            "contracts/context",
+            "contracts/schema",
+            "contracts/query",
+            "contracts/identity",
+            "definition/schema-types",
+            "filters/dates",
+            "filters/registry",
+            "filters/plan",
+            "filters/evaluate",
+            "filters/translate",
+            "filters/inverse",
+          ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ]
       : [
           "index.js",
@@ -70,7 +86,7 @@ for (const name of ["react", "heroui"]) {
       "package/README.md",
       ...emitted.map((file) => `package/dist/${file}`),
     ].sort(),
-    "Unexpected or missing foundation output",
+    "Unexpected or missing reviewed output",
   );
   assert(
     files.every(

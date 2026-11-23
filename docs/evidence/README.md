@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-02 private contracts — 2026-11-23](wp-02-contracts-2026-11-23.md):
+  pure schema/operator/date/translator and packed-boundary evidence; no mounted
+  table, backend, SSR, full gate or publication acceptance.
+
 - [Documentation foundation — 2026-11-23](documentation-foundation-2026-11-23.md):
   source intake, local coverage/navigation/skill review and check results; no
   runtime, Figma, package, benchmark or publication acceptance.

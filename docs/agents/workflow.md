@@ -36,6 +36,12 @@ IDs or automatic packet approval. Notes may be cleared when the maintainer asks;
 preserve applied decisions in canonical owners first, not solely in the temporary
 scratchpad. This does not authorize discarding task/evidence history or user work.
 
+Treat factual review reports as testable hypotheses, whoever reports them.
+Independently reproduce the failure, check it against the owning contract, and
+report contrary evidence when a claim is not confirmed. Maintainers and agents
+can both make mistakes; neither assertion substitutes for proof. This does not
+change the maintainer's authority over requirements or execution authorization.
+
 | State | Meaning |
 | --- | --- |
 | planned | Queued/proposed; no execution or authorization implied |

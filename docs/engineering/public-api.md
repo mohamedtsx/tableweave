@@ -1,7 +1,10 @@
 # Definition and public integration contracts
 
-Source: HLD §4; ADR-02. **All Tableweave names/types here are proposed contracts,
-not available exports.** Feasibility and type tests precede public API freezing.
+Source: HLD §4; ADR-02. Most names/types below remain proposed contracts.
+WP-02's private `defineQuerySchema`, query/operator helpers and accessor bindings
+now exist; the [implemented WP-02 contract](wp-02-contracts.md) owns their exact
+surface and limits. No table/controller/native API is implied; maintainer packet
+review precedes producer acceptance or public API freezing.
 
 ## Schema versus rendering definition
 

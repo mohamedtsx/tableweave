@@ -23,3 +23,13 @@ For a new/revised consequential decision, use the [ADR template](../templates/ad
 record source/FR/D IDs, alternatives, evidence/risks, review disposition and
 supersession. Update the owning contract and affected acceptance/packets. Do not
 mark a decision “accepted” merely because an agent wrote it.
+
+## WP-02 implementation disposition
+
+Maintainer explicitly approved the bounded plan and internal Valibot `1.5.0` /
+Internationalized Date `3.12.4` additions in TASK-006. This realizes ADR-02/ADR-05
+without replacing the serializable-descriptor/native-definition split or adding
+a row-processing engine. Vendor schemas stay internal; native bridging, controller
+and React/UI APIs remain proposed. Concrete wire/date/key choices and their risks
+are recorded in the [private producer contract](../engineering/wp-02-contracts.md),
+subject to packet review. No G-gate/publication disposition changes.

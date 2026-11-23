@@ -54,6 +54,11 @@ IDs. Each table has its own controller/IDs unless intentionally controlled toget
 
 ## Proposed versioned wire envelope
 
+The [private WP-02 implementation](wp-02-contracts.md) now realizes wire version 1
+with narrower date variants and inferred field/operator/value types. The sketch
+below remains an overview; executable producer contracts and their normalization
+choices are owned there. Controller/native coordination above is not implemented.
+
 ```ts
 type JsonValue = null | boolean | number | string
   | JsonValue[] | { [key: string]: JsonValue };
