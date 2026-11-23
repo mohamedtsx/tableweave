@@ -20,7 +20,10 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXCLUDED = {".git", ".repo", "node_modules", ".venv", "dist", "__pycache__"}
+EXCLUDED = {
+    ".git", ".repo", "node_modules", ".venv", "dist", "__pycache__",
+    ".artifacts", "storybook-static", "test-results", "playwright-report",
+}
 INVENTORIES = (
     ("FR", "product/features.md", r"^## (FR-\d{2})\b", 1, 16),
     ("D", "product/decisions.md", r"^\| (D-\d{2}) \|", 1, 40),

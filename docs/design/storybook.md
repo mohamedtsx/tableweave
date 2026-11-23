@@ -1,8 +1,10 @@
 # Storybook workbench contract
 
-Source: HLD §13 and §§18–20; FR-16. Proposed home: `apps/storybook`; **no runner or
-stories are mounted yet**. Bootstrap must document verified commands in root
-README, rather than copying Gamila's paths or test scripts.
+Source: HLD §13 and §§18–20; FR-16. Home: `apps/storybook`. WP-01 mounts only
+`Foundation/Workspace → Smoke` using real vendor primitives and synthetic local
+state, not a Tableweave component or approved visual design. The catalog below
+remains planned. Root [README](../../README.md#local-foundation-workflow) owns
+verified commands; no Gamila paths or test scripts are copied.
 
 ## Ownership
 

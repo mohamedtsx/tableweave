@@ -40,8 +40,10 @@ pipeline, not a competing table engine. Query stays in examples/applications.
 
 ## Proposed repository shape
 
-Directories below are **future outputs**, not mounted files. Current docs live
-alongside them and remain the contract owners.
+This is the **target shape**, not a list of implemented features. WP-01 mounts
+the two package entry/build skeletons, minimal Storybook and foundation test/
+consumer harnesses; most feature folders and example apps remain future outputs.
+Current docs live alongside them and remain the contract owners.
 
 ```text
 packages/
@@ -59,6 +61,8 @@ side-effect free. Externalize peers and inspect **packed tarballs**, not only
 workspace aliases. Confirm headless and default renderer imports exclude HeroUI
 or optional sortable as appropriate; a boolean flag alone is not tree shaking.
 
-The exact build implementation and executable commands are WP-01 outputs. No
+The current WP-01 build uses unbundled TypeScript ESM/declaration emission to
+preserve directives/import boundaries, with an explicit CSS copy. Verified commands
+are in the root [README](../../README.md#local-foundation-workflow). No
 database/auth/worker/service stack is required for this library. Do not copy
 Gamila's app topology, patches, install hooks or lockfile.

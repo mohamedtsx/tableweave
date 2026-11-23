@@ -22,7 +22,7 @@ source or final visual approval. Keep all reference no-copy/read-only boundaries
 | [Toolbar configurations](https://www.figma.com/design/03BxapjDU8ceJUFjx3o6Cx/better-table?node-id=2-74) | Optional tools and attribute/operator/value controls | Competing owners or all tools on by default |
 | [Segmented rules](https://www.figma.com/design/03BxapjDU8ceJUFjx3o6Cx/better-table?node-id=27-922) | Whole-rule wrapping, segments/options/typed editor | Nested Boolean groups; segments are one rule, not a subtree |
 | [Filtered table](https://www.figma.com/design/03BxapjDU8ceJUFjx3o6Cx/better-table?node-id=27-1269) | Sample active criteria/results | Assuming every sample owner map is valid |
-| [HeroUI Table](https://heroui.com/docs/components/table), [Drawer](https://heroui.com/docs/components/drawer) | Compound vocabulary, theme/focus/state affordances | Second processing owner or unsupported responsive props |
+| [HeroUI v3 Storybook](https://storybook-v3.heroui.com/?path=/docs/welcome--docs) | Primary component reference for Table/Drawer anatomy, variants, theme/focus/state affordances; verify against installed types/tagged source | Second processing owner, unsupported responsive props or assuming hosted examples match the installed release |
 | [shadcn guide](https://ui.shadcn.com/docs/components/base/data-table) | Composition/custom cells/actions | Required Base UI/Radix/shadcn dependency or only permitted theme |
 | [Notion filtering](https://www.notion.com/help/views-filters-and-sorts) | Type/operator/empty vocabulary | Nested groups/views/formulas/backend clone |
 

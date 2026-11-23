@@ -1,9 +1,10 @@
 # Verification strategy
 
-Source: HLD §13; product acceptance and quality gates. **No runtime suites or
-runtime commands exist yet.** The only executable local checks are the
-[README documentation checks](../../README.md#check-documentation). WP-01 must
-mount and document the actual build/type/unit/browser/Storybook/pack workflow.
+Source: HLD §13; product acceptance and quality gates. WP-01 mounts foundation
+build/type/boundary-unit/browser-smoke/Storybook/packed-consumer checks, not feature
+acceptance suites. The [README](../../README.md#local-foundation-workflow) owns
+executable commands; [foundation evidence](../evidence/wp-01-foundation-2026-11-23.md)
+records their scope. Documentation checks remain independently runnable in Python.
 
 ## Choose checks for meaningful risk
 

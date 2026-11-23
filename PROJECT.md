@@ -14,8 +14,9 @@ domain-driven design, nor that a specification proves a working feature.
 - PRD v1.0: completed requirements baseline, including all FR-01–FR-16.
 - HLD v1.0: completed architecture/designer handoff, ready for review; candidate
   APIs/dependencies are not frozen or implemented. G-01–G-05 remain unexecuted.
-- Local repository: documentation and documentation-check tooling only. No npm
-  package, application, Figma system, benchmark or consumer integration exists here.
+- Local repository: private WP-01 ESM/declaration package scaffolds, synthetic
+  Storybook smoke and foundation checks alongside documentation. No table feature
+  APIs, published npm package, Figma system, benchmark or real-consumer integration.
 - [TASKS.md](TASKS.md) owns live status and current authorization. A planned packet
   never authorizes execution, installs, remote writes or publication.
 

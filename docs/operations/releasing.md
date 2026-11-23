@@ -1,8 +1,9 @@
 # Packaging and release operations
 
-Source: PRD §11; HLD §13. This is a future procedure, not a configured CI pipeline
-or permission to publish. No packages/registry accounts/releases exist here as a
-result of this task. [Product gates](../../product/release-gates.md) own readiness.
+Source: PRD §11; HLD §13. Publication remains a future procedure, not permission
+to publish. WP-01 adds private local package scaffolds, packing checks and CI
+configuration; no remote CI run, registry ownership or release is claimed.
+[Product gates](../../product/release-gates.md) own readiness.
 
 ## Version and support policy
 

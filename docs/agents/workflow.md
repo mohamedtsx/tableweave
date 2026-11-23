@@ -27,6 +27,15 @@ the same ID in parallel. WP IDs identify reusable scope packets, not live task
 status. No second TODO/PROGRESS board. Archive completed history only when useful,
 preserving IDs/links/evidence and marking it historical, not active instruction.
 
+Maintainer review-note labels (`n1`, `n2`, …) are **session-local** and restart
+in each new review session. Keep numbered feedback in the separate
+[REVIEW.md](../../REVIEW.md) scratchpad, grouped by session with its request,
+disposition/checks and task context. TASKS links to it but remains the only task
+board. Refer to task + session + note when ambiguous; labels are not global task
+IDs or automatic packet approval. Notes may be cleared when the maintainer asks;
+preserve applied decisions in canonical owners first, not solely in the temporary
+scratchpad. This does not authorize discarding task/evidence history or user work.
+
 | State | Meaning |
 | --- | --- |
 | planned | Queued/proposed; no execution or authorization implied |
