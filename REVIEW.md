@@ -233,7 +233,9 @@ numbering restarts at n1. Main **agent-approves under delegated authority** the
 tested WP-05/G-03 producer after the full isolated workflow (255 unit/15 browser,
 both public packed TS versions/runtime probes). No personal maintainer review,
 combined native-integration, framework SSR or release approval is claimed.
-Final stacked integration still requires reruns and a separate PR, without merge.
+Final stacked `e6eeabf` integration now also passes **288 unit/43 Chromium**, both
+unpatched packed TS versions and all native/collection/resource boundaries; source
+fingerprints match the reviewed producer. Separate PR delivery follows, no merge.
 
 ### n1 — Suspense hide incorrectly clears the resource as unmounted (P1)
 

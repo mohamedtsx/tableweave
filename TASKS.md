@@ -63,8 +63,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   sampling fidelity. No implementation or stable-release gate is claimed passed.
 - **Next action:** WP-04 has delegated technical/G-01 approval and implementation
   `b165550` in [PR #4](https://github.com/mohamedtsx/tableweave/pull/4), stacked on
-  still-open PR #3. Complete its patch-material handoff push, then
-  stack reviewed resource commit `71f076c` and rerun combined WP-04/WP-05 checks.
+  still-open PR #3. Final head `bf7712e` is pushed/verified and the tree was clean.
+  Reviewed resource transport `71f076c` is stacked as `e6eeabf` on
+  `feat/wp-05-resources`; combined checks now pass. Finish its evidence/docs/PR
+  handoff, then integrate the isolated WP-06 actual Start SSR work. No PR merges.
   PR #3 stays open; no PR merge. WP-06 plan/dependency research is prepared.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
@@ -89,7 +91,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | in progress | Isolated resource worker; main integrates/reviews later | Independent WP-02/WP-03 dependency; G-03 |
-| TASK-014 | WP-06 Start/Query SSR integration | planned | Assigned after producer handoffs | WP-04/WP-05; G-04 |
+| TASK-014 | WP-06 Start/Query SSR integration | in progress | Main prepares isolated plan/install, then app worker | Reviewed WP-04/WP-05 producers; G-04 required |
 | TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
 | TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
 | TASK-017 | WP-09 details/localization/responsive shell | planned | Assigned after producer handoffs | WP-04/WP-05 |
@@ -654,6 +656,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   notes referenced by the lockfile, with no runtime/source-byte change. Final
   docs/whitespace passed (77 Markdown/490 local links/18 probes). Verify final
   pushed head/PR state, then stack resource commit `71f076c`; never merge PRs.
+  Final local/remote/PR #4 head verified equal at
+  `bf7712eed7c29203172e168c4c0bfa4ed102b021`; PR remains OPEN and working tree
+  was clean before the WP-05 branch was created. No merge.
+  GitHub later reports both `foundation` checks SUCCESS on PR #4 head `bf7712e`;
+  state remains OPEN. Remote CI success does not authorize merging it.
 
 ## TASK-013 — WP-05 independent resource producer
 
@@ -691,16 +698,52 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Next: finish WP-04, create the final WP-05 stack branch, cherry-pick the reviewed
   resource commit, reconcile shared integration paths and rerun combined checks
   before its separate PR. Dependency symlinks were explicitly excluded from Git.
+  **Stack integration:** created `feat/wp-05-resources` from complete WP-04
+  `bf7712e`, cherry-picked transport as `e6eeabf`, preserving both native/resource
+  root APIs, test discovery, renderer/strict declaration/type/bundle guards and
+  all browser runners. Eight expected shared-path conflicts were reconciled by
+  combining both sides, not dropping producer APIs/checks. Lint/whitespace and
+  conflict-marker checks passed. Combined `pnpm check` now passes **288 unit/
+  43 Chromium**, both unpatched public TS6/5.9 native/resource/real-renderer
+  consumers, all declaration/import/CSS/sortable guards and 18 documentation
+  probes. Main extends scoped delegated WP-05/G-03 approval to this combined
+  handoff; fingerprints match the reviewed resource code. Final docs/checks,
+  handoff commit/push and PR to `feat/wp-04-native-bridge` are next. No PR yet.
+  Final postapproval Markdown/whitespace passed: 80 Markdown /508 local links and
+  all 18 checker probes. Runtime suite preceded only these Markdown status edits.
 
-## TASK-014 — WP-06 preparation only
+## TASK-014 — WP-06 actual Start/Query SSR integration
 
-- **Status:** planned; runtime waits for WP-04/WP-05 reviewed producers.
+- **Status:** bounded plan approved under delegated engineering authority before
+  source/install, in isolated `/tmp/opencode/tableweave-wp06` on
+  `work/wp-06-start-query` from `e6eeabf`. Both producers have scoped technical
+  approval; main finishes combined WP-05 checks/Git delivery in parallel. Final
+  WP-06 stack/acceptance waits for that combined handoff. No shared module links.
 - **Read-only research:** compatible Start/Router/Query/SSR integration profile
   identified on 2026-11-24 without installs: Start 1.168.61, Router 1.170.42,
   router-core 1.171.35, Query/query-core 5.108.4 and react-router-ssr-query 1.167.3
   with accepted Vite 7.3.8/plugin5.2.0. Current Start1.169.7 needs Vite8; do not
   silently upgrade root/Storybook or force peers. These are candidates, not passes.
-- **Next action:** use the prepared bounded plan when producers hand off; verify
-  peer/security suitability, record exact app-only install scope, then implement
-  actual Start SSR with request-local clients, one hydration owner and packed
-  concurrent-scope proof. No core integration dependency or synthetic-SSR pass.
+- **Install scope:** main independently rechecked all six exact registry versions/
+  peer/engine metadata. App manifest pins those, existing React/DOM19.3.1/Table9.3.1,
+  Vite7.3.8/plugin5.2.0, TS6.0.3/React types19.3.0/Node types24.19.2/Playwright1.65.1.
+  Only app integration dependencies; no core Query/router/Start import. Metadata
+  is not a security audit or installed compatibility pass. Main owns isolated
+  install/lock/shared config; worker will own app source and `tests/start/**`.
+- **Requirements/paths:** WP-06/G-04/AC-22–24; request-local clients, one hydration
+  owner, real HTML-before-JS, two-scope and same-key canary, stable bootstrap,
+  actual isomorphic abort/RPC, validation/manual-page/resource/race/metadata
+  integration and real packed consumer. Port6013, isolated artifacts. Default
+  resource server snapshot is empty, so explicit authorized bootstrap proof is
+  required; no pretend SSR-data pass. No real auth/backend/consumer write.
+- **Next action:** install the planned profile in the isolated worktree, inspect
+  strict peers/build-script diagnostics, then assign app implementation. No forced
+  peers/strictness suppression or blanket tooling/runtime upgrade. Publication,
+  deployment, manual AT/device/performance/legal acceptance remain separate.
+  **Install/assignment result:** isolated strict install passed (five projects,
+  366 packages), only the existing glob deprecation warning; no forced peers or
+  unreviewed build-script exemption. App worker now owns the assigned app/tests
+  paths and may run isolated builds/SSR/browser proof on6013. Main retains all
+  manifests/lock/shared checks/docs and Git; root integration happens after the
+  producer PR handoff. WP-07 has a separate read-only planning agent, no runtime
+  implementation assigned yet.

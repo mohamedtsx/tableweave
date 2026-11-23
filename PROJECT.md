@@ -14,14 +14,17 @@ domain-driven design, nor that a specification proves a working feature.
 - PRD v1.0: completed requirements baseline, including all FR-01–FR-16.
 - HLD v1.0: completed architecture/designer handoff, ready for review; candidate
   APIs/dependencies are not generally frozen. WP-04 records bounded G-01 proof;
-  later gates are separate and do not pass through that result.
+  WP-05 separately records bounded G-03 resource proof. Later gates remain separate.
 - Local repository: accepted WP-01 foundation/WP-02 schema/operator contracts and
   WP-03 accepted-state controller/React hooks. Synthetic Storybook and
   hook fixtures/checks exist; WP-04 native/collection producer has scoped delegated
-  agent G-01 approval, not personal maintainer acceptance. No full table facade,
-  published package, Figma
-  system, benchmark or real-consumer integration. [WP-03 contract](docs/engineering/wp-03-controller.md)
-  distinguishes implemented coordination from later native/UI/resource work.
+  agent G-01 approval, not personal maintainer acceptance.
+  WP-05 adds plain resource generation/retention/lifecycle APIs with scoped
+  delegated G-03 approval; framework SSR and full UI remain separate. No full
+  table facade, published package, Figma system, benchmark or real-consumer
+  integration. The [WP-03](docs/engineering/wp-03-controller.md),
+  [WP-04](docs/engineering/wp-04-native.md) and [resource](docs/engineering/resources.md)
+  contracts distinguish actual private producers from later whole-table work.
 - [TASKS.md](TASKS.md) owns live status and current authorization. A planned packet
   never authorizes execution, installs, remote writes or publication.
 

@@ -29,8 +29,8 @@ Contracts/filters contain no client directive or React/UI import. Their only
 runtime dependencies are Valibot `1.5.0` and Internationalized Date `3.12.4`.
 Vendor validation objects/types are internal. See the repository's
 [WP-02 contract](../../docs/engineering/wp-02-contracts.md) for exact context,
-normalization, translator and privacy obligations. No fetching, persistence,
-authorization is supplied. Only the WP-04 candidate root uses a native row pipeline;
+normalization, translator and privacy obligations. No fetching, persistence or
+authorization is supplied. Only the WP-04 producer root uses a native row pipeline;
 the server-safe subpaths do not import it or React.
 
 Not published or ready for application use. Peers are exact development candidates,

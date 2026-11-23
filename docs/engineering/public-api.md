@@ -3,17 +3,21 @@
 Source: HLD §4; ADR-02. Most names/types below remain proposed contracts.
 WP-02's private `defineQuerySchema`, query/operator helpers and accessor bindings
 now exist; the [implemented WP-02 contract](wp-02-contracts.md) owns their exact
-surface and limits. No table/native facade is implied; maintainer packet
-review precedes producer acceptance or public API freezing.
+surface and limits. No full table facade is implied; authorized packet review
+(explicitly delegated technical review where granted) precedes private producer
+acceptance. Public API/release freezing remains separate.
 
 WP-02 and WP-03 are accepted. WP-03 separately implements controller/pure
 transition/snapshot/query/selector hooks; [its contract](wp-03-controller.md) owns
-their exact names, ownership and lifecycle. `defineTable`, `useTableweave`, native
-whole-table/resource facade, `DataTable` and sortable integration remain unavailable.
+their exact names, ownership and lifecycle. `defineTable`, `useTableweave`, the
+whole-table facade, `DataTable` and sortable integration remain unavailable.
 
 The separate [WP-04 producer](wp-04-native.md) exposes bounded root native
 definition/controller/hook helpers with delegated scoped G-01 approval; this is
-not personal maintainer acceptance or the proposed whole-table/resource facade.
+not personal maintainer acceptance or the proposed whole-table facade. WP-05's
+[plain resource producer](resources.md#implemented-private-producer) now adds
+`createResourceAdapter`, `projectResourceView`, `useTableweaveResource` and tagged
+types with scoped delegated G-03 proof; it is not a fetch cache or SSR integration.
 
 ## Schema versus rendering definition
 
