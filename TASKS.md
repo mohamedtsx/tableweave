@@ -64,9 +64,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Next action:** WP-04 has delegated technical/G-01 approval and implementation
   `b165550` in [PR #4](https://github.com/mohamedtsx/tableweave/pull/4), stacked on
   still-open PR #3. Final head `bf7712e` is pushed/verified and the tree was clean.
-  Reviewed resource transport `71f076c` is stacked as `e6eeabf` on
-  `feat/wp-05-resources`; combined checks now pass. Finish its evidence/docs/PR
-  handoff, then integrate the isolated WP-06 actual Start SSR work. No PR merges.
+  Resource transport `71f076c` is stacked as `e6eeabf` plus approval `2be951a` in
+  [PR #5](https://github.com/mohamedtsx/tableweave/pull/5), based on open PR #4;
+  combined checks pass. Verify the final handoff push, then continue isolated
+  WP-06 actual Start SSR and approve WP-07's prepared plan before code. No merges.
   PR #3 stays open; no PR merge. WP-06 plan/dependency research is prepared.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
@@ -90,7 +91,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-010 | Commit accepted WP-03 and create a PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #3 open to develop |
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
-| TASK-013 | WP-05 resource presentation/races | in progress | Isolated resource worker; main integrates/reviews later | Independent WP-02/WP-03 dependency; G-03 |
+| TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
 | TASK-014 | WP-06 Start/Query SSR integration | in progress | Main prepares isolated plan/install, then app worker | Reviewed WP-04/WP-05 producers; G-04 required |
 | TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
 | TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
@@ -711,6 +712,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   handoff commit/push and PR to `feat/wp-04-native-bridge` are next. No PR yet.
   Final postapproval Markdown/whitespace passed: 80 Markdown /508 local links and
   all 18 checker probes. Runtime suite preceded only these Markdown status edits.
+  **Git delivery:** code `e6eeabf`, combined approval `2be951a`, pushed on
+  `feat/wp-05-resources`; [PR #5](https://github.com/mohamedtsx/tableweave/pull/5)
+  is OPEN to `feat/wp-04-native-bridge`. This handoff records its actual URL and
+  completion; final pushed-head equality is checked after this Markdown commit.
+  No merges, publication, deployments or extra consumer/reference changes.
 
 ## TASK-014 — WP-06 actual Start/Query SSR integration
 
