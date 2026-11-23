@@ -140,7 +140,8 @@ TASK-009 is done and the review is closed; retained review notes are not cleared
 Acceptance applies to the reviewed local runtime/declaration snapshot measured by
 the corrected core tarball fingerprint above. The subsequent acceptance update is
 Markdown-only, with documentation/whitespace checks; runtime tests were not rerun
-or backdated for that update. Source remains uncommitted on base `a4dd2b1`.
+or backdated for that update. Source was uncommitted on base `a4dd2b1` at acceptance;
+the subsequent explicitly requested Git delivery is recorded in TASK-010.
 No commit, push, new PR, next-packet execution or release is authorized by acceptance.
 
 ## Limits

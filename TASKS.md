@@ -11,10 +11,10 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Current owner instruction:** maintainer explicitly accepted WP-03 after
   review session 1 n1–n2 corrections; TASK-009 is **done** and the session is closed.
   Acceptance covers the reviewed local coordinator/hooks producer, not broader
-  native/UI/resource/SSR/release gates. The subsequent “commit then create pr”
-  request authorizes TASK-010's new WP-03 branch, scoped commits, push and PR to
-  `develop`. No merge, next-packet work, dependency, delegation, publication or
-  deployment is included.
+  native/UI/resource/SSR/release gates. TASK-010 delivered the subsequent commit/
+  PR request as implementation `4f151d7` on `feat/wp-03-coordinator` and
+  [PR #3](https://github.com/mohamedtsx/tableweave/pull/3) to `develop`. No merge,
+  next-packet work, dependency, delegation, publication or deployment is included.
 - **Previous Git instruction:** the approved documentation changes were committed
   as `de7f1cb`; that one-time commit permission is consumed.
 - **Previous transfer instruction:** move the existing local documentation commit and
@@ -60,9 +60,9 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   Source-ID/fingerprint/section/navigation checks pass; 16 documentation-checker
   probes pass. Final source review corrected row-grouping wording and benchmark
   sampling fidelity. No implementation or stable-release gate is claimed passed.
-- **Next action:** deliver TASK-010's accepted WP-03 snapshot as a new PR to
-  `develop`, preserving all verification limits. No WP-04/05 execution is implied.
-  PR #1/#2 are merged; the background worker reported zero open PRs.
+- **Next action:** maintainer reviews [PR #3](https://github.com/mohamedtsx/tableweave/pull/3)
+  for Git integration; WP-03 packet acceptance remains recorded. PR #1/#2 were
+  merged earlier. No automatic merge or WP-04/05 execution is authorized.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
@@ -82,7 +82,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-007 | Commit WP-02 and create a separate PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #2 open; PR #1 unchanged |
 | TASK-008 | Merge the two open repository PRs | done | Main agent merged #1; authorized background agent merged #2 | Both checks passed; GitHub confirms both merged and zero open PRs |
 | TASK-009 | Plan then implement WP-03 accepted-state coordinator | done | Main agent delivered/corrected; maintainer accepted | Explicit WP-03 acceptance after 208-test/four-browser/packed checks and n1–n2 fixes |
-| TASK-010 | Commit accepted WP-03 and create a PR | in progress | Current agent executes/verifies Git handoff | Explicit commit-then-PR request; PR #1/#2 already merged |
+| TASK-010 | Commit accepted WP-03 and create a PR | done | Current agent delivered/verified; maintainer reviews PR | Implementation committed/pushed; PR #3 open to develop |
 
 ## TASK-001 — Documentation foundation
 
@@ -513,17 +513,17 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Acceptance:** explicit “I accept WP-03” after the n1–n2 corrections. Accepted
   reviewed runtime/declarations correspond to the tested core tarball SHA-256
   `600f17bd9eedaa653d567f049e0ffbf7e9440ee419852b45df21fd477d2abf65`
-  (before acceptance-only Markdown edits). Source remains local/uncommitted on
-  `a4dd2b1`; no new immutable commit/release identity is claimed.
+  (before acceptance-only Markdown edits). At acceptance source was uncommitted
+  on `a4dd2b1`; TASK-010 now records its implementation commit, not a release.
 - **Next action:** authorized Git delivery is tracked in TASK-010; next-packet
   execution remains separately authorized.
   No WP-04 native bridge, WP-05 resource, UI, full SSR/G-gate or
   release acceptance is implied. WP-03/acceptance/merge bookkeeping stays local
-  and uncommitted at acceptance; the subsequent explicit Git grant is TASK-010.
+  and uncommitted at acceptance; TASK-010 records the subsequent Git delivery.
 
 ## TASK-010 — Commit accepted WP-03 and create a PR
 
-- **Status/owner:** in progress; current agent executes and verifies the bounded
+- **Status/owner:** done; current agent delivered and verified the bounded
   Git handoff. TASK-009 acceptance/review closure remains unchanged.
 - **Authorization:** explicit “commit then create pr”. Create a new branch,
   commit accepted WP-03 source/tests/plan/review/acceptance/docs and preserved merge
@@ -543,5 +543,17 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 - **Checks:** reuse recorded 208-test/four-browser full verification for unchanged
   runtime. Rerun actual documentation/17-probe and whitespace checks for handoff
   edits, inspect staged scope and verify remote PR metadata. No CI pass invented.
-- **Next action:** create branch, commit and push the scoped snapshot, create the
-  PR and record/verify its final handoff. No automatic merge or further task.
+- **Delivered:** implementation commit
+  `4f151d7629fb71fc5e4bfa29b4c774f37d3a1407` on `feat/wp-03-coordinator`, pushed
+  with upstream tracking. [PR #3](https://github.com/mohamedtsx/tableweave/pull/3)
+  is OPEN/non-draft with base `develop` and the expected head branch. Verified
+  implementation SHA against both PR metadata and remote ref; worktree was clean
+  before this documentation-only completion update.
+- **Verification/handoff:** staged scope inspected (39 reviewed WP-03 files);
+  documentation checks/all 17 probes and staged whitespace checks passed before
+  commit. No runtime/test/dependency changes since the recorded 208-test/four-
+  browser full run. PR body distinguishes local proof from remote CI, retains
+  native/resource/SSR/release limits and records explicit packet acceptance.
+  This final record is a follow-up documentation commit, not another feature.
+- **Next action:** maintainer reviews PR #3. No merge, further Git action or
+  next-packet implementation is inferred from completing this request.

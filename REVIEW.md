@@ -113,4 +113,5 @@ guarded runtime/server-render checks, 17 documentation probes and **four Chromiu
 tests** (including both n1 regressions). Reviewed corrected source/declarations
 and preserved all prior guards. See [WP-03 evidence](docs/evidence/wp-03-controller-2026-11-23.md#review-session-1--n1n2-corrections).
 The later explicit WP-03 acceptance closes this session; broader gates remain
-unpassed. No commit/push performed. Restart numbering at n1 for the next session.
+unpassed. No Git writes occurred during these corrections; subsequent delivery is
+tracked in TASK-010. Restart numbering at n1 for the next session.
