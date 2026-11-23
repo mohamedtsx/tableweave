@@ -1,0 +1,3 @@
+[submodule ".repo/Gamila"]
+	path = .repo/Gamila
+	url = git@github.com:mohamedtsx/Gamila.git
