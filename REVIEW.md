@@ -1559,3 +1559,16 @@ new WP-08 command-validator/native/source reset integration is not established.
 No actual tool/option-buffer erasure, privacy-before-commit, React/SSR, paired frame,
 native unpaged/complete-resource/facade/genuine packed/full AC/packet acceptance or
 merge follows. Preserve all old source seals before the next declared generation.
+
+## WP-09 combined transport — delegated review session 6
+
+### n1 — Bounded source reconciliation accepted; no verified defect
+
+Independent object/working-tree comparisons verify original95/433 and follow-up
+97/433 exclusive paths, zero mismatches;610 unaffected parent paths and105 runtime
+sources stay exact. Six shared resolutions preserve history/exports/layers/safe
+copier, with8/8 fresh copier vectors. Main independently reconciles the source-map
+recipe at b9a3e8ee… and verifies actual combined build/strict package/type/scoped
+units. Main grants delegated transport acceptance, not an output-generation or
+whole-WP09 pass. Default650 pass/2 historical-generation failures remain open.
+Only the exact two-file U1 controller plan is activated; other runtime owners frozen.

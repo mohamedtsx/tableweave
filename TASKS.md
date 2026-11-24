@@ -1,5 +1,46 @@
 # Tableweave tasks
 
+## Current WP-09 integration boundary
+
+Main transports approved prerequisites onto delivered WP-08
+fadb9a8e226f4a7111f062c5e6d00a7ce1235ebb. Push45396781964/PR45396795693 both succeed;
+PR #8 remains open/unmerged with auto-merge null. Source dcfeb874 is reconciled as
+0a63a25, and readiness follow-up a8d4611 as fee0bb5 in this target. Initial byte audit
+confirms all95 source-exclusive/433 parent-exclusive paths unchanged, six shared
+resolutions only. Main owns frozen-lock install/build/transport review. No new
+controller/native/resource behavior, public plain-module exports, generation hash
+approval or complete WP-09 acceptance follows. Historical source guards remain.
+
+Next: independent reconciliation review plus actual combined build/types; name the
+new source baseline and approve only the two-file controller guard stage afterward.
+New details exports/CSS intentionally alter output, so old WP-08 fixed-generation
+gates remain historical until a separate reviewed generation integration.
+
+Combined frozen install/build (TS6), both TS5.9 package source checks, lint498 and
+docs/18 probes pass. Actual source suites pass policy267/execution348/publication88/
+criteria56/details9 (overlapping suites, not a summed unique total). Default units
+are650 passed/2 failed: both failures are the unchanged approved180-output generation
+tests observing the new199 outputs. This preserved intentional integration blocker
+is not full-root acceptance or a source-producer defect. No expected hash is changed.
+Follow-up transport audit confirms97 source-exclusive/433 parent-exclusive files
+unchanged. Measured105-source baseline is c6ce30d0a8c5f3c4e0537e4703a0cfabae40263619f0e1a9f1b3c4a90236033f;
+measurement alone grants no runtime/output generation approval. Independent transport
+review still gates the next two-file controller implementation allocation.
+The exact U1 store/reducer guard plan is written/linked, but its source lease remains
+inactive until independent transport review is accepted. It preserves capture and
+query.replace ordering, rejects before private callbacks and does not touch native/
+resource/output-generation integration. No worker is assigned yet.
+Independent transport review is now accepted:95/433 then97/433 bytes/modes preserved,
+six correct unions,610 parent paths intact,105 sources unchanged and eight copier
+probes pass. Main replays the common source-map recipe at b9a3e8ee… and records
+combined evidence. **U1 is now active:** one worker owns only controller/{store,reducer}.ts
+and new tests/pagination-policy/controller/**, under the written exact guard plan.
+Protected producer/native/resource/tool/exports/config/Git paths stay read-only;
+independent correction review and main integration follow. Root650/2-failed generation
+status remains explicit; no new hash/full workflow approval follows.
+
+## Historical WP-08 integration and delivery
+
 Current integration: source handoff9fbac79 is replayed onto final WP-07 46df932
 in this target. Main reconciles shared scripts/exports/CSS/patches/lock/ledger and
 preserves both packets' verification lanes. The new

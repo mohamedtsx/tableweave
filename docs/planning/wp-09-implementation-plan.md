@@ -50,6 +50,8 @@ The [stack reconciliation](wp-09-stack-reconciliation.md) owns transport preserv
 checks and the six shared-file resolutions before the next combined baseline.
 The [initial adoption readiness](wp-09-bootstrap-readiness.md) distinguishes certified
 same-domain seeds from old-domain retirement without changing the producer API.
+The [two-file controller guard plan](wp-09-controller-guards-plan.md) is the next
+bounded implementation after the independent transport disposition activates it.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time
