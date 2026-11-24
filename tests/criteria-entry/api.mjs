@@ -1,0 +1,31 @@
+// Explicit contract inventory for source/static/final supplied-archive checks.
+export const runtimeNames = [
+  "createCriteriaAuthority",
+  "CriteriaAuthorityError",
+  "getCriteriaAuthorityOrigin",
+  "requireCriteriaAuthority",
+  "createCriteriaPublication",
+  "CriteriaPublicationError",
+  "getCriteriaPublicationBinding",
+].sort();
+export const typeNames = [
+  "CriteriaAuthority",
+  "CriteriaAuthorityOptions",
+  "CriteriaCurrent",
+  "CriteriaOrigin",
+  "CriteriaPublication",
+  "CriteriaPublicationBeginResult",
+  "CriteriaPublicationBinding",
+  "CriteriaPublicationCancelResult",
+  "CriteriaPublicationCompleteResult",
+  "CriteriaPublicationDisposeResult",
+  "CriteriaPublicationEvent",
+  "CriteriaPublicationFailure",
+  "CriteriaPublicationNext",
+  "CriteriaPublicationObserver",
+  "CriteriaPublicationOptions",
+  "CriteriaPublicationParticipant",
+  "CriteriaPublicationRetirementPort",
+  "CriteriaPublicationSnapshot",
+  "CriteriaPublicationTicket",
+].sort();

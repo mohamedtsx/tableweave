@@ -21,6 +21,10 @@
     "./filters": {
       "types": "./dist/filters/index.d.ts",
       "import": "./dist/filters/index.js"
+    },
+    "./criteria": {
+      "types": "./dist/criteria/index.d.ts",
+      "import": "./dist/criteria/index.js"
     }
   },
   "scripts": {
