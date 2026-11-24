@@ -1432,6 +1432,40 @@ export function getCriteriaToolOwner<S extends QuerySchema>(
     ? ((tools.get(authority) as Tool<S> | undefined)?.owner ?? null)
     : null;
 }
+
+/** Private exact-frame read proof. Unlike a tool cap, this does not follow a replacement. */
+export function requireCriteriaCommittedFrame<
+  S extends QuerySchema,
+  T extends RowData,
+>(
+  frame: CriteriaCommittedFrame<S, T>,
+  expected: CriteriaFrameOwner<NoInfer<S>>,
+): void {
+  try {
+    const entry = object(frame)
+      ? (frames.get(frame) as Entry<S, T> | undefined)
+      : undefined;
+    if (
+      !entry ||
+      entry.owner.owner !== expected ||
+      entry.owner.busy ||
+      entry.phase !== "committed" ||
+      entry.owner.cell !== entry ||
+      entry.committed !== frame
+    )
+      deny();
+    const operation = entry.owner.operation;
+    checkEntry(entry);
+    if (
+      entry.owner.operation !== operation ||
+      entry.owner.busy ||
+      entry.owner.cell !== entry
+    )
+      deny();
+  } catch {
+    deny();
+  }
+}
 export function requireCriteriaTool<S extends QuerySchema>(
   authority: CriteriaToolAuthority<S>,
   expected: CriteriaFrameOwner<NoInfer<S>>,
@@ -1564,6 +1598,7 @@ export interface CriteriaReactCapture<S extends QuerySchema, T extends RowData>
   readonly native: CriteriaFrameInput<S, T> | null;
   readonly receipt: CriteriaReactReceipt;
   readonly subscriptionSource: ResourceAdapter<T, QueryFor<S>> | null;
+  readonly clientInputCount: number | null;
 }
 interface ReactCaptureProof<S extends QuerySchema, T extends RowData> {
   readonly owner: State<S, T>;
@@ -1586,6 +1621,26 @@ export function captureCriteriaReactInput<
   framesOwner: CriteriaFrames<S, T>,
   input: CriteriaReactInput<S, T>,
   previous: CriteriaReactReceipt | null,
+): CriteriaReactCapture<S, T> {
+  return captureReactInput(framesOwner, input, previous, false);
+}
+
+/** Library-private facade route; public omitted-native behavior stays source-only. */
+export function captureCriteriaSourceFrameInput<
+  S extends QuerySchema,
+  T extends RowData,
+>(
+  framesOwner: CriteriaFrames<S, T>,
+  input: CriteriaSourceInput<S, T> & { readonly manualOrder?: boolean },
+  previous: CriteriaReactReceipt | null,
+): CriteriaReactCapture<S, T> {
+  return captureReactInput(framesOwner, input, previous, true);
+}
+function captureReactInput<S extends QuerySchema, T extends RowData>(
+  framesOwner: CriteriaFrames<S, T>,
+  input: CriteriaReactInput<S, T>,
+  previous: CriteriaReactReceipt | null,
+  derive: boolean,
 ): CriteriaReactCapture<S, T> {
   try {
     const owner = state<S, T>(framesOwner),
@@ -1673,12 +1728,36 @@ export function captureCriteriaReactInput<
         ? capture.data(input, "manualOrder")
         : undefined;
     if (manualField && typeof manualOrder !== "boolean") return deny();
-    const nativeField = capture.descriptor(input, "nativeInput");
+    let rawNative: unknown = null;
+    let hasNative = false;
+    if (derive) {
+      // After actual owner/source/binding admission, consume only actual source data.
+      if (mode === "client") {
+        rawNative = Object.freeze({
+          mode,
+          records: capture.data(rawSource, "records"),
+        });
+        hasNative = true;
+      } else if (metadata.mode !== "client" && metadata.hasSnapshot) {
+        if (source.mode === "client") return deny();
+        const snapshot = capture.data(source.view, "snapshot");
+        rawNative = Object.freeze({
+          mode,
+          records: capture.data(snapshot, "records"),
+          pageInfo: capture.data(snapshot, "page"),
+        });
+        hasNative = true;
+      }
+    } else if (capture.descriptor(input, "nativeInput")) {
+      rawNative = capture.data(input, "nativeInput");
+      hasNative = true;
+    }
     let native: CriteriaFrameInput<S, T> | null = null;
+    let clientInputCount: number | null = null;
     const nativeKey: unknown[] = [];
     const suppliedNativeKey: unknown[] = [];
-    if (nativeField) {
-      const raw = capture.data(input, "nativeInput");
+    if (hasNative) {
+      const raw = rawNative;
       if (!object(raw) || capture.data(raw, "mode") !== mode) return deny();
       if (metadata.mode === "client" || metadata.hasSnapshot) {
         const records = capture.data(raw, "records");
@@ -1686,6 +1765,16 @@ export function captureCriteriaReactInput<
         suppliedNativeKey.push(mode, records);
         if (mode === "client") {
           if (records !== capture.data(rawSource, "records")) return deny();
+          if (derive) {
+            const length = capture.data(records, "length");
+            if (
+              typeof length !== "number" ||
+              !Number.isSafeInteger(length) ||
+              length < 0
+            )
+              return deny();
+            clientInputCount = length;
+          }
           source = Object.freeze({
             mode,
             context: port.contextRef as ResourceContext,
@@ -1823,6 +1912,7 @@ export function captureCriteriaReactInput<
       ...nativeKey,
       manualOrder,
       accepted,
+      ...(derive ? [clientInputCount] : []),
     ]);
     const receipt = Object.freeze({ key });
     const result = Object.freeze({
@@ -1832,6 +1922,7 @@ export function captureCriteriaReactInput<
       key,
       receipt,
       subscriptionSource: port.resource,
+      clientInputCount,
     });
     const retained: ReactCaptureProof<S, T> = {
       owner,

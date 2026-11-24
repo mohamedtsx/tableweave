@@ -77,3 +77,24 @@ candidate/no-loop/two-owner tests. Only lightweight positive TS6/syntax/scope ch
 runtime/React/browser/SSR/dual/emitted/negative/packed/independent proof stays deferred.
 Record actual interfaces/private bridge additions/protected baseline/hashes/results
 and deferred commands. Stop on excluded API/path need; no guessed future UI ports.
+
+Activation is9b68eae after actual root and integrated F3b source-fixture light TS6
+checks. Canonical source119 map is1eb525a870c29deebfa7c7db840ed8044b664d26c782b8369e14c18cb0813420
+at /tmp/opencode/wp09-before-facade-hook-source119.json. Initial existing hashes:
+
+- table/types.ts:60c56b51b7e37a17b13dab8404a89792cf8415715e3b50b68478b910a72aa4de
+- presentation/criteria-frame.ts:4d785e345657d7cbe78aa6ce1dddc1662b949427823282378a83a803cf951d3f
+- presentation/criteria-frame-react.ts:ed10694653cd84a7fe5df791eb47002ceaff670933e6e7cd90caca98a6b1bce6
+
+Protect the other116 source files, main's identity-only adapter delta and existing
+tests/exports/config/seals. New hook/recovery namespaces are intentional additions;
+old117/118 and producer source maps are preserved historical inputs, not rebased.
+
+## Provisional implemented handoff
+
+[Actual P2 handoff](../../tests/table-facade/hook/README.md) records22 inputs at
+d4bc2813f58661504a171e241724c056f36f8de4d091030560d0f88db7e5b8ab. Main inspects
+actual source/model/recovery/private-bridge code, matches all22 hashes/116 protected
+source hashes and passes one whole-React TS6 noEmit compile. Source121 map is
+49bd0090170ea5c18e33f19dc592099f8ac532ffedde4e0bbf0028709dee4c01. Runtime/React/
+negative/dual/emitted/independent checks stay deferred; public exports are main-owned.

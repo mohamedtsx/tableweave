@@ -2,6 +2,13 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+P2 now hands off PROVISIONALLY atd4bc2813f58661504a171e241724c056f36f8de4d091030560d0f88db7e5b8ab.
+Main inspects actual facade/model/recovery/private bridge APIs, matches22 worker
+inputs/116 protected source hashes and passes one whole-React TS6 noEmit compile.
+Post-P2 source121 map is49bd0090170ea5c18e33f19dc592099f8ac532ffedde4e0bbf0028709dee4c01.
+No runtime/React/negative/emitted/independent acceptance is claimed. Main commits
+before exports/intake; isolated Search/Tabs continues against unchanged F3 APIs.
+
 React/source readiness now hands off PROVISIONALLY at716782d90f43c4656b0b55832392cc7e516621576fe9ddae8fb385a4014f7e0d.
 Main inspects source capability/hook contracts, matches20 handoff hashes,115 protected
 source hashes and the main-owned adapter delta, and passes one whole-React TS6 noEmit
@@ -17,6 +24,10 @@ compile both pass after bridge exports. They do not exercise runtime/React/negat
 packed checks. Supplemental Figma board10:619 now supplies additive768/320/RTL/
 arbitrary details/two-table/access-loss illustrations; initial board stays unchanged.
 User approval remains bounded to the initial visual direction, not those runtime gates.
+Separately, a private read-only shell callback-ownership proposal is active under
+/tmp/opencode/wp09-shell-commit-design/REPORT.md only. It must resolve nested parent/
+child actor ownership and source-only recovery slots using actual P2/F3, without
+reading the changing Search/Tabs host as accepted or editing source/design/repository.
 Main allocates headless P2 hook/model/recovery under a five-file source lease. It
 uses actual definition/controller/frame/source APIs and adds only a private commit-
 time source derivation/projection route; no duplicate NativeInput/app callback API,
@@ -44,11 +55,10 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
   Main reads the actual APIs/source, verifies21 input/104 protected source hashes
   and performs one successful whole-React TS6 noEmit compile. No runtime correction
   or independent approval is claimed. Main commits before disjoint intake.
-- Active shared writer: criteria-frame.ts/new criteria-frame-react.ts only, for
-  commit-only React frames and distinct source-metadata readiness. Isolated F3
-  committed-tool cells own one new styled helper/tests. All work stays provisional.
-  Main separately owns a minimal resource adapter identity lookup needed for
-  requestless idle admission; worker resumes using it without changing that file.
+- Active shared writer: headless P2 facade under its exact table types/hook/recovery
+  and private frame/React derivation/projection lease. Other116 sources freeze.
+  Isolated Search/Tabs owns its three toolbar files/new host/tests. All work stays
+  provisional; F3b/bridge/identity lookup are already intaken, not runtime-approved.
 - Independent design writer owns only the newly authorized Tableweave Figma file;
   no runtime/API/source ownership. Composed scenes are pending, not design approval.
   Initial scenes now hand off for review: board4:62 in the new file, linked through
@@ -63,8 +73,8 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
 - Generation harness is intaken asdbdc7a2 from isolated34fad4f. Current=fc01;
   both historical output identities remain unchanged. New generation registration
   and actual default-root generation checks are still unresolved, not passed.
-- Next integration: receive React/source readiness and committed-cell handoffs,
-  inspect actual APIs/light compile and allocate actual four-tool adoption. Do not
+- Next integration: receive P2 and Search/Tabs handoffs, inspect actual APIs/light
+  compile and allocate remaining Date/Builder adoption plus shell composition. Do not
   duplicate running workers or their checks.
 - External runner access and real consumer are deferred by the user. Ask modal
   handles new policy/permission/input blockers; do not invent external evidence.
