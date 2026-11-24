@@ -84,3 +84,14 @@ inactive until D2's actual core handoff. All129 sources/1453 prior inputs are un
 at the fence. No facade source/decoder/UI implementation or runtime pass is claimed.
 The [zero-edit handoff](../../tests/criteria-facade-config/README.md) is a blocked
 record, not an implemented or approved facade source/host.
+
+After D2's real handoff/auditbfb12c3, the [serial extension](wp-09-facade-capture-cancel-plan.md)
+now activates S3a with the shared core added to its two existing files, one new
+source and own fixtures. Fresh133-source baseline replaces only the active stage
+selection, not any historical hash expectation. Details/renderer/raw tool contracts
+remain unchanged; future Builder host wiring stays a separate actual integration.
+
+The combined source/cancellation handoff is now provisionally ready; main validates
+its actual API/hashes and positive source compile before committing. It uses one
+core, independent child capture and actual typed defaults; it does not deliver the
+Builder host/DataTable UI or final privacy/continuity/SSR/packed acceptance.

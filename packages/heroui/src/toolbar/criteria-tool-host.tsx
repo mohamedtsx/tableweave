@@ -19,12 +19,22 @@ import type {
   CriteriaToolTarget,
 } from "../filters/criteria-commit.js";
 import { createCriteriaCommitCell } from "../filters/criteria-commit.js";
+import {
+  bindCriteriaFacadeEnvelope,
+  closeCriteriaFacadeHost,
+  consumeCriteriaFacadeHostSkip,
+  criteriaFacadeIdentity,
+  criteriaFacadeSameSource,
+  criteriaFacadeState,
+  prepareCriteriaFacadeHost,
+  takeCriteriaFacadePresentation,
+} from "../filters/criteria-facade-config.js";
 import type { FilterToolProps } from "./filter-shared.js";
 import { filterToolMessages } from "./filter-shared.js";
 
 export type ToolbarKind = "search" | "tabs" | "date";
 export type CriteriaCandidate<S extends QuerySchema> =
-  | Readonly<{ kind: "omitted" | "denied" }>
+  | Readonly<{ kind: "omitted" | "denied" | "unready" }>
   | Readonly<{ kind: "target"; target: CriteriaToolTarget<S> }>;
 export class CriteriaToolbarError extends Error {
   readonly code = "criteria.toolbar.unavailable";
@@ -63,6 +73,11 @@ export function captureCriteriaCandidate<S extends QuerySchema>(
     if (!Object.hasOwn(descriptor, "value") || !object(descriptor.value))
       return { kind: "denied" };
     const raw: object = descriptor.value;
+    const facade = bindCriteriaFacadeEnvelope<S>(input, raw);
+    if (facade)
+      return facade.target
+        ? { kind: "target", target: facade.target }
+        : { kind: "unready" };
     const authority = own(raw, "authority") as CriteriaToolAuthority<S>;
     const owner = getCriteriaToolOwner(authority);
     if (
@@ -135,6 +150,7 @@ export function createCriteriaToolbarStore<
   let committing = false,
     notifying = false;
   let operation: object = {};
+  let facadePin: object | null = null;
   const publish = () => {
     if (committing) return;
     version = Object.freeze({});
@@ -199,6 +215,7 @@ export function createCriteriaToolbarStore<
       return () => {
         if (mount !== token) return;
         mount = null;
+        facadePin = null;
         operation = {};
         const exactCell = cell,
           exactLease = lease;
@@ -223,6 +240,8 @@ export function createCriteriaToolbarStore<
         mounted = mount;
       operation = token;
       committing = true;
+      let silent = false,
+        handback: object | null = null;
       try {
         const captured = captureCriteriaCandidate<S>(input);
         if (operation !== token || mount !== mounted) return deny();
@@ -237,6 +256,12 @@ export function createCriteriaToolbarStore<
           return deny();
         if (captured.kind === "omitted" && mode !== "adopted") {
           mode = "legacy";
+          return;
+        }
+        if (captured.kind === "unready" && mode !== "legacy") {
+          mode = "adopted";
+          facadePin = null;
+          retire();
           return;
         }
         if (captured.kind !== "target" || mode === "legacy") {
@@ -268,11 +293,61 @@ export function createCriteriaToolbarStore<
           if (mount !== mounted || operation !== token) return deny();
         };
         check();
-        const disabled = own(input, "disabled", true);
+        const facadeState = criteriaFacadeState(input),
+          identity = criteriaFacadeIdentity(input);
+        if (facadeState === "denied" || facadeState === "unready")
+          return deny();
+        if (identity) {
+          const data = (value: unknown, key: string) => {
+            check();
+            try {
+              return own(value, key);
+            } finally {
+              check();
+            }
+          };
+          if (
+            data(input, "controller") !== actualC ||
+            data(input, "criteria") !== identity ||
+            data(input, "invalidationKey") !== 0
+          )
+            deny();
+          const context = data(input, "expectedContext");
+          if (
+            data(context, "definitionKey") !== origin.context.definitionKey ||
+            data(context, "scopeKey") !== origin.context.scopeKey ||
+            data(context, "access") !== origin.context.access
+          )
+            deny();
+        }
+        if (
+          facadeState === "waiting" ||
+          facadeState === "superseded" ||
+          (identity && identity === facadePin)
+        ) {
+          if (!criteriaFacadeSameSource(input, facadePin)) return deny();
+          // Pre-capture skip/coalescing still proves exact old child origin/actor.
+          const actor = cell?.getSnapshot().actor;
+          if (!actor || !cell || !lease || mode !== "adopted") return deny();
+          const old = requireActor(actor);
+          if (
+            old.origin.controller !== origin.controller ||
+            old.origin.definition !== origin.definition ||
+            old.origin.epoch !== origin.epoch ||
+            old.origin.context.definitionKey !== origin.context.definitionKey ||
+            old.origin.context.scopeKey !== origin.context.scopeKey ||
+            !old.origin.context.access
+          )
+            return deny();
+          check();
+          silent = true;
+          return;
+        }
+        const disabled = identity ? undefined : own(input, "disabled", true);
         check();
         if (disabled !== undefined && typeof disabled !== "boolean")
           return deny();
-        const className = own(input, "className", true);
+        const className = identity ? undefined : own(input, "className", true);
         check();
         if (className !== undefined && typeof className !== "string")
           return deny();
@@ -297,15 +372,19 @@ export function createCriteriaToolbarStore<
         }
         if (!lease || !presentation) return deny();
         target = next;
+        handback = prepareCriteriaFacadeHost(input);
         const actor = cell.commit(lease, next, input);
         cell.require(actor);
         check();
+        const validated = handback
+          ? takeCriteriaFacadePresentation(handback, input)
+          : { disabled: disabled ?? false, className: className ?? "" };
         presentation.write(
           actor,
           Object.freeze({
             actor,
-            disabled: disabled ?? false,
-            className: className ?? "",
+            disabled: validated.disabled,
+            className: validated.className,
           }),
         );
         cell.require(actor);
@@ -317,13 +396,20 @@ export function createCriteriaToolbarStore<
         }
         ownerPin = next.owner;
         mode = "adopted";
+        facadePin = identity;
         // No state mirror; controller notifications publish only a fresh version.
         stopController ??= actualC.subscribe(publish);
-      } catch {
-        retire();
+      } catch (error) {
+        if (cell && consumeCriteriaFacadeHostSkip(error, input, cell, handback))
+          silent = true;
+        else {
+          facadePin = null;
+          retire();
+        }
       } finally {
+        closeCriteriaFacadeHost(handback);
         committing = false;
-        publish();
+        if (!silent) publish();
       }
     },
     read() {

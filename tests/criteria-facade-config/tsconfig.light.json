@@ -1,0 +1,10 @@
+{
+  "extends": "../criteria-commit/tsconfig.json",
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../packages/heroui/src/**/*.ts",
+    "../../packages/heroui/src/**/*.tsx"
+  ],
+  "exclude": ["./negative-types.tsx", "./.artifacts"]
+}

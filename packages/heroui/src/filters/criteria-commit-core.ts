@@ -14,11 +14,21 @@ import { createDetailsAdapter } from "../details/committed-details.js";
 import type { DetailsCommitCell } from "../details/types.js";
 import { createTableRendererAdapter } from "../table/renderer-commit.js";
 import type { TableRendererCell } from "../table/types.js";
+import type { CriteriaToolTarget } from "./criteria-commit.js";
 import {
   type CriteriaCommitCell,
   type CriteriaToolKind,
   createCriteriaToolAdapter,
 } from "./criteria-commit.js";
+import {
+  activateCriteriaFacadeCapture,
+  beginCriteriaFacadeCapture,
+  checkCriteriaFacadeCapture,
+  consumeCriteriaFacadeCancellation,
+  criteriaFacadeAttemptSource,
+  endCriteriaFacadeCapture,
+  sealCriteriaFacadeCapture,
+} from "./criteria-facade-config.js";
 
 /** Source-private library policy. No exported factory accepts an application policy,
  * permission callback, participant or reset setter. The three closed entrypoints below
@@ -251,6 +261,7 @@ function createCore<
     busy = false,
     notifying = false,
     modelVersion: object = Object.freeze({});
+  let currentFacadeSource: object | null = null;
   const makeSnapshot = (version: object) =>
     Object.freeze({
       version,
@@ -313,6 +324,7 @@ function createCore<
       current.committed = null;
     }
     current = null;
+    currentFacadeSource = null;
     for (const node of nodes) node.value = null;
     adapter.clearMetadata?.();
     for (const item of work) {
@@ -458,12 +470,19 @@ function createCore<
       }
       return deny();
     }
+    const prior = current,
+      priorRegistration = registration,
+      priorPin = pin,
+      priorFacade = currentFacadeSource,
+      priorSnapshot = snapshot;
     busy = true;
     const token = {};
     operation = token;
     let candidate: Item | null = null;
     const added: { value: Registration<S> | null } = { value: null };
     let actor: Actor;
+    let facadeAttempt: object | null = null,
+      captureOpen = false;
     const local = () => {
       if (operation !== token || mount !== lease) return deny();
     };
@@ -478,6 +497,7 @@ function createCore<
           adapter.genuine(candidate.target, candidate.origin, false);
         local();
       }
+      checkCriteriaFacadeCapture(facadeAttempt);
       return undefined;
     };
     try {
@@ -510,6 +530,17 @@ function createCore<
         if (previous !== active) added.value = active;
       };
       if (adapter.registerBeforeCapture) ensureRegistration();
+      if (["search", "tabs", "date", "builder"].includes(adapter.kind))
+        facadeAttempt = beginCriteriaFacadeCapture(
+          opaqueProps,
+          adapter.kind,
+          controller,
+          target as unknown as CriteriaToolTarget<S>,
+          origin,
+          cell,
+          token,
+        );
+      captureOpen = true;
       const captured = adapter.capture(
         admission,
         opaqueProps,
@@ -518,6 +549,8 @@ function createCore<
         pin,
       );
       check();
+      sealCriteriaFacadeCapture(facadeAttempt);
+      captureOpen = false; // No cancellation grant beyond private capture.
       if (!adapter.registerBeforeCapture) ensureRegistration();
       cancelAll();
       check();
@@ -540,6 +573,7 @@ function createCore<
       candidate.phase = "active";
       actors.set(actor, candidate);
       current = candidate;
+      currentFacadeSource = criteriaFacadeAttemptSource(facadeAttempt);
       pin = Object.freeze({
         owner,
         publication,
@@ -547,8 +581,88 @@ function createCore<
         stamp: captured.stamp,
         mode: captured.mode,
       });
+      activateCriteriaFacadeCapture(facadeAttempt);
       touch(); // L-config, no app callback before actor publication.
-    } catch {
+    } catch (error) {
+      let skipped: object | null = null;
+      if (
+        captureOpen &&
+        facadeAttempt &&
+        prior &&
+        priorRegistration &&
+        priorPin &&
+        priorFacade &&
+        candidate
+      ) {
+        try {
+          // Independent core-owned eligibility, not a caller exception/boolean.
+          if (
+            operation !== token ||
+            !validLease(lease) ||
+            current !== prior ||
+            registration !== priorRegistration ||
+            pin !== priorPin ||
+            currentFacadeSource !== priorFacade ||
+            snapshot !== priorSnapshot ||
+            added.value !== null ||
+            prior.phase !== "active" ||
+            prior.lease !== lease ||
+            !prior.actor ||
+            !prior.ports ||
+            !prior.committed ||
+            candidate.phase !== "capturing" ||
+            candidate.actor !== null ||
+            candidate.ports !== null ||
+            candidate.committed !== null ||
+            priorRegistration.phase !== "active" ||
+            priorRegistration.owner !== priorPin.owner ||
+            candidate.target === null ||
+            candidate.origin.controller !== controller ||
+            candidate.origin.definition !== controller.getDefinition() ||
+            !sameCommitOrigin(candidate.origin, prior.origin) ||
+            !sameCommitOrigin(priorPin.origin, prior.origin) ||
+            candidate.origin.controller !== priorPin.origin.controller ||
+            priorPin.stamp !== 0 ||
+            priorPin.owner.publication !== priorPin.publication
+          )
+            deny();
+          adapter.genuine(prior.target, prior.origin, true);
+          adapter.genuine(candidate.target, candidate.origin, false);
+          const binding = getCriteriaPublicationBinding(
+            priorRegistration.authority,
+          );
+          if (
+            !binding ||
+            binding.publication !== priorPin.publication ||
+            !sameCommitOrigin(binding.origin, prior.origin) ||
+            operation !== token ||
+            mount !== lease ||
+            current !== prior ||
+            registration !== priorRegistration ||
+            pin !== priorPin ||
+            snapshot !== priorSnapshot
+          )
+            deny();
+          skipped = consumeCriteriaFacadeCancellation(
+            facadeAttempt,
+            error,
+            cell,
+            token,
+            priorFacade,
+            prior.origin,
+            priorPin.mode,
+          );
+        } catch {
+          /* Every unproven/reentrant/revoked/post-boundary case purges below. */
+        }
+      }
+      if (skipped && candidate) {
+        candidate.phase = "retired";
+        candidate.ports = null;
+        candidate.committed = null;
+        // No cancelAll, touch, notify, registration change or A resurrection.
+        throw skipped;
+      }
       if (candidate && candidate !== current) {
         candidate.phase = "retired";
         candidate.ports = null;
@@ -566,6 +680,7 @@ function createCore<
       notify();
       return deny();
     } finally {
+      endCriteriaFacadeCapture(facadeAttempt);
       busy = false;
     }
     notify();

@@ -2,12 +2,103 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+### Current ownership and next action
+
+All WP-09 implementation below is provisional. User-selected final exhaustive/
+independent verification is deferred; no WP-09 approval/PR delivery or merge exists.
+
+| Scope | Current owner/location | Next integration boundary |
+| --- | --- | --- |
+| Opaque tool config + exact capture cancellation | Handoff delivered, worker released | Main matches82 hashes/130 protected sources and positive TS6; preserve before queued intake |
+| Builder formatting | Preserved1e0c218 afterbec322f, worker released | Main matches16 stage hashes/123 protected sources and AST preservation; intake waits for S3a |
+| Shell layout CSS | Preserved004f945, worker released | Six input/130 protected-source hashes, static parser/contract and staged whitespace checked; intake waits for S3 |
+| Plain criteria entry | Preserved1665830, no active writer | Intake after S3a; source export is not packed availability |
+| Neutral details label | Preserved5e09726, no active source writer | Intake after S3a; keep review16n2 runtime/manual acceptance open |
+| DataTable shell | Inactive written plan, no writer allocated | Requires actual S3a + Builder + neutral metadata integration |
+| Deferred command inventory | External report delivered, worker released | Actual scripts/producer-vs-current gates inventoried; missing runners/output isolation remain open, no checks run |
+
+Main alone owns docs/ledger/Git/manifests/exports/integration. Current shared source
+basebfb12c3 has only the S3a leased source edits in progress. Do not read those as
+an accepted handoff, race their protected inputs or rebaseline old seals. Once S3a
+hands off: inspect actual APIs, match hashes, light-compile, preserve it; intake
+entry/neutral/Builder deltas, integrate the actual Builder host skip seam, then
+activate the bounded shell lease. Packet sequencing/external blocks remain as below.
+
+S3a is provisionally ready at implementation-map77fea517… after main actual source/
+API inspection,82 handoff hashes/130 protected sources and one own positive TS6
+compile. New source1341865cd4d… is preserved. Strict main-document drift failures are
+separately recorded, not erased/rebased. Main now commits before queued source intake;
+runtime/independent correction and the actual Builder host seam remain deferred.
+Main's ownership/planning structural check passes209 Markdown/787 local links;
+scoped docs/ledger whitespace passes. No checker regressions, runtime, external URL
+or semantic-source comparison is rerun/claimed by this small navigation check.
+
+Layout CSS is preserved in isolated004f945 after main's six-input/130-source hash,
+actual static-parser/contract and whitespace checks. It remains unimported/inactive;
+computed cascade/runtime/visual/RTL/zoom/AT/unit/independent checks stay deferred.
+The isolated CSS worker is released; no shared S3 input is changed by preservation.
+
+Builder formatting is preserved in isolated1e0c218. Worker full formatter/lint/type
+checks pass; main verifies16 inputs/123 protected sources and independently runs
+AST/printer/import/comment equivalence. Five required reference inputs are tracked
+explicitly, not arbitrary generated artifacts; old Builder source seal is unchanged.
+Both Builder commits remain outside shared tree until S3a handoff; full runtime/
+independent acceptance is deferred and the isolated worker is released.
+A free worker now inventories actual deferred commands/output labels/ports and
+historical-vs-current guard preconditions into an external report only. It cannot
+execute checks or inspect the active S3 implementation as accepted. This prepares
+the eventual final batch without approving or skipping any requirement.
+The report is delivered at `/tmp/opencode/wp09-final-command-inventory/REPORT.md`.
+Main reads its actual-command/precondition inventory: static-only import checks,
+fixed outputs/implicit historical guards and incomplete negative/emitted/public
+lanes require later explicit allocation. No suites/probes/Git or active-S3 source
+inspection occurred. Worker is released; no inventory entry is an acceptance claim.
+
+Builder is preserved in isolatedbec322f after main API inspection,32 input/123
+protected source hashes and one positive source-fixture TS6 check. Full behavior is
+unverified. Review17n1 allocates a separate format-only five-source correction in
+that isolated tree; no old seal or test changes. Shared S3 inputs stay unchanged;
+main intake waits for its actual handoff.
+
+Main allocates the free isolated worker one new shell-layout CSS file/own static
+fixtures, with approved Figma direction and inherited existing tokens/components.
+No existing stylesheet/import/markup or active shared S3 source is changed; actual
+visual/browser/RTL/AT acceptance stays deferred until real shell composition.
+
+Neutral details label is preserved in isolated5e09726 after main source/whitespace
+inspection. Worker final light TS6/AST/Biome/syntax/scope pass129 protected sources/
+1112 inputs, with interrupted calls retained as incomplete. It is a metadata port,
+not permission or manual Arabic/AT acceptance. Intake waits for S3; review16n2 stays
+provisionally addressed/unverified. Entry1665830 and Builder handoffs stay separate.
+
+Main records an inactive DataTable shell composition plan, pending actual S3a/
+Builder/neutral-label handoffs. It preserves one engine/tool ownership, exact details
+owner joining, legacy trigger name and approved visual direction. No shell source
+lease or private behavior is activated from proposed interfaces alone.
+
+Plain criteria entry is preserved in isolated1665830 after main manifest/source/API
+inspection and staged whitespace. Worker positive TS6/static graph/scope pass129
+sources/1116 tracked inputs;7 runtime/19 type reexports are source-only, not installed/
+packed/SSR availability. Intake waits for S3 handoff. The free worker gets isolated
+neutral-label one-source correction under source13090f6528f…; shared S3 inputs and
+all runtime/independent gate claims stay unchanged.
+
+D2/audit are intaken8fb811c/bfb12c3 with positive source checks. Main now serially
+reactivates combined S3a + closed cancellation in exactly core/tool-wrapper/toolbar-
+host, one new facade-config source and own fixtures. No second core writer exists.
+Baseline133cf4b3671… protects the other130 sources; no isolated entry/Builder intake
+until this handoff. Review15n1 runtime/independent correction remains deferred.
+
 D2 is preservedce3ea3b/intaken8fb811c. Main verifies61 own-tree file hashes and58
 tracked intaken hashes/121 other current sources, audits exactly16 legacy type names
 at both HeroUI barrels, and passes positive integrated D2 + existing S2 source TS6.
 Current133-source mapcf4b3671… includes only those deliberate deltas. Raw failed/log
 whitespace is preserved; runtime/cycle/focus/privacy/independent proof stays deferred.
 Core owner is now free; main commits audit/bookkeeping before serial S3a reactivation.
+Main allocates isolated review16n2 correction in the preserved D2 tree: only provider
+neutralLabel metadata plus owned EN/AR constants/own tests. It adds no body/access/
+session/focus behavior and does not change shared S3 inputs. Actual runtime/manual/
+independent localization acceptance stays deferred; language is not inferred from RTL.
 Intake review16 records corrected legacy type-star leakage and an open neutral
 details region-label localization handoff for shell integration. Do not infer language
 from RTL or read private options to fix it before readiness. FR-16/AT remains unapproved.

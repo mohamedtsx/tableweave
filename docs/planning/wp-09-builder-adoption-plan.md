@@ -108,3 +108,14 @@ React/browser fixtures. Only light TS6/syntax/scope checks after activation. Run
 dual/emitted/negative/browser/SSR/packed/independent proof stays in the final phase.
 Own README must record actual dependencies/handle/API, hashes/light results and
 deferred commands; no Builder/integrated privacy/full-WP09 approval from authoring.
+
+## Preserved provisional Builder handoff
+
+Isolatedbec322f records actual Builder/F2 ownership and source fixtures. Main reads
+host/draft/claim/Date APIs, matches32 handoff inputs/123 protected sources and passes
+one positive source-fixture TS6 compile. Source128 map is
+8d4cd2f6cfc5fa1dcd708a12118b608c84dac17366a9f385557363c4cff97197.
+Runtime/React/SSR/negative/packed/independent proof remains deferred. Main separately
+allocates a [format-only correction](wp-09-builder-format-plan.md), preserving the
+original producer seal rather than replacing it after source formatting. Shared
+intake still waits for actual serial S3a handoff.

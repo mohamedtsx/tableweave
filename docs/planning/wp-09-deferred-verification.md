@@ -64,3 +64,33 @@ Historical producer guards intentionally conflict with downstream changes. Repla
 them at their exact producer/preimage revisions as required, preserving expectations;
 separately verify intentional deltas/current source. Never rewrite all old hashes to
 make the newest tree green. Prior failures stay failed until corrected replay exists.
+
+## Read-only command inventory follow-up
+
+The external `/tmp/opencode/wp09-final-command-inventory/REPORT.md` inventories
+actual scripts/configs without running them or reading active S3 implementation.
+It is navigation, not accepted evidence or an executable unified orchestration.
+Main must reconcile it against final source/PR heads before execution.
+
+- Some unit runners implicitly enforce historical protected-source maps (notably
+  original localization); allocate a distinct current-source lane instead of
+  bypassing that gate or rewriting old hashes.
+- Fresh labels do not relocate fixed output/cache/type/browser destinations. Allocate
+  fresh attempt images/paths before commands can overwrite prior evidence.
+- Existing negative programs vary: annotated, unannotated, individual removals and
+  all-removed. Positive compilation or arbitrary nonzero failure does not prove
+  intended rejection. Missing dual/emitted/public declaration matrices remain open.
+- Several import/boundary checks parse source only. Actual all-root ESM module-load/
+  constructor/cycle/React-shape and integrated styled-shell SSR/hydration lanes are
+  still required. Neutral server-render units are not those proofs.
+- Root umbrella checks repeat builds/installs while omitting custom WP-09 namespaces.
+  Batch equivalent programs once per exact source/compiler/options, preserving all
+  historical/current/ordinary-public/packed boundaries and independent review.
+- Supplied-archive entry verification is read-only and lacks declaration compilation;
+  existing foundation/Start packers prepare/install consumers. Keep those authority
+  and proof differences explicit, including consumer-owned RAC setup.
+
+Commands for later S3a/shell/Builder integration and the reviewed new generation
+must be added from actual handoffs. External/manual/language/AT/device/performance/
+real-consumer gates stay blocked when unavailable. No runtime or correction test
+was executed to produce this inventory.

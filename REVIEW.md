@@ -1740,6 +1740,13 @@ paths stay fail-closed. Core allocation is inactive/serial after D2's handoff; n
 second engine, public boolean/error-as-proof or broad catch waiver. Runtime and
 independent correction verification remain deferred; n1 is unresolved.
 
+Session15 n1 implementation follow-up: actual S3a adds registered capture attempts,
+core-owned unchanged-A eligibility checks and one-use host skip consumption. Main
+reads actual code/APIs, matches82 handoff hashes/130 protected sources and passes
+one positive source TS6 program. Original strict planning-drift failures/maps stay
+preserved separately. Actual supersession/malformed/reset/reentry/React/cycle and
+independent correction verification remains deferred; n1 is not closed or approved.
+
 ## WP-09 bound details intake — review session 16 (provisional)
 
 ### n1 — Internal cell types escape through existing type-star barrels
@@ -1756,3 +1763,25 @@ section. That English default is not yet configurable through a neutral, non-pri
 presentation port. Add a safe localized-label handoff during shell/details integration,
 without reading private detail options before readiness or inferring language from
 RTL. This remains open; no FR-16/manual-language/AT acceptance is claimed from D2.
+
+Session16 n2 source follow-up: isolated5e09726 adds readonly neutralLabel and EN/AR
+constants with exact accessory proof before own-data validation, preserving English
+omission/default and other producer AST. Main inspects delta/staged whitespace;
+worker light source/type/scope checks pass. SSR/browser/manual/AT/independent
+correction verification remains unexecuted; n2 is provisionally addressed, not closed.
+
+## WP-09 Builder intake — review session 17 (provisional)
+
+### n1 — Formatter coverage was explicitly disabled
+
+Main confirms the handoff's lint command disables formatting/import assist and new
+source branches are compressed. Preserve originalbec322f, then format only its five
+production files under a separate delta with normalized AST/import order unchanged.
+Old source maps/test assertions/seals stay immutable. Light positive type/hash checks
+do not prove runtime behavior; independent final correction verification is deferred.
+
+Session17 n1 source follow-up: isolated1e0c218 formats four files, leaving types.ts
+unchanged. Worker full formatter/lint/positive TS6 pass; main matches16 stage hashes/
+123 protected sources and independently runs AST/printer/import/comment preservation.
+Five required formatter reference inputs are retained for fresh-checkout replay.
+No behavior/runtime approval is claimed; final independent correction review is deferred.

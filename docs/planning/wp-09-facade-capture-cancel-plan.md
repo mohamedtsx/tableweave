@@ -49,3 +49,37 @@ P reset, foreign/reused skip receipt, changed child operation/lease, initial-no-
 post-capture/registration/notification errors and actual child B commit. No permitting
 fake gates. Only light TS6/syntax/scope during implementation; all runtime/React/
 cycle/golden/negative/SSR/packed/independent verification remains final and deferred.
+
+## Provisional serial activation
+
+D2 actual core handoff is preservedce3ea3b/intaken8fb811c, followed by explicit
+barrel auditbfb12c3. Main checks actual source/APIs/hashes and positive D2/S2 source
+programs. D2's runtime owner is released. Main now activates the combined S3a source
+protocol plus this closed cancellation seam, with one shared worker owning exactly
+filters/{criteria-commit.tsx,criteria-commit-core.ts}, toolbar/criteria-tool-host.tsx,
+new filters/criteria-facade-config.tsx and tests/criteria-facade-config/**.
+
+Actual basebfb12c3 source133 map iscf4b36714107d270c0be26ed38a77cc87a456ae76ba8bba3b4a5d553f63d8ef7
+at /tmp/opencode/wp09-after-d2-export-audit-source133.json. Protect other130 sources
+and all old D2/S2/F3/Date/seal fixtures. Preserve the three current input preimages;
+the new namespace is intentional. Original129/127 maps/stopped S3 record stay
+historical, not rebased. No criteria-entry/Builder intake races this shared stage.
+
+Other details/renderer adapters retain original core behavior; cancellation is only
+the actual registered facade/tool capture path with exact one-attempt proof. Future
+Builder host integration must explicitly consume the same skip outcome after its
+actual handoff; S3a cannot claim unimplemented Builder UI already handles it.
+
+## Provisional implemented handoff
+
+[Actual S3a handoff](../../tests/criteria-facade-config/README.md) records82 source/
+fixture/local-evidence hashes at implementation-map digest
+77fea5178ffb00a6aabbb986c1b067ea3ccb2ed86b2c26670362eecbd1761d14.
+Main reads actual source/host/cancellation APIs, matches all82 hashes/130 protected
+source hashes and passes one positive own source-fixture TS6 compile. Source134 map:
+1865cd4de50bd08e2b4916d0b6f6e46b768aa3094b3723ccb1c7c6f5b153f51a.
+Worker records original strict metadata-drift failures separately; main docs/ledger
+changes are not worker source drift and old scope maps remain unchanged. No claim
+that all2064 original files remain identical is made. Runtime/supersession/React/
+cycle/negative/independent review15n1 correction proof stays deferred. Actual Builder
+host integration is a separate prerequisite after intake, not delivered by this stage.

@@ -105,6 +105,12 @@ The [plain criteria entry lease](wp-09-criteria-entry-plan.md) independently exp
 existing authority/publication producers without importing the client root on servers.
 The [details export audit](wp-09-details-export-audit.md) prevents internal cell
 types escaping through legacy type-star barrels during provisional D2 intake.
+The [neutral label correction](wp-09-details-neutral-label-plan.md) adds a safe
+localized presentation handoff without reading private detail options before readiness.
+The [inactive shell composition plan](wp-09-data-table-shell-plan.md) waits for real
+child-config/Builder/neutral-label APIs and records exact table/details owner joining.
+The [isolated layout CSS lease](wp-09-shell-layout-css-plan.md) prepares only scoped
+containers from the approved direction; no component, import or behavior activation.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

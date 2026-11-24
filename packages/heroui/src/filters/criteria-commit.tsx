@@ -12,6 +12,10 @@ import {
   sameCommitContext,
   sameCommitOrigin,
 } from "./criteria-commit-core.js";
+import {
+  criteriaFacadeIdentity,
+  materializeCriteriaFacade,
+} from "./criteria-facade-config.js";
 import type {
   CriteriaPortsCheck,
   FilterBuilderPorts,
@@ -281,7 +285,25 @@ export function createCriteriaToolAdapter<
       )
         return deny();
       const schema = metadata.data(origin.definition, "schema") as S;
-      const ports = captures[kind](schema, opaqueProps, check);
+      let ports: CriteriaPortsByKind<S>[K];
+      if (criteriaFacadeIdentity(opaqueProps)) {
+        try {
+          ports = captures[kind](
+            schema,
+            materializeCriteriaFacade(
+              opaqueProps,
+              kind,
+              origin,
+              metadata,
+              check,
+            ),
+            check,
+          );
+        } finally {
+          check();
+        } // F3a deliberately translates errors; restore only the
+        // exact registered supersession outcome at this actual capture boundary.
+      } else ports = captures[kind](schema, opaqueProps, check);
       const mode =
         kind === "builder"
           ? (ports as FilterBuilderPorts<S>).evaluationMode

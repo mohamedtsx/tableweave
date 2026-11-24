@@ -32,3 +32,14 @@ Capture exact manifest preimage and129-source map, protect all existing source a
 other tracked inputs; new entry changes future output count but does not approve a
 new generation. Own README records concrete exports/manifest delta/results/deferred
 commands. Stop on any excluded producer/lock/public-contract need.
+
+## Preserved provisional handoff
+
+Isolated1665830 has only the additive manifest mapping/new plain barrel/own tests.
+Main reads the exact JSON hunk and7 runtime/19 type allowlist, then passes staged
+whitespace. Worker light TS6/static three-node graph/scope pass129 existing sources/
+1116 tracked inputs. Exact15-input aggregate:
+13e1dcd34634451488793f619be81ec232698d6b51bd7f8d3f6a44e63827e797.
+Import/runtime/archive/typed emitted/SSR/independent checks remain deferred; the
+conservative authored archive runner is unexecuted, not consumer evidence. Intake
+waits for shared S3 handoff; current generation staysfc01.
