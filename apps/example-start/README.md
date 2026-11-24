@@ -9,6 +9,9 @@ database translator, real-consumer acceptance or a final styled table.
 
 Dependencies are main-owned and already exactly pinned. No install command is
 implied by these worker checks.
+The app typecheck first runs the actual Start/Vite production build to generate
+its ignored route tree, then unchanged strict tsc. It therefore works before dev
+has ever run; no generated router source is committed or copied into packed apps.
 
 ```sh
 pnpm --filter @tableweave/react build

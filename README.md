@@ -91,7 +91,7 @@ is enabled by these local commands.
 | --- | --- |
 | `pnpm install:check` | Fresh manifest-only workspace install with the frozen lockfile; may reuse dependency cache |
 | `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
-| `pnpm typecheck` | Build, then check Storybook/harness sources with strict TypeScript 6 |
+| `pnpm typecheck` | Build packages and Start's generated router, then strict Storybook/harness/app TypeScript 6 |
 | `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
 | `pnpm test` | Emitted-boundary guards, contracts/operators, controller/native models and resource race/lifecycle tests; browser behavior is separate |
 | `pnpm test:contracts` | Build plus schema/operator/date/identity and synthetic translator vectors |

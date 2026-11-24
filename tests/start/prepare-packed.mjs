@@ -35,9 +35,16 @@ await mkdir(join(target, "apps"));
 await cp(join(root, "apps/example-start"), app, {
   recursive: true,
   filter: (source) =>
-    !["node_modules", "dist", ".tanstack", "test-results"].some((part) =>
-      source.split("/").includes(part),
-    ),
+    ![
+      "node_modules",
+      "dist",
+      ".tanstack",
+      "test-results",
+      "routeTree.gen.ts",
+    ].some((part) => source.split("/").includes(part)),
+});
+await assert.rejects(readFile(join(app, "src/routeTree.gen.ts")), {
+  code: "ENOENT",
 });
 await cp(join(root, "tsconfig.base.json"), join(target, "tsconfig.base.json"));
 const manifest = JSON.parse(await readFile(join(app, "package.json"), "utf8"));

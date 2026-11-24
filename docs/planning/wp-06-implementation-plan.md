@@ -161,3 +161,15 @@ selected compiler's standard libraries, and also checks the complete standalone
 Start workspace under both compiler versions. No new runtime/root version, source
 alias or patch inheritance. The original artifact fails the new guard; refreshed
 actual strict packing and the complete workflow must pass before G-04 approval.
+
+## Clean-checkout route-generation correction
+
+Remote CI on cc88f21 and an independent fresh source copy reproduce TS2307 for
+ignored routeTree.gen.ts: local framework builds had already generated it. Before
+repair, main approves explicit real Start/Vite generation in the app's typecheck
+script (`vite build` then unchanged strict tsc), rather than checking in a generated
+tree, omitting source/routes from types or adding a new CLI dependency. The packed
+preparer must exclude that ignored file and assert it is absent; the actual packed
+typecheck/build then must create it. No app runtime source/authorization/policy or
+strict compiler change. Prior local full success is retained, but clean-checkout
+delivery/remote acceptance stays blocked until corrected fresh source/tarball proof.

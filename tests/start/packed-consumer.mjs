@@ -54,6 +54,10 @@ assert(
 );
 assert(!JSON.stringify(manifest).includes("workspace:"));
 command("pnpm", ["typecheck"], app);
+assert(
+  (await readFile(join(app, "src/routeTree.gen.ts"), "utf8")).length > 0,
+  "Actual framework typecheck must generate its own ignored route tree",
+);
 command(
   process.execPath,
   [
@@ -93,6 +97,7 @@ await writeFile(
       installed,
       strictInstall: "passed",
       declarations: ["6.0.3", "5.9.3"],
+      generatedRoutes: "created-by-actual-framework-typecheck-build",
       declarationsIsolation,
       build: "passed",
       actualStartDevelopment: "passed",

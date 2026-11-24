@@ -375,3 +375,26 @@ and source/packed25-file fingerprint equality. Main grants **agent-approved unde
 delegated authority** for bounded private WP-06/G-04 only. This is not personal
 maintainer acceptance, production auth, actual-device/AT/performance/real-consumer/
 release evidence. Commit/separate stacked PR follows; **no PR merge**.
+
+### n7 — Clean-checkout typecheck lacks ignored generated route tree (P1)
+
+- Remote CI on cc88f21 fails TS2307 for routeTree.gen plus derivative route/context
+  diagnostics. Main independently copies source without ignored generated output
+  and reproduces that exact missing-module failure. Earlier local runs had the
+  framework-generated file; their success did not prove clean-checkout generation.
+- Disposition: real Start/Vite build now precedes app strict tsc. Packed preparation
+  excludes/asserts absence of the ignored tree, and its real typecheck must create
+  it. No hand-maintained generated module, narrowed source check, shim/dependency
+  or compiler waiver. Fresh source/actual-packed and remote verification required;
+  packet delivery remains in progress despite prior scoped runtime proof.
+  **Fresh local proof:** cold source copy now generates routes and passes; root
+  typecheck and genuine fresh pack:start pass27 dev+27 production, both strict
+  compilers/721-file confinement. Preparation starts without the ignored route
+  tree and actual framework typecheck creates it. Independent correction review
+  and final remote checks remain pending; runtime source/archive are unchanged.
+  **Resolved:** independent cold probe confirms absence before actual framework
+  build, generated-tree creation, strict TS6/5.9 pass and packed preparer's real
+  ENOENT assertion even with generated output present at source. CI ordering is
+  correct;25-file runtime digest and headless archive match prior review. Main
+  grants scoped delegated technical approval for n7. Corrected remote delivery
+  checks remain required; the prior cc88f21 CI failures are not overwritten.

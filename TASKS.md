@@ -789,3 +789,19 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   `feat/wp-05-resources`. GitHub confirms OPEN and auto-merge disabled. Both
   foundation checks are running at this handoff; main will verify their result.
   No PR merge or further source changes are inferred from creating the PR.
+  **Remote n7:** both cc88f21 checks fail before app typecheck because clean CI has
+  no ignored generated router. Main independently reproduces from source without
+  that file, then adds actual framework build-before-tsc and excludes/asserts the
+  file absent in packed preparation. No runtime app-source or strictness change.
+  Fresh source/actual-packed/remote correction proof is now required; no green CI
+  or completed packet-delivery claim. PR #6 remains OPEN/unmerged.
+  Fresh cold source and root typechecks now pass, and fresh genuine pack:start
+  passes27 dev/27 production with both strict compiler/721-file confinement guards.
+  Standalone app starts without generated routes and creates them via actual
+  framework build. Independent narrow n7 review is active before corrected push;
+  final remote workflow still required. No runtime25-file or archive change.
+  Independent cold n7 review now resolves the finding: real generation/strict
+  TS6+5.9, real packed preparer exclusion/ENOENT and CI ordering verified,25-file
+  source/archive hashes unchanged. Main approves the narrow correction under
+  delegated technical authority. Next commit/push to existing PR #6, then verify
+  its final remote checks. No merge or new packet approval is implied.
