@@ -119,15 +119,22 @@ export function createNativeBoundary<S extends QuerySchema, T extends RowData>(
     input: NativeInput<T>,
     state: TableState<S>,
   ): NativeFrame<S, T> {
-    const snapshot: NativeInput<T> = Object.freeze(
-      input.mode === "client"
-        ? { mode: "client", records: input.records }
-        : {
-            mode: "server",
-            records: input.records,
-            pageInfo: Object.freeze({ ...input.pageInfo }),
-          },
-    );
+    if (!input || typeof input !== "object") nativeFail("native.rows");
+    const { mode, records } = input;
+    if (!Array.isArray(records)) nativeFail("native.rows");
+    let snapshot: NativeInput<T>;
+    if (mode === "client") snapshot = Object.freeze({ mode, records });
+    else if (mode === "server" || mode === "server-complete") {
+      const page = input.pageInfo;
+      // Capture the page once as well; unrecognized modes never become server.
+      const pageInfo = page && Object.freeze({ ...page });
+      if (mode === "server")
+        snapshot = Object.freeze({ mode, records, pageInfo });
+      else {
+        if (pageInfo?.kind !== "known") return nativeFail("native.page");
+        snapshot = Object.freeze({ mode, records, pageInfo });
+      }
+    } else return nativeFail("native.rows");
     const options = adapter.getOptions(snapshot, state);
     const table = constructTable<NativeFeatures, T>({
       ...options,

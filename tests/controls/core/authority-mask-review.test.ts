@@ -17,6 +17,7 @@ function neutral(
   blockedReason: ControlsBlockedReason = "context",
 ) {
   const expected: ControlsPresentation<typeof schema, RecordRow> = {
+    paginationEnabled: true,
     selectionMode,
     selectedIds: [],
     loadedSelected: [],

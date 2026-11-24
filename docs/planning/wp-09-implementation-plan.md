@@ -65,6 +65,14 @@ supersedes per-substage exhaustive-check timing. Dependency handoffs stay provis
 until final verification; no required test or approval is silently waived.
 The [generation harness lease](wp-09-generation-harness-plan.md) permits isolated
 registry/selection authoring while preserving historical anchors and a red current gate.
+The [isolated disabled-pager lease](wp-09-disabled-pager-plan.md) implements trusted
+false-policy guards independently of U4, with final integration/verification deferred.
+The [isolated localization lease](wp-09-localization-plan.md) adds private aggregate
+English/Arabic bundles against existing message ports without touching shared APIs.
+The [option criteria bridge lease](wp-09-option-criteria-plan.md) isolates two-phase
+source reset implementation from native frame integration; verification is deferred.
+The [criteria-frame plan](wp-09-criteria-frame-plan.md) records the chosen genuine
+paired-boundary mechanism but stays inactive until U4's actual interface handoff.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

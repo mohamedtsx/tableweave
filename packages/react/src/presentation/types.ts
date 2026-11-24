@@ -1,4 +1,5 @@
 import type { RowData } from "@tanstack/react-table";
+import type { QueryExecutionExtent } from "../contracts/execution.js";
 import type { QueryFor, QuerySchema } from "../contracts/types.js";
 import type { MutationResult, TableController } from "../controller/types.js";
 import type {
@@ -23,10 +24,11 @@ export interface ControlsRequestBinding<S extends QuerySchema> {
   readonly definitionIdentity: string;
   readonly queryIdentity: string;
   readonly evaluatedAt: number;
+  readonly extent: QueryExecutionExtent;
 }
 export type ControlsRequestInput<S extends QuerySchema> = Omit<
   ResourceRequestInput<QueryFor<S>>,
-  "query"
+  "query" | "evaluatedAt"
 >;
 export interface ControlsRequestStart<S extends QuerySchema> {
   readonly request: ResourceRequest<QueryFor<S>>;
@@ -45,7 +47,7 @@ export type ControlsSource<S extends QuerySchema, T> =
       readonly records: readonly T[];
     }
   | {
-      readonly mode: "server";
+      readonly mode: "server" | "server-complete";
       readonly resource: ResourceAdapter<T, QueryFor<S>>;
       readonly view: ResourceView<T, QueryFor<S>>;
       readonly bindings: ControlsBindings<S>;
@@ -57,7 +59,8 @@ export interface ControlsInput<S extends QuerySchema, T extends RowData> {
   readonly manualOrder?: boolean;
 }
 export interface ControlsDisplayed<S extends QuerySchema> {
-  readonly mode: "client" | "server";
+  readonly mode: "client" | "server" | "server-complete";
+  readonly extent: QueryExecutionExtent;
   readonly query: QueryFor<S>;
   readonly queryIdentity: string;
   readonly evaluatedAt: number;
@@ -82,6 +85,7 @@ export interface ControlsPresentation<
   S extends QuerySchema,
   T extends RowData,
 > {
+  readonly paginationEnabled: boolean;
   readonly selectionMode: NativeSelectionMode;
   readonly selectedIds: readonly string[];
   readonly loadedSelected: readonly {
@@ -157,7 +161,7 @@ export type ControlsAuthorityOptions<
   (
     | { readonly mode: "client"; readonly resource?: never }
     | {
-        readonly mode: "server";
+        readonly mode: "server" | "server-complete";
         readonly resource: ResourceAdapter<T, QueryFor<S>>;
       }
   );

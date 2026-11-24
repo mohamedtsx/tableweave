@@ -1,5 +1,46 @@
 # Tableweave tasks
 
+## Live summary — later entries supersede earlier chronology
+
+- Active packet: WP-09, branch feat/wp-09-details. U1/U2 are scoped verified
+  history; U3 and proof fixtures are committed **provisional** at5621db0,
+  2efbc53 and1a1086d. No full WP-09 approval or PR delivery yet.
+- User chooses **one final verification phase after remaining implementation**.
+  Author tests now; run lightweight compile/scope checks during implementation.
+  Defer exhaustive suites, independent verification and final approval. New PRs
+  remain draft/provisional until supported. No PR merges or product-gate waivers.
+- U4 native/complete binding/projection under its eight-source/one-fixture lease
+  has handed off provisionally. Main inspected its API/diff and completed one
+  lightweight package TS6 compile; exhaustive checks remain deferred.
+- Isolated parallel tracks: three-file disabled-pager guard; new EN/AR locale
+  modules; source-owned option reset bridge (frozen install succeeded); private
+  typed-facade contract. Their written plans own exact bounded paths.
+- Generation harness is preserved in isolated34fad4f, not intaken. Current=fc01;
+  both historical output identities remain unchanged. New generation registration
+  and actual default-root generation checks are still unresolved, not passed.
+- Next integration: commit the received U4 handoff provisionally, then intake
+  disjoint harness/pager/locale work and allocate genuine
+  criteria-frame/tool adoption. Do not duplicate running workers or their checks.
+- External runner access and real consumer are deferred by the user. Ask modal
+  handles new policy/permission/input blockers; do not invent external evidence.
+
+Disabled-pager implementation is preserved in isolated49c641e after main's API/diff
+inspection and whitespace check. Its19 cases are authored, zero executed this phase;
+worker light TS6 noEmit passed55 roots. Full behavior/independent verification is
+deferred, not approved. Intake waits for U4's protected-source handoff; existing
+historical native-browser12-pass/2-fail evidence remains unchanged.
+U4 aggregate208263cd521a993896a86dfedc99f8680215991fad0731b3966c993df5d95549 matches20
+inputs/97 protected sources. Main's whole-React TS6 noEmit compile passes; actual
+eight-file API/diff and one-line fixture delta are inspected. No U4 runtime/preimage/
+type-matrix/independent pass is claimed. Post-U4 source105 map is3c19bf0f7090bbf6bf29d88466f945676507e2a942ecbcaa51a3b2e3f9c9b270,
+preserving old maps. Main commits provisional U4 before disjoint intake.
+Localization is preserved in isolatedb286884 after main API/source inspection and
+whitespace checking:11 real message ports/36 built-in labels, five authored unit
+cases/ten type-negative lines, zero runtime cases executed. Worker light TS6 and
+static seven-data-module graph passed; all752 protected inputs unchanged. This is
+not Arabic/native-language/RTL/SSR/package approval. Intake/public exports wait for
+the active U4 source handoff; original bootstrap proof remains unchanged.
+
 ## Current WP-09 integration boundary
 
 Main transports approved prerequisites onto delivered WP-08
@@ -151,6 +192,48 @@ final authored edits and remain historical; full verification/approval is deferr
 Main commits this interface handoff, then intakes isolated bootstrapf05bdb6 and
 browser7e05505 fixtures provisionally before U4 allocation. Browser's historical
 12-pass/2-fail run remains failed; its authored corrections need final execution.
+U3 is committed5621db0; provisional bootstrap/browser fixtures are intaken as2efbc53/
+1a1086d. Their discovery links are added without rerunning deferred suites. **U4 is
+active** under its written eight-source/new-test lease at source105 map3327ca40… .
+One shared runtime writer implements explicit complete native/binding/projection;
+resource/U1/U2/metadata/tools/hooks/details/exports/config stay frozen. Only lightweight
+compile/API/scope checks now; independent reviews/full matrices await the final phase.
+U4's pre-edit fence finds one typed exact-mask fixture missing the required additive
+paginationEnabled field. Main reads its callers/shared enabled policy and extends
+the lease only to authority-mask-review.test.ts for literal paginationEnabled:true.
+Strict equality/old assertions remain; expected facts must not mirror actual output.
+No runtime code had changed at this report; U4 resumes provisionally with that scope.
+Main allocates isolated disabled-pager work at source7e05505: only three styled
+pagination sources/new pager-disabled tests, separate from U4's eight headless files.
+Trusted controller/schema false gates skip private ports with unconditional hooks;
+existing correction-capture/messages/styles/profile and source browser proof freeze.
+Light checks only now; full allowing/denial/React/browser integration stays deferred.
+Main assigns the completed bootstrap worker a separate isolated new localization
+module/test lease atf05bdb6. Existing105 sources/bootstrap proof freeze; only new
+styled localization files aggregate actual component message ports in English/Arabic.
+No root export/facade/state-message API is guessed. Compile/scope checks only now,
+final language/RTL/browser/type verification deferred; U4 and pager guards stay disjoint.
+Localization pre-edit fence finds built-in operator labels live in per-field
+FilterFieldPresentation.operatorLabels, not FilterBuilderMessages. Main records
+the exact locale-only builtinOperatorLabels map using that existing data-port type;
+later facade applies it as fallback beneath app field overrides. No existing
+message interface/component source changes or new helper are allocated.
+The generation harness handoff is preserved in isolated commit34fad4f, provisional:
+registry/fixtures/selectors only, current=fc01 and no new identity. Main holds intake
+until the active U4 scope hands off. That worker now prepares a private read-only
+typed facade API contract from stable producers/planned U4 interfaces, without
+reading changing U4 files as accepted or competing with live-criteria contract work.
+Main reads the exact-adoption report and actual option source/publication APIs. It
+authorizes isolated F2 source-reset bridge implementation from1a1086d: one existing
+option source plus two new bridge/core files and own tests. Actual registerParticipant
+replaces report shorthand register; the dependency-free core keeps legacy source
+imports free of criteria/native/React runtime. No U4 overlap or source-history adoption.
+Light checks only; explicit two-phase debt/barrier and final review remain mandatory.
+Main selects the genuine single-boundary criteria-frame design and records an
+inactive exact five-existing/two-new-source lease. It waits for U4's real interface
+handoff/fresh hashes; no worker may edit the overlapping native/presentation paths
+yet. Plain criteria/publication stay untouched; callback gates never imply permission
+or erase app/vendor observations. The option bridge is independently active.
 
 ## Historical WP-08 integration and delivery
 

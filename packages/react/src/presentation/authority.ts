@@ -48,16 +48,18 @@ export function createControlsAuthority<
     const expected = Object.freeze({ ...committed.expected });
     const inputSource = { ...committed.source };
     const source =
-      inputSource.mode === "server"
+      inputSource.mode === "server" || inputSource.mode === "server-complete"
         ? { ...inputSource, view: inputSource.resource.getSnapshot() }
-        : {
-            ...inputSource,
-            context: Object.freeze({ ...inputSource.context }),
-          };
+        : inputSource.mode === "client"
+          ? {
+              ...inputSource,
+              context: Object.freeze({ ...inputSource.context }),
+            }
+          : unavailable();
     const actualContext =
-      source.mode === "server"
-        ? Object.freeze({ ...source.view.context })
-        : source.context;
+      source.mode === "client"
+        ? source.context
+        : Object.freeze({ ...source.view.context });
     return { committed: { ...committed, expected }, source, actualContext };
   };
   const sameScope = (a: ResourceContext, b: ResourceContext) =>
@@ -77,7 +79,7 @@ export function createControlsAuthority<
       mode === source.mode &&
       sameScope(context, committed.expected) &&
       sameScope(context, actual) &&
-      (source.mode === "server"
+      (source.mode === "server" || source.mode === "server-complete"
         ? source.resource === resource
         : resource === undefined)
     );
@@ -92,23 +94,28 @@ export function createControlsAuthority<
           queryLayout: false,
           facts: maskedControlsPresentation<S, T>(
             definition.selectionMode,
+            definition.paginationEnabled,
             "context",
           ),
         };
       const owner = controller.getSnapshot();
       // Criteria/layout belong to the live authorized owner domain, not to a
       // captured query or any loaded row. No readiness/navigation flag is used.
-      const request = source.mode === "server" ? source.view.request : null;
+      const remote =
+        source.mode === "server" || source.mode === "server-complete"
+          ? source
+          : null;
+      const request = remote ? remote.view.request : null;
       const queryLayout =
         committed.expected.access === true &&
         actualContext.access === true &&
-        (source.mode !== "server" ||
-          (!source.view.invalidationFailed &&
+        (!remote ||
+          (!remote.view.invalidationFailed &&
             (!request ||
               getControlsRequestBinding(
                 definition,
                 controller,
-                source.resource,
+                remote.resource,
                 request,
               ) !== null)));
       const facts = projectControlsState(

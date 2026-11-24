@@ -103,3 +103,47 @@ stop for main to allocate that path; do not cast away the failure. Independent r
 and final main verification are deferred to the user's final phase. Lightweight
 interface checks may permit provisional downstream implementation/commit, but no
 unexecuted proof, output identity or packet approval is claimed.
+
+## Provisional activation and exact inputs
+
+U3 implementation is committed5621db0 after API inspection,19-input/102-source hash
+checks and one TS6 noEmit package compile. It is **not independently approved**;
+verification remains deferred. Bootstrap/browser intakes2efbc53/1a1086d are likewise
+provisional. Main now activates this exact eight-file lease.
+
+Pre-U4 source105 map is3327ca40ba02be4f56534e4b00414fd4836362ec570e15103c97cb606b3cf6fe.
+Initial SHA256s:
+
+- tanstack/types.ts:7cca21e7ed8c55760e07dde869bcae40320047634542374341833476e3da34a9
+- tanstack/adapter.ts:48497c6bfc342824908648f188100314c6ca40eb36a781dc7b571730a1f657e6
+- tanstack/boundary.ts:0ec21341bb9a82c8ffdb34fe8eefc6fb2a53f09a453912bf6a21d81dd46bfcb6
+- presentation/types.ts:35b8ceae8cafdb2e9c60e6e85c30f1deabd4d3bdd266a67d579f582063dcdbfe
+- presentation/binding.ts:3a67e13294fba491abc128d33e621fdac97d975579fb93bbee919aa45f18ecbe
+- presentation/project.ts:30eb2060454eaa38e0200f9ba4f31bc54b2b29ff29fbf841569df3bbcac666e1
+- presentation/masked.ts:f813ccc033722c41f0840a3821ab914c52188cc67a6b54fc76088c59d4b89b14
+- presentation/authority.ts:7b50a3b037c7c38338228605874a69bdd830be85579a84b2ee0a076894c09b46
+
+Use lightweight compile/scope/interface checks now; author full regression coverage
+without exhaustive suites/browser/packed/type-negative runs. Keep97 other runtime
+sources and old seals unchanged; do not rebase U3's protected map to bless downstream
+changes. Implementation/dependent handoffs remain provisional until final verification.
+
+### Minimal fixture fence extension
+
+Before runtime edits the worker identifies tests/controls/core/authority-mask-review.test.ts
+neutral()'s typed exact expected object. Main inspects its actual callers: all use
+the unchanged enabled shared schema. Allocate this one existing file only to add
+the required literal paginationEnabled:true origin-policy expectation. Keep strict
+equality/all old assertions/cases intact; never derive expected value from observed
+facts. Disabled-origin masks are separate new U4 cases. No other existing test path
+or type-assertion weakening is authorized; preserve the original fixture preimage.
+
+## Provisional handoff
+
+[Actual authored U4 handoff](../../tests/pagination-policy/complete-source/README.md)
+records20 inputs at208263cd521a993896a86dfedc99f8680215991fad0731b3966c993df5d95549.
+Main inspects eight source diffs/one literal fixture insertion, checks all20 hashes
+and97 protected source hashes, and runs one whole-React TS6 noEmit compile successfully.
+Post-U4 source105 map is3c19bf0f7090bbf6bf29d88466f945676507e2a942ecbcaa51a3b2e3f9c9b270.
+Runtime/preimage/dual-compiler/emitted/negative/independent checks stay deferred.
+This is a provisional implementation dependency, not final U4 or packet approval.

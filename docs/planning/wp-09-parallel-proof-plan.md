@@ -51,3 +51,7 @@ The later [final-verification timing](final-verification-phase.md) supersedes
 per-handoff exhaustive-run timing above. Workers now author provisional proof code,
 use lightweight compile/scope checks and defer full runs/reviews to the final phase.
 Executed results stay exact; no unexecuted assertion is represented as passed.
+
+Provisional intake handoffs: [bootstrap](../../tests/criteria-bootstrap/README.md)
+and [native browser](../../tests/pagination-policy/native-browser/README.md).
+Their final authored revisions remain pending the declared final verification.

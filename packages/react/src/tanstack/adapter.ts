@@ -300,11 +300,40 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
     if (
       !input ||
       !Array.isArray(input.records) ||
-      (input.mode !== "client" && input.mode !== "server")
+      (input.mode !== "client" &&
+        input.mode !== "server" &&
+        input.mode !== "server-complete")
     )
       nativeFail("native.rows");
     if (!definition.paginationEnabled && input.mode === "server")
       nativeFail("native.page");
+    if (input.mode === "server-complete") {
+      if (definition.paginationEnabled) nativeFail("native.page");
+      const page = input.pageInfo;
+      if (
+        page?.kind !== "known" ||
+        !Number.isSafeInteger(page.total) ||
+        page.total < 0 ||
+        page.total !== input.records.length
+      )
+        nativeFail("native.page");
+      // Complete shape/count denial precedes all private record callbacks.
+      if (Object.keys(input.records).length !== input.records.length)
+        nativeFail("native.rows");
+      for (let index = 0; index < input.records.length; index++) {
+        const field = Object.getOwnPropertyDescriptor(
+          input.records,
+          String(index),
+        );
+        if (
+          !field ||
+          !Object.hasOwn(field, "value") ||
+          field.value === null ||
+          typeof field.value !== "object"
+        )
+          nativeFail("native.rows");
+      }
+    }
     const seen = new Set<string>();
     const ids = input.records.map((record) => {
       let id: unknown;
@@ -391,7 +420,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       predicateQuery = state.query;
       predicateTime = state.evaluatedAt;
     }
-    const manual = input.mode === "server";
+    const manual = input.mode === "server" || input.mode === "server-complete";
     const options: TableOptions<NativeFeatures, T> = {
       features: nativeFeatures,
       columns,
@@ -435,7 +464,8 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       rowCount: {
         enumerable: true,
         value:
-          input.mode === "server" && input.pageInfo.kind === "known"
+          (input.mode === "server" || input.mode === "server-complete") &&
+          input.pageInfo.kind === "known"
             ? input.pageInfo.total
             : undefined,
       },
@@ -468,7 +498,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       (id) => state.selection[id],
     ).length;
     const pageInfo: NativePageInfo =
-      input.mode === "server"
+      input.mode === "server" || input.mode === "server-complete"
         ? Object.freeze({ ...input.pageInfo })
         : Object.freeze({
             kind: "known",

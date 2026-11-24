@@ -1,4 +1,5 @@
 import type { RowData } from "@tanstack/react-table";
+import type { QueryExecutionExtent } from "../contracts/execution.js";
 import { getQueryIdentity } from "../contracts/identity.js";
 import { canonicalJson } from "../contracts/json.js";
 import type { QueryFor, QuerySchema } from "../contracts/types.js";
@@ -41,6 +42,16 @@ function samePage(a: PageInfo, b: PageInfo): boolean {
       : b.kind === "unknown" && a.hasNextPage === b.hasNextPage)
   );
 }
+function resolvedExtent(request: ResourceRequest): QueryExecutionExtent {
+  return request.extent ?? { kind: "page", ...request.query.pagination };
+}
+function sameExtent(a: QueryExecutionExtent, b: QueryExecutionExtent): boolean {
+  return a.kind === "complete"
+    ? b.kind === "complete"
+    : b.kind === "page" &&
+        a.pageIndex === b.pageIndex &&
+        a.pageSize === b.pageSize;
+}
 export function projectControls<S extends QuerySchema, T extends RowData>(
   definition: NativeDefinition<S, T>,
   input: ControlsInput<S, T>,
@@ -61,16 +72,20 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   // return an authentic view for the check and foreign data for the projection.
   const capturedSource = { ...input.source };
   const source =
-    capturedSource.mode === "server"
+    capturedSource.mode === "server" ||
+    capturedSource.mode === "server-complete"
       ? { ...capturedSource, bindings: { ...capturedSource.bindings } }
       : capturedSource;
-  const ports =
-    source.mode === "server"
-      ? {
-          getSnapshot: source.resource.getSnapshot,
-          getServerSnapshot: source.resource.getServerSnapshot,
-        }
+  const remoteSource =
+    source.mode === "server" || source.mode === "server-complete"
+      ? source
       : null;
+  const ports = remoteSource
+    ? {
+        getSnapshot: remoteSource.resource.getSnapshot,
+        getServerSnapshot: remoteSource.resource.getServerSnapshot,
+      }
+    : null;
   // Current permission/scope is authority even when the supplied candidate is an
   // ordinary discarded render view or the adapter's saved initial SSR snapshot.
   const actualView = ports?.getSnapshot() ?? null;
@@ -81,27 +96,29 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
     ...(source.mode === "client" ? source.context : actualView?.context),
   };
   const suppliedContext =
-    source.mode === "client" ? actualContext : { ...source.view.context };
+    source.mode === "client"
+      ? actualContext
+      : { ...remoteSource?.view.context };
   const sameScope = (context: Partial<ResourceContext>) =>
     context.definitionKey === expected.definitionKey &&
     context.scopeKey === expected.scopeKey;
   const bindingOwnersMatch =
-    source.mode !== "server" ||
+    !remoteSource ||
     ((!actualView?.request ||
       getControlsRequestBinding(
         definition,
         native.controller,
-        source.resource,
+        remoteSource.resource,
         actualView.request,
       ) !== null) &&
-      [source.bindings.request, source.bindings.snapshot].every(
+      [remoteSource.bindings.request, remoteSource.bindings.snapshot].every(
         (binding) =>
           binding === null ||
           hasBindingProof(
             binding,
             definition,
             native.controller,
-            source.resource,
+            remoteSource.resource,
           ),
       ));
   const cancelScope =
@@ -122,6 +139,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   ): ControlsPresentation<S, T> => {
     const neutral = maskedControlsPresentation<S, T>(
       definition.selectionMode,
+      definition.paginationEnabled,
       reason,
     );
     const canCancelSelection =
@@ -156,12 +174,16 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   if (!bindingOwnersMatch) return blocked("binding", false);
   if (!privateVisible) return blocked("context");
   const authenticView =
-    source.mode !== "server" ||
-    source.view === actualView ||
-    source.view === ports?.getServerSnapshot();
+    !remoteSource ||
+    remoteSource.view === actualView ||
+    remoteSource.view === ports?.getServerSnapshot();
   if (!authenticView) return blocked("source");
-  if (source.mode === "server")
-    resource = projectResourceView(source.view, expected);
+  if (remoteSource) resource = projectResourceView(remoteSource.view, expected);
+  if (
+    (source.mode === "server" && !definition.paginationEnabled) ||
+    (source.mode === "server-complete" && definition.paginationEnabled)
+  )
+    return blocked("source");
 
   const bindingMatches = (
     binding: ControlsRequestBinding<S> | null,
@@ -169,8 +191,13 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   ): boolean => {
     if (
       !binding ||
-      source.mode !== "server" ||
-      !hasBindingProof(binding, definition, native.controller, source.resource)
+      !remoteSource ||
+      !hasBindingProof(
+        binding,
+        definition,
+        native.controller,
+        remoteSource.resource,
+      )
     )
       return false;
     const token = binding.request;
@@ -183,6 +210,18 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
       token.queryKey === request.queryKey &&
       token.requestKey === request.requestKey &&
       token.generation === request.generation &&
+      sameExtent(binding.extent, resolvedExtent(token)) &&
+      sameExtent(binding.extent, resolvedExtent(request)) &&
+      (remoteSource.mode === "server-complete"
+        ? binding.extent.kind === "complete"
+        : binding.extent.kind === "page") &&
+      Object.hasOwn(token, "extent") === Object.hasOwn(request, "extent") &&
+      Object.hasOwn(token, "evaluatedAt") ===
+        Object.hasOwn(request, "evaluatedAt") &&
+      (token.extent === undefined
+        ? !Object.hasOwn(token, "evaluatedAt")
+        : token.evaluatedAt === binding.evaluatedAt &&
+          request.evaluatedAt === binding.evaluatedAt) &&
       getQueryIdentity(definition.controllerDefinition.schema, request.query, {
         ...definition.evaluation,
         now: binding.evaluatedAt,
@@ -194,6 +233,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   let identity: string;
   let evaluatedAt: number;
   let page: PageInfo;
+  let extent: QueryExecutionExtent;
   let request: ResourceRequest<QueryFor<S>> | null = null;
   let receivedAt: string | null = null;
   let requestCurrent = true;
@@ -203,8 +243,8 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   let canRetry = false;
   const frameCurrent = native.state.queryIdentity === owner.queryIdentity;
   try {
-    if (source.mode === "server" && resource) {
-      const current = source.bindings.request;
+    if (remoteSource && resource) {
+      const current = remoteSource.bindings.request;
       const requestBound =
         resource.request !== null &&
         current !== null &&
@@ -224,13 +264,14 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
           canRetry,
         });
       if (!resource.request) return blocked("binding");
-      const binding = source.bindings.snapshot;
+      const binding = remoteSource.bindings.snapshot;
       if (!binding || !bindingMatches(binding, snapshot))
         return Object.freeze({ ...blocked("binding"), canRetry });
       records = snapshot.records;
       query = snapshot.query;
       identity = binding.queryIdentity;
       evaluatedAt = binding.evaluatedAt;
+      extent = binding.extent;
       page = snapshot.page;
       receivedAt = snapshot.receivedAt;
       request = Object.freeze({
@@ -240,19 +281,25 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
         requestKey: snapshot.requestKey,
         generation: snapshot.generation,
         query,
+        ...(snapshot.extent !== undefined ? { extent: snapshot.extent } : {}),
+        ...(snapshot.evaluatedAt !== undefined
+          ? { evaluatedAt: snapshot.evaluatedAt }
+          : {}),
       });
       sourceSelect = resource.canSelect;
       sourceNavigate = resource.canNavigate;
       sourceReorder = resource.canReorder;
       if (
-        records.length > query.pagination.pageSize ||
-        (page.kind === "known" &&
-          records.length >
-            Math.max(
-              0,
-              page.total -
-                query.pagination.pageIndex * query.pagination.pageSize,
-            ))
+        extent.kind === "complete"
+          ? page.kind !== "known" || page.total !== records.length
+          : records.length > query.pagination.pageSize ||
+            (page.kind === "known" &&
+              records.length >
+                Math.max(
+                  0,
+                  page.total -
+                    query.pagination.pageIndex * query.pagination.pageSize,
+                ))
       )
         return Object.freeze({ ...blocked("source"), canRetry });
     } else if (source.mode === "client") {
@@ -260,6 +307,11 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
       query = native.state.query;
       identity = native.state.queryIdentity;
       evaluatedAt = native.state.evaluatedAt;
+      extent = Object.freeze(
+        definition.paginationEnabled
+          ? { kind: "page", ...query.pagination }
+          : { kind: "complete" },
+      );
       page = native.pagination.pageInfo;
       if (page.kind !== "known") return blocked("source");
     } else return blocked("source");
@@ -282,15 +334,20 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
         canonicalJson(native.state.query.sorting)
     )
       return Object.freeze({ ...blocked("source"), canRetry });
-    const manual = source.mode === "server";
+    const manual = remoteSource !== null;
     if (
       table.options.manualFiltering !== manual ||
       table.options.manualSorting !== manual ||
-      table.options.manualPagination !== manual ||
+      table.options.manualPagination !==
+        (manual || !definition.paginationEnabled) ||
+      native.pagination.enabled !== definition.paginationEnabled ||
       !samePage(native.pagination.pageInfo, page) ||
       (manual
         ? table.options.rowCount !==
-          (page.kind === "known" ? page.total : undefined)
+            (page.kind === "known" ? page.total : undefined) ||
+          (extent.kind === "complete" &&
+            (native.rows.length !== records.length ||
+              table.options.pageCount !== undefined))
         : page.kind !== "known" ||
           page.total !== table.getFilteredRowModel().rows.length)
     )
@@ -314,10 +371,12 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
       (id) => owner.selection[id],
     ).length;
     const pageCount =
-      page.kind === "known"
+      definition.paginationEnabled && page.kind === "known"
         ? Math.ceil(page.total / query.pagination.pageSize)
         : null;
-    const offset = query.pagination.pageIndex * query.pagination.pageSize;
+    const offset = definition.paginationEnabled
+      ? query.pagination.pageIndex * query.pagination.pageSize
+      : 0;
     const range =
       rows.length && Number.isSafeInteger(offset + rows.length)
         ? Object.freeze({ from: offset + 1, to: offset + rows.length })
@@ -326,6 +385,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
           : null;
     const displayed: ControlsDisplayed<S> = Object.freeze({
       mode: source.mode,
+      extent,
       query,
       queryIdentity: identity,
       evaluatedAt,
@@ -339,7 +399,8 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
     });
     const canSelect =
       current && sourceSelect && definition.selectionMode !== false;
-    const canNavigate = current && sourceNavigate;
+    const canNavigate =
+      definition.paginationEnabled && current && sourceNavigate;
     const plan = compileFilter(
       definition.controllerDefinition.schema,
       owner.query,
@@ -351,6 +412,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
       plan.date !== null ||
       plan.search.text.length > 0;
     return Object.freeze({
+      paginationEnabled: definition.paginationEnabled,
       selectionMode: definition.selectionMode,
       selectedIds,
       rows,
@@ -385,7 +447,11 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
         ? !frameCurrent || obsolete
           ? "query"
           : "binding"
-        : !sourceSelect || !sourceNavigate
+        : !sourceSelect ||
+            (!sourceNavigate &&
+              !(
+                source.mode === "server-complete" && resource?.kind === "ready"
+              ))
           ? "resource"
           : null,
       canSelect,

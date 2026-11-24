@@ -78,6 +78,11 @@ export type NativeInput<T> =
       readonly mode: "server";
       readonly records: readonly T[];
       readonly pageInfo: NativePageInfo;
+    }
+  | {
+      readonly mode: "server-complete";
+      readonly records: readonly T[];
+      readonly pageInfo: Extract<NativePageInfo, { readonly kind: "known" }>;
     };
 
 // Supported native methods route only through controller callbacks. Native row /

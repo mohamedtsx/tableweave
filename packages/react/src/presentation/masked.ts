@@ -12,9 +12,11 @@ export function maskedControlsPresentation<
   T extends RowData,
 >(
   selectionMode: NativeSelectionMode,
+  paginationEnabled: boolean,
   blockedReason: ControlsBlockedReason,
 ): ControlsPresentation<S, T> {
   return Object.freeze({
+    paginationEnabled,
     selectionMode,
     selectedIds: empty,
     loadedSelected: empty,
