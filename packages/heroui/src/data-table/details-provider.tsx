@@ -79,14 +79,57 @@ export function useDetailsContext<
   getDetailsBinding(accessory);
   return accessory;
 }
-/** One actual shell, driven by a genuine bound producer, with no accepted-state mirror. */
-export function RecordDetails<S extends QuerySchema, T extends object>({
-  accessory,
-}: {
+/** Neutral nonsensitive presentation metadata, never row/dataset/scope/detail copy. */
+export const englishDetailsRegionLabel = "Record details region";
+export const arabicDetailsRegionLabel = "منطقة تفاصيل السجل";
+
+export interface RecordDetailsProps<S extends QuerySchema, T extends object> {
   readonly accessory: DetailsAccessory<S, T>;
-}) {
-  const binding = getDetailsBinding(accessory),
-    session = useBoundDetailsSession(accessory);
+  /** Available before layout/while denied. No permission; never put private values here. */
+  readonly neutralLabel?: string;
+}
+function invalidNeutralMetadata(): never {
+  throw new TypeError("Invalid record details neutral metadata.");
+}
+function recordDetailsOwnData(input: unknown, key: string): unknown {
+  try {
+    if (!input || typeof input !== "object") return invalidNeutralMetadata();
+    const descriptor = Object.getOwnPropertyDescriptor(input, key);
+    if (!descriptor || !Object.hasOwn(descriptor, "value"))
+      return invalidNeutralMetadata();
+    return descriptor.value;
+  } catch {
+    return invalidNeutralMetadata();
+  }
+}
+function captureNeutralLabel(input: object): string {
+  try {
+    const descriptor = Object.getOwnPropertyDescriptor(input, "neutralLabel");
+    if (!descriptor) {
+      if (Reflect.has(input, "neutralLabel")) return invalidNeutralMetadata();
+      return englishDetailsRegionLabel;
+    }
+    if (!Object.hasOwn(descriptor, "value")) return invalidNeutralMetadata();
+    const value: unknown = descriptor.value;
+    if (typeof value !== "string" || !value.trim())
+      return invalidNeutralMetadata();
+    return value;
+  } catch {
+    return invalidNeutralMetadata();
+  }
+}
+/** One actual shell, driven by a genuine bound producer, with no accepted-state mirror. */
+export function RecordDetails<S extends QuerySchema, T extends object>(
+  props: RecordDetailsProps<S, T>,
+) {
+  const accessory = recordDetailsOwnData(
+    props,
+    "accessory",
+  ) as DetailsAccessory<S, T>;
+  const binding = getDetailsBinding(accessory);
+  // Exact accessory provenance comes first; neutral metadata cannot authorize body work.
+  const neutralLabel = captureNeutralLabel(props);
+  const session = useBoundDetailsSession(accessory);
   const direction = useContext(DirectionContext);
   const neutral = useRef<HTMLElement>(null),
     wasOpen = useRef(false),
@@ -126,7 +169,7 @@ export function RecordDetails<S extends QuerySchema, T extends object>({
   }, [binding, session]);
   return (
     <>
-      <section ref={neutral} tabIndex={-1} aria-label="Record details region" />
+      <section ref={neutral} tabIndex={-1} aria-label={neutralLabel} />
       {actor ? (
         <BoundDetailsShell
           accessory={accessory}
