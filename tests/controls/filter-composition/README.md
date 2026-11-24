@@ -2,6 +2,12 @@
 
 ## Main-owned fc01 observations
 
+Clean-checkout correction: public-output verification uses the committed reviewed
+generation count/digest, not an ignored historical roots-before.json. The initial
+remote17b846b failure is preserved in stack evidence; nine permanent regressions
+check cold/poisoned history and reject unknown or tampered outputs. Per-run
+source/public snapshots remain independently retained in parent memory.
+
 The final ordered stacked workflow is now complete. This fixture's unchanged19,
 actual built4 and genuine packed19 pass within that run; permanent focus10 also
 pass publicly and packed. Independent source/emitted/fixture/guard reviews and

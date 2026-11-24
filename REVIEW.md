@@ -1287,3 +1287,20 @@ Final Git/PR remote delivery remains to verify. No personal maintainer acceptanc
 ordinary unpatched grouped/Strict runtime, full CJS table behavior, raw vendor
 structures, fullG05/manual/device/performance/real-consumer/legal/publication or
 merge permission is inferred. Raw criteria AC-16/25 adoption remains WP-09's duty.
+
+## WP-08 remote clean-checkout harness — review session 20
+
+### n1 — Ignored local manifest required before first type gate (P1, open)
+
+Both initial17b846b remote workflows fail before new type/browser work because
+verify-public-roots reads ignored controls/integration/.artifacts/roots-before.json.
+Local ordered success is preserved as local evidence, not remote acceptance.
+The trusted approved count/digest already lives in committed generation.mjs. Main
+removes only the historical manifest dependency, retains that fixed anchor and the
+dual parent-memory source snapshots, and adds clean-fixture regression coverage.
+No runtime/package/type/browser assertion change is authorized by this correction.
+Main's separate clean detached17b846b worktree installs/builds successfully, then
+reproduces the same ENOENT in actual types mode without copying historical outputs.
+The new9 regressions fail2/pass7 before the fix, pass9 afterward, including CI tmpdir
+mode. All652 units across36 files and foundation strict TS pass after the correction.
+Independent correction review and clean fixed checkout/remote replay remain next.

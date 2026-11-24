@@ -102,6 +102,19 @@ Default type/public browser commands and fresh profile38+19+10 are registered.
 FC-01 is resolved at its source/emitted/Storybook/packed boundary. Main starts the
 complete ordered `pnpm check`; runtime/test/manifest/lock/archive inputs are frozen.
 Final packet, push/PR and remote checks remain required; all PRs stay unmerged.
+**Remote clean-checkout correction:** both workflows45380868486/45380893266 fail
+at the new type gate because verify-public-roots reads an ignored workstation
+roots-before.json. Build/strict prior stages pass; later gates do not run remotely.
+Main allocates only that verifier and a new foundation regression fixture: validate
+the already reviewed generation's fixed count/hash directly, never optionalize or
+autogenerate its trusted expected hash. Keep both parent-memory snapshot guards and
+all browser/type assertions. Prove absent/poisoned historical artifacts irrelevant,
+wrong/missing/renamed output and unknown generation still reject. Independent review,
+clean-path targeted gates and fresh remote runs precede final delivery acceptance.
+The corrected actual four-program strict types gate passes with both parent-held
+snapshots unchanged. Main commits the candidate harness repair for transfer into
+the separate cold worktree, then runs complete CI-mode checks there. Independent
+review remains pending; this candidate commit is not remote/packet reacceptance.
 **Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
 42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
 110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and
