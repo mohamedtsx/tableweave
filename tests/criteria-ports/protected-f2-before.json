@@ -1,0 +1,94 @@
+{
+  "packages/react/src/filters/options-criteria-core.ts": {
+    "sha256": "8df071c8c4d3fca39ba7893f4b7807be527565ccde23cb1a7095fc5ca874b994",
+    "mode": 436
+  },
+  "packages/react/src/filters/options-criteria.ts": {
+    "sha256": "bdde4afc4ba2cd1f3f26e05606c68335da93c266f656180a5037a09d2369e06e",
+    "mode": 436
+  },
+  "packages/react/src/filters/options-source.ts": {
+    "sha256": "37e6190dd32b4b97b8d524e69e9115fdd47c64c3c63f4e85e0061bd3701b5227",
+    "mode": 436
+  },
+  "tests/options-criteria/README.md": {
+    "sha256": "054331e75843624f5b7f75ab7574a39e11b9456084a067562badb78bc9cad6b5",
+    "mode": 436
+  },
+  "tests/options-criteria/check-boundary.mjs": {
+    "sha256": "2b64f08b20831aee1ca74c9faf121a8eaa2a16fac0490d768f9610643dd02e61",
+    "mode": 436
+  },
+  "tests/options-criteria/check-negatives.mjs": {
+    "sha256": "c465dc733f8ceacc01e81a0e9a74c2cfe2a8f1dbd56dd9665bf073abe246e0fa",
+    "mode": 436
+  },
+  "tests/options-criteria/fixtures.ts": {
+    "sha256": "689650fc728f29e80b9f7bfed598bc46dfcf9ff5e9535143d4345b97d5f121ef",
+    "mode": 436
+  },
+  "tests/options-criteria/handoff-hashes.json": {
+    "sha256": "3cb974f6f9a96ea517729c6c7865d1ece9b9dd7a6c194af9b4a358b3e65eb1ab",
+    "mode": 436
+  },
+  "tests/options-criteria/measure.mjs": {
+    "sha256": "cb76a4b8eb13585d075cd59f7c68aa4ad0a43b58b359cc139cbefd7926cf4ccd",
+    "mode": 436
+  },
+  "tests/options-criteria/negative-types.ts": {
+    "sha256": "cb4bdd3d5d265232e9c05ea3e529340b240a61aba55f58e6121fd71c146b70b0",
+    "mode": 436
+  },
+  "tests/options-criteria/options-source.before.txt": {
+    "sha256": "d90d26e930ca61e3dac17704013f6b70762b8b13054315640ebe09e869b78efb",
+    "mode": 436
+  },
+  "tests/options-criteria/protected-before.json": {
+    "sha256": "e061210f89d50ac81f2f5d154340916367126cf2f9ffaa7be94352c1a1e7cd38",
+    "mode": 436
+  },
+  "tests/options-criteria/protected-inputs-before.json": {
+    "sha256": "5534f68953ea000d7544b329ebdd239b5b6d69b78fabdc7775ef16942d2e40fe",
+    "mode": 436
+  },
+  "tests/options-criteria/protected-sources-before.json": {
+    "sha256": "faaae4faf2f5cf7d85089c441cddd80ac02d4d99ae0ace94f643346b87f62fa1",
+    "mode": 436
+  },
+  "tests/options-criteria/regression.test.ts": {
+    "sha256": "06f5649ac99f19729c15ae1e9252bd20e463a2cfeb83c3ddc7adf4c7bad01c5e",
+    "mode": 436
+  },
+  "tests/options-criteria/run.mjs": {
+    "sha256": "8d592af348190472cf12ab68b112a21dcb2edd00935793164f2715d1c214c1fb",
+    "mode": 436
+  },
+  "tests/options-criteria/scope.mjs": {
+    "sha256": "38031d171b753222f7c46730a4f7e062eb4af9d6726fae4f167cbaf4b7306d6e",
+    "mode": 436
+  },
+  "tests/options-criteria/tsconfig.emit.json": {
+    "sha256": "aabfc0bd9c115f15f2fa1fd5d74fc6b92159380f8c4da01553d14c564be2089f",
+    "mode": 436
+  },
+  "tests/options-criteria/tsconfig.emitted.json": {
+    "sha256": "424e7c3c1f5b3324083e09f5c9ca7349a67eba99af2cc9b5c126ce15fc717f9d",
+    "mode": 436
+  },
+  "tests/options-criteria/tsconfig.json": {
+    "sha256": "fba290df27e0d8e72a3d48bc7b1f6bf05ad243b494fb75d566440bb6ac1a7072",
+    "mode": 436
+  },
+  "tests/options-criteria/tsconfig.negative.json": {
+    "sha256": "3233cf5101596a8024f933462300d258656032d96edd587d141e0ee15bf2010c",
+    "mode": 436
+  },
+  "tests/options-criteria/types-emitted.ts": {
+    "sha256": "96f071b33582f5f6211812df35f844e9c6b5246cfb8def388894d418f12d13df",
+    "mode": 436
+  },
+  "tests/options-criteria/types.ts": {
+    "sha256": "2a14891f7b33ab4567b15ca69c2525eac2c0ff0caddee58b97c47de3d2e9ee78",
+    "mode": 436
+  }
+}

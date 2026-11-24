@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "paths": {
+      "@internationalized/date": [
+        "../../packages/heroui/node_modules/@internationalized/date"
+      ],
+      "@tableweave/react": ["../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": ["../../packages/react/src/filters/index.ts"]
+    }
+  },
+  "include": [
+    "./fixtures.ts",
+    "./capture.test.ts",
+    "./types.ts",
+    "../../packages/heroui/src/filters/criteria-ports.ts"
+  ],
+  "exclude": ["./.artifacts", "./negative-types.ts"]
+}
