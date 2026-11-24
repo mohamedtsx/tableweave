@@ -1739,6 +1739,44 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   symlink/generated evidence is staged. Shared copier/exports are old details-only
   adaptations: final stack must union them into WP-08's safe current implementations.
   Final WP-08 dual remote checks are still pending; no WP-09 PR or full check claimed.
+  Isolated source payload is now committed locally as dcfeb874b1a7757f0e86b61a1573c20030056f1a,
+  101 owned files; preexisting dependency symlinks remain unstaged/untracked and
+  generated evidence is excluded. No push/PR or complete runtime acceptance follows.
+- A new read-only/private bootstrap review checks how future facade initial accepted
+  selection and legitimate pending proposals coexist with first publication admission.
+  Mandatory old-domain retirement remains strict, but mounting cannot silently erase
+  explicit same-domain initial state. No producer/port contract change is approved;
+  require an owned initial-domain proof/explicit boundary before React/tool adoption.
+- Read-only stack comparison identifies95 source-exclusive/433 parent-exclusive
+  paths and six shared files. Main records exact reconciliation/preservation rules;
+  source transport still waits final WP-08 dual remote results. New package output
+  must use a separately reviewed generation, not rebase historical WP-08 anchors.
+- Private final-parent native/resource readiness review is now allocated: trace
+  exact client unslicing, complete-result provenance/request binding and disabled
+  presentation seams against final WP-08, not the old source base. Read-only report
+  only; no native/resource/API/code lease until combined baseline and main approval.
+- Final-parent push45396781964 now completes successfully at exact fadb9a8;
+  PR #8 remains OPEN/unmerged against WP-07 with auto-merge null. Matching PR
+  workflow45396795693 is still awaited before declaring the dependency delivered.
+  Source prerequisites remain frozen; no historical guard generation is rebased.
+- Bootstrap readiness review is received and main selects application-certified
+  same-domain adoption without changing the publisher API. First acknowledgement
+  stays mandatory; valid initial selection/receipts are preserved only with exact
+  owner/candidate/incarnation proof. Real resets/disposal retain reject-first/actual
+  selection clearing. Canonical readiness records external-owner/Strict/SSR limits;
+  future tests-only fixture is not yet allocated and no tests ran in this review.
+- Final-parent unpaged readiness report is received. Main records its serial path
+  and exact current binding/manual-processing/projection seams in next-stage
+  readiness; resource metadata/new-mode details remain proposed until their own
+  bounded plans. No source/API changes or runtime tests ran. Next source operation
+  still requires final WP-08 disposition and inspected combined baseline.
+- **WP-08 dependency delivered:** push45396781964 and PR45396795693 both complete
+  successfully at fadb9a8e226f4a7111f062c5e6d00a7ce1235ebb. PR #8 is OPEN/unmerged,
+  base WP-07, auto-merge null. Main now authorizes transport only onto that exact
+  parent using the six shared-file reconciliation rules. Preserve approved source
+  bytes and all parent-exclusive inputs; no controller/native/resource behavior
+  implementation starts until independent combined-baseline review. No new output
+  generation is blessed by capture alone; historical evidence remains unchanged.
 - Read-only next-core planning now traces disabled-pagination controller command
   guards and atomic query replacement against the approved four-file policy. Private
   report only; store/reducer/validation/native/resource changes are not allocated

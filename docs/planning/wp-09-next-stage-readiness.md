@@ -102,3 +102,45 @@ review. Then explicitly allocate all-four-tool adoption/paired native adapter an
 facade/default-state/localization integration. Existing details/criteria source
 approvals do not close integrated AC-16/25, unpaged/server completeness, SSR, actual
 packed consumers, manual/device/performance/legal or stable readiness gates.
+
+## Later prerequisite disposition and final-parent reconciliation
+
+The earlier proposed pure pieces are now separately source-approved: [policy](wp-09-pagination-contracts-plan.md),
+[execution metadata](wp-09-execution-descriptor-plan.md) and [publication](wp-09-criteria-publication-plan.md).
+Their [handoff](../evidence/wp-09-prerequisites-2026-11-24.md) preserves exact scope/
+hashes. This supersedes only their earlier absent/proposed status, not the unclosed
+runtime/integration gates above. [Bootstrap readiness](wp-09-bootstrap-readiness.md)
+also distinguishes certified same-domain initial state from true old-domain retirement.
+
+A further read-only review of final WP-08 recommends the following serial runtime
+path, with **no implementation allocation or executed proof**:
+
+1. Transport and independently inspect the combined baseline; preserve all historical
+   fixed-generation/protected-input maps, then name intentional later generations.
+2. Apply the [controller ordering](wp-09-controller-policy-readiness.md): capture
+   first, static disabled-command rejection before private validators/clock, and
+   matching pure reducer guards. Preserve original query.replace validation.
+3. Client native processing keeps filter/sort but uses manualPagination for disabled
+   slicing only. Ordinary manual server pages remain incompatible with false policy.
+4. Add explicit request extent/evaluation metadata without changing legacy omitted
+   page shape. Establish it before begin; success inherits the exact current token's
+   metadata and cannot promote a page to complete by count/labels. Explicit complete
+   success needs dense rows/known exact count as consistency, not backend attestation.
+5. Add an explicit server-complete native/control branch with genuine binding. Capture
+   accepted query/evaluation/owner tuple before begin; register its real token afterward.
+   During synchronous begin notification an unregistered token denies, never fabricates
+   binding proof. Retry retains the original tuple before application transport.
+6. Split projection's current remote/manual-pagination/navigation assumptions. Complete
+   source navigation=false must not itself deny selection/retry; disabled counts/ranges
+   use actual rows, never dormant offset/size arithmetic. Preserve origin masking,
+   real owner/model/data checks and retained A's exact extent/time.
+7. Prove disabled pager/correction safety, preserving hooks ordering and rejecting before
+   private callback work. Then main owns exports/discovery/new generation and real
+   source/public/browser/packed verification; typed facade/tool integration remains later.
+
+Proposed raw optional metadata combinations, exact mode/type names and file leases
+must be approved in their individual plans after baseline inspection. One shared-core
+writer proceeds serially; no parallel consumers guess changing interfaces. New generic
+resource capture must validate the values actually stored rather than inherit existing
+multiple-read assumptions. Keep one resource/lifetime, no enormous page size, local
+complete relabeling, extra clock or implicit backend query. This review ran no tests.

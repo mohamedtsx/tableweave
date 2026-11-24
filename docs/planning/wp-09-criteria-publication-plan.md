@@ -171,3 +171,9 @@ strict TS6/5.9/136 meaningful negatives and the measured two-runtime/five-declar
 graph. Original72/extended130 and historical279/289 seals verify unchanged. Main
 grants bounded source approval at e06bb4212d9327dea7105f8e25005630ccb141cf8833c850ddd39218d0e625f3,
 not actual buffer/React/SSR/paired-frame/complete-server/native/facade acceptance.
+
+The later [initial-domain adoption contract](wp-09-bootstrap-readiness.md) clarifies
+the application's first acknowledgement: certified current-domain state is not
+obsolete state to clear on mount. Real old-domain resets/disposal retain the full
+retirement recipe above. Approved producer API/source stays unchanged; a future
+combined-source adapter fixture must prove the distinction before adoption.

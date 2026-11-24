@@ -46,6 +46,10 @@ The [publication prerequisite](wp-09-criteria-publication-plan.md) separately
 allocates one inert-first metadata producer and its own tests, not tool adoption.
 The [next controller readiness](wp-09-controller-policy-readiness.md) reconciles
 final WP-08 callback ordering, but grants no shared-core implementation lease yet.
+The [stack reconciliation](wp-09-stack-reconciliation.md) owns transport preservation
+checks and the six shared-file resolutions before the next combined baseline.
+The [initial adoption readiness](wp-09-bootstrap-readiness.md) distinguishes certified
+same-domain seeds from old-domain retirement without changing the producer API.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time
