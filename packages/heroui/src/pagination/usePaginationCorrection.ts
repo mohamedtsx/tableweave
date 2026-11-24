@@ -30,9 +30,21 @@ export function usePaginationCorrection<
   authority: ControlsAuthority<S, T>,
   context: PaginationCorrectionContext<S, T>,
 ): void {
+  // Read only the supplied controller's immutable definition before touching
+  // context/authority ports. Normalized legacy enabled schemas omit the flag.
+  let paginationEnabled = false;
+  try {
+    const policy: unknown =
+      controller.getDefinition().schema.pagination.enabled;
+    paginationEnabled = policy === undefined || policy === true;
+  } catch {
+    // Unusable controller metadata cannot authorize a correction attempt.
+  }
   // Descriptors capture primitive tags and the callback/receiver exactly once.
   // No application lifecycle callback runs while rendering.
-  const origin = captureCorrectionOrigin<S, T>(context);
+  const origin = paginationEnabled
+    ? captureCorrectionOrigin<S, T>(context)
+    : null;
   const attempted = useRef<{
     controller: TableController<S>;
     definition: object;
@@ -40,6 +52,7 @@ export function usePaginationCorrection<
     semantic: string;
   } | null>(null);
   useEffect(() => {
+    if (!paginationEnabled) return;
     try {
       if (!origin?.access) return;
       const { definition, stamp: epoch } = origin;
@@ -125,5 +138,5 @@ export function usePaginationCorrection<
       // This does not suppress unobservable application Promise rejections. A
       // dispatched attempt stays spent even if its callback rejects or throws.
     }
-  }, [controller, presentation, authority, origin]);
+  }, [controller, presentation, authority, origin, paginationEnabled]);
 }

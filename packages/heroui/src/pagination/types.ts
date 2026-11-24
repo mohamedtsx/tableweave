@@ -52,7 +52,7 @@ export interface PaginationProps<S extends QuerySchema, T extends object> {
 
 export type PaginationComponent = <S extends QuerySchema, T extends object>(
   props: PaginationProps<S, T>,
-) => ReactElement;
+) => ReactElement | null;
 
 export interface PaginationCorrectionEpoch {
   readonly context: ResourceContext;

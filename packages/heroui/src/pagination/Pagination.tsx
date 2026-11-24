@@ -11,21 +11,30 @@ import { formatPaginationNumber, paginationMessages } from "./messages.js";
 import { paginationTargets } from "./model.js";
 import type { PaginationComponent } from "./types.js";
 
-export const Pagination: PaginationComponent = ({
-  schema,
-  presentation: facts,
-  authority,
-  locale = facts.displayed?.query.locale ?? "en-US",
-  messages: m = paginationMessages,
-  formatNumber = formatPaginationNumber,
-  id,
-  className,
-  onRetry,
-}) => {
+export const Pagination: PaginationComponent = (props) => {
   const generatedId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const focusedControl = useRef<HTMLElement | null>(null);
+  const schema = props.schema;
+  // The normalized schema is authoritative. In particular, do not even read
+  // the presentation reference (or eager locale/formatter defaults) when false.
+  const facts = schema.pagination.enabled === false ? null : props.presentation;
+  let enabled = facts !== null;
+  if (enabled) {
+    try {
+      // The legacy presentation has no flag. A supplied newer own flag can
+      // only deny rendering; it never grants event or backend authority.
+      const flag = Object.getOwnPropertyDescriptor(facts, "paginationEnabled");
+      if (flag && (!("value" in flag) || flag.value !== true)) enabled = false;
+    } catch {
+      enabled = false;
+    }
+  }
   useEffect(() => {
+    if (!enabled) {
+      focusedControl.current = null;
+      return;
+    }
     const previous = focusedControl.current;
     const root = rootRef.current;
     if (
@@ -46,6 +55,16 @@ export const Pagination: PaginationComponent = ({
       focusedControl.current = target;
     }
   });
+  if (!enabled || facts === null) return null;
+  const {
+    authority,
+    locale = facts.displayed?.query.locale ?? "en-US",
+    messages: m = paginationMessages,
+    formatNumber = formatPaginationNumber,
+    id,
+    className,
+    onRetry,
+  } = props;
   const rootId = id ?? generatedId;
   const displayed = facts.displayed;
   const n = (value: number) => formatNumber(value, locale);
