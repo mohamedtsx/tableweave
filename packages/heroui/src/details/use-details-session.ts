@@ -15,6 +15,7 @@ import {
   sameContext,
   sameLifecycle,
 } from "./identity.js";
+import { recordDetailsSession } from "./session-identity.js";
 import type {
   DetailsAuthority,
   DetailsChangeRequest,
@@ -60,6 +61,7 @@ export function useDetailsSession<S extends QuerySchema, T extends object>(
   if (!controller || typeof controller !== "object")
     throw new Error("Details requires a controller data property.");
   const state = useTableweaveState(controller);
+  const [mount] = useState(() => Object.freeze({}));
   type CapturedOptions = {
     controller: typeof controller;
     authority: DetailsAuthority | null;
@@ -357,7 +359,7 @@ export function useDetailsSession<S extends QuerySchema, T extends object>(
         )
       : undefined;
 
-  return {
+  const session: DetailsSession<S, T> = {
     contentKey: JSON.stringify([
       ownerVersion,
       origin?.context.definitionKey,
@@ -405,4 +407,6 @@ export function useDetailsSession<S extends QuerySchema, T extends object>(
       }
     },
   };
+  recordDetailsSession(session, controller, mount);
+  return session;
 }

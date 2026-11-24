@@ -1,0 +1,25 @@
+{
+  "originalHookSha256": "53284c89ae9442a05bf1621047521473e3d90987e1f528428b68295eb6b01e85",
+  "currentHookSha256": "aea680d0a9892762c3465cbbae27db495b28f244fb462be7be6c48f8d53669b7",
+  "identityModuleSha256": "79b33c20fc819102a8f91730c896a7c8b956c02bb122b5ac66477c419e1df00a",
+  "normalizedAstSha256": "5cccbeb9d622ca5ebe5149ab3690ca233a896ee4194fbd54bb99fd7ca12bf359",
+  "rawAstPreservedAfterExactScaffoldingRemoval": true,
+  "productionImporters": [
+    "packages/heroui/src/details/use-details-session.ts"
+  ],
+  "runtimeImportsInIdentityModule": 0,
+  "identityCalls": [
+    "owners.set",
+    "Object.freeze",
+    "owners.get"
+  ],
+  "syntaxFiles": 9,
+  "scriptSyntaxPaths": [
+    "tests/details-session-identity/check-negatives.mjs",
+    "tests/details-session-identity/check-static.mjs",
+    "tests/details-session-identity/scope.mjs",
+    "tests/details-session-identity/vite.config.mjs",
+    "tests/details-session-identity/vitest.config.mjs"
+  ],
+  "limits": "Static AST/import/syntax only; no hook, React, unit, type-negative or behavior execution."
+}

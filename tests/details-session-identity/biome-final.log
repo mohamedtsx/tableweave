@@ -1,0 +1,21 @@
+tests/details-session-identity/.artifacts/static.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5  5 │     "normalizedAstSha256": "5cccbeb9d622ca5ebe5149ab3690ca233a896ee4194fbd54bb99fd7ca12bf359",
+     6  6 │     "rawAstPreservedAfterExactScaffoldingRemoval": true,
+     7    │ - ··"productionImporters":·[
+     8    │ - ····"packages/heroui/src/details/use-details-session.ts"
+     9    │ - ··],
+        7 │ + ··"productionImporters":·["packages/heroui/src/details/use-details-session.ts"],
+    10  8 │     "runtimeImportsInIdentityModule": 0,
+    11  9 │     "syntaxFiles": 9,
+  
+
+Checked 21 files in 23ms. No fixes applied.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.light.json",
+  "include": ["./types.negative.ts"],
+  "exclude": []
+}
