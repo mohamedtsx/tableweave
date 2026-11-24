@@ -1290,7 +1290,7 @@ merge permission is inferred. Raw criteria AC-16/25 adoption remains WP-09's dut
 
 ## WP-08 remote clean-checkout harness — review session 20
 
-### n1 — Ignored local manifest required before first type gate (P1, open)
+### n1 — Ignored local manifest required before first type gate (P1, corrected)
 
 Both initial17b846b remote workflows fail before new type/browser work because
 verify-public-roots reads ignored controls/integration/.artifacts/roots-before.json.
@@ -1304,3 +1304,13 @@ reproduces the same ENOENT in actual types mode without copying historical outpu
 The new9 regressions fail2/pass7 before the fix, pass9 afterward, including CI tmpdir
 mode. All652 units across36 files and foundation strict TS pass after the correction.
 Independent correction review and clean fixed checkout/remote replay remain next.
+
+Independent review now accepts verifierb808c4592601f4bb44d3c67e376af626442e80a177ed2039855fb7b0734f1293
+and test621e54145fe08d066d6897926120dd60c7fbaaedc5fea2c7a0c5d98adc12494c:
+9 permanent cases/31 private vectors/two physical clean relocations pass; two old
+verifier reproductions fail as expected. Strict TS6 foundation619 and TS5.9 targeted
+201-file programs pass without diagnostics; default discovery retains the test.
+Actual runtime/RAC bytes stay unchanged. Main grants bounded harness-correction
+approval and pushes the same corrected code for fresh remote runs while complete
+CI-mode checks continue in the separate cold worktree. Final remote/full-clean
+acceptance is not inferred from the focused approval.

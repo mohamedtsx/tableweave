@@ -115,6 +115,11 @@ The corrected actual four-program strict types gate passes with both parent-held
 snapshots unchanged. Main commits the candidate harness repair for transfer into
 the separate cold worktree, then runs complete CI-mode checks there. Independent
 review remains pending; this candidate commit is not remote/packet reacceptance.
+Independent correction review is now accepted:9 permanent tests/31 guard vectors/
+two clean relocations and strict TS6/5.9 pass, original failures reproduced. Main
+grants scoped harness approval and pushes corrected candidate04f3c10 plus this
+documentation disposition; complete cold CI-mode rehearsal and replacement remote
+workflows run separately. No runtime/archive input changes or final remote claim.
 **Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
 42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
 110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and
