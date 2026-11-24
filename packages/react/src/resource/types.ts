@@ -1,3 +1,4 @@
+import type { QueryExecutionExtent } from "../contracts/execution.js";
 import type { WireQuery } from "../contracts/types.js";
 
 export interface ResourceContext {
@@ -18,6 +19,9 @@ export interface ResourceRequest<Q extends WireQuery = WireQuery> {
   readonly requestKey: string;
   readonly generation: number;
   readonly query: Q;
+  /** Absent means legacy page; explicit extent requires captured evaluatedAt. */
+  readonly extent?: QueryExecutionExtent;
+  readonly evaluatedAt?: number;
 }
 
 export interface ResourceRequestInput<Q extends WireQuery = WireQuery> {
@@ -27,6 +31,9 @@ export interface ResourceRequestInput<Q extends WireQuery = WireQuery> {
   readonly requestKey: string;
   /** Already accepted/validated query. Keys must describe this exact request. */
   readonly query: Q;
+  /** Raw optional fields are paired/validated at begin, not a completeness proof. */
+  readonly extent?: QueryExecutionExtent;
+  readonly evaluatedAt?: number;
   /** Application starts the request using the NEW token, including its query. */
   // biome-ignore lint/suspicious/noConfusingVoidType: Application callbacks can finish synchronously or asynchronously.
   readonly retry?: (request: ResourceRequest<Q>) => void | Promise<unknown>;

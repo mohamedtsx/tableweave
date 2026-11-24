@@ -85,3 +85,33 @@ all historical input maps; create a named new stage protection map instead. Capt
 exact source/test hashes and commands in own README. No root output-generation
 changes/exclusions/full-check claim, native/server-complete binding/projection,
 browser/SSR/genuine packed/facade or full AC acceptance. Stop before excluded edits.
+
+## Activation and exact inputs
+
+Main independently accepts U2 and commits0288904 before activating this exact U3
+lease. The raw optional metadata pairing/table above is selected: both absent
+legacy, any explicit extent requires evaluatedAt, no time-only or undefined pair.
+This runtime validation contract does not pretend raw optional types make all bad
+combinations statically impossible. One worker owns only the three sources/new tests.
+
+Pre-U3 source105 canonical map is497a1e37cd60c4080243847760e23526b8fe7cb033627ead9c7042d3ca0b0790.
+Initial source SHA256s:
+
+- types.ts:1eba3f273584c16fa6eefa39cd497dcb4142dbcf44155fdda79ecdc2e62d8863
+- adapter.ts:f30a63afabb116bc3a1d71952ab1e5e1912535917699ea08ce5ac6ec3b9b4bc9
+- view.ts:7f3ef437d01824cb0e14a34520fa6fa67c72bf440aa85b2fb7b7cb234e529f7c
+
+Preserve earlier producer maps; create a new102-source stage protection map rather
+than rebasing U1/U2 historical guards. This does not activate any native mode,
+binding/presentation, hook, public export or output-generation integration.
+
+## Provisional implementation handoff
+
+[Actual U3 handoff](../../tests/pagination-policy/resource-extent/README.md) records
+19-input aggregated7ce78a40584c7dc9d0adfb95398cae5db8acdc7db78bac9eb9c093e53fa3153.
+Main inspects the three-file API/capture diff, replays19 input hashes/102 protected
+source hashes and performs one lightweight whole-React TS6 noEmit compile successfully.
+Post-U3 source105 canonical map is3327ca40ba02be4f56534e4b00414fd4836362ec570e15103c97cb606b3cf6fe.
+This permits provisional dependent implementation under the user's final-phase
+timing, not independent approval or a final unit/type/runtime pass. Earlier344-case
+results predate final authored edits; all declared deferred checks remain required.

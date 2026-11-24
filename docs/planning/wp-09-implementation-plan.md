@@ -56,6 +56,15 @@ The [native client plan](wp-09-native-client-plan.md) is prepared but remains in
 until U1's reviewed source handoff and a separate main allocation.
 The [resource extent plan](wp-09-resource-extent-plan.md) is prepared but inactive
 until client U2 review and a separate main-owned source allocation.
+The [parallel proof allocation](wp-09-parallel-proof-plan.md) assigns isolated
+bootstrap/browser tests and read-only contract work without competing runtime writers.
+The [complete-source plan](wp-09-complete-source-plan.md) prepares the later exact
+native/binding/projection seam but remains inactive until U3 review and allocation.
+The user's later [single final verification phase](final-verification-phase.md)
+supersedes per-substage exhaustive-check timing. Dependency handoffs stay provisional
+until final verification; no required test or approval is silently waived.
+The [generation harness lease](wp-09-generation-harness-plan.md) permits isolated
+registry/selection authoring while preserving historical anchors and a red current gate.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

@@ -1,0 +1,656 @@
+[
+  {
+    "withRetry": false,
+    "same": false,
+    "states": [
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"idle\",\"request\":null,\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"idle\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": null,
+        "snapshotKeys": null,
+        "notifications": 0
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"loading\",\"notice\":null,\"busy\":true,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": null,
+        "notifications": 1
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 2
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"updating\",\"busy\":true,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 3
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"timeout\",\"message\":\"The request timed out.\"},\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 4
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"timeout\",\"message\":\"The request timed out.\"},\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 4
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"empty\",\"requestKey\":\"empty\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"empty\",\"requestKey\":\"empty\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"empty\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 6
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"c\",\"requestKey\":\"c\",\"generation\":4,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"empty\",\"requestKey\":\"empty\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"offline\",\"message\":\"Records are unavailable while offline.\"},\"invalidationFailed\":false,\"display\":\"updating-empty\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 8
+      }
+    ],
+    "retainedPending": true,
+    "seenGeneration": 0,
+    "retryThisUndefined": false,
+    "retryGeneration": null,
+    "late": false
+  },
+  {
+    "withRetry": false,
+    "same": true,
+    "states": [
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"idle\",\"request\":null,\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"idle\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": null,
+        "snapshotKeys": null,
+        "notifications": 0
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"loading\",\"notice\":null,\"busy\":true,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": null,
+        "notifications": 1
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 2
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"updating\",\"busy\":true,\"stale\":true,\"obsolete\":false,\"canSelect\":true,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 3
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"timeout\",\"message\":\"The request timed out.\"},\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":false,\"canSelect\":true,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 4
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"timeout\",\"message\":\"The request timed out.\"},\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":false,\"canSelect\":true,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 4
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"empty\",\"requestKey\":\"empty\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"empty\",\"requestKey\":\"empty\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"empty\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 6
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"c\",\"requestKey\":\"c\",\"generation\":4,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"empty\",\"requestKey\":\"empty\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"offline\",\"message\":\"Records are unavailable while offline.\"},\"invalidationFailed\":false,\"display\":\"updating-empty\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 8
+      }
+    ],
+    "retainedPending": true,
+    "seenGeneration": 0,
+    "retryThisUndefined": false,
+    "retryGeneration": null,
+    "late": false
+  },
+  {
+    "withRetry": true,
+    "same": false,
+    "states": [
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"idle\",\"request\":null,\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"idle\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": null,
+        "snapshotKeys": null,
+        "notifications": 0
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"loading\",\"notice\":null,\"busy\":true,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": null,
+        "notifications": 1
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 2
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"updating\",\"busy\":true,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 3
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"timeout\",\"message\":\"The request timed out.\"},\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":true}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 4
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"empty\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 6
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"c\",\"requestKey\":\"c\",\"generation\":4,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"b\",\"requestKey\":\"b\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":5,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"offline\",\"message\":\"Records are unavailable while offline.\"},\"invalidationFailed\":false,\"display\":\"updating-empty\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 8
+      }
+    ],
+    "retainedPending": true,
+    "seenGeneration": 3,
+    "retryThisUndefined": true,
+    "retryGeneration": 3,
+    "late": false
+  },
+  {
+    "withRetry": true,
+    "same": true,
+    "states": [
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"idle\",\"request\":null,\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"idle\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": null,
+        "snapshotKeys": null,
+        "notifications": 0
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"loading\",\"notice\":null,\"busy\":true,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": null,
+        "notifications": 1
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 2
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"pending\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"updating\",\"busy\":true,\"stale\":true,\"obsolete\":false,\"canSelect\":true,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 3
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":2,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":1,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[{\"id\":\"synthetic-0\"},{\"id\":\"synthetic-1\"}],\"page\":{\"kind\":\"known\",\"total\":90},\"emptyKind\":\"unknown\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"timeout\",\"message\":\"The request timed out.\"},\"invalidationFailed\":false,\"display\":\"records\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":false,\"canSelect\":true,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":true}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 4
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"ready\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":null,\"invalidationFailed\":false,\"display\":\"empty\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":true,\"canReorder\":true,\"canNavigate\":true,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 6
+      },
+      {
+        "bytes": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":true,\"kind\":\"failure\",\"request\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"c\",\"requestKey\":\"c\",\"generation\":4,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}},\"snapshot\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"queryKey\":\"a\",\"requestKey\":\"a\",\"generation\":3,\"query\":{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":25},\"schemaId\":\"u3-synthetic\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1},\"records\":[],\"page\":{\"kind\":\"known\",\"total\":0},\"emptyKind\":\"dataset\",\"receivedAt\":\"2026-11-24T00:00:00.000Z\"},\"error\":{\"code\":\"offline\",\"message\":\"Records are unavailable while offline.\"},\"invalidationFailed\":false,\"display\":\"updating-empty\",\"notice\":\"update-failed\",\"busy\":false,\"stale\":true,\"obsolete\":true,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}",
+        "requestKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query"
+        ],
+        "snapshotKeys": [
+          "definitionKey",
+          "scopeKey",
+          "queryKey",
+          "requestKey",
+          "generation",
+          "query",
+          "records",
+          "page",
+          "emptyKind",
+          "receivedAt"
+        ],
+        "notifications": 8
+      }
+    ],
+    "retainedPending": true,
+    "seenGeneration": 3,
+    "retryThisUndefined": true,
+    "retryGeneration": 3,
+    "late": false
+  },
+  {
+    "inactive": null,
+    "disposed": null,
+    "serverStable": true,
+    "final": "{\"context\":{\"definitionKey\":\"u3-definition\",\"scopeKey\":\"u3-scope\",\"access\":true},\"active\":false,\"kind\":\"disposed\",\"request\":null,\"snapshot\":null,\"error\":null,\"invalidationFailed\":false,\"display\":\"blocked\",\"notice\":null,\"busy\":false,\"stale\":false,\"obsolete\":false,\"canSelect\":false,\"canReorder\":false,\"canNavigate\":false,\"canRetry\":false}"
+  }
+]

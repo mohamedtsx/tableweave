@@ -91,6 +91,66 @@ source approval atb5a853ab… and commits the exact three sources/new tests. Sep
 pre-U3 source105 map497a1e37… records intentional deltas without rebasing old seals.
 U3 activation waits this commit and its recorded three-file allocation; no server/
 controls/full-feature/generation acceptance is inferred.
+U2 is committed0288904. **U3 is active**: only resource/{types,adapter,view}.ts and
+new tests/pagination-policy/resource-extent/** under the exact paired-metadata plan.
+Prechange three hashes/source105 baseline are recorded before code. One runtime
+writer; all U1/U2/metadata/native/presentation/tools/hooks/exports/config/Git inputs
+remain frozen. Legacy omitted shape/retry/refusal and one-buffer semantics stay;
+complete requires pre-begin extent/time and cannot be added by success. Independent
+review precedes U4; no backend completeness/authentication/full-feature claim.
+Separately, one read-only/private reviewer now formalizes paired controls/criteria
+frame and committed-callback adoption against actual accepted producers/all four
+raw tools. It owns no source/docs/config/test edits and does not consume changing
+U3 metadata as accepted API. U3 remains the sole runtime writer; later tool/React/
+SSR implementation still needs an exact approved contract and exclusive lease.
+User requests additional parallel agents. Main approves the linked parallel-proof
+plan before code: isolated0288904 worktrees own only new bootstrap tests and new
+native-browser tests (6541), with main-owned frozen installs. Private adoption and
+generation design reports run independently. U3 remains the sole shared runtime
+writer; manifests/exports/Git and final review/integration stay main-owned. No
+WP-10–WP-15 packet implementation/acceptance is skipped by preparatory proof work.
+Both isolated worktrees now install the frozen lockfile successfully. Bootstrap
+worker owns only new tests/criteria-bootstrap/** in work/wp09-bootstrap-proof;
+browser worker owns only new tests/pagination-policy/native-browser/** in
+work/wp09-native-browser, port6541. Both start accepted0288904 with all105 source
+files frozen; no changing U3 API is consumed. Alongside U3 and the two read-only
+contract tracks, five agents work in parallel. Main still owns review/integration/
+shared metadata/Git and does not skip sequential packet acceptance or PR delivery.
+Main reads actual native boundary/binding/project/authority seams and writes an
+inactive eight-file U4 complete-source plan. U3 remains sole shared runtime writer;
+isolated proof workers add no producer code. U4 needs accepted U3 metadata, fresh
+hashes and explicit allocation, with genuine pre-begin tuple/after-token binding,
+remote mode recognition and disabled selection/navigation separation kept explicit.
+**User process change:** batch expensive verification into one final phase after
+remaining implementation. Main steers U3/bootstrap/browser workers to finish code
+with lightweight compile/scope checks, preserve in-flight actual results and defer
+new exhaustive runs. Implementation/dependent handoffs and future draft PRs stay
+provisional until final reviews/checks/fixes support approval. Earlier per-stage
+timing is superseded, not product requirements or no-merge/evidence rules. Existing
+U1/U2 verified approvals remain historical. Ask modal handles real approval blockers.
+Main receives the read-only generation design and authorizes isolated harness-only
+implementation from0288904 under its written path lease. Current=fc01 and both old
+count/digest anchors remain immutable; no new199/final identity is registered. Author
+historical/current regression separation and consistent dual-namespace selection,
+preserving parent-memory/report/profile guards. Heavy verification is deferred;
+handoff/intake stays provisional. This adds no shared runtime writer alongside U3.
+The generation worktree installs cleanly and its harness-only author is active.
+U4's activation condition now follows the user's timing: actual U3 implementation/
+API handoff plus lightweight inspection, not exhaustive verified acceptance. All
+downstream code remains provisional until the final verification-and-fix phase.
+Bootstrap test-only handoff is preserved as isolated commitf05bdb6:51 authored unit
+cases/23 type-negative lines; final lightweight TS6 succeeds and742 protected inputs
+remain unchanged. Earlier43-case runtime pass predates final edits; final runtime/
+dual-compiler/independent verification is deferred. Main inspects the application-
+owner fixture without approval and holds intake until U3 hands off, avoiding an
+active protected-inventory race. No source/SSR/tool privacy claim follows.
+U3 is implementation-ready/provisional atd7ce78a4… . Main reads the actual paired-
+metadata/capture/view API, checks19 input/102 protected-source hashes and performs
+one TS6 whole-React noEmit compile successfully. Earlier344 runtime cases predate
+final authored edits and remain historical; full verification/approval is deferred.
+Main commits this interface handoff, then intakes isolated bootstrapf05bdb6 and
+browser7e05505 fixtures provisionally before U4 allocation. Browser's historical
+12-pass/2-fail run remains failed; its authored corrections need final execution.
 
 ## Historical WP-08 integration and delivery
 
