@@ -161,6 +161,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-08 Selection, sort, pagination and visibility
 
+- **Execution plan:** [WP-08 bounded plan](wp-08-implementation-plan.md); only
+  core presentation/selection-mode producer work is initially assigned. TASKS
+  records actual authority, interface handoffs and independent review status.
+
 - **Role/dependencies:** table-controls worker; WP-04/WP-05, relevant visual review.
 - **Read:** shared rules, rendering/reordering column section, AC-08–AC-11/AC-13/
   AC-15/AC-24; scenes F-08–F-11/F-17.

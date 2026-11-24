@@ -187,6 +187,14 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
     onGlobalFilterChange: managedWrite,
   };
   const bindTable = (table: Table<NativeFeatures, T>) => {
+    if (definition.selectionMode !== "multiple") {
+      table.toggleAllPageRowsSelected = managedWrite;
+      table.toggleAllRowsSelected = managedWrite;
+      table.getToggleAllPageRowsSelectedHandler = () => managedWrite;
+      table.getToggleAllRowsSelectedHandler = () => managedWrite;
+      table.getIsAllPageRowsSelected = () => false;
+      table.getIsSomePageRowsSelected = () => false;
+    }
     // Vendor toggles can derive direction/visibility/selection from stale state.
     // Route model-context intent through the accepted owner instead.
     // This decorates actual native model methods; it does not process any rows.
@@ -261,7 +269,12 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         onRowSelectionChange((previous) => {
           const nextSelected = selected ?? !previous[row.id];
           if (nextSelected && !row.getCanSelect()) return previous;
-          const next = { ...previous };
+          const next = Object.assign(
+            Object.create(null) as RowSelectionState,
+            nextSelected && definition.selectionMode === "single"
+              ? {}
+              : previous,
+          );
           if (nextSelected) next[row.id] = true;
           else delete next[row.id];
           return next;
@@ -406,6 +419,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
           }
         : false,
       enableRowRangeSelection: false,
+      enableMultiRowSelection: definition.selectionMode === "multiple",
       enableSubRowSelection: false,
       manualFiltering: manual,
       manualSorting: manual,
@@ -444,9 +458,10 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
     state: TableState<S>,
   ): NativeTableView<S, T> => {
     const rows = table.getRowModel().rows;
-    const eligibleIds = definition.controllerDefinition.selection
-      ? rows.filter((row) => row.getCanSelect()).map((row) => row.id)
-      : [];
+    const eligibleIds =
+      definition.selectionMode === "multiple"
+        ? rows.filter((row) => row.getCanSelect()).map((row) => row.id)
+        : [];
     const selectedOnPage = eligibleIds.filter(
       (id) => state.selection[id],
     ).length;
@@ -485,6 +500,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       setColumnOrder: table.setColumnOrder,
     });
     return Object.freeze({
+      selectionMode: definition.selectionMode,
       native,
       controller,
       state,
@@ -506,6 +522,8 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       }),
       selectPage(selected: boolean) {
         current();
+        if (definition.selectionMode !== "multiple")
+          nativeFail("native.managed");
         return controller.dispatch({
           type: "selection.page",
           pageIds: rows.map((row) => row.id),

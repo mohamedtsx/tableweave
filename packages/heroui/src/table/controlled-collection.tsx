@@ -4,7 +4,11 @@ import { Button } from "@heroui/react/button";
 import { Checkbox } from "@heroui/react/checkbox";
 import { Table } from "@heroui/react/table";
 import type { ReactNode } from "react";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import {
+  type CollectionMessages,
+  defaultCollectionMessages,
+} from "./collection-messages.js";
 import type {
   CollectionColumn,
   CollectionLeaf,
@@ -29,13 +33,17 @@ export interface CollectionSort {
 /** Minimal, controlled collection boundary, not the final Tableweave renderer. */
 export interface ControlledCollectionProps {
   readonly label: string;
-  readonly selectionMode?: "none" | "multiple";
+  readonly selectionMode?: "none" | "single" | "multiple";
+  readonly messages?: Partial<CollectionMessages>;
+  readonly diagnostics?: boolean;
+  readonly isSelectionDisabled?: boolean;
   readonly columns: readonly CollectionColumn[];
   readonly rows: readonly CollectionRow[];
   readonly selectedIds: ReadonlySet<string>;
   readonly eligiblePageIds: readonly string[];
   readonly onSelectedIdsChange: (ids: ReadonlySet<string>) => void;
   readonly onPageSelectionChange?: (selected: boolean) => void;
+  readonly onCancelSelection?: () => void;
   readonly sorting: readonly CollectionSort[];
   readonly onSort: (columnId: string, additive: boolean) => void;
 }
@@ -51,26 +59,56 @@ function CheckboxContents() {
 }
 
 export function ControlledCollection(props: ControlledCollectionProps) {
-  const projected = useMemo(
-    () => projectCollectionColumns(props.columns),
-    [props.columns],
-  );
+  const messages = { ...defaultCollectionMessages, ...props.messages };
+  const mode = props.selectionMode ?? "multiple";
+  const projected = useMemo(() => {
+    try {
+      return projectCollectionColumns(props.columns);
+    } catch {
+      throw new Error(messages.invalidColumns);
+    }
+  }, [props.columns, messages.invalidColumns]);
   const eligible = new Set(props.eligiblePageIds);
+  // RAC's public Set also carries its range anchor. Reuse the received object
+  // only after its exact IDs are accepted by the owner, never optimistically.
+  // Do not mutate it, inspect vendor metadata, or put it in a collection node.
+  const rangeKeys = useRef<{
+    readonly proposed: Set<string | number>;
+    readonly baseline: Set<string | number>;
+  } | null>(null);
+  const acceptedKeys = [
+    rangeKeys.current?.proposed,
+    rangeKeys.current?.baseline,
+  ].find(
+    (keys) =>
+      keys &&
+      keys.size === props.selectedIds.size &&
+      [...keys].every(
+        (key) => typeof key === "string" && props.selectedIds.has(key),
+      ),
+  );
+  const selectedKeys = acceptedKeys ?? new Set(props.selectedIds);
   const loaded = new Set(props.rows.map((row) => row.id));
   if (
     loaded.size !== props.rows.length ||
     [...eligible].some((id) => !loaded.has(id))
   ) {
-    throw new Error(
-      "Collection rows and eligible page IDs must have stable unique identities",
-    );
+    throw new Error(messages.invalidRows);
   }
   const checked =
     eligible.size > 0 && [...eligible].every((id) => props.selectedIds.has(id));
   const mixed =
     !checked && [...eligible].some((id) => props.selectedIds.has(id));
   const primary = props.sorting[0];
+  const visiblePrimary =
+    primary &&
+    projected.leaves.some(
+      (column) => column.id === primary.id && column.allowsSorting,
+    )
+      ? primary
+      : undefined;
   function setPageSelected(selected: boolean) {
+    if (mode !== "multiple" || props.isSelectionDisabled) return;
     if (props.onPageSelectionChange) {
       props.onPageSelectionChange(selected);
       return;
@@ -106,35 +144,41 @@ export function ControlledCollection(props: ControlledCollectionProps) {
         id={column.id}
         textValue={column.textValue}
         isRowHeader={column.isRowHeader === true}
-        allowsSorting={index === 0}
+        allowsSorting={index === 0 && column.allowsSorting === true}
         focusMode={
-          column.isSelection || column.allowsSorting ? "child" : "cell"
+          (column.isSelection && mode === "multiple") || column.allowsSorting
+            ? "child"
+            : "cell"
         }
         allowsArrowNavigation
         data-column-id={column.id}
       >
-        {column.isSelection ? (
+        {column.isSelection && mode === "multiple" ? (
           <Checkbox
             slot={null}
-            aria-label="Select eligible rows on this page"
+            aria-label={messages.pageCheckbox}
             isSelected={checked}
             isIndeterminate={mixed}
-            isDisabled={eligible.size === 0}
+            isDisabled={props.isSelectionDisabled || eligible.size === 0}
             onChange={setPageSelected}
           >
             <CheckboxContents />
           </Checkbox>
-        ) : column.allowsSorting ? (
+        ) : column.allowsSorting && !column.isSelection ? (
           <Button
             variant="tertiary"
             onPress={(event) => props.onSort(column.id, event.shiftKey)}
-            aria-label={`Sort ${column.textValue}${direction ? `, ${direction}, priority ${index + 1}` : ", not sorted"}`}
+            aria-label={messages.sortButton(
+              column.textValue,
+              direction ?? null,
+              sort ? index + 1 : null,
+            )}
           >
             <Table.SortableColumnHeader
               {...(direction ? { sortDirection: direction } : {})}
             >
               {column.label}
-              {sort ? ` (${index + 1})` : null}
+              {sort ? messages.sortPriority(index + 1) : null}
             </Table.SortableColumnHeader>
           </Button>
         ) : (
@@ -144,24 +188,47 @@ export function ControlledCollection(props: ControlledCollectionProps) {
     );
   }
   function renderCell(row: CollectionRow, column: CollectionLeaf) {
-    if (column.isSelection) {
+    if (column.isSelection && mode !== "none") {
       return (
         <Table.Cell
           key={column.id}
           id={JSON.stringify([row.id, column.id])}
-          textValue={`Select ${row.textValue}`}
+          textValue={messages.rowCheckbox(row.textValue)}
           focusMode="child"
           allowsArrowNavigation
           data-column-id={column.id}
         >
-          <Checkbox slot="selection" aria-label="Select">
+          <Checkbox
+            slot={null}
+            aria-label={messages.rowCheckbox(row.textValue)}
+            isSelected={props.selectedIds.has(row.id)}
+            isDisabled={props.isSelectionDisabled || !eligible.has(row.id)}
+            onChange={(selected) => {
+              const next =
+                mode === "single" && selected
+                  ? new Set<string>()
+                  : new Set(props.selectedIds);
+              if (selected) next.add(row.id);
+              else next.delete(row.id);
+              props.onSelectedIdsChange(next);
+            }}
+          >
             <CheckboxContents />
           </Checkbox>
         </Table.Cell>
       );
     }
+    if (column.isSelection)
+      return (
+        <Table.Cell
+          key={column.id}
+          id={JSON.stringify([row.id, column.id])}
+          textValue={column.textValue}
+          data-column-id={column.id}
+        />
+      );
     const cell = row.cells[column.id];
-    if (!cell) throw new Error("Projected collection cell is missing");
+    if (!cell) throw new Error(messages.missingCell);
     return (
       <Table.Cell
         key={column.id}
@@ -176,24 +243,43 @@ export function ControlledCollection(props: ControlledCollectionProps) {
   return (
     <Table variant="secondary" className="tw-native-collection">
       <Table.ScrollContainer
-        onKeyDownCapture={(event) =>
-          skipPlaceholderHeader(event, projected.columns)
-        }
+        onKeyDownCapture={(event) => {
+          if (
+            mode !== "none" &&
+            event.key === "Escape" &&
+            props.onCancelSelection
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            props.onCancelSelection();
+            return;
+          }
+          if (
+            mode !== "multiple" &&
+            (event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "a"
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+          }
+          skipPlaceholderHeader(event, projected.columns);
+        }}
       >
         <Table.Content
           aria-label={props.label}
-          selectionMode={props.selectionMode ?? "multiple"}
+          selectionMode={mode}
           selectionBehavior="toggle"
-          selectedKeys={new Set(props.selectedIds)}
+          selectedKeys={selectedKeys}
           disabledKeys={props.rows
-            .filter((row) => !eligible.has(row.id))
+            .filter((row) => props.isSelectionDisabled || !eligible.has(row.id))
             .map((row) => row.id)}
           disabledBehavior="selection"
-          {...(primary
+          {...(visiblePrimary
             ? {
                 sortDescriptor: {
-                  column: primary.id,
-                  direction: primary.desc
+                  column: visiblePrimary.id,
+                  direction: visiblePrimary.desc
                     ? ("descending" as const)
                     : ("ascending" as const),
                 },
@@ -204,8 +290,21 @@ export function ControlledCollection(props: ControlledCollectionProps) {
               props.onSort(sort.column, false);
           }}
           onSelectionChange={(keys) => {
+            if (mode === "none" || props.isSelectionDisabled) return;
             if (keys === "all") {
               setPageSelected(true);
+              return;
+            }
+            rangeKeys.current = { proposed: keys, baseline: selectedKeys };
+            if (mode === "single") {
+              if (keys.size > 1) return;
+              const next = new Set(
+                [...keys].filter(
+                  (key): key is string =>
+                    typeof key === "string" && eligible.has(key),
+                ),
+              );
+              props.onSelectedIdsChange(next);
               return;
             }
             const next = new Set(
@@ -226,19 +325,26 @@ export function ControlledCollection(props: ControlledCollectionProps) {
           </Table.Body>
         </Table.Content>
       </Table.ScrollContainer>
-      <Table.Footer>
-        <span data-selected-count>{props.selectedIds.size} selected</span>
-        <span role="status" aria-label="Sort order">
-          {props.sorting.length
-            ? props.sorting
-                .map(
-                  (sort, index) =>
-                    `${sort.id} ${sort.desc ? "descending" : "ascending"}, priority ${index + 1}`,
-                )
-                .join("; ")
-            : "Not sorted"}
-        </span>
-      </Table.Footer>
+      {props.diagnostics !== false ? (
+        <Table.Footer>
+          <span data-selected-count>
+            {messages.selectedCount(props.selectedIds.size)}
+          </span>
+          <span role="status" aria-label={messages.sortOrderLabel}>
+            {props.sorting.length
+              ? props.sorting
+                  .map((sort, index) =>
+                    messages.sortEntry(
+                      sort.id,
+                      sort.desc ? "descending" : "ascending",
+                      index + 1,
+                    ),
+                  )
+                  .join(messages.sortSeparator)
+              : messages.notSorted}
+          </span>
+        </Table.Footer>
+      ) : null}
     </Table>
   );
 }

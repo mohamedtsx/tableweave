@@ -17,6 +17,15 @@ export {
   useTableweaveSelector,
   useTableweaveState,
 } from "./hooks/state.js";
+export {
+  beginControlsRequest,
+  ControlsError,
+  createControlsAuthority,
+  getControlsAuthorityOwner,
+  getControlsRequestBinding,
+  projectControls,
+} from "./presentation/index.js";
+export type * from "./presentation/types.js";
 export type {
   EmptyKind,
   PageInfo,
@@ -53,6 +62,7 @@ export type {
   NativeInput,
   NativePageInfo,
   NativeRow,
+  NativeSelectionMode,
   NativeTableHandle,
   NativeTableView,
 } from "./tanstack/index.js";

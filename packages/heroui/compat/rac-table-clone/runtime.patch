@@ -1,0 +1,45 @@
+diff --git a/dist/private/Table.js b/dist/private/Table.js
+--- a/dist/private/Table.js
++++ b/dist/private/Table.js
+@@ -243,6 +243,9 @@
+         collection.rows = this.rows;
+         collection.rowHeaderColumnKeys = this.rowHeaderColumnKeys;
+         collection.head = this.head;
++        // Tableweave candidate compatibility modification (react-aria-components 1.22.1):
++        // Preserve the actual header-cache invalidation state when cloning.
++        collection.columnsDirty = this.columnsDirty;
+         return collection;
+     }
+     getTextValue(key) {
+@@ -1442 +1444,0 @@
+-//# sourceMappingURL=Table.js.map
+diff --git a/dist/private/Table.mjs b/dist/private/Table.mjs
+--- a/dist/private/Table.mjs
++++ b/dist/private/Table.mjs
+@@ -236,6 +236,9 @@
+         collection.rows = this.rows;
+         collection.rowHeaderColumnKeys = this.rowHeaderColumnKeys;
+         collection.head = this.head;
++        // Tableweave candidate compatibility modification (react-aria-components 1.22.1):
++        // Preserve the actual header-cache invalidation state when cloning.
++        collection.columnsDirty = this.columnsDirty;
+         return collection;
+     }
+     getTextValue(key) {
+@@ -1435 +1437,0 @@
+-//# sourceMappingURL=Table.mjs.map
+diff --git a/dist/private/Table.cjs b/dist/private/Table.cjs
+--- a/dist/private/Table.cjs
++++ b/dist/private/Table.cjs
+@@ -255,6 +255,9 @@
+         collection.rows = this.rows;
+         collection.rowHeaderColumnKeys = this.rowHeaderColumnKeys;
+         collection.head = this.head;
++        // Tableweave candidate compatibility modification (react-aria-components 1.22.1):
++        // Preserve the actual header-cache invalidation state when cloning.
++        collection.columnsDirty = this.columnsDirty;
+         return collection;
+     }
+     getTextValue(key) {
+@@ -1453 +1455,0 @@
+-//# sourceMappingURL=Table.cjs.map

@@ -30,6 +30,14 @@ hook producer. Neither is a full table implementation or release approval.
   [resource contract](../../docs/engineering/resources.md) and
   [plan](../../docs/planning/wp-05-implementation-plan.md). This is not the full
   table facade, a fetch cache, framework SSR integration or styled UI.
+- Root's private WP-08 producer adds `projectControls`, `createControlsAuthority`,
+  `getControlsAuthorityOwner`, atomic `beginControlsRequest`, read-only exact-token
+  `getControlsRequestBinding`, `ControlsError` and owned control/native-mode types.
+  See the [controls contract](../../docs/engineering/wp-08-controls.md). Render facts
+  use the current genuine native view; event commands reread application-committed
+  authority. Factory owner metadata is not authorization. Single mode rejects all
+  page-selection commands, including no-ops/final controlled acceptance. No second
+  query/native/resource owner, transport, cache or whole-table facade is added.
 
 Contracts/filters contain no client directive or React/UI import. Their only
 runtime dependencies are Valibot `1.5.0` and Internationalized Date `3.12.4`.

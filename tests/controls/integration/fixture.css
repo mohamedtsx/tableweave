@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@source "../../../apps/storybook/src/controls";
+body {
+  margin: 0;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: system-ui, sans-serif;
+}
+main {
+  min-inline-size: 0;
+}
+h1 {
+  margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}

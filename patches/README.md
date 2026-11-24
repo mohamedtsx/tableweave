@@ -1,4 +1,4 @@
-# Exact upstream declaration repair
+# Exact upstream compatibility profiles
 
 `react-aria-components@1.22.1.patch` modifies only `Group.d.ts` and
 `OverlayArrow.d.ts` to avoid contradictory inherited optional properties under
@@ -57,3 +57,22 @@ proof; no patch failure waiver or publication/legal acceptance is implied.
 The same patch also scopes ListBox item/section references to their genuine
 existing exports, for the same reason. Its complete expectation is exactly the
 Calendar, RangeCalendar and ListBox entry declarations; no runtime file changes.
+
+## WP-08 explicit clone-only runtime profile
+
+The user selects the temporary application-side compatibility path for private/
+prerelease delivery, conditional on independent review and real archive tests.
+`react-aria-components@1.22.1-tableweave.patch` is the exact byte concatenation of
+the preserved original two-declaration repair and the reviewed styled-package
+[runtime asset](../packages/heroui/compat/rac-table-clone/runtime.patch). Only this
+combined file is registered for the one workspace RAC selector. Hash
+2ea5eb125d410033ad4968533b578c2698ba1eefabeb8f0c4dd273bd8870eeca is locked;
+no version changes, forced flags or broader traversal repair are introduced.
+
+The separate shipped asset is runtime-only. Consumers extract it from the actual
+styled archive before installation, register it in their own configuration and
+invoke the verifier. It is not propagated automatically by the development lock.
+Read [setup and limits](../packages/heroui/compat/rac-table-clone/README.md) before
+using the private renderer. Unpatched public types remain separately tested, while
+ordinary unpatched grouped/Strict runtime is known failing. Attribution and the
+Apache license accompany the compat asset; no legal/publication audit is claimed.

@@ -20,6 +20,13 @@ Computed, nested or aliased columns that also filter require an explicit typed
 reused with an invented row index or evaluated against an unrelated direct key.
 Multi-sort needs both schema `sorting.multi` and definition `multiSort: true`.
 
+WP-08 adds immutable selection modes: omission/false disables selection, true is
+backward-compatible multiple, and `"multiple"` / `"single"` are explicit modes.
+Definition and view expose `selectionMode`. Single mode is coordinator-validated
+at initialization, reduced candidates and final controlled override acceptance;
+row intents replace the prior selected ID and actual native multi-select is false.
+Supported page-all actions reject in single/disabled mode even on a one-row page.
+
 `createNativeController(definition, options)` uses the definition's explicit shared
 registry and composes native restrictions into the coordinator's `validateState`
 hook before candidate/proposal publication and final acceptance. The native bridge

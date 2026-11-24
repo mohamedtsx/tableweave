@@ -30,6 +30,10 @@ files and distinguish what is retained versus transient.
   independently corrected helpers/real components, completed isolated full workflow,
   strict public types and actual-tarball browser proof; final WP-06 stack separate.
 
+- [WP-08 controls source/package observations — 2026-11-24](wp-08-controls-2026-11-24.md):
+  independently corrected sources, real strict isolated build/types/runtime/package
+  boundaries; combined actual-browser/stack proof remains separate.
+
 - [WP-05 private resource producer — 2026-11-24](wp-05-resource-2026-11-24.md):
   independently corrected Suspense lifetime, deterministic races and isolated full
   plus combined native/resource public packed/browser workflow evidence; not

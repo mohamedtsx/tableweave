@@ -1,0 +1,10 @@
+7dfe6526888bac51759c99f9a51262ba2711a8c12a067f2181609dd9a4066b84  packages/heroui/compat/rac-table-clone/LICENSE-APACHE-2.0
+f8a0dd6c0c050362918b561b015b11e9d95412e655e5af263e5c88134d68dfdb  packages/heroui/compat/rac-table-clone/NOTICE-RAC
+bd2c78e6ef2168f7f62c8f2a42cdb703a67a08107c89af1551a5a2da02dc8671  packages/heroui/compat/rac-table-clone/README.md
+86a3d24eace0483ec4b779994c7fb2b30bc66e150c8e62318904ecb9b225078e  packages/heroui/compat/rac-table-clone/profile.json
+f3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35  packages/heroui/compat/rac-table-clone/runtime.patch
+edb10823e1abc6801905641c8a90fce59a72f4eb5dc2fca0250899ccb556c95b  packages/heroui/compat/rac-table-clone/verify.mjs
+89d343980429b2d4dc0bf0b709329430283f9de9bfb2fd10c5f061e7a286cde0  tests/compat/rac-table-clone/README.md
+e3fb320fefddc17ca91482ce16e4af1c7692e0e4878441b12056be616945480d  tests/compat/rac-table-clone/fixtures.mjs
+e5aac53ab382508dc9dbadeffe2071a0f7211d1fc100d70f0cf6d9781db961fe  tests/compat/rac-table-clone/registry-proof.mjs
+6c24c6d2148876e9ee689a7d964913f9706d68051547fbb8cf132611f97dff6b  tests/compat/rac-table-clone/verify.test.mjs

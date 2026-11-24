@@ -42,12 +42,18 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
     expect(Object.keys(exports).sort()).toEqual(
       [
         "ControllerError",
+        "ControlsError",
         "NativeBridgeError",
         "createNativeColumnHelper",
         "createNativeController",
         "createTableController",
         "createResourceAdapter",
         "createTableState",
+        "beginControlsRequest",
+        "createControlsAuthority",
+        "getControlsAuthorityOwner",
+        "getControlsRequestBinding",
+        "projectControls",
         "defineController",
         "defineNativeTable",
         "reduceTableState",
