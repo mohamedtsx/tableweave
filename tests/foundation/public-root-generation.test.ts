@@ -10,18 +10,23 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, it } from "vitest";
-import { rootDigests } from "../controls/filter-composition/roots.mjs";
+import { getPublicGeneration } from "./public-generations.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const helpers = "tests/controls/filter-composition";
 
-async function fixture() {
+async function fixture(label = "fc01") {
   const parent =
     process.env.TABLEWEAVE_TMPDIR ??
     (process.env.CI ? tmpdir() : "/tmp/opencode");
   const directory = await mkdtemp(join(parent, "tableweave-root-generation-"));
   const own = join(directory, helpers);
   await mkdir(own, { recursive: true });
+  await mkdir(join(directory, "tests/foundation"), { recursive: true });
+  await copyFile(
+    join(root, "tests/foundation/public-generations.mjs"),
+    join(directory, "tests/foundation/public-generations.mjs"),
+  );
   for (const file of ["verify-public-roots.mjs", "generation.mjs"])
     await copyFile(join(root, helpers, file), join(own, file));
   await writeFile(
@@ -32,9 +37,11 @@ export const workspace = ${JSON.stringify(directory)};
 export const rootDigests = () => JSON.parse(readFileSync(new URL("./inputs.json", import.meta.url), "utf8"));
 `,
   );
-  const outputs = Object.fromEntries(
-    Object.entries(rootDigests()).filter(([file]) =>
-      /^packages\/(?:react|heroui)\/dist\//.test(file),
+  // Historical regressions must not assume every future workspace emits fc01.
+  const outputs: Record<string, string> = JSON.parse(
+    await readFile(
+      join(root, `tests/foundation/fixtures/public-generations/${label}.json`),
+      "utf8",
     ),
   );
   const inputs = join(own, "inputs.json");
@@ -48,7 +55,8 @@ export const rootDigests = () => JSON.parse(readFileSync(new URL("./inputs.json"
       encoding: "utf8",
       env: {
         ...process.env,
-        FILTER_CONTROLS_GENERATION: "fc01",
+        FILTER_CONTROLS_GENERATION: label,
+        FILTER_CONTROLS_PUBLIC_SHA256: getPublicGeneration(label).outputSha256,
         FILTER_CONTROLS_RUN: "clean-checkout",
         ...extra,
       },
@@ -73,6 +81,85 @@ it("verifies the committed generation without a historical ignored manifest", as
   );
   expect(published).toEqual(setup.outputs);
 });
+
+it.each(["original", "fc01"])(
+  "replays committed %s roots without consulting today's workspace output",
+  async (label) => {
+    const setup = await fixture(label);
+    expect(setup.run().status).toBe(0);
+    const other = label === "original" ? "fc01" : "original";
+    expect(
+      setup.run({
+        FILTER_CONTROLS_GENERATION: other,
+        FILTER_CONTROLS_PUBLIC_SHA256: getPublicGeneration(other).outputSha256,
+      }).status,
+    ).not.toBe(0);
+  },
+);
+
+it.each(["original", "fc01"])(
+  "rejects new same-count bytes under historical %s even with caller/hash/history poison",
+  async (label) => {
+    const setup = await fixture(label);
+    const declaration = Object.keys(setup.outputs).find((file) =>
+      file.endsWith(".d.ts"),
+    );
+    if (!declaration) throw new Error("Missing historical declaration");
+    setup.outputs[declaration] = "1".repeat(64);
+    await writeFile(setup.inputs, JSON.stringify(setup.outputs));
+    await mkdir(join(setup.historical, ".."), { recursive: true });
+    await writeFile(setup.historical, JSON.stringify(setup.outputs));
+    expect(setup.run().status).not.toBe(0);
+    expect(
+      setup.run({ FILTER_CONTROLS_PUBLIC_SHA256: "1".repeat(64) }).status,
+    ).not.toBe(0);
+  },
+);
+
+it.each(["mixed", "shuffled", "swapped", "nonhex", "absolute", "separator"])(
+  "rejects historical map corruption: %s",
+  async (mutation) => {
+    const setup = await fixture();
+    const entries = Object.entries(setup.outputs);
+    const first = entries[0];
+    const second = entries[1];
+    if (!first || !second) throw new Error("Historical fixture is incomplete");
+    if (mutation === "mixed") {
+      const original: Record<string, string> = JSON.parse(
+        await readFile(
+          join(
+            root,
+            "tests/foundation/fixtures/public-generations/original.json",
+          ),
+          "utf8",
+        ),
+      );
+      Object.assign(setup.outputs, original);
+    }
+    if (mutation === "swapped") {
+      setup.outputs[first[0]] = second[1];
+      setup.outputs[second[0]] = first[1];
+    }
+    if (mutation === "nonhex") setup.outputs[first[0]] = "not-a-sha";
+    if (mutation === "absolute" || mutation === "separator") {
+      delete setup.outputs[first[0]];
+      setup.outputs[
+        mutation === "absolute"
+          ? `/${first[0]}`
+          : first[0].replaceAll("/", "\\")
+      ] = first[1];
+    }
+    await writeFile(
+      setup.inputs,
+      JSON.stringify(
+        mutation === "shuffled"
+          ? Object.fromEntries(entries.reverse())
+          : setup.outputs,
+      ),
+    );
+    expect(setup.run().status).not.toBe(0);
+  },
+);
 
 it("ignores poisoned historical evidence instead of using it as authority", async () => {
   const setup = await fixture();

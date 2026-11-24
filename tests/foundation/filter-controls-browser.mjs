@@ -4,17 +4,16 @@ import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, realpath, writeFile } from "node:fs/promises";
 import { join, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { selectPublicGeneration } from "./public-generations.mjs";
 
+const selected = selectPublicGeneration(process.argv.slice(2), process.env);
 const root = await realpath(fileURLToPath(new URL("../../", import.meta.url)));
-const mode = process.argv[2] ?? "browser";
-assert(
-  ["browser", "types"].includes(mode) && process.argv.length <= 3,
-  "Choose the browser or types composition boundary",
-);
+const { mode, generation } = selected;
 const run = `ordered-${randomUUID()}`;
 const target = join(
   root,
-  "tests/controls/filter-composition/.artifacts/fc01",
+  "tests/controls/filter-composition/.artifacts",
+  generation,
   run,
 );
 await mkdir(target, { recursive: true });
@@ -27,12 +26,18 @@ const environment = {
   ...process.env,
   CI: "1",
   DO_NOT_TRACK: "1",
-  FILTER_CONTROLS_GENERATION: "fc01",
+  FILTER_CONTROLS_GENERATION: generation,
   FILTER_CONTROLS_RUN: run,
   ...(storybook ? { FILTER_CONTROLS_STORYBOOK_DIR: storybook } : {}),
-  FILTER_CONTROLS_PUBLIC_SHA256:
-    "de82ce232f3021a754b1e30df780eac27cd358604766cde4110cc922bf25f095",
+  FILTER_CONTROLS_PUBLIC_SHA256: selected.outputSha256,
 };
+// FILE has highest precedence; no child inherits a caller's report destination.
+for (const key of [
+  "PLAYWRIGHT_JSON_OUTPUT_FILE",
+  "PLAYWRIGHT_JSON_OUTPUT_NAME",
+  "PLAYWRIGHT_JSON_OUTPUT_DIR",
+])
+  delete environment[key];
 function command(executable, args, env = environment) {
   const result = spawnSync(executable, args, {
     cwd: root,
@@ -63,7 +68,8 @@ for (const [boundary, script] of [
     root,
     "tests/controls",
     boundary,
-    ".artifacts/fc01",
+    ".artifacts",
+    generation,
     run,
   );
   snapshots.push({
@@ -102,6 +108,7 @@ if (mode === "types") {
         ...environment,
         PLAYWRIGHT_JSON_OUTPUT_NAME: report,
         PLAYWRIGHT_JSON_OUTPUT_FILE: report,
+        PLAYWRIGHT_JSON_OUTPUT_DIR: target,
       },
     );
     const result = JSON.parse(await readFile(report, "utf8"));
@@ -130,7 +137,10 @@ await writeFile(
   join(target, "report.json"),
   JSON.stringify(
     {
-      generation: "fc01",
+      generation,
+      selection: selected.selection,
+      outputCount: selected.outputCount,
+      outputSha256: selected.outputSha256,
       mode,
       packageBuildsDuringRun: false,
       installsDuringRun: false,
@@ -140,10 +150,27 @@ await writeFile(
           createHash("sha256").update(initial).digest("hex"),
         ]),
       ),
+      snapshotCounts: Object.fromEntries(
+        snapshots.map(({ boundary, initial }) => {
+          const captured = JSON.parse(initial.toString("utf8"));
+          const entries =
+            boundary === "focus-handoff"
+              ? { ...captured.roots.sources, ...captured.roots.outputs }
+              : captured;
+          const outputs = Object.keys(entries).filter((path) =>
+            /^packages\/(?:react|heroui)\/dist\//.test(path),
+          ).length;
+          return [
+            boundary,
+            { sourcePublic: Object.keys(entries).length, outputs },
+          ];
+        }),
+      ),
       reports,
     },
     null,
     2,
   ),
+  { flag: "wx" },
 );
 console.log(`Real tool/control ${mode} gates passed: ${target}`);

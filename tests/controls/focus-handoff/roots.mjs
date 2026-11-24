@@ -3,6 +3,10 @@ import { readdirSync, readFileSync, realpathSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  assertGenerationEnvironment,
+  getPublicGeneration,
+} from "../../foundation/public-generations.mjs";
 
 export const workspace = fileURLToPath(new URL("../../../", import.meta.url));
 export const own = fileURLToPath(new URL("./", import.meta.url));
@@ -12,13 +16,13 @@ export const appRequire = createRequire(
 export const rootRequire = createRequire(join(workspace, "package.json"));
 export const correctedSourceSha256 =
   "4ce900626de4479db7d1d69a7c51db64fca4fbd41ede957280189d82ca347144";
-const oldPublicSha256 =
-  "ad59470c7d472563ed273b8b167073953f6f574df0a1910510480082da63a8ce";
 
 export function generation() {
   const name = process.env.FILTER_CONTROLS_GENERATION;
   if (!name || !/^[a-z][a-z0-9-]{0,63}$/.test(name))
     throw new Error("Supply an explicit safe FILTER_CONTROLS_GENERATION name");
+  getPublicGeneration(name);
+  assertGenerationEnvironment(name, process.env);
   return name;
 }
 export function generationDirectory() {
@@ -88,22 +92,19 @@ export function assertCorrectedSource() {
 }
 export function assertFreshPublic() {
   assertCorrectedSource();
-  const expected = process.env.FILTER_CONTROLS_PUBLIC_SHA256;
-  if (
-    !expected ||
-    !/^[a-f0-9]{64}$/.test(expected) ||
-    expected === oldPublicSha256
-  )
+  const name = generation();
+  const expected = getPublicGeneration(name);
+  if (name === "original")
     throw new Error(
-      "Main must supply a NEW approved FILTER_CONTROLS_PUBLIC_SHA256; old180 output is not runnable evidence",
+      "Original/ad594 output is not runnable corrected focus evidence",
     );
   const current = snapshots();
   if (
-    Object.keys(current.outputs).length !== 180 ||
-    current.publicSha256 !== expected
+    Object.keys(current.outputs).length !== expected.outputCount ||
+    current.publicSha256 !== expected.outputSha256
   )
     throw new Error(
-      "Actual public output does not match main's new180-file generation",
+      `Actual public output does not match main's ${name}/${expected.outputCount}-file generation`,
     );
   return current;
 }

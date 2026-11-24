@@ -13,12 +13,32 @@ import {
 import { isAbsolute, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
+import { rootDigests } from "../controls/filter-composition/roots.mjs";
 import { forbiddenImports, inspectGraph } from "./boundaries.mjs";
 import { checkConsumerDeclarations } from "./consumer-declarations.mjs";
 import { checkPackedControlsProfile } from "./packed-controls-profile.mjs";
 import { checkPackedFilterTools } from "./packed-filter-tools.mjs";
+import { packedPublicGeneration } from "./packed-focus-handoff.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
+// This is the same captured record used by the profiled focus child, not an env SHA.
+const producerBefore = rootDigests();
+const publicBefore = Object.fromEntries(
+  Object.entries(producerBefore).filter(([path]) =>
+    /^packages\/(?:react|heroui)\/dist\//.test(path),
+  ),
+);
+assert.equal(
+  Object.keys(publicBefore).length,
+  packedPublicGeneration.outputCount,
+);
+assert.equal(
+  createHash("sha256")
+    .update(`${JSON.stringify(publicBefore, null, 2)}\n`)
+    .digest("hex"),
+  packedPublicGeneration.outputSha256,
+  "Actual output differs from the registered current generation",
+);
 const artifacts = join(root, ".artifacts");
 await mkdir(artifacts, { recursive: true });
 const run = await mkdtemp(join(artifacts, "packed-"));
@@ -33,6 +53,8 @@ function command(executable, args, cwd = root) {
 }
 const reports = [];
 const archives = {};
+const archiveDigests = {};
+const archiveOutputs = {};
 for (const name of ["react", "heroui"]) {
   const target = join(run, name);
   await mkdir(target);
@@ -190,6 +212,10 @@ for (const name of ["react", "heroui"]) {
   );
   command("tar", ["-xzf", archive, "-C", target]);
   const pkg = join(target, "package");
+  for (const file of emitted)
+    archiveOutputs[`packages/${name}/dist/${file}`] = createHash("sha256")
+      .update(await readFile(join(pkg, "dist", file)))
+      .digest("hex");
   const manifest = JSON.parse(
     await readFile(join(pkg, "package.json"), "utf8"),
   );
@@ -241,15 +267,24 @@ for (const name of ["react", "heroui"]) {
     [],
     "Public declarations leaked vendor types requiring workspace-only repairs",
   );
+  archiveDigests[name] = createHash("sha256")
+    .update(await readFile(archive))
+    .digest("hex");
   reports.push({
     package: manifest.name,
     archive,
-    sha256: createHash("sha256")
-      .update(await readFile(archive))
-      .digest("hex"),
+    sha256: archiveDigests[name],
     files,
   });
 }
+
+assert.deepEqual(
+  Object.fromEntries(
+    Object.entries(archiveOutputs).sort(([a], [b]) => a.localeCompare(b)),
+  ),
+  publicBefore,
+  "Actual archive outputs differ from the frozen registered build",
+);
 
 const vendor = JSON.parse(
   await readFile(join(root, "apps/storybook/package.json"), "utf8"),
@@ -492,7 +527,32 @@ for (const kind of ["headless", "styled"]) {
       ),
     });
 }
-await writeFile(join(run, "report.json"), JSON.stringify(reports, null, 2));
+assert.deepEqual(
+  rootDigests(),
+  producerBefore,
+  "Source/public bytes changed since the parent captured them before packing",
+);
+for (const [name, archive] of Object.entries(archives))
+  assert.equal(
+    createHash("sha256")
+      .update(await readFile(archive))
+      .digest("hex"),
+    archiveDigests[name],
+    `Actual ${name} archive changed during consumer verification`,
+  );
+reports.push({
+  boundary: "registered-public-generation",
+  generation: packedPublicGeneration.generation,
+  outputCount: packedPublicGeneration.outputCount,
+  outputSha256: packedPublicGeneration.outputSha256,
+  sourcePublicCount: Object.keys(producerBefore).length,
+  sourcePublicSha256: createHash("sha256")
+    .update(`${JSON.stringify(producerBefore, null, 2)}\n`)
+    .digest("hex"),
+});
+await writeFile(join(run, "report.json"), JSON.stringify(reports, null, 2), {
+  flag: "wx",
+});
 console.log(
   `Packed foundation checks passed. Evidence: ${resolve(run, "report.json")}`,
 );

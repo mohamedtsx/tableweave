@@ -14,9 +14,10 @@ import {
 import { createRequire } from "node:module";
 import { basename, dirname, isAbsolute, join, resolve, sep } from "node:path";
 import { checkConsumerDeclarations } from "./consumer-declarations.mjs";
+import { selectPublicGeneration } from "./public-generations.mjs";
 
-const PUBLIC_SHA256 =
-  "de82ce232f3021a754b1e30df780eac27cd358604766cde4110cc922bf25f095";
+// Imported by the parent packer too: one immutable selection before packing.
+export const packedPublicGeneration = selectPublicGeneration([], process.env);
 const TOOLBAR_SOURCE_SHA256 =
   "4ce900626de4479db7d1d69a7c51db64fca4fbd41ede957280189d82ca347144";
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -193,10 +194,13 @@ export async function checkPackedFocusHandoff(root, consumer) {
     sourceBefore["packages/heroui/src/selection/selection-toolbar.tsx"],
     TOOLBAR_SOURCE_SHA256,
   );
-  assert.equal(Object.keys(publicBefore).length, 180);
+  assert.equal(
+    Object.keys(publicBefore).length,
+    packedPublicGeneration.outputCount,
+  );
   assert.equal(
     sha256(`${JSON.stringify(sorted(publicBefore), null, 2)}\n`),
-    PUBLIC_SHA256,
+    packedPublicGeneration.outputSha256,
   );
   const vendorBefore = await tree(join(consumer, "node_modules"), {
     localLinks: true,
@@ -616,9 +620,11 @@ export default defineConfig({
     );
   }
   const guards = {
+    generation: packedPublicGeneration.generation,
+    outputCount: packedPublicGeneration.outputCount,
     sourceBefore,
     publicBefore: sorted(publicBefore),
-    publicSha256: PUBLIC_SHA256,
+    publicSha256: packedPublicGeneration.outputSha256,
     toolbarSourceSha256: TOOLBAR_SOURCE_SHA256,
     vendorEntries: Object.keys(vendorBefore).length,
     vendorSha256: sha256(JSON.stringify(vendorBefore)),

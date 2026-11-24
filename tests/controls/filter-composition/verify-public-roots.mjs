@@ -4,6 +4,7 @@ import { join } from "node:path";
 import {
   evidenceDirectory,
   expectedPublicAggregate,
+  expectedPublicCount,
   generation,
 } from "./generation.mjs";
 import { rootDigests } from "./roots.mjs";
@@ -18,10 +19,14 @@ const aggregate = createHash("sha256").update(text).digest("hex");
 // The reviewed generation is a committed count/digest, not an ignored snapshot
 // left by a previous local run. Per-run source snapshots remain parent-anchored.
 if (
-  Object.keys(current).length !== 180 ||
+  Object.keys(current).length !== expectedPublicCount ||
   aggregate !== expectedPublicAggregate
 )
-  throw new Error("Main's frozen 180-output handoff no longer matches");
+  throw new Error(
+    `Main's frozen ${expectedPublicCount}-output handoff no longer matches (${generation})`,
+  );
 mkdirSync(evidenceDirectory, { recursive: true });
 writeFileSync(join(evidenceDirectory, "public-roots-verified.json"), text);
-console.log(`${generation}: 180 frozen public outputs unchanged: ${aggregate}`);
+console.log(
+  `${generation}: ${expectedPublicCount} frozen public outputs unchanged: ${aggregate}`,
+);
