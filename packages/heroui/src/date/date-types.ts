@@ -4,6 +4,7 @@ import type {
   DateValue,
   FieldDefinition,
 } from "@tableweave/react/contracts";
+import type { CriteriaDateStateProps } from "./criteria-date-state.js";
 
 export interface FilterDateContext {
   readonly locale: string;
@@ -84,7 +85,7 @@ export const dateEditorMessages: DateEditorMessages = {
   },
 };
 
-interface DateOperandEditorBase {
+interface DateOperandEditorBase extends CriteriaDateStateProps {
   readonly field: DateFieldDefinition;
   readonly context: FilterDateContext;
   /** New editing-session identity. value seeds the session; drafts stay local. */

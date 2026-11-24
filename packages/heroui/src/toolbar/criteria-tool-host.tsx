@@ -9,6 +9,7 @@ import { getCriteriaToolOwner, requireCriteriaTool } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ComponentType } from "react";
 import { useLayoutEffect, useState, useSyncExternalStore } from "react";
+import { prepareCriteriaDateCell } from "../date/criteria-date-state.js";
 import type {
   CriteriaActor,
   CriteriaCommitCell,
@@ -21,7 +22,7 @@ import { createCriteriaCommitCell } from "../filters/criteria-commit.js";
 import type { FilterToolProps } from "./filter-shared.js";
 import { filterToolMessages } from "./filter-shared.js";
 
-export type ToolbarKind = "search" | "tabs";
+export type ToolbarKind = "search" | "tabs" | "date";
 export type CriteriaCandidate<S extends QuerySchema> =
   | Readonly<{ kind: "omitted" | "denied" }>
   | Readonly<{ kind: "target"; target: CriteriaToolTarget<S> }>;
@@ -309,6 +310,11 @@ export function createCriteriaToolbarStore<
         );
         cell.require(actor);
         check();
+        if (kind === "date") {
+          prepareCriteriaDateCell(cell, actor);
+          cell.require(actor);
+          check();
+        }
         ownerPin = next.owner;
         mode = "adopted";
         // No state mirror; controller notifications publish only a fresh version.
@@ -339,7 +345,15 @@ export function CriteriaToolbarNeutral({
   readonly kind: ToolbarKind;
 }) {
   return (
-    <div className={kind === "search" ? "tw-filter-search" : "tw-filter-tabs"}>
+    <div
+      className={
+        kind === "search"
+          ? "tw-filter-search"
+          : kind === "date"
+            ? "tw-filter-date"
+            : "tw-filter-tabs"
+      }
+    >
       <p role="status">{filterToolMessages.unavailable}</p>
     </div>
   );

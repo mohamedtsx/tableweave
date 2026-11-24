@@ -9,6 +9,15 @@ import { canonicalJson } from "@tableweave/react/contracts";
 import { relativePresets, resolveDateOperand } from "@tableweave/react/filters";
 import { useLayoutEffect, useRef, useState } from "react";
 import { I18nProvider } from "react-aria-components/I18nProvider";
+import type { CriteriaDateStateHandle } from "./criteria-date-state.js";
+import {
+  criteriaDateChild,
+  criteriaDateState,
+  readCriteriaDateState,
+  requireCriteriaDateState,
+  useCriteriaDateRoute,
+  useCriteriaDateVersion,
+} from "./criteria-date-state.js";
 import { InstantPointEditor } from "./date-instant.js";
 import { DayPointPicker, DayRangePicker } from "./date-picker.js";
 import type {
@@ -30,6 +39,12 @@ export { dateEditorMessages } from "./date-types.js";
 
 /** Private builder/toolbar primitive. No dispatch or operator-policy duplication. */
 export function DateOperandEditor(props: DateOperandEditorProps) {
+  const route = useCriteriaDateRoute(props);
+  if (route.kind === "legacy") return <LegacyDateOperandEditor {...props} />;
+  if (route.kind !== "adopted") return null;
+  return <CriteriaDateOperand handle={route.handle} />;
+}
+function LegacyDateOperandEditor(props: DateOperandEditorProps) {
   const sessionKey = canonicalJson([
     props.resetKey,
     props.field,
@@ -41,6 +56,217 @@ export function DateOperandEditor(props: DateOperandEditorProps) {
       <DateOperandSession key={sessionKey} {...props} />
     </I18nProvider>
   );
+}
+
+function CriteriaDateOperand({
+  handle,
+}: {
+  readonly handle: CriteriaDateStateHandle;
+}) {
+  const version = useCriteriaDateVersion(handle);
+  useLayoutEffect(() => {
+    void version;
+    try {
+      criteriaDateState.revalidate(handle);
+    } catch {
+      /* Revoked actual actor/edit. */
+    }
+  }, [handle, version]);
+  try {
+    const state = readCriteriaDateState(handle),
+      messages = state.messages;
+    const presets: readonly SymbolicDateValue[] = [
+      ...(state.field.relativePresets ?? relativePresets).map((preset) => ({
+        kind: "relative" as const,
+        preset,
+      })),
+      ...(state.field.rollingDays ?? []).flatMap((days) => [
+        { kind: "rolling" as const, days, direction: "past" as const },
+        { kind: "rolling" as const, days, direction: "future" as const },
+      ]),
+    ];
+    const currentSymbol =
+      state.draft.status === "complete" &&
+      !Array.isArray(state.draft.value) &&
+      "kind" in state.draft.value &&
+      (state.draft.value.kind === "relative" ||
+        state.draft.value.kind === "rolling")
+        ? canonicalJson(state.draft.value)
+        : "";
+    const point = criteriaDateChild(handle, "point", "picker"),
+      range = criteriaDateChild(handle, "point", "range"),
+      instant = criteriaDateChild(handle, "point", "instant");
+    const output = (
+      <I18nProvider locale={state.context.locale}>
+        <div className="tw-date-editor">
+          <label className="tw-date-mode">
+            <span>{messages.modeLabel}</span>
+            <select
+              value={state.mode}
+              onChange={(event) => {
+                try {
+                  requireCriteriaDateState(handle);
+                  const next = event.currentTarget.value;
+                  requireCriteriaDateState(handle);
+                  if (
+                    next === "day" ||
+                    next === "instant" ||
+                    next === "relative"
+                  )
+                    criteriaDateState.mode(handle, next);
+                } catch {
+                  /* Denied before DOM/private read. */
+                }
+              }}
+            >
+              <option value="day">{messages.dayModeLabel}</option>
+              {state.field.type === "datetime" ? (
+                <option value="instant">{messages.instantModeLabel}</option>
+              ) : null}
+              {state.cardinality === "one" && presets.length > 0 ? (
+                <option value="relative">{messages.relativeModeLabel}</option>
+              ) : null}
+            </select>
+          </label>
+          <div>
+            {state.mode === "relative" ? (
+              <label className="tw-date-mode">
+                <span>{messages.presetsLabel}</span>
+                <select
+                  value={currentSymbol}
+                  onChange={(event) => {
+                    try {
+                      requireCriteriaDateState(handle);
+                      const key = event.currentTarget.value;
+                      requireCriteriaDateState(handle);
+                      const current = readCriteriaDateState(handle),
+                        values: readonly SymbolicDateValue[] = [
+                          ...(
+                            current.field.relativePresets ?? relativePresets
+                          ).map((preset) => ({
+                            kind: "relative" as const,
+                            preset,
+                          })),
+                          ...(current.field.rollingDays ?? []).flatMap(
+                            (days) => [
+                              {
+                                kind: "rolling" as const,
+                                days,
+                                direction: "past" as const,
+                              },
+                              {
+                                kind: "rolling" as const,
+                                days,
+                                direction: "future" as const,
+                              },
+                            ],
+                          ),
+                        ];
+                      const value = values.find(
+                        (preset) => canonicalJson(preset) === key,
+                      );
+                      criteriaDateState.operand(
+                        handle,
+                        value
+                          ? { status: "complete", value }
+                          : { status: "empty", value: null },
+                      );
+                    } catch {
+                      /* Denied. */
+                    }
+                  }}
+                >
+                  <option value="">{messages.presetsLabel}</option>
+                  {presets.map((preset) => {
+                    requireCriteriaDateState(handle);
+                    const label = messages.formatRelative(preset);
+                    requireCriteriaDateState(handle);
+                    if (typeof label !== "string")
+                      throw new Error("Date editor state is unavailable.");
+                    return (
+                      <option
+                        key={canonicalJson(preset)}
+                        value={canonicalJson(preset)}
+                      >
+                        {label}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            ) : state.mode === "day" ? (
+              state.cardinality === "range" ? (
+                <DayRangePicker
+                  criteriaState={range}
+                  field={state.field}
+                  context={state.context}
+                  messages={messages}
+                  disabled={false}
+                  initialValue={null}
+                  onDraft={(draft) => criteriaDateState.operand(handle, draft)}
+                />
+              ) : (
+                <DayPointPicker
+                  criteriaState={point}
+                  label={messages.pointLabel}
+                  field={state.field}
+                  context={state.context}
+                  messages={messages}
+                  disabled={false}
+                  initialValue={null}
+                  onDraft={(draft) => criteriaDateState.operand(handle, draft)}
+                />
+              )
+            ) : state.cardinality === "one" ? (
+              <InstantPointEditor
+                criteriaState={instant}
+                label={messages.pointLabel}
+                field={state.field}
+                context={state.context}
+                messages={messages}
+                disabled={false}
+                initialValue={null}
+                onDraft={(draft) => criteriaDateState.operand(handle, draft)}
+              />
+            ) : (
+              <div className="tw-date-instant-range">
+                {(["start", "end"] as const).map((part) => (
+                  <InstantPointEditor
+                    key={part}
+                    criteriaState={criteriaDateChild(handle, part, "instant")}
+                    label={
+                      part === "start" ? messages.startLabel : messages.endLabel
+                    }
+                    field={state.field}
+                    context={state.context}
+                    messages={messages}
+                    disabled={false}
+                    initialValue={null}
+                    onDraft={(draft) =>
+                      criteriaDateState.operand(handle, draft)
+                    }
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+          {state.invalid ||
+          state.draft.status === "invalid" ||
+          state.draft.status === "incomplete" ? (
+            <p role="status">
+              {state.invalid || state.draft.status === "invalid"
+                ? messages.invalidValue
+                : messages.incompleteValue}
+            </p>
+          ) : null}
+        </div>
+      </I18nProvider>
+    );
+    requireCriteriaDateState(handle);
+    return output;
+  } catch {
+    return null;
+  }
 }
 
 function DateOperandSession(props: DateOperandEditorProps) {

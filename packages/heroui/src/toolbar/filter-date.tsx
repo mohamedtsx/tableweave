@@ -12,6 +12,22 @@ import type {
 import { canonicalJson, parseQuery } from "@tableweave/react/contracts";
 import { compileFilter, relativePresets } from "@tableweave/react/filters";
 import { useId, useLayoutEffect, useRef, useState } from "react";
+import type {
+  CriteriaDateBundle,
+  CriteriaDateStateHandle,
+} from "../date/criteria-date-state.js";
+import {
+  beginCriteriaDateEdit,
+  closeCriteriaDateEdit,
+  createCriteriaDateBundle,
+  criteriaDateState,
+  readCriteriaDateToolbar,
+  reconcileCriteriaDateBundle,
+  requireCriteriaDateSession,
+  requireCriteriaDateState,
+  selectCriteriaDatePreset,
+  setCriteriaDateNotice,
+} from "../date/criteria-date-state.js";
 import { DateOperandEditor } from "../date/date-operand-editor.js";
 import type {
   DateDraft,
@@ -21,6 +37,21 @@ import type {
 } from "../date/date-types.js";
 import { dateEditorMessages } from "../date/date-types.js";
 import { calendarSeed, dayWire } from "../date/date-wire.js";
+import type {
+  CriteriaActor,
+  CriteriaCommitCell,
+  CriteriaLocalCell,
+  CriteriaWorkHandle,
+} from "../filters/criteria-commit.js";
+import type {
+  CriteriaToolbarStore,
+  ToolbarCommitted,
+} from "./criteria-tool-host.js";
+import {
+  CriteriaToolbarNeutral,
+  CriteriaToolHost,
+  useCriteriaToolbarVersion,
+} from "./criteria-tool-host.js";
 import type { FilterToolMessages, FilterToolProps } from "./filter-shared.js";
 import {
   filterToolMessages,
@@ -95,6 +126,17 @@ interface DateSession {
 }
 
 export function FilterDate<S extends QuerySchema>(props: FilterDateProps<S>) {
+  return (
+    <CriteriaToolHost<"date", S, CriteriaDateLocal<S>, FilterDateProps<S>>
+      kind="date"
+      input={props}
+      createLocal={createCriteriaDateLocal}
+      Legacy={LegacyFilterDate}
+      Surface={CriteriaDateSurface}
+    />
+  );
+}
+function LegacyFilterDate<S extends QuerySchema>(props: FilterDateProps<S>) {
   const messages = { ...defaults, ...props.messages };
   const { controller } = props;
   const { state, owner, active, isCurrent } = useFilterOwner(props);
@@ -384,4 +426,756 @@ export function FilterDate<S extends QuerySchema>(props: FilterDateProps<S>) {
       </span>
     </div>
   );
+}
+
+interface DateFocus<S extends QuerySchema> {
+  readonly token: object;
+  readonly intent: "editor" | "trigger";
+  readonly baseline: string;
+  readonly ownerKey: string;
+  readonly owner: CriteriaActor<"date", S>;
+  readonly editorHandle: CriteriaDateStateHandle | null;
+  readonly expectedDate?: string;
+  readonly actor: CriteriaActor<"date", S> | null;
+  readonly work: CriteriaWorkHandle<"date", S> | null;
+}
+export interface CriteriaDateLocal<S extends QuerySchema> {
+  readonly bundle: CriteriaDateBundle<"date", S>;
+  readonly focus: CriteriaLocalCell<"date", S, DateFocus<S>>;
+}
+export function createCriteriaDateLocal<S extends QuerySchema>(
+  cell: CriteriaCommitCell<"date", S>,
+): CriteriaDateLocal<S> {
+  return Object.freeze({
+    bundle: createCriteriaDateBundle(cell, defaults),
+    focus: cell.createLocal<DateFocus<S>>("session"),
+  });
+}
+type DateStore<S extends QuerySchema> = CriteriaToolbarStore<
+  "date",
+  S,
+  CriteriaDateLocal<S>
+>;
+type DateFrame<S extends QuerySchema> = ToolbarCommitted<
+  "date",
+  S,
+  CriteriaDateLocal<S>
+>;
+function dateLive<S extends QuerySchema>(frame: DateFrame<S>) {
+  frame.cell.require(frame.actor);
+  const controller = frame.origin.controller,
+    definition = controller.getDefinition(),
+    state = controller.getSnapshot();
+  frame.cell.require(frame.actor);
+  if (definition !== frame.origin.definition)
+    throw new Error("Criteria date unavailable.");
+  const entry = Object.entries(definition.schema.fields).find(
+    ([, field]) => field.owner === "date",
+  );
+  const field: DateFieldDefinition | null =
+    entry && (entry[1].type === "date" || entry[1].type === "datetime")
+      ? entry[1]
+      : null;
+  const context: FilterDateContext = {
+    locale: state.query.locale,
+    timeZone: state.query.timeZone,
+    evaluatedAt: state.evaluatedAt,
+  };
+  const mode = definition.schema.date?.mode ?? "range";
+  const baseline = canonicalJson([
+    state.query.date,
+    entry ?? null,
+    mode,
+    context.locale,
+    context.timeZone,
+  ]);
+  const ownerKey = canonicalJson([
+    entry ?? null,
+    mode,
+    context.locale,
+    context.timeZone,
+  ]);
+  return {
+    schema: definition.schema,
+    state,
+    field,
+    context,
+    mode,
+    baseline,
+    ownerKey,
+  };
+}
+function dateGuard<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  baseline?: string,
+  evaluatedAt?: number,
+) {
+  const frame = store.require(actor),
+    live = dateLive(frame);
+  if (baseline !== undefined && live.baseline !== baseline)
+    throw new Error("Criteria date unavailable.");
+  if (evaluatedAt !== undefined && live.context.evaluatedAt !== evaluatedAt)
+    throw new Error("Criteria date unavailable.");
+  return { frame, live };
+}
+function dateMessages<S extends QuerySchema>(
+  frame: DateFrame<S>,
+): FilterDateMessages {
+  frame.cell.require(frame.actor);
+  const result = Object.freeze({ ...defaults, ...frame.ports.messages });
+  frame.cell.require(frame.actor);
+  return result;
+}
+function validateCriteriaDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  date: StandaloneDate | null,
+  baseline: string,
+  expected?: {
+    readonly handle: CriteriaDateStateHandle;
+    readonly candidate?: string;
+  },
+) {
+  const { frame, live } = dateGuard(store, actor, baseline),
+    options = frame.ports.registry ? { registry: frame.ports.registry } : {};
+  const check = () => {
+    dateGuard(store, actor, baseline, live.context.evaluatedAt);
+    if (expected) {
+      requireCriteriaDateState(expected.handle);
+      const current = readCriteriaDateToolbar(frame.local.bundle, actor);
+      if (
+        !current.open ||
+        current.handle !== expected.handle ||
+        (expected.candidate !== undefined &&
+          (current.draft.status !== "complete" ||
+            canonicalJson(current.candidate) !== expected.candidate))
+      )
+        throw new Error("Criteria date unavailable.");
+    }
+  };
+  check();
+  const parsed = parseQuery(
+    live.schema,
+    { ...live.state.query, date },
+    options,
+  );
+  check();
+  if (!parsed.success) return null;
+  try {
+    compileFilter(live.schema, parsed.data, {
+      ...options,
+      now: live.context.evaluatedAt,
+    });
+    check();
+    return { date: parsed.data.date };
+  } catch {
+    check();
+    return null;
+  }
+}
+function configuredCriteriaDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  baseline: string,
+): boolean {
+  const { frame, live } = dateGuard(store, actor, baseline);
+  if (!live.field) return false;
+  const probePoint = live.field.min ?? dayWire(calendarSeed(live.context));
+  const parsed = parseQuery(
+    live.schema,
+    {
+      ...live.state.query,
+      date:
+        live.mode === "single"
+          ? { operator: "date.on", value: probePoint }
+          : { operator: "date.between", value: [probePoint, probePoint] },
+    },
+    frame.ports.registry ? { registry: frame.ports.registry } : {},
+  );
+  dateGuard(store, actor, baseline, live.context.evaluatedAt);
+  return !(
+    parsed.success === false &&
+    parsed.issues.some((issue) => issue.code === "rule.operator")
+  );
+}
+function reconcileDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+) {
+  const { frame } = dateGuard(store, actor);
+  reconcileCriteriaDateBundle(frame.local.bundle, actor);
+  if (frame.disabled) closeCriteriaDateEdit(frame.local.bundle, actor);
+  const live = dateGuard(store, actor).live;
+  const plan = frame.local.focus.read(actor);
+  if (!plan) return;
+  const current = readCriteriaDateToolbar(frame.local.bundle, actor);
+  const acceptedOwn =
+    plan.intent === "trigger" &&
+    plan.expectedDate !== undefined &&
+    plan.expectedDate === canonicalJson(live.state.query.date) &&
+    plan.ownerKey === live.ownerKey;
+  const invalid =
+    frame.disabled ||
+    plan.ownerKey !== live.ownerKey ||
+    (plan.baseline !== live.baseline && !acceptedOwn) ||
+    (plan.intent === "editor" &&
+      (!current.open ||
+        (plan.owner === actor && plan.editorHandle !== current.handle)));
+  if (invalid) {
+    if (plan.work) frame.cell.cancelWork(actor, plan.work);
+    frame.local.focus.clear(actor);
+    return;
+  }
+  if (plan.owner !== actor || plan.baseline !== live.baseline) {
+    if (plan.work) frame.cell.cancelWork(actor, plan.work);
+    frame.local.focus.write(actor, {
+      ...plan,
+      owner: actor,
+      baseline: live.baseline,
+      editorHandle: plan.intent === "editor" ? current.handle : null,
+      actor: null,
+      work: null,
+    });
+  }
+}
+function closeDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  expectedDate?: string,
+) {
+  try {
+    const { frame, live } = dateGuard(store, actor);
+    if (frame.disabled) return;
+    closeCriteriaDateEdit(frame.local.bundle, actor);
+    const prior = frame.local.focus.read(actor);
+    if (prior?.work) frame.cell.cancelWork(actor, prior.work);
+    frame.local.focus.write(actor, {
+      token: Object.freeze({}),
+      intent: "trigger",
+      baseline: live.baseline,
+      ownerKey: live.ownerKey,
+      owner: actor,
+      editorHandle: null,
+      ...(expectedDate === undefined ? {} : { expectedDate }),
+      actor: null,
+      work: null,
+    });
+  } catch {
+    /* No stale focus or private fallback. */
+  }
+}
+function openDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+) {
+  try {
+    const { frame, live } = dateGuard(store, actor);
+    if (frame.disabled || !configuredCriteriaDate(store, actor, live.baseline))
+      return;
+    reconcileDate(store, actor);
+    if (readCriteriaDateToolbar(frame.local.bundle, actor).open) {
+      closeDate(store, actor);
+      return;
+    }
+    dateGuard(store, actor, live.baseline);
+    const editorHandle = beginCriteriaDateEdit(frame.local.bundle, actor);
+    const prior = frame.local.focus.read(actor);
+    if (prior?.work) frame.cell.cancelWork(actor, prior.work);
+    frame.local.focus.write(actor, {
+      token: Object.freeze({}),
+      intent: "editor",
+      baseline: live.baseline,
+      ownerKey: live.ownerKey,
+      owner: actor,
+      editorHandle,
+      actor: null,
+      work: null,
+    });
+  } catch {
+    try {
+      const { frame } = dateGuard(store, actor);
+      setCriteriaDateNotice(
+        frame.local.bundle,
+        actor,
+        dateMessages(frame).invalidValue,
+      );
+    } catch {
+      /* Denied. */
+    }
+  }
+}
+function submitDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  clear: boolean,
+) {
+  let baseline: string | undefined;
+  let expected:
+    | { readonly handle: CriteriaDateStateHandle; readonly candidate: string }
+    | undefined;
+  try {
+    const { frame, live } = dateGuard(store, actor);
+    if (frame.disabled) return;
+    baseline = live.baseline;
+    reconcileDate(store, actor);
+    const local = readCriteriaDateToolbar(frame.local.bundle, actor);
+    if (
+      !clear &&
+      (!local.open ||
+        !local.handle ||
+        local.draft.status !== "complete" ||
+        !local.candidate)
+    )
+      return;
+    if (!clear && !configuredCriteriaDate(store, actor, baseline)) return;
+    const candidate = clear ? null : local.candidate;
+    expected =
+      !clear && local.handle
+        ? { handle: local.handle, candidate: canonicalJson(candidate) }
+        : undefined;
+    const parsed = validateCriteriaDate(
+      store,
+      actor,
+      candidate,
+      baseline,
+      expected,
+    );
+    if (parsed === null) {
+      setCriteriaDateNotice(
+        frame.local.bundle,
+        actor,
+        dateMessages(frame).invalidValue,
+      );
+      return;
+    }
+    dateGuard(store, actor, baseline, live.context.evaluatedAt);
+    if (expected) {
+      requireCriteriaDateState(expected.handle);
+      const current = readCriteriaDateToolbar(frame.local.bundle, actor);
+      if (
+        current.handle !== expected.handle ||
+        current.draft.status !== "complete" ||
+        canonicalJson(current.candidate) !== expected.candidate
+      )
+        return;
+    }
+    const result = frame.origin.controller.dispatch({
+      type: "date.commit",
+      date: parsed.date,
+    });
+    const after = dateGuard(store, actor),
+      messages = dateMessages(after.frame);
+    let sameEdit =
+      after.live.ownerKey === live.ownerKey &&
+      (after.live.baseline === live.baseline ||
+        canonicalJson(after.live.state.query.date) ===
+          canonicalJson(parsed.date));
+    try {
+      if (local.handle) requireCriteriaDateSession(local.handle);
+      else if (
+        readCriteriaDateToolbar(after.frame.local.bundle, actor).handle !== null
+      )
+        sameEdit = false;
+    } catch {
+      sameEdit = false;
+    }
+    if (sameEdit) {
+      if (result.status === "rejected")
+        setCriteriaDateNotice(frame.local.bundle, actor, messages.failed);
+      else {
+        closeDate(store, actor, canonicalJson(parsed.date));
+        setCriteriaDateNotice(
+          frame.local.bundle,
+          actor,
+          result.status === "proposed" ? messages.submitted : "",
+        );
+      }
+    }
+    // A same-actor reentrant edit must not swallow the application's actual
+    // proposal receipt even though it prevents all old-edit cleanup/notice.
+    dateGuard(store, actor);
+    observeMutation(frame.ports.onMutation, result);
+    dateGuard(store, actor);
+    reconcileDate(store, actor);
+  } catch {
+    try {
+      const { frame } = dateGuard(store, actor, baseline);
+      if (expected) {
+        requireCriteriaDateState(expected.handle);
+        if (
+          canonicalJson(
+            readCriteriaDateToolbar(frame.local.bundle, actor).candidate,
+          ) !== expected.candidate
+        )
+          return;
+      }
+      setCriteriaDateNotice(
+        frame.local.bundle,
+        actor,
+        dateMessages(frame).invalidValue,
+      );
+    } catch {
+      /* A never uses B after callback reentry. */
+    }
+  }
+}
+function datePresets<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  baseline: string,
+) {
+  const { frame, live } = dateGuard(store, actor, baseline),
+    messages = dateMessages(frame);
+  const scope = readCriteriaDateToolbar(frame.local.bundle, actor).handle;
+  if (frame.ports.presets !== undefined) return frame.ports.presets;
+  if (!live.field) return [];
+  return [
+    ...(live.field.relativePresets ?? relativePresets).map((preset) => ({
+      kind: "relative" as const,
+      preset,
+    })),
+    ...(live.field.rollingDays ?? []).flatMap((days) => [
+      { kind: "rolling" as const, days, direction: "past" as const },
+      { kind: "rolling" as const, days, direction: "future" as const },
+    ]),
+  ].map((value) => {
+    dateGuard(store, actor, baseline, live.context.evaluatedAt);
+    if (scope) requireCriteriaDateState(scope);
+    const label = messages.formatRelative(value);
+    dateGuard(store, actor, baseline, live.context.evaluatedAt);
+    if (scope) requireCriteriaDateState(scope);
+    if (typeof label !== "string")
+      throw new Error("Criteria date unavailable.");
+    return {
+      id: canonicalJson(value),
+      label,
+      date: { operator: "date.on" as const, value },
+    };
+  });
+}
+function presetDate<S extends QuerySchema>(
+  store: DateStore<S>,
+  actor: CriteriaActor<"date", S>,
+  id: string,
+) {
+  try {
+    const { frame, live } = dateGuard(store, actor);
+    if (frame.disabled) return;
+    reconcileDate(store, actor);
+    if (!readCriteriaDateToolbar(frame.local.bundle, actor).open) return;
+    const preset = datePresets(store, actor, live.baseline).find(
+      (item) => item.id === id,
+    );
+    if (!preset) return;
+    const scope = readCriteriaDateToolbar(frame.local.bundle, actor).handle;
+    const parsed = validateCriteriaDate(
+      store,
+      actor,
+      preset.date,
+      live.baseline,
+      scope ? { handle: scope } : undefined,
+    );
+    dateGuard(store, actor, live.baseline);
+    if (parsed === null) return;
+    const focus = frame.local.focus.read(actor);
+    if (focus?.work) frame.cell.cancelWork(actor, focus.work);
+    frame.local.focus.clear(actor);
+    selectCriteriaDatePreset(frame.local.bundle, actor, preset.date);
+  } catch {
+    /* Denied. */
+  }
+}
+export const criteriaDate = Object.freeze({
+  open: openDate,
+  cancel: closeDate,
+  apply: <S extends QuerySchema>(
+    store: DateStore<S>,
+    actor: CriteriaActor<"date", S>,
+  ) => submitDate(store, actor, false),
+  clear: <S extends QuerySchema>(
+    store: DateStore<S>,
+    actor: CriteriaActor<"date", S>,
+  ) => submitDate(store, actor, true),
+  preset: presetDate,
+  reconcile: reconcileDate,
+});
+
+function CriteriaDateSurface<S extends QuerySchema>({
+  store,
+}: {
+  readonly store: DateStore<S>;
+}) {
+  const version = useCriteriaToolbarVersion(store),
+    frame = store.read(),
+    actor = frame?.actor;
+  const trigger = useRef<HTMLButtonElement | null>(null),
+    editor = useRef<HTMLDivElement | null>(null),
+    editorId = useId();
+  useLayoutEffect(() => {
+    if (!actor || store.getSnapshot() !== version) return;
+    try {
+      reconcileDate(store, actor);
+      const current = store.require(actor),
+        plan = current.local.focus.read(actor);
+      if (!plan) return;
+      if (plan.actor === actor && plan.work) return;
+      if (plan.work) current.cell.cancelWork(actor, plan.work);
+      const work = current.cell.animationFrame(actor, () => {
+        try {
+          const checked = dateGuard(store, actor, plan.baseline);
+          if (checked.frame.disabled) return undefined;
+          const activePlan = checked.frame.local.focus.read(actor);
+          if (activePlan?.token !== plan.token) return undefined;
+          const local = readCriteriaDateToolbar(
+            checked.frame.local.bundle,
+            actor,
+          );
+          if (plan.intent === "editor" && !local.open) return undefined;
+          if (plan.intent === "editor") {
+            if (!plan.editorHandle || local.handle !== plan.editorHandle)
+              return undefined;
+            requireCriteriaDateState(plan.editorHandle);
+          }
+          const target =
+            plan.intent === "editor"
+              ? editor.current?.querySelector<HTMLElement>(
+                  "select, input, [role=spinbutton]",
+                )
+              : trigger.current;
+          dateGuard(store, actor, plan.baseline);
+          if (checked.frame.local.focus.read(actor) !== activePlan)
+            return undefined;
+          target?.focus();
+          dateGuard(store, actor, plan.baseline);
+          if (plan.intent === "editor" && plan.editorHandle)
+            requireCriteriaDateState(plan.editorHandle);
+          if (checked.frame.local.focus.read(actor) === activePlan)
+            checked.frame.local.focus.clear(actor);
+        } catch {
+          /* Real actor/baseline fences survive focus reentry. */
+        }
+        return undefined;
+      });
+      current.local.focus.write(actor, { ...plan, actor, work });
+    } catch {
+      /* Revoked actual actor/edit. */
+    }
+  }, [store, actor, version]);
+  if (!frame || !actor) return <CriteriaToolbarNeutral kind="date" />;
+  try {
+    const live = dateLive(frame),
+      messages = dateMessages(frame),
+      active = !frame.disabled,
+      configured = configuredCriteriaDate(store, actor, live.baseline),
+      local = readCriteriaDateToolbar(frame.local.bundle, actor),
+      open = local.open && active;
+    let summary = "";
+    if (active) {
+      if (!live.state.query.date) summary = messages.emptySummary;
+      else {
+        dateGuard(store, actor, live.baseline, live.context.evaluatedAt);
+        summary = frame.ports.messages?.formatSummary
+          ? frame.ports.messages.formatSummary(
+              live.state.query.date,
+              live.context,
+            )
+          : live.state.query.date.operator === "date.on" &&
+              (live.state.query.date.value.kind === "relative" ||
+                live.state.query.date.value.kind === "rolling")
+            ? messages.formatRelative(live.state.query.date.value)
+            : messages.formatSummary(live.state.query.date, live.context);
+        dateGuard(store, actor, live.baseline, live.context.evaluatedAt);
+        if (typeof summary !== "string")
+          throw new Error("Criteria date unavailable.");
+      }
+    }
+    const candidateValid =
+      local.candidate !== null &&
+      validateCriteriaDate(
+        store,
+        actor,
+        local.candidate,
+        live.baseline,
+        local.handle
+          ? { handle: local.handle, candidate: canonicalJson(local.candidate) }
+          : undefined,
+      ) !== null;
+    const presets = open ? datePresets(store, actor, live.baseline) : [];
+    let zone = "";
+    if (open) {
+      dateGuard(store, actor, live.baseline);
+      zone = messages.formatTimeZone(live.context.timeZone);
+      dateGuard(store, actor, live.baseline, live.context.evaluatedAt);
+      if (local.handle) requireCriteriaDateState(local.handle);
+      if (typeof zone !== "string")
+        throw new Error("Criteria date unavailable.");
+    }
+    const editHandle = local.handle;
+    const output = (
+      <div className={`tw-filter-date ${frame.className}`}>
+        <div className="tw-filter-date-actions">
+          <Button
+            ref={trigger}
+            variant="secondary"
+            isDisabled={!active || !configured}
+            aria-expanded={open}
+            aria-controls={editorId}
+            onPress={() => openDate(store, actor)}
+          >
+            {messages.label}
+          </Button>
+          <output
+            className="tw-filter-date-summary"
+            aria-label={messages.label}
+          >
+            {summary}
+          </output>
+          <Button
+            variant="tertiary"
+            isDisabled={!active || live.state.query.date === null}
+            onPress={() => submitDate(store, actor, true)}
+          >
+            {messages.clearLabel}
+          </Button>
+        </div>
+        {!configured ? (
+          <p role="alert">{messages.invalidConfiguration}</p>
+        ) : null}
+        {!active ? <p role="status">{messages.unavailable}</p> : null}
+        {open && live.field && editHandle ? (
+          <div
+            ref={editor}
+            id={editorId}
+            className="tw-filter-date-editor"
+            onKeyDownCapture={(event) => {
+              try {
+                dateGuard(store, actor);
+                requireCriteriaDateState(editHandle);
+                if (event.key === "Escape") {
+                  if (
+                    event.target instanceof Element &&
+                    event.target.closest(
+                      '[data-slot="date-picker-popover"], [data-slot="date-range-picker-popover"]',
+                    )
+                  )
+                    return;
+                  dateGuard(store, actor);
+                  requireCriteriaDateState(editHandle);
+                  event.preventDefault();
+                  event.stopPropagation();
+                  closeDate(store, actor);
+                }
+              } catch {
+                /* Denied before event/DOM reads. */
+              }
+            }}
+          >
+            <p className="tw-date-hint">{zone}</p>
+            <div className="tw-filter-date-actions">
+              {presets.map((preset) => {
+                const allowed =
+                    validateCriteriaDate(
+                      store,
+                      actor,
+                      preset.date,
+                      live.baseline,
+                      editHandle ? { handle: editHandle } : undefined,
+                    ) !== null,
+                  presetId = preset.id;
+                return (
+                  <div key={presetId}>
+                    <Button
+                      variant="tertiary"
+                      isDisabled={!allowed}
+                      onPress={() => {
+                        try {
+                          dateGuard(store, actor);
+                          requireCriteriaDateState(editHandle);
+                          presetDate(store, actor, presetId);
+                        } catch {
+                          /* Saved old edit cannot act on a new session. */
+                        }
+                      }}
+                    >
+                      {preset.label}
+                    </Button>
+                    {!allowed ? (
+                      <small>{messages.invalidConfiguration}</small>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+            {live.mode === "single" ? (
+              <DateOperandEditor
+                criteriaState={editHandle}
+                cardinality="one"
+                value={null}
+                resetKey={0}
+                field={live.field}
+                context={live.context}
+                messages={messages}
+                onDraftChange={(draft) =>
+                  criteriaDateState.operand(editHandle, draft)
+                }
+              />
+            ) : (
+              <DateOperandEditor
+                criteriaState={editHandle}
+                cardinality="range"
+                value={null}
+                resetKey={0}
+                field={live.field}
+                context={live.context}
+                messages={messages}
+                onDraftChange={(draft) =>
+                  criteriaDateState.operand(editHandle, draft)
+                }
+              />
+            )}
+            <div className="tw-filter-date-actions">
+              <Button
+                className="tw-confirm-action"
+                isDisabled={!candidateValid}
+                onPress={() => {
+                  try {
+                    dateGuard(store, actor);
+                    requireCriteriaDateState(editHandle);
+                    submitDate(store, actor, false);
+                  } catch {
+                    /* Saved old edit cannot apply a new session. */
+                  }
+                }}
+              >
+                {messages.applyLabel}
+              </Button>
+              <Button
+                variant="tertiary"
+                onPress={() => {
+                  try {
+                    dateGuard(store, actor);
+                    requireCriteriaDateState(editHandle);
+                    closeDate(store, actor);
+                  } catch {
+                    /* Saved old edit cannot close a new session. */
+                  }
+                }}
+              >
+                {messages.cancelLabel}
+              </Button>
+            </div>
+          </div>
+        ) : null}
+        <span className="tw-filter-status" role="status">
+          {active ? local.notice : ""}
+        </span>
+      </div>
+    );
+    dateGuard(store, actor, live.baseline, live.context.evaluatedAt);
+    if (open && editHandle) requireCriteriaDateState(editHandle);
+    return output;
+  } catch {
+    return <CriteriaToolbarNeutral kind="date" />;
+  }
 }

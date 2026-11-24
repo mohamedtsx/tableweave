@@ -13,6 +13,18 @@ import type {
 import { parseDate, toCalendarDate } from "@internationalized/date";
 import type { DatePoint, DateRange } from "@tableweave/react/contracts";
 import { useRef, useState } from "react";
+import type {
+  CriteriaDateStateHandle,
+  CriteriaDateStateProps,
+} from "./criteria-date-state.js";
+import {
+  criteriaDateChild,
+  criteriaDateState,
+  readCriteriaDateState,
+  requireCriteriaDateState,
+  useCriteriaDateRoute,
+  useCriteriaDateVersion,
+} from "./criteria-date-state.js";
 import { DateSegmentsObserver } from "./date-segments.js";
 import type {
   DateDraft,
@@ -22,7 +34,7 @@ import type {
 } from "./date-types.js";
 import { calendarSeed, dayWire, pickerBounds } from "./date-wire.js";
 
-interface DayPickerBase {
+interface DayPickerBase extends CriteriaDateStateProps {
   readonly field: DateFieldDefinition;
   readonly context: FilterDateContext;
   readonly disabled: boolean;
@@ -45,6 +57,18 @@ function editingKey(key: string): boolean {
 }
 
 export function DayPointPicker(
+  props: DayPickerBase & {
+    readonly label: string;
+    readonly initialValue: DatePoint | null;
+    readonly onDraft: (draft: DateDraft<DatePoint>) => void;
+  },
+) {
+  const route = useCriteriaDateRoute(props);
+  if (route.kind === "legacy") return <LegacyDayPointPicker {...props} />;
+  if (route.kind !== "adopted") return null;
+  return <CriteriaDayPointPicker handle={route.handle} />;
+}
+function LegacyDayPointPicker(
   props: DayPickerBase & {
     readonly label: string;
     readonly initialValue: DatePoint | null;
@@ -153,6 +177,17 @@ export function DayPointPicker(
 }
 
 export function DayRangePicker(
+  props: DayPickerBase & {
+    readonly initialValue: DateRange | null;
+    readonly onDraft: (draft: DateDraft<DateRange>) => void;
+  },
+) {
+  const route = useCriteriaDateRoute(props);
+  if (route.kind === "legacy") return <LegacyDayRangePicker {...props} />;
+  if (route.kind !== "adopted") return null;
+  return <CriteriaDayRangePicker handle={route.handle} />;
+}
+function LegacyDayRangePicker(
   props: DayPickerBase & {
     readonly initialValue: DateRange | null;
     readonly onDraft: (draft: DateDraft<DateRange>) => void;
@@ -304,4 +339,311 @@ export function DayRangePicker(
       </DateRangePicker.Popover>
     </DateRangePicker>
   );
+}
+
+function CriteriaDayPointPicker({
+  handle,
+}: {
+  readonly handle: CriteriaDateStateHandle;
+}) {
+  useCriteriaDateVersion(handle);
+  try {
+    const state = readCriteriaDateState(handle),
+      bounds = pickerBounds(state.field, state.context),
+      seed = calendarSeed(state.context),
+      messages = state.messages;
+    const label =
+      state.part === "start"
+        ? messages.startLabel
+        : state.part === "end"
+          ? messages.endLabel
+          : messages.pointLabel;
+    const observer = criteriaDateChild(handle, state.part, "day-observer");
+    const output = (
+      <DatePicker
+        value={state.day}
+        onChange={(next) => {
+          try {
+            criteriaDateState.picker(handle, next);
+          } catch {
+            /* Denied. */
+          }
+        }}
+        placeholderValue={seed}
+        minValue={bounds.min}
+        maxValue={bounds.max}
+        granularity="day"
+        isDisabled={false}
+        validationBehavior="aria"
+      >
+        <Label>{label}</Label>
+        <DateField.Group variant="secondary">
+          <div
+            onKeyDownCapture={(event) => {
+              try {
+                requireCriteriaDateState(handle);
+                if (editingKey(event.key) && !event.ctrlKey && !event.metaKey)
+                  criteriaDateState.editing(handle);
+              } catch {
+                /* Denied before event/DOM payload. */
+              }
+            }}
+          >
+            <DateField.Input>
+              {(segment) => {
+                try {
+                  requireCriteriaDateState(handle);
+                  const node = (
+                    <>
+                      {segment.type === "year" ? (
+                        <DateSegmentsObserver
+                          criteriaState={observer}
+                          onDraft={(draft) =>
+                            criteriaDateState.receive(observer, draft)
+                          }
+                        />
+                      ) : null}
+                      <DateField.Segment segment={segment} />
+                    </>
+                  );
+                  requireCriteriaDateState(handle);
+                  return node;
+                } catch {
+                  // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element; denial renders no DOM.
+                  return <></>;
+                }
+              }}
+            </DateField.Input>
+          </div>
+          <DateField.Suffix>
+            <DatePicker.Trigger aria-label={messages.chooseDateLabel}>
+              <DatePicker.TriggerIndicator />
+            </DatePicker.Trigger>
+          </DateField.Suffix>
+        </DateField.Group>
+        <DatePicker.Popover>
+          <Calendar
+            aria-label={label}
+            defaultFocusedValue={state.day ?? seed}
+            minValue={bounds.min}
+            maxValue={bounds.max}
+            onChange={(next) => {
+              try {
+                requireCriteriaDateState(handle);
+                const value = toCalendarDate(next);
+                requireCriteriaDateState(handle);
+                criteriaDateState.calendar(handle, value);
+              } catch {
+                /* Denied. */
+              }
+            }}
+          >
+            <Calendar.Header>
+              <Calendar.Heading />
+              <Calendar.NavButton
+                slot="previous"
+                aria-label={messages.previousMonthLabel}
+              />
+              <Calendar.NavButton
+                slot="next"
+                aria-label={messages.nextMonthLabel}
+              />
+            </Calendar.Header>
+            <Calendar.Grid>
+              <Calendar.GridHeader>
+                {(day) => {
+                  try {
+                    requireCriteriaDateState(handle);
+                    return <Calendar.HeaderCell>{day}</Calendar.HeaderCell>;
+                  } catch {
+                    // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element; denial renders no DOM.
+                    return <></>;
+                  }
+                }}
+              </Calendar.GridHeader>
+              <Calendar.GridBody>
+                {(date) => {
+                  try {
+                    requireCriteriaDateState(handle);
+                    return <Calendar.Cell date={date} />;
+                  } catch {
+                    // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element; denial renders no DOM.
+                    return <></>;
+                  }
+                }}
+              </Calendar.GridBody>
+            </Calendar.Grid>
+          </Calendar>
+        </DatePicker.Popover>
+      </DatePicker>
+    );
+    requireCriteriaDateState(handle);
+    return output;
+  } catch {
+    return null;
+  }
+}
+
+function CriteriaDayRangePicker({
+  handle,
+}: {
+  readonly handle: CriteriaDateStateHandle;
+}) {
+  useCriteriaDateVersion(handle);
+  try {
+    const state = readCriteriaDateState(handle),
+      bounds = pickerBounds(state.field, state.context),
+      seed = calendarSeed(state.context),
+      messages = state.messages;
+    const output = (
+      <DateRangePicker
+        value={state.range}
+        onChange={(next) => {
+          try {
+            criteriaDateState.range(handle, next);
+          } catch {
+            /* Denied. */
+          }
+        }}
+        placeholderValue={seed}
+        minValue={bounds.min}
+        maxValue={bounds.max}
+        granularity="day"
+        isDisabled={false}
+        validationBehavior="aria"
+      >
+        <Label>{messages.pointLabel}</Label>
+        <DateField.Group variant="secondary">
+          <DateField.InputContainer>
+            {(["start", "end"] as const).map((part) => {
+              const observer = criteriaDateChild(
+                handle,
+                part,
+                "range-observer",
+              );
+              return (
+                <span
+                  key={part}
+                  className="tw-date-range-part"
+                  onKeyDownCapture={(event) => {
+                    try {
+                      requireCriteriaDateState(handle);
+                      if (
+                        editingKey(event.key) &&
+                        !event.ctrlKey &&
+                        !event.metaKey
+                      )
+                        criteriaDateState.editing(handle, part);
+                    } catch {
+                      /* Denied. */
+                    }
+                  }}
+                >
+                  <DateField.Input
+                    slot={part}
+                    aria-label={
+                      part === "start" ? messages.startLabel : messages.endLabel
+                    }
+                  >
+                    {(segment) => {
+                      try {
+                        requireCriteriaDateState(observer);
+                        const node = (
+                          <>
+                            {segment.type === "year" ? (
+                              <DateSegmentsObserver
+                                criteriaState={observer}
+                                onDraft={(draft) =>
+                                  criteriaDateState.receive(observer, draft)
+                                }
+                              />
+                            ) : null}
+                            <DateField.Segment segment={segment} />
+                          </>
+                        );
+                        requireCriteriaDateState(observer);
+                        return node;
+                      } catch {
+                        // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element; denial renders no DOM.
+                        return <></>;
+                      }
+                    }}
+                  </DateField.Input>
+                  {part === "start" ? <DateRangePicker.RangeSeparator /> : null}
+                </span>
+              );
+            })}
+          </DateField.InputContainer>
+          <DateField.Suffix>
+            <DateRangePicker.Trigger aria-label={messages.chooseDateLabel}>
+              <DateRangePicker.TriggerIndicator />
+            </DateRangePicker.Trigger>
+          </DateField.Suffix>
+        </DateField.Group>
+        <DateRangePicker.Popover>
+          <RangeCalendar
+            aria-label={messages.pointLabel}
+            defaultFocusedValue={state.range?.start ?? seed}
+            minValue={bounds.min}
+            maxValue={bounds.max}
+            onChange={(next) => {
+              try {
+                requireCriteriaDateState(handle);
+                const value = {
+                  start: toCalendarDate(next.start),
+                  end: toCalendarDate(next.end),
+                };
+                requireCriteriaDateState(handle);
+                criteriaDateState.calendar(handle, value);
+              } catch {
+                /* Denied. */
+              }
+            }}
+          >
+            <RangeCalendar.Header>
+              <RangeCalendar.Heading />
+              <RangeCalendar.NavButton
+                slot="previous"
+                aria-label={messages.previousMonthLabel}
+              />
+              <RangeCalendar.NavButton
+                slot="next"
+                aria-label={messages.nextMonthLabel}
+              />
+            </RangeCalendar.Header>
+            <RangeCalendar.Grid>
+              <RangeCalendar.GridHeader>
+                {(day) => {
+                  try {
+                    requireCriteriaDateState(handle);
+                    return (
+                      <RangeCalendar.HeaderCell>{day}</RangeCalendar.HeaderCell>
+                    );
+                  } catch {
+                    // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element; denial renders no DOM.
+                    return <></>;
+                  }
+                }}
+              </RangeCalendar.GridHeader>
+              <RangeCalendar.GridBody>
+                {(date) => {
+                  try {
+                    requireCriteriaDateState(handle);
+                    return <RangeCalendar.Cell date={date} />;
+                  } catch {
+                    // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element; denial renders no DOM.
+                    return <></>;
+                  }
+                }}
+              </RangeCalendar.GridBody>
+            </RangeCalendar.Grid>
+          </RangeCalendar>
+        </DateRangePicker.Popover>
+      </DateRangePicker>
+    );
+    requireCriteriaDateState(handle);
+    return output;
+  } catch {
+    return null;
+  }
 }

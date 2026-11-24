@@ -15,6 +15,18 @@ import {
 } from "@internationalized/date";
 import type { DatePoint } from "@tableweave/react/contracts";
 import { useId, useRef, useState } from "react";
+import type {
+  CriteriaDateStateHandle,
+  CriteriaDateStateProps,
+} from "./criteria-date-state.js";
+import {
+  criteriaDateChild,
+  criteriaDateState,
+  readCriteriaDateState,
+  requireCriteriaDateState,
+  useCriteriaDateRoute,
+  useCriteriaDateVersion,
+} from "./criteria-date-state.js";
 import { DayPointPicker } from "./date-picker.js";
 import { DateSegmentsObserver } from "./date-segments.js";
 import type {
@@ -29,7 +41,7 @@ import {
   wallTimeWire,
 } from "./date-wire.js";
 
-export function InstantPointEditor(props: {
+type InstantPointProps = CriteriaDateStateProps & {
   readonly label: string;
   readonly initialValue: DatePoint | null;
   readonly field: DateFieldDefinition;
@@ -37,7 +49,14 @@ export function InstantPointEditor(props: {
   readonly messages: DateEditorMessages;
   readonly disabled: boolean;
   readonly onDraft: (draft: DateDraft<DatePoint>) => void;
-}) {
+};
+export function InstantPointEditor(props: InstantPointProps) {
+  const route = useCriteriaDateRoute(props);
+  if (route.kind === "legacy") return <LegacyInstantPointEditor {...props} />;
+  if (route.kind !== "adopted") return null;
+  return <CriteriaInstantPointEditor handle={route.handle} />;
+}
+function LegacyInstantPointEditor(props: InstantPointProps) {
   const initial =
     props.initialValue?.kind === "instant" ? props.initialValue : null;
   const [text, setText] = useState(initial?.value ?? "");
@@ -216,4 +235,146 @@ export function InstantPointEditor(props: {
       {error ? <p role="alert">{error}</p> : null}
     </div>
   );
+}
+
+function CriteriaInstantPointEditor({
+  handle,
+}: {
+  readonly handle: CriteriaDateStateHandle;
+}) {
+  useCriteriaDateVersion(handle);
+  const hintId = useId();
+  try {
+    const state = readCriteriaDateState(handle),
+      messages = state.messages,
+      label =
+        state.part === "start"
+          ? messages.startLabel
+          : state.part === "end"
+            ? messages.endLabel
+            : messages.pointLabel;
+    const seed = toCalendarDateTime(
+      fromAbsolute(state.context.evaluatedAt, state.context.timeZone),
+    );
+    const day = criteriaDateChild(handle, state.part, "instant-day"),
+      observer = criteriaDateChild(handle, state.part, "time-observer");
+    const output = (
+      <div className="tw-date-instant">
+        <TextField
+          value={state.text}
+          onChange={(next) => {
+            try {
+              criteriaDateState.text(handle, next);
+            } catch {
+              /* Denied. */
+            }
+          }}
+          isDisabled={false}
+          aria-describedby={hintId}
+        >
+          <Label>{`${label} — ${messages.exactInstantLabel}`}</Label>
+          <Input spellCheck={false} autoComplete="off" />
+        </TextField>
+        <p id={hintId} className="tw-date-hint">
+          {messages.exactInstantHint}
+        </p>
+        {/* Only an explicit exact-ISO edit resets convenience inputs, never actor,
+          configuration/query allocation or the authoritative freeform field. */}
+        <div
+          key={state.controlsRevision}
+          className="tw-date-instant-fields"
+          onKeyDownCapture={() => {
+            try {
+              criteriaDateState.dirty(handle);
+            } catch {
+              /* Denied. */
+            }
+          }}
+          onPointerDownCapture={() => {
+            try {
+              criteriaDateState.dirty(handle);
+            } catch {
+              /* Denied. */
+            }
+          }}
+        >
+          <DayPointPicker
+            criteriaState={day}
+            label={label}
+            initialValue={null}
+            field={state.field}
+            context={state.context}
+            disabled={false}
+            messages={messages}
+            onDraft={(draft) => criteriaDateState.operand(handle, draft)}
+          />
+          <TimeField
+            value={state.time}
+            placeholderValue={seed}
+            onChange={(next) => {
+              try {
+                criteriaDateState.time(handle, next);
+              } catch {
+                /* Denied. */
+              }
+            }}
+            granularity="second"
+            isDisabled={false}
+            validationBehavior="aria"
+          >
+            <Label>{messages.timeLabel}</Label>
+            <TimeField.Group variant="secondary">
+              <div
+                onKeyDownCapture={(event) => {
+                  try {
+                    requireCriteriaDateState(handle);
+                    if (
+                      event.key !== "Tab" &&
+                      event.key !== "Shift" &&
+                      !event.ctrlKey &&
+                      !event.metaKey
+                    )
+                      criteriaDateState.timeEditing(handle);
+                  } catch {
+                    /* Denied before DOM/event reads. */
+                  }
+                }}
+              >
+                <TimeField.Input>
+                  {(segment) => {
+                    try {
+                      requireCriteriaDateState(handle);
+                      const node = (
+                        <>
+                          {segment.type === "hour" ? (
+                            <DateSegmentsObserver
+                              criteriaState={observer}
+                              onDraft={(draft) =>
+                                criteriaDateState.receive(observer, draft)
+                              }
+                            />
+                          ) : null}
+                          <TimeField.Segment segment={segment} />
+                        </>
+                      );
+                      requireCriteriaDateState(handle);
+                      return node;
+                    } catch {
+                      // biome-ignore lint/complexity/noUselessFragments: vendor render prop requires an element, not null; denial renders no DOM.
+                      return <></>;
+                    }
+                  }}
+                </TimeField.Input>
+              </div>
+            </TimeField.Group>
+          </TimeField>
+        </div>
+        {state.error ? <p role="alert">{state.error}</p> : null}
+      </div>
+    );
+    requireCriteriaDateState(handle);
+    return output;
+  } catch {
+    return null;
+  }
 }
