@@ -54,3 +54,8 @@ reports untouched. Record all unchanged source/accepted proof inputs in a new st
 map; old105-source browser guard stays historical. Exact commands/results/deferred
 checks go in own README. No verification approval/SSR/manual/WCAG/full-WP09 claim.
 Stop if an excluded field/API or runtime change is required; main owns allocation.
+
+Provisional isolated49c641e is intaken as8cdbae3 after U4 handoff. The
+[actual handoff](../../tests/pagination-policy/pager-disabled/README.md) records19
+authored/unexecuted cases and lightweight TS6/scope results. Main's integrated
+whole-HeroUI TS6 compile passes; no behavioral/independent acceptance follows.

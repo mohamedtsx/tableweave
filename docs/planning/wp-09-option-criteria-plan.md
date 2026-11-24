@@ -60,3 +60,12 @@ negative/import/lifetime/browser and independent verification stay deferred to t
 user's final phase. Own README records exact APIs, source/fixture hashes, actual
 checks and deferred commands. No approval, full privacy/SSR or release claim.
 Stop with concrete path/API conflict before editing outside this lease.
+
+## Preserved provisional handoff
+
+Isolated1004252 contains the three allocated sources/own test folder. Main reads
+the actual bridge/capability/source protocol and checks staged whitespace. The
+worker's light TS6/static graph/syntax checks pass;104 other sources/510 non-source
+inputs remain unchanged. Runtime/negative/independent checks are deferred. Intake
+waits for the current F1 protected-source handoff; this does not approve cleanup or
+privacy behavior from static inspection alone.

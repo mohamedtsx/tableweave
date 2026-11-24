@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["node", "react", "react-dom"],
+    "lib": ["ES2022", "ES2023.Intl", "DOM"],
+    "paths": {
+      "@tanstack/react-table": [
+        "../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ]
+    }
+  },
+  "include": ["./*.ts"]
+}

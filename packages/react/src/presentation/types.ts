@@ -146,6 +146,8 @@ export interface ControlsAuthorityOwner<
   readonly controller: TableController<S>;
 }
 interface ControlsAuthorityBase<S extends QuerySchema, T extends RowData> {
+  /** Optional denial-only current gate. Captured as own data, never a grant. */
+  readonly checkCurrent?: () => undefined;
   readonly definition: NativeDefinition<S, T>;
   readonly controller: TableController<S>;
   /** Capture render-origin tags, never an opaque application request key. */

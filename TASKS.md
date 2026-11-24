@@ -12,34 +12,78 @@
 - U4 native/complete binding/projection under its eight-source/one-fixture lease
   has handed off provisionally. Main inspected its API/diff and completed one
   lightweight package TS6 compile; exhaustive checks remain deferred.
-- Isolated parallel tracks: three-file disabled-pager guard; new EN/AR locale
-  modules; source-owned option reset bridge (frozen install succeeded); private
-  typed-facade contract. Their written plans own exact bounded paths.
-- Generation harness is preserved in isolated34fad4f, not intaken. Current=fc01;
+- U4 is353653a; harness/pager/locale intakes aredbdc7a2/8cdbae3/55a21ff.
+  Both package TS6 light compiles pass. **F1 genuine criteria-frame work is now
+  active** under its five-existing/two-new-source lease at canonical109-source
+  map048c088c…; no other worker may edit those paths.
+- F1 stopped on TanStack's nested constructed-sort callback closure. Main confirms
+  the installed source trace; user selects **Explicit helper** in the ask modal.
+  Its lease now additionally owns new tanstack/sort.ts for genuine helper/built-in
+  guarded clones. No vendor patch or silent weaker guard; raw native APIs unchanged.
+- F1/helper now hands off provisionally at11636636… after the user-selected fix.
+  Main reads the actual APIs/source, verifies21 input/104 protected source hashes
+  and performs one successful whole-React TS6 noEmit compile. No runtime correction
+  or independent approval is claimed. Main commits before disjoint intake.
+- Isolated UI-port capture is preserved as5d6a4c3; option reset and typed
+  facade definition handoffs are preserved as1004252/1ebfb62, awaiting intake after
+  F1. Pager/EN/AR/harness are intaken provisionally. Written plans own exact paths.
+- Generation harness is intaken asdbdc7a2 from isolated34fad4f. Current=fc01;
   both historical output identities remain unchanged. New generation registration
   and actual default-root generation checks are still unresolved, not passed.
-- Next integration: commit the received U4 handoff provisionally, then intake
-  disjoint harness/pager/locale work and allocate genuine
-  criteria-frame/tool adoption. Do not duplicate running workers or their checks.
+- Next integration: receive F1 and isolated bridge/definition handoffs, inspect
+  actual APIs/light compile and allocate committed UI-port/tool adoption. Do not
+  duplicate running workers or their checks.
 - External runner access and real consumer are deferred by the user. Ask modal
   handles new policy/permission/input blockers; do not invent external evidence.
 
 Disabled-pager implementation is preserved in isolated49c641e after main's API/diff
 inspection and whitespace check. Its19 cases are authored, zero executed this phase;
 worker light TS6 noEmit passed55 roots. Full behavior/independent verification is
-deferred, not approved. Intake waits for U4's protected-source handoff; existing
+deferred, not approved. Intake is8cdbae3 after U4's handoff; existing
 historical native-browser12-pass/2-fail evidence remains unchanged.
 U4 aggregate208263cd521a993896a86dfedc99f8680215991fad0731b3966c993df5d95549 matches20
 inputs/97 protected sources. Main's whole-React TS6 noEmit compile passes; actual
 eight-file API/diff and one-line fixture delta are inspected. No U4 runtime/preimage/
 type-matrix/independent pass is claimed. Post-U4 source105 map is3c19bf0f7090bbf6bf29d88466f945676507e2a942ecbcaa51a3b2e3f9c9b270,
 preserving old maps. Main commits provisional U4 before disjoint intake.
+Main intakes all three disjoint commits without conflicts and light-compiles both
+packages successfully. Their handoffs remain provisional, current generation stays
+fc01 and no deferred behavioral test is run. F1 now owns the actual post-U4 native/
+controls guard seams and two new paired-frame files;104 other sources freeze.
+Main receives the private facade proposal, selects curried definition/controller
+composition and allocates only two new table definition files/own tests in the
+isolated generations tree. That stage depends on unchanged native factory APIs,
+not changing F1/source unions. Later hook/shell/criteria integration stays unallocated;
+actual native C/CD identity and default placement/state ownership remain mandatory.
+F2 option bridge is preserved in isolated1004252 after main API/source inspection
+and whitespace checking; behavioral/independent proof stays deferred. Main holds
+intake until F1's source-map handoff. The now-free isolated worker gets only a new
+UI capture-helper file/own tests: exact actual callback ports, no F1 symbols/actor/
+React publication/tool behavior. It remains a provisional prerequisite, not adoption.
+P1 definition/controller handoff is preserved in isolated1ebfb62 after main source/
+API inspection and whitespace checking: two new sources/own fixtures,750 protected
+inputs unchanged. Its one successful TS6 compile predates final small guard edits;
+final syntax/scoped lint pass, but no final-source compile/runtime/negative/independent
+claim follows. Main intake waits for F1, then light-compiles actual combined source.
+The facade proposal also names a genuine remaining dependency: initial-error Retry
+without a displayed frame needs committed source-metadata callback readiness, not
+a fabricated native frame/tool grant. Main will allocate that bounded companion
+after actual F1 handoff, before shell/hook completion. No unsafe retry fallback.
+F3a capture-only helper is preserved in isolated5d6a4c3 after main API inspection
+and whitespace checking. Worker final light TS6/static syntax/import checks pass;
+all728 existing inputs/23 F2 files remain unchanged. Runtime/negative/actor/React
+proof is deferred. No actual raw tool is adopted and no callback readiness follows
+from this helper alone. Main holds all three disjoint intakes until F1 hands off.
+F1's exact21-input aggregate is1163663648c3833d27a982c92163c2d89772837b7acd5bc956e9159f314074dc.
+Post-F1 source112 mapb6a4f38903b059dd57f69918e197b8a90337618df610b60fac80a0dcc7cc58e3
+keeps old maps intact. Historical blocker/failed attempts remain preserved; all
+runtime/helper positives/dual types/independent proof still wait for the final phase.
 Localization is preserved in isolatedb286884 after main API/source inspection and
 whitespace checking:11 real message ports/36 built-in labels, five authored unit
 cases/ten type-negative lines, zero runtime cases executed. Worker light TS6 and
 static seven-data-module graph passed; all752 protected inputs unchanged. This is
-not Arabic/native-language/RTL/SSR/package approval. Intake/public exports wait for
-the active U4 source handoff; original bootstrap proof remains unchanged.
+not Arabic/native-language/RTL/SSR/package approval. Intake is55a21ff; public exports
+remain separate. Original bootstrap proof remains unchanged.
 
 ## Current WP-09 integration boundary
 

@@ -1604,3 +1604,29 @@ delegated authority** for client native source only. No server completeness/cont
 projection/pager/facade/output-generation/full-WP09 or merge approval follows.
 Post-U2 pre-U3 source105 canonical map is497a1e37cd60c4080243847760e23526b8fe7cb033627ead9c7042d3ca0b0790;
 historical maps remain intact. Only a separately activated U3 lease may change resource.
+
+## WP-09 F1 implementation contract — review session 9 (provisional)
+
+### n1 — Constructed sort resolver calls escape an outer callback fence
+
+- **Finding:** the installed TanStack9.3.1 option is sortFn. Its constructSortFn
+  closure calls resolver A, resolver B, then sort using its original function object.
+  Replacing wrapper properties cannot interpose after resolver A revokes permission.
+- **Independent check:** main reads actual installed sortFns.js:34–45 and
+  rowSortingFeature.types.d.ts:20–50/88, confirming the static call/closure trace.
+  No runtime failing test or successful correction is claimed; the original
+  BLOCKER.md and authored obligation remain preserved in tests/criteria-frame/.
+- **User decision:** the ask modal selects Explicit helper, not a vendor patch or
+  weaker fence. Author createTableSortFn using actual vendor factory + private
+  provenance; rebuild recognized helper/built-ins with separately guarded callbacks.
+  Unregistered constructed/ambiguous functions deny on the protected route only;
+  ordinary custom callback internals remain app-owned. Raw native APIs are unchanged.
+- **Status:** correction is authorized, not implemented/verified/approved here.
+  Exact scope is in the criteria-frame plan. Runtime/golden/type/independent proof
+  remains in the user's final verification phase; this session is not F1 acceptance.
+
+Implementation follow-up: F1/helper handoff11636636… now implements the selected
+route. Main inspects actual source/API, matches21 input/104 protected source hashes
+and passes one whole-package TS6 noEmit compile. One-resolver/zero-sort positives,
+receiver/order parity and independent correction verification remain **unexecuted**
+and deferred. n1 is not marked verified or accepted from these lightweight checks.

@@ -59,3 +59,8 @@ browser/packed/type/CI matrices. No dummy WP09 entry, optional hash/bypass or au
 registration command. Return implementation-ready/provisional with exact changed
 paths/commands/seals. Final independent verification and real candidate registration
 remain required before output approval or final packet acceptance.
+
+Provisional isolated34fad4f is intaken asdbdc7a2 after U4 handoff. Current remains
+fc01; [actual handoff](../../tests/foundation/public-generation-handoff.md) records
+light checks and deferred matrices. Neither candidate registration nor live-root
+generation acceptance follows from preserving historical fixture tests.

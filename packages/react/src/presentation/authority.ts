@@ -1,12 +1,17 @@
 import type { RowData } from "@tanstack/react-table";
 import type { QuerySchema } from "../contracts/types.js";
-import type { MutationResult } from "../controller/types.js";
+import type { MutationResult, TableCommand } from "../controller/types.js";
 import type { ResourceContext } from "../resource/types.js";
 import {
   assertNativeController,
   assertNativeState,
 } from "../tanstack/definition.js";
 import { getControlsRequestBinding, unavailable } from "./binding.js";
+import {
+  type CriteriaCheck,
+  type CriteriaNativeCallbacks,
+  createCriteriaCallbacks,
+} from "./criteria-callbacks.js";
 import { maskedControlsPresentation } from "./masked.js";
 import { projectControlsState } from "./project.js";
 import type {
@@ -33,6 +38,27 @@ export function createControlsAuthority<
   S extends QuerySchema,
   T extends RowData,
 >(options: ControlsAuthorityOptions<S, T>): ControlsAuthority<S, T> {
+  let check: CriteriaCheck | undefined;
+  try {
+    const field = Object.getOwnPropertyDescriptor(options, "checkCurrent");
+    if (field) {
+      if (!Object.hasOwn(field, "value") || typeof field.value !== "function")
+        return unavailable();
+      const fn: (...args: never[]) => unknown = field.value;
+      check = () => {
+        try {
+          if (Reflect.apply(fn, options, []) !== undefined)
+            return unavailable();
+        } catch {
+          return unavailable();
+        }
+        return undefined;
+      };
+    } else if ("checkCurrent" in options) return unavailable();
+  } catch {
+    return unavailable();
+  }
+  let work: CriteriaNativeCallbacks<S, T> | undefined;
   // Tags and ports only. No captured rows/view/resource snapshot and no leases.
   const {
     definition,
@@ -44,6 +70,7 @@ export function createControlsAuthority<
   } = options;
   const context = Object.freeze({ ...options.context });
   const latest = () => {
+    check?.();
     const committed = { ...readCommitted() };
     const expected = Object.freeze({ ...committed.expected });
     const inputSource = { ...committed.source };
@@ -60,6 +87,7 @@ export function createControlsAuthority<
       source.mode === "client"
         ? source.context
         : Object.freeze({ ...source.view.context });
+    check?.();
     return { committed: { ...committed, expected }, source, actualContext };
   };
   const sameScope = (a: ResourceContext, b: ResourceContext) =>
@@ -86,6 +114,7 @@ export function createControlsAuthority<
   };
   const readFrame = () => {
     try {
+      check?.();
       const { committed, source, actualContext } = latest();
       // Reject origin changes before projecting any foreign aggregate/activity
       // facts. Only immutable origin configuration survives this boundary.
@@ -118,11 +147,14 @@ export function createControlsAuthority<
                 remote.resource,
                 request,
               ) !== null)));
+      if (check && !work) work = createCriteriaCallbacks(definition, check);
       const facts = projectControlsState(
         definition,
         { ...committed, source },
         owner,
+        work,
       );
+      check?.();
       return {
         queryLayout,
         facts:
@@ -148,6 +180,7 @@ export function createControlsAuthority<
     intent: ControlsIntent,
   ): ControlsPresentation<S, T> => {
     try {
+      check?.();
       // Capture new discriminants (and existing payload ports) once, never check
       // an accessor kind and then consume a different kind on a later read.
       const captured = { ...intent };
@@ -172,12 +205,21 @@ export function createControlsAuthority<
                       facts.rows.some((row) => row.id === id),
                     );
       if (!allowed) return unavailable();
+      check?.();
       return facts;
     } catch {
       return unavailable();
     }
   };
   const noop = (): MutationResult<S> => ({ status: "noop" });
+  const dispatch = (command: TableCommand<S>): MutationResult<S> => {
+    check?.();
+    try {
+      return controller.dispatch(command);
+    } finally {
+      check?.();
+    }
+  };
   const pageIndex = (index: number) => {
     const facts = requireIntent({ type: "navigate" });
     if (!Number.isSafeInteger(index) || index < 0 || !facts.displayed)
@@ -192,7 +234,7 @@ export function createControlsAuthority<
         return unavailable();
     } else if (index > Math.max(0, facts.displayed.pageCount - 1))
       return unavailable();
-    return controller.dispatch({
+    return dispatch({
       type: "pagination.change",
       update: (previous) => ({ ...previous, pageIndex: index }),
     });
@@ -204,7 +246,7 @@ export function createControlsAuthority<
       if (typeof selected !== "boolean" || typeof id !== "string" || !id)
         return unavailable();
       requireIntent({ type: "select-row", id });
-      return controller.dispatch({
+      return dispatch({
         type: "selection.change",
         update(previous) {
           const next = Object.assign(
@@ -220,7 +262,7 @@ export function createControlsAuthority<
     selectPage(selected: boolean) {
       if (typeof selected !== "boolean") return unavailable();
       const facts = requireIntent({ type: "select-page" });
-      return controller.dispatch({
+      return dispatch({
         type: "selection.page",
         selected,
         pageIds: facts.rows.map((row) => row.id),
@@ -236,12 +278,12 @@ export function createControlsAuthority<
         return unavailable();
       }
       // Recovery ignores query freshness, but never the origin owner or scope.
-      return controller.dispatch({ type: "selection.cancel" });
+      return dispatch({ type: "selection.cancel" });
     },
     setPageIndex: pageIndex,
     setPageSize(size: number) {
       requireIntent({ type: "navigate" });
-      return controller.dispatch({
+      return dispatch({
         type: "pagination.change",
         update: (previous) => ({ ...previous, pageSize: size }),
       });
@@ -260,7 +302,12 @@ export function createControlsAuthority<
     },
     retry() {
       requireIntent({ type: "retry" });
-      return resource?.retry() ?? null;
+      check?.();
+      try {
+        return resource?.retry() ?? null;
+      } finally {
+        check?.();
+      }
     },
   });
   authorityOwners.set(authority, Object.freeze({ definition, controller }));

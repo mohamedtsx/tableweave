@@ -73,6 +73,10 @@ The [option criteria bridge lease](wp-09-option-criteria-plan.md) isolates two-p
 source reset implementation from native frame integration; verification is deferred.
 The [criteria-frame plan](wp-09-criteria-frame-plan.md) records the chosen genuine
 paired-boundary mechanism but stays inactive until U4's actual interface handoff.
+The [isolated facade definition lease](wp-09-facade-definition-plan.md) implements
+new typed definition/controller composition against unchanged native factory APIs.
+The [UI-port capture lease](wp-09-criteria-ui-ports-plan.md) authors internal captured
+callback schemas independently; committed actor/tool adoption still waits for F1.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

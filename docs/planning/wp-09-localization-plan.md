@@ -55,7 +55,9 @@ own test/handoff files. Main inspects actual types/dictionaries/imports and runs
 git diff --cached --check, without executing deferred tests. Worker records one
 successful lightweight TS6 check, a static seven-data-module graph and752 unchanged
 protected inputs. Five units/ten type negatives remain authored, not verified.
-Later main intake links tests/localization/README.md and owns public facade wiring.
+Main intakes this as55a21ff; [actual handoff](../../tests/localization/README.md)
+records deferred checks. Integrated whole-HeroUI TS6 passes; main still owns public
+exports/facade wiring and no localization/manual-language acceptance follows.
 
 ## Authored proof and light checks
 

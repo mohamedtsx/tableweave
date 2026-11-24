@@ -17,6 +17,7 @@ import {
 } from "../tanstack/definition.js";
 import type { NativeDefinition } from "../tanstack/types.js";
 import { getControlsRequestBinding, hasBindingProof } from "./binding.js";
+import type { CriteriaNativeCallbacks } from "./criteria-callbacks.js";
 import { maskedControlsPresentation } from "./masked.js";
 import type {
   ControlsBlockedReason,
@@ -65,7 +66,9 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
   definition: NativeDefinition<S, T>,
   input: ControlsInput<S, T>,
   owner: TableState<S>,
+  work?: CriteriaNativeCallbacks<S, T>,
 ): ControlsPresentation<S, T> {
+  work?.check();
   const { native } = input;
   const expected = { ...input.expected };
   // Authenticate and consume the same captured ports/view, not a getter that can
@@ -137,6 +140,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
     reason: ControlsBlockedReason,
     valid = true,
   ): ControlsPresentation<S, T> => {
+    work?.check();
     const neutral = maskedControlsPresentation<S, T>(
       definition.selectionMode,
       definition.paginationEnabled,
@@ -223,7 +227,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
         : token.evaluatedAt === binding.evaluatedAt &&
           request.evaluatedAt === binding.evaluatedAt) &&
       getQueryIdentity(definition.controllerDefinition.schema, request.query, {
-        ...definition.evaluation,
+        ...(work?.evaluation ?? definition.evaluation),
         now: binding.evaluatedAt,
       }) === binding.queryIdentity
     );
@@ -356,7 +360,7 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
     for (const record of records) {
       if (record === null || typeof record !== "object")
         return blocked("source");
-      const id = definition.getRowId(record);
+      const id = work ? work.getRowId(record) : definition.getRowId(record);
       if (typeof id !== "string" || !id || loaded.has(id))
         return blocked("source");
       loaded.set(id, record);
@@ -404,13 +408,17 @@ export function projectControlsState<S extends QuerySchema, T extends RowData>(
     const plan = compileFilter(
       definition.controllerDefinition.schema,
       owner.query,
-      { ...definition.evaluation, now: owner.evaluatedAt },
+      {
+        ...(work?.evaluation ?? definition.evaluation),
+        now: owner.evaluatedAt,
+      },
     );
     const filtering =
       plan.builder.rules.length > 0 ||
       plan.tab.rules.length > 0 ||
       plan.date !== null ||
       plan.search.text.length > 0;
+    work?.check();
     return Object.freeze({
       paginationEnabled: definition.paginationEnabled,
       selectionMode: definition.selectionMode,
