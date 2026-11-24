@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-08 final-stack observations — 2026-11-24](wp-08-stack-2026-11-24.md):
+  exact WP-07 transport/reconciliation and initial merged checks; real-tool and
+  complete combined workflow results are recorded only after execution.
+
 - [WP-06 actual Start proof — 2026-11-24](wp-06-start-2026-11-24.md):
   independent isolation corrections, strict declaration/install confinement and
   completed actual source/tarball HTTP SSR/hydration; scoped delegated G-04 only.

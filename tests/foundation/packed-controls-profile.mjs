@@ -11,6 +11,8 @@ import {
 import { createRequire } from "node:module";
 import { dirname, join, resolve, sep } from "node:path";
 import { checkPackedControls } from "./packed-controls.mjs";
+import { checkPackedFilterControls } from "./packed-filter-controls.mjs";
+import { checkPackedFocusHandoff } from "./packed-focus-handoff.mjs";
 
 const assetNames = [
   "runtime.patch",
@@ -155,6 +157,8 @@ export async function checkPackedControlsProfile(
   command(process.execPath, ["runtime.mjs", "--styled"]);
 
   const browser = await checkPackedControls(root, consumer);
+  const filterComposition = await checkPackedFilterControls(root, consumer);
+  const focusHandoff = await checkPackedFocusHandoff(root, consumer);
   command(process.execPath, [verifier, consumer]);
   for (const name of assetNames)
     assert.equal(
@@ -179,5 +183,7 @@ export async function checkPackedControlsProfile(
     lock: "frozen-reinstall-unchanged",
     nodeImports: "actual-profiled-runtime-guards; not-CJS-table-interaction",
     browser,
+    filterComposition,
+    focusHandoff,
   };
 }

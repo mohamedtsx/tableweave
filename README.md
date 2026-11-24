@@ -101,12 +101,12 @@ is enabled by these local commands.
 | `pnpm test:start` | Actual Start build, dev/production HTTP+Chromium SSR/hydration fixtures and server-only bundle markers |
 | `pnpm pack:start` | Actual-tarball Start strict install/types/build/dev+production HTTP/browser proof; no workspace aliases |
 | `pnpm test:filter-tools` | Candidate helper/option-source/date vectors; UI/packet acceptance remains separate |
-| `pnpm pack:check` | Inspect tarballs; unpatched strict types/import/bundle lanes plus explicit profiled tool/control production Chromium |
+| `pnpm pack:check` | Inspect tarballs; unpatched types/imports/bundles and43 tool cases, plus separate explicit-profile38 control/19 real-composition/10 focus production cases |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
 | `pnpm test:browser` | Baseline/native/resource, actual tools, source controls, emitted composition and built Storybook; build first |
 | `pnpm test:controls:source` | Six serialized source control/renderer scopes; actual vendor dependencies and one source factory registry |
-| `pnpm test:controls:public` | Emitted public control composition and actual built Storybook plays on6483; expects frozen package/Storybook output |
+| `pnpm test:controls:public` | Retained38 controls/four plays plus real19 composition/four plays/ten focus cases; frozen outputs and distinct named evidence runs |
 | `pnpm check:docs` | Structural Markdown checks and checker regression probes |
 | `pnpm check` | Full local sequence above, including fresh-install verification |
 | `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
@@ -146,11 +146,11 @@ remain separate; no PR merge is authorized.
 WP-08's [private controls contract](docs/engineering/wp-08-controls.md) distinguishes
 approved source/public types from final integration. The default check now includes
 the actual control browser boundaries rather than excluding new regressions. It is
-**not final stacked acceptance**: the retained plain StrictMode grouped
-collection defect requires the user-selected explicit temporary runtime profile.
-The isolated ordered workflow passes after independent integration review, including
-emitted38 and genuine profiled-tarball38. Real WP-07 composition and the combined
-stack workflow remain required. Follow the
+**bounded private/prerelease integration**, not personal/stable acceptance: the
+retained plain StrictMode defect requires the user-selected explicit runtime profile.
+Both isolated and complete ordered stacked workflows pass after independent review,
+including real tool/control composition and permanent public/packed focus regressions.
+Final remote delivery and personal maintainer review remain separate. Follow the
 [private runtime setup](packages/heroui/compat/rac-table-clone/README.md): extract
 the reviewed assets from the actual archive before installation, explicitly register
 the patch and run the byte verifier. Tableweave does not configure or patch a

@@ -1085,3 +1085,205 @@ commit and safe replay onto exact final WP-07 precede real tool composition and
 combined verification. This is not final packet/remote delivery, personal maintainer
 review, general unpatched runtime, full CJS interaction, fullG05 or any unmeasured
 manual/device/performance/real-consumer/legal/publication gate. No PR merge.
+
+## WP-08 final stack reconciliation — delegated review session 12
+
+### n1 — Packed-lane description is ambiguous (P3)
+
+Independent review notes README's “profiled tool/control” sentence misdescribes
+the retained lanes. Main verifies that actual code runs WP-07 tools in the unpatched
+consumer and WP-08 controls in a separate explicitly profiled consumer. **Resolved:**
+correct the sentence, preserving the implementation and both regression baselines.
+
+No blocking code finding. Independent comparison preserves146 WP-07-exclusive
+and217 WP-08-exclusive paths byte-for-byte; shared producer/index/CSS/scripts/test
+discovery retain both baselines. Lock/workspace differences only replace the exact
+RAC patch reference, with no upgrades. Independent42 copied asset tests, actual
+three-format workspace guard, TS6/5.9 emitted checks (215/244 files, not installed
+consumers) and exact88-headless/92-styled output union pass. Frozen180-file aggregate
+remainsad59470c7d472563ed273b8b167073953f6f574df0a1910510480082da63a8ce.
+Main's643-unit log is audited, not independently rerun. Active new fixtures are not
+assessed by this review. Main grants bounded delegated stack-reconciliation approval;
+real composition/packed proof/full ordered workflow/remote packet approval remain.
+
+## WP-08 additive archive harness — delegated review session 13
+
+### n1 — Scoped guard review; no blocking finding reproduced
+
+Independent synthetic proof accepts one control case and rejects18 guard negatives
+for the new packed-composition runner. Generated configs retain strictness/local
+consumer isolation/exact inventory/hash guards and dedicated6501 port. No actual
+fixture/compiler/build/browser executes in that review; this is not packed19 proof.
+
+The registry harness adaptation separately passes11 classification cases: only all
+original or all reviewed bytes are accepted; six mixed sets and three unknown
+formats reject. Real registry integrity/private zero-fuzz patch proof also passes
+with truthful reviewed-clone installed labeling, unchanged maps and per-format
+unpatched rejection retained. All10 current manifest entries match; reviewed source
+and actual installed runtime remain unchanged. Main grants bounded harness approval
+for later wiring, not new composition/full stack/CJS interaction/G05/legal/packet
+acceptance. Actual19 must be executed after the fixture is ready.
+
+## WP-08 named-generation evidence guards — review session 15
+
+### n1 — Inherited JSON report FILE overrides unique NAME (P2)
+
+Pinned Playwright prioritizes OUTPUT_FILE; inheriting it can overwrite previous
+evidence before the runner fails to find its expected unique report. Independent
+review corroborates with the genuine pinned --list CLI. Main separately reproduces
+in a private copied runner: the historical sentinel is overwritten and run exits1.
+Fix the highest-priority output path explicitly for every boundary; no browser or
+source assertion is changed.
+
+### n2 — Rebased before-manifest can hide source drift (P2)
+
+If a child changes source and replaces that run's before-map to match, the copied
+runner currently exits0 despite its initial source differing. Main independently
+reproduces this coupled counterexample plus a clean positive control. Keep the
+initial snapshot in parent memory and compare both final manifests to those bytes,
+in addition to helper/public-generation guards. These findings block default
+registration, not the independently completed actual19/four plays or producer fix.
+The separate reviewer verifies77 other guard cases; those are synthetic, not real
+browser acceptance. No shared source/runtime/evidence is modified by these probes.
+
+**n1/n2 resolved for the corrected base runner:** main counter-replay passes the
+clean positive, rejects coupled rebasing and preserves prior report bytes under
+inherited FILE settings. Independent review passes88 synthetic vectors and three
+genuine pinned --list checks at runnere2b71cf3…, with parent-held snapshots and
+unique highest-priority FILE outputs. No browser/packet acceptance follows.
+The later permanent-focus integration adds explicit focus capture/type mode and
+separate snapshot retention; that delta receives another review before activation.
+
+## WP-08 whole real-tool composition — delegated review session 16
+
+### n1 — Bounded composition approval; no blocking finding
+
+Independent review executes four fresh unclocked Chromium scenarios against actual
+target app/shared outputs, audits main19 retry0 successes including the blocked
+tail, and passes strict TS6/5.9. Removing negative directives produces exactly
+seven intended errors per compiler. Four awaited Storybook plays/additive packed
+wiring are sound;14 synthetic host-gate negatives reject. Its four probes and audit
+are not a separately rerun full19, nor actual tarball/Storybook proof.
+
+Main grants bounded delegated real-composition source/emitted integration approval
+with all15 reviewed inputs unchanged. Main separately supplies actual built4 and
+genuine packed19 success. Raw-tool AC-16/25 authority, full ordered stack, final
+packet/remote and all external/full-G05 gates stay separate. No merge is authorized.
+
+## WP-08 real-tool focus integration — review session 14
+
+### n1 — Focused real builder portal falls to BODY on selection swap (P1, resolved)
+
+The real composition run passes18/19 with strict source/public TS6/5.9 and full
+22-file Biome. Its remaining case focuses an unapplied builder value input, accepts
+off-page-only selection through the genuine application seam and verifies normal
+tools/portal unmount. Focus falls to BODY rather than the new selection Cancel.
+A separate unclocked reproduction also fails. Main independently replays before
+any correction and allocates private causal review, not an application workaround
+or vendor/global focus patch. The failing assertion and unexecuted queued-search/
+Cancel/restore tail remain blocking; Storybook4/packed19 are not claimed executed.
+Main's unchanged unclocked replay independently fails at the same Cancel-focus
+assertion (`/tmp/opencode/tableweave-wp08-main-before-focus.log`); no correction has
+been applied. Private causal investigation runs on6503 with shared180 outputs frozen.
+Private causal proof now identifies the actual phase boundary: connected/enabled
+Cancel is still below root[inert] at layout restoration; focus never takes effect.
+Modal passive cleanup clears inert afterward. This agrees with the pinned public
+overlay implementation, not a need for a vendor/global/inert patch. Private clean
+candidate passes59 executions (1 unclocked/19 unchanged/10 focused/29 adapted), both
+strict compilers and Biome. Main applies only that producer correction at source
+4ce900626de4479db7d1d69a7c51db64fca4fbd41ede957280189d82ca347144:
+layout capture stays; restoration moves to passive phase with current-authority,
+config/liveness/phase/surviving-focus checks before and after fallback callbacks.
+No timers, public APIs or other producers change. Independent source review is
+active; shared180 outputs remain the failing generation. This finding stays open
+until actual rebuilt19, permanent focus regressions and later packed proof pass.
+
+### Independent producer disposition
+
+A different reviewer reproduces both original failures and proves original TSX
+emission equals the old JS byte-for-byte. Corrected private emission passes65
+Chromium cases (1 unclocked/19 unchanged/16 focused/29 adapted selection/privacy),
+zero skips/flakes, plus strict TS6/5.9, Biome and two DOM-free SSR/import smokes.
+New negatives cover throwing reads, disabled/inert destinations and fallback
+disposal/reselection, alongside live denial/external focus/Strict/unmount safety.
+Main grants bounded **agent-approved under delegated authority** for source
+4ce900626de4479db7d1d69a7c51db64fca4fbd41ede957280189d82ca347144.
+This is not a root rebuild or full composition/packed pass. Main now authorizes
+the named fc01 build generation; preserve failing manifests before rebuilding,
+verify only toolbar JS changes and rerun the actual boundary before closing n1.
+
+**Resolved at the corrected producer/integration boundary:** actual unchanged19,
+unclocked regression, source selection/privacy29 and old/new built plays4+4 pass.
+Genuine packed composition19 and permanent public focus10 pass; a different reviewer
+freshly reruns all10 and verifies meaningful types. Main separately reviews the
+packed-focus module and runs three fresh production probes against its existing
+actual-consumer build. No timer/vendor/inert/global workaround or assertion removal.
+Complete ordered workflow/final packet approval remain separate from this defect.
+
+## WP-08 permanent focus fixture — delegated review session 17
+
+### n1 — Source/public regression approval; no blocking finding
+
+Independent fresh public10 retry0/zero skip/flaky, public/source TS6/5.9 and three
+supplied intended type negatives plus an extra missing-client-context negative pass.
+All14 inputs match manifest0480312190d5b5023d945bd5b0cf68f9c109e46c322f374dd63f05eee896a4d2.
+Worker's separate10 and12-file Biome are audited, not added as unique cases. Main
+grants bounded delegated permanent source/public fixture approval. That reviewer
+does not assess the packed runner; default/packed/full workflow gates stay separate.
+
+## WP-08 actual packed focus runner — main independent review session 18
+
+### n1 — Bounded genuine packed-focus approval
+
+Main reviews the worker's exact new runner012ae501b27508a2cc9efb69d57209642de5edef3f807a0e2995cb80752319e0:
+fixed regular-file/import allowlist, no source/vendor alias or installer, both strict
+programs, actual installed dist/component checks, physical module confinement,
+unique highest-priority JSON output, exact10 single retry0 results and parent-held
+source/staged/vendor/archive/previous-report guards, including on failure cleanup.
+
+Worker's real production10 pass on6509, both265-file programs,1240 module IDs and
+471501-byte CSS are audited. Main independently serves that unchanged consumer
+production build on6515 and passes three fresh ordinary/Strict/denied-context probes,
+including real input/Cancel/normal focus and private callback suppression. Initial
+standalone test-tool CJS import interop fails before any browser; using the actual
+consumer's require entry corrects that harness-only problem. No product code changes.
+Prior100 report SHA21c8a9fcdb08ba3e8fc43b022f9402f39e03b5beb478dc74c1b4e0032de04bb4
+remains unchanged. Main grants bounded packed-focus approval and registers this
+additional10 in future fresh explicit-profile runs after38+19, before final CLI.
+No full ordered stack/packet/G05/manual/device/legal/publication approval or merge.
+
+## WP-08 final default gate integration — delegated review session 19
+
+### n1 — Types-mode final console label is too broad (P3, resolved)
+
+The report correctly classifies types-only execution, but its final console line
+mentions Storybook/focus browser gates. Main changes only that line to include the
+actual mode; no browser assertion or result classification is changed.
+
+Independent review accepts the dual-namespace integration after123 fresh synthetic
+checks/two history readbacks and four actual strict compiler programs (composition
+668/focus532 files per version). Both snapshots remain parent-anchored; source
+rebasing/report redirection/invalid modes/child failures reject. Main's actual
+types and19+4+10 browser preflights are separate completed evidence. Main grants
+bounded delegated default-gate approval, registers its public/type commands and
+starts the complete ordered stack workflow with runtime/test/config inputs frozen.
+No full packet/remote acceptance or external gate follows before that result.
+
+## WP-08 complete ordered packet disposition
+
+The actual final stacked `pnpm check` completes with exit0:643 Vitest units/42 Node
+asset checks,411 baseline/tool/control/actual-built-play browser executions,110
+genuine packed production cases (43 unpatched tools; separate38 controls/19 real
+composition/10 focus on explicit profile),54 source and54 actual-packed Start
+HTTP/browser checks. Strict type/confinement, source SSR/import, frozen install,
+426-file lint, docs/18 regression probes pass. Pager's three LIMITATION cases remain
+negative host-behavior characterizations, not universal rejection containment.
+
+All verified packet findings are corrected and independently reviewed at their
+recorded scopes. Main grants **agent-approved under delegated authority** for the
+bounded WP-08 packet/component/composition/private temporary-profile integration.
+Actual180 output remains de82ce…; archives retain their tested90/100-member bytes.
+Final Git/PR remote delivery remains to verify. No personal maintainer acceptance,
+ordinary unpatched grouped/Strict runtime, full CJS table behavior, raw vendor
+structures, fullG05/manual/device/performance/real-consumer/legal/publication or
+merge permission is inferred. Raw criteria AC-16/25 adoption remains WP-09's duty.

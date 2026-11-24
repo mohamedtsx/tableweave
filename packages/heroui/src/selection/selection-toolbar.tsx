@@ -4,7 +4,7 @@ import { Button } from "@heroui/react/button";
 import { ButtonGroup } from "@heroui/react/button-group";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ReactNode } from "react";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { captureActions, selectionActionContext } from "./action.js";
 import type {
   SelectionActionContext,
@@ -112,15 +112,44 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
       committed.current = null;
     };
   });
-  useLayoutEffect(() => {
+  // Modal descendants release background inert in passive cleanup. Keep capture
+  // in layout cleanup, but restore only after that cleanup has finished.
+  useEffect(() => {
     const removed = removedFocus.current;
     removedFocus.current = null;
     // Do not call a previous private trigger/fallback or steal surviving external
     // focus on access/context loss. Clear the pending restoration on this commit.
-    if (!removed || !hasPrivatePresentation) return;
-    const active = root.current?.ownerDocument.activeElement;
-    if (active && active !== removed && active !== active.ownerDocument.body)
-      return;
+    const canRestore = () => {
+      if (
+        !hasPrivatePresentation ||
+        committed.current !== config ||
+        !root.current?.isConnected
+      )
+        return false;
+      try {
+        const live = config.read();
+        return (
+          committed.current === config &&
+          root.current?.isConnected === true &&
+          live.requestedQuery !== null &&
+          live.blockedReason !== "context" &&
+          live.blockedReason !== "definition" &&
+          live.selectedIds.length > 0 === selected &&
+          (!selected || live.canCancelSelection)
+        );
+      } catch {
+        return false;
+      }
+    };
+    const survivingFocus = () => {
+      const active = root.current?.ownerDocument.activeElement;
+      return !!(
+        active &&
+        active !== removed &&
+        active !== active.ownerDocument.body
+      );
+    };
+    if (!removed || !canRestore() || survivingFocus()) return;
     let target: HTMLElement | null = selected ? cancel.current : null;
     if (!selected) {
       try {
@@ -130,6 +159,14 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
       }
     }
     if (!target?.isConnected) target = root.current;
+    // The application fallback may synchronously change the owner or move focus.
+    if (
+      !canRestore() ||
+      survivingFocus() ||
+      target?.closest("[inert]") ||
+      target?.matches(":disabled")
+    )
+      return;
     target?.focus({ preventScroll: true });
   });
   // Stable callback: FocusRegion cleanup must not run on ordinary rerenders.

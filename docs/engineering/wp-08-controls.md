@@ -96,6 +96,24 @@ selected ESM production and Node import checks, not full CJS table interactions,
 all raw vendor structures, general package-manager layouts or stable/G-05/manual/
 device/performance/legal/publication acceptance.
 
+## Real-tool selection focus handoff
+
+Real builder/search/tab/date composition exposes a modal phase boundary not covered
+by a plain portal: its background remains inert until passive cleanup. SelectionToolbar
+captures removed focus in layout cleanup, then restores in the passive phase after
+that cleanup. It requires fresh same-owner authority/liveness/selection-phase facts,
+preserves surviving external focus and rechecks after any application fallback.
+It does not focus disabled/inert targets or alter modal containment, timers, global
+handlers or vendor internals. The synchronous application fallback remains a focus
+target port, not backend authorization or a general asynchronous operation wrapper.
+
+The [real composition](../../tests/controls/filter-composition/README.md) passes
+unchanged19 emitted and actual profiled-production cases plus four real built
+Storybook plays. [Permanent focus probes](../../tests/controls/focus-handoff/README.md)
+add ten actual public and genuine packed cases, independently reviewed at their
+stated boundaries. See [stack evidence](../evidence/wp-08-stack-2026-11-24.md) for the
+preserved original failure, named corrected generation and exact current limits.
+
 ## Remaining integration
 
 Real WP-07 tools in the normal/external regions retain their accepted raw-tool
@@ -110,8 +128,9 @@ Selection, pager/correction, sorting/chooser and guarded native collection have
 bounded independent source approval. Main emits actual own root types/messages/CSS
 and verifies genuine tarball strict NodeNext TS6/5.9/runtime boundaries. See the
 [dated observations](../evidence/wp-08-controls-2026-11-24.md), not inferred UI proof.
-Main still owns actual packed browser,
-combined lifecycle/privacy/locale and full workflow evidence before packet approval.
+Actual packed composition/focus proof is now recorded separately from source/type
+checks. Main still owns the complete ordered stack workflow and final packet/remote
+approval; focused preflights do not replace that result.
 No manual AT/device/performance/real-consumer/G-05 or publication claim follows.
 
 Scoped source handoffs (not a second live task board):

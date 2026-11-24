@@ -7,6 +7,113 @@ preserves both packets' verification lanes. The new
 has authored fixtures only; execution waits for a clean target install and merged
 public build. Main owns those actions; no packet approval or merge is implied.
 
+Frozen target install/build and exact runtime byte guard now pass. Transport is
+committed as68706c5; merged units pass643 across35 files. All180 emitted files are
+frozen atad59470c7d472563ed273b8b167073953f6f574df0a1910510480082da63a8ce
+while the fixture owner executes against them. Independent stack reconciliation
+review is active. Main's additive actual-archive composition runner is prepared
+but not registered/executed; current real19 cases and four new Storybook plays are
+not yet claimed passing. Full combined workflow/remote PR approval stay pending.
+
+Preflight also passes actual Start generated-router/build/typecheck, fresh frozen
+manifest install and all165 source controls cases against the merged stack. Pager
+LIMITATION negatives retain their classification. Existing WP-07 combined browser
+fixtures run separately; no new real-tool or Storybook pass is inferred from these.
+Independent reconciliation now confirms146 WP-07-exclusive/217 WP-08-exclusive
+paths preserved, exact88+92 emitted union,42 asset tests, three-format byte guard
+and both emitted compiler programs. Main grants bounded stack-reconciliation
+approval. REVIEW session12 n1 is a verified documentation-only lane-label correction,
+now fixed without changing the retained unpatched tool/profiled control tests.
+New composition/genuine packing/full ordered stack/remote packet gates stay pending.
+All43 existing WP-07 emitted combined-tool browser cases also pass on the merged
+build, independently of the new real filter/control composition still being tested.
+The retained38 emitted-control cases also pass against the frozen merged180 outputs;
+the three existing browser baselines (165 source/43 tools/38 emitted) remain intact.
+Independent new-harness review now passes one synthetic control/18 guard negatives
+plus11 installed-byte classifier cases and real registry zero-fuzz proof. All10
+current manifest hashes match. Main grants scoped harness approval only; genuine
+packed19 still waits for the active fixture handoff and main's explicit wiring/run.
+New fixture handoff now passes18/19 actual emitted cases, both strict source/public
+compilers and22-file Biome, with all180 outputs unchanged. FC-01 loses focused real
+builder portal focus to BODY on accepted selection swap, including an unclocked
+reproduction. Main preserves the failure and independently replays before a bounded
+causal review; no producer correction or app/global/vendor workaround yet. REVIEW
+session14 n1 and BLOCKER.md own the reproduction; later case tail/Storybook4/packed19
+remain unexecuted/blocking. No user product decision is currently needed.
+FC-01 private cause is now established: focus capture/removal work, but layout
+restoration calls enabled Cancel while root is still inert; modal passive cleanup
+clears inert afterward. Private candidate passes59 executions (unclocked1/unchanged19/
+focused10/adapted29), both strict compilers and Biome. Main allocates/applies only
+SelectionToolbar restoration phase/live guards, with no vendor/timer/global patch;
+independent source review precedes new shared output. A separate new permanent
+focus-handoff test lease prepares6505 probes; execution waits for a named new
+generation. Old180/275 guards and failed traces remain historical and unchanged.
+Independent single-producer review now passes65 private browser executions,
+strict TS6/5.9/Biome and two DOM-free SSR/import smokes, with causal before failures
+and original emission identity. Main grants bounded source approval and starts
+the separately named fc01 shared rebuild, preserving old failed manifests first.
+Expected diff is one toolbar JS file, all179 other outputs unchanged. Actual
+rebuilt19/permanent10/Storybook4/genuine packing still gate integration acceptance.
+Actual fc01 build now passes: only toolbar JS changes to0249b473…, all179 other
+outputs remain identical. New180 aggregate de82ce232f3021a754b1e30df780eac27cd358604766cde4110cc922bf25f095;
+275-source/public aggregate45e209723d5aa67dfb23798099243496d9d3d78e0b583b9ea5922b2c9f452b5d.
+Old failed manifests/traces remain preserved. Main runs unchanged19 on6499 and
+old source selection29 while building real Storybook without rebuilding packages;
+permanent focused tests may now execute against supplied fc01 artifacts on6505.
+Actual fc01 unchanged19 now pass, including the previously blocked queued-search/
+action/selection Cancel/normal-focus/discarded-draft tail. The unchanged unclocked
+diagnostic, source selection/privacy29 and old built Storybook4 also pass. Main
+registers the reviewed additive genuine19 runner after retained profiled38 and
+before final CLI verification; unpatched43 tool production remains separate.
+New Storybook4 and fresh combined actual-tarball replay run next; permanent focused
+tests/default helper review/full ordered workflow still remain.
+New built Storybook4 also pass with the strict host-completion gates. Default
+evidence-runner review finds two P2 issues (inherited report FILE precedence and
+coupled before-manifest/source rebasing). Main independently reproduces both, fixes
+highest-priority unique report output and parent-retained snapshot comparison, and
+replays both corrected counterexamples plus a clean positive. Independent correction
+review is active; default registration remains held. These are evidence-harness
+issues, not a failing focus producer or invalidated completed actual19/four plays.
+Fresh genuine combined-tarball replay now passes100 production cases (43 unpatched
+tools/38 profiled controls/19 profiled real composition), with extracted CLI bytes
+verified before/after, unpatched E_VENDOR negative unchanged,265-file strict actual
+composition programs and1240 recorded runtime IDs. Headless90/styled100 archives
+match explicit allowlists. Report packed-pitxjz; permanent focus/default correction
+review/full ordered workflow and final packet/remote approval remain next.
+Permanent focus10 now pass publicly with both strict compiler modes/Biome/frozen
+180+275 guards. Whole composition independently receives bounded source/emitted
+approval (four fresh probes,19 audit, meaningful seven negative errors/compiler,
+14 host-gate negatives). Base runner findings independently resolve across88 guard
+vectors/three pinned --list checks. Main extends default helper to supply focus's
+required SHA, unique own capture and memory guard, plus types-only mode; that delta
+needs review before registration. A new unique packed-focus module is allocated
+to run10 on the existing genuine consumer6509 without rewriting the100-case report.
+The completed actual integrated-gate preflights now pass: types mode executes both
+fixtures under strict TS6/5.9, and browser mode executes exactly19+4+10 with both
+fixture snapshots anchored in parent memory before/after. New ordered paths keep
+all failed/original evidence intact. Final dual-namespace helper review remains
+active; default activation/full ordered workflow wait for it and packed-focus handoff.
+Final helper integration is now independently accepted after123 guard checks/two
+history readbacks/four real strict compiler programs; the P3 types-mode console
+wording is corrected without changing gate behavior. Permanent focus10 receive
+independent fresh10/public-source type approval. The genuine packed module passes10;
+main audits it and passes three fresh production probes, preserving the old100 report.
+Default type/public browser commands and fresh profile38+19+10 are registered.
+FC-01 is resolved at its source/emitted/Storybook/packed boundary. Main starts the
+complete ordered `pnpm check`; runtime/test/manifest/lock/archive inputs are frozen.
+Final packet, push/PR and remote checks remain required; all PRs stay unmerged.
+**Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
+42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
+110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and
+54 actual-packed Start HTTP/browser checks. Strict programs, frozen install/lock,
+426-file lint, source SSR/import and docs/18 probes pass. Actual180 outputs remain
+de82ce…; all scoped findings are resolved and independent reviews recorded. Main
+grants **agent-approved under delegated authority** for WP-08's bounded packet/
+composition/private-profile integration, not personal/stable/external acceptance.
+Next commit the reviewed integration, push/open PR #8 against final WP-07, verify
+both remote workflow results and keep every PR unmerged. Runtime/archive inputs
+remain unchanged; final status/evidence documentation alone is refreshed now.
+
 This is the only live work ledger. Requirements live in `product/`, contracts in
 `docs/`, procedures in `.agents/skills/`, and observations in `docs/evidence/`.
 Planned work is not authorization to implement, install, publish, or modify Gamila.
