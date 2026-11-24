@@ -70,3 +70,15 @@ dependency matching React Table9.3.1, not an undeclared transitive import. The
 [correction plan](../planning/wp-04-implementation-plan.md#native-commit-boundary-correction--2026-11-24)
 and suspended-render/native-action/browser evidence must demonstrate the boundary
 before approval. No extra application store, filtering engine or scope waiver.
+
+## WP-06 ADR-07 Vite integration compatibility disposition
+
+**2026-11-24; delegated engineering decision, verification pending.** Installed
+Start declarations omit a required internal algorithm alias and two declaring-
+package dependency edges, and unnecessarily reach all optional bundler types
+through Router's barrel. The [bounded repair](../planning/wp-06-implementation-plan.md#strict-vite-declaration-repair-disposition--2026-11-24)
+restores exact source types and selects the genuine public Vite type entry without
+changing runtime versions/bytes or strict flags. Alternate-bundler installation,
+unplugin overrides, ambient-any modules and hiding config checks are rejected.
+Independent strict app/config and real packed Start evidence remain mandatory.
+Only the Vite profile is covered; upstream and release/legal review are separate.

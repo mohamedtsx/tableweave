@@ -253,3 +253,125 @@ fingerprints match the reviewed producer. Separate PR delivery follows, no merge
   verified defect; producer approval recommended pending main packed integration.
   Unmount cleanup is passive-phase, not before arbitrary layout callbacks;
   application permission/scope invalidation remains explicit, including hidden UI.
+
+## WP-06 — delegated agent review session 1
+
+Open for the actual Start candidate; numbering restarts at n1. Development and
+production source fixtures report 13 checks each, but strict typing, actual
+tarball installation/SSR proof and independent application review remain required.
+No G-04 approval or personal maintainer acceptance. No PR merges.
+
+### n1 — Actual app/config strict typing fails upstream declarations (P1)
+
+- **Main reproduction:** `pnpm --filter @tableweave/example-start typecheck`
+  reports 11 diagnostics under unchanged strict settings: missing `_Algorithm`
+  and undeclared Standard Schema dependency in installed Start server-core, plus
+  eager optional-bundler type imports in unplugin/webpack-virtual-modules.
+- **Disposition:** main owns the exact dependency/declaration repair after
+  source/metadata research. Build/browser success is not type acceptance. No
+  ambient-any modules, skipLibCheck, strictness downgrade, omitted config checks
+  or broad dependency upgrade is permitted merely to hide these errors.
+  The recorded exact source-type/dependency repair now passes strict TS6/5.9
+  app/config checks; compared all 426 upstream package files, only the three
+  reviewed declarations differ. Initial actual-tarball types/build/dev+production
+  proof also passes, but predates n2–n4 corrections and is not G-04 approval.
+
+### n2 — Accepted actor/scope transition retains prior runtime (P1)
+
+- **Independent reproduction:** hydrate Alpha/select a row, switch the synthetic
+  actor cookie to Beta, invalidate the existing router and wait for committed
+  Beta loader bootstrap. Alpha resource/rows/selection/cache and same-key canary
+  remain active in both dev and production.
+- **Disposition:** returned for an independently failing regression and explicit
+  accepted bootstrap/scope lifecycle, pure first-render privacy guard and correct
+  cache/token/application-state invalidation. Using the old runtime's context as
+  its own expected context cannot detect the newly authorized scope.
+  Worker independently reproduced the failing dev/production case, then added a
+  commit-owned authorization session boundary, fresh scoped bootstrap/canary and
+  retirement cleanup. Real pending/late/ABA and abandoned Suspense scenarios are
+  included in21 passing checks per mode. Main matches the source fingerprint;
+  independent rereview/full refreshed actual-tarball workflow are active.
+
+### n3 — Real authorization denial is ordinary refresh failure (P1)
+
+- **Independent reproduction:** hydrate/select Alpha, change the cookie to an
+  unauthorized actor, ordinary Refresh. The actual RPC denies access, but rows,
+  selection/cache and canSelect remain; output reports access=true/unavailable.
+- **Disposition:** returned for actual safe authorization-outcome signaling from
+  the server/RPC, not a special requested test-mode oracle. Current-token/generation
+  guards must prevent stale denials revoking a later scope. Add real ordinary-
+  request denial regressions in dev and production.
+  Worker reproduced/fixed with the actual safe discriminated server authorization
+  outcome and exact token guards; no requested-mode/error-string oracle. A mounted
+  denied Query observer initially recreated an empty entry; observer ownership was
+  corrected instead of weakening cache-clear assertions. Independent rereview pending.
+
+### n4 — Early validation/CSRF rejection omits no-store headers (P2)
+
+- **Independent reproduction:** invalid-mode RPC input returns safe serialized
+  rejection (framework HTTP200) without Cache-Control; cross-origin CSRF rejection
+  likewise lacks the promised private/no-store policy. No secret leakage shown.
+- **Disposition:** returned for an outer response policy covering early rejection
+  paths before validation/CSRF. Preserve the genuine framework status/transport
+  protocol and safe errors; document actual statuses rather than inventing them.
+  Worker reproduced both early paths and added outer request middleware before
+  CSRF/validation; regressions require private/no-store while preserving actual
+  framework HTTP200 serialized validation and HTTP403 CSRF statuses. Full and
+  independent refreshed checks remain pending.
+
+### n5 — Bootstrap denial leaves resumable authorized cache (P1)
+
+- **Independent fresh-copy reproduction:** hydrate/select Alpha, change the actor
+  cookie to revoked, then invalidate the router (Reload authorization). Error UI
+  unmounts, but Alpha cache/canary and access=true resource/server metadata remain;
+  reconnecting the old wrapper immediately restores ten cached rows without fresh
+  authorization. Confirmed in dev and production. No server authorization bypass
+  is claimed, but private-cache clearing/resurrection invariants fail.
+- **Disposition:** original n2–n4 fixes are independently verified; this new
+  bootstrap-side denial path still blocks approval. Main stopped only the owned
+  obsolete full-check tree and returned n5 for failing regressions/typed terminal
+  authorization handling, generation-safe scope retirement and explicit fresh
+  restoration. Mere unmount or a generic thrown error is not access invalidation.
+  Definition-only transition/read-count gaps and a five-second cold hydration
+  expectation timeout are noted separately; the latter is not a verified source
+  defect or permission to hide failures with broad retries/timeouts.
+  **Correction handoff:** worker reproduced n5 in both modes before fixing typed
+  bootstrap/canary outcomes and a per-router authorization grant owner. Terminal
+  denial now clears caches/server snapshots and blocks old-wrapper restoration;
+  late-denial, fresh grant, definition change and per-transition read-count cases
+  are included.27 dev+27 production/both strict TS checks pass in worker scope.
+  Initial hydration alone uses the existing30-second test deadline after recorded
+  module-load timing exceeded five seconds; transition/race timeouts stay unchanged.
+  Independent rereview and refreshed full/actual-packed checks remain outstanding.
+  **Independent resolution:** fresh27 dev+27 production and two extra probes per
+  mode confirm terminal old wrappers even after fresh grants and delayed denial
+  across Alpha→Beta→Alpha. Same-grant page-two revalidation adds no read; scope/
+  actual-definition transitions add one each. Both TS versions/24-file Biome/build
+  and all five client hashes match. Reviewed25-file aggregate remains
+  `88438df5a0ef6c7fd044efe7bc02f4badfdd99826a46f962a8530a6a4ae447de`.
+  n5 is resolved; scoped source technical approval recommended. Main's refreshed
+  full/actual-packed workflow remains mandatory before delegated G-04 disposition.
+
+### n6 — Shared consumer type isolation relies on workspace fallback (P2)
+
+- Main's resolution trace finds the earlier shared library test apps borrowing
+  genuine unpatched React19.3.0 declarations from an ancestor workspace. Type/ABI
+  assertions ran, but complete type-install isolation was not proven.
+- Added exact local React/DOM type dev dependencies and per-compiler resolved-file
+  guards to the shared harness. The actual standalone Start workspace already
+  resolves all721 program files locally under TS6 and5.9; only compiler standard
+  libraries escape. Both shared and actual Start runners now enforce that guard.
+  Refreshed full workflow is required before marking the shared correction passed.
+  **Resolved:** final full workflow passes exact local type installs and resolved-
+  file confinement for both compilers:205 headless/209 styled and721 actual Start
+  files each. No workspace declaration is borrowed except compiler standard libs.
+
+### WP-06 session-1 disposition
+
+All n1–n6 are resolved. Independent source review and main's completed guarded
+`pnpm check` pass289 units,43 baseline browser cases,27+27 real Start source and
+27+27 actual-tarball cases, strict TS6/5.9, archive/runtime/bundle/header safeguards
+and source/packed25-file fingerprint equality. Main grants **agent-approved under
+delegated authority** for bounded private WP-06/G-04 only. This is not personal
+maintainer acceptance, production auth, actual-device/AT/performance/real-consumer/
+release evidence. Commit/separate stacked PR follows; **no PR merge**.

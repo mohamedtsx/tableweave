@@ -1,0 +1,21 @@
+diff --git a/dist/esm/schema.d.ts b/dist/esm/schema.d.ts
+--- a/dist/esm/schema.d.ts
++++ b/dist/esm/schema.d.ts
+@@ -92,1 +92,1 @@
+-        codeSplittingOptions?: import('@tanstack/router-plugin').CodeSplittingOptions | undefined;
++        codeSplittingOptions?: import('@tanstack/router-plugin/vite').CodeSplittingOptions | undefined;
+@@ -395,1 +395,1 @@
+-        codeSplittingOptions: z.ZodOptional<z.ZodOptional<z.ZodCustom<import('@tanstack/router-plugin').CodeSplittingOptions, import('@tanstack/router-plugin').CodeSplittingOptions>>>;
++        codeSplittingOptions: z.ZodOptional<z.ZodOptional<z.ZodCustom<import('@tanstack/router-plugin/vite').CodeSplittingOptions, import('@tanstack/router-plugin/vite').CodeSplittingOptions>>>;
+@@ -664,1 +664,1 @@
+-        codeSplittingOptions: z.ZodOptional<z.ZodOptional<z.ZodCustom<import('@tanstack/router-plugin').CodeSplittingOptions, import('@tanstack/router-plugin').CodeSplittingOptions>>>;
++        codeSplittingOptions: z.ZodOptional<z.ZodOptional<z.ZodCustom<import('@tanstack/router-plugin/vite').CodeSplittingOptions, import('@tanstack/router-plugin/vite').CodeSplittingOptions>>>;
+diff --git a/dist/esm/vite/schema.d.ts b/dist/esm/vite/schema.d.ts
+--- a/dist/esm/vite/schema.d.ts
++++ b/dist/esm/vite/schema.d.ts
+@@ -59,1 +59,1 @@
+-        codeSplittingOptions: z.ZodOptional<z.ZodOptional<z.ZodCustom<import('@tanstack/router-plugin').CodeSplittingOptions, import('@tanstack/router-plugin').CodeSplittingOptions>>>;
++        codeSplittingOptions: z.ZodOptional<z.ZodOptional<z.ZodCustom<import('@tanstack/router-plugin/vite').CodeSplittingOptions, import('@tanstack/router-plugin/vite').CodeSplittingOptions>>>;
+@@ -824,1 +824,1 @@
+-        codeSplittingOptions?: import('@tanstack/router-plugin').CodeSplittingOptions | undefined;
++        codeSplittingOptions?: import('@tanstack/router-plugin/vite').CodeSplittingOptions | undefined;

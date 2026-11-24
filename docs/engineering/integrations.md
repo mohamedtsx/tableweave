@@ -4,6 +4,23 @@ Source: HLD §7; ADR-09. Primary integration is TanStack Start + Query; core
 imports neither. Additional Vite React and Next App Router consumers exercise
 the same [public contracts](public-api.md).
 
+## Implemented bounded Start fixture
+
+WP-06's private [actual app](../../apps/example-start/README.md) is agent-approved
+under delegated engineering authority for scoped G-04/AC-22–24. It uses one
+request/router-local QueryClient/provider, explicit app-owned authorization grants
+and authorized bootstrap around the existing resource producer; the producer's
+empty server snapshot is unchanged. Normal refresh and bootstrap denials are
+distinct from recoverable unavailability, and old wrappers cannot resume revoked
+private cache. Accepted scope/definition changes retire the prior owner at commit.
+
+The corrected full workflow passes actual source and genuine-tarball Start HTTP/
+Chromium development/production cases with strict TS6/5.9 and resolved-file install
+confinement. [Evidence](../evidence/wp-06-start-2026-11-24.md) preserves independent
+failures/fixes, exact versions/hashes and limits. This is not a full styled table,
+production auth/database/backend translator, Next/device/AT/performance/real-consumer
+or release proof. All PRs remain unmerged for personal maintainer review.
+
 ## State before data
 
 Create accepted query state before the request, then adapt the result into a

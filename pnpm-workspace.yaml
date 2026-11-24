@@ -9,3 +9,11 @@ onlyBuiltDependencies:
 
 patchedDependencies:
   react-aria-components@1.22.1: patches/react-aria-components@1.22.1.patch
+  '@tanstack/start-server-core@1.169.40': patches/@tanstack__start-server-core@1.169.40.patch
+  '@tanstack/start-plugin-core@1.171.50': patches/@tanstack__start-plugin-core@1.171.50.patch
+
+packageExtensions:
+  '@tanstack/start-server-core@1.169.40':
+    dependencies:
+      '@standard-schema/spec': '1.1.0'
+      cookie-es: '3.1.1'

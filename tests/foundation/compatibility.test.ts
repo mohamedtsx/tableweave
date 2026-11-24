@@ -3,6 +3,39 @@ import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 
 describe("exact declaration-only compatibility repair", () => {
+  it("keeps exact Start Vite repairs limited to reviewed genuine declarations", async () => {
+    const patches = [
+      [
+        "patches/@tanstack__start-server-core@1.169.40.patch",
+        ["dist/esm/session.d.ts"],
+      ],
+      [
+        "patches/@tanstack__start-plugin-core@1.171.50.patch",
+        ["dist/esm/schema.d.ts", "dist/esm/vite/schema.d.ts"],
+      ],
+    ] as const;
+    const lock = await readFile("pnpm-lock.yaml", "utf8");
+    for (const [file, paths] of patches) {
+      const text = await readFile(file, "utf8");
+      expect(
+        [...text.matchAll(/^diff --git a\/(\S+) b\/(\S+)$/gm)].map(
+          (match) => match[1],
+        ),
+      ).toEqual(paths);
+      expect(text).not.toMatch(/deleted file mode|new file mode/);
+      expect(lock).toContain(
+        `hash: ${createHash("sha256").update(text).digest("hex")}`,
+      );
+      if (file.includes("plugin-core"))
+        expect(
+          text.match(/\+.*import\('@tanstack\/router-plugin\/vite'\)/g),
+        ).toHaveLength(5);
+    }
+    const workspace = await readFile("pnpm-workspace.yaml", "utf8");
+    expect(workspace).toContain("'@standard-schema/spec': '1.1.0'");
+    expect(workspace).toContain("cookie-es: '3.1.1'");
+    expect(workspace).not.toMatch(/allowUnusedPatches|ignorePatchFailures/);
+  });
   it("patches only the two reviewed declarations, not runtime or package exports", async () => {
     const patch = await readFile(
       "patches/react-aria-components@1.22.1.patch",

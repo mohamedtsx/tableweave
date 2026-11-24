@@ -14,6 +14,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
 import { forbiddenImports, inspectGraph } from "./boundaries.mjs";
+import { checkConsumerDeclarations } from "./consumer-declarations.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const artifacts = join(root, ".artifacts");
@@ -186,6 +187,9 @@ for (const name of ["react", "heroui"]) {
 const vendor = JSON.parse(
   await readFile(join(root, "apps/storybook/package.json"), "utf8"),
 ).dependencies;
+const tooling = JSON.parse(
+  await readFile(join(root, "package.json"), "utf8"),
+).devDependencies;
 for (const kind of ["headless", "styled"]) {
   const dir = join(run, `consumer-${kind}`);
   await mkdir(dir);
@@ -209,6 +213,10 @@ for (const kind of ["headless", "styled"]) {
         private: true,
         type: "module",
         dependencies,
+        devDependencies: {
+          "@types/react": tooling["@types/react"],
+          "@types/react-dom": tooling["@types/react-dom"],
+        },
       },
       null,
       2,
@@ -285,6 +293,14 @@ for (const kind of ["headless", "styled"]) {
       [join(root, "node_modules", compiler, "bin/tsc"), "-p", "tsconfig.json"],
       dir,
     );
+    reports.push({
+      consumer: kind,
+      declarationsIsolation: await checkConsumerDeclarations(
+        root,
+        dir,
+        compiler,
+      ),
+    });
   }
   command(
     process.execPath,

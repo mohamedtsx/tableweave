@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   test: {
+    maxWorkers: 4,
     include: [
       "tests/foundation/**/*.test.ts",
       "tests/contracts/**/*.test.ts",

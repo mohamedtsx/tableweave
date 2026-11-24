@@ -66,9 +66,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   still-open PR #3. Final head `bf7712e` is pushed/verified and the tree was clean.
   Resource transport `71f076c` is stacked as `e6eeabf` plus approval `2be951a` in
   [PR #5](https://github.com/mohamedtsx/tableweave/pull/5), based on open PR #4;
-  combined checks pass. Verify the final handoff push, then continue isolated
-  WP-06 actual Start SSR and approve WP-07's prepared plan before code. No merges.
-  PR #3 stays open; no PR merge. WP-06 plan/dependency research is prepared.
+  combined checks pass. WP-06 actual Start corrections n1–n5 are independently
+  reviewed; no residual source defect is verified. Main's full corrected guarded
+  workflow/fresh actual-tarball checks pass and bounded G-04 is agent-approved
+  under delegated authority. Commit and deliver a separate stacked unmerged PR. Other packets
+  continue only in their bounded isolated/primary paths. No deployment/publication.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
@@ -92,7 +94,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
-| TASK-014 | WP-06 Start/Query SSR integration | in progress | Main prepares isolated plan/install, then app worker | Reviewed WP-04/WP-05 producers; G-04 required |
+| TASK-014 | WP-06 Start/Query SSR integration | in progress | Guarded implementation approved; main Git/PR handoff | Delegated G-04;289 units/43 baseline +54 source/54 packed browser executions |
 | TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
 | TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
 | TASK-017 | WP-09 details/localization/responsive shell | planned | Assigned after producer handoffs | WP-04/WP-05 |
@@ -752,4 +754,30 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   paths and may run isolated builds/SSR/browser proof on6013. Main retains all
   manifests/lock/shared checks/docs and Git; root integration happens after the
   producer PR handoff. WP-07 has a separate read-only planning agent, no runtime
-  implementation assigned yet.
+   implementation assigned yet.
+  **Current candidate:** WP-05 final handoff is incorporated (`9c62b31` carries
+  `3e4aaa8`). Actual Start app/production host and shared/root/actual-tarball
+  runners are implemented. Exact declaration/dependency repair passes unchanged
+  strict TS6/5.9 without runtime version/byte changes. Initial13+13 source/packed
+  scenarios missed verified review findings; no approval followed those passes.
+  n2–n4 are independently corrected. New bootstrap denial n5 is now returned with
+  before-failing evidence and27 dev/27 production/both TS checks reported passing;
+  independent rereview and refreshed full/root/actual-tarball workflow remain.
+  [Evidence](docs/evidence/wp-06-start-2026-11-24.md) and
+  [review](REVIEW.md#wp-06--delegated-agent-review-session-1) record exact limits.
+  Main owns shared integration/Git; no G-04 acceptance, release/deploy or merge.
+  Independent n5 rereview resolves the last source defect (27+27 and two extra
+  probes per mode, exact25-file hash). The30-minute full run passes all earlier
+  stages including43 baseline/54 source/27 packed-development browser cases, then
+  times out in the final packed-production suite after one pass. No assertion
+  failure/full-pass claim. Main verifies/stops only that owned6013 server, adds
+  explicit consumer type dependencies/resolution confinement (Start721 files per
+  compiler already pass), and starts the complete guarded run with45-minute
+  host/CI headroom. Behavior deadlines/retries and strict settings stay unchanged.
+  **Final integration:** corrected guarded pnpm check passes289 units,43 baseline
+  Chromium,27+27 actual source Start and27+27 actual tarball Start cases. Both
+  compiler versions and confined declaration installs pass;25 source and packed
+  files match independent review hash. n1–n6 resolved; bounded private WP-06/G-04
+  is **agent-approved under delegated authority**, not personal maintainer/real-
+  consumer/AT/performance/release acceptance. Next: commit, stack on actual PR #5,
+  push/open separate PR and verify remote checks. No merge/publication/deploy.
