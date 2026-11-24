@@ -21,7 +21,13 @@ import {
   validateRuleDraft,
 } from "@tableweave/react/filters";
 import type { ReactNode } from "react";
-import { useCallback, useEffect, useRef, useState,useLayoutEffect } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect,
+} from "react";
 import { dateEditorMessages } from "../date/date-operand-editor.js";
 import { dateOperandValue } from "./date-value.js";
 import { builderMessages, operatorLabel } from "./messages.js";
@@ -32,9 +38,26 @@ import {
 } from "./option-owners.js";
 import type { FilterBuilderMessages, FilterBuilderProps } from "./types.js";
 import { requestOptions, ValueEditor } from "./value-editors.js";
-import type { CriteriaBuilderStore,CriteriaBuilderEditorHandle,BuilderDraft } from "./criteria-builder-host.js";
-import { CriteriaBuilderHost,useCriteriaBuilderVersion,builderState,builderEditor,readBuilderEditor,requireBuilderEditor,builderRegistry,validateBuilder,builderActions,editorActions,reconcileBuilder,safely } from "./criteria-builder-host.js";
-import { CriteriaOptionOwners,criteriaOptionView } from "./option-owners.js";
+import type {
+  CriteriaBuilderStore,
+  CriteriaBuilderEditorHandle,
+  BuilderDraft,
+} from "./criteria-builder-host.js";
+import {
+  CriteriaBuilderHost,
+  useCriteriaBuilderVersion,
+  builderState,
+  builderEditor,
+  readBuilderEditor,
+  requireBuilderEditor,
+  builderRegistry,
+  validateBuilder,
+  builderActions,
+  editorActions,
+  reconcileBuilder,
+  safely,
+} from "./criteria-builder-host.js";
+import { CriteriaOptionOwners, criteriaOptionView } from "./option-owners.js";
 
 interface Draft {
   readonly id: string;
@@ -765,9 +788,17 @@ function BuilderSurface<S extends QuerySchema>({
 export function FilterBuilder<S extends QuerySchema>(
   props: FilterBuilderProps<S>,
 ) {
-  return <CriteriaBuilderHost input={props} Legacy={LegacyFilterBuilder} Surface={CriteriaBuilderSurface}/>;
+  return (
+    <CriteriaBuilderHost
+      input={props}
+      Legacy={LegacyFilterBuilder}
+      Surface={CriteriaBuilderSurface}
+    />
+  );
 }
-function LegacyFilterBuilder<S extends QuerySchema>(props:FilterBuilderProps<S>) {
+function LegacyFilterBuilder<S extends QuerySchema>(
+  props: FilterBuilderProps<S>,
+) {
   const state = useTableweaveState(props.controller);
   return (
     <OptionOwners props={props} rules={state.query.builder.rules}>
@@ -776,61 +807,503 @@ function LegacyFilterBuilder<S extends QuerySchema>(props:FilterBuilderProps<S>)
   );
 }
 
-function CriteriaFieldPicker({handle}:{readonly handle:CriteriaBuilderEditorHandle}) {
-  try{const e=readBuilderEditor(handle),search=e.frame.local.search.read(e.actor)??"",fields=e.fields.filter(entry=>(e.frame.ports.fields[entry.id]?.label??entry.id).toLocaleLowerCase().includes(search.toLocaleLowerCase()));
-    const node=<><TextField value={search} onChange={text=>safely(()=>editorActions.search(handle,text))}><Label>{e.messages.searchFields}</Label><Input autoFocus/></TextField>{!fields.length?<p>{e.messages.noFields}</p>:null}<ListBox aria-label={e.messages.chooseField} escapeKeyBehavior="none" onAction={id=>safely(()=>{requireBuilderEditor(handle);if(typeof id==="string")editorActions.field(handle,id);})}>{fields.map(entry=><ListBox.Item key={entry.id} id={entry.id} textValue={e.frame.ports.fields[entry.id]?.label??entry.id}>{e.frame.ports.fields[entry.id]?.label??entry.id}</ListBox.Item>)}</ListBox></>;requireBuilderEditor(handle);return node;
-  }catch{return null;}
+function CriteriaFieldPicker({
+  handle,
+}: {
+  readonly handle: CriteriaBuilderEditorHandle;
+}) {
+  try {
+    const e = readBuilderEditor(handle),
+      search = e.frame.local.search.read(e.actor) ?? "",
+      fields = e.fields.filter((entry) =>
+        (e.frame.ports.fields[entry.id]?.label ?? entry.id)
+          .toLocaleLowerCase()
+          .includes(search.toLocaleLowerCase()),
+      );
+    const node = (
+      <>
+        <TextField
+          value={search}
+          onChange={(text) => safely(() => editorActions.search(handle, text))}
+        >
+          <Label>{e.messages.searchFields}</Label>
+          <Input autoFocus />
+        </TextField>
+        {!fields.length ? <p>{e.messages.noFields}</p> : null}
+        <ListBox
+          aria-label={e.messages.chooseField}
+          escapeKeyBehavior="none"
+          onAction={(id) =>
+            safely(() => {
+              requireBuilderEditor(handle);
+              if (typeof id === "string") editorActions.field(handle, id);
+            })
+          }
+        >
+          {fields.map((entry) => (
+            <ListBox.Item
+              key={entry.id}
+              id={entry.id}
+              textValue={e.frame.ports.fields[entry.id]?.label ?? entry.id}
+            >
+              {e.frame.ports.fields[entry.id]?.label ?? entry.id}
+            </ListBox.Item>
+          ))}
+        </ListBox>
+      </>
+    );
+    requireBuilderEditor(handle);
+    return node;
+  } catch {
+    return null;
+  }
 }
-function CriteriaBuilderEditor({handle}:{readonly handle:CriteriaBuilderEditorHandle}) {
-  try{
-    const e=readBuilderEditor(handle);if(!e.draft)return null;const entry=e.fields.find(item=>item.id===e.draft?.field),operators=entry?getFieldOperators(e.schema,entry.id,builderRegistry(e.store,e.actor,e.draft)):[],descriptor=operators.find(item=>item.id===e.draft?.operator),presentation=entry?e.frame.ports.fields[entry.id]:undefined;
-    const usable=(item:OperatorDescriptor)=>e.frame.ports.evaluationMode==="server"||item.builtin||typeof item.custom?.evaluate==="function";
-    if(e.draft.part==="options"){
-      const inverse=descriptor?.inverse&&operators.some(item=>item.id===descriptor.inverse&&usable(item));
-      const node=<div className="tw-filter-options"><Button variant="tertiary" onPress={()=>safely(()=>editorActions.duplicate(handle))}>{e.messages.duplicate}</Button>{inverse?<Button variant="tertiary" onPress={()=>safely(()=>editorActions.negate(handle))}>{e.messages.negate}</Button>:null}<Button variant="danger" onPress={()=>safely(()=>editorActions.remove(handle))}>{e.messages.remove}</Button></div>;requireBuilderEditor(handle);return node;
+function CriteriaBuilderEditor({
+  handle,
+}: {
+  readonly handle: CriteriaBuilderEditorHandle;
+}) {
+  try {
+    const e = readBuilderEditor(handle);
+    if (!e.draft) return null;
+    const entry = e.fields.find((item) => item.id === e.draft?.field),
+      operators = entry
+        ? getFieldOperators(
+            e.schema,
+            entry.id,
+            builderRegistry(e.store, e.actor, e.draft),
+          )
+        : [],
+      descriptor = operators.find((item) => item.id === e.draft?.operator),
+      presentation = entry ? e.frame.ports.fields[entry.id] : undefined;
+    const usable = (item: OperatorDescriptor) =>
+      e.frame.ports.evaluationMode === "server" ||
+      item.builtin ||
+      typeof item.custom?.evaluate === "function";
+    if (e.draft.part === "options") {
+      const inverse =
+        descriptor?.inverse &&
+        operators.some(
+          (item) => item.id === descriptor.inverse && usable(item),
+        );
+      const node = (
+        <div className="tw-filter-options">
+          <Button
+            variant="tertiary"
+            onPress={() => safely(() => editorActions.duplicate(handle))}
+          >
+            {e.messages.duplicate}
+          </Button>
+          {inverse ? (
+            <Button
+              variant="tertiary"
+              onPress={() => safely(() => editorActions.negate(handle))}
+            >
+              {e.messages.negate}
+            </Button>
+          ) : null}
+          <Button
+            variant="danger"
+            onPress={() => safely(() => editorActions.remove(handle))}
+          >
+            {e.messages.remove}
+          </Button>
+        </div>
+      );
+      requireBuilderEditor(handle);
+      return node;
     }
-    if(e.draft.part==="field")return <CriteriaFieldPicker handle={handle}/>;
-    if(e.draft.part==="operator"){
-      const node=<ListBox aria-label={e.messages.chooseOperator} escapeKeyBehavior="none" disabledKeys={operators.filter(item=>!usable(item)).map(item=>item.id)} onAction={id=>safely(()=>{requireBuilderEditor(handle);if(typeof id==="string")editorActions.operator(handle,id);})}>{operators.map(item=><ListBox.Item key={item.id} id={item.id} textValue={operatorLabel(item.id,presentation?.operatorLabels)}>{operatorLabel(item.id,presentation?.operatorLabels)}</ListBox.Item>)}</ListBox>;requireBuilderEditor(handle);return node;
+    if (e.draft.part === "field")
+      return <CriteriaFieldPicker handle={handle} />;
+    if (e.draft.part === "operator") {
+      const node = (
+        <ListBox
+          aria-label={e.messages.chooseOperator}
+          escapeKeyBehavior="none"
+          disabledKeys={operators
+            .filter((item) => !usable(item))
+            .map((item) => item.id)}
+          onAction={(id) =>
+            safely(() => {
+              requireBuilderEditor(handle);
+              if (typeof id === "string") editorActions.operator(handle, id);
+            })
+          }
+        >
+          {operators.map((item) => (
+            <ListBox.Item
+              key={item.id}
+              id={item.id}
+              textValue={operatorLabel(item.id, presentation?.operatorLabels)}
+            >
+              {operatorLabel(item.id, presentation?.operatorLabels)}
+            </ListBox.Item>
+          ))}
+        </ListBox>
+      );
+      requireBuilderEditor(handle);
+      return node;
     }
-    if(!entry||!descriptor)return <p role="alert">{e.messages.invalid}</p>;
-    const checked=validateBuilder(e.store,e.actor,e.draft),immediate=descriptor.builtin&&(entry.field.type==="enum"||entry.field.type==="set")&&!presentation?.renderEditor;
+    if (!entry || !descriptor) return <p role="alert">{e.messages.invalid}</p>;
+    const checked = validateBuilder(e.store, e.actor, e.draft),
+      immediate =
+        descriptor.builtin &&
+        (entry.field.type === "enum" || entry.field.type === "set") &&
+        !presentation?.renderEditor;
     // The internal adopted alternative consumes only the genuine registered
     // handle; it never reconstructs raw props or manufactures a draft receipt.
-    const node=<><ValueEditor criteriaEditor={handle}/>{!immediate&&descriptor.cardinality!=="none"?<Button className="tw-confirm-action" isDisabled={(entry.field.type==="date"||entry.field.type==="datetime")&&checked.status!=="valid"} onPress={()=>safely(()=>editorActions.apply(handle))}>{e.messages.apply}</Button>:null}</>;requireBuilderEditor(handle);return node;
-  }catch{return null;}
+    const node = (
+      <>
+        <ValueEditor criteriaEditor={handle} />
+        {!immediate && descriptor.cardinality !== "none" ? (
+          <Button
+            className="tw-confirm-action"
+            isDisabled={
+              (entry.field.type === "date" ||
+                entry.field.type === "datetime") &&
+              checked.status !== "valid"
+            }
+            onPress={() => safely(() => editorActions.apply(handle))}
+          >
+            {e.messages.apply}
+          </Button>
+        ) : null}
+      </>
+    );
+    requireBuilderEditor(handle);
+    return node;
+  } catch {
+    return null;
+  }
 }
-function CriteriaBuilderSurface<S extends QuerySchema>({store}:{readonly store:CriteriaBuilderStore<S>}) {
-  const version=useCriteriaBuilderVersion(store),frame=store.read(),actor=frame?.actor,triggers=useRef(new Map<string,HTMLButtonElement>());
-  useLayoutEffect(()=>{if(!actor||store.snapshot()!==version)return;safely(()=>{
-    reconcileBuilder(store,actor);const current=store.require(actor),plan=current.local.focus.read(actor);if(!plan||(plan.actor===actor&&plan.work))return;if(plan.work)current.cell.cancelWork(actor,plan.work);
-    const work=current.cell.animationFrame(actor,()=>{try{const checked=store.require(actor),active=checked.local.focus.read(actor);if(active?.token!==plan.token)return undefined;const target=triggers.current.get(plan.anchor)??triggers.current.get("filters");store.require(actor);target?.focus();store.require(actor);if(checked.local.focus.read(actor)===active)checked.local.focus.clear(actor);}catch{/* Saved A focus cannot reach B. */}return undefined;});current.local.focus.write(actor,{...plan,actor,work});
-  });},[store,actor,version]);
-  let content:ReactNode=<div role="status">{builderMessages.accessUnavailable}</div>;
-  if(frame&&actor)try{
-    const e=builderState(store,actor),{state,fields,messages,draft}=e,handle=draft?builderEditor(store,actor):null,error=frame.local.error.read(actor)??"",announcement=frame.local.announcement.read(actor)??"",receipt=frame.local.receipt.read(actor)?.token;
-    const checkRender=()=>{store.require(actor);if(JSON.stringify(frame.origin.controller.getSnapshot().query.builder)!==JSON.stringify(state.query.builder))throw new Error("Criteria builder unavailable");};
-    const checkVersion=(before:object)=>{if(frame.cell.getSnapshot().version!==before)throw new Error("Criteria builder unavailable");};
-    const invokeRender=<V,>(field:BuilderFieldId<S>|undefined,callback:()=>V):V=>{checkRender();if(field&&frame.ports.fields[field]?.asyncOptions)store.option(actor,field);const before=frame.cell.getSnapshot().version;try{return callback();}finally{checkRender();if(field&&frame.ports.fields[field]?.asyncOptions)store.option(actor,field);checkVersion(before);}};
-    const summary=(rule:RuleFor<S>):ReactNode=>{
-      checkRender();const entry=fields.find(item=>item.id===rule.field),presentation=entry?frame.ports.fields[entry.id]:undefined;
-      if(presentation?.asyncOptions){try{if(!entry)return messages.unavailableValue;criteriaOptionView(store,actor,entry.id);}catch{return messages.unavailableValue;}}
-      if(presentation?.formatValue){const format=presentation.formatValue;return invokeRender(entry?.id,()=>format.call(presentation,rule));}
-      const ids=scalarIds(rule.value);if(presentation?.choices||presentation?.asyncOptions){const view=presentation.asyncOptions&&entry?criteriaOptionView(store,actor,entry.id):undefined;const result=ids.map(id=>presentation.choices?.find(option=>option.id===id)?.label??view?.selected.find(option=>option.id===id)?.label??String(id)).join(", ");store.require(actor);return result;}
-      if(entry?.field.type==="date"||entry?.field.type==="datetime"){const value=dateOperandValue(rule.value);if(value&&"kind" in value){if(value.kind==="day"||value.kind==="instant")return value.value;return invokeRender(entry.id,()=>(frame.ports.dateMessages?.formatRelative??dateEditorMessages.formatRelative)(value));}if(value)return `${value[0].value} – ${value[1].value}`;}
-      if(typeof rule.value==="string"||typeof rule.value==="number"||typeof rule.value==="boolean")return String(rule.value);if(Array.isArray(rule.value))return rule.value.map((value:unknown)=>typeof value==="string"||typeof value==="number"?String(value):"…").join(" – ");return rule.value===undefined?"":messages.value;
-    };
-    const segment=(anchor:string,label:string,text:ReactNode,part:BuilderDraft["part"],ruleId?:string)=>{
-      const isOpen=draft?.anchor===anchor,nameFromContents=anchor==="filters"||part==="value",edit=handle;
-      return <Popover isOpen={isOpen} onOpenChange={open=>safely(()=>{store.require(actor);if(!open&&isOpen&&edit)editorActions.cancel(edit);else if(open&&!isOpen&&receipt)builderActions.open(store,actor,anchor,part,receipt,ruleId);})}><Button ref={element=>{if(element)triggers.current.set(anchor,element);else triggers.current.delete(anchor);}} variant="tertiary" className="tw-filter-segment" {...(nameFromContents?{}:{"aria-label":label})}>{nameFromContents?<span className="tw-filter-sr-only">{label}: </span>:null}{text}</Button><Popover.Content placement="bottom start" className="tw-filter-popover"><Popover.Dialog aria-label={messages.editorTitle}><Popover.Heading>{messages.editorTitle}</Popover.Heading>{isOpen&&edit?<CriteriaBuilderEditor handle={edit}/>:null}{isOpen&&error?<p role="alert">{error}</p>:null}<Button variant="tertiary" onPress={()=>safely(()=>{if(edit)editorActions.cancel(edit);})}>{messages.cancel}</Button></Popover.Dialog></Popover.Content></Popover>;
-    };
-    const node=<fieldset className={`tw-filter-builder ${frame.className}`} aria-label={messages.filters}>
-      {segment("filters",messages.addRule,messages.filters,"field")}
-      {state.query.builder.rules.length?<><fieldset aria-label={messages.join} className="tw-filter-join"><Button variant="tertiary" aria-pressed={state.query.builder.join==="and"} onPress={()=>safely(()=>{if(receipt)builderActions.join(store,actor,"and",receipt);})}>{messages.all}</Button><Button variant="tertiary" aria-pressed={state.query.builder.join==="or"} onPress={()=>safely(()=>{if(receipt)builderActions.join(store,actor,"or",receipt);})}>{messages.any}</Button></fieldset>
-      {state.query.builder.rules.map(rule=>{store.require(actor);const id=rule.id,entry=fields.find(item=>item.id===rule.field),presentation=entry?frame.ports.fields[entry.id]:undefined,name=presentation?.label??rule.field,operator=operatorLabel(rule.operator,presentation?.operatorLabels),descriptor=builderRegistry(store,actor).get(rule.operator);return <fieldset key={id} className="tw-filter-rule" data-rule-id={id} aria-label={`${name} ${operator}`}>{segment(`${id}:field`,`${messages.field}: ${name}`,name,"field",id)}{segment(`${id}:operator`,`${messages.operator}: ${operator}`,operator,"operator",id)}{descriptor?.cardinality!=="none"?segment(`${id}:value`,`${messages.value}: ${name}`,<bdi>{summary(rule)}</bdi>,"value",id):null}{segment(`${id}:options`,`${messages.options}: ${name}`,"⋯","options",id)}</fieldset>;})}
-      <Button variant="tertiary" aria-label={messages.clearLabel} onPress={()=>safely(()=>{if(receipt)builderActions.clear(store,actor,receipt);})}>{messages.clear}</Button></>:null}
-      {!fields.length?<span>{messages.noFields}</span>:null}{error&&!draft?<p role="alert">{error}</p>:null}<span className="tw-filter-announcement" role="status">{announcement}</span>
-    </fieldset>;checkRender();if(draft&&handle)requireBuilderEditor(handle);content=node;
-  }catch{/* No private candidate fallback. */}
-  return <><CriteriaOptionOwners store={store}/>{content}</>;
+function CriteriaBuilderSurface<S extends QuerySchema>({
+  store,
+}: {
+  readonly store: CriteriaBuilderStore<S>;
+}) {
+  const version = useCriteriaBuilderVersion(store),
+    frame = store.read(),
+    actor = frame?.actor,
+    triggers = useRef(new Map<string, HTMLButtonElement>());
+  useLayoutEffect(() => {
+    if (!actor || store.snapshot() !== version) return;
+    safely(() => {
+      reconcileBuilder(store, actor);
+      const current = store.require(actor),
+        plan = current.local.focus.read(actor);
+      if (!plan || (plan.actor === actor && plan.work)) return;
+      if (plan.work) current.cell.cancelWork(actor, plan.work);
+      const work = current.cell.animationFrame(actor, () => {
+        try {
+          const checked = store.require(actor),
+            active = checked.local.focus.read(actor);
+          if (active?.token !== plan.token) return undefined;
+          const target =
+            triggers.current.get(plan.anchor) ??
+            triggers.current.get("filters");
+          store.require(actor);
+          target?.focus();
+          store.require(actor);
+          if (checked.local.focus.read(actor) === active)
+            checked.local.focus.clear(actor);
+        } catch {
+          /* Saved A focus cannot reach B. */
+        }
+        return undefined;
+      });
+      current.local.focus.write(actor, { ...plan, actor, work });
+    });
+  }, [store, actor, version]);
+  let content: ReactNode = (
+    <div role="status">{builderMessages.accessUnavailable}</div>
+  );
+  if (frame && actor)
+    try {
+      const e = builderState(store, actor),
+        { state, fields, messages, draft } = e,
+        handle = draft ? builderEditor(store, actor) : null,
+        error = frame.local.error.read(actor) ?? "",
+        announcement = frame.local.announcement.read(actor) ?? "",
+        receipt = frame.local.receipt.read(actor)?.token;
+      const checkRender = () => {
+        store.require(actor);
+        if (
+          JSON.stringify(
+            frame.origin.controller.getSnapshot().query.builder,
+          ) !== JSON.stringify(state.query.builder)
+        )
+          throw new Error("Criteria builder unavailable");
+      };
+      const checkVersion = (before: object) => {
+        if (frame.cell.getSnapshot().version !== before)
+          throw new Error("Criteria builder unavailable");
+      };
+      const invokeRender = <V,>(
+        field: BuilderFieldId<S> | undefined,
+        callback: () => V,
+      ): V => {
+        checkRender();
+        if (field && frame.ports.fields[field]?.asyncOptions)
+          store.option(actor, field);
+        const before = frame.cell.getSnapshot().version;
+        try {
+          return callback();
+        } finally {
+          checkRender();
+          if (field && frame.ports.fields[field]?.asyncOptions)
+            store.option(actor, field);
+          checkVersion(before);
+        }
+      };
+      const summary = (rule: RuleFor<S>): ReactNode => {
+        checkRender();
+        const entry = fields.find((item) => item.id === rule.field),
+          presentation = entry ? frame.ports.fields[entry.id] : undefined;
+        if (presentation?.asyncOptions) {
+          try {
+            if (!entry) return messages.unavailableValue;
+            criteriaOptionView(store, actor, entry.id);
+          } catch {
+            return messages.unavailableValue;
+          }
+        }
+        if (presentation?.formatValue) {
+          const format = presentation.formatValue;
+          return invokeRender(entry?.id, () => format.call(presentation, rule));
+        }
+        const ids = scalarIds(rule.value);
+        if (presentation?.choices || presentation?.asyncOptions) {
+          const view =
+            presentation.asyncOptions && entry
+              ? criteriaOptionView(store, actor, entry.id)
+              : undefined;
+          const result = ids
+            .map(
+              (id) =>
+                presentation.choices?.find((option) => option.id === id)
+                  ?.label ??
+                view?.selected.find((option) => option.id === id)?.label ??
+                String(id),
+            )
+            .join(", ");
+          store.require(actor);
+          return result;
+        }
+        if (entry?.field.type === "date" || entry?.field.type === "datetime") {
+          const value = dateOperandValue(rule.value);
+          if (value && "kind" in value) {
+            if (value.kind === "day" || value.kind === "instant")
+              return value.value;
+            return invokeRender(entry.id, () =>
+              (
+                frame.ports.dateMessages?.formatRelative ??
+                dateEditorMessages.formatRelative
+              )(value),
+            );
+          }
+          if (value) return `${value[0].value} – ${value[1].value}`;
+        }
+        if (
+          typeof rule.value === "string" ||
+          typeof rule.value === "number" ||
+          typeof rule.value === "boolean"
+        )
+          return String(rule.value);
+        if (Array.isArray(rule.value))
+          return rule.value
+            .map((value: unknown) =>
+              typeof value === "string" || typeof value === "number"
+                ? String(value)
+                : "…",
+            )
+            .join(" – ");
+        return rule.value === undefined ? "" : messages.value;
+      };
+      const segment = (
+        anchor: string,
+        label: string,
+        text: ReactNode,
+        part: BuilderDraft["part"],
+        ruleId?: string,
+      ) => {
+        const isOpen = draft?.anchor === anchor,
+          nameFromContents = anchor === "filters" || part === "value",
+          edit = handle;
+        return (
+          <Popover
+            isOpen={isOpen}
+            onOpenChange={(open) =>
+              safely(() => {
+                store.require(actor);
+                if (!open && isOpen && edit) editorActions.cancel(edit);
+                else if (open && !isOpen && receipt)
+                  builderActions.open(
+                    store,
+                    actor,
+                    anchor,
+                    part,
+                    receipt,
+                    ruleId,
+                  );
+              })
+            }
+          >
+            <Button
+              ref={(element) => {
+                if (element) triggers.current.set(anchor, element);
+                else triggers.current.delete(anchor);
+              }}
+              variant="tertiary"
+              className="tw-filter-segment"
+              {...(nameFromContents ? {} : { "aria-label": label })}
+            >
+              {nameFromContents ? (
+                <span className="tw-filter-sr-only">{label}: </span>
+              ) : null}
+              {text}
+            </Button>
+            <Popover.Content
+              placement="bottom start"
+              className="tw-filter-popover"
+            >
+              <Popover.Dialog aria-label={messages.editorTitle}>
+                <Popover.Heading>{messages.editorTitle}</Popover.Heading>
+                {isOpen && edit ? (
+                  <CriteriaBuilderEditor handle={edit} />
+                ) : null}
+                {isOpen && error ? <p role="alert">{error}</p> : null}
+                <Button
+                  variant="tertiary"
+                  onPress={() =>
+                    safely(() => {
+                      if (edit) editorActions.cancel(edit);
+                    })
+                  }
+                >
+                  {messages.cancel}
+                </Button>
+              </Popover.Dialog>
+            </Popover.Content>
+          </Popover>
+        );
+      };
+      const node = (
+        <fieldset
+          className={`tw-filter-builder ${frame.className}`}
+          aria-label={messages.filters}
+        >
+          {segment("filters", messages.addRule, messages.filters, "field")}
+          {state.query.builder.rules.length ? (
+            <>
+              <fieldset aria-label={messages.join} className="tw-filter-join">
+                <Button
+                  variant="tertiary"
+                  aria-pressed={state.query.builder.join === "and"}
+                  onPress={() =>
+                    safely(() => {
+                      if (receipt)
+                        builderActions.join(store, actor, "and", receipt);
+                    })
+                  }
+                >
+                  {messages.all}
+                </Button>
+                <Button
+                  variant="tertiary"
+                  aria-pressed={state.query.builder.join === "or"}
+                  onPress={() =>
+                    safely(() => {
+                      if (receipt)
+                        builderActions.join(store, actor, "or", receipt);
+                    })
+                  }
+                >
+                  {messages.any}
+                </Button>
+              </fieldset>
+              {state.query.builder.rules.map((rule) => {
+                store.require(actor);
+                const id = rule.id,
+                  entry = fields.find((item) => item.id === rule.field),
+                  presentation = entry
+                    ? frame.ports.fields[entry.id]
+                    : undefined,
+                  name = presentation?.label ?? rule.field,
+                  operator = operatorLabel(
+                    rule.operator,
+                    presentation?.operatorLabels,
+                  ),
+                  descriptor = builderRegistry(store, actor).get(rule.operator);
+                return (
+                  <fieldset
+                    key={id}
+                    className="tw-filter-rule"
+                    data-rule-id={id}
+                    aria-label={`${name} ${operator}`}
+                  >
+                    {segment(
+                      `${id}:field`,
+                      `${messages.field}: ${name}`,
+                      name,
+                      "field",
+                      id,
+                    )}
+                    {segment(
+                      `${id}:operator`,
+                      `${messages.operator}: ${operator}`,
+                      operator,
+                      "operator",
+                      id,
+                    )}
+                    {descriptor?.cardinality !== "none"
+                      ? segment(
+                          `${id}:value`,
+                          `${messages.value}: ${name}`,
+                          <bdi>{summary(rule)}</bdi>,
+                          "value",
+                          id,
+                        )
+                      : null}
+                    {segment(
+                      `${id}:options`,
+                      `${messages.options}: ${name}`,
+                      "⋯",
+                      "options",
+                      id,
+                    )}
+                  </fieldset>
+                );
+              })}
+              <Button
+                variant="tertiary"
+                aria-label={messages.clearLabel}
+                onPress={() =>
+                  safely(() => {
+                    if (receipt) builderActions.clear(store, actor, receipt);
+                  })
+                }
+              >
+                {messages.clear}
+              </Button>
+            </>
+          ) : null}
+          {!fields.length ? <span>{messages.noFields}</span> : null}
+          {error && !draft ? <p role="alert">{error}</p> : null}
+          <span className="tw-filter-announcement" role="status">
+            {announcement}
+          </span>
+        </fieldset>
+      );
+      checkRender();
+      if (draft && handle) requireBuilderEditor(handle);
+      content = node;
+    } catch {
+      /* No private candidate fallback. */
+    }
+  return (
+    <>
+      <CriteriaOptionOwners store={store} />
+      {content}
+    </>
+  );
 }

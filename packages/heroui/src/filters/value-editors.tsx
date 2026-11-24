@@ -20,7 +20,7 @@ import type {
   RuleDraftResult,
 } from "@tableweave/react/filters";
 import { projectOptionSourceView } from "@tableweave/react/filters";
-import { useId, useState,useLayoutEffect } from "react";
+import { useId, useState, useLayoutEffect } from "react";
 import { DateOperandEditor } from "../date/date-operand-editor.js";
 import { dateOperandValue } from "./date-value.js";
 import { acceptedOptionIds, scalarIds } from "./option-owners.js";
@@ -31,8 +31,21 @@ import type {
   FilterOptionPort,
 } from "./types.js";
 import type { CriteriaBuilderEditorHandle } from "./criteria-builder-host.js";
-import { readBuilderEditor,requireBuilderEditor,useBuilderEditorVersion,useBuilderEditorRoute,builderRegistry,validateBuilder,editorActions,safely } from "./criteria-builder-host.js";
-import { criteriaOptionView,criteriaRequestOptions,criteriaChoiceReceipt } from "./option-owners.js";
+import {
+  readBuilderEditor,
+  requireBuilderEditor,
+  useBuilderEditorVersion,
+  useBuilderEditorRoute,
+  builderRegistry,
+  validateBuilder,
+  editorActions,
+  safely,
+} from "./criteria-builder-host.js";
+import {
+  criteriaOptionView,
+  criteriaRequestOptions,
+  criteriaChoiceReceipt,
+} from "./option-owners.js";
 import { getFieldOperators } from "@tableweave/react/filters";
 import { readCriteriaDateToolbar } from "../date/criteria-date-state.js";
 
@@ -530,52 +543,440 @@ function LegacyValueEditor<S extends QuerySchema>({
   );
 }
 
-export function ValueEditor<S extends QuerySchema>(props:Parameters<typeof LegacyValueEditor<S>>[0]|{readonly criteriaEditor:CriteriaBuilderEditorHandle}) {
-  const route=useBuilderEditorRoute(props);if(route==="legacy")return <LegacyValueEditor {...props as Parameters<typeof LegacyValueEditor<S>>[0]}/>;if(route==="denied")return null;return <CriteriaValueEditor handle={route}/>;
+export function ValueEditor<S extends QuerySchema>(
+  props:
+    | Parameters<typeof LegacyValueEditor<S>>[0]
+    | { readonly criteriaEditor: CriteriaBuilderEditorHandle },
+) {
+  const route = useBuilderEditorRoute(props);
+  if (route === "legacy")
+    return (
+      <LegacyValueEditor
+        {...(props as Parameters<typeof LegacyValueEditor<S>>[0])}
+      />
+    );
+  if (route === "denied") return null;
+  return <CriteriaValueEditor handle={route} />;
 }
-function CriteriaValueEditor({handle}:{readonly handle:CriteriaBuilderEditorHandle}) {
-  const version=useBuilderEditorVersion(handle);
-  useLayoutEffect(()=>{void version;safely(()=>{const e=readBuilderEditor(handle);if(!e.draft)return;const entry=e.fields.find(item=>item.id===e.draft?.field);if(entry&&e.frame.ports.fields[entry.id]?.asyncOptions){const start=e.frame.local.term.read(e.actor)===null,view=criteriaOptionView(e.store,e.actor,entry.id);criteriaChoiceReceipt(handle);if(start&&view.display==="idle")criteriaRequestOptions(handle,"","first");}});},[handle,version]);
-  try{
-    const e=readBuilderEditor(handle);if(!e.draft)return null;const entry=e.fields.find(item=>item.id===e.draft?.field),descriptor=entry?getFieldOperators(e.schema,entry.id,builderRegistry(e.store,e.actor,e.draft)).find(item=>item.id===e.draft?.operator):undefined;if(!entry||!descriptor||descriptor.cardinality==="none")return null;
-    const presentation=e.frame.ports.fields[entry.id],validation=validateBuilder(e.store,e.actor,e.draft);
-    if(presentation?.asyncOptions)e.store.option(e.actor,entry.id);
-    if(!descriptor.builtin||presentation?.renderEditor){if(!presentation?.renderEditor)return <p role="alert">{e.messages.customEditorMissing}</p>;requireBuilderEditor(handle);const before=e.frame.cell.getSnapshot().version;const node=presentation.renderEditor({fieldId:entry.id,field:entry.field,operator:descriptor,value:e.draft.value,acceptedRule:e.state.query.builder.rules.find(rule=>rule.id===e.draft?.id),validation,locale:e.state.query.locale,timeZone:e.state.query.timeZone,evaluatedAt:e.state.evaluatedAt,isDisabled:false,onChange:value=>safely(()=>editorActions.change(handle,value))});requireBuilderEditor(handle);if(e.frame.cell.getSnapshot().version!==before)throw new Error("Criteria editor unavailable");return node;}
-    if(entry.field.type==="number"){
-      const texts=e.frame.local.numbers.read(e.actor)??[],range=descriptor.cardinality==="range";const node=<div className="tw-filter-value-range">{texts.map((text,index)=><TextField key={index===0?"first":"last"} value={text} onChange={next=>safely(()=>editorActions.number(handle,index,next))}><Label>{range?index===0?e.messages.from:e.messages.to:e.messages.value}</Label><Input inputMode="decimal"/></TextField>)}</div>;requireBuilderEditor(handle);return node;
-    }
-    if(entry.field.type==="enum"||entry.field.type==="set")return <CriteriaChoices handle={handle}/>;
-    if((entry.field.type==="date"||entry.field.type==="datetime")&&(descriptor.cardinality==="one"||descriptor.cardinality==="range")){
-      const date=readCriteriaDateToolbar(e.frame.local.date,e.actor);if(!date.handle)return null;const common={criteriaState:date.handle,field:entry.field,resetKey:0,context:{locale:e.state.query.locale,timeZone:e.state.query.timeZone,evaluatedAt:e.state.evaluatedAt},onDraftChange:()=>undefined};return descriptor.cardinality==="one"?<DateOperandEditor {...common} cardinality="one" value={null}/>:<DateOperandEditor {...common} cardinality="range" value={null}/>;
-    }
-    const node=<TextField value={typeof e.draft.value==="string"?e.draft.value:""} onChange={value=>safely(()=>editorActions.change(handle,value))}><Label>{e.messages.value}</Label><Input/></TextField>;requireBuilderEditor(handle);return node;
-  }catch{return <p role="status">{builderUnavailable}</p>;}
-}
-const builderUnavailable="The filter value is unavailable.";
-function CriteriaChoices({handle}:{readonly handle:CriteriaBuilderEditorHandle}) {
-  useBuilderEditorVersion(handle);
-  try{
-    const e=readBuilderEditor(handle);if(!e.draft)return null;const entry=e.fields.find(item=>item.id===e.draft?.field);if(!entry||(entry.field.type!=="enum"&&entry.field.type!=="set"))return null;const descriptor=getFieldOperators(e.schema,entry.id,builderRegistry(e.store,e.actor,e.draft)).find(item=>item.id===e.draft?.operator);if(!descriptor)return null;
-    const field=entry.field,presentation=e.frame.ports.fields[entry.id],port=presentation?.asyncOptions,view=port?criteriaOptionView(e.store,e.actor,entry.id):undefined,rule=e.state.query.builder.rules.find(item=>item.id===e.draft?.id),selected=rule?.field===entry.id&&rule.operator===descriptor.id?scalarIds(rule.value):[];
-    const options=new Map<ScalarId,FilterOption>();if(port){for(const option of view?.selected??[])options.set(option.id,option);for(const option of view?.page?.options??[])options.set(option.id,option);}else{for(const id of selected)options.set(id,{id,label:String(id)});for(const option of presentation?.choices??entry.field.values?.map(id=>({id,label:String(id)}))??[])options.set(option.id,option);}
-    const term=e.frame.local.term.read(e.actor)??view?.page?.request.term??view?.request?.term??"",notice=e.frame.local.choiceNotice.read(e.actor)??"",receipt=e.frame.local.choiceReceipt.read(e.actor)?.token??null,hasAsync=port!==undefined;
-    const choose=(keys:"all"|Set<unknown>)=>safely(()=>{
-      const current=readBuilderEditor(handle);if(!current.draft||keys==="all")return;const livePort=hasAsync?current.store.option(current.actor,entry.id):undefined,latest=livePort?criteriaOptionView(current.store,current.actor,entry.id):undefined,owned=current.frame.local.choiceReceipt.read(current.actor);
-      if(livePort&&(!receipt||owned?.token!==receipt||owned.source!==livePort.source||owned.request!==latest?.request||owned.page!==latest?.page||!latest?.canChoose)){current.frame.local.choiceNotice.write(current.actor,current.messages.staleDraft);return;}
-      const sourceSnapshot=livePort?.source.getSnapshot(),version=current.frame.cell.getSnapshot().version,currentRule=current.state.query.builder.rules.find(item=>item.id===current.draft?.id),accepted=currentRule?.field===entry.id&&currentRule.operator===descriptor.id?scalarIds(currentRule.value):[],available=new Map<ScalarId,FilterOption>();
-      if(livePort){for(const option of latest?.selected??[])available.set(option.id,option);for(const option of latest?.page?.options??[])available.set(option.id,option);}else{for(const id of accepted)available.set(id,{id,label:String(id)});for(const option of current.frame.ports.fields[entry.id]?.choices??field.values?.map(id=>({id,label:String(id)}))??[])available.set(option.id,option);}
-      const next:ScalarId[]=[];for(const option of available.values()){requireBuilderEditor(handle);const included=keys.has(choiceKey(option.id));requireBuilderEditor(handle);if(included)next.push(option.id);}
-      const changed=descriptor.cardinality==="many"?[...accepted.filter(id=>!next.includes(id)),...next.filter(id=>!accepted.includes(id))]:next;
-      const size=keys.size;requireBuilderEditor(handle);if(current.frame.cell.getSnapshot().version!==version)return;if(livePort){current.store.option(current.actor,entry.id);if(livePort.source.getSnapshot()!==sourceSnapshot)return;}if(next.length!==size||changed.some(id=>!available.has(id)||available.get(id)?.disabled)){current.frame.local.choiceNotice.write(current.actor,current.messages.staleDraft);return;}
-      current.frame.local.choiceNotice.clear(current.actor);if(descriptor.cardinality==="many"){if(next.length)editorActions.apply(handle,next,true);else if(currentRule?.field===entry.id&&currentRule.operator===descriptor.id)editorActions.remove(handle);}else if(next.length===1)editorActions.apply(handle,next[0],true);
+function CriteriaValueEditor({
+  handle,
+}: {
+  readonly handle: CriteriaBuilderEditorHandle;
+}) {
+  const version = useBuilderEditorVersion(handle);
+  useLayoutEffect(() => {
+    void version;
+    safely(() => {
+      const e = readBuilderEditor(handle);
+      if (!e.draft) return;
+      const entry = e.fields.find((item) => item.id === e.draft?.field);
+      if (entry && e.frame.ports.fields[entry.id]?.asyncOptions) {
+        const start = e.frame.local.term.read(e.actor) === null,
+          view = criteriaOptionView(e.store, e.actor, entry.id);
+        criteriaChoiceReceipt(handle);
+        if (start && view.display === "idle")
+          criteriaRequestOptions(handle, "", "first");
+      }
     });
-    const node=<div className="tw-filter-choices">{port?<TextField value={term} onChange={next=>safely(()=>{const current=readBuilderEditor(handle);current.frame.local.term.write(current.actor,next);current.frame.local.choiceNotice.clear(current.actor);criteriaRequestOptions(handle,next,"first");})}><Label>{e.messages.searchOptions}</Label><Input/></TextField>:null}
-      {view?.busy?<p role="status">{e.messages.loading}</p>:null}
-      {view?.display==="error"||view?.notice==="load-failed"?<div role="alert">{e.messages.optionsFailed}{view?.canRetry?<Button variant="tertiary" onPress={()=>safely(()=>{const current=readBuilderEditor(handle),latest=criteriaOptionView(current.store,current.actor,entry.id);if(latest.canRetry&&latest.request)criteriaRequestOptions(handle,latest.request.term,latest.request.pageKey);})}>{e.messages.retry}</Button>:null}</div>:null}
-      {port&&view?.display==="idle"?<Button variant="tertiary" onPress={()=>safely(()=>{const current=readBuilderEditor(handle);criteriaRequestOptions(handle,current.frame.local.term.read(current.actor)??"","first");})}>{e.messages.searchOptions}</Button>:null}
-      {view?.display==="blocked"?<p role="status">{e.messages.accessUnavailable}</p>:null}{(!port&&!options.size)||view?.display==="empty"?<p role="status">{e.messages.emptyOptions}</p>:null}{notice?<p role="status">{notice}</p>:null}
-      <ListBox aria-label={e.messages.chooseValue} escapeKeyBehavior="none" selectionMode={descriptor.cardinality==="many"?"multiple":"single"} selectedKeys={new Set(selected.map(choiceKey))} disallowEmptySelection={descriptor.cardinality!=="many"} disabledKeys={[...options.values()].filter(option=>(port&&view?.canChoose!==true)||option.disabled).map(option=>choiceKey(option.id))} onSelectionChange={keys=>choose(keys)}>{[...options.values()].map(option=><ListBox.Item key={choiceKey(option.id)} id={choiceKey(option.id)} textValue={option.label}>{option.label}<ListBox.ItemIndicator/></ListBox.Item>)}</ListBox>
-      {port&&view?.canLoadMore&&view.page?.request.term===term&&port.nextPageKey?<Button variant="tertiary" onPress={()=>safely(()=>{const current=readBuilderEditor(handle),latest=criteriaOptionView(current.store,current.actor,entry.id),actual=current.store.option(current.actor,entry.id);if(!latest.canLoadMore||!latest.page||latest.page.request.term!==(current.frame.local.term.read(current.actor)??""))return;const snapshot=actual.source.getSnapshot();requireBuilderEditor(handle);const next=actual.nextPageKey?.(latest.page.request);requireBuilderEditor(handle);current.store.option(current.actor,entry.id);if(next!==undefined&&next!==null&&actual.source.getSnapshot()===snapshot)criteriaRequestOptions(handle,latest.page.request.term,next);})}>{e.messages.nextOptions}</Button>:null}
-    </div>;requireBuilderEditor(handle);if(port)e.store.option(e.actor,entry.id);return node;
-  }catch{return <p role="status">{builderUnavailable}</p>;}
+  }, [handle, version]);
+  try {
+    const e = readBuilderEditor(handle);
+    if (!e.draft) return null;
+    const entry = e.fields.find((item) => item.id === e.draft?.field),
+      descriptor = entry
+        ? getFieldOperators(
+            e.schema,
+            entry.id,
+            builderRegistry(e.store, e.actor, e.draft),
+          ).find((item) => item.id === e.draft?.operator)
+        : undefined;
+    if (!entry || !descriptor || descriptor.cardinality === "none") return null;
+    const presentation = e.frame.ports.fields[entry.id],
+      validation = validateBuilder(e.store, e.actor, e.draft);
+    if (presentation?.asyncOptions) e.store.option(e.actor, entry.id);
+    if (!descriptor.builtin || presentation?.renderEditor) {
+      if (!presentation?.renderEditor)
+        return <p role="alert">{e.messages.customEditorMissing}</p>;
+      requireBuilderEditor(handle);
+      const before = e.frame.cell.getSnapshot().version;
+      const node = presentation.renderEditor({
+        fieldId: entry.id,
+        field: entry.field,
+        operator: descriptor,
+        value: e.draft.value,
+        acceptedRule: e.state.query.builder.rules.find(
+          (rule) => rule.id === e.draft?.id,
+        ),
+        validation,
+        locale: e.state.query.locale,
+        timeZone: e.state.query.timeZone,
+        evaluatedAt: e.state.evaluatedAt,
+        isDisabled: false,
+        onChange: (value) => safely(() => editorActions.change(handle, value)),
+      });
+      requireBuilderEditor(handle);
+      if (e.frame.cell.getSnapshot().version !== before)
+        throw new Error("Criteria editor unavailable");
+      return node;
+    }
+    if (entry.field.type === "number") {
+      const texts = e.frame.local.numbers.read(e.actor) ?? [],
+        range = descriptor.cardinality === "range";
+      const node = (
+        <div className="tw-filter-value-range">
+          {texts.map((text, index) => (
+            <TextField
+              key={index === 0 ? "first" : "last"}
+              value={text}
+              onChange={(next) =>
+                safely(() => editorActions.number(handle, index, next))
+              }
+            >
+              <Label>
+                {range
+                  ? index === 0
+                    ? e.messages.from
+                    : e.messages.to
+                  : e.messages.value}
+              </Label>
+              <Input inputMode="decimal" />
+            </TextField>
+          ))}
+        </div>
+      );
+      requireBuilderEditor(handle);
+      return node;
+    }
+    if (entry.field.type === "enum" || entry.field.type === "set")
+      return <CriteriaChoices handle={handle} />;
+    if (
+      (entry.field.type === "date" || entry.field.type === "datetime") &&
+      (descriptor.cardinality === "one" || descriptor.cardinality === "range")
+    ) {
+      const date = readCriteriaDateToolbar(e.frame.local.date, e.actor);
+      if (!date.handle) return null;
+      const common = {
+        criteriaState: date.handle,
+        field: entry.field,
+        resetKey: 0,
+        context: {
+          locale: e.state.query.locale,
+          timeZone: e.state.query.timeZone,
+          evaluatedAt: e.state.evaluatedAt,
+        },
+        onDraftChange: () => undefined,
+      };
+      return descriptor.cardinality === "one" ? (
+        <DateOperandEditor {...common} cardinality="one" value={null} />
+      ) : (
+        <DateOperandEditor {...common} cardinality="range" value={null} />
+      );
+    }
+    const node = (
+      <TextField
+        value={typeof e.draft.value === "string" ? e.draft.value : ""}
+        onChange={(value) => safely(() => editorActions.change(handle, value))}
+      >
+        <Label>{e.messages.value}</Label>
+        <Input />
+      </TextField>
+    );
+    requireBuilderEditor(handle);
+    return node;
+  } catch {
+    return <p role="status">{builderUnavailable}</p>;
+  }
+}
+const builderUnavailable = "The filter value is unavailable.";
+function CriteriaChoices({
+  handle,
+}: {
+  readonly handle: CriteriaBuilderEditorHandle;
+}) {
+  useBuilderEditorVersion(handle);
+  try {
+    const e = readBuilderEditor(handle);
+    if (!e.draft) return null;
+    const entry = e.fields.find((item) => item.id === e.draft?.field);
+    if (!entry || (entry.field.type !== "enum" && entry.field.type !== "set"))
+      return null;
+    const descriptor = getFieldOperators(
+      e.schema,
+      entry.id,
+      builderRegistry(e.store, e.actor, e.draft),
+    ).find((item) => item.id === e.draft?.operator);
+    if (!descriptor) return null;
+    const field = entry.field,
+      presentation = e.frame.ports.fields[entry.id],
+      port = presentation?.asyncOptions,
+      view = port ? criteriaOptionView(e.store, e.actor, entry.id) : undefined,
+      rule = e.state.query.builder.rules.find(
+        (item) => item.id === e.draft?.id,
+      ),
+      selected =
+        rule?.field === entry.id && rule.operator === descriptor.id
+          ? scalarIds(rule.value)
+          : [];
+    const options = new Map<ScalarId, FilterOption>();
+    if (port) {
+      for (const option of view?.selected ?? []) options.set(option.id, option);
+      for (const option of view?.page?.options ?? [])
+        options.set(option.id, option);
+    } else {
+      for (const id of selected) options.set(id, { id, label: String(id) });
+      for (const option of presentation?.choices ??
+        entry.field.values?.map((id) => ({ id, label: String(id) })) ??
+        [])
+        options.set(option.id, option);
+    }
+    const term =
+        e.frame.local.term.read(e.actor) ??
+        view?.page?.request.term ??
+        view?.request?.term ??
+        "",
+      notice = e.frame.local.choiceNotice.read(e.actor) ?? "",
+      receipt = e.frame.local.choiceReceipt.read(e.actor)?.token ?? null,
+      hasAsync = port !== undefined;
+    const choose = (keys: "all" | Set<unknown>) =>
+      safely(() => {
+        const current = readBuilderEditor(handle);
+        if (!current.draft || keys === "all") return;
+        const livePort = hasAsync
+            ? current.store.option(current.actor, entry.id)
+            : undefined,
+          latest = livePort
+            ? criteriaOptionView(current.store, current.actor, entry.id)
+            : undefined,
+          owned = current.frame.local.choiceReceipt.read(current.actor);
+        if (
+          livePort &&
+          (!receipt ||
+            owned?.token !== receipt ||
+            owned.source !== livePort.source ||
+            owned.request !== latest?.request ||
+            owned.page !== latest?.page ||
+            !latest?.canChoose)
+        ) {
+          current.frame.local.choiceNotice.write(
+            current.actor,
+            current.messages.staleDraft,
+          );
+          return;
+        }
+        const sourceSnapshot = livePort?.source.getSnapshot(),
+          version = current.frame.cell.getSnapshot().version,
+          currentRule = current.state.query.builder.rules.find(
+            (item) => item.id === current.draft?.id,
+          ),
+          accepted =
+            currentRule?.field === entry.id &&
+            currentRule.operator === descriptor.id
+              ? scalarIds(currentRule.value)
+              : [],
+          available = new Map<ScalarId, FilterOption>();
+        if (livePort) {
+          for (const option of latest?.selected ?? [])
+            available.set(option.id, option);
+          for (const option of latest?.page?.options ?? [])
+            available.set(option.id, option);
+        } else {
+          for (const id of accepted)
+            available.set(id, { id, label: String(id) });
+          for (const option of current.frame.ports.fields[entry.id]?.choices ??
+            field.values?.map((id) => ({ id, label: String(id) })) ??
+            [])
+            available.set(option.id, option);
+        }
+        const next: ScalarId[] = [];
+        for (const option of available.values()) {
+          requireBuilderEditor(handle);
+          const included = keys.has(choiceKey(option.id));
+          requireBuilderEditor(handle);
+          if (included) next.push(option.id);
+        }
+        const changed =
+          descriptor.cardinality === "many"
+            ? [
+                ...accepted.filter((id) => !next.includes(id)),
+                ...next.filter((id) => !accepted.includes(id)),
+              ]
+            : next;
+        const size = keys.size;
+        requireBuilderEditor(handle);
+        if (current.frame.cell.getSnapshot().version !== version) return;
+        if (livePort) {
+          current.store.option(current.actor, entry.id);
+          if (livePort.source.getSnapshot() !== sourceSnapshot) return;
+        }
+        if (
+          next.length !== size ||
+          changed.some(
+            (id) => !available.has(id) || available.get(id)?.disabled,
+          )
+        ) {
+          current.frame.local.choiceNotice.write(
+            current.actor,
+            current.messages.staleDraft,
+          );
+          return;
+        }
+        current.frame.local.choiceNotice.clear(current.actor);
+        if (descriptor.cardinality === "many") {
+          if (next.length) editorActions.apply(handle, next, true);
+          else if (
+            currentRule?.field === entry.id &&
+            currentRule.operator === descriptor.id
+          )
+            editorActions.remove(handle);
+        } else if (next.length === 1)
+          editorActions.apply(handle, next[0], true);
+      });
+    const node = (
+      <div className="tw-filter-choices">
+        {port ? (
+          <TextField
+            value={term}
+            onChange={(next) =>
+              safely(() => {
+                const current = readBuilderEditor(handle);
+                current.frame.local.term.write(current.actor, next);
+                current.frame.local.choiceNotice.clear(current.actor);
+                criteriaRequestOptions(handle, next, "first");
+              })
+            }
+          >
+            <Label>{e.messages.searchOptions}</Label>
+            <Input />
+          </TextField>
+        ) : null}
+        {view?.busy ? <p role="status">{e.messages.loading}</p> : null}
+        {view?.display === "error" || view?.notice === "load-failed" ? (
+          <div role="alert">
+            {e.messages.optionsFailed}
+            {view?.canRetry ? (
+              <Button
+                variant="tertiary"
+                onPress={() =>
+                  safely(() => {
+                    const current = readBuilderEditor(handle),
+                      latest = criteriaOptionView(
+                        current.store,
+                        current.actor,
+                        entry.id,
+                      );
+                    if (latest.canRetry && latest.request)
+                      criteriaRequestOptions(
+                        handle,
+                        latest.request.term,
+                        latest.request.pageKey,
+                      );
+                  })
+                }
+              >
+                {e.messages.retry}
+              </Button>
+            ) : null}
+          </div>
+        ) : null}
+        {port && view?.display === "idle" ? (
+          <Button
+            variant="tertiary"
+            onPress={() =>
+              safely(() => {
+                const current = readBuilderEditor(handle);
+                criteriaRequestOptions(
+                  handle,
+                  current.frame.local.term.read(current.actor) ?? "",
+                  "first",
+                );
+              })
+            }
+          >
+            {e.messages.searchOptions}
+          </Button>
+        ) : null}
+        {view?.display === "blocked" ? (
+          <p role="status">{e.messages.accessUnavailable}</p>
+        ) : null}
+        {(!port && !options.size) || view?.display === "empty" ? (
+          <p role="status">{e.messages.emptyOptions}</p>
+        ) : null}
+        {notice ? <p role="status">{notice}</p> : null}
+        <ListBox
+          aria-label={e.messages.chooseValue}
+          escapeKeyBehavior="none"
+          selectionMode={
+            descriptor.cardinality === "many" ? "multiple" : "single"
+          }
+          selectedKeys={new Set(selected.map(choiceKey))}
+          disallowEmptySelection={descriptor.cardinality !== "many"}
+          disabledKeys={[...options.values()]
+            .filter(
+              (option) => (port && view?.canChoose !== true) || option.disabled,
+            )
+            .map((option) => choiceKey(option.id))}
+          onSelectionChange={(keys) => choose(keys)}
+        >
+          {[...options.values()].map((option) => (
+            <ListBox.Item
+              key={choiceKey(option.id)}
+              id={choiceKey(option.id)}
+              textValue={option.label}
+            >
+              {option.label}
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          ))}
+        </ListBox>
+        {port &&
+        view?.canLoadMore &&
+        view.page?.request.term === term &&
+        port.nextPageKey ? (
+          <Button
+            variant="tertiary"
+            onPress={() =>
+              safely(() => {
+                const current = readBuilderEditor(handle),
+                  latest = criteriaOptionView(
+                    current.store,
+                    current.actor,
+                    entry.id,
+                  ),
+                  actual = current.store.option(current.actor, entry.id);
+                if (
+                  !latest.canLoadMore ||
+                  !latest.page ||
+                  latest.page.request.term !==
+                    (current.frame.local.term.read(current.actor) ?? "")
+                )
+                  return;
+                const snapshot = actual.source.getSnapshot();
+                requireBuilderEditor(handle);
+                const next = actual.nextPageKey?.(latest.page.request);
+                requireBuilderEditor(handle);
+                current.store.option(current.actor, entry.id);
+                if (
+                  next !== undefined &&
+                  next !== null &&
+                  actual.source.getSnapshot() === snapshot
+                )
+                  criteriaRequestOptions(
+                    handle,
+                    latest.page.request.term,
+                    next,
+                  );
+              })
+            }
+          >
+            {e.messages.nextOptions}
+          </Button>
+        ) : null}
+      </div>
+    );
+    requireBuilderEditor(handle);
+    if (port) e.store.option(e.actor, entry.id);
+    return node;
+  } catch {
+    return <p role="status">{builderUnavailable}</p>;
+  }
 }
