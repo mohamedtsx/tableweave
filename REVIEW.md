@@ -1373,3 +1373,30 @@ Main grants bounded **agent-approved under delegated authority** for the test-on
 correction7e3ff48, supported by main canonical55, clean CI-mode55 and independent3.
 Fresh full remote workflows are still required; no producer/animation/AX/manual/
 performance/general rapid-interaction or merge approval follows.
+
+## WP-08 pagination open-Select contrast — review session 23
+
+### n1 — Immediate open-menu scan reports light-theme contrast (P1, open)
+
+Push45390462746 passes builder correction and reaches pager62; its English/Arabic
+light cases fail axe color-contrast at line461 immediately after Enter opens Select.
+Failure nodes carry data-entering=true and contrast4.36–4.42 against required4.5.
+It is not yet established whether settled tokens or transitional compositing cause
+the failure. Main allocates private unmodified-source phase/contrast measurements,
+not threshold relaxation, disabled rules, arbitrary sleeps or animation overrides.
+Producer/test changes wait for causal evidence and independent correction review.
+The sibling PR workflow45390474622 subsequently passes completely at the identical
+a668922 head. This is separate successful remote evidence, not a reclassification
+of failed push45390462746; both remain part of the phase/contrast investigation.
+Private canonical measurements return stable option contrast17.71:1 light and17.26:1
+dark in both locales, all four options. Raw frames show unchanged tokens with popup
+opacity0→1 over the pinned150ms entry. Main audits actual phase/axe data: steady
+open has no entering flag/animations, opacity1, zero violations and all four passing
+option nodes. Supplemental alpha calculation explains the remote gray pair but is
+not a freshly reproduced full-axe failure. Main allocates only three observed-state
+preconditions before the existing open scan; no rule/token/animation/timeout edits.
+Main canonical original4 pass (remote failure not locally reproduced), then actual
+corrected full62/strict TS/Biome pass. Main audits raw16 steady option nodes at the
+reported ratios and confirms all180 outputs unchanged. Only visible-listbox,
+entry-complete and opacity1 assertions are added before the open scan. Separate
+independent correction review and clean-checkout replay remain active before push.

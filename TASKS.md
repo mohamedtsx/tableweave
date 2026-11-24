@@ -156,6 +156,35 @@ f107a7aa…/2043 input/180+275 root seals. Main grants bounded test-only correct
 approval and pushes7e3ff48 plus this documentation disposition for new full remote
 workflows. No production/library/archive code changes; full cold rehearsal and
 55+55 canonical source evidence are complete. Final remote acceptance still waits.
+Push45390462746 passes repaired cold gate/builder/genuine packing, then fails two
+source pagination light-theme axe checks at the immediate-open scan. Error nodes
+report data-entering=true with4.36–4.42 contrast. Main allocates private causal
+measurement of entry versus steady open/closed Select in all four locale/themes;
+no test/contrast rule, CSS/producer or animation edit is yet authorized. Preserve
+threshold4.5, original assertions/deadlines and failure logs. PR workflow result
+is still awaited separately; no full remote pass is claimed.
+PR45390474622 now completes successfully at the same a668922 head; push45390462746
+remains failed at the two immediate-entry contrast scans. One green full workflow
+does not erase the red sibling or establish settled contrast. Main retains both
+results and the causal phase/contrast investigation; no blind workflow rerun.
+Private unmodified canonical measurements now show steady light17.71/dark17.26
+contrast for all four options/locales; only popup opacity changes during entry.
+The exact remote scan failure is not reproduced locally; its gray colors match
+measured transitional compositing, not steady tokens. Main audits raw phase/axe
+evidence and allocates only three test preconditions before open axe: visible listbox,
+no data-entering=true and actual opacity1. All original scans/rules/threshold/actions/
+deadlines remain; no CSS/animation/producer edits or all-frame WCAG claim. Canonical
+baseline precedes actual edit; main full62/type/Biome and independent review follow.
+Main's canonical unmodified four theme/locale cases pass locally (not an exact
+reproduction of the failed remote scan). Main independently audits raw phase/axe
+JSON for all16 options and applies only the three approved observed-state assertions.
+Scoped strict TS/Biome pass; canonical full62 runs on6529 with original deadlines/
+retry0 and all scans/rules intact. Runtime/archives remain unchanged. Separate
+correction review follows completion; no all-animation/manual AA claim is added.
+Canonical main62 now passes, preserving all three LIMITATION characterizations;
+actual test-only diff contains just the three added settled-open assertions. Main
+commits the candidate to replay it in the clean worktree without changing package
+outputs. Independent correction review is active; push/final acceptance remains held.
 **Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
 42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
 110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and

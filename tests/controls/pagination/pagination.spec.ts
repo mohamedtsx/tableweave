@@ -458,6 +458,12 @@ for (const rtl of [false, true])
       });
       await trigger.focus();
       await page.keyboard.press("Enter");
+      await expect(page.getByRole("listbox")).toBeVisible();
+      await expect(page.getByRole("dialog")).not.toHaveAttribute(
+        "data-entering",
+        "true",
+      );
+      await expect(page.getByRole("dialog")).toHaveCSS("opacity", "1");
       expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
       await page.keyboard.press("End");
       await page.keyboard.press("Enter");
