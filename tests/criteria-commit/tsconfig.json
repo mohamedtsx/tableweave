@@ -1,0 +1,33 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "../..",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "ES2023.Intl", "DOM", "DOM.Iterable"],
+    "types": ["node", "react", "react-dom"],
+    "paths": {
+      "@tableweave/react": ["../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../packages/react/src/filters/index.ts"
+      ],
+      "@internationalized/date": [
+        "../../packages/heroui/node_modules/@internationalized/date"
+      ],
+      "@tanstack/react-table": [
+        "../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../packages/heroui/src/filters/criteria-commit.tsx"
+  ],
+  "exclude": ["./negative-types.ts", "./.artifacts"]
+}
