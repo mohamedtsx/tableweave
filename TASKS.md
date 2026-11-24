@@ -145,6 +145,17 @@ pending before push. Only one test's preconditions change; runtime/archives stay
 Main commits this test-only candidate to replay the exact assertions in the separate
 clean checkout, preserving prior full-run results. Independent correction review
 still gates push and final remote success; candidate commit is not acceptance.
+Clean checkout7ca8e12 corrected canonical55 also passes under CI=1 on6525, with
+no source/CSS adaptation. Independent static/type review confirms exact four lines
+and preserved assertions, but its private native Vite setup fails CSS before any
+behavior. Main supplies the already successful exact canonical CLI/cwd/cache path
+for independent replay; zero setup-blocked passes are claimed. New remote push
+waits for that correction disposition; no source/runtime broadened repair.
+Independent canonical replay now passes3/3 without CSS/alias adaptation, same spec
+f107a7aa…/2043 input/180+275 root seals. Main grants bounded test-only correction
+approval and pushes7e3ff48 plus this documentation disposition for new full remote
+workflows. No production/library/archive code changes; full cold rehearsal and
+55+55 canonical source evidence are complete. Final remote acceptance still waits.
 **Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
 42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
 110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and

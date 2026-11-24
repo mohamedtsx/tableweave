@@ -1317,7 +1317,7 @@ acceptance is not inferred from the focused approval.
 
 ## WP-08 existing builder transition — review session 21
 
-### n1 — Cancel locator matches consecutive popover exits (P2 test, open)
+### n1 — Cancel locator matches consecutive popover exits (P2 test, corrected)
 
 Both e385104 replacement workflows pass cold type gating/652 units, then the
 existing inverse/operand builder case fails at its immediate Cancel locator. The
@@ -1343,3 +1343,33 @@ assertions, the complete canonical55, strict TS and Biome pass on6521 without pr
 CSS serving adaptation. Separate independent correction review is active. The cold
 04b3bf7 complete CI-mode workflow independently passes652/42/411/110/54+54, including
 the original case; local success does not reclassify remote failures as passed.
+
+## WP-08 builder assertion correction — review session 22
+
+### n1 — Exact four added assertions preserve intent (static/type approved)
+
+Independent review confirms corrected specf107a7aaf1c1e9e0359a4c92c62b2176645677c9cec378eaf52d364a37232cae;
+removing only four new lines restores the original entire spec byte-for-byte.
+All original actions/strict Cancel/inverse/operand/error/query/native assertions
+remain. Fresh strict TS5.9 and one-file Biome pass. Bounded test-only acceptance
+is conditional on canonical behavior, not a producer/animation correction.
+
+### n2 — Private native-loader server blocks before behavioral proof (setup)
+
+Three independent browser attempts reach no correction lines: a private native Vite
+API/config/cache setup cannot resolve the fixture's stylesheet import; its overlay
+intercepts the original first click. A separate CSS preflight is HTTP500. This is
+zero behavioral passes, not a correction defect or ignored failure. Main's exact
+canonical CLI runs pass focused-before/full55-after and clean-checkout55-after;
+main supplies that unchanged CLI/cwd/standard generated-cache path for a bounded
+independent replay without CSS/alias adaptation. Historical blocked outputs remain.
+All2043 fingerprints retain only the one expected test change; runtime180/275 roots
+stay fixed. Remote final acceptance remains pending.
+
+Independent exact canonical CLI replay now passes3/3, zero failed/skipped/flaky,
+retry0/unchanged30s budget. Corrected spec hash and all2043 input/180+275 generation
+seals remain unchanged. The three earlier native-loader setup failures stay separate.
+Main grants bounded **agent-approved under delegated authority** for the test-only
+correction7e3ff48, supported by main canonical55, clean CI-mode55 and independent3.
+Fresh full remote workflows are still required; no producer/animation/AX/manual/
+performance/general rapid-interaction or merge approval follows.
