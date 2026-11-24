@@ -1,148 +1,231 @@
-# F4c Builder adoption — BLOCKED before source implementation
+# Committed Builder adoption — implementation-ready PROVISIONAL
 
-Authorization: the activated four-existing/one-new-source provisional lease in
-`/tmp/opencode/tableweave-wp09-stacked/docs/planning/wp-09-builder-adoption-plan.md`,
-especially activation lines 21–26 and the stop boundary at lines 79/88. Main
-supplied this worktree at `283bbad` (S1/D1 plus preserved Date); no Git operation
-reverified or changed that label. TASKS was read and remains main-owned/read-only.
+Source and fixtures are authored; **runtime and independent acceptance are not
+established**. Main's supplied starting preservation is `43a3b02`; no Git command
+was used to reverify or alter it. This handoff does not reactivate other packets,
+intake changing S3/D2 APIs, approve integrated privacy, or complete WP-09.
 
-**No Builder implementation or partial optional-prop adoption was started.** The
-four allocated existing sources, the proposed new Builder host and every frozen
-producer remain untouched. Only this blocker record and a read-only baseline
-checker were added in the authorized new fixture directory.
+Main preserved the [original static blocker](BLOCKER.md) byte-for-byte after the
+Date prerequisite. `check-baseline.mjs` remains unchanged historical evidence for
+the old pre-prerequisite127 snapshot. **Do not run it as the current delta gate.**
+No prior Date/F3/prerequisite seal was rewritten or resigned.
 
-## Concrete frozen Date API conflict
+## Exact lease and dependencies
 
-The actual Date producer can edit an accepted Builder rule in its existing
-field/operator, or start an empty new-rule editor. It cannot express an existing
-rule's replacement draft whose field/operator differs from its accepted baseline.
-This is a source/API limitation, not a runtime-test result or an S1/F3-core failure.
+Only four existing sources change:
 
-### Builder behavior that must remain
+- `packages/heroui/src/filters/types.ts`
+- `packages/heroui/src/filters/filter-builder.tsx`
+- `packages/heroui/src/filters/option-owners.tsx`
+- `packages/heroui/src/filters/value-editors.tsx`
 
-In `packages/heroui/src/filters/filter-builder.tsx`:
+One new private source is `packages/heroui/src/filters/criteria-builder-host.tsx`;
+all other new files are under this fixture directory. Exports, Date, F3 core/ports,
+F1/F2, toolbar/host, headless/renderer/details, messages/styles, config/manifests/
+lock, old tests, docs, TASKS and Git were not edited. No new dependency or installed
+API is assumed. Main owns intake, preservation, export integration and acceptance.
 
-1. `open`, lines 264–280, keeps the accepted rule ID and stores
-   `baseline: JSON.stringify(rule)` while copying its current field/operator/value.
-2. `chooseField`, lines 347–360, changes the **draft** field/operator, preserving
-   that accepted ID/baseline. A compatible value is retained; an incompatible
-   value is cleared locally, not committed.
-3. `chooseOperator`, lines 362–383, changes the **draft** operator with the same
-   ID/baseline, retaining compatible values and otherwise clearing the operand.
-   Value-bearing changes require confirmation, not an early accepted mutation.
-4. `validation`, lines 294–309, passes `replaceRuleId: candidate.id` for an existing
-   rule. `matchesDraft`, lines 128–153, continues comparing the original accepted
-   rule's JSON baseline, independently of the draft field/operator.
-5. `ValueEditor`, lines 504–515 of `filters/value-editors.tsx`, opens the shared
-   Date editor using the draft field, descriptor cardinality and current value.
-   Its raw `DateEditor`, lines 140–175, takes a one-time shape-checked draft seed.
+The current canonical127 map is
+`/tmp/opencode/wp09-before-builder-resume-source127.json`, SHA-256
+`2361efaa0666c9c126437f9f7d1b490eb609d75a4b0c85a18dd3a8bbfe2156ed`.
+`scope-resume.mjs` excludes only the four original Builder sources to derive the
+protected123. Its own `resume-before.json` was captured **after main's explicit
+README/BLOCKER bookkeeping**, not by rebasing the prerequisite's before map.
+It also protects 1,023 existing inputs, including every prerequisite file, Date/F3
+seal, the archived blocker and original checker. TASKS is excluded as main-owned
+bookkeeping but was not edited by this worker. `resume-source-preimages.json`
+contains the four actual original source texts for raw-body AST comparisons.
 
-### Actual Date API and rejecting path
+The original external127 map remains unchanged at SHA-256
+`8281387f44e3ef1e0392159d329e05c7a5e0d319311f42b673beaa923ceee1e2`.
+The frozen Date helper remains
+`28ebb1a8181337a5aa9bfd867bebee621efaf75d67442f354d4aa982fea73aef`.
+These are historical/producer inputs, not approvals of this implementation.
 
-In `packages/heroui/src/date/criteria-date-state.tsx`:
+## Actual private surface
 
-- `CriteriaDateBinding`, lines 75–82, exposes only
-  `{kind:"builder", fieldId, operator, ruleId}` for Builder. There are no distinct
-  accepted-origin and draft-editor field/operator/seed inputs.
-- `beginCriteriaDateEdit`, lines 1078–1083, forwards that exact binding to the
-  registered bundle. `begin`, lines 679–707, immediately calls `bindingValue`
-  before allocating the current edit token/handle and initializing its slots.
-- `bindingValue`, lines 355–381, derives cardinality from `binding.operator`,
-  finds the actual accepted rule by non-null `ruleId`, and **denies at 372–376**
-  unless that accepted rule's field/operator equal the binding field/operator.
-  The seed is then taken only from that accepted rule's value.
-- `cfg`, lines 445–450, reruns `bindingValue` on every full handle guard. This
-  cannot be bypassed by issuing a handle first and changing the binding later.
-- Keeping the accepted binding instead does not represent the new editor:
-  `report`, lines 503–521, checks against its old cardinality/field. Supplying a
-  new `cardinality`/`field`/`value` prop cannot fix this: the adopted
-  `DateOperandEditor` branch at `date-operand-editor.tsx:41–45` forwards only the
-  genuine handle and reads the registered snapshot, not those private props.
+`FilterBuilderProps<S>.criteria?: CriteriaToolTarget<NoInfer<S>>` carries the real
+F1 frame owner and tool authority. True omission keeps the unchanged raw route.
+Own undefined, accessors, inherited metadata, copied contained authorities and
+other invalid targets deny; structural envelopes containing exact genuine
+identities remain eligible. A committed adopted lifetime cannot downgrade to raw
+by removing criteria, change frame owner/P/C/CD, or replace its pinned evaluation
+mode/invalidation key within the same domain.
 
-### Minimal blocked scenario (illustrative synthetic values; not executed)
+`createCriteriaBuilderStore<S>()` is the private host store. Mount acquisition is
+separate from configuration `commit(unknown)`; it uses the actual
+`createCriteriaCommitCell("builder", C)`, never a permitting controller or a second
+actor engine. `read()/require(actor)` expose only genuine committed F3 records.
+The React `CriteriaBuilderHost` retains one store and a stable subscribed surface;
+rendered/abandoned candidates inspect criteria metadata, not candidate ports.
+New configuration actors fence saved A handlers while retaining eligible local
+slots and component identities. Ordinary cleanup does not dispose C/P, increment
+epochs, dispatch selection cancellation, or clear accepted criteria.
 
-```text
-Accepted: r1 / builder-owned datetime field created / date.on / complete instant
-User:     select date.between on r1; enter a replacement range before Apply
-Baseline: the unchanged accepted r1, still date.on until successful application
+`builderEditor(store, actor)` creates an opaque, WeakMap-registered private editor
+handle tied to that actual actor and draft token. `ValueEditor`'s internal adopted
+alternative accepts only `{criteriaEditor: handle}`; its raw alternative retains
+the original body. It does not reconstruct raw metadata/seed callbacks or invent
+an opaque-facade API. Root/editor/choice receipts are distinct from display mode.
 
-beginCriteriaDateEdit(actualBundle, actualBuilderActor, {
-  kind: "builder", fieldId: "created", operator: "date.between", ruleId: "r1"
-})
-→ bindingValue finds actual r1.operator === "date.on"
-→ deny at criteria-date-state.tsx:372–376, before an edit handle is issued
+The store allocates **13 fixed own F3 local slots plus one presentation slot**:
+draft, error, announcement, allocated IDs, field search, numeric texts, option
+term, choice notice, Date key, focus plan, accepted Builder receipt, choice receipt
+and pending-request receipt, plus presentation. The real Date bundle allocates
+its existing **52 slots**, for **66 fixed slots total**. No per-render cell growth,
+private-value React state mirror, latest-handler ref, or independent scheduler is
+introduced. Focus work uses actual F3 animation-frame handles and is cancelled by
+the real core; Promise failure continuations retain only an opaque editor/token
+and reread the request from its slot. There is no generic asynchronous-work grant.
+
+## Date seed and accepted-rule provenance
+
+The parent stores the original accepted rule's `JSON.stringify(rule)` baseline,
+not a fabricated accepted replacement. Existing draft field/operator changes keep
+that ID/baseline. Before beginning the real Date bridge, and again before final
+dispatch, the actual C baseline must still match; genuinely new IDs must remain
+absent. Field ownership/operator eligibility and full draft validation still use
+the real schema, registry, accepted query, limits and controller commands.
+
+The actual frozen bridge call is:
+
+```ts
+beginCriteriaDateEdit(bundle, actor, {
+  kind: "builder",
+  fieldId: actualDraftField,
+  operator: actualDraftOperator,
+  ruleId: baseline === null ? null : actualDraftId,
+  draft: { id: actualDraftId, baseline, value: eligibleDateWire ?? null },
+});
 ```
 
-An existing rule changed from a different field to a Date field hits the same
-check. Retaining the old `date.on` binding would render a scalar editor and reject
-a range draft. `ruleId:null` would pretend this is a new rule and discard the
-actual existing-rule provenance; the explicit user lease prohibits that workaround.
-Dispatching early to make the accepted rule match would violate confirmed Date
-editing and local Cancel. Fake accepted rules, controller snapshots/authorities,
-duplicate Date slot engines and changes to the frozen bridge are not alternatives.
+`null` is an empty seed, never a malformed partial Date wire or a way to disguise
+an existing rule. `builderState` takes the current Date value from the bridge's
+`readCriteriaDateToolbar(...).draft` receipt: complete → actual value, invalid →
+invalid local input, empty/incomplete → no complete operand. Merely switching mode
+cannot fall back to the original accepted seed. Real bridge reconciliation renews
+the actor's handle family without reseeding eligible same-domain text/ranges.
+The parent retains full normalization/validation, Apply/Cancel and mutation receipt
+ownership. Immediate scalar/set choices remain accepted-controlled; confirmed
+numeric/Date/custom drafts are not applied while typing. Rule wrapping and stable
+IDs remain controller-owned. Local Cancel, Builder-only Clear and selection Cancel
+are separate operations.
 
-## Exact next dependency / authorization boundary
+Registry get/custom validation/normalization/evaluation, ID creation, formatting,
+custom rendering and option request/cursor/retry callbacks use committed ports
+with actual actor/baseline/field checks before and after. Operation-local F3
+versions detect reentry; they are not a new domain counter or global query-revision
+readiness policy. Custom input values are copied/frozen into owned local data;
+reflection boundaries check freshness before traversing another descriptor.
 
-Main must allocate a narrow Date-producer prerequisite which can represent,
-separately, the genuine accepted Builder rule baseline and the intended draft
-field/operator/cardinality/eligible seed, while retaining actual C/F3 provenance,
-finite nested owned slots, old-handle denial and independent Cancel semantics.
-The exact API remains for that authorized producer to define; no proposed shape
-here is treated as an accepted signature. After main intakes that actual API,
-reactivate this bounded Builder lease against the corresponding source map.
+## Actual F2 source claims and passive ownership
 
-The user required stopping on this precise conflict. Builder host, option claims,
-numeric/choice state, Date wiring, optional prop and runtime fixtures were not
-partially implemented. F2 ownership/debt integration has not been assessed or
-approved in this stopped lane. No additional source-path authorization is inferred.
+Field claims use `owner.publication.issue(frame.origin)` and genuine
+`registerOptionCriteriaSource({publication, criteria, fieldId, source})`. No public
+clear, empty page, equal tag, caller reset callback or void return is used as a
+grant. Dirty/unrecognized/populated source history stays unavailable. Claims are
+created in passive ownership effects, not picker opening, render, or F3 capture.
 
-## Baseline and actual light evidence
+One source-identity lifetime component owns the passive `source.connect()` and
+single active external-store subscription outside picker visibility. Same-domain
+configuration does not release/reacquire it. Its subscribed snapshot is opaque
+version metadata, not a retained copy of pages/labels. Accepted selected-ID unions
+are computed field-wide across actual C rules and synchronized only after the real
+claim/actor checks. Source pages/labels, choice receipts, cursor operations and
+transport are checked against the current claim; saved A callbacks cannot retag
+themselves as B. Registration release keeps its actual P/source association.
 
-Main's canonical map is
-`/tmp/opencode/wp09-before-builder-source127.json`, SHA-256
-`8281387f44e3ef1e0392159d329e05c7a5e0d319311f42b673beaa923ceee1e2`.
-All **127** mapped source files (including CSS) match their original hashes and
-Git-style modes: **123** protected sources plus **all four allocated existing
-sources also unchanged**, with no source additions/removals. Thus before and after
-source hashes are identical to that exact map; Date/F3 historical maps were not
-rebased. The new `criteria-builder-host.tsx` does not exist.
+F2 performs its own synchronous purge and lifecycle cleanup. The real source
+owner's original `onInvalidate(event)` must acknowledge its own work; throws or
+asynchronous returns remain publication cleanup debt. This UI never calls
+`P.begin/complete`, changes source context/history, fabricates acknowledgement,
+or disposes an application-owned source to obtain permission. Fixtures explicitly
+model a genuine application's synchronous reset acknowledgement/refusal, not a
+mock source/authority/controller.
 
-The initial ad-hoc mode check wrongly compared the map's Git mode `100644` to all
-filesystem permission bits (`0664`) and failed. It wrote nothing. Correcting the
-checker to compare Git-style executable/non-executable modes passed all 127
-hashes/modes and matched the exact map-byte SHA above. Group-write filesystem
-permission is not a source or Git-mode delta; no chmod or Git operation was used.
+## Authored, not executed
 
-Read-only final checker and syntax-only check:
+- `builder.test.ts`: original JSON baseline across field/operator/Date edits,
+  partial Date receipt, A→B numeric/Date continuity, stale same-ID rejection,
+  controlled proposals, Cancel/Clear distinction and actual P purge/regrant.
+- `claims.test.ts`: real F2 registration/passive lease, accepted field-wide ID
+  unions, dirty-history denial, refusal/debt, old request fencing and cleared
+  backing selected labels after a genuine reset.
+- `capture.test.ts`, `reentry.test.ts`: malformed/present metadata, genuine target
+  envelopes, abandoned candidate metadata capture, configuration/custom-value/
+  registry reentry and real allocated-ID bookkeeping.
+- `publication.test.ts`: genuine P2/F1 producers over the exact same C/CD/context/
+  epoch, with a one-use application initial-lineage certificate, cannot relink P1
+  actors or reach candidate private props. No source methods are patched.
+- `browser.tsx` / `browser.spec.ts`: actual React StrictMode/HeroUI composition,
+  uncontrolled custom form DOM/caret/focus continuity, numeric confirmation,
+  proposal rejection, Date continuity/reset, suspended candidate and no downgrade.
+  **Port 6552 is reserved; no server/browser was started.**
+- `ssr.test.tsx`: authored server-render candidate-port exclusion; unexecuted.
+- `types.ts` / `negative/types.ts`: actual-source positive consumer shape and
+  separate exact-optional/NoInfer/opaque-handle negative cases. Negative compilation,
+  removal matrices and dual compilers remain deferred.
+
+Purging library slots/source backing state does **not** claim erasure of values
+already observed by application callbacks, RAC internals, connected DOM, vendor
+state or retained external references. Same-ID content ABA not observed between
+checks still needs actual parent/session/C/P/F3 retirement or reconciliation;
+content equality alone is not incarnation provenance. Browser/AT, performance,
+privacy and continuity assertions require their real final-phase execution.
+
+## Actual light results
+
+Only the allowed positive TS6/noEmit, syntax/AST, scoped no-write lint and hash/scope
+checks were run. Initial syntax/type/lint defects were fixed; commands interrupted
+by the server restart were rerun to completion. Final results:
 
 ```sh
-node tests/criteria-builder/check-baseline.mjs
-node --check tests/criteria-builder/check-baseline.mjs
-node node_modules/@biomejs/biome/bin/biome check --vcs-enabled=false tests/criteria-builder/check-baseline.mjs
+node node_modules/typescript/bin/tsc -p tests/criteria-builder/tsconfig.json --pretty false
+node node_modules/typescript/bin/tsc -p tests/criteria-date/tsconfig.json --pretty false
+node tests/criteria-builder/static.mjs
+node tests/criteria-builder/scope-resume.mjs
+node node_modules/@biomejs/biome/bin/biome check --formatter-enabled=false --assist-enabled=false packages/heroui/src/filters/types.ts packages/heroui/src/filters/filter-builder.tsx packages/heroui/src/filters/value-editors.tsx packages/heroui/src/filters/option-owners.tsx packages/heroui/src/filters/criteria-builder-host.tsx tests/criteria-builder --max-diagnostics=40
+node tests/criteria-builder/measure.mjs
 ```
 
-Actual results: the final baseline checker **passed** all 127 hashes, Git-style
-modes and the full source inventory (123 protected + four allocated unchanged;
-zero added/removed sources). Syntax-only `node --check` **passed**. Final no-write
-Biome checked the **one** new script with **no fixes or diagnostics**. No application
-module was loaded and no emitted file was written. The single executable fixture
-file `check-baseline.mjs` has SHA-256
-`72cce529f15cbaef7a4693cca4ba5a0e969035c9afe336407ad3efe58436147b`;
-README handoff prose is excluded from that self-referential evidence hash.
+- Both positive TS6 commands: PASS, no emits.
+- Static: 15 original raw function bodies unchanged; 12 positive/source fixture
+  TS/TSX files parsed; 8 scripts/configs syntax checked; 14 own allocation sites
+  plus the unchanged 52-slot Date producer; zero application modules loaded.
+- Scope: 1,023 protected inputs and the canonical-map-derived123 protected sources
+  match; both external maps and original BLOCKER/checker preserved.
+- Scoped lint: 31 files including the new seal, no fixes or diagnostics. Formatter/import-assist checks
+  were explicitly disabled; this is not a formatting/import-order approval.
+- Current seal: **32 inputs = 5 sources + 25 new fixtures/evidence + 2 historical
+  files**, excluding this README, the seal itself and `.artifacts`. SHA-256 aggregate
+  over sorted compact path→SHA JSON:
+  `7422a760f9c995a2bf3a574cbb0d90d9a3133fdd62d8eb30b26541e95730a52b`.
+  `handoff-hashes.json` lists exact individual source hashes and filesystem modes.
 
-No positive TS6 run was needed or claimed here: source implementation stopped
-before edits, and the added checker is JavaScript. Main's earlier integrated Date
-positive TS6 result remains main's reported baseline evidence, not a fresh result
-from this lane. No units, React/browser/SSR, negative programs, dual compilation,
-emissions, packed/genuine consumers, server, network, install, agents, shared build,
-Git/commit, export changes or independent verification were performed.
+`measure.mjs seal` created this stage's new seal once; normal `measure.mjs` checks
+it without writing. This seal does not include or revise any prior producer seal.
 
-## Deferred proof
+## Deferred single final phase / next owner
 
-The full Builder acceptance fixtures and commands must be authored against the
-resolved actual Date API when this lease is reactivated; no invented runnable
-Builder unit/browser command is claimed to exist now. Port **6552** remains
-reserved for the future authored-only browser config, not a launched server.
-All runtime/purge/form/continuity/SSR/consumer/negative/independent engineering
-approval stays deferred to the user's single final phase. This is a blocker
-handoff, **not implementation-ready PROVISIONAL or Builder/WP-09 approval**.
+Main should inspect the actual source/API/seal and preserve/intake this bounded
+delta. No new exports, opaque facade, shared helper integration or adjacent source
+change was guessed. Main must explicitly allocate any defects in frozen producers.
+No commits, pushes, installs, agents, shared builds, emissions, deployments,
+network/browser/server operations or independent-review checks ran here.
+
+Only when the user's single final verification phase is authorized:
+
+```sh
+node tests/criteria-builder/run.mjs final-builder-001
+node node_modules/@playwright/test/cli.js test --config tests/criteria-builder/playwright.config.ts
+node node_modules/typescript/bin/tsc -p tests/criteria-builder/negative/tsconfig.json --pretty false
+node tests/criteria-date-builder-draft/run.mjs final-date-draft-compat-001
+node tests/criteria-date/run.mjs final-date-builder-compat-001
+```
+
+The Builder unit command includes the authored SSR test; the negative command is
+expected to fail and needs diagnostic review, not an inverted blanket success.
+Use fresh own artifact labels/output directories. Existing compatibility, actual
+React/browser/SSR, negative/removal/dual/emitted/packed/genuine consumers and
+independent acceptance still belong to that final phase. None of these authored
+tests has passed merely because it parses or type-checks.

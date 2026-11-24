@@ -22,6 +22,7 @@ import type {
 } from "@tableweave/react/filters";
 import type { ReactNode } from "react";
 import type { DateEditorMessages } from "../date/date-operand-editor.js";
+import type { CriteriaToolTarget } from "./criteria-commit.js";
 
 export interface FilterBuilderMessages {
   filters: string;
@@ -105,6 +106,7 @@ export interface FilterFieldPresentation<S extends QuerySchema> {
 }
 
 export interface FilterBuilderProps<S extends QuerySchema> {
+  readonly criteria?: CriteriaToolTarget<NoInfer<S>>;
   readonly controller: TableController<S>;
   /** Matches the application's processing owner; compile validation alone does not prove a client evaluator exists. */
   readonly evaluationMode: "client" | "server";
