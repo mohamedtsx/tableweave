@@ -78,6 +78,14 @@ F1's exact21-input aggregate is1163663648c3833d27a982c92163c2d89772837b7acd5bc95
 Post-F1 source112 mapb6a4f38903b059dd57f69918e197b8a90337618df610b60fac80a0dcc7cc58e3
 keeps old maps intact. Historical blocker/failed attempts remain preserved; all
 runtime/helper positives/dual types/independent proof still wait for the final phase.
+F1 is committed2b54fb7; F2/P1/F3a intakes9954714/16fd97c/d200e83 apply without
+conflicts. Main allocates only additive actual root/filter source exports as the
+cross-package handoff. Historical installed dist/new output identities are not
+rebuilt or blessed; downstream fixtures remain source/private-emitted feasibility.
+The additive root/filter source-export handoff passes one actual React source TS6
+noEmit compile. HeroUI's package compile also passes, but still resolves historical
+installed declarations; it is not proof of new cross-package exports. F3's new own
+fixture must resolve the actual source entry explicitly and label that limitation.
 Localization is preserved in isolatedb286884 after main API/source inspection and
 whitespace checking:11 real message ports/36 built-in labels, five authored unit
 cases/ten type-negative lines, zero runtime cases executed. Worker light TS6 and

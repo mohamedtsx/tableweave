@@ -34,3 +34,7 @@ export {
 } from "./registry.js";
 export type { QueryTranslator } from "./translate.js";
 export { translateQuery } from "./translate.js";
+export {
+  OptionCriteriaError,
+  registerOptionCriteriaSource,
+} from "./options-criteria.js";

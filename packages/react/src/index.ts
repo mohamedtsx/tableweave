@@ -6,6 +6,19 @@ export {
   replaceTableDefinition,
 } from "./controller/store.js";
 export type * from "./controller/types.js";
+export type * from "./controller/criteria.js";
+export {
+  createCriteriaAuthority,
+  CriteriaAuthorityError,
+  getCriteriaAuthorityOrigin,
+  requireCriteriaAuthority,
+} from "./controller/criteria.js";
+export type * from "./controller/criteria-publication.js";
+export {
+  createCriteriaPublication,
+  CriteriaPublicationError,
+  getCriteriaPublicationBinding,
+} from "./controller/criteria-publication.js";
 export type { StateErrorCode } from "./controller/validation.js";
 export {
   ControllerError,
@@ -26,6 +39,24 @@ export {
   projectControls,
 } from "./presentation/index.js";
 export type * from "./presentation/types.js";
+export type * from "./presentation/criteria-frame.js";
+export {
+  createCriteriaFrames,
+  CriteriaFrameError,
+  getCriteriaToolOwner,
+  requireCriteriaTool,
+} from "./presentation/criteria-frame.js";
+export {
+  defineTable,
+  TableDefinitionError,
+} from "./table/definition.js";
+export type {
+  DefineTableInput,
+  TableDefinition,
+  TableToolPlacement,
+  ToolPlacement,
+} from "./table/types.js";
+export { createTableSortFn } from "./tanstack/sort.js";
 export type {
   EmptyKind,
   PageInfo,
