@@ -398,3 +398,5 @@ release evidence. Commit/separate stacked PR follows; **no PR merge**.
   correct;25-file runtime digest and headless archive match prior review. Main
   grants scoped delegated technical approval for n7. Corrected remote delivery
   checks remain required; the prior cc88f21 CI failures are not overwritten.
+  Corrected222c97f source now passes both complete remote push/PR jobs. Final
+  documentation-head verification follows; all PRs remain unmerged.

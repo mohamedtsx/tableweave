@@ -71,7 +71,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   workflow/fresh actual-tarball checks pass and bounded G-04 is agent-approved
   under delegated authority. Source `a7d0863` is pushed in open
   [PR #6](https://github.com/mohamedtsx/tableweave/pull/6) against PR #5's branch;
-  remote checks are pending at handoff. Other packets
+  corrected source222c97f has two successful remote checks. A final documentation
+  handoff records their exact run IDs; verify that last handoff head too. Other packets
   continue only in their bounded isolated/primary paths. No deployment/publication.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
@@ -96,7 +97,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
-| TASK-014 | WP-06 Start/Query SSR integration | in progress | Source approved/pushed; PR #6 open, remote checks pending | Delegated G-04;289 units/43 baseline +54 source/54 packed browser executions |
+| TASK-014 | WP-06 Start/Query SSR integration | in progress | Corrected source/remote checks pass; final docs-head verification | Delegated G-04; PR #6 remains OPEN/unmerged |
 | TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
 | TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
 | TASK-017 | WP-09 details/localization/responsive shell | planned | Assigned after producer handoffs | WP-04/WP-05 |
@@ -805,3 +806,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   source/archive hashes unchanged. Main approves the narrow correction under
   delegated technical authority. Next commit/push to existing PR #6, then verify
   its final remote checks. No merge or new packet approval is implied.
+  **Corrected remote result:** source222c97f's push/PR foundation jobs both pass,
+  runs45315481726 and45315488925. PR #6 remains OPEN, auto-merge null, exact head
+  222c97f4390ee32668d2c5a6908b878dc475516e. This final documentation-only handoff
+  preserves those results; main verifies its final pushed head/checks separately.
