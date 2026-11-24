@@ -1,0 +1,66 @@
+/* Reserved shell slots; not imported until the actual DataTable shell adopts them.
+   NativeCollection keeps ownership of table anatomy and horizontal scrolling. */
+@layer tableweave {
+  .tw-data-table {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    color: var(--foreground);
+    font-family: inherit;
+  }
+
+  .tw-data-table__external,
+  .tw-data-table__toolbar,
+  .tw-data-table__collection,
+  .tw-data-table__state,
+  .tw-data-table__notice,
+  .tw-data-table__footer {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+
+  /* Wrap direct tool groups, never their internal rule segments or vendor slots. */
+  .tw-data-table__external,
+  .tw-data-table__toolbar,
+  .tw-data-table__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tw-data-table__external,
+  .tw-data-table__footer {
+    justify-content: space-between;
+  }
+
+  .tw-data-table__state,
+  .tw-data-table__notice {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .tw-data-table__state {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+    padding-block: 1rem;
+  }
+
+  /* Only styles a future programmatically focusable root; adds no focus behavior. */
+  .tw-data-table:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Scoped hidden semantics outrank these layout display rules. This is not
+     authorization, unmounting, DOM/heap erasure or a global vendor reset. */
+  .tw-data-table[hidden],
+  .tw-data-table [hidden] {
+    display: none;
+  }
+}
