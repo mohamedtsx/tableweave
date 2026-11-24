@@ -53,3 +53,7 @@ inputs/121 other sources. Full staged whitespace check reports only two unchange
 raw Biome outputs; excluding exactly those two logs passes source/other staged input
 whitespace. Failed outputs remain verbatim. Runtime/React/negative/independent proof
 is deferred; intake waits for S1, with no adopted/accessory permission grant.
+
+Intake is76c3823 after S1ab9685c. The [actual D1 handoff](../../tests/details-session-identity/README.md)
+keeps runtime/React/negative/independent checks deferred. Main's integrated positive
+source-fixture TS6 passes; issuance remains legacy-only, not adopted readiness.

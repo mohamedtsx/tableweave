@@ -1,5 +1,7 @@
 "use client";
 
+export { flexRender as renderNativeComponent } from "@tanstack/react-table";
+
 export { reduceTableState } from "./controller/reducer.js";
 export {
   createTableController,

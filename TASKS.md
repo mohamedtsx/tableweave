@@ -2,6 +2,58 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+S2 now hands off PROVISIONALLY ata97a4a0187a9aa10818709d86604d2f364b094d0db15fb1b5d8f5b1038024e22.
+Main inspects target/collection/helper APIs, matches26 handoff inputs/120 protected
+source hashes/exact root delta and passes one positive integrated source-fixture TS6
+compile. Post-S2 source127 is92880b32fc0cd49115eda129a47998b2a15938a15341ee4f69ddc1f24f108021.
+Runtime/React/helper correction/independent proof stays deferred. Main commits before
+Date/state-locale intake; isolated details/Date-prerequisite inventories remain fixed.
+
+Builder stops before source edits on Date's accepted-operator/draft-operator API
+conflation (review14n1). Main confirms the trace and pauses the Builder lease. Only
+date/criteria-date-state.tsx plus new prerequisite fixtures are now authorized in
+that isolated tree, separating genuine accepted baseline from draft configuration.
+All127 sources were unchanged at the fence; full correction verification is deferred.
+
+Date is preserved in isolatedf6ce6ab and transported to current S1/D1 in new Builder
+tree283bbad. Main verifies31 Date input/119 other source hashes and passes one
+integrated positive Date-fixture TS6 compile. No runtime/React/purge approval follows.
+Main activates Builder's four-existing/one-new-source lease there under source127
+map8281387f…; actual Date/core stay read-only. Shared S2 and isolated D2 source
+inventories remain unchanged; no intake races their work.
+
+S1 is committedab9685c; D1 is intaken as76c3823 without conflict. Main's integrated
+D1 positive source-fixture TS6 passes. Source126 baseline4a956137… is preserved.
+Main activates only collection/selection renderer guards under a five-existing/
+one-new-source lease; no actual shell/host/details behavior or source core edits.
+Source/cycle/runtime/independent acceptance stays deferred; Date remains isolated.
+S2 stops before producer edits on native FlexRender's deferred context handoff.
+Main confirms the installed/source trace and allocates only an additive root alias
+for actual vendor lowercase flexRender, using the existing headless peer. No renderer
+restriction/new dependency/vendor patch. S2 resumes its original paths with120
+protected sources plus the separately asserted main-owned index delta; old126/121
+maps remain historical. React-owned app internals are not a post-body guard claim.
+Main additionally owns an isolated data-only state-locale extension from actual S1
+types: one new locale module/own fixtures, no old bundle/default/export changes.
+Its14-string EN/AR states will remain provisional with runtime/manual proof deferred;
+it cannot change the active S2/Date/D2 source inventories until their handoffs.
+Main preserves that extension in isolated271d843:14 EN/AR state strings, existing11
+ports/functions/labels unchanged by reference; five units/four negatives authored,
+zero executed. Two positive TS6 programs (initial and final after formatting), final
+scoped Biome/syntax/whitespace and1057 protected inputs/126 source hashes pass.
+Initial formatter failures stay in local artifacts; runtime/negative/graph/manual/
+independent proof is deferred. Exact9-input aggregate is35fca2131fd6a210e5e431512be4bfa610f93989fe2f3b76799f89cd59db3cca.
+Main holds intake until active runtime handoffs and adds no root/default UI exports.
+Main reads configured Figma scene5:159 through mandatory design-to-code guidance
+with its screenshot, using the existing authorized file/session. It records visual
+adaptation limits; no production UI/Tailwind/static-table asset or runtime visual
+acceptance is created. Component/interaction verification remains in the final phase.
+Main also allocates isolated bound-details implementation from76c3823 under its
+six-existing/four-new-source lease. It uses actual shared core and D1 issuance, not
+renderer parent actors or fake frames; S2 guards stay in the shared tree. No intake
+occurs until both protected-source handoffs are received. Source-only cannot grant
+private details rendering or loaded-row trigger permission; final proof stays deferred.
+
 S1 renderer/core handoff is PROVISIONAL at5dcf331b9f230f9ff8d67838bcabacb8260aa97a0a83d9025f1389260f7edaf0.
 Main inspects actual core/tool/renderer/type APIs, matches21 worker inputs/121
 protected source hashes and passes one integrated positive source-fixture TS6 check.
@@ -106,9 +158,11 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
   and performs one successful whole-React TS6 noEmit compile. No runtime correction
   or independent approval is claimed. Main commits before disjoint intake.
 - P2 isd5be856, intended source exports5f9815f; Search/Tabs is e8529b0.
-  Active shared writer: one F3 core extraction/new renderer types/ports lease,
-  preserving F3 signatures. Isolated Date owns its seven files/new state bridge.
-  Other runtime paths freeze; full behavior/independent acceptance stays deferred.
+  S1 isab9685c; D1 intake76c3823. Active shared writer: renderer collection/event
+  guards under its five-existing/one-new lease. Datef6ce6ab is preserved; new isolated
+  Builder owns four files/new host on actual Date/core base283bbad. Isolated bound
+  details owns core/five details/four new sources.
+  No source intake until handoffs. Other runtime paths freeze; full approval deferred.
 - Independent design writer owns only the newly authorized Tableweave Figma file;
   no runtime/API/source ownership. Composed scenes are pending, not design approval.
   Initial scenes now hand off for review: board4:62 in the new file, linked through
@@ -123,8 +177,9 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
 - Generation harness is intaken asdbdc7a2 from isolated34fad4f. Current=fc01;
   both historical output identities remain unchanged. New generation registration
   and actual default-root generation checks are still unresolved, not passed.
-- Next integration: receive renderer-core and Date handoffs, inspect actual APIs/light
-  compile, then allocate Builder adoption and shell composition. Do not
+- Next integration: receive collection/Builder/bound-details handoffs, inspect APIs/
+  light compile, intake preserved Date/state locales, then allocate shell composition.
+  Do not
   duplicate running workers or their checks.
 - External runner access and real consumer are deferred by the user. Ask modal
   handles new policy/permission/input blockers; do not invent external evidence.

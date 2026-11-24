@@ -4,7 +4,24 @@ import { Button } from "@heroui/react/button";
 import { ButtonGroup } from "@heroui/react/button-group";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ReactNode } from "react";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useSyncExternalStore,
+} from "react";
+import {
+  captureTableRendererProp,
+  requireTableRendererTarget,
+  subscribeTableRenderer,
+  TableRendererCommitError,
+  tableRendererBoundary,
+  tableRendererSnapshot,
+  tableRendererStatus,
+} from "../table/renderer-commit.js";
+import type { TableRendererTarget } from "../table/types.js";
 import { captureActions, selectionActionContext } from "./action.js";
 import type {
   SelectionActionContext,
@@ -57,6 +74,79 @@ function FocusRegion({
 export function SelectionToolbar<S extends QuerySchema, T extends object>(
   props: SelectionToolbarProps<S, T>,
 ) {
+  const candidate = captureTableRendererProp<S, T>(props);
+  if (candidate.kind === "denied") return null;
+  if (candidate.kind === "omitted")
+    return <SelectionToolbarContent input={props} />;
+  const { target } = candidate;
+  // Only library-issued config fields are consumed in the adopted route. normal
+  // remains an opaque node reference, never a child callback owner/config capture.
+  const descriptor = Object.getOwnPropertyDescriptor(props, "normal");
+  if (!descriptor || !Object.hasOwn(descriptor, "value")) return null;
+  if (tableRendererStatus(target) === "denied") return null;
+  return <RendererSelectionToolbar target={target} normal={descriptor.value} />;
+}
+
+function AdoptedSelectionToolbar<S extends QuerySchema, T extends object>({
+  target,
+  normal,
+}: {
+  readonly target: TableRendererTarget<S, T>;
+  readonly normal: ReactNode;
+}) {
+  useSyncExternalStore(
+    useCallback(
+      (listener) => subscribeTableRenderer(target, listener),
+      [target],
+    ),
+    useCallback(() => tableRendererSnapshot(target), [target]),
+    useCallback(() => tableRendererSnapshot(target), [target]),
+  );
+  try {
+    const { model, ports } = requireTableRendererTarget(target);
+    if (!model.authority || !model.presentation) return null;
+    return (
+      <SelectionToolbarContent
+        input={{
+          presentation: model.presentation,
+          authority: model.authority,
+          normal,
+          ...(ports.actions === undefined ? {} : { actions: ports.actions }),
+          ...(ports.messages.selectionToolbar === undefined
+            ? {}
+            : { messages: ports.messages.selectionToolbar }),
+          ...(ports.onError === undefined ? {} : { onError: ports.onError }),
+          ...(ports.getRestoreFocusTarget === undefined
+            ? {}
+            : { getRestoreFocusTarget: ports.getRestoreFocusTarget }),
+        }}
+        target={target}
+      />
+    );
+  } catch (error) {
+    if (error instanceof TableRendererCommitError) return null;
+    throw error;
+  }
+}
+const RendererSelectionToolbar = memo(
+  AdoptedSelectionToolbar,
+  (a, b) =>
+    a.target.cell === b.target.cell &&
+    a.target.actor === b.target.actor &&
+    (a.normal === b.normal || tableRendererStatus(b.target) === "waiting"),
+) as typeof AdoptedSelectionToolbar;
+
+function SelectionToolbarContent<S extends QuerySchema, T extends object>({
+  input: props,
+  target,
+}: {
+  readonly input: SelectionToolbarProps<S, T>;
+  readonly target?: TableRendererTarget<S, T>;
+}) {
+  // Exact library projection entry, not merely its parent's earlier JSX creation.
+  if (target) requireTableRendererTarget(target);
+  const entry = <Value,>(read: () => Value): Value =>
+    target ? tableRendererBoundary(target, read) : read();
   const input = { ...props };
   const { selectedIds, canCancelSelection, requestedQuery, blockedReason } =
     input.presentation;
@@ -92,6 +182,7 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
     throw new TypeError("Invalid selection toolbar port");
   }
   const config = {
+    renderer: target,
     hasPrivatePresentation,
     authority: input.authority,
     read,
@@ -104,6 +195,7 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
   const root = useRef<HTMLFieldSetElement>(null);
   const cancel = useRef<HTMLButtonElement>(null);
   const removedFocus = useRef<Element | null>(null);
+  const removedRenderer = useRef<TableRendererTarget<S, T> | null>(null);
   const selected = selectedCount > 0;
   // Only commit phase updates event ports; abandoned renders cannot acquire authority.
   useLayoutEffect(() => {
@@ -116,7 +208,9 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
   // in layout cleanup, but restore only after that cleanup has finished.
   useEffect(() => {
     const removed = removedFocus.current;
+    const receipt = removedRenderer.current;
     removedFocus.current = null;
+    removedRenderer.current = null;
     // Do not call a previous private trigger/fallback or steal surviving external
     // focus on access/context loss. Clear the pending restoration on this commit.
     const canRestore = () => {
@@ -127,7 +221,17 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
       )
         return false;
       try {
+        if (config.renderer) {
+          if (
+            !receipt ||
+            receipt.cell !== config.renderer.cell ||
+            receipt.actor !== config.renderer.actor
+          )
+            return false;
+          requireTableRendererTarget(config.renderer);
+        }
         const live = config.read();
+        if (config.renderer) requireTableRendererTarget(config.renderer);
         return (
           committed.current === config &&
           root.current?.isConnected === true &&
@@ -153,7 +257,7 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
     let target: HTMLElement | null = selected ? cancel.current : null;
     if (!selected) {
       try {
-        target = config.getRestoreFocusTarget?.() ?? null;
+        target = entry(() => config.getRestoreFocusTarget?.() ?? null);
       } catch {
         /* Safe local fallback. */
       }
@@ -167,53 +271,96 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
       target?.matches(":disabled")
     )
       return;
-    target?.focus({ preventScroll: true });
+    const focus = () => {
+      if (
+        !canRestore() ||
+        survivingFocus() ||
+        target?.closest("[inert]") ||
+        target?.matches(":disabled")
+      )
+        return;
+      const selectionRegion = target?.closest('[data-selection-active="true"]');
+      if (
+        config.renderer &&
+        selectionRegion &&
+        selectionRegion !== root.current
+      )
+        return;
+      target?.focus({ preventScroll: true });
+    };
+    if (config.renderer) queueMicrotask(focus);
+    else target?.focus({ preventScroll: true });
   });
   // Stable callback: FocusRegion cleanup must not run on ordinary rerenders.
   const onRemove = useRef((element: Element) => {
     removedFocus.current = element;
+    removedRenderer.current = committed.current?.renderer ?? null;
   }).current;
+  const current = () => {
+    const latest = committed.current;
+    if (
+      !latest?.hasPrivatePresentation ||
+      (!target && latest.authority !== config.authority)
+    )
+      return null;
+    if (target) {
+      if (
+        !latest.renderer ||
+        latest.renderer.cell !== target.cell ||
+        latest.renderer.actor !== target.actor
+      )
+        return null;
+      try {
+        requireTableRendererTarget(target);
+      } catch {
+        return null;
+      }
+    } else if (latest.renderer) return null;
+    return latest;
+  };
   const report = (failure: SelectionToolbarFailure) => {
     try {
-      const latest = committed.current;
+      const latest = current();
       if (
         !latest?.hasPrivatePresentation ||
-        latest.authority !== config.authority
+        (!target && latest.authority !== config.authority)
       )
         return;
       const { blockedReason } = latest.read();
+      if (target && current() !== latest) return;
       if (blockedReason === "context" || blockedReason === "definition") return;
-      const result = latest.onError?.(failure);
+      const result = entry(() => latest.onError?.(failure));
       void Promise.resolve(result).catch(() => {});
     } catch {
       /* App reporting must not create an unhandled error. */
     }
   };
   const invoke = (id: string | null) => {
-    const latest = committed.current;
+    const latest = current();
     // Replacing an authority or unmounting invalidates saved old DOM callbacks.
     if (
       !latest?.hasPrivatePresentation ||
-      latest.authority !== config.authority
+      (!target && latest.authority !== config.authority)
     )
       return;
     try {
       if (id === null) {
-        latest.cancelSelection();
+        entry(() => latest.cancelSelection());
         return;
       }
       const action = latest.actions.find((candidate) => candidate.id === id);
       if (!action || action.isDisabled || action.isPending) return;
       let context: SelectionActionContext<S, T>;
       try {
-        context = selectionActionContext(latest.read());
+        context = entry(() => selectionActionContext(latest.read()));
+        if (target && current() !== latest) return;
       } catch (error) {
         report({ actionId: id, reason: "unavailable", error });
         return;
       }
       // A callback may retain this snapshot; the app must discard its own pending
       // work on access loss and independently authorize every backend operation.
-      const result = action.onAction(context);
+      const result = entry(() => action.onAction(context));
       void Promise.resolve(result).catch((error: unknown) =>
         report({ actionId: id, reason: "callback", error }),
       );
@@ -225,7 +372,17 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
       });
     }
   };
-  if (!hasPrivatePresentation) return null;
+  if (!hasPrivatePresentation || (target && !currentRenderTarget(target)))
+    return null;
+  let selectedText: string | undefined;
+  if (target && selected) {
+    try {
+      selectedText = entry(() => messages.selectedCount(selectedCount));
+    } catch (error) {
+      if (error instanceof TableRendererCommitError) return null;
+      throw error;
+    }
+  }
   return (
     <fieldset
       ref={root}
@@ -266,7 +423,7 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
                 marginInlineEnd: "auto",
               }}
             >
-              {messages.selectedCount(selectedCount)}
+              {target ? selectedText : messages.selectedCount(selectedCount)}
             </span>
             <ButtonGroup
               aria-label={messages.actionsLabel}
@@ -326,4 +483,15 @@ export function SelectionToolbar<S extends QuerySchema, T extends object>(
       </FocusRegion>
     </fieldset>
   );
+}
+
+function currentRenderTarget<S extends QuerySchema, T extends object>(
+  target: TableRendererTarget<S, T>,
+): boolean {
+  try {
+    requireTableRendererTarget(target);
+    return true;
+  } catch {
+    return false;
+  }
 }

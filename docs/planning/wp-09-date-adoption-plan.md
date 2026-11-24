@@ -56,3 +56,12 @@ Only light positive TS6/syntax/scoped formatting/scope checks now; all runtime,
 React/browser/SSR/negative/dual/emitted/independent verification remains deferred.
 Own README records actual private handle/prop, scope/hash/light results and deferred
 commands. No Date/full-WP09 acceptance; stop before excluded producer changes.
+
+## Preserved provisional handoff
+
+Date is preserved in isolatedf6ce6ab after main API inspection/whitespace checking.
+Worker records873 protected inputs/112 sources,31 sealed inputs and successful light
+checks; runtime/React/negative/independent proof stays deferred. Main transports only
+this commit to current S1/D1 base76c3823 in new Builder tree283bbad, verifies31 hashes/
+119 other sources and passes one positive integrated Date source-fixture TS6 compile.
+Main shared-tree intake waits for active S2/D2 handoffs; old seals are not rebound.

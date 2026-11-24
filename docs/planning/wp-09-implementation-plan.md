@@ -91,6 +91,12 @@ for source/display callbacks while keeping child tools' port ownership separate.
 The [inactive Builder plan](wp-09-builder-adoption-plan.md) waits for real Date/core
 interfaces; the [details issuance prerequisite](wp-09-details-issuance-plan.md)
 records raw session provenance only, not strict accessory readiness.
+The [collection/event boundary lease](wp-09-renderer-collection-plan.md) authenticates
+renderer targets and saved events without replacing the existing native collection.
+The [bound-details lease](wp-09-bound-details-plan.md) extends the real shared core
+with its own port owner and genuine session/model join, retaining raw legacy routes.
+The [state-locale extension](wp-09-state-locales-plan.md) composes actual S1 types
+without changing existing bundles, renderer defaults or active source inventories.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

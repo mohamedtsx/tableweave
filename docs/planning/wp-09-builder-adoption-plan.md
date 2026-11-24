@@ -4,6 +4,33 @@ TASK-017 / FR-04–07/13/16, AC-16/25. This stage is **inactive until Date's act
 nested-state handle handoff and the shared F3 core extraction handoff**. A written
 plan is not permission to edit overlapping source before main activates it.
 
+The F3-core prerequisite now exists provisionally atab9685c with unchanged tool
+signatures. Date's actual handle/slot API is still outstanding; this lease remains
+inactive. Future intake may intentionally extend the core for details while preserving
+tool signatures; do not infer its changing source as a new Builder dependency.
+
+## Provisional activation
+
+Main preserves actual Date in isolatedf6ce6ab and transports it onto current S1/D1
+base76c3823 in a fresh Builder tree as283bbad. There, all31 Date input hashes/119
+other source hashes match and main's positive Date source-fixture TS6 passes with
+actual extracted core. No runtime/purge/form/SSR approval follows. Main activates
+this exact four-existing/one-new lease in /tmp/opencode/tableweave-wp09-builder-adoption,
+not the older Date worktree.
+
+Canonical source127 map8281387f44e3ef1e0392159d329e05c7a5e0d319311f42b673beaa923ceee1e2 is
+/tmp/opencode/wp09-before-builder-source127.json. Protect the other123 sources,
+including actual handed-off Date/core and all old tests/config/seals. Shared S2/root
+helper and isolated D2 stay outside; no source intake races this scope. If actual
+Date semantics cannot express a Builder draft, stop with the precise API trace,
+not a fake accepted rule/seed or an unallocated Date edit.
+
+Activation is now paused before Builder implementation: actual Date binding rejects
+existing-rule draft operator/field changes. The separately allocated
+[Date draft prerequisite](wp-09-date-builder-draft-plan.md) owns the one-source fix.
+Main will record its actual API/new map before resuming Builder; old127/source seals
+and tests/criteria-builder/README.md blocker remain unchanged history.
+
 ## Proposed exact paths
 
 One isolated writer: existing filters/{types.ts,filter-builder.tsx,option-owners.tsx,

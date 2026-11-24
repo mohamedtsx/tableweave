@@ -238,3 +238,9 @@ export interface TableRendererCell<S extends QuerySchema, T extends object> {
     handle: TableRendererWork<NoInfer<S>, NoInfer<T>>,
   ) => void;
 }
+
+/** Source-private denial boundary. Structural envelope, exact factory cell/actor. */
+export interface TableRendererTarget<S extends QuerySchema, T extends object> {
+  readonly cell: TableRendererCell<S, T>;
+  readonly actor: TableRendererActor<S, T>;
+}

@@ -76,3 +76,18 @@ fills and a corrected field-wrap defect, using existing tokens/fonts. These are
 bounded illustrations for F-19–22, not proof of actual two-table/privacy/form/focus/
 responsive behavior. F-03–07/F-09–13, full transition/zoom/manual matrices and all
 runtime gates remain missing. Initial896-node evidence stays separately scoped.
+
+## Implementation preparation
+
+Main loads the mandatory Figma design-to-code skill and reads high-fidelity context
+plus the requested screenshot for configured scene5:159 in the existing file/session.
+It is a visual reference, not code to paste. Actual HeroUI compounds/native processing/
+CSS tokens replace the static div/Tailwind prototype. The screenshot is not a runtime
+asset; this scene supplies no image/SVG asset URLs requiring download. Fixed1376px
+table/6-row labels are synthetic, not defaults or responsive/card/hiding policy.
+
+Observed target: quiet 1px separators,40px header/52px example rows,14/20 data text,
+12/18 metadata,16px vertical rhythm and contained scrolling. Runtime font remains
+inherited rather than installing the Figma font stand-in. Actual shell screenshot/
+interaction/RTL/asset checks stay in the final phase; no Tailwind dependency or new
+static table is authorized by this context request.

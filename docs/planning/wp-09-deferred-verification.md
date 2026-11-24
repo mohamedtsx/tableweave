@@ -25,6 +25,8 @@ compiles do not establish packed or runtime acceptance.
 | Headless facade/recovery | [P2](../../tests/table-facade/hook/README.md) | Provisionald5be856 |
 | Search/Tabs adoption | [F4a](../../tests/criteria-search-tabs/README.md) | Provisionale8529b0; review11n1 is contract clarification |
 | Shared core/renderer ports | [S1](../../tests/table-renderer-commit/README.md) | Provisional source handoff; cycles/golden/role execution unverified |
+| Legacy details issuance | [D1](../../tests/details-session-identity/README.md) | Provisional76c3823; raw identity is not adopted readiness |
+| Collection/selection guards | [S2](../../tests/table-renderer-collection/README.md) | Provisional handoff; helper/React/member/focus correction unverified |
 
 Add Date/core-renderer/Builder/shell/details/export/generation/integrated SSR only
 when actual fixtures exist. No current-root output/hash is approved by this list.

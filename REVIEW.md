@@ -1682,3 +1682,40 @@ Main corrected replay passes186 Markdown/752 local links and18 checker regressio
 The two navigation edges—not old fixture bytes/checker assertions—are the fix.
 Initial failing logs remain preserved. This proves structural navigation/checker
 behavior only; independent semantic review remains in the final phase.
+
+## WP-09 collection entry — review session 13 (provisional)
+
+### n1 — Deferred native child lacks a synchronous context handoff gate
+
+Worker stops without producer edits. Main confirms actual handle FlexRender is the
+uppercase component and installed FlexRender.js:41–52 later gets native context
+and calls lowercase flexRender; a guard outside the child cannot fence that later
+entry. Main selects the existing lowercase public helper through one additive root
+source alias, no vendor patch/dependency/support restriction. S2 can authenticate
+real context/membership immediately before/after that synchronous helper call.
+React owns later app-body execution; no post-body/universal containment claim.
+Original root preimage97baabc7… is preserved externally. This is a static contract
+correction, not a runtime reproduction or verified S2 fix. Final proof is deferred.
+
+Main's additive helper alias passes one whole-React TS6 noEmit compile. Current
+root SHA f7f226b64d2dd141a8ee133383d26bc0fcb36cc909fddd0d901f765e331ed318 is asserted
+separately from S2's original source map. This is not runtime correction verification.
+
+Session13 n1 implementation follow-up: actual S2 now uses the synchronous helper
+within its current member/context entry checks. Main inspects source/API, matches26
+handoff/120 protected-source hashes/root delta and passes one positive TS6 source
+fixture compile. Actual runtime/React context-reentry/shape/golden/independent
+correction tests remain unexecuted; n1 is not marked verified or accepted.
+
+## WP-09 Builder/Date contract — review session 14 (provisional)
+
+### n1 — Draft Date operator cannot differ from its accepted baseline
+
+Main confirms actual Builder chooseOperator keeps the accepted rule ID/baseline
+while changing the draft operator, but Date bindingValue rejects that ID unless
+the accepted field/operator match the draft. Thus an existing date.on→date.between
+confirmed edit cannot be represented. No runtime case was executed; Builder source
+is untouched. A narrow one-source Date prerequisite separates real accepted baseline
+from target configuration/seed, keeping legacy omission compatible. No null-ID/
+early-commit/fake-rule workaround, product waiver or independent approval. Correction
+is authorized only under its exact plan; runtime verification remains deferred.

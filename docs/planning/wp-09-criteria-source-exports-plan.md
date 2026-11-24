@@ -28,3 +28,9 @@ and useDataTable/model issuance lookup/require/assertion to the root source entr
 Private source-derived hook/capture/committed-frame helper and pure recovery
 implementation remain internal. Existing server-safe contracts/filter boundaries
 and historical installed dist are unchanged; final emitted/archive checks are owed.
+
+S2's missing synchronous native handoff is resolved by main's additional source
+alias renderNativeComponent for actual vendor lowercase flexRender, through the
+existing headless peer. No new dependency/manifest/vendor patch or React renderer
+restriction. Root TS6 noEmit passes; actual callback/React/packed proof stays deferred.
+The helper itself grants no permission or post-body React execution containment.

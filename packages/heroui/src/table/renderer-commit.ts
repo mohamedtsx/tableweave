@@ -27,6 +27,7 @@ import type {
   TableRendererCell,
   TableRendererCommitted,
   TableRendererPorts,
+  TableRendererTarget,
 } from "./types.js";
 
 export class TableRendererCommitError extends Error {
@@ -47,6 +48,51 @@ interface Binding<S extends QuerySchema, T extends object> {
 }
 type Role = "source" | "display" | "retry" | "selection" | "columns";
 type Callable = (...args: never[]) => unknown;
+export type TableRendererMemberKind = "row" | "column" | "header" | "cell";
+
+function member<S extends QuerySchema, T extends object>(
+  binding: Binding<S, T>,
+  kind: TableRendererMemberKind,
+  argument: unknown,
+  check: () => void,
+): void {
+  if (
+    kind !== "row" &&
+    kind !== "column" &&
+    kind !== "header" &&
+    kind !== "cell"
+  )
+    deny();
+  check();
+  const view = binding.model.view;
+  if (!view || binding.model.phase !== "display") deny();
+  const identities = new Set<unknown>();
+  if (kind === "row") for (const row of view.rows) identities.add(row);
+  else if (kind === "cell")
+    for (const row of view.rows) {
+      check();
+      const cells = row.getVisibleCells();
+      check();
+      for (const cell of cells) identities.add(cell);
+    }
+  else {
+    if (kind === "column")
+      for (const column of view.visibleColumns) identities.add(column);
+    const visit = (
+      header: (typeof view.headerGroups)[number]["headers"][number],
+    ) => {
+      check();
+      identities.add(kind === "header" ? header : header.column);
+      for (const child of header.subHeaders) visit(child);
+      check();
+    };
+    for (const group of view.headerGroups)
+      for (const header of group.headers) visit(header);
+  }
+  check();
+  // No alleged argument property, id, getter or prototype was inspected.
+  if (!identities.has(argument)) deny();
+}
 type MessageSchema = Readonly<Record<string, "text" | "function">>;
 type SchemaOf<T> = {
   readonly [K in keyof T]-?: T[K] extends Callable ? "function" : "text";
@@ -262,6 +308,15 @@ class RendererCapture<S extends QuerySchema, T extends object> {
         if (after.model !== before.model) return deny();
         capture.check();
       };
+      const argumentKind =
+        name === "rowTextValue"
+          ? "row"
+          : name === "columnTextValue"
+            ? "column"
+            : name === "cellTextValue"
+              ? "cell"
+              : null;
+      if (argumentKind) member(before, argumentKind, args[0], finish);
       let callArgs: readonly unknown[] = args;
       if (behavior === "state")
         callArgs = [
@@ -307,6 +362,7 @@ class RendererCapture<S extends QuerySchema, T extends object> {
         result = Reflect.apply(fn, receiver, callArgs);
       } finally {
         finish();
+        if (argumentKind) member(before, argumentKind, args[0], finish);
       }
       if (behavior !== "event" && behavior !== "action") return result;
       // Void callbacks' ordinary non-Promise values are intentionally ignored.
@@ -574,7 +630,242 @@ export function createTableRendererCell<
   S extends QuerySchema,
   T extends object,
 >(model: DataTableModel<S, T>): TableRendererCell<S, T> {
-  return createRendererCommitCore(model);
+  const owner = getDataTableModelOwner(model);
+  if (!owner) return deny();
+  const cell = createRendererCommitCore(model);
+  const require = cell.require;
+  rendererCells.set(
+    cell,
+    Object.freeze({
+      owner,
+      require,
+      snapshot: cell.getSnapshot,
+      subscribe: cell.subscribe,
+      models: new WeakMap<object, DataTableModel<S, T>>(),
+    }),
+  );
+  return cell;
+}
+
+// No exported registration function and no allegedly supplied cell method reads.
+const rendererCells = new WeakMap<object, object>();
+interface RendererRegistration<S extends QuerySchema, T extends object> {
+  readonly owner: NonNullable<ReturnType<typeof getDataTableModelOwner<S, T>>>;
+  readonly require: TableRendererCell<S, T>["require"];
+  readonly snapshot: TableRendererCell<S, T>["getSnapshot"];
+  readonly subscribe: TableRendererCell<S, T>["subscribe"];
+  readonly models: WeakMap<object, DataTableModel<S, T>>;
+}
+export function getTableRendererOwner<S extends QuerySchema, T extends object>(
+  cell: TableRendererCell<S, T>,
+): RendererRegistration<S, T>["owner"] | null {
+  return (
+    (rendererCells.get(cell) as RendererRegistration<S, T> | undefined)
+      ?.owner ?? null
+  );
+}
+function ownData(input: unknown, key: string): unknown {
+  if (!input || typeof input !== "object") return deny();
+  let descriptor: PropertyDescriptor | undefined;
+  try {
+    descriptor = Object.getOwnPropertyDescriptor(input, key);
+  } catch {
+    return deny();
+  }
+  if (!descriptor || !Object.hasOwn(descriptor, "value")) return deny();
+  return descriptor.value;
+}
+export function captureTableRendererTarget<
+  S extends QuerySchema,
+  T extends object,
+>(input: unknown): TableRendererTarget<S, T> {
+  const cell = ownData(input, "cell");
+  if (!cell || typeof cell !== "object" || !rendererCells.has(cell))
+    return deny();
+  const actor = ownData(input, "actor");
+  // Only exact registered core.require knows actor issuance. No actor payload read.
+  const registration = rendererCells.get(cell) as RendererRegistration<S, T>;
+  registration.require(actor as TableRendererActor<S, T>);
+  return Object.freeze({
+    cell: cell as TableRendererCell<S, T>,
+    actor: actor as TableRendererActor<S, T>,
+  });
+}
+export function requireTableRendererTarget<
+  S extends QuerySchema,
+  T extends object,
+>(target: TableRendererTarget<S, T>): TableRendererCommitted<S, T> {
+  const cell = ownData(target, "cell");
+  if (!cell || typeof cell !== "object") return deny();
+  const registration = rendererCells.get(cell) as
+    | RendererRegistration<S, T>
+    | undefined;
+  if (!registration) return deny();
+  const actor = ownData(target, "actor");
+  const committed = registration.require(actor as TableRendererActor<S, T>);
+  const { model, origin } = committed;
+  requireDataTableModel(model, registration.owner.definition);
+  const tool = model.toolTarget,
+    source = model.sourceTarget;
+  if (
+    model.phase !== "display" ||
+    !model.view ||
+    !model.frame ||
+    !model.presentation ||
+    !model.authority ||
+    !tool ||
+    !source ||
+    tool.owner !== source.owner ||
+    getCriteriaToolOwner(tool.authority) !== source.owner ||
+    !sameCommitOrigin(requireCriteriaTool(tool.authority, tool.owner), origin)
+  )
+    return deny();
+  requireCriteriaSource(source.authority, source.owner);
+  const after = registration.require(actor as TableRendererActor<S, T>);
+  if (after.model !== model) return deny();
+  registration.models.set(actor as object, model);
+  return after;
+}
+/** Metadata-only waiting classification, NEVER event/callback permission. A prior
+ * genuine display model may retain a subtree while a same-origin model refresh is
+ * not yet committed. Every private entry still requires the fresh exact model. */
+export function tableRendererStatus<S extends QuerySchema, T extends object>(
+  target: TableRendererTarget<S, T>,
+): "ready" | "waiting" | "denied" {
+  try {
+    const cell = ownData(target, "cell");
+    if (!cell || typeof cell !== "object") return "denied";
+    const registration = rendererCells.get(cell) as
+      | RendererRegistration<S, T>
+      | undefined;
+    if (!registration) return "denied";
+    const actor = ownData(target, "actor");
+    if (
+      !actor ||
+      typeof actor !== "object" ||
+      registration.snapshot().actor !== actor
+    )
+      return "denied";
+    try {
+      requireTableRendererTarget(target);
+      return "ready";
+    } catch {
+      /* Classify only, never permit a callback. */
+    }
+    const model = registration.models.get(actor),
+      source = model?.sourceTarget;
+    if (!model || !source || !model.metadata) return "denied";
+    const metadata = requireCriteriaSource(source.authority, source.owner);
+    if (
+      !sameCommitOrigin(metadata.origin, model.metadata.origin) ||
+      metadata.mode !== model.metadata.mode ||
+      registration.snapshot().actor !== actor
+    )
+      return "denied";
+    return "waiting";
+  } catch {
+    return "denied";
+  }
+}
+export function subscribeTableRenderer<S extends QuerySchema, T extends object>(
+  target: TableRendererTarget<S, T>,
+  listener: () => void,
+): () => void {
+  const cell = ownData(target, "cell");
+  if (!cell || typeof cell !== "object") return deny();
+  const registration = rendererCells.get(cell) as
+    | RendererRegistration<S, T>
+    | undefined;
+  if (!registration) return deny();
+  return registration.subscribe(listener);
+}
+export function tableRendererSnapshot<S extends QuerySchema, T extends object>(
+  target: TableRendererTarget<S, T>,
+): ReturnType<TableRendererCell<S, T>["getSnapshot"]> {
+  const cell = ownData(target, "cell");
+  if (!cell || typeof cell !== "object") return deny();
+  const registration = rendererCells.get(cell) as
+    | RendererRegistration<S, T>
+    | undefined;
+  return registration ? registration.snapshot() : deny();
+}
+/** Presence semantics: only actual absence is the raw legacy route. */
+export function captureTableRendererProp<
+  S extends QuerySchema,
+  T extends object,
+>(
+  input: object,
+):
+  | Readonly<{ kind: "omitted" }>
+  | Readonly<{ kind: "denied" }>
+  | Readonly<{ kind: "target"; target: TableRendererTarget<S, T> }> {
+  try {
+    const descriptor = Object.getOwnPropertyDescriptor(input, "renderer");
+    if (!descriptor)
+      return Reflect.has(input, "renderer")
+        ? { kind: "denied" }
+        : { kind: "omitted" };
+    if (!Object.hasOwn(descriptor, "value")) return { kind: "denied" };
+    const cell = ownData(descriptor.value, "cell");
+    if (!cell || typeof cell !== "object") return { kind: "denied" };
+    const registration = rendererCells.get(cell) as
+      | RendererRegistration<S, T>
+      | undefined;
+    if (!registration) return { kind: "denied" };
+    const actor = ownData(descriptor.value, "actor");
+    if (
+      !actor ||
+      typeof actor !== "object" ||
+      registration.snapshot().actor !== actor
+    )
+      return { kind: "denied" };
+    const target = Object.freeze({
+      cell: cell as TableRendererCell<S, T>,
+      actor: actor as TableRendererActor<S, T>,
+    });
+    if (tableRendererStatus(target) === "denied") return { kind: "denied" };
+    return { kind: "target", target };
+  } catch {
+    return { kind: "denied" };
+  }
+}
+export function requireTableRendererMember<
+  S extends QuerySchema,
+  T extends object,
+>(
+  target: TableRendererTarget<S, T>,
+  kind: TableRendererMemberKind,
+  argument: unknown,
+): TableRendererCommitted<S, T> {
+  const current = requireTableRendererTarget(target);
+  const check = () => {
+    if (requireTableRendererTarget(target).model !== current.model) deny();
+  };
+  member(
+    {
+      model: current.model,
+      owner: current.model.sourceTarget?.owner ?? deny(),
+      origin: current.origin,
+      metadata: current.metadata,
+    },
+    kind,
+    argument,
+    check,
+  );
+  check();
+  return current;
+}
+export function tableRendererBoundary<
+  S extends QuerySchema,
+  T extends object,
+  Value,
+>(target: TableRendererTarget<S, T>, read: () => Value): Value {
+  const before = requireTableRendererTarget(target);
+  try {
+    return read();
+  } finally {
+    if (requireTableRendererTarget(target).model !== before.model) deny();
+  }
 }
 
 /** Closed library policy; not an application factory accepting permitting ports. */

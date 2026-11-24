@@ -4,6 +4,7 @@ import type {
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ReactNode } from "react";
+import type { TableRendererTarget } from "../table/types.js";
 
 /** An event-time snapshot, not authorization or a promise that records are loaded. */
 export interface SelectionActionContext<
@@ -55,6 +56,8 @@ export interface SelectionToolbarProps<
   S extends QuerySchema,
   T extends object,
 > {
+  /** @internal Exact renderer event identity; absence alone selects raw behavior. */
+  readonly renderer?: TableRendererTarget<S, T>;
   /** Current accepted render projection; never a speculative selection mirror.
    * A withheld requestedQuery/context/definition renders no private region. */
   readonly presentation: ControlsPresentation<S, T>;

@@ -13,7 +13,7 @@ import type {
 } from "@tableweave/react";
 import { getControlsAuthorityOwner } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
-import { memo, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import {
   type CollectionMessages,
   defaultCollectionMessages,
@@ -21,12 +21,26 @@ import {
 import type { CollectionColumn } from "./collection-projection.js";
 import type { CollectionRow } from "./controlled-collection.js";
 import { ControlledCollection } from "./controlled-collection.js";
+import {
+  TableRendererCollection,
+  TableRendererNativeContent,
+} from "./renderer-collection.js";
+import {
+  captureTableRendererProp,
+  requireTableRendererMember,
+  requireTableRendererTarget,
+  TableRendererCommitError,
+  tableRendererBoundary,
+} from "./renderer-commit.js";
+import type { TableRendererTarget } from "./types.js";
 
 /** Presentation only: callers supply the current view, not just a stable handle. */
 export interface NativeCollectionProps<
   S extends QuerySchema,
   T extends object,
 > {
+  /** @internal Presence opts into exact factory renderer ownership, never a grant. */
+  readonly renderer?: TableRendererTarget<S, T>;
   readonly view: NativeTableView<S, T>;
   readonly label: string;
   readonly rowHeaderColumnId: string;
@@ -69,11 +83,51 @@ const NativeSelectionCount = memo(function NativeSelectionCount({
 export function NativeCollection<S extends QuerySchema, T extends object>(
   props: NativeCollectionProps<S, T>,
 ) {
-  const { view } = props;
-  const messages = useMemo(
-    () => ({ ...defaultCollectionMessages, ...props.messages }),
-    [props.messages],
+  const candidate = captureTableRendererProp<S, T>(props);
+  if (candidate.kind === "denied") return null;
+  if (candidate.kind === "target")
+    return <TableRendererCollection target={candidate.target} />;
+  return <NativeCollectionContent input={props} />;
+}
+
+/** Source-private shared producer; absence retains raw projection/event/JSX policy. */
+export function NativeCollectionContent<
+  S extends QuerySchema,
+  T extends object,
+>({
+  input: props,
+  target,
+}: {
+  readonly input: NativeCollectionProps<S, T>;
+  readonly target?: TableRendererTarget<S, T>;
+}) {
+  // The shared projection may be scheduled after its parent. Deny before any
+  // input view/message/action payload, not just before app formatter invocation.
+  if (target) requireTableRendererTarget(target);
+  const entry = useCallback(
+    <Value,>(read: () => Value): Value =>
+      target ? tableRendererBoundary(target, read) : read(),
+    [target],
   );
+  const eligible = () => {
+    if (!target) return true;
+    try {
+      requireTableRendererTarget(target);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  const { view } = props;
+  const messages = useMemo(() => {
+    try {
+      return entry(() => ({ ...defaultCollectionMessages, ...props.messages }));
+    } catch (error) {
+      if (target && error instanceof TableRendererCommitError)
+        return defaultCollectionMessages;
+      throw error;
+    }
+  }, [props.messages, target, entry]);
   const controls = props.controls;
   const presentation = controls?.presentation;
   const authority = controls?.authority;
@@ -107,85 +161,118 @@ export function NativeCollection<S extends QuerySchema, T extends object>(
       ? []
       : view.rows.filter((row) => row.getCanSelect()).map((row) => row.id));
   const projected = useMemo(() => {
-    if (masked) return null;
-    const visible = new Map(
-      view.visibleColumns.map((column) => [column.id, column]),
-    );
-    const preferred = view.controller
-      .getDefinition()
-      .columns.find((column) => column.id === props.rowHeaderColumnId);
-    const rowHeader =
-      visible.get(props.rowHeaderColumnId) ??
-      view.visibleColumns.find((column) => !column.columnDef.meta?.utility);
-    if (
-      !preferred ||
-      preferred.utility ||
-      !rowHeader ||
-      rowHeader.columnDef.meta?.utility
-    ) {
-      throw new Error(messages.invalidRowHeader);
-    }
-    const rowHeaderId = rowHeader.id;
-    if (
-      props.selectionColumnId &&
-      !visible.get(props.selectionColumnId)?.columnDef.meta?.utility
-    ) {
-      throw new Error(messages.invalidSelectionColumn);
-    }
-    const native = view.native;
-    function headerColumns(header: NativeHeader<T>): CollectionColumn[] {
-      if (header.isPlaceholder) return header.subHeaders.flatMap(headerColumns);
-      const column = header.column;
-      if (column.columns.length > 0) {
-        const children = header.subHeaders.flatMap(headerColumns);
-        return children.length
-          ? [
-              {
-                kind: "group",
-                id: column.id,
-                label: <native.FlexRender header={header} />,
-                textValue: props.columnTextValue(column),
-                children,
-              },
-            ]
-          : [];
-      }
-      // The producer's explicit public leaf allowlist is the sole render policy.
-      // No enumeration of all native columns, private carrier ID, or extra engine.
-      if (!visible.has(column.id)) return [];
-      return [
-        {
-          kind: "leaf",
-          id: column.id,
-          label: <native.FlexRender header={header} />,
-          textValue: props.columnTextValue(column),
-          isRowHeader: column.id === rowHeaderId,
-          allowsSorting: column.getCanSort(),
-          isSelection: column.id === props.selectionColumnId,
-        },
-      ];
-    }
-    const columns = view.headerGroups[0]?.headers.flatMap(headerColumns) ?? [];
-    const rows: CollectionRow[] = renderRows.map((row) => {
-      const nativeCells = new Map(
-        row.getVisibleCells().map((cell) => [cell.column.id, cell]),
-      );
-      const cells: CollectionRow["cells"] = Object.fromEntries(
-        view.visibleColumns.map((column) => {
-          const cell = nativeCells.get(column.id);
-          if (!cell) throw new Error(messages.missingCell);
+    try {
+      return entry(() => {
+        if (masked) return null;
+        const visible = new Map(
+          view.visibleColumns.map((column) => [column.id, column]),
+        );
+        const preferred = view.controller
+          .getDefinition()
+          .columns.find((column) => column.id === props.rowHeaderColumnId);
+        const rowHeader =
+          visible.get(props.rowHeaderColumnId) ??
+          view.visibleColumns.find((column) => !column.columnDef.meta?.utility);
+        if (
+          !preferred ||
+          preferred.utility ||
+          !rowHeader ||
+          rowHeader.columnDef.meta?.utility
+        ) {
+          throw new Error(messages.invalidRowHeader);
+        }
+        const rowHeaderId = rowHeader.id;
+        if (
+          props.selectionColumnId &&
+          !visible.get(props.selectionColumnId)?.columnDef.meta?.utility
+        ) {
+          throw new Error(messages.invalidSelectionColumn);
+        }
+        const native = view.native;
+        function headerColumns(header: NativeHeader<T>): CollectionColumn[] {
+          if (target) requireTableRendererMember(target, "header", header);
+          if (header.isPlaceholder)
+            return header.subHeaders.flatMap(headerColumns);
+          const column = header.column;
+          if (column.columns.length > 0) {
+            const children = header.subHeaders.flatMap(headerColumns);
+            return children.length
+              ? [
+                  {
+                    kind: "group",
+                    id: column.id,
+                    label: target ? (
+                      <TableRendererNativeContent
+                        target={target}
+                        header={header}
+                      />
+                    ) : (
+                      <native.FlexRender header={header} />
+                    ),
+                    textValue: entry(() => props.columnTextValue(column)),
+                    children,
+                  },
+                ]
+              : [];
+          }
+          // The producer's explicit public leaf allowlist is the sole render policy.
+          // No enumeration of all native columns, private carrier ID, or extra engine.
+          if (!visible.has(column.id)) return [];
           return [
-            column.id,
             {
-              content: <native.FlexRender cell={cell} />,
-              textValue: props.cellTextValue(cell),
+              kind: "leaf",
+              id: column.id,
+              label: target ? (
+                <TableRendererNativeContent target={target} header={header} />
+              ) : (
+                <native.FlexRender header={header} />
+              ),
+              textValue: entry(() => props.columnTextValue(column)),
+              isRowHeader: column.id === rowHeaderId,
+              allowsSorting: entry(() => column.getCanSort()),
+              isSelection: column.id === props.selectionColumnId,
             },
           ];
-        }),
-      );
-      return { id: row.id, textValue: props.rowTextValue(row), cells };
-    });
-    return { columns, rows };
+        }
+        const columns =
+          view.headerGroups[0]?.headers.flatMap(headerColumns) ?? [];
+        const rows: CollectionRow[] = renderRows.map((row) => {
+          if (target) requireTableRendererTarget(target);
+          const nativeCells = new Map(
+            entry(() => row.getVisibleCells()).map((cell) => [
+              cell.column.id,
+              cell,
+            ]),
+          );
+          const cells: CollectionRow["cells"] = Object.fromEntries(
+            view.visibleColumns.map((column) => {
+              const cell = nativeCells.get(column.id);
+              if (!cell) throw new Error(messages.missingCell);
+              return [
+                column.id,
+                {
+                  content: target ? (
+                    <TableRendererNativeContent target={target} cell={cell} />
+                  ) : (
+                    <native.FlexRender cell={cell} />
+                  ),
+                  textValue: entry(() => props.cellTextValue(cell)),
+                },
+              ];
+            }),
+          );
+          return {
+            id: row.id,
+            textValue: entry(() => props.rowTextValue(row)),
+            cells,
+          };
+        });
+        return { columns, rows };
+      });
+    } catch (error) {
+      if (target && error instanceof TableRendererCommitError) return null;
+      throw error;
+    }
   }, [
     view.native,
     view.headerGroups,
@@ -199,9 +286,12 @@ export function NativeCollection<S extends QuerySchema, T extends object>(
     renderRows,
     masked,
     messages,
+    target,
+    entry,
   ]);
 
-  if (!projected || masked) return <div className="tw-native-collection" />;
+  if (!projected || masked || !eligible())
+    return <div className="tw-native-collection" />;
   const sameSelection = (selection: Readonly<Record<string, boolean>>) => {
     const keys = Object.keys(selection).filter((id) => selection[id]);
     return (
@@ -210,6 +300,7 @@ export function NativeCollection<S extends QuerySchema, T extends object>(
     );
   };
   function guard(ids: readonly string[], page = false): boolean {
+    if (!eligible()) return false;
     if (!matchesOwner()) return false;
     const state = view.controller.getSnapshot();
     if (
@@ -244,7 +335,7 @@ export function NativeCollection<S extends QuerySchema, T extends object>(
       )
         return false;
     }
-    return true;
+    return eligible();
   }
   function changeSelection(ids: ReadonlySet<string>) {
     try {
@@ -323,7 +414,7 @@ export function NativeCollection<S extends QuerySchema, T extends object>(
         onSelectedIdsChange={changeSelection}
         onCancelSelection={() => {
           try {
-            if (!matchesOwner()) return;
+            if (!eligible() || !matchesOwner()) return;
             if (authority) authority.cancelSelection();
             else view.cancelSelection();
           } catch {
@@ -332,7 +423,7 @@ export function NativeCollection<S extends QuerySchema, T extends object>(
         }}
         onSort={(id, additive) => {
           try {
-            if (!matchesOwner()) return;
+            if (!eligible() || !matchesOwner()) return;
             if (authority) {
               authority.require({ type: "sort" });
             }
