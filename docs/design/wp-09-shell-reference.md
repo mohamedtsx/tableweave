@@ -44,8 +44,9 @@ screenshot and one targeted correction pass were performed. These observations
 are design-worker evidence, not main's independent or browser verification.
 Buttons remain static ownership references; no interactions/backend are wired.
 
-Still missing complete F-03–07/F-09–13/F-19/F-21–22 scenes, full refreshing/middle/
-last-page screens,768/320, zoom/text expansion and RTL desktop drawer/selection.
+At the initial handoff, complete F-03–07/F-09–13/F-19/F-21–22 scenes, full refreshing/
+middle/last-page screens,768/320, zoom/text expansion and RTL drawer/selection were
+missing. The additive board below addresses only its stated visual subset.
 Manual language/AT/device, keyboard/focus, contrast, touch, safe-area and actual
 runtime/SSR/packed/privacy/performance acceptance are deferred. Do not infer a
 full design-system publication, personal maintainer approval or WP-09 completion.
@@ -53,3 +54,22 @@ full design-system publication, personal maintainer approval or WP-09 completion
 Private handoff: /tmp/opencode/wp09-figma-shell/REPORT.md. The account-facing file
 was created as Tableweave; the plugin's internal root readback was Document. No
 second file or title change was made from that internal-name discrepancy.
+
+## Additive responsive/details board
+
+The [supplement](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-619)
+adds the initial board's missing WP-09 references without changing its approved
+nodes: [768 tablet](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-635),
+[320 RTL phone](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-841),
+[RTL left-side drawer](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-978),
+[RTL selection](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-1105),
+[customer form](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-1185),
+[inventory form](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-1240),
+[two tables](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-1295) and
+[neutral access loss](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-1480).
+
+Worker readback reports788 editable supplemental nodes/125 instances/zero image
+fills and a corrected field-wrap defect, using existing tokens/fonts. These are
+bounded illustrations for F-19–22, not proof of actual two-table/privacy/form/focus/
+responsive behavior. F-03–07/F-09–13, full transition/zoom/manual matrices and all
+runtime gates remain missing. Initial896-node evidence stays separately scoped.

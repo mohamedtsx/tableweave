@@ -16,3 +16,9 @@ that is not public-root/packed consumer evidence. Do not claim ordinary installe
 consumers can use the names before final emission/archive/type/runtime verification.
 Server-safe contracts/filter execution stay separate; root retains its client marker.
 Final plain-module public subpaths/discovery/import graphs remain main integration.
+
+After provisional bridge commitdab5a94/F3b intake5d4f8a1, main adds intended
+source-authority metadata functions/types and useCriteriaFrame plus its public input/
+result types. Replace broad frame type-star export with an explicit allowlist so
+private bridge receipt/capture helpers do not become root API by accident. No
+private owner lookup/capture registry/resource identity helper is exported.

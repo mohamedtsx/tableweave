@@ -60,3 +60,6 @@ derived types/capture interface and checks staged whitespace. Worker reports fin
 positive TS6 plus static one-module/zero-runtime-import graph and728 unchanged
 existing inputs, including23 F2 files. Units/negative/actor/React/independent proof
 are deferred. Intake waits for F1; no raw tool behavior or readiness is changed.
+
+Intake isd200e83; [actual handoff](../../tests/criteria-ports/README.md) stays
+capture-only/provisional, without tool-readiness or behavioral acceptance.

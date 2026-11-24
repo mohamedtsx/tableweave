@@ -69,3 +69,6 @@ worker's light TS6/static graph/syntax checks pass;104 other sources/510 non-sou
 inputs remain unchanged. Runtime/negative/independent checks are deferred. Intake
 waits for the current F1 protected-source handoff; this does not approve cleanup or
 privacy behavior from static inspection alone.
+
+Intake is9954714; [actual handoff](../../tests/options-criteria/README.md) remains
+provisional, with runtime/negative/lifecycle/independent checks deferred.

@@ -68,3 +68,8 @@ reentry/purge/domain/receiver/baseline/work and React continuity tests; executio
 dual/emitted/negative/browser/independent proof stays deferred. No runtime, readiness,
 privacy, tool adoption or full WP09 approval. Stop on excluded API/path needs and
 return the concrete trace; main owns public source exports and later F4 allocation.
+
+Preserved isolated2b9933e is intaken as5d4f8a1 after the headless bridge handoff.
+[Actual F3b handoff](../../tests/criteria-commit/README.md) records unexecuted runtime
+and React checks. Main's integrated positive source-fixture TS6 check passes against
+actual root source/new bridge; this is not installed/packed or behavioral proof.

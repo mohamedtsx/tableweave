@@ -82,6 +82,8 @@ The [committed-cell](wp-09-criteria-commit-plan.md), [React/source readiness](wp
 leases keep new integration/design ownership explicit. Their full checks remain deferred.
 The [Search/Tabs adoption lease](wp-09-search-tabs-adoption-plan.md) applies the
 actual committed cell to two raw tools while preserving omitted legacy behavior.
+The [facade hook lease](wp-09-facade-hook-plan.md) composes actual headless APIs and
+pure recovery with commit-only native derivation/projection; no shell behavior yet.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

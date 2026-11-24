@@ -78,3 +78,7 @@ actual definition/receiver/identity/default merging code and checks staged white
 The worker's successful light TS6 compile predates final small source guards; final
 syntax/scoped lint and750 protected inputs pass. This is not a final-source type or
 runtime approval. Intake and one combined lightweight compile follow F1's handoff.
+
+Intake is16fd97c; [actual handoff](../../tests/table-facade/definition/README.md)
+remains provisional. Later whole-React source noEmit compiles pass on the integrated
+tree; runtime/negative/emitted/independent definition acceptance remains deferred.

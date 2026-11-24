@@ -8,6 +8,20 @@ source hashes and the main-owned adapter delta, and passes one whole-React TS6 n
 compile. Post-bridge source118 is e51f7535452f9035ab78e91b5f6f6bc05d16122aa1a9f890c04353e4f463af2c.
 Runtime/React/SSR/negative/import/independent verification remains deferred. Main
 commits before intaking preserved F3b2b9933e and exporting only intended bridge APIs.
+Bridge is committeddab5a94; F3b is intaken as5d4f8a1 without conflict. Main adds
+only intended source-capability/hook source exports and an explicit frame-type
+allowlist; private bridge receipts/resource identity/capture helpers stay unexported.
+Installed dist remains historical and no new output identity is approved.
+Main source-root TS6 compile and actual integrated F3b positive source-fixture
+compile both pass after bridge exports. They do not exercise runtime/React/negative/
+packed checks. Supplemental Figma board10:619 now supplies additive768/320/RTL/
+arbitrary details/two-table/access-loss illustrations; initial board stays unchanged.
+User approval remains bounded to the initial visual direction, not those runtime gates.
+Main allocates headless P2 hook/model/recovery under a five-file source lease. It
+uses actual definition/controller/frame/source APIs and adds only a private commit-
+time source derivation/projection route; no duplicate NativeInput/app callback API,
+render-time private row work or fake empty frame. Search/Tabs stays isolated until
+this source handoff, avoiding protected-inventory races. Final proof remains deferred.
 
 - Active packet: WP-09, branch feat/wp-09-details. U1/U2 are scoped verified
   history; U3 and proof fixtures are committed **provisional** at5621db0,

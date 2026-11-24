@@ -39,13 +39,34 @@ export {
   projectControls,
 } from "./presentation/index.js";
 export type * from "./presentation/types.js";
-export type * from "./presentation/criteria-frame.js";
+export type {
+  CriteriaCommittedFrame,
+  CriteriaFrameInput,
+  CriteriaFrameObserver,
+  CriteriaFrameOwner,
+  CriteriaFramePair,
+  CriteriaFrames,
+  CriteriaFramesOptions,
+  CriteriaFrameSnapshot,
+  CriteriaFrameTicket,
+  CriteriaSourceAuthority,
+  CriteriaSourceInput,
+  CriteriaSourceMetadata,
+  CriteriaToolAuthority,
+} from "./presentation/criteria-frame.js";
 export {
   createCriteriaFrames,
   CriteriaFrameError,
+  getCriteriaSourceOwner,
   getCriteriaToolOwner,
+  requireCriteriaSource,
   requireCriteriaTool,
 } from "./presentation/criteria-frame.js";
+export type {
+  CriteriaFrameReactInput,
+  CriteriaFrameReactResult,
+} from "./presentation/criteria-frame-react.js";
+export { useCriteriaFrame } from "./presentation/criteria-frame-react.js";
 export {
   defineTable,
   TableDefinitionError,
