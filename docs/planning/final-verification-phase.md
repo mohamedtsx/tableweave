@@ -44,3 +44,6 @@ Use the modal for new product-policy decisions, required missing inputs, spendin
 external mutations beyond existing permission, consumer modifications or publishing.
 Routine in-scope engineering decisions remain delegated. This phase decision does
 not authorize deployment, paid resources, manual acceptance claims or publication.
+
+The [WP-09 deferred inventory](wp-09-deferred-verification.md) links actual authored
+handoffs and historical failures without treating test code as executed evidence.

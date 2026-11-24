@@ -76,3 +76,9 @@ Only lightweight positive TS6/syntax/scoped formatting/scope checks now; no runt
 browser/SSR/negative/dual/emitted/packed/independent runs. Existing test/profile/style
 inputs and historical F3 seals stay unchanged. New README records actual APIs,
 source hashes/light results and deferred exact commands; no adoption acceptance.
+
+Isolated882fa9f is intaken ase8529b0 after P2. Main reads actual optional prop/host/
+slot/receipt APIs and passes integrated positive source-fixture TS6. The
+[actual handoff](../../tests/criteria-search-tabs/README.md) keeps runtime/React/
+legacy compatibility/negative/independent checks deferred. Date/Builder remain
+unadopted until their own implementations; shared types alone grant no acceptance.

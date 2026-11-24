@@ -2,6 +2,48 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+S1 renderer/core handoff is PROVISIONAL at5dcf331b9f230f9ff8d67838bcabacb8260aa97a0a83d9025f1389260f7edaf0.
+Main inspects actual core/tool/renderer/type APIs, matches21 worker inputs/121
+protected source hashes and passes one integrated positive source-fixture TS6 check.
+Post-S1 source125 is569e03e65c14411c7b274906e787f3837c457c65f49a92998d8cf28ab28a06ed.
+No runtime/cycle/golden/React/independent verification is claimed. Main commits
+before D1 intake; isolated Date remains the only active runtime worker meanwhile.
+
+Main receives the private shell-commit proposal and reads actual F4 host. It
+activates a shared renderer-port prerequisite: extract the unchanged F3 lifecycle
+into a private core and add table renderer types/committed ports. No raw tool/host,
+headless model, selection or details behavior changes are allocated. Date stays
+isolated against unchanged F3 APIs. Full verification remains deferred.
+Main adds a deferred-test navigation inventory and qualified private-composition
+engineering status. These document actual source exports and historical failures,
+not executed new checks or an accepted/rebuilt public package. The final phase must
+replay stage seals at their original revisions and separately verify current deltas.
+Main's lightweight documentation checks initially find two unreachable Markdown
+owners (review12n1) and3/18 checker regression failures from them. Actual navigation
+links fix the issue; replay passes186 Markdown/752 links and18 regressions. No
+fixture/checker assertion changed; runtime and independent semantic proof are deferred.
+Main records an inactive four-existing/one-new-source Builder lease. Activation
+requires actual Date nested-state and F3-core handoffs; no writer may edit those
+Builder paths yet. It preserves accepted rule baselines, field-wide passive option
+ownership and real F2 reset acknowledgements rather than public clear/noop guesses.
+Main receives the private P4 details report and inspects actual session/types. It
+allocates only isolated raw session issuance: one existing hook/new private registry/
+own tests. No adopted session, callback readiness, shell or focus behavior changes;
+legacy identity alone cannot grant strict accessory admission. Full P4 waits for S1.
+D1 is preserved in isolated6d26064 after main reads the exact hook delta/identity
+lookup and actual worker handoff. Worker light TS6/AST/import/scope checks pass;
+1001 protected files/121 other sources stay unchanged. Main's full staged whitespace
+check reports trailing blanks only in two preserved raw Biome failure logs; a check
+excluding exactly those raw outputs passes. Logs are retained verbatim, not cleaned
+or treated as source defects. No runtime/React/negative/independent approval follows.
+Intake waits for the active S1 protected-source handoff; raw legacy identity is not
+adopted details readiness and no package export is added.
+
+Search/Tabs isolated882fa9f is intaken ase8529b0 after P2's source handoff; main
+integrated positive source-fixture TS6 passes. Legacy bodies are statically retained,
+not runtime-proved. Main allocates only isolated Date/host/nested-editor adoption
+under its written seven-existing/one-new-source lease. Builder remains unadopted.
+
 P2 now hands off PROVISIONALLY atd4bc2813f58661504a171e241724c056f36f8de4d091030560d0f88db7e5b8ab.
 Main inspects actual facade/model/recovery/private bridge APIs, matches22 worker
 inputs/116 protected source hashes and passes one whole-React TS6 noEmit compile.
@@ -29,10 +71,13 @@ compile both pass after bridge exports. They do not exercise runtime/React/negat
 packed checks. Supplemental Figma board10:619 now supplies additive768/320/RTL/
 arbitrary details/two-table/access-loss illustrations; initial board stays unchanged.
 User approval remains bounded to the initial visual direction, not those runtime gates.
-Separately, a private read-only shell callback-ownership proposal is active under
+Historical proposal (now delivered and selected for the renderer lease):
 /tmp/opencode/wp09-shell-commit-design/REPORT.md only. It must resolve nested parent/
 child actor ownership and source-only recovery slots using actual P2/F3, without
 reading the changing Search/Tabs host as accepted or editing source/design/repository.
+A separate private read-only P4 details ownership/lifetime proposal is now active at
+/tmp/opencode/wp09-details-accessory-design/REPORT.md only. No repository/Figma writes
+or changing-renderer implementation review is allocated there.
 Main allocates headless P2 hook/model/recovery under a five-file source lease. It
 uses actual definition/controller/frame/source APIs and adds only a private commit-
 time source derivation/projection route; no duplicate NativeInput/app callback API,
@@ -60,10 +105,10 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
   Main reads the actual APIs/source, verifies21 input/104 protected source hashes
   and performs one successful whole-React TS6 noEmit compile. No runtime correction
   or independent approval is claimed. Main commits before disjoint intake.
-- Active shared writer: headless P2 facade under its exact table types/hook/recovery
-  and private frame/React derivation/projection lease. Other116 sources freeze.
-  Isolated Search/Tabs owns its three toolbar files/new host/tests. All work stays
-  provisional; F3b/bridge/identity lookup are already intaken, not runtime-approved.
+- P2 isd5be856, intended source exports5f9815f; Search/Tabs is e8529b0.
+  Active shared writer: one F3 core extraction/new renderer types/ports lease,
+  preserving F3 signatures. Isolated Date owns its seven files/new state bridge.
+  Other runtime paths freeze; full behavior/independent acceptance stays deferred.
 - Independent design writer owns only the newly authorized Tableweave Figma file;
   no runtime/API/source ownership. Composed scenes are pending, not design approval.
   Initial scenes now hand off for review: board4:62 in the new file, linked through
@@ -78,8 +123,8 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
 - Generation harness is intaken asdbdc7a2 from isolated34fad4f. Current=fc01;
   both historical output identities remain unchanged. New generation registration
   and actual default-root generation checks are still unresolved, not passed.
-- Next integration: receive P2 and Search/Tabs handoffs, inspect actual APIs/light
-  compile and allocate remaining Date/Builder adoption plus shell composition. Do not
+- Next integration: receive renderer-core and Date handoffs, inspect actual APIs/light
+  compile, then allocate Builder adoption and shell composition. Do not
   duplicate running workers or their checks.
 - External runner access and real consumer are deferred by the user. Ask modal
   handles new policy/permission/input blockers; do not invent external evidence.

@@ -1665,3 +1665,20 @@ wording is corrected to deny counterfeit authorities/owners, not transparent out
 containers; own-data capture/reentry checks and committed owner/actor pinning stay.
 No new target producer/protocol or F3 source change is authorized. This is a static
 contract clarification; no runtime test or Search/Tabs approval is claimed.
+
+## WP-09 shell planning/navigation — review session 12
+
+### n1 — Two authored Markdown documents are unreachable
+
+Main runs actual README documentation checks: structural checker finds the Figma
+responsive follow-up plan and public-generation fixture README unreachable. Checker
+regressions report3 failures/18 from those same missing navigation edges. Initial
+logs are preserved externally; no runtime suite is implicated or claimed.
+Correction: link the follow-up plan from its shell reference and immutable fixture
+owner from the deferred verification inventory, without changing fixture contents,
+checker rules or test assertions. Corrected replay is recorded below after it runs.
+
+Main corrected replay passes186 Markdown/752 local links and18 checker regressions.
+The two navigation edges—not old fixture bytes/checker assertions—are the fix.
+Initial failing logs remain preserved. This proves structural navigation/checker
+behavior only; independent semantic review remains in the final phase.

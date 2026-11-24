@@ -1,0 +1,5 @@
+{
+  "extends": "../criteria-commit/tsconfig.json",
+  "include": ["./*.ts", "./*.tsx"],
+  "exclude": ["./negative-types.ts", "./.artifacts"]
+}

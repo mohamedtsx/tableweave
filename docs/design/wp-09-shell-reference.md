@@ -57,6 +57,9 @@ second file or title change was made from that internal-name discrepancy.
 
 ## Additive responsive/details board
 
+The [bounded follow-up plan](../planning/wp-09-figma-responsive-followup.md) owns
+the additive design scope; it does not grant runtime or accessibility acceptance.
+
 The [supplement](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-619)
 adds the initial board's missing WP-09 references without changing its approved
 nodes: [768 tablet](https://www.figma.com/design/USX6vMtBrZICYS9M4V84bB?node-id=10-635),

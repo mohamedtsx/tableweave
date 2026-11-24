@@ -84,6 +84,13 @@ The [Search/Tabs adoption lease](wp-09-search-tabs-adoption-plan.md) applies the
 actual committed cell to two raw tools while preserving omitted legacy behavior.
 The [facade hook lease](wp-09-facade-hook-plan.md) composes actual headless APIs and
 pure recovery with commit-only native derivation/projection; no shell behavior yet.
+The [Date adoption lease](wp-09-date-adoption-plan.md) extends the actual host and
+nested editor slots, without changing Search/Tabs or Builder ownership.
+The [renderer-port lease](wp-09-renderer-commit-plan.md) reuses one F3 lifecycle
+for source/display callbacks while keeping child tools' port ownership separate.
+The [inactive Builder plan](wp-09-builder-adoption-plan.md) waits for real Date/core
+interfaces; the [details issuance prerequisite](wp-09-details-issuance-plan.md)
+records raw session provenance only, not strict accessory readiness.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time
