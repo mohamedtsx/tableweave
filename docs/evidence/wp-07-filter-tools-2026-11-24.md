@@ -273,3 +273,44 @@ Next main commits this source handoff, stacks it without merging onto actual
 WP-06 head9eb71e1, reconciles owned shared configuration and reruns the combined
 Start/tools workflow before final packet integration approval/push/separate PR.
 No publication, deployment, real-consumer change or PR merge is authorized.
+
+## Completed combined WP-06/WP-07 stack
+
+Source handoff ea9dc57 is replayed as7b3b981 with exact parent
+9eb71e16bac43466443d9547256ead3f9733225e. Tool package/source/fixture paths match
+ea9dc57 byte-for-byte; Start app/tests match9eb71e1. Independent static review
+checks shared script/patch/lock/type-isolation/guard/documentation unions against
+both parents, finding no blocker. Final runtime/source inputs stay frozen during
+the complete stacked `pnpm check`, which now exits0.
+
+Actual completed stacked run: **430 units**, **171 baseline/tool Chromium**,
+**43 actual-tarball tool production checks**, **27 development+27 production source
+Start**, and **27+27 actual-tarball Start**. All strict/frozen-install, package/
+Storybook/framework build, client/server bundle markers, runtime/default-sortable/
+CSS guards and docs/18 checker probes pass. These are completed combined results,
+not summed partial runs. CI keeps45-minute headroom; main allows60-minute host
+delivery headroom without changing assertions, runtime deadlines or retries.
+
+Tool archive report: `.artifacts/packed-R562On/report.json`. React78-file archive
+SHA384bcdc8250d58d8e8bd183042da4471be150e0804b43c36be50b5e1f9305288;
+HeroUI52-file archive SHA
+ff7dadaa50640b6df207ef010f513fb5a7e4894489412cdd62985db2ac8371ef.
+Styled README differs from the earlier isolated archive; emitted library files
+remain byte-identical. Actual tool app CSS hash remainscda0f69b6dbe5be5d23abb1d27d9c5d1d9ac8fa0a701b4484929632e660ae9f4.
+Both strict compilers confine210 headless/223 styled/372 app program files, and
+the tool browser result has43 expected/zero skipped/unexpected/flaky cases.
+
+Packed Start acceptance `.artifacts/start/packed-USYWHH/acceptance.json` uses that
+same headless archive, passes both compilers with721-file confinement each and
+starts without generated route input. Actual framework build creates the route
+tree; dev/production tests pass. The deliberately aborted synthetic negative HTTP
+cases retain vendor AbortError diagnostics; they are not a claim of zero server
+diagnostics or a production error-reporting/backend service.
+
+Main grants **agent-approved under delegated authority** for bounded combined WP-07
+engineering integration after independent source/static review and this actual
+full result. Final documentation-only handoff/push/separate PR/remote checks are
+next. The final remote run rebuilds archives after these documentation changes;
+no stale archive hash is claimed for a later README. No PR merge, personal
+maintainer/Figma/manual-AT/device/performance/real-consumer/legal/publication/full
+library G-05 acceptance is inferred. WP-08 controls and WP-09 facade remain separate.

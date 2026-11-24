@@ -96,7 +96,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
 | TASK-014 | WP-06 Start/Query SSR integration | done | PR #6 final9eb71e1 open/unmerged; both remote checks pass | Delegated bounded G-04; no personal/release acceptance |
-| TASK-015 | WP-07 filter tools/async choices | in progress | Main approved plan/provisional visuals; headless producer first | Reviewed WP-04/WP-05; exact helper protocol before UI |
+| TASK-015 | WP-07 filter tools/async choices | in review | Combined stack approved; separate PR/remote delivery next | Exact9eb71e1 parent;430 units/171 baseline-tools/43 packed-tools/108 Start |
 | TASK-016 | WP-08 table controls | in progress | Core approved; selection/pager UI, additive owner-intent review | Reviewed WP-04/WP-05; exact producer ports only |
 | TASK-017 | WP-09 details/localization/responsive shell | in progress | Approved isolated details-only producer first; shell waits for WP-07/08 | Reviewed WP-04/WP-05, exact later control/tool handoffs |
 | TASK-018 | WP-10 optional sortable | in progress | Pure coordinator/column-helper stage only; no adapter/install yet | Reviewed authority + explicit app stamp; G-02 remains |
@@ -879,6 +879,13 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   producer histories and all source/runtime requirements. Frozen install passes
   without lock modification. Next full combined workflow; no integrated approval
   or push follows from the isolated result alone. No PR merges.
+  **Combined result:** independent static reconciliation review passes; actual
+  complete stacked `pnpm check` now passes430 units,171 baseline/tool Chromium,
+  43 actual-packed tools and27+27 source/27+27 actual-packed Start. Both strict
+  compiler/confinement/frozen-install/CSS/runtime/build/docs paths pass. Tool and
+  Start source remain byte-identical to reviewed baselines; main grants bounded
+  combined integration approval. Next final docs commit, push/separate PR against
+  feat/wp-06-start-query and verify remote head/checks. No merge or later gates.
 
 ## TASK-016 — WP-08 controls/presentation producer
 

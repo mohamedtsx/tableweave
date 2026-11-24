@@ -13,8 +13,9 @@ The root also exports private WP-07 `FilterBuilder`, `FilterSearch`, `FilterTabs
 source integration passes real emitted/actual-tarball interactions and unpatched
 strict NodeNext TS6/5.9 consumers under delegated technical source approval.
 See the [tool boundary](../../docs/engineering/wp-07-tools.md) and actual
-[builder handoff](../../tests/filter-tools/builder/README.md). Final combined-stack
-delivery, personal maintainer and later release gates remain separate.
+[builder handoff](../../tests/filter-tools/builder/README.md). Combined WP-06
+integration passes; remote PR delivery, personal maintainer and later release
+gates remain separate. No merge is authorized.
 `FilterBuilder` requires explicit client/server `evaluationMode`; it never owns
 transport, accepted query state or backend authorization. Mutation observers report
 submitted/proposed outcomes, not automatic application acceptance.

@@ -1,8 +1,9 @@
 # WP-07 private filter-tools producer
 
-The isolated source integration is **agent-approved under delegated authority**
+The source and combined WP-06 integration are **agent-approved under delegated authority**
 after independent corrections and the completed full workflow, including actual
-packed UI interaction. Final WP-06 stack integration/PR delivery remains separate.
+packed UI and real source/packed Start interaction. Final remote PR delivery
+verification remains separate; no PR merge is authorized.
 [TASKS](../../TASKS.md),
 [review](../../REVIEW.md#wp-07--delegated-agent-review-session-1) and
 [evidence](../evidence/wp-07-filter-tools-2026-11-24.md) record actual disposition.

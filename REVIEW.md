@@ -649,3 +649,20 @@ not personal maintainer/Figma/manual-AT/device/performance/real-consumer/release
 acceptance. Main next commits the source handoff and stacks onto final WP-06
 9eb71e1 without merging, reconciles shared ownership and reruns combined checks
 before final integration approval, push and separate PR.
+
+### Completed combined-stack disposition
+
+Stack7b3b981 has exact parent9eb71e1. Independent static review verifies both
+runtime/fixture baselines byte-for-byte and all shared script/patch/lock/guard/docs
+unions. Main's complete stacked `pnpm check` exits0 with430 units,171 baseline/tool
+Chromium,43 genuine packed-tool production cases and27 development+27 production
+source Start plus27+27 actual-packed Start. Both strict compiler versions and
+confinement pass (210 headless/223 styled/372 tool app/721 Start program files).
+Cold generated routes come only from the actual framework. No version, strictness,
+behavior deadline or retry change was used;45-minute CI budget remains unchanged.
+
+Main extends scoped **agent-approved under delegated authority** to this combined
+WP-07 private integration after reviewing the actual completed result. Final
+documentation/PR push/remote checks remain delivery verification, not personal
+maintainer, manual AT/device/performance/real-consumer/legal/publication/full G-05
+acceptance. PRs remain unmerged; no residual WP-07 finding is verified.

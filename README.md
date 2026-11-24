@@ -130,7 +130,8 @@ WP-07's [private tool boundary](docs/engineering/wp-07-tools.md) adds genuine ow
 filter-component types/CSS and an exact scoped HeroUI declaration-entry repair.
 Both packages pass strict unpatched NodeNext TS6/5.9 tool-prop/runtime/bundle checks
 and real emitted/actual-tarball interactions after independent UI corrections.
-The isolated full workflow passes; final WP-06 stack integration remains required.
+The isolated and combined WP-06 full workflows pass; remote PR delivery is verified
+separately, without merging.
 No full DataTable facade or personal maintainer acceptance is implied.
 
 The vendor smoke alone is not G-01/full G-05, a full vendor-barrel declaration pass,
