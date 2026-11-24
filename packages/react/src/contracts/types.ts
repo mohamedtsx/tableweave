@@ -212,6 +212,7 @@ export interface QuerySchemaDefinition<F extends FieldMap = FieldMap> {
   readonly date?: { readonly mode?: "single" | "range" };
   readonly sorting?: { readonly multi?: boolean };
   readonly pagination?: {
+    readonly enabled?: boolean;
     readonly defaultSize?: number;
     readonly sizes?: readonly number[];
   };
@@ -224,6 +225,7 @@ export type QuerySchema<
 > = Omit<D, "limits" | "pagination"> & {
   readonly limits: Limits;
   readonly pagination: {
+    readonly enabled?: false;
     readonly defaultSize: number;
     readonly sizes: readonly number[];
   };

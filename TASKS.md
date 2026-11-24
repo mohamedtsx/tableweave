@@ -300,7 +300,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
 | TASK-014 | WP-06 Start/Query SSR integration | done | PR #6 final9eb71e1 open/unmerged; remote checks pass | Delegated bounded G-04, no personal/release acceptance |
 | TASK-015 | WP-07 filter tools/async choices | done | PR #7 final46df932 open/unmerged; remote checks pass | Bounded delegated delivery; no personal/external-gate acceptance |
-| TASK-016 | WP-08 table controls | in review | Isolated full workflow passes; source transport and real-tool stack next | Exact WP-07 parent; temporary profile independently verified |
+| TASK-016 | WP-08 table controls | done | PR #8 finalfadb9a8 open/unmerged; both remote workflows pass | Delegated private-profile delivery; no personal/stable acceptance |
 | TASK-017 | WP-09 details/localization/responsive shell | in progress | Details/plain criteria producers approved; facade/adoption held | Exact later WP-08 handoff, unpaged/live-context contracts |
 | TASK-018 | WP-10 optional sortable | in progress | Pure stage1 approved; adapter/ref/interlock stages held | Actual controls stamps and browser G-02 proof remain |
 | TASK-019 | WP-11 examples/docs/workbench | planned | Assigned after feature handoffs | WP-06–WP-10 |
@@ -1665,3 +1665,173 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   lease is opened here. Same-controller pre-render criteria revocation remains an
   explicit unclosed AC-16/25 facade obligation for WP-09, not a hidden-slot waiver
   or an inferred result of guarded selection/sort/pager behavior.
+
+## TASK-017 — Isolated WP-09 details producer
+
+- **New bounded prerequisite authorized:** main approves
+  [pure pagination contracts](docs/planning/wp-09-pagination-contracts-plan.md)
+  before code. One worker owns only contracts/{types,schema,query,identity}.ts and
+  new tests/pagination-policy/contracts/**. Inputs match accepted core/final WP-08
+  byte-for-byte, independent of its remote harness repair. Preserve paged bytes,
+  canonical false/dormant pair and strict callback guards; no controller/native/
+  resource/tool/export/runtime support claim. Capture old baselines before edits,
+  then meaningful strict/unit/import proof and independent review. Everything else
+  stays read-only; no install/shared build/Git or additional agents.
+- A separate read-only contract reviewer now formalizes the proposed metadata
+  publication prerequisite in private reports only: exact begin/complete/reset,
+  ticket/reentrancy/domain-epoch semantics over the unchanged approved plain
+  criteria producer. No source/public API/React/tool/resource/adapter lease follows.
+  Pure pagination's four files remain exclusively owned by its implementation
+  worker; committed-config/SSR readiness stays a separate later contract.
+- Pure-pagination prerequisite is now review-ready at aggregate36676cb883cda5276a2a63194988bacd89d38981ff49e16b8690daf8d1111086:
+  only four allocated sources/new tests changed;56 new+211 unchanged units, strict
+  TS6/5.9 source/own-emitted programs,40 meaningful negative lines, ten-module
+  server-safe graph and163 protected files pass worker checks. Main inspects the
+  minimal diff and allocates independent private review/fresh probes. No independent
+  acceptance, root export, native unpaged execution, early controller command guard,
+  complete resource/server or facade support is inferred.
+  **Independent prerequisite approved:**56 fresh+267 rerun cases, all16 original
+  golden strings replayed from verified HEAD preimages, strict TS6/5.9 and64 meaningful
+  line/compiler/mode negative rejections, unchanged ten-module graphs/bare imports
+  and279-manifest/163-protected seals pass. Main grants delegated approval only for
+  aggregate36676cb883cda5276a2a63194988bacd89d38981ff49e16b8690daf8d1111086 source.
+  No root exports/discovery/integration or controller/native/resource execution lease
+  is added yet. REVIEW session3 records scope; runtime remains paged and no full AC.
+- Publication specification is received but **not approved for implementation**.
+  Main flags its constructor-time per-controller singleton claim: speculative/Strict
+  allocation could strand the claim before any commit/disposal owner exists. The
+  report documents an outside-render precondition but defers the bootstrap proof.
+  Main requests a bounded refinement: inert construction and explicit first-begin
+  ownership admission at an application-safe boundary, with exact conflict/dispose/
+  retry/authority semantics before code. No new publisher/tool/React source lease.
+- **Next independent pure lease authorized:** after bounded pagination source
+  approval, main approves the exact execution-descriptor plan before code. One
+  worker owns only new contracts/execution.ts and tests/pagination-policy/execution/**.
+  Reuse real validated query/filter/identity at one explicit captured evaluation;
+  extent derives from trusted schema, not a client flag. All approved existing
+  sources/root exports/controller/native/resource stay read-only. No complete-server
+  or unpaged runtime/backend/SSR/browser/full feature claim; independent review follows.
+- **Publication V2 now approved for bounded source execution:** main selects inert
+  construction/first-valid-begin admission, denies foreign conflicts before payload
+  work, retains failed admitted claims and preserves exact authority/binding identity.
+  The canonical publication plan is written/linked before code. One worker owns
+  only new controller/criteria-publication.ts and tests/criteria-publication/**.
+  Existing plain criteria80da37…/pagination/details/exports/React/tool/native/resource
+  sources stay untouched. Source/type/real-controller/private-import proof and
+  independent review follow; no integrated buffer/commit/SSR/AC acceptance is implied.
+  Publication handoff is now review-ready at e06bb4212d9327dea7105f8e25005630ccb141cf8833c850ddd39218d0e625f3:
+  88 source units, strict TS6/5.9/100 intended negative checks, two runtime modules/
+  five declaration files and72 protected inputs pass worker checks. Main allocates
+  independent private review, keeping existing store/reducer/native/criteria/exports
+  and approved metadata inputs frozen. Real retirement actors use this old source
+  store, not yet the final WP-08 stacked validator integration. No acceptance follows
+  from handoff before independent review and later coherent tool/React adoption.
+  **Independent source approved:**110 fresh+88 rerun tests/1296 finite public traces,
+  strict TS6/5.9/136 intended negatives, two runtime/five declaration modules, bare
+  Node/Biome and130-sealed/original72/upstream279+289 proof pass. Main grants bounded
+  approval at e06bb4212d9327dea7105f8e25005630ccb141cf8833c850ddd39218d0e625f3 only.
+  All private prerequisite source leases are now complete/frozen. Main prepares an
+  isolated source handoff commit, excluding dependency symlinks/generated output,
+  then waits for exact delivered WP-08/approved combined baseline before any shared
+  controller/native/resource or tool/React implementation. Old seals remain historical.
+  Main records the isolated prerequisite handoff, runs static lint201/docs+18 probes
+  and prepares one local source snapshot from the WP-05 base. No source dependency
+  symlink/generated evidence is staged. Shared copier/exports are old details-only
+  adaptations: final stack must union them into WP-08's safe current implementations.
+  Final WP-08 dual remote checks are still pending; no WP-09 PR or full check claimed.
+- Read-only next-core planning now traces disabled-pagination controller command
+  guards and atomic query replacement against the approved four-file policy. Private
+  report only; store/reducer/validation/native/resource changes are not allocated
+  while current metadata producers and their protected baselines remain active.
+  Exact error/callback/proposal ordering and later serial path leases are required
+  before implementation, without changing existing controlled/relative-clock rules.
+  The private old-baseline report proposes reducer-only guards and confirms original
+  query.replace parses before resets, but explicitly lacks WP-08's later command
+  capture/validateCommand contracts. Main does not approve that as the final stacked
+  algorithm. A read-only addendum must reconcile actual final WP-08 callback/capture/
+  mandatory-reset ordering before any controller lease; active producer fence remains.
+  Final-source addendum now confirms store preflight after capture/before private
+  validateCommand plus both reducer guards are needed; valid unsupported commands
+  then reject before validators/updater/clock. Capture failures retain precedence.
+  Canonical query.replace parsing already precedes resets. Main records the selected
+  readiness algorithm and bare-app-owner cleanup/status verification requirement,
+  not code authorization; publication review/protected baseline fence remains active.
+- Execution descriptor handoff is review-ready at552fe801c7ff59ad5faddf20c3a4065f347b29605fe1bb44aae35c88bbb5af0c:
+ 81 new+267 unchanged units, strict TS6/5.9/52 meaningful negative rejections,
+ eleven-module graph/bare import,289 manifest entries and original177 protected
+ bytes pass worker checks. The preserved strict inventory failure adds only the
+ separately authorized active publication namespace, which main reconciles by path
+ without accepting its changing contents or rebasing. Independent source review
+ follows; no complete-server/native/export/packed/SSR or full-feature acceptance.
+  **Independent source approved:**69 fresh+348 rerun cases, strict TS6/5.9/76
+  meaningful negative rejections, thirteen declarations/compiler, eleven-module
+  graph/bare import and177/upstream14/289 seals pass. Main grants bounded delegated
+  approval at552fe801c7ff59ad5faddf20c3a4065f347b29605fe1bb44aae35c88bbb5af0c.
+  Concurrent publication additions are reconciled by authorized paths only; no full
+  inventory rebase/pass or publication source acceptance is inferred. No runtime/
+  backend/complete-resource/native/facade/root export integration is allocated.
+
+- **Read-only next-stage readiness review:** while final WP-08 ordered checks run,
+  main allocates separate source/contract audits for (a) canonical dormant pagination,
+  explicit disabled execution and complete-result provenance; (b) optional plain
+  criteria-authority adoption into all four tools and the facade's coherent live
+  frame. Read current proposal/actual accepted producers; no source/docs/exports/
+  configs/lock/install/build/Git writes are granted. Reviewers return private reports
+  with exact interfaces, bounded future paths, verification and unresolved conflicts.
+  Full facade/shell/unpaged/tool adoption remain unallocated until main approves
+  those contracts after the final WP-08 dependency. Existing details/criteria source
+  approvals and read-only reference constraints remain unchanged.
+  **Reports received:** unpaged review traces88 protected inputs and selects omission
+  of canonical true for backward identities, explicit pre-begin complete provenance
+  and serial core ownership. Criteria review identifies actual getDefinition ref,
+  explicit publication/reset and committed-callback/readiness requirements, plus a
+  dedicated criteria epoch rather than the query-intent epoch. Three private source
+  probes/strict TS6 confirm custom-time behavior is captured-evaluation limited;
+  current relative-boundary tick promise is not violated. Main records planning
+  constraints without a parity waiver, clock migration or new source allocation.
+  **Dependency provenance:** WP-08's complete local ordered workflow passes and
+  reviewed final source17b846b is pushed in open/unmerged PR #8 against final WP-07.
+  Both remote workflow results are still pending; no final remote acceptance is
+  assumed. The existing WP-09 source remains unchanged. Readiness decisions supply
+  inputs for exact next plans, not a source/exports/tool/facade implementation lease.
+
+- **New bounded parallel allocation:** main approves plain criteria-authority
+  before code. Worker owns new controller/criteria.ts and tests/criteria-authority/**
+  using accepted getDefinition/isDisposed/ResourceContext APIs already present.
+  No existing source/exports/config/lock/details/UI, installs/shared builds or Git.
+  This is independent of pending WP-08 compatibility and approves no full facade
+  or integrated AC-16/25. Exact tested handoff/review precede later adoption.
+  **Producer approved:** independent70 units (56 candidate/14 fresh), strict source/
+  own-public TS6/5.9, seven meaningful negative errors per compiler, DOM-free bare
+  import/zero runtime imports/four declaration files and nine-file Biome pass.
+  All11 old controller/details inputs remain unchanged. Main grants scoped source
+  approval at80da37ffc9cbfad9b15ead39f0b24833e382adfa45d6d8f6481656d83af654db;
+  no root export/tool/native adapter/packed/full-facade acceptance follows.
+
+- Main approved the [bounded plan](docs/planning/wp-09-implementation-plan.md)
+  before code in `/tmp/opencode/tableweave-wp09`, `work/wp-09-details`, reviewed
+  WP-05 `3e4aaa8`. Final delivery stacks after WP-08; no merge/publication/deploy.
+- Worker owns only packages/heroui/src/details/** and tests/details/**, port6447.
+  Main owns shared renderer/exports/styles/config/docs/ledger/Git. Existing
+  controller/native/resource are read-only; local installed-vendor links are not
+  committed or new install authority.
+- Exact accepted-target/context/session port and arbitrary content/optional genuine
+  row, controlled async shared close/replace policy and responsive one-tree Drawer
+  precede consumers. Private strongly typed pinned pointer-handler adapter disables
+  swipe only; actual backdrop/Escape/focus/scroll/pointer browser proof is required.
+- Next: tested producer handoff/independent review. DataTable/state UI/localization/
+  facade integration waits for exact WP-07/WP-08 handoffs; no guessed props, duplicate
+  controller/resource owner, backend auth/transport or manual AT/device acceptance.
+  **Initial handoff:** private details index now contains useDetailsSession,
+  DetailsShell/Trigger, own English messages and strongly typed authority/source/
+  policy ports. Worker reports22 Chromium/two units/strict source+NodeNext TS6/5.9,
+  four-file public-reachable declaration graph and26-file Biome passing. Main
+  retains root exports/CSS/packed/discovery; independent read-only review is active.
+  [Candidate contract](docs/engineering/wp-09-details.md) distinguishes source
+  proof from unpassed package/default-shell/localization/facade acceptance.
+  Independent n1–n5 correction review now passes68 Chromium across two runs,
+  nine units, source/public TS6/5.9 and declaration/Biome checks. Exact source
+  aggregate11ddb455e5bcfefde2a1760886cf720a22fd13935e42841ca02d986d7e9ba5da
+  matches. Main grants bounded initial details-source approval under delegated
+  technical authority, not packet/public/packed/AT/device acceptance. Next public
+  integration and precise completed tool/control handoffs for later shell work.

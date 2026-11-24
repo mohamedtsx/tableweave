@@ -5,6 +5,13 @@ export {
   defaultColumnChooserMessages,
 } from "./columns/index.js";
 export type * from "./columns/types.js";
+export {
+  DetailsShell,
+  DetailsTrigger,
+  englishDetailsMessages,
+  useDetailsSession,
+} from "./details/index.js";
+export type * from "./details/types.js";
 export { FilterBuilder } from "./filters/filter-builder.js";
 export type {
   FilterBuilderMessages,

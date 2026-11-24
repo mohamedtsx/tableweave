@@ -112,6 +112,7 @@ const definitionSchema = v.strictObject({
   ),
   pagination: v.exactOptional(
     v.strictObject({
+      enabled: v.exactOptional(v.boolean()),
       defaultSize: v.exactOptional(integer),
       sizes: v.exactOptional(v.array(integer)),
     }),
@@ -201,6 +202,9 @@ export function defineQuerySchema<
     )
       fail("schema.invalid");
     const pagination = {
+      ...(data.pagination?.enabled === false
+        ? { enabled: false as const }
+        : {}),
       defaultSize: data.pagination?.defaultSize ?? 10,
       sizes: data.pagination?.sizes ?? [10, 25, 50, 100],
     };

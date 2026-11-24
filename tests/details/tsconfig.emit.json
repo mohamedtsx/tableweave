@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "../../packages/heroui/src/details",
+    "outDir": "./.artifacts/declarations"
+  },
+  "include": [
+    "../../packages/heroui/src/details/**/*.ts",
+    "../../packages/heroui/src/details/**/*.tsx"
+  ]
+}

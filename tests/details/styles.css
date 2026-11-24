@@ -1,0 +1,54 @@
+@layer theme, base, components, tableweave, utilities;
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "../../packages/heroui/src/details/styles.css";
+@source "./";
+
+body {
+  margin: 1rem;
+  font-family: system-ui, sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+main {
+  max-inline-size: 70rem;
+}
+.fixture-record-scroll {
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 1rem;
+}
+td {
+  padding: 0.5rem;
+  border-block-end: 1px solid var(--border);
+}
+.fixture-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+}
+.fixture-form {
+  display: grid;
+  gap: 1rem;
+}
+.fixture-custom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.fixture-custom > h2 {
+  grid-column: 1 / -1;
+}
+.fixture-full-interior {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto;
+}

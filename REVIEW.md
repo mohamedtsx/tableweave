@@ -1419,3 +1419,143 @@ threshold, deadlines/retry0 and actual animations remain unchanged. This does no
 repair or certify every transition frame or prove manual AT/WCAG compliance.
 Original red push/green PR remain historical; replacement full remote checks are
 still required before final delivery, and no PR merge is authorized.
+
+## WP-09 — delegated agent review session 1
+
+Open for initial private details producer. Independent read-only review is active;
+numbering restarts at n1 when findings are reproduced. Worker22 Chromium/two unit/
+strict source/declaration checks do not establish public exports/actual tarball,
+default shell, aggregate localization/facade or packet acceptance. No PR merge,
+personal maintainer/human-AT/actual-device/performance/release claim.
+
+### n1 — Getter rereads admit denied data or throw raw source errors (P1)
+
+- An access getter changes after validation; denied source context then matches
+  the reread origin and renders its record in a normal React root. Separately,
+  an explicitly denied session still evaluates an old throwing source getter.
+- Returned for fail-closed single-snapshot metadata validation and denial-first
+  projection, without reading raw errors or cloning/freezing app record objects.
+
+### n2 — Loading refetch unmounts an unsaved same-session form (P1)
+
+- Edit the open form, increment request generation with correctly tagged loading
+  then ready input. Its original input disconnects and unsaved state is lost;
+  ready→ready coverage missed the transition.
+- Returned for real subtree continuity through same-session loading/error, truthful
+  status and application draft ownership. No hidden retained-record cache or
+  conditional shell unmount may substitute for preserving the form.
+
+### n3 — Untagged retained native view exposes old-scope models (P1)
+
+- Preserve controller/query across scopes and legitimately share immutable recordA.
+  Supplying retained viewA under sourceB returns RowA whose table still exposes
+  old-scope rows. Matching record reference is not frame/resource provenance.
+- Main approved an atomic current-read/native-frame protocol before code: validate
+  owner/context/frame together or omit the optional row. Do not rebind old views,
+  fabricate rows, add a second native/resource owner or weaken privacy. Independently
+  reproduce/fix/update unpublished candidate fixtures/types before composition.
+  Independent replay resolves n1's original privacy/source-getter faults and n3's
+  old-frame rejection; genuine current-frame and separate detail-record controls
+  remain passing. The following continuity/callback residuals remain separate.
+
+### n4 — Request-generation lag unmounts a permitted dirty session (P1)
+
+- Advance the current committed port generation before parent props catch up,
+  retaining row/session/epoch/scope/access. An intervening render closes the shell
+  and disconnects its form; loading props later remount and reset the draft.
+- Main approved lifetime/freshness separation. Worker reproduces before failure,
+  then preserves the same permitted subtree while masking stale records/rows.
+  Real lifecycle changes still unmount. Independent rereview remains active.
+
+### n5 — Dirty policy accessor is validated then reread (P2)
+
+- A readonly beforeChange getter yields deny then allow. The denying policy is
+  never called, allowing is called once and close commits, losing the dirty form.
+- Worker reproduces before failure and rejects callback accessors without invoking
+  them, captures valid receivers and contains async observer/focus failures.
+  n4/n5 handoff reports52 Chromium/nine units/both strict compiler/public checks;
+  independent review must verify the exact candidate, not infer full approval.
+  **Resolved:** independent original generation-race/policy probes and earlier
+  privacy/frame controls pass.68 Chromium checks across two runs, nine units,
+  source/public TS6/5.9 and four-file declaration scan/Biome pass with aggregate
+  11ddb455e5bcfefde2a1760886cf720a22fd13935e42841ca02d986d7e9ba5da.
+  Main grants scoped initial details-source technical approval for integration;
+  public packing/default shell/localization/facade/full WP-09 remain separate.
+
+## WP-09 criteria authority — delegated review session 2
+
+### n1 — Scoped plain producer reviewed; no blocking finding
+
+Independent70 units (56 candidate/14 new probes), both strict source/public compiler
+versions, DOM-free private emission/bare Node import and nine-file Biome pass.
+Removing negative type directives produces seven intended errors per compiler,
+not unresolved-module failures. Zero runtime imports/four own declaration files;
+11 existing controller/details files remain unchanged. Nonempty context keys
+match the accepted resource contract. Denial order/exact refs/receivers/capture-
+once/replacement/disposal/revoked proxies/poisoned errors are independently tested.
+
+Main grants **agent-approved under delegated authority** for the plain source
+prerequisite at80da37ffc9cbfad9b15ead39f0b24833e382adfa45d6d8f6481656d83af654db.
+Host publication/reset discipline and rechecks after later callbacks remain required.
+This does not approve root exports/UI adoption/native adapter/actual tarball/
+request SSR/full facade or integrated AC-16/25; those are separate producer steps.
+
+## WP-09 pure pagination contracts — delegated review session 3
+
+### n1 — Four-file source prerequisite approved; no in-scope defect
+
+Independent review runs56 fresh probes plus267 candidate/existing cases, zero
+failures/skips, and both strict source/own-emitted compilers. It independently
+replays all16 sealed golden strings using hash-verified original HEAD preimages;
+omitted/true preserve paged schema/controller/query/filter bytes. False-only identity,
+callback ordering/diagnostic precedence/definition replacement/custom captured-clock
+behavior pass. Forty worker and24 independent meaningful negative rejections are
+confirmed, not missing-module errors. Original/current ten-module graphs match;
+bare imports pass and emitted consumers need neither DOM nor Node types.
+
+All279 manifest entries/163 protected inputs/four source hashes and aggregate
+36676cb883cda5276a2a63194988bacd89d38981ff49e16b8690daf8d1111086 remain unchanged.
+Main grants **agent-approved under delegated authority** for this source prerequisite
+only. Current native still pages. No controller command/no-op guard, native/complete-
+server/resource/exports/facade/browser/SSR/genuine packed/full AC or packet acceptance
+follows. Those require separately approved owners/contracts and integrated proof.
+
+## WP-09 execution metadata — delegated review session 4
+
+### n1 — New-module source prerequisite approved; no in-scope defect
+
+Independent69 fresh probes plus348 candidate/existing cases pass, zero failures/
+skips. Strict TS6/5.9 source/own-emitted checks confirm52 candidate+24 independent
+meaningful negative rejections; each compiler emits13 declarations and own consumers
+need neither Node nor DOM types. Original ten-module graph plus only execution.ts,
+external imports and bare Node import pass. Capture/time/extent/identity/parity/error
+semantics match the approved pure contract, not a backend execution assertion.
+
+Sourcec4e2bf93218b82eb36e85f62fa260e678de776835f04787c32b1a9139e0b9d51 and aggregate
+552fe801c7ff59ad5faddf20c3a4065f347b29605fe1bb44aae35c88bbb5af0c match before/after.
+All177 original/upstream14 bytes and289 manifest entries verify. Extra inventory
+paths are only the separately authorized publication namespace; their active contents
+are not read/accepted and the strict whole-inventory failure remains preserved.
+Main grants **agent-approved under delegated authority** for this pure new-module
+source prerequisite only. No root exports, native unpaged/complete-server/resource,
+genuine packed/SSR/browser/full-feature or packet/merge acceptance follows.
+
+## WP-09 publication metadata — delegated review session 5
+
+### n1 — One-module source prerequisite approved; no verified defect
+
+Independent110 fresh+88 unchanged source cases pass, including1296 length-four
+public lifecycle traces/5184 steps (not infinite/MAX_SAFE_INTEGER execution).
+Strict TS6/5.9 source/own-emitted programs confirm136 meaningful negative checks;
+two runtime modules/five declarations, bare Node and full scoped Biome pass.
+All130 sealed inputs/artifacts, original72 and accepted policy/execution inputs
+remain unchanged; historical279/289 manifests verify without rebasing.
+
+Source86bb9c80e6286ecd4eace96d2503710a2df8f6fa62e858993eb046fa6e5262fb and aggregate
+e06bb4212d9327dea7105f8e25005630ccb141cf8833c850ddd39218d0e625f3 match before/after.
+Main grants **agent-approved under delegated authority** for this one new pure
+metadata module only. Actual retirement actors use old source store51352a…;
+new WP-08 command-validator/native/source reset integration is not established.
+No actual tool/option-buffer erasure, privacy-before-commit, React/SSR, paired frame,
+native unpaged/complete-resource/facade/genuine packed/full AC/packet acceptance or
+merge follows. Preserve all old source seals before the next declared generation.

@@ -101,6 +101,9 @@ export function getQueryIdentity<S extends QuerySchema>(
     tabId: query.tabId,
     sorting: query.sorting,
     pagination: query.pagination,
+    ...(schema.pagination.enabled === false
+      ? { paginationEnabled: false }
+      : {}),
     locale: query.locale,
     timeZone: query.timeZone,
   });

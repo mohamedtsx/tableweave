@@ -72,6 +72,12 @@ export function parseQuery<S extends QuerySchema>(
     )
       fail("query.limit");
     if (
+      schema.pagination.enabled === false &&
+      (query.pagination.pageIndex !== 0 ||
+        query.pagination.pageSize !== schema.pagination.defaultSize)
+    )
+      fail("query.invalid");
+    if (
       query.search &&
       !Object.values(schema.fields).some((field) => field.owner === "search")
     )

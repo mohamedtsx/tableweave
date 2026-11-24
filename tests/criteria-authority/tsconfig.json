@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "noEmit": true, "lib": ["ES2022"], "types": ["node"] },
+  "include": ["./*.ts", "../../packages/react/src/controller/criteria.ts"],
+  "exclude": ["./.artifacts", "./public-types.ts"]
+}

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ES2022"],
+    "types": [],
+    "paths": {
+      "@tableweave/react": [
+        "/home/mohamed/Desktop/tableweave/packages/react/dist/index.d.ts"
+      ],
+      "@tableweave/react/contracts": [
+        "/home/mohamed/Desktop/tableweave/packages/react/dist/contracts/index.d.ts"
+      ]
+    }
+  },
+  "include": ["./public-types.ts"]
+}

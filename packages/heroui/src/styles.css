@@ -5,6 +5,7 @@
 @import "./filters/filters.css" layer(tableweave);
 @import "./date/date-editor.css" layer(tableweave);
 @import "./toolbar/filter-tools.css" layer(tableweave);
+@import "./details/styles.css";
 
 @layer tableweave {
   .tw-native-collection [data-slot="table-column"],
