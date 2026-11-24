@@ -57,6 +57,7 @@ export interface NativeDefinitionInput<
 }
 export interface NativeDefinition<S extends QuerySchema, T extends RowData> {
   readonly controllerDefinition: ControllerDefinition<S>;
+  readonly paginationEnabled: boolean;
   readonly columns: readonly NativeColumnDef<T>[];
   readonly getRowId: (record: T) => string;
   readonly isRowSelectable?: (record: T) => boolean;
@@ -117,6 +118,7 @@ export interface NativeTableView<S extends QuerySchema, T extends RowData> {
     readonly mixed: boolean;
   };
   readonly pagination: {
+    readonly enabled: boolean;
     readonly pageInfo: NativePageInfo;
     readonly pageCount: number | null;
     readonly canPreviousPage: boolean;

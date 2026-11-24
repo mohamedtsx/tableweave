@@ -1589,3 +1589,18 @@ Main grants **agent-approved under delegated authority** at source/test aggregat
 No native/resource/pager/facade/generation/full-WP09 or merge approval follows.
 New pre-U2 source105 map is abba84ba… under the documented canonical JSON recipe;
 old baseline/seals remain historical, not rewritten to bless intentional deltas.
+
+## WP-09 U2 native client unslicing — delegated review session 8
+
+### n1 — Three-file source candidate accepted; no blocking finding
+
+Final independent review passes302 scoped cases/41 fresh probes/72 paged golden
+comparisons. TS6.0.3/5.9.3 complete normally, all64 individually removed negatives
+and26 declarations/compiler pass. The three native hashes and source/test aggregate
+b5a853ab59f11068cb0239b20a7316101612ee8c646f479f3d4a43cc15a2a257 remain exact;
+1038 fingerprints/U1 identity/1025 manifest entries/18 seals are unchanged.
+Main reruns actual302/guard-after/lint521/docs+18 and grants **agent-approved under
+delegated authority** for client native source only. No server completeness/control
+projection/pager/facade/output-generation/full-WP09 or merge approval follows.
+Post-U2 pre-U3 source105 canonical map is497a1e37cd60c4080243847760e23526b8fe7cb033627ead9c7042d3ca0b0790;
+historical maps remain intact. Only a separately activated U3 lease may change resource.

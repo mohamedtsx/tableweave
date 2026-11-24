@@ -303,6 +303,8 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       (input.mode !== "client" && input.mode !== "server")
     )
       nativeFail("native.rows");
+    if (!definition.paginationEnabled && input.mode === "server")
+      nativeFail("native.page");
     const seen = new Set<string>();
     const ids = input.records.map((record) => {
       let id: unknown;
@@ -423,7 +425,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       enableSubRowSelection: false,
       manualFiltering: manual,
       manualSorting: manual,
-      manualPagination: manual,
+      manualPagination: manual || !definition.paginationEnabled,
     };
     // v9 shallow-merges options. Omission would retain an earlier total/-1 when
     // metadata or processing mode changes. Its exact optional declarations do
@@ -473,14 +475,16 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
             total: table.getFilteredRowModel().rows.length,
           });
     const pageCount =
-      pageInfo.kind === "known"
+      definition.paginationEnabled && pageInfo.kind === "known"
         ? Math.ceil(pageInfo.total / state.query.pagination.pageSize)
         : null;
-    const canPreviousPage = state.query.pagination.pageIndex > 0;
+    const canPreviousPage =
+      definition.paginationEnabled && state.query.pagination.pageIndex > 0;
     const canNextPage =
-      pageInfo.kind === "unknown"
+      definition.paginationEnabled &&
+      (pageInfo.kind === "unknown"
         ? pageInfo.hasNextPage
-        : state.query.pagination.pageIndex + 1 < (pageCount ?? 0);
+        : state.query.pagination.pageIndex + 1 < (pageCount ?? 0));
     const native: NativeTableHandle<T> = Object.freeze({
       Subscribe: table.Subscribe,
       FlexRender: table.FlexRender,
@@ -515,6 +519,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         mixed: selectedOnPage > 0 && selectedOnPage < eligibleIds.length,
       }),
       pagination: Object.freeze({
+        enabled: definition.paginationEnabled,
         pageInfo,
         pageCount,
         canPreviousPage,
@@ -536,6 +541,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       previousPage() {
         if (current().queryIdentity !== state.queryIdentity)
           nativeFail("native.page");
+        if (!definition.paginationEnabled) nativeFail("native.page");
         if (canPreviousPage)
           onPaginationChange((previous) => ({
             ...previous,
@@ -545,6 +551,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       nextPage() {
         if (current().queryIdentity !== state.queryIdentity)
           nativeFail("native.page");
+        if (!definition.paginationEnabled) nativeFail("native.page");
         if (canNextPage)
           onPaginationChange((previous) => ({
             ...previous,

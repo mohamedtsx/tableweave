@@ -55,6 +55,42 @@ commits exact producers/new tests and records separate pre-U2 source105 map
 abba84ba882b2d6d6fa596b74f91003308ed6d249001fa2084ebdef40a8403c2. Old maps stay
 preserved. U2 activates only after commit and explicit allocation; root generation
 failures remain open and no native/full-feature acceptance follows.
+U1 is committed9f96deb. **U2 is now active** under its exact plan: one worker owns
+tanstack/{types,definition,adapter}.ts and new tests/pagination-policy/native-client/**.
+Initial three source hashes and post-U1 source105 baseline are recorded before code.
+All controller/metadata/resource/presentation/tool/details/exports/config/Git inputs
+stay frozen. Real native filter/sort unslicing and old paged regression proof precede
+independent review; ordinary server pages remain unsupported with false policy.
+Main reads actual resource capture/view seams and writes an inactive U3 metadata
+plan, preserving legacy omitted shapes/refusals/retry and forbidding success-time
+promotion. U2 remains the sole active runtime writer; resource/types/adapter/view
+stay unchanged until U2 approval, fresh baselines and explicit main allocation.
+U2 is review-ready at b5a853ab59f11068cb0239b20a7316101612ee8c646f479f3d4a43cc15a2a257:
+three allocated native sources/new tests only;302 scoped cases include40 new, with
+36 prechange paged captures/five real prechange failures preserved. Worker strict
+TS6/5.9/64 intended negatives, bare actual native creation/Biome/102 protected
+sources+710 inputs pass. Main inspects the diff and allocates independent private
+review; no U2 acceptance/U3 source lease or server/control/full-feature claim yet.
+User reaffirms all-packet delivery through WP-15 with numbered independent reviews,
+delegated approval, commits and separate unmerged PRs; blockers require ask modal.
+U2 runtime/static review is clean302+41/72 golden comparisons, but final TS6/5.9
+individual-negative checks remain pending; no U2 approval or U3 activation yet.
+Later fixed-runner/real-consumer/legal inputs are being requested separately, not
+used to stop safe current work or fabricate external readiness.
+User later provides Dokploy endpoint/project and environment key, but read-only
+inventory/project-specific API calls return403. Main creates no remote service or
+paid resource and claims no fixed-runner proof. The real-consumer target is explicitly
+deferred. Copyright holder is supplied as Mohamed Khalid Ahmed; user authorizes
+GitHub private vulnerability reporting, which main enables and verifies true.
+Credentials stay local/excluded and out of source/evidence. No publication rights,
+npm ownership, benchmark compliance or full external acceptance is inferred.
+Final independent U2 review now passes302+41/72 golden comparisons and both strict
+compilers/64 individual negatives/26 declarations each, with1038 fingerprints and
+1025 manifest entries intact. Main reruns302/guard/lint521/docs+18, grants scoped
+source approval atb5a853ab… and commits the exact three sources/new tests. Separate
+pre-U3 source105 map497a1e37… records intentional deltas without rebasing old seals.
+U3 activation waits this commit and its recorded three-file allocation; no server/
+controls/full-feature/generation acceptance is inferred.
 
 ## Historical WP-08 integration and delivery
 

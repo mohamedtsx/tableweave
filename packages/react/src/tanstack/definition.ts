@@ -176,16 +176,18 @@ function defineNativeTableImpl<S extends QuerySchema, T extends RowData>(
     if (field.sort && !sortable.has(id)) nativeFail("native.definition");
   if (!policies.some((column) => !column.utility))
     nativeFail("native.definition");
+  const controllerDefinition = defineController(
+    {
+      schema,
+      columns: policies,
+      selection: selectionMode !== false,
+      ...(details !== undefined ? { details } : {}),
+    },
+    evaluation.registry,
+  );
   const definition = Object.freeze({
-    controllerDefinition: defineController(
-      {
-        schema,
-        columns: policies,
-        selection: selectionMode !== false,
-        ...(details !== undefined ? { details } : {}),
-      },
-      evaluation.registry,
-    ),
+    controllerDefinition,
+    paginationEnabled: controllerDefinition.schema.pagination.enabled !== false,
     columns,
     getRowId,
     ...(isRowSelectable ? { isRowSelectable } : {}),

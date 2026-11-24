@@ -54,6 +54,8 @@ The [two-file controller guard plan](wp-09-controller-guards-plan.md) is the nex
 bounded implementation after the independent transport disposition activates it.
 The [native client plan](wp-09-native-client-plan.md) is prepared but remains inactive
 until U1's reviewed source handoff and a separate main allocation.
+The [resource extent plan](wp-09-resource-extent-plan.md) is prepared but inactive
+until client U2 review and a separate main-owned source allocation.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

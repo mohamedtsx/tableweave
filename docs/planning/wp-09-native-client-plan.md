@@ -57,3 +57,29 @@ will deliberately need the later separately owned integration. This native-only
 stage proves no complete-server provenance, controls readiness, browser collection,
 genuine packed/SSR/facade or full AC result. Keep historical generation guards intact.
 Stop for excluded source/API changes rather than silently widening the lease.
+
+## Activation and exact inputs
+
+Main accepts U1 source after independent345+67 proof and main345/guard replay,
+then commits9f96deb. This exact U2 lease is now active. Pre-U2 source105 map uses
+the combined canonical JSON recipe at
+abba84ba882b2d6d6fa596b74f91003308ed6d249001fa2084ebdef40a8403c2.
+Initial native source SHA256s:
+
+- types.ts:a72486264cd77d8cfd80db9e1f74d57e95dcda57d9a441ba3eb2e81f99ffb2b3
+- definition.ts:9f0a6ae53e0fdf33dd976d30861eef88ae54d92d60a3c58d5a0ee5e1601db3b0
+- adapter.ts:f2add671658a719c98ecbc6712ba6cf2db275b90b9196c149806103e5bf949a4
+
+One worker owns only those three sources/new native-client tests; no other runtime
+writer is active. Preserve U1's original protected maps as historical evidence,
+and establish a separately named102-source protection map for this intentional stage.
+
+[Source handoff](../../tests/pagination-policy/native-client/README.md) records
+review-ready actual model proof and its client-only/native-only limitations.
+Independent review is required before any U3 allocation.
+
+Final review passes302 scoped/41 independent probes/72 golden comparisons and strict
+TS6/5.9/64 individually removed negatives. Main's302/guard/lint/docs replay passes;
+main grants bounded client-native source approval at
+b5a853ab59f11068cb0239b20a7316101612ee8c646f479f3d4a43cc15a2a257. No later owner or
+output-generation gate is accepted by this disposition.
