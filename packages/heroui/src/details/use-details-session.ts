@@ -1,8 +1,14 @@
 "use client";
 
+import type {
+  MutationResult,
+  TableController,
+  TableState,
+} from "@tableweave/react";
 import { useTableweaveState } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { getDetailsBinding } from "../data-table/details-binding.js";
 import type { CapturedCallback } from "./identity.js";
 import {
   captureAuthority,
@@ -15,8 +21,12 @@ import {
   sameContext,
   sameLifecycle,
 } from "./identity.js";
-import { recordDetailsSession } from "./session-identity.js";
+import {
+  recordAdoptedDetailsSession,
+  recordDetailsSession,
+} from "./session-identity.js";
 import type {
+  DetailsAccessory,
   DetailsAuthority,
   DetailsChangeRequest,
   DetailsContext,
@@ -40,11 +50,247 @@ function observe<A extends readonly unknown[]>(
   }
 }
 
+/** Genuine bound producer from its first render. Never calls the legacy hook. */
+export function useBoundDetailsSession<S extends QuerySchema, T extends object>(
+  accessory: DetailsAccessory<S, T>,
+): DetailsSession<S, T> {
+  const binding = getDetailsBinding(accessory);
+  const snapshot = useSyncExternalStore(
+    binding.subscribe,
+    binding.getSnapshot,
+    binding.getSnapshot,
+  );
+  const actor = snapshot.actor;
+  const session: DetailsSession<S, T> = Object.freeze<DetailsSession<S, T>>({
+    get contentKey() {
+      return binding.readSession(actor).contentKey;
+    },
+    get isOpen() {
+      return binding.readSession(actor).isOpen;
+    },
+    get context() {
+      return binding.readSession(actor).context;
+    },
+    get canRetry() {
+      return binding.readSession(actor).canRetry;
+    },
+    requestOpen: (id, options) =>
+      actor
+        ? binding.open(actor, id, options)
+        : Promise.resolve({ status: "stale" }),
+    requestClose: (reason = "programmatic") =>
+      actor
+        ? binding.request(actor, null, reason)
+        : Promise.resolve({ status: "stale" }),
+    retry: () => (actor ? binding.retry(actor) : Promise.resolve("stale")),
+  });
+  recordAdoptedDetailsSession(session, binding);
+  return session;
+}
+
 function fieldIds(input: unknown): readonly string[] {
   try {
     return Array.isArray(input) ? input : [];
   } catch {
     return [];
+  }
+}
+
+/** Source-private shared policy/transition implementation, not an authority factory. */
+export interface DetailsRequestRuntime<S extends QuerySchema> {
+  readonly origin: () => DetailsAuthority | null;
+  readonly baseline: () => TableState<S>["details"];
+  readonly store: (token: object, data: DetailsRequestData<S>) => void;
+  readonly load: (token: object) => DetailsRequestData<S> | null;
+  readonly forget: (token: object) => void;
+  readonly current: () => {
+    readonly binding: {
+      readonly controller: TableController<S>;
+      readonly beforeChange: CapturedCallback<
+        [DetailsChangeRequest],
+        boolean | Promise<boolean>
+      >;
+    };
+    readonly authority: DetailsAuthority;
+  } | null;
+  readonly observer: () =>
+    | CapturedCallback<[DetailsOutcome<S>, DetailsChangeRequest], void>
+    | undefined;
+  readonly mounted: () => boolean;
+  readonly pending: () => object | null;
+  readonly setPending: (value: object | null) => void;
+  readonly setBusy: (value: boolean) => void;
+  readonly captureRestore: (
+    options: DetailsOpenOptions | undefined,
+  ) => CapturedCallback<[], boolean>;
+  readonly restore: (context: DetailsContext, focus: () => boolean) => void;
+  readonly result?: (
+    result: MutationResult<S>,
+    change: DetailsChangeRequest,
+  ) => void;
+}
+export interface DetailsRequestData<S extends QuerySchema> {
+  readonly change: DetailsChangeRequest;
+  readonly baseline: TableState<S>["details"];
+  readonly observer:
+    | CapturedCallback<[DetailsOutcome<S>, DetailsChangeRequest], void>
+    | undefined;
+  readonly options: DetailsOpenOptions | undefined;
+  readonly controller: TableController<S>;
+}
+function reportRequest<S extends QuerySchema>(
+  runtime: DetailsRequestRuntime<S>,
+  data: Pick<DetailsRequestData<S>, "observer" | "change">,
+  outcome: DetailsOutcome<S>,
+): DetailsOutcome<S> {
+  if (runtime.mounted() && data.observer)
+    observe(data.observer, outcome, data.change);
+  return outcome;
+}
+function beginRequest<S extends QuerySchema>(
+  runtime: DetailsRequestRuntime<S>,
+  toId: string | null,
+  reason: DetailsReason,
+  openOptions?: DetailsOpenOptions,
+):
+  | { outcome: DetailsOutcome<S> }
+  | { token: object; decision: boolean | Promise<boolean> } {
+  const origin = runtime.origin();
+  if (!origin) return { outcome: { status: "stale" } };
+  const currentAtStart = runtime.current(),
+    observer = runtime.observer();
+  const change: DetailsChangeRequest = Object.freeze({
+    authority: currentAtStart?.authority ?? origin,
+    fromId: origin.rowId,
+    toId,
+    reason,
+  });
+  const report = (outcome: DetailsOutcome<S>) => ({
+    outcome: reportRequest(runtime, { observer, change }, outcome),
+  });
+  if (toId !== null && (!toId || typeof toId !== "string"))
+    return report({ status: "failed" });
+  if (!currentAtStart) return report({ status: "stale" });
+  const latest = currentAtStart.binding;
+  if (!latest.beforeChange.valid) return report({ status: "blocked" });
+  if (toId === origin.rowId) return report({ status: "noop" });
+  if (runtime.pending()) return report({ status: "busy" });
+  const token = {};
+  try {
+    runtime.store(token, {
+      change,
+      baseline: runtime.baseline(),
+      observer,
+      options: openOptions,
+      controller: latest.controller,
+    });
+    runtime.setPending(token);
+    runtime.setBusy(true);
+    const decision = latest.beforeChange.invoke
+      ? latest.beforeChange.invoke(change)
+      : true;
+    return { token, decision };
+  } catch {
+    const data = runtime.load(token);
+    const outcome = data
+      ? reportRequest(runtime, data, { status: "failed" })
+      : ({ status: "stale" } as const);
+    finishActivity(runtime, token);
+    return { outcome };
+  }
+}
+function finishActivity<S extends QuerySchema>(
+  runtime: DetailsRequestRuntime<S>,
+  token: object,
+): void {
+  try {
+    if (runtime.pending() === token) {
+      runtime.setPending(null);
+      if (runtime.mounted()) runtime.setBusy(false);
+    }
+  } catch {
+    /* An owner retired during cleanup; never touch its replacement. */
+  } finally {
+    runtime.forget(token);
+  }
+}
+function completeRequest<S extends QuerySchema>(
+  runtime: DetailsRequestRuntime<S>,
+  token: object,
+  allowed: boolean,
+): DetailsOutcome<S> {
+  const data = runtime.load(token);
+  if (!data) return { status: "stale" };
+  const report = (outcome: DetailsOutcome<S>) =>
+    reportRequest(runtime, data, outcome);
+  const after = runtime.current();
+  if (!after || runtime.pending() !== token) return report({ status: "stale" });
+  if (!after.binding.beforeChange.valid) return report({ status: "blocked" });
+  if (allowed !== true) return report({ status: "blocked" });
+  const restore = runtime.captureRestore(data.options);
+  if (data.change.toId !== null && restore.invoke)
+    runtime.restore(data.change.authority.context, restore.invoke);
+  const result = data.controller.dispatch({
+    type: "details.change",
+    update(previous) {
+      const now = runtime.current();
+      const current = runtime.load(token);
+      if (
+        !now?.binding.beforeChange.valid ||
+        !current ||
+        previous !== current.baseline
+      )
+        return previous;
+      return { rowId: current.change.toId };
+    },
+  });
+  runtime.result?.(result, data.change);
+  switch (result.status) {
+    case "proposed":
+      return report({ status: "submitted", proposal: result.proposal });
+    case "committed":
+      return report({
+        status: "committed",
+        notificationFailures: result.notificationFailures,
+      });
+    case "rejected":
+      return report({ status: "rejected" });
+    case "noop":
+      return report({ status: "noop" });
+  }
+}
+/** Sole async policy/accepted-transition engine. Across await retain only opaque
+ * token/runtime and the application's decision promise, never a private request. */
+export function runDetailsRequest<S extends QuerySchema>(
+  runtime: DetailsRequestRuntime<S>,
+  toId: string | null,
+  reason: DetailsReason,
+  options?: DetailsOpenOptions,
+): Promise<DetailsOutcome<S>> {
+  try {
+    const begun = beginRequest(runtime, toId, reason, options);
+    return "outcome" in begun
+      ? Promise.resolve(begun.outcome)
+      : continueRequest(runtime, begun.token, begun.decision);
+  } catch {
+    return Promise.resolve({ status: "stale" });
+  }
+}
+async function continueRequest<S extends QuerySchema>(
+  runtime: DetailsRequestRuntime<S>,
+  token: object,
+  decision: boolean | Promise<boolean>,
+): Promise<DetailsOutcome<S>> {
+  try {
+    const allowed = typeof decision === "boolean" ? decision : await decision;
+    return completeRequest(runtime, token, allowed);
+  } catch {
+    const data = runtime.load(token);
+    return data
+      ? reportRequest(runtime, data, { status: "failed" })
+      : { status: "stale" };
+  } finally {
+    finishActivity(runtime, token);
   }
 }
 
@@ -262,84 +508,41 @@ export function useDetailsSession<S extends QuerySchema, T extends object>(
     }
   };
 
-  const request = async (
+  const request = (
     toId: string | null,
     reason: DetailsReason,
     openOptions?: DetailsOpenOptions,
   ): Promise<DetailsOutcome<S>> => {
-    if (!origin) return { status: "stale" };
-    const currentAtStart = current();
-    const observer = committed.current?.onOutcome;
-    const change: DetailsChangeRequest = Object.freeze({
-      authority: currentAtStart?.authority ?? origin,
-      fromId: origin.rowId,
+    const requests = new Map<object, DetailsRequestData<S>>();
+    return runDetailsRequest(
+      {
+        origin: () => origin,
+        baseline: () => originDetails,
+        store: (token, data) => {
+          requests.set(token, data);
+        },
+        load: (token) => requests.get(token) ?? null,
+        forget: (token) => {
+          requests.delete(token);
+        },
+        current,
+        observer: () => committed.current?.onOutcome,
+        mounted: () => mounted.current,
+        pending: () => pending.current,
+        setPending: (value) => {
+          pending.current = value;
+        },
+        setBusy: setPolicyBusy,
+        captureRestore: (value) =>
+          captureCallback<[], boolean>(value, "restoreFocus"),
+        restore: (context, focus) => {
+          restore.current = { context, focus };
+        },
+      },
       toId,
       reason,
-    });
-    const report = (outcome: DetailsOutcome<S>) => {
-      if (mounted.current && observer) observe(observer, outcome, change);
-      return outcome;
-    };
-    if (toId !== null && (!toId || typeof toId !== "string"))
-      return report({ status: "failed" });
-    if (!currentAtStart) return report({ status: "stale" });
-    const latest = currentAtStart.binding;
-    if (!latest.beforeChange.valid) return report({ status: "blocked" });
-    if (toId === origin.rowId) return report({ status: "noop" });
-    if (pending.current) return report({ status: "busy" });
-    const token = {};
-    pending.current = token;
-    setPolicyBusy(true);
-    try {
-      const decision = latest.beforeChange.invoke
-        ? latest.beforeChange.invoke(change)
-        : true;
-      const allowed = typeof decision === "boolean" ? decision : await decision;
-      const currentAfterPolicy = current();
-      if (!currentAfterPolicy || pending.current !== token)
-        return report({ status: "stale" });
-      if (!currentAfterPolicy.binding.beforeChange.valid)
-        return report({ status: "blocked" });
-      if (allowed !== true) return report({ status: "blocked" });
-      const restoreFocus = captureCallback<[], boolean>(
-        openOptions,
-        "restoreFocus",
-      );
-      if (toId !== null && restoreFocus.invoke)
-        restore.current = {
-          context: origin.context,
-          focus: restoreFocus.invoke,
-        };
-      const result = latest.controller.dispatch({
-        type: "details.change",
-        update(previous) {
-          const latest = current();
-          if (!latest?.binding.beforeChange.valid || previous !== originDetails)
-            return previous;
-          return { rowId: toId };
-        },
-      });
-      switch (result.status) {
-        case "proposed":
-          return report({ status: "submitted", proposal: result.proposal });
-        case "committed":
-          return report({
-            status: "committed",
-            notificationFailures: result.notificationFailures,
-          });
-        case "rejected":
-          return report({ status: "rejected" });
-        case "noop":
-          return report({ status: "noop" });
-      }
-    } catch {
-      return report({ status: "failed" });
-    } finally {
-      if (pending.current === token) {
-        pending.current = null;
-        if (mounted.current) setPolicyBusy(false);
-      }
-    }
+      openOptions,
+    );
   };
   const requestClose = (reason: DetailsReason = "programmatic") =>
     request(null, reason);

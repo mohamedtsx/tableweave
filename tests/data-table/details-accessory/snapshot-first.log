@@ -1,0 +1,8 @@
+Initial static scope snapshot exited 1 before writing any baseline or production edits.
+Main's source126 JSON SHA matched. First file byte SHA matched, but raw filesystem
+mode 100664 differed from the manifest's Git-normalized mode 100644:
+packages/heroui/src/columns/column-chooser.tsx
+  actual:   mode 100664, sha256 0ed883a11dfa4dd68e92c9cff9139baf1b761edc04b4c1c4797234757f5459ad
+  expected: mode 100644, sha256 0ed883a11dfa4dd68e92c9cff9139baf1b761edc04b4c1c4797234757f5459ad
+Correction: compare main's executable Git mode without chmod; protect raw checkout
+permissions separately. This is a scope-script correction, not a source-map rebase.

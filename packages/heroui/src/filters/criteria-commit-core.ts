@@ -10,6 +10,8 @@ import {
   type TableController,
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
+import { createDetailsAdapter } from "../details/committed-details.js";
+import type { DetailsCommitCell } from "../details/types.js";
 import { createTableRendererAdapter } from "../table/renderer-commit.js";
 import type { TableRendererCell } from "../table/types.js";
 import {
@@ -19,7 +21,7 @@ import {
 } from "./criteria-commit.js";
 
 /** Source-private library policy. No exported factory accepts an application policy,
- * permission callback, participant or reset setter. The two closed entrypoints below
+ * permission callback, participant or reset setter. The three closed entrypoints below
  * select only the actual library adapters. Imports are function-only cycles. */
 export interface CommitAdapter<
   S extends QuerySchema,
@@ -830,4 +832,14 @@ export function createRendererCommitCore<
   // The closed renderer adapter installs updateModel; all missing declaration
   // members are opaque lease/actor/local/work brands, not consumer data casts.
   return createCore(adapter) as unknown as TableRendererCell<S, T>;
+}
+
+/** Closed details specialization; tool/renderer ordering and signatures unchanged. */
+export function createDetailsCommitCore<
+  S extends QuerySchema,
+  T extends object,
+>(model: DataTableModel<S, T>): DetailsCommitCell<S, T> {
+  return createCore(
+    createDetailsAdapter(model),
+  ) as unknown as DetailsCommitCell<S, T>;
 }

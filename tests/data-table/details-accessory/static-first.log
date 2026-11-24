@@ -1,0 +1,11 @@
+{
+  "scope": "static AST/import/syntax only",
+  "existingCoreNormalized": "651937a7d042978b455b43a696c09b23203d9e39d330600f8c956cad7d92f562",
+  "rawHookOutsideRequest": "AST equal",
+  "rawInteriorAndTrigger": "AST equal",
+  "checked": 24,
+  "limits": [
+    "No runtime/cycle/SSR/React/browser/negative or emitted proof",
+    "Shared request policy/transition behavior still requires old raw regressions and new bound tests"
+  ]
+}

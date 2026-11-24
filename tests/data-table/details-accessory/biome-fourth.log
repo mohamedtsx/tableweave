@@ -1,0 +1,214 @@
+tests/data-table/details-accessory/static-check.mjs:9:44 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+     7 │ const root = fileURLToPath(new URL("../../../", import.meta.url));
+     8 │ const here = fileURLToPath(new URL("./", import.meta.url));
+   > 9 │ const baseline = JSON.parse(await readFile(here + "baseline.json", "utf8"));
+       │                                            ^^^^^^^^^^^^^^^^^^^^^^
+    10 │ const sha = (input) => createHash("sha256").update(input).digest("hex");
+    11 │ const parse = (name, text) =>
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+      7   7 │   const root = fileURLToPath(new URL("../../../", import.meta.url));
+      8   8 │   const here = fileURLToPath(new URL("./", import.meta.url));
+      9     │ - const·baseline·=·JSON.parse(await·readFile(here·+·"baseline.json",·"utf8"));
+          9 │ + const·baseline·=·JSON.parse(await·readFile(`${here}baseline.json`,·"utf8"));
+     10  10 │   const sha = (input) => createHash("sha256").update(input).digest("hex");
+     11  11 │   const parse = (name, text) =>
+  
+
+tests/data-table/details-accessory/static-check.mjs:23:37 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    21 │   printer.printNode(ts.EmitHint.Unspecified, node, node.getSourceFile());
+    22 │ async function preimage(path) {
+  > 23 │   return parse(path, await readFile(here + "preimages/" + path, "utf8"));
+       │                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    24 │ }
+    25 │ async function actual(path) {
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+     21  21 │     printer.printNode(ts.EmitHint.Unspecified, node, node.getSourceFile());
+     22  22 │   async function preimage(path) {
+     23     │ - ··return·parse(path,·await·readFile(here·+·"preimages/"·+·path,·"utf8"));
+         23 │ + ··return·parse(path,·await·readFile(`${here}preimages/${path}`,·"utf8"));
+     24  24 │   }
+     25  25 │   async function actual(path) {
+  
+
+tests/data-table/details-accessory/static-check.mjs:90:22 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    88 │   );
+    89 │ assert.equal(
+  > 90 │   sha(await readFile(here + "source126-before.json")),
+       │                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    91 │   baseline.source126,
+    92 │   "Copied main map changed",
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+     88  88 │     );
+     89  89 │   assert.equal(
+     90     │ - ··sha(await·readFile(here·+·"source126-before.json")),
+         90 │ + ··sha(await·readFile(`${here}source126-before.json`)),
+     91  91 │     baseline.source126,
+     92  92 │     "Copied main map changed",
+  
+
+tests/data-table/details-accessory/static-check.mjs:98:17 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+     96 │ for (const entry of await readdir(here, { withFileTypes: true }))
+     97 │   if (entry.isFile() && /\.(?:ts|tsx|mjs)$/.test(entry.name))
+   > 98 │     inputs.push("tests/data-table/details-accessory/" + entry.name);
+        │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     99 │ for (const path of inputs) {
+    100 │   const text = await readFile(root + path, "utf8"),
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+     96  96 │   for (const entry of await readdir(here, { withFileTypes: true }))
+     97  97 │     if (entry.isFile() && /\.(?:ts|tsx|mjs)$/.test(entry.name))
+     98     │ - ····inputs.push("tests/data-table/details-accessory/"·+·entry.name);
+         98 │ + ····inputs.push(`tests/data-table/details-accessory/${entry.name}`);
+     99  99 │   for (const path of inputs) {
+    100 100 │     const text = await readFile(root + path, "utf8"),
+  
+
+tests/data-table/details-accessory/static-check.mjs:139:13 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    137 │   ],
+    138 │ };
+  > 139 │ await mkdir(here + ".artifacts", { recursive: true });
+        │             ^^^^^^^^^^^^^^^^^^^
+    140 │ await writeFile(
+    141 │   here + ".artifacts/static.json",
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    137 137 │     ],
+    138 138 │   };
+    139     │ - await·mkdir(here·+·".artifacts",·{·recursive:·true·});
+        139 │ + await·mkdir(`${here}.artifacts`,·{·recursive:·true·});
+    140 140 │   await writeFile(
+    141 141 │     here + ".artifacts/static.json",
+  
+
+tests/data-table/details-accessory/static-check.mjs:141:3 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    139 │ await mkdir(here + ".artifacts", { recursive: true });
+    140 │ await writeFile(
+  > 141 │   here + ".artifacts/static.json",
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    142 │   JSON.stringify(report, null, 2) + "\n",
+    143 │ );
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    139 139 │   await mkdir(here + ".artifacts", { recursive: true });
+    140 140 │   await writeFile(
+    141     │ - ··here·+·".artifacts/static.json",
+        141 │ + ··`${here}.artifacts/static.json`,
+    142 142 │     JSON.stringify(report, null, 2) + "\n",
+    143 143 │   );
+  
+
+tests/data-table/details-accessory/static-check.mjs:142:3 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    140 │ await writeFile(
+    141 │   here + ".artifacts/static.json",
+  > 142 │   JSON.stringify(report, null, 2) + "\n",
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    143 │ );
+    144 │ process.stdout.write(JSON.stringify(report, null, 2) + "\n");
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    140 140 │   await writeFile(
+    141 141 │     here + ".artifacts/static.json",
+    142     │ - ··JSON.stringify(report,·null,·2)·+·"\n",
+        142 │ + ··`${JSON.stringify(report,·null,·2)}\n`,
+    143 143 │   );
+    144 144 │   process.stdout.write(JSON.stringify(report, null, 2) + "\n");
+  
+
+tests/data-table/details-accessory/static-check.mjs:144:22 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    142 │   JSON.stringify(report, null, 2) + "\n",
+    143 │ );
+  > 144 │ process.stdout.write(JSON.stringify(report, null, 2) + "\n");
+        │                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    145 │ 
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    142 142 │     JSON.stringify(report, null, 2) + "\n",
+    143 143 │   );
+    144     │ - process.stdout.write(JSON.stringify(report,·null,·2)·+·"\n");
+        144 │ + process.stdout.write(`${JSON.stringify(report,·null,·2)}\n`);
+    145 145 │   
+  
+
+packages/heroui/src/data-table/details-binding.ts:285:9 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━
+
+  ! Change to an optional chain.
+  
+    283 │         source = current.ports.source;
+    284 │       if (
+  > 285 │         !source ||
+        │         ^^^^^^^^^^
+  > 286 │         source.status !== "ready" ||
+        │         ^^^^^^^^^^^^^^^^^^^^^^^^^
+    287 │         !sameDetailsAuthority(source.authority, current.authority)
+    288 │       )
+  
+  i An optional chain is shorter, and it avoids repeating the same expression in each check.
+  
+  i Unsafe fix: Change to an optional chain.
+  
+     283  283 │           source = current.ports.source;
+     284  284 │         if (
+     285      │ - ········!source·||
+     286      │ - ········source.status·!==·"ready"·||
+          285 │ + ········source?.status·!==·"ready"·||
+     287  286 │           !sameDetailsAuthority(source.authority, current.authority)
+     288  287 │         )
+  
+
+Skipped 9 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 25 files in 61ms. Fixed 2 files.
+Found 1 warning.
+Found 8 infos.

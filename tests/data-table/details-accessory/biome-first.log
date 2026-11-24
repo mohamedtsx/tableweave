@@ -1,0 +1,441 @@
+packages/heroui/src/data-table/details-binding.ts:171:18 lint/complexity/noCommaOperator ━━━━━━━━━━━
+
+  ! The comma operator is disallowed.
+  
+    169 │         }
+    170 │       },
+  > 171 │     },toId,reason,options);
+        │                  ^
+    172 │   }
+    173 │   async retry(actor:DetailsCommitActor<S,T>):Promise<"submitted"|"stale"|"failed"|"unavailable">{
+  
+  i Its use is often confusing and obscures side effects.
+  
+
+packages/heroui/src/details/committed-details.ts:162:40 lint/suspicious/noConfusingVoidType  FIXABLE  ━━━━━━━━━━
+
+  ! void is confusing inside a union type.
+  
+    160 │       true,
+    161 │     ) ?? denyDetails();
+  > 162 │   const retry = fn<[DetailsAuthority], void | Promise<unknown>>(
+        │                                        ^^^^
+    163 │     originalPort,
+    164 │     "retry",
+  
+  i void is meant for the return type of a function. In other positions it is easy to mix up with undefined, which makes the type harder to understand.
+  
+  i Unsafe fix: Use undefined instead.
+  
+    160 160 │         true,
+    161 161 │       ) ?? denyDetails();
+    162     │ - ··const·retry·=·fn<[DetailsAuthority],·void·|·Promise<unknown>>(
+        162 │ + ··const·retry·=·fn<[DetailsAuthority],·undefined·|·Promise<unknown>>(
+    163 163 │       originalPort,
+    164 164 │       "retry",
+  
+
+packages/heroui/src/data-table/details-binding.ts:153:204 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × expected `,` but instead found `)`
+  
+    151 │     };
+    152 │     return runDetailsRequest({origin,baseline,current:live,
+  > 153 │       observer:()=>({valid:true,invoke:(outcome,change)=>{try{const v=this.cell.require(actor);v.ports?.onOutcome?.(outcome,change);this.cell.require(actor);}catch{/* Stale A never calls B observer. */}}),
+        │                                                                                                                                                                                                            ^
+    154 │       mounted:()=>{try{this.cell.require(actor);return true;}catch{return false;}},
+    155 │       pending:()=>{try{return this.state(actor).pending;}catch{return null;}},
+  
+  i Remove )
+  
+
+packages/heroui/src/data-table/details-binding.ts:171:27 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × expected `,` but instead found `;`
+  
+    169 │         }
+    170 │       },
+  > 171 │     },toId,reason,options);
+        │                           ^
+    172 │   }
+    173 │   async retry(actor:DetailsCommitActor<S,T>):Promise<"submitted"|"stale"|"failed"|"unavailable">{
+  
+  i Remove ;
+  
+
+packages/heroui/src/data-table/details-binding.ts:178:178 lint/correctness/noVoidTypeReturn ━━━━━━━━━━
+
+  × The function should not return a value because its return type is void.
+  
+    176 │   requireRow(actor:DetailsCommitActor<S,T>,id:string):void{
+    177 │     const value=this.cell.require(actor),model=requireDetailsDisplay(value),facts=model.authority?.read() ?? denyDetails();
+  > 178 │     if(!facts.displayed || facts.blockedReason!==null || facts.obsolete || facts.resourceObsolete || facts.displayed.queryIdentity!==this.controller.getSnapshot().queryIdentity)return denyDetails();
+        │                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^
+    179 │     const row=facts.rows.find(r=>r.id===id);
+    180 │     if(!row || !model.view?.rows.includes(row) || model.view.state!==this.controller.getSnapshot())return denyDetails();
+  
+  i The function is here:
+  
+    174 │     try{const before=this.current(actor);if(before.ports.source?.status!=="error" || !sameDetailsAuthority(before.ports.source.authority,before.authority) || !before.ports.port.retry)return "unavailable";await before.ports.port.retry(before.authority);this.current(actor);return "submitted";}catch{return "stale";}
+    175 │   }
+  > 176 │   requireRow(actor:DetailsCommitActor<S,T>,id:string):void{
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 177 │     const value=this.cell.require(actor),model=requireDetailsDisplay(value),facts=model.authority?.read() ?? denyDetails();
+         ...
+  > 181 │     requireDetailsDisplay(this.cell.require(actor));
+  > 182 │   }
+        │   ^
+    183 │   retain(actor:DetailsCommitActor<S,T>,key:string,node:ReactNode):void{
+    184 │     try{this.display(actor);const state=this.state(actor);if(state.key===key)state.output={key,node};}catch{/* Abandoned/stale render never retains output. */}
+  
+  i 'void' signals the absence of value. The returned value is likely to be ignored by the caller.
+  
+
+packages/heroui/src/data-table/details-binding.ts:180:100 lint/correctness/noVoidTypeReturn ━━━━━━━━━━
+
+  × The function should not return a value because its return type is void.
+  
+    178 │     if(!facts.displayed || facts.blockedReason!==null || facts.obsolete || facts.resourceObsolete || facts.displayed.queryIdentity!==this.controller.getSnapshot().queryIdentity)return denyDetails();
+    179 │     const row=facts.rows.find(r=>r.id===id);
+  > 180 │     if(!row || !model.view?.rows.includes(row) || model.view.state!==this.controller.getSnapshot())return denyDetails();
+        │                                                                                                    ^^^^^^^^^^^^^^^^^^^^^
+    181 │     requireDetailsDisplay(this.cell.require(actor));
+    182 │   }
+  
+  i The function is here:
+  
+    174 │     try{const before=this.current(actor);if(before.ports.source?.status!=="error" || !sameDetailsAuthority(before.ports.source.authority,before.authority) || !before.ports.port.retry)return "unavailable";await before.ports.port.retry(before.authority);this.current(actor);return "submitted";}catch{return "stale";}
+    175 │   }
+  > 176 │   requireRow(actor:DetailsCommitActor<S,T>,id:string):void{
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 177 │     const value=this.cell.require(actor),model=requireDetailsDisplay(value),facts=model.authority?.read() ?? denyDetails();
+         ...
+  > 181 │     requireDetailsDisplay(this.cell.require(actor));
+  > 182 │   }
+        │   ^
+    183 │   retain(actor:DetailsCommitActor<S,T>,key:string,node:ReactNode):void{
+    184 │     try{this.display(actor);const state=this.state(actor);if(state.key===key)state.output={key,node};}catch{/* Abandoned/stale render never retains output. */}
+  
+  i 'void' signals the absence of value. The returned value is likely to be ignored by the caller.
+  
+
+packages/heroui/src/data-table/details-binding.ts:228:84 lint/correctness/noVoidTypeReturn ━━━━━━━━━━
+
+  × The function should not return a value because its return type is void.
+  
+    226 │     requireDetailsDisplay(this.cell.require(actor));
+    227 │     const admission=new CommitMetadata(()=>{requireDetailsDisplay(this.cell.require(actor));return undefined;},denyDetails);
+  > 228 │     const rowId=admission.data(props,"rowId");if(typeof rowId!=="string" || !rowId)return denyDetails();this.requireRow(actor,rowId);
+        │                                                                                    ^^^^^^^^^^^^^^^^^^^^^
+    229 │     const check=()=>{this.requireRow(actor,rowId);};
+    230 │     const metadata=new CommitMetadata(check,denyDetails);
+  
+  i The function is here:
+  
+    223 │   }
+    224 │   focusPending():boolean{try{return this.state(this.actor()).focusPending;}catch{return false;}}
+  > 225 │   trigger(actor:DetailsCommitActor<S,T>,token:object,props:unknown):void{
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 226 │     requireDetailsDisplay(this.cell.require(actor));
+         ...
+  > 235 │     entries.set(token,{actor,rowId,label,children:children as ReactNode,disabled:disabled===true,className,node:old?.node ?? null});
+  > 236 │   }
+        │   ^
+    237 │   readTrigger(actor:DetailsCommitActor<S,T>,token:object):Trigger<S,T>|null{try{this.cell.require(actor);const v=this.state(actor).triggers.get(token);if(v?.actor!==actor)return null;this.requireRow(actor,v.rowId);return v;}catch{return null;}}
+    238 │   triggerNode(actor:DetailsCommitActor<S,T>,token:object,node:HTMLElement|null):void{try{const value=this.state(actor).triggers.get(token);if(value?.actor!==actor)return;if(node)this.requireRow(actor,value.rowId);value.node=node;}catch{/* Purged ticket has no DOM backup. */}}
+  
+  i 'void' signals the absence of value. The returned value is likely to be ignored by the caller.
+  
+
+packages/heroui/src/data-table/details-binding.ts:232:164 lint/correctness/noVoidTypeReturn ━━━━━━━━━━
+
+  × The function should not return a value because its return type is void.
+  
+    230 │     const metadata=new CommitMetadata(check,denyDetails);
+    231 │     const label=metadata.data(props,"label"),children=metadata.data(props,"children",true),disabled=metadata.data(props,"isDisabled",true),className=metadata.data(props,"className",true);
+  > 232 │     if(typeof label!=="string" || !label.trim() || (disabled!==undefined && typeof disabled!=="boolean") || (className!==undefined && typeof className!=="string"))return denyDetails();
+        │                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^
+    233 │     this.requireRow(actor,rowId);
+    234 │     const entries=this.state(actor).triggers,old=entries.get(token);
+  
+  i The function is here:
+  
+    223 │   }
+    224 │   focusPending():boolean{try{return this.state(this.actor()).focusPending;}catch{return false;}}
+  > 225 │   trigger(actor:DetailsCommitActor<S,T>,token:object,props:unknown):void{
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 226 │     requireDetailsDisplay(this.cell.require(actor));
+         ...
+  > 235 │     entries.set(token,{actor,rowId,label,children:children as ReactNode,disabled:disabled===true,className,node:old?.node ?? null});
+  > 236 │   }
+        │   ^
+    237 │   readTrigger(actor:DetailsCommitActor<S,T>,token:object):Trigger<S,T>|null{try{this.cell.require(actor);const v=this.state(actor).triggers.get(token);if(v?.actor!==actor)return null;this.requireRow(actor,v.rowId);return v;}catch{return null;}}
+    238 │   triggerNode(actor:DetailsCommitActor<S,T>,token:object,node:HTMLElement|null):void{try{const value=this.state(actor).triggers.get(token);if(value?.actor!==actor)return;if(node)this.requireRow(actor,value.rowId);value.node=node;}catch{/* Purged ticket has no DOM backup. */}}
+  
+  i 'void' signals the absence of value. The returned value is likely to be ignored by the caller.
+  
+
+packages/heroui/src/data-table/details-binding.ts:252:79 lint/correctness/noVoidTypeReturn ━━━━━━━━━━
+
+  × The function should not return a value because its return type is void.
+  
+    250 │     shellProps.set(props,{accessory:this,actor});return props;
+    251 │   }
+  > 252 │   claimShell(token:object):void{if(this.shellMount && this.shellMount!==token)return denyDetails();this.shellMount=token;const actor=this.cell.getSnapshot().actor;if(actor)this.publish(actor);}
+        │                                                                               ^^^^^^^^^^^^^^^^^^^^^
+    253 │   releaseShell(token:object):void{if(this.shellMount!==token)return;this.shellMount=null;const actor=this.cell.getSnapshot().actor;if(actor){try{const v=this.state(actor);v.output=null;v.restore=null;v.waitFocus=null;v.contentRoot=null;v.close=null;v.pending=null;v.busy=false;v.triggers.clear();}catch{/* Already purged. */}}}
+    254 │   contentNode(actor:DetailsCommitActor<S,T>,node:HTMLElement|null):void{try{this.state(actor).contentRoot=node;}catch{/* Purged callback stores no backup. */}}
+  
+  i The function is here:
+  
+    250 │     shellProps.set(props,{accessory:this,actor});return props;
+    251 │   }
+  > 252 │   claimShell(token:object):void{if(this.shellMount && this.shellMount!==token)return denyDetails();this.shellMount=token;const actor=this.cell.getSnapshot().actor;if(actor)this.publish(actor);}
+        │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    253 │   releaseShell(token:object):void{if(this.shellMount!==token)return;this.shellMount=null;const actor=this.cell.getSnapshot().actor;if(actor){try{const v=this.state(actor);v.output=null;v.restore=null;v.waitFocus=null;v.contentRoot=null;v.close=null;v.pending=null;v.busy=false;v.triggers.clear();}catch{/* Already purged. */}}}
+    254 │   contentNode(actor:DetailsCommitActor<S,T>,node:HTMLElement|null):void{try{this.state(actor).contentRoot=node;}catch{/* Purged callback stores no backup. */}}
+  
+  i 'void' signals the absence of value. The returned value is likely to be ignored by the caller.
+  
+
+packages/heroui/src/data-table/details-binding.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Code formatting aborted due to parsing errors. To format code with errors, enable the 'formatter.formatWithErrors' option.
+  
+
+packages/heroui/src/data-table/details-provider.tsx:123:7 lint/a11y/useAriaPropsSupportedByRole ━━━━━━━━━━
+
+  × The ARIA attribute 'aria-label' is not supported by this element.
+  
+    121 │   return (
+    122 │     <>
+  > 123 │       <span ref={neutral} tabIndex={-1} aria-label="Record details region" />
+        │       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    124 │       {actor ? (
+    125 │         <BoundDetailsShell
+  
+  i Assistive technologies may ignore an ARIA attribute that the role of the element does not support, or report incorrect information to the user.
+  
+  i Remove the attribute, or use a role that supports it.
+  
+
+packages/heroui/src/data-table/details-provider.tsx:101:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: actor.
+  
+     99 │     if (actor && !session.isOpen) binding.scheduleFocus(actor, neutral.current);
+    100 │   }, [binding, actor, session.isOpen]);
+  > 101 │   useEffect(() => {
+        │   ^^^^^^^^^
+    102 │     if (wasOpen.current && !session.isOpen) needsNeutral.current = true;
+    103 │     wasOpen.current = session.isOpen;
+  
+  i This dependency can be removed from the list.
+  
+    118 │       node.focus({ preventScroll: true });
+    119 │     needsNeutral.current = false;
+  > 120 │   }, [binding, session, actor]);
+        │                         ^^^^^
+    121 │   return (
+    122 │     <>
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+  
+  i Unsafe fix: Remove the extra dependencies from the list.
+  
+    120 │ ··},·[binding,·session,·actor]);
+        │                       -------   
+
+packages/heroui/src/data-table/details-trigger.tsx:35:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: snapshot.modelVersion.
+  
+    33 │   const actor = snapshot.actor;
+    34 │   useLayoutEffect(() => () => binding.removeTrigger(token), [binding, token]);
+  > 35 │   useLayoutEffect(() => {
+       │   ^^^^^^^^^^^^^^^
+    36 │     if (!actor) return;
+    37 │     try {
+  
+  i This dependency can be removed from the list.
+  
+    41 │       /* No private labels before the row's real commit. */
+    42 │     }
+  > 43 │   }, [binding, actor, snapshot.modelVersion, token, props]);
+       │                       ^^^^^^^^^^^^^^^^^^^^^
+    44 │   void revision;
+    45 │   const entry = actor ? binding.readTrigger(actor, token) : null;
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+  
+  i Unsafe fix: Remove the extra dependencies from the list.
+  
+    43 │ ··},·[binding,·actor,·snapshot.modelVersion,·token,·props]);
+       │                       -----------------------               
+
+packages/heroui/src/details/details-shell.tsx:49:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook does not specify its dependency on bound.
+  
+    47 │   const heading = useRef<HTMLHeadingElement>(null);
+    48 │   const initialFocus = useRef(props.focusInitial);
+  > 49 │   useLayoutEffect(() => {
+       │   ^^^^^^^^^^^^^^^
+    50 │     if (bound) {
+    51 │       try {
+  
+  i This dependency is being used here, but is not specified in the hook dependency list.
+  
+    48 │   const initialFocus = useRef(props.focusInitial);
+    49 │   useLayoutEffect(() => {
+  > 50 │     if (bound) {
+       │         ^^^^^
+    51 │       try {
+    52 │         requireDetailsDisplay(bound.binding.cell.require(bound.actor));
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Failing to specify dependencies can result in Effects not updating correctly when state changes.
+    These "stale closures" are a common source of surprising bugs.
+  
+  i Either include it or remove the dependency array.
+  
+  i Unsafe fix: Add the missing dependency bound to the list.
+  
+    59 │ ··},·[bound]);
+       │       +++++   
+
+packages/heroui/src/details/details-shell.tsx:49:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook does not specify its dependency on bound.actor.
+  
+    47 │   const heading = useRef<HTMLHeadingElement>(null);
+    48 │   const initialFocus = useRef(props.focusInitial);
+  > 49 │   useLayoutEffect(() => {
+       │   ^^^^^^^^^^^^^^^
+    50 │     if (bound) {
+    51 │       try {
+  
+  i This dependency is being used here, but is not specified in the hook dependency list.
+  
+    50 │     if (bound) {
+    51 │       try {
+  > 52 │         requireDetailsDisplay(bound.binding.cell.require(bound.actor));
+       │                                                          ^^^^^^^^^^^
+    53 │       } catch {
+    54 │         return;
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Failing to specify dependencies can result in Effects not updating correctly when state changes.
+    These "stale closures" are a common source of surprising bugs.
+  
+  i Either include it or remove the dependency array.
+  
+  i Unsafe fix: Add the missing dependency bound.actor to the list.
+  
+    59 │ ··},·[bound.actor]);
+       │       +++++++++++   
+
+packages/heroui/src/details/details-shell.tsx:49:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook does not specify its dependency on bound.binding.cell.require.
+  
+    47 │   const heading = useRef<HTMLHeadingElement>(null);
+    48 │   const initialFocus = useRef(props.focusInitial);
+  > 49 │   useLayoutEffect(() => {
+       │   ^^^^^^^^^^^^^^^
+    50 │     if (bound) {
+    51 │       try {
+  
+  i This dependency is being used here, but is not specified in the hook dependency list.
+  
+    50 │     if (bound) {
+    51 │       try {
+  > 52 │         requireDetailsDisplay(bound.binding.cell.require(bound.actor));
+       │                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    53 │       } catch {
+    54 │         return;
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Failing to specify dependencies can result in Effects not updating correctly when state changes.
+    These "stale closures" are a common source of surprising bugs.
+  
+  i Either include it or remove the dependency array.
+  
+  i Unsafe fix: Add the missing dependency bound.binding.cell.require to the list.
+  
+    59 │ ··},·[bound.binding.cell.require]);
+       │       ++++++++++++++++++++++++++   
+
+packages/heroui/src/details/details-shell.tsx:245:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook does not specify its dependency on context.
+  
+    243 │     }
+    244 │   });
+  > 245 │   useLayoutEffect(
+        │   ^^^^^^^^^^^^^^^
+    246 │     () => () => {
+    247 │       if (context) binding.captureWaitingFocus(actor, key);
+  
+  i This dependency is being used here, but is not specified in the hook dependency list.
+  
+    245 │   useLayoutEffect(
+    246 │     () => () => {
+  > 247 │       if (context) binding.captureWaitingFocus(actor, key);
+        │           ^^^^^^^
+    248 │     },
+    249 │     [binding, actor, key, context !== null],
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Failing to specify dependencies can result in Effects not updating correctly when state changes.
+    These "stale closures" are a common source of surprising bugs.
+  
+  i Unsafe fix: Add the missing dependency context to the list.
+  
+    249 │ ····[binding,·actor,·key,·context·!==·null,·context],
+        │                                           +++++++++  
+
+packages/heroui/src/details/details-shell.tsx:245:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: context !== null.
+  
+    243 │     }
+    244 │   });
+  > 245 │   useLayoutEffect(
+        │   ^^^^^^^^^^^^^^^
+    246 │     () => () => {
+    247 │       if (context) binding.captureWaitingFocus(actor, key);
+  
+  i This dependency can be removed from the list.
+  
+    247 │       if (context) binding.captureWaitingFocus(actor, key);
+    248 │     },
+  > 249 │     [binding, actor, key, context !== null],
+        │                           ^^^^^^^^^^^^^^^^
+    250 │   );
+    251 │   return (
+  
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+  
+  i Unsafe fix: Remove the extra dependencies from the list.
+  
+    249 │ ····[binding,·actor,·key,·context·!==·null],
+        │                         ------------------  
+
+Skipped 14 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 25 files in 66ms. Fixed 20 files.
+Found 16 errors.
+Found 2 warnings.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

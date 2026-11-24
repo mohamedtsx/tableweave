@@ -1,0 +1,5 @@
+{
+  "inputs": 132,
+  "sha256": "535b409bafa2215582516b77a12de8aaa0f419e89d07ea8915c41674285274a8",
+  "scope": "TS6 positive/noEmit source inputs only; no compile executed by this script"
+}

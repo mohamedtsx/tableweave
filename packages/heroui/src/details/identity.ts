@@ -7,7 +7,12 @@ import type {
 } from "./types.js";
 
 /** Never invoke metadata accessors. Proxy descriptor/prototype failures are opaque. */
-export function ownData(input: unknown, key: string): unknown {
+export function ownData(
+  input: unknown,
+  key: string,
+  check?: () => void,
+): unknown {
+  check?.();
   try {
     if (input === null || typeof input !== "object") return undefined;
     const descriptor = Object.getOwnPropertyDescriptor(input, key);
@@ -16,16 +21,21 @@ export function ownData(input: unknown, key: string): unknown {
       : undefined;
   } catch {
     return undefined;
+  } finally {
+    check?.();
   }
 }
 
-function plain(input: unknown): boolean {
+function plain(input: unknown, check?: () => void): boolean {
+  check?.();
   try {
     if (input === null || typeof input !== "object") return false;
     const prototype = Object.getPrototypeOf(input);
     return prototype === Object.prototype || prototype === null;
   } catch {
     return false;
+  } finally {
+    check?.();
   }
 }
 function nonempty(value: unknown): value is string {
@@ -36,13 +46,16 @@ function counter(value: unknown): value is number {
 }
 
 /** Validate only captured descriptor values, never a later read of the input. */
-export function captureContext(input: unknown): DetailsContext | null {
-  if (!plain(input)) return null;
-  const definitionKey = ownData(input, "definitionKey");
-  const datasetKey = ownData(input, "datasetKey");
-  const scopeKey = ownData(input, "scopeKey");
-  const access = ownData(input, "access");
-  const epoch = ownData(input, "epoch");
+export function captureContext(
+  input: unknown,
+  check?: () => void,
+): DetailsContext | null {
+  if (!plain(input, check)) return null;
+  const definitionKey = ownData(input, "definitionKey", check);
+  const datasetKey = ownData(input, "datasetKey", check);
+  const scopeKey = ownData(input, "scopeKey", check);
+  const access = ownData(input, "access", check);
+  const epoch = ownData(input, "epoch", check);
   return nonempty(definitionKey) &&
     nonempty(datasetKey) &&
     nonempty(scopeKey) &&
@@ -52,13 +65,16 @@ export function captureContext(input: unknown): DetailsContext | null {
     : null;
 }
 
-export function captureAuthority(input: unknown): DetailsAuthority | null {
-  if (!plain(input)) return null;
-  const context = captureContext(ownData(input, "context"));
+export function captureAuthority(
+  input: unknown,
+  check?: () => void,
+): DetailsAuthority | null {
+  if (!plain(input, check)) return null;
+  const context = captureContext(ownData(input, "context", check), check);
   if (!context) return null;
-  const rowId = ownData(input, "rowId");
-  const session = ownData(input, "session");
-  const generation = ownData(input, "generation");
+  const rowId = ownData(input, "rowId", check);
+  const session = ownData(input, "session", check);
+  const generation = ownData(input, "generation", check);
   return (rowId === null || nonempty(rowId)) &&
     counter(session) &&
     counter(generation)
@@ -107,23 +123,39 @@ export function captureCallback<A extends readonly unknown[], R>(
   receiver: unknown,
   key: string,
   required = false,
+  check?: () => void,
 ): CapturedCallback<A, R> {
   const absent = { valid: !required, invoke: null };
   const invalid = { valid: false, invoke: null };
+  check?.();
   try {
     if (receiver === null || typeof receiver !== "object") return invalid;
     const descriptor = Object.getOwnPropertyDescriptor(receiver, key);
-    if (!descriptor) return key in receiver ? invalid : absent;
+    check?.();
+    if (!descriptor) {
+      const inherited = key in receiver;
+      check?.();
+      return inherited ? invalid : absent;
+    }
     if (!Object.hasOwn(descriptor, "value")) return invalid;
     const value: unknown = descriptor.value;
     if (value === undefined) return absent;
     if (typeof value !== "function") return invalid;
     return Object.freeze({
       valid: true,
-      invoke: (...args: A) => Reflect.apply(value, receiver, args) as R,
+      invoke: (...args: A) => {
+        check?.();
+        try {
+          return Reflect.apply(value, receiver, args) as R;
+        } finally {
+          check?.();
+        }
+      },
     });
   } catch {
     return invalid;
+  } finally {
+    check?.();
   }
 }
 export function validAuthority(input: unknown): boolean {
@@ -144,28 +176,32 @@ interface CapturedFrame {
 function captureFrame(
   input: unknown,
   authority: DetailsAuthority,
+  check?: () => void,
 ): CapturedFrame | null {
-  if (!plain(input)) return null;
-  const origin = captureContext(ownData(input, "origin"));
+  if (!plain(input, check)) return null;
+  const origin = captureContext(ownData(input, "origin", check), check);
   if (!origin?.access || !sameContext(origin, authority.context)) return null;
-  const owner = ownData(input, "owner");
-  const view = ownData(input, "view");
+  const owner = ownData(input, "owner", check);
+  const view = ownData(input, "view", check);
   return Object.freeze({
     origin,
     owner,
-    viewOwner: ownData(view, "controller"),
-    state: ownData(view, "state"),
-    rows: ownData(view, "rows"),
+    viewOwner: ownData(view, "controller", check),
+    state: ownData(view, "state", check),
+    rows: ownData(view, "rows", check),
   });
 }
-export function captureCurrent(input: unknown): CapturedCurrent | null {
-  if (!plain(input)) return null;
-  const authority = captureAuthority(ownData(input, "authority"));
+export function captureCurrent(
+  input: unknown,
+  check?: () => void,
+): CapturedCurrent | null {
+  if (!plain(input, check)) return null;
+  const authority = captureAuthority(ownData(input, "authority", check), check);
   // Denial precedes even inspection of the optional frame envelope.
   if (!authority?.context.access) return null;
   return Object.freeze({
     authority,
-    frame: captureFrame(ownData(input, "nativeFrame"), authority),
+    frame: captureFrame(ownData(input, "nativeFrame", check), authority, check),
   });
 }
 

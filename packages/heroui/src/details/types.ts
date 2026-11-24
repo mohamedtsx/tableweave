@@ -1,8 +1,16 @@
 import type {
+  ControllerDefinition,
+  CriteriaFrameOwner,
+  CriteriaOrigin,
+  CriteriaPublication,
+  CriteriaSourceAuthority,
+  CriteriaSourceMetadata,
+  DataTableModel,
   NativeRow,
   NativeTableView,
   StateProposal,
   TableController,
+  TableDefinition,
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ReactNode } from "react";
@@ -202,4 +210,117 @@ export interface DetailsTriggerProps<S extends QuerySchema, T extends object> {
   readonly children?: ReactNode;
   readonly isDisabled?: boolean;
   readonly className?: string;
+}
+
+/** Source-private bound composition contracts; not root exports or backend grants. */
+export type DetailsAccessoryOptions<
+  S extends QuerySchema,
+  T extends object,
+> = Omit<
+  DetailsOptions<S, T>,
+  "controller" | "visibleFieldIds" | "hiddenFieldIds"
+> &
+  Omit<DetailsShellProps<S, T>, "session" | "direction">;
+declare const detailsActor: unique symbol;
+declare const detailsLease: unique symbol;
+declare const detailsLocal: unique symbol;
+declare const detailsWork: unique symbol;
+declare const detailsAccessory: unique symbol;
+export interface DetailsCommitActor<S extends QuerySchema, T extends object> {
+  readonly [detailsActor]: (schema: S, record: T) => readonly [S, T];
+}
+export interface DetailsCommitLease<S extends QuerySchema, T extends object> {
+  readonly [detailsLease]: (schema: S, record: T) => readonly [S, T];
+}
+export interface DetailsAccessory<S extends QuerySchema, T extends object> {
+  readonly [detailsAccessory]: (schema: S, record: T) => readonly [S, T];
+}
+export interface DetailsAccessoryOwner<
+  S extends QuerySchema,
+  T extends object,
+> {
+  readonly definition: TableDefinition<S, T>;
+  readonly controller: TableController<S>;
+  readonly controllerDefinition: ControllerDefinition<S>;
+  readonly frameOwner: CriteriaFrameOwner<S>;
+  readonly publication: CriteriaPublication<S>;
+  readonly source: CriteriaSourceAuthority<S>;
+  readonly mode: CriteriaSourceMetadata<S>["mode"];
+  readonly mount: object;
+}
+export interface DetailsCommitLocal<
+  S extends QuerySchema,
+  T extends object,
+  V,
+> {
+  readonly [detailsLocal]: (
+    schema: S,
+    record: T,
+    value: V,
+  ) => readonly [S, T, V];
+  readonly read: (
+    actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>,
+  ) => V | null;
+  readonly write: (
+    actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>,
+    value: V,
+  ) => void;
+  readonly clear: (actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>) => void;
+}
+export interface DetailsCommitWork<S extends QuerySchema, T extends object> {
+  readonly [detailsWork]: (schema: S, record: T) => readonly [S, T];
+  readonly deadline: number | null;
+}
+export interface DetailsCommitted<S extends QuerySchema, T extends object> {
+  readonly actor: DetailsCommitActor<S, T>;
+  readonly origin: CriteriaOrigin<S>;
+  readonly model: DataTableModel<S, T>;
+  readonly owner: CriteriaFrameOwner<S>;
+  readonly source: CriteriaSourceAuthority<S>;
+  readonly metadata: CriteriaSourceMetadata<S>;
+  readonly ports: DetailsAccessoryOptions<S, T> | null;
+}
+export interface DetailsCommitSnapshot<
+  S extends QuerySchema,
+  T extends object,
+> {
+  readonly actor: DetailsCommitActor<S, T> | null;
+  readonly version: object;
+  readonly modelVersion: object;
+}
+export interface DetailsCommitCell<S extends QuerySchema, T extends object> {
+  readonly getSnapshot: () => DetailsCommitSnapshot<S, T>;
+  readonly subscribe: (listener: () => void) => () => void;
+  readonly connect: () => DetailsCommitLease<S, T>;
+  readonly disconnect: (
+    lease: DetailsCommitLease<NoInfer<S>, NoInfer<T>>,
+  ) => void;
+  readonly commit: (
+    lease: DetailsCommitLease<NoInfer<S>, NoInfer<T>>,
+    model: DataTableModel<NoInfer<S>, NoInfer<T>>,
+    input: DetailsAccessoryOptions<NoInfer<S>, NoInfer<T>>,
+  ) => DetailsCommitActor<S, T>;
+  readonly updateModel: (
+    lease: DetailsCommitLease<NoInfer<S>, NoInfer<T>>,
+    model: DataTableModel<NoInfer<S>, NoInfer<T>>,
+  ) => void;
+  readonly require: (
+    actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>,
+  ) => DetailsCommitted<S, T>;
+  createLocal<V>(
+    role: "draft" | "session" | "receipt",
+  ): DetailsCommitLocal<S, T, V>;
+  readonly timeout: (
+    actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>,
+    delay: number,
+    run: (value: DetailsCommitted<S, T>) => undefined,
+  ) => DetailsCommitWork<S, T>;
+  readonly animationFrame: (
+    actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>,
+    run: (value: DetailsCommitted<S, T>) => undefined,
+  ) => DetailsCommitWork<S, T>;
+  readonly cancelWork: (
+    actor: DetailsCommitActor<NoInfer<S>, NoInfer<T>>,
+    handle: DetailsCommitWork<NoInfer<S>, NoInfer<T>>,
+  ) => void;
 }
