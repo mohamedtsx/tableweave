@@ -77,6 +77,11 @@ The [isolated facade definition lease](wp-09-facade-definition-plan.md) implemen
 new typed definition/controller composition against unchanged native factory APIs.
 The [UI-port capture lease](wp-09-criteria-ui-ports-plan.md) authors internal captured
 callback schemas independently; committed actor/tool adoption still waits for F1.
+The [committed-cell](wp-09-criteria-commit-plan.md), [React/source readiness](wp-09-criteria-react-plan.md),
+[source export](wp-09-criteria-source-exports-plan.md) and [Figma shell](wp-09-figma-shell-plan.md)
+leases keep new integration/design ownership explicit. Their full checks remain deferred.
+The [Search/Tabs adoption lease](wp-09-search-tabs-adoption-plan.md) applies the
+actual committed cell to two raw tools while preserving omitted legacy behavior.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

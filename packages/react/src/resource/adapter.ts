@@ -22,6 +22,17 @@ function invalid(): never {
   throw new Error("Invalid Tableweave resource input.");
 }
 
+const adapterIdentities = new WeakSet<object>();
+
+/** Source-private factory identity only; context, access and liveness are separate. */
+export function hasResourceAdapterIdentity(value: unknown): boolean {
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    adapterIdentities.has(value)
+  );
+}
+
 // Capture only consumed own data; unrelated envelope fields (including retry's
 // generation) are not enumerated. The cache also covers aliased payload objects.
 class Capture {
@@ -468,5 +479,7 @@ export function createResourceAdapter<T, Q extends WireQuery = WireQuery>(
       });
     },
   };
-  return Object.freeze(adapter);
+  Object.freeze(adapter);
+  adapterIdentities.add(adapter);
+  return adapter;
 }

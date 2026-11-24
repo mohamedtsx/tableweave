@@ -2,6 +2,13 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+React/source readiness now hands off PROVISIONALLY at716782d90f43c4656b0b55832392cc7e516621576fe9ddae8fb385a4014f7e0d.
+Main inspects source capability/hook contracts, matches20 handoff hashes,115 protected
+source hashes and the main-owned adapter delta, and passes one whole-React TS6 noEmit
+compile. Post-bridge source118 is e51f7535452f9035ab78e91b5f6f6bc05d16122aa1a9f890c04353e4f463af2c.
+Runtime/React/SSR/negative/import/independent verification remains deferred. Main
+commits before intaking preserved F3b2b9933e and exporting only intended bridge APIs.
+
 - Active packet: WP-09, branch feat/wp-09-details. U1/U2 are scoped verified
   history; U3 and proof fixtures are committed **provisional** at5621db0,
   2efbc53 and1a1086d. No full WP-09 approval or PR delivery yet.
@@ -13,9 +20,8 @@
   has handed off provisionally. Main inspected its API/diff and completed one
   lightweight package TS6 compile; exhaustive checks remain deferred.
 - U4 is353653a; harness/pager/locale intakes aredbdc7a2/8cdbae3/55a21ff.
-  Both package TS6 light compiles pass. **F1 genuine criteria-frame work is now
-  active** under its five-existing/two-new-source lease at canonical109-source
-  map048c088c…; no other worker may edit those paths.
+  F1/helper is2b54fb7; F2/P1/F3a are9954714/16fd97c/d200e83. Actual additive
+  source exports aref5d5325, not a new installed/packed generation.
 - F1 stopped on TanStack's nested constructed-sort callback closure. Main confirms
   the installed source trace; user selects **Explicit helper** in the ask modal.
   Its lease now additionally owns new tanstack/sort.ts for genuine helper/built-in
@@ -24,14 +30,27 @@
   Main reads the actual APIs/source, verifies21 input/104 protected source hashes
   and performs one successful whole-React TS6 noEmit compile. No runtime correction
   or independent approval is claimed. Main commits before disjoint intake.
-- Isolated UI-port capture is preserved as5d6a4c3; option reset and typed
-  facade definition handoffs are preserved as1004252/1ebfb62, awaiting intake after
-  F1. Pager/EN/AR/harness are intaken provisionally. Written plans own exact paths.
+- Active shared writer: criteria-frame.ts/new criteria-frame-react.ts only, for
+  commit-only React frames and distinct source-metadata readiness. Isolated F3
+  committed-tool cells own one new styled helper/tests. All work stays provisional.
+  Main separately owns a minimal resource adapter identity lookup needed for
+  requestless idle admission; worker resumes using it without changing that file.
+- Independent design writer owns only the newly authorized Tableweave Figma file;
+  no runtime/API/source ownership. Composed scenes are pending, not design approval.
+  Initial scenes now hand off for review: board4:62 in the new file, linked through
+  docs/design/wp-09-shell-reference.md. Main reads the report; worker's design-only
+  readback is not independent runtime/manual acceptance or full scene coverage.
+  User subsequently approves the visual direction in the ask modal, explicitly
+  bounded to appearance—not runtime/accessibility/WP-09 completion.
+  Main allocates an additive responsive/details follow-up in that same file only:
+  768/320, RTL desktop details/selection, arbitrary customer/inventory forms and
+  two-table/access-loss illustrations. Approved board4:62 stays unchanged; no new
+  runtime/UI API, verification or full-scene acceptance follows.
 - Generation harness is intaken asdbdc7a2 from isolated34fad4f. Current=fc01;
   both historical output identities remain unchanged. New generation registration
   and actual default-root generation checks are still unresolved, not passed.
-- Next integration: receive F1 and isolated bridge/definition handoffs, inspect
-  actual APIs/light compile and allocate committed UI-port/tool adoption. Do not
+- Next integration: receive React/source readiness and committed-cell handoffs,
+  inspect actual APIs/light compile and allocate actual four-tool adoption. Do not
   duplicate running workers or their checks.
 - External runner access and real consumer are deferred by the user. Ask modal
   handles new policy/permission/input blockers; do not invent external evidence.
@@ -86,6 +105,39 @@ The additive root/filter source-export handoff passes one actual React source TS
 noEmit compile. HeroUI's package compile also passes, but still resolves historical
 installed declarations; it is not proof of new cross-package exports. F3's new own
 fixture must resolve the actual source entry explicitly and label that limitation.
+Main activates isolated F3 committed-tool cells atf5d5325: one new styled helper and
+own tests, using actual F1/F2/port source exports. No raw tool or existing source is
+allocated; purgeable cells/readiness must remain inert until genuine committed lease.
+F3b is preserved in isolated2b9933e after main API/source inspection and whitespace
+checking: worker light TS6/Biome/syntax and828 protected inputs/117 sources pass;
+runtime/React/negative/independent checks remain unexecuted. Main holds intake until
+the active headless source handoff and authorizes only isolated Search/Tabs/shared
+host adoption from that exact F3b API. Date/builder/F2/F3 internals stay frozen.
+Before any F4 edits, worker identifies ambiguous envelope copy/proxy wording. Main
+reads actual structural CriteriaToolTarget/F3b commit and clarifies: envelope copies
+carrying exact genuine authority/owner are allowed, counterfeit authority/owner are
+not. No new target factory or F3 source change; own-data/actor/owner pinning remains.
+No files/tests had changed or run at the fence. Search/Tabs resumes under that rule.
+Main allocates the shared headless continuation: existing criteria-frame.ts plus new
+criteria-frame-react.ts/own tests, for true commit-only React frames and distinct
+source-metadata readiness without a native frame. It cannot grant filter-tool access
+or invoke initial Retry by itself. F3's new UI cell lives in a separate worktree;
+all exports/manifests/other runtime paths remain main-owned/frozen respectively.
+React/source readiness stops on a confirmed producer gap: no factory identity exists
+for initial-idle requestless resources. Main allocates only a WeakSet identity lookup
+in resource/adapter.ts, owns that tiny delta/preimage and resumes the original frame
+writer afterward. No source getter is proof; lookup itself grants no permission or
+record access. Original116-source seal stays historical; new protected subset115
+excludes only this intentional main-owned source delta. No runtime proof is claimed.
+Main implements that identity-only delta at source SHA7ce69208472b815420ff1688016375c6633fdb9626a6ef8b055b42d6fa3405d2,
+preserving exact preimage36df1cc7… externally. React writer resumes with115 protected
+sources plus an exact assertion of the main-owned adapter delta. No compilation or
+runtime pass existed at the blocker; final lightweight/result history remains owed.
+User explicitly authorizes a new Figma design named Tableweave. Main creates it at
+USX6vMtBrZICYS9M4V84bB and opens sessionee4af72b-3aba-4d91-b261-5c136b8e84ba. A bounded
+design worker may edit that new file only using synthetic content/actual design
+guidance. Earlier no-Figma authorization is superseded only there; references stay
+read-only, no paid generation/publication/deploy or runtime acceptance follows.
 Localization is preserved in isolatedb286884 after main API/source inspection and
 whitespace checking:11 real message ports/36 built-in labels, five authored unit
 cases/ten type-negative lines, zero runtime cases executed. Worker light TS6 and

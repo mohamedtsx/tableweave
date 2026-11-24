@@ -1630,3 +1630,38 @@ route. Main inspects actual source/API, matches21 input/104 protected source has
 and passes one whole-package TS6 noEmit compile. One-resolver/zero-sort positives,
 receiver/order parity and independent correction verification remain **unexecuted**
 and deferred. n1 is not marked verified or accepted from these lightweight checks.
+
+## WP-09 React/source contract — review session 10 (provisional)
+
+### n1 — Initial-idle resource has no producer identity proof
+
+- **Finding:** a requestless idle adapter has no U4 token binding. Structural own
+  getter/view equality admits a different object returning the same idle view.
+- **Independent check:** main inspects actual adapter construction/return, resource
+  types and binding lookup. No factory identity lookup exists; the descriptor cache
+  is unrelated. This is a confirmed static contract gap, not an executed failure.
+- **Correction scope:** main adds only a private WeakSet admission/identity lookup
+  to adapter.ts, preserving preimage36df1cc7… separately. New source SHA7ce69208…
+  identifies this provisional delta. Identity does not imply access/liveness/binding;
+  no requests, subscriptions, rows, public keys or server snapshot behavior change.
+- **Status:** worker must use the lookup before remote metadata ports, author real
+  identity/permission cases and complete the original bridge. Runtime and independent
+  correction verification stay deferred; neither n1 nor the stage is approved.
+
+Session10 n1 follow-up: the bridge now uses actual producer identity before remote
+metadata ports. Main inspects its API/hook, matches20 handoff/115 protected source
+hashes plus the exact adapter delta, and passes one TS6 package noEmit compile.
+Requestless positive/copy denial, subscription/Strict/no-loop and independent
+correction checks remain unexecuted; n1 is not marked runtime-verified or accepted.
+
+## WP-09 Search/Tabs contract — review session 11 (provisional)
+
+### n1 — Structural target envelope is not the identity-bearing capability
+
+Main confirms from CriteriaToolTarget and commit's exact authority/owner registry
+checks that the envelope itself has no brand/registry. Copying an envelope carrying
+the same real proofs does not forge those proofs. The lease's blanket copy/proxy
+wording is corrected to deny counterfeit authorities/owners, not transparent outer
+containers; own-data capture/reentry checks and committed owner/actor pinning stay.
+No new target producer/protocol or F3 source change is authorized. This is a static
+contract clarification; no runtime test or Search/Tabs approval is claimed.
