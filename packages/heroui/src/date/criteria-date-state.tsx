@@ -19,8 +19,11 @@ import type {
   StandaloneDate,
 } from "@tableweave/react/contracts";
 import { canonicalJson } from "@tableweave/react/contracts";
+import type { BuilderFieldId } from "@tableweave/react/filters";
 import {
   defaultOperatorRegistry,
+  getFieldOperators,
+  relativePresets,
   resolveDateOperand,
 } from "@tableweave/react/filters";
 import { useLayoutEffect, useState, useSyncExternalStore } from "react";
@@ -72,6 +75,15 @@ export interface CriteriaDateStateProps {
 export interface CriteriaDateBundle<K extends Kind, S extends QuerySchema> {
   readonly [bundleBrand]: (kind: K, schema: S) => readonly [K, S];
 }
+/** @internal Original Builder intent, not a rule/permission supplied to C.
+ * id is required even for a new rule so null provenance can prove actual absence.
+ * baseline is exactly JSON.stringify(the original actual accepted rule), or null
+ * for that absent new id. value is the eligible parent draft's Date wire seed. */
+export interface CriteriaBuilderDateDraft {
+  readonly id: string;
+  readonly baseline: string | null;
+  readonly value: DateValue | DateRange | null;
+}
 export type CriteriaDateBinding =
   | Readonly<{ kind: "date" }>
   | Readonly<{
@@ -79,6 +91,8 @@ export type CriteriaDateBinding =
       fieldId: string;
       operator: string;
       ruleId: string | null;
+      /** True omission preserves the original accepted-field/operator contract. */
+      draft?: CriteriaBuilderDateDraft;
     }>;
 export class CriteriaDateStateError extends Error {
   readonly code = "criteria.date.unavailable";
@@ -92,6 +106,161 @@ function deny(): never {
 }
 function object(value: unknown): value is object {
   return value !== null && typeof value === "object";
+}
+/** Operation-local descriptor/alias cache. The only check is library-created
+ * from the real F3 actor/C snapshot; callers cannot supply a permitting guard.
+ * No caller object, reflection cache or callback survives in an edit handle. */
+class BindingCapture {
+  private readonly descriptors = new WeakMap<
+    object,
+    Map<PropertyKey, PropertyDescriptor | undefined>
+  >();
+  private readonly inherited = new WeakMap<object, Map<PropertyKey, boolean>>();
+  private readonly prototypes = new WeakMap<object, unknown>();
+  private readonly names = new WeakMap<object, readonly PropertyKey[]>();
+  private readonly arrays = new WeakMap<object, boolean>();
+  constructor(private readonly check: () => void) {}
+  reflect<Value>(read: () => Value): Value {
+    this.check();
+    try {
+      return read();
+    } catch {
+      return deny();
+    } finally {
+      this.check();
+    }
+  }
+  array(input: unknown): input is readonly unknown[] {
+    this.check();
+    if (!object(input)) return false;
+    if (!this.arrays.has(input))
+      this.arrays.set(
+        input,
+        this.reflect(() => Array.isArray(input)),
+      );
+    return this.arrays.get(input) === true;
+  }
+  record(input: unknown): object {
+    this.check();
+    if (!object(input) || this.array(input)) return deny();
+    if (!this.prototypes.has(input))
+      this.prototypes.set(
+        input,
+        this.reflect(() => Object.getPrototypeOf(input)),
+      );
+    const prototype = this.prototypes.get(input);
+    if (prototype !== null && prototype !== Object.prototype) return deny();
+    return input;
+  }
+  private descriptor(
+    input: unknown,
+    key: PropertyKey,
+    optional: boolean,
+  ): PropertyDescriptor | undefined {
+    this.check();
+    if (!object(input)) return deny();
+    let fields = this.descriptors.get(input);
+    if (!fields) {
+      fields = new Map();
+      this.descriptors.set(input, fields);
+    }
+    if (!fields.has(key))
+      fields.set(
+        key,
+        this.reflect(() => Object.getOwnPropertyDescriptor(input, key)),
+      );
+    const descriptor = fields.get(key);
+    if (!descriptor) {
+      let inherited = this.inherited.get(input);
+      if (!inherited) {
+        inherited = new Map();
+        this.inherited.set(input, inherited);
+      }
+      if (!inherited.has(key))
+        inherited.set(
+          key,
+          this.reflect(() => Reflect.has(input, key)),
+        );
+      if (inherited.get(key) || !optional) return deny();
+      return undefined;
+    }
+    if (!Object.hasOwn(descriptor, "value")) return deny();
+    return descriptor;
+  }
+  data(input: unknown, key: PropertyKey, enumerable = false): unknown {
+    const descriptor = this.descriptor(input, key, false);
+    if (!descriptor || (enumerable && !descriptor.enumerable)) return deny();
+    return descriptor.value;
+  }
+  optional(
+    input: unknown,
+    key: PropertyKey,
+  ):
+    | { readonly present: false }
+    | { readonly present: true; readonly value: unknown } {
+    const descriptor = this.descriptor(input, key, true);
+    return descriptor
+      ? { present: true, value: descriptor.value }
+      : { present: false };
+  }
+  keys(input: object, expected: readonly string[]): void {
+    if (!this.names.has(input))
+      this.names.set(
+        input,
+        this.reflect(() => Reflect.ownKeys(input)),
+      );
+    const names = this.names.get(input);
+    if (
+      !names ||
+      names.length !== expected.length ||
+      names.some((name) => typeof name !== "string" || !expected.includes(name))
+    )
+      deny();
+  }
+  point(input: unknown): DatePoint {
+    const source = this.record(input);
+    this.keys(source, ["kind", "value"]);
+    const kind = this.data(source, "kind", true),
+      value = this.data(source, "value", true);
+    if ((kind !== "day" && kind !== "instant") || typeof value !== "string")
+      return deny();
+    return Object.freeze({ kind, value });
+  }
+  wire(input: unknown): DateValue | DateRange | null {
+    this.check();
+    if (input === null) return null;
+    if (this.array(input)) {
+      this.keys(input, ["0", "1", "length"]);
+      if (this.data(input, "length") !== 2) return deny();
+      const first = this.point(this.data(input, "0", true)),
+        last = this.point(this.data(input, "1", true));
+      return Object.freeze([first, last] as const);
+    }
+    const source = this.record(input),
+      kind = this.data(source, "kind", true);
+    if (kind === "day" || kind === "instant") return this.point(source);
+    if (kind === "relative") {
+      this.keys(source, ["kind", "preset"]);
+      const name = this.data(source, "preset", true),
+        preset = relativePresets.find((item) => item === name);
+      if (!preset) return deny();
+      return Object.freeze({ kind, preset });
+    }
+    if (kind === "rolling") {
+      this.keys(source, ["kind", "days", "direction"]);
+      const days = this.data(source, "days", true),
+        direction = this.data(source, "direction", true);
+      if (
+        typeof days !== "number" ||
+        !Number.isSafeInteger(days) ||
+        days <= 0 ||
+        (direction !== "past" && direction !== "future")
+      )
+        return deny();
+      return Object.freeze({ kind, days, direction });
+    }
+    return deny();
+  }
 }
 const parts: readonly CriteriaDatePart[] = ["point", "start", "end"];
 const channels: readonly CriteriaDateChannel[] = [
@@ -298,9 +467,11 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
   const live = (actor: CriteriaActor<K, S>) => {
     const committed = cell.require(actor),
       controller = committed.origin.controller;
-    const definition = controller.getDefinition(),
-      state = controller.getSnapshot();
+    const definition = controller.getDefinition();
     cell.require(actor);
+    // Real C's snapshot read is pure. Read it after the final origin/permission
+    // gate, rather than carrying a snapshot across that gate's possible reentry.
+    const state = controller.getSnapshot();
     if (definition !== committed.origin.definition) return deny();
     const ports = committed.ports;
     const registry = ports.registry;
@@ -333,7 +504,10 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
             ([, field]) => field.owner === "date",
           )?.[0]
         : binding.fieldId;
-    const field = fieldId ? schema.fields[fieldId] : undefined;
+    const field =
+      fieldId && Object.hasOwn(schema.fields, fieldId)
+        ? schema.fields[fieldId]
+        : undefined;
     if (
       !field ||
       (field.type !== "date" && field.type !== "datetime") ||
@@ -354,9 +528,20 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
           : null;
     } else {
       if (cell.kind !== "builder") return deny();
+      // Captured omission stays omission even if a caller later pollutes the
+      // ambient object prototype. Never resolve an optional owned input there.
+      const intent = Object.hasOwn(binding, "draft")
+        ? binding.draft
+        : undefined;
       const descriptor = (
-        current.registry ?? defaultOperatorRegistry
-      ).descriptors.find((item) => item.id === binding.operator);
+        intent
+          ? getFieldOperators(
+              schema,
+              fieldId as BuilderFieldId<S>,
+              current.registry ?? defaultOperatorRegistry,
+            )
+          : (current.registry ?? defaultOperatorRegistry).descriptors
+      ).find((item) => item.id === binding.operator);
       if (
         !descriptor?.types.includes(field.type) ||
         (descriptor.cardinality !== "one" && descriptor.cardinality !== "range")
@@ -369,16 +554,35 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
           : current.state.query.builder.rules.find(
               (item) => item.id === binding.ruleId,
             );
-      if (
+      if (intent) {
+        if (binding.ruleId === null) {
+          if (
+            intent.baseline !== null ||
+            current.state.query.builder.rules.some(
+              (item) => item.id === intent.id,
+            )
+          )
+            return deny();
+        } else if (
+          intent.id !== binding.ruleId ||
+          intent.baseline === null ||
+          !rule ||
+          JSON.stringify(rule) !== intent.baseline
+        )
+          return deny();
+      } else if (
         binding.ruleId !== null &&
         (!rule || rule.field !== fieldId || rule.operator !== binding.operator)
       )
         return deny();
       accepted = rule ?? null;
-      // The actual accepted rule's value is validated as a date operand before
-      // seeding. This editor bridge is not an operator/backend authorization API.
-      seed =
-        rule && "value" in rule ? (rule.value as DateValue | DateRange) : null;
+      // Legacy seeds come from the accepted rule; explicit targets use only the
+      // captured parent seed. Neither is an operator/backend authorization API.
+      seed = intent
+        ? intent.value
+        : rule && "value" in rule
+          ? (rule.value as DateValue | DateRange)
+          : null;
     }
     const baseline = canonicalJson([
       binding,
@@ -390,6 +594,103 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
       current.context.timeZone,
     ]);
     return { ...current, field, cardinality, seed, baseline };
+  };
+  const captureBinding = (
+    actor: CriteriaActor<K, S>,
+    input: CriteriaDateBinding,
+  ): CriteriaDateBinding => {
+    const initial = live(actor),
+      version = cell.getSnapshot().version;
+    let id: string | null = null;
+    const check = () => {
+      const current = live(actor);
+      if (
+        cell.getSnapshot().version !== version ||
+        current.context.locale !== initial.context.locale ||
+        current.context.timeZone !== initial.context.timeZone
+      )
+        return deny();
+      if (
+        id !== null &&
+        JSON.stringify(
+          current.state.query.builder.rules.find((rule) => rule.id === id),
+        ) !==
+          JSON.stringify(
+            initial.state.query.builder.rules.find((rule) => rule.id === id),
+          )
+      )
+        return deny();
+    };
+    const capture = new BindingCapture(check),
+      source = capture.record(input),
+      kind = capture.data(source, "kind");
+    if (kind === "date") {
+      check();
+      return Object.freeze({ kind });
+    }
+    if (kind !== "builder" || cell.kind !== "builder") return deny();
+    const ruleId = capture.data(source, "ruleId");
+    if (ruleId !== null && (typeof ruleId !== "string" || !ruleId))
+      return deny();
+    id = ruleId;
+    check();
+    const supplied = capture.optional(source, "draft");
+    let intent: {
+        readonly id: string;
+        readonly baseline: string | null;
+      } | null = null,
+      draftSource: object | null = null;
+    if (supplied.present) {
+      draftSource = capture.record(supplied.value);
+      capture.keys(draftSource, ["id", "baseline", "value"]);
+      const draftId = capture.data(draftSource, "id", true);
+      if (typeof draftId !== "string" || !draftId) return deny();
+      if (ruleId !== null && ruleId !== draftId) return deny();
+      id = draftId;
+      check();
+      const baseline = capture.data(draftSource, "baseline", true);
+      if (baseline !== null && typeof baseline !== "string") return deny();
+      const accepted = initial.state.query.builder.rules.find(
+        (rule) => rule.id === draftId,
+      );
+      if (
+        ruleId === null
+          ? baseline !== null || accepted !== undefined
+          : baseline === null ||
+            accepted === undefined ||
+            JSON.stringify(accepted) !== baseline
+      )
+        return deny();
+      intent = Object.freeze({ id: draftId, baseline });
+      check();
+    }
+    const fieldId = capture.data(source, "fieldId"),
+      operator = capture.data(source, "operator");
+    if (
+      typeof fieldId !== "string" ||
+      !fieldId ||
+      typeof operator !== "string" ||
+      !operator
+    )
+      return deny();
+    // Prove real target/provenance before reading the private seed descriptor.
+    // This temporary owned empty seed is never stored, exposed or treated as C data.
+    const target = Object.freeze({
+      kind,
+      fieldId,
+      operator,
+      ruleId,
+      ...(intent ? { draft: Object.freeze({ ...intent, value: null }) } : {}),
+    });
+    bindingValue(actor, target);
+    check();
+    if (!intent || !draftSource) return target;
+    const value = capture.wire(capture.data(draftSource, "value", true));
+    check();
+    return Object.freeze({
+      ...target,
+      draft: Object.freeze({ ...intent, value }),
+    });
   };
   const put = <Value,>(
     slot: CriteriaLocalCell<K, S, Value>,
@@ -443,17 +744,22 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
     return Object.freeze(result);
   };
   const cfg = (actor: CriteriaActor<K, S>, token?: object) => {
+    const version = cell.getSnapshot().version;
     const value = root.config.read(actor);
     if (!value || (token && value.token !== token)) return deny();
     const current = bindingValue(actor, value.binding);
-    if (current.baseline !== value.baseline) return deny();
+    if (
+      current.baseline !== value.baseline ||
+      cell.getSnapshot().version !== version
+    )
+      return deny();
     return { value, current };
   };
   const renew = (actor: CriteriaActor<K, S>) => {
     const value = root.config.read(actor);
     if (!value) return deny();
     const token = Object.freeze({});
-    root.config.write(actor, { ...value, token });
+    root.config.write(actor, Object.freeze({ ...value, token }));
     root.family.write(actor, family(actor, token));
   };
   const point = (
@@ -666,22 +972,25 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
           return;
         }
         if (root.preparedActor.read(actor) !== actor) {
-          root.config.write(actor, {
-            ...value,
-            messages: actual.messages,
-            registry: actual.registry,
-          });
+          root.config.write(
+            actor,
+            Object.freeze({
+              ...value,
+              messages: actual.messages,
+              registry: actual.registry,
+            }),
+          );
           root.family.write(actor, family(actor, value.token));
         }
       }
       put(root.preparedActor, actor, actor);
     },
-    begin(opaque: object, binding: CriteriaDateBinding) {
+    begin(opaque: object, input: CriteriaDateBinding) {
       const actor = actualActor(opaque),
+        binding = captureBinding(actor, input),
         actual = bindingValue(actor, binding);
-      close(actor);
       const token = Object.freeze({}),
-        value: Configuration = {
+        value: Configuration = Object.freeze({
           token,
           binding,
           field: actual.field,
@@ -690,9 +999,17 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
           seed: actual.seed,
           messages: actual.messages,
           registry: actual.registry,
-        };
-      // A supplied accepted builder seed must actually be a supported date wire.
+        });
+      // Seed validation is Date-wire/bounds validation, not a Builder mutation or
+      // custom-operator normalization. The parent retains final rule validation.
       if (cell.kind === "builder" && actual.seed !== null) {
+        if (
+          binding.kind === "builder" &&
+          Object.hasOwn(binding, "draft") &&
+          binding.draft &&
+          Array.isArray(actual.seed) !== (actual.cardinality === "range")
+        )
+          return deny();
         resolveDateOperand(actual.field, actual.seed, {
           locale: actual.context.locale,
           timeZone: actual.context.timeZone,
@@ -700,11 +1017,24 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
         });
         cell.require(actor);
       }
+      const checked = bindingValue(actor, binding);
+      if (
+        checked.baseline !== actual.baseline ||
+        checked.context.evaluatedAt !== actual.context.evaluatedAt
+      )
+        return deny();
+      close(actor);
       root.config.write(actor, value);
       root.family.write(actor, family(actor, token));
       put(root.open, actor, true);
       root.notice.clear(actor);
       initialize(actor, value);
+      if (
+        binding.kind === "builder" &&
+        Object.hasOwn(binding, "draft") &&
+        binding.draft
+      )
+        report(actor);
       if (cell.kind === "date") {
         const date = actual.state.query.date;
         if (date) root.candidate.write(actor, date);
@@ -714,7 +1044,9 @@ export function createCriteriaDateBundle<K extends Kind, S extends QuerySchema>(
           date ? { status: "complete", value: date.value } : empty,
         );
       }
-      return root.family.read(actor)?.["point:operand"] ?? deny();
+      const handle = root.family.read(actor)?.["point:operand"] ?? deny();
+      cfg(actor, value.token);
+      return handle;
     },
     close(opaque: object) {
       close(actualActor(opaque));

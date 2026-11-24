@@ -1,0 +1,10 @@
+{
+  "extends": "../criteria-date/tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../packages/heroui/src/date/criteria-date-state.tsx"
+  ],
+  "exclude": ["./negative/**", "./.artifacts"]
+}
