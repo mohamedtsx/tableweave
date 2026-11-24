@@ -1719,3 +1719,40 @@ is untouched. A narrow one-source Date prerequisite separates real accepted base
 from target configuration/seed, keeping legacy omission compatible. No null-ID/
 early-commit/fake-rule workaround, product waiver or independent approval. Correction
 is authorized only under its exact plan; runtime verification remains deferred.
+
+Session14 n1 implementation follow-up: isolated43a3b02 adds the explicit immutable
+draft id/original baseline/value envelope, preserving old omission. Main reads the
+actual API/capture guards, matches15 sealed inputs/126 protected sources and passes
+one positive TS6 fixture compile. Builder resumes only against that real resolved
+API. Scalar→range/field replacement/staleness/purge/negative runtime and independent
+correction verification remain unexecuted; n1 is not marked verified/accepted.
+
+## WP-09 opaque child capture — review session 15 (provisional)
+
+### n1 — Superseded in-flight capture is indistinguishable from malformed config
+
+Main confirms core commit catch always purges and host catch retires again. A
+genuine parent ticket change during child capture must stop traversal without
+discarding otherwise eligible A; host-only skip is too late. No producer edits or
+runtime reproduction. Main selects only a closed, exact capture-phase cancellation
+outcome with actual core eligibility revalidation; malformed/source-loss/reentry
+paths stay fail-closed. Core allocation is inactive/serial after D2's handoff; no
+second engine, public boolean/error-as-proof or broad catch waiver. Runtime and
+independent correction verification remain deferred; n1 is unresolved.
+
+## WP-09 bound details intake — review session 16 (provisional)
+
+### n1 — Internal cell types escape through existing type-star barrels
+
+Main confirms D2's flagged two-barrel leakage. It replaces those type-stars with
+exactly the16 original legacy type names, checking against the original declaration
+set and passing integrated D2/S2 positive TS6. Producer/runtime bodies are unchanged;
+ordinary emitted/root/packed and independent export verification remain deferred.
+
+### n2 — Neutral details focus-region label needs localization control
+
+The new RecordDetails source hardcodes "Record details region" on its neutral
+section. That English default is not yet configurable through a neutral, non-private
+presentation port. Add a safe localized-label handoff during shell/details integration,
+without reading private detail options before readiness or inferring language from
+RTL. This remains open; no FR-16/manual-language/AT acceptance is claimed from D2.

@@ -27,6 +27,10 @@ compiles do not establish packed or runtime acceptance.
 | Shared core/renderer ports | [S1](../../tests/table-renderer-commit/README.md) | Provisional source handoff; cycles/golden/role execution unverified |
 | Legacy details issuance | [D1](../../tests/details-session-identity/README.md) | Provisional76c3823; raw identity is not adopted readiness |
 | Collection/selection guards | [S2](../../tests/table-renderer-collection/README.md) | Provisional handoff; helper/React/member/focus correction unverified |
+| Date/nested editor adoption | [F4b](../../tests/criteria-date/README.md) | Provisionalfd428e1; Builder draft-configuration gap has a separate prerequisite |
+| EN/AR state extension | [State locales](../../tests/localization-state/README.md) | Provisional54c3c9e; five units/four negatives unexecuted |
+| Date Builder draft provenance | [Prerequisite](../../tests/criteria-date-builder-draft/README.md) | Provisional1d7a890; review14n1 runtime/independent correction unverified |
+| Bound details/accessory | [D2/P4](../../tests/data-table/details-accessory/README.md) | Provisional8fb811c; runtime/policy/focus/waiting/form/golden/SSR unverified |
 
 Add Date/core-renderer/Builder/shell/details/export/generation/integrated SSR only
 when actual fixtures exist. No current-root output/hash is approved by this list.

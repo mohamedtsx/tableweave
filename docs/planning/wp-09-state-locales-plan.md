@@ -29,3 +29,8 @@ Biome/syntax/whitespace and1057 tracked-input/126 source comparisons pass. Two
 formatter failures are preserved, not converted to test passes. No runtime/negative/
 manual/graph/independent check runs. Intake and actual default/export wiring remain
 separate. The isolated tests/localization-state/README.md owns exact commands/limits.
+
+Main intakes this as54c3c9e after shared S2 handoff; isolated runtime trees remain
+unchanged. [Actual state-locale handoff](../../tests/localization-state/README.md)
+still defers runtime/negative/manual proof. Main's integrated positive fixture TS6
+check passes against actual S2/Date/types; no default/root export is added.

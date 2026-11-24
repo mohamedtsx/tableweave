@@ -88,3 +88,20 @@ verification remains deferred. Existing raw tests/assertions stay untouched. Cap
 preimages/source126 inventory, protect the other120 sources and old artifacts; old
 S1/D1 seals remain historical. Record actual APIs/limits/light results/hashes/deferred
 commands. Stop before excluded producer/path/contract needs; no full P4/WP09 approval.
+
+## Provisional preserved/intaken handoff
+
+Isolatedce3ea3b is intaken as8fb811c. Main reads actual provider/session/binding/type
+APIs and checks all61 worker file hashes at map8e5d73b2bd5c61a04a3e203aaa4d4e65ecc54ace5c5084b28f0b6c836ae2c96d.
+All58 tracked worker files match after intake (three generated artifacts remain
+local evidence);121 other current sources stay unchanged. Worker1052-input/120-source
+scope checks stay historical to its actual tree. Raw log whitespace is preserved;
+source/other staged whitespace passes excluding only raw logs. Main does not claim
+a zero-warning worker Biome result.
+
+[Actual D2 handoff](../../tests/data-table/details-accessory/README.md) defers all
+runtime/React/SSR/cycle/golden/negative/independent checks. Main passes one positive
+integrated D2 source-fixture TS6 and unchanged S2 positive fixture TS6. The
+[legacy export audit](wp-09-details-export-audit.md) preserves16 old public names
+while withholding internal cell types; it is not an old producer hash rebase.
+No P4/focus/privacy/form acceptance follows.

@@ -97,6 +97,14 @@ The [bound-details lease](wp-09-bound-details-plan.md) extends the real shared c
 with its own port owner and genuine session/model join, retaining raw legacy routes.
 The [state-locale extension](wp-09-state-locales-plan.md) composes actual S1 types
 without changing existing bundles, renderer defaults or active source inventories.
+The [opaque child-config handoff](wp-09-facade-child-config-plan.md) keeps parent
+metadata updates separate from each tool's actual committed callback revision.
+Its [closed cancellation extension](wp-09-facade-capture-cancel-plan.md) is inactive
+until the current details core owner hands off; no parallel shared-core API writes.
+The [plain criteria entry lease](wp-09-criteria-entry-plan.md) independently exposes
+existing authority/publication producers without importing the client root on servers.
+The [details export audit](wp-09-details-export-audit.md) prevents internal cell
+types escaping through legacy type-star barrels during provisional D2 intake.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

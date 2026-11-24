@@ -65,3 +65,9 @@ checks; runtime/React/negative/independent proof stays deferred. Main transports
 this commit to current S1/D1 base76c3823 in new Builder tree283bbad, verifies31 hashes/
 119 other sources and passes one positive integrated Date source-fixture TS6 compile.
 Main shared-tree intake waits for active S2/D2 handoffs; old seals are not rebound.
+
+After S2 handoff, main intakes this asfd428e1 without touching isolated D2/Date-fix
+trees. The [actual Date handoff](../../tests/criteria-date/README.md) stays provisional;
+main passes another positive integrated Date source-fixture TS6 check with S2 present.
+The separate Builder-draft prerequisite is still required; no complete Builder API
+or Date runtime/purge/continuity acceptance is implied.

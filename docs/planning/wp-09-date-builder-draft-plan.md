@@ -51,3 +51,28 @@ independent correction proof remains final. Own README records exact new API and
 before/after hashes/results/deferred commands. Preserve original Builder blocker
 and Date/source127 seals unchanged. Main must intake/activate the actual resolved
 API before Builder source implementation resumes.
+
+## Preserved provisional resolution
+
+Isolated43a3b02 implements builder binding.draft:{id,baseline,value}. Existing IDs
+must match the original exact JSON.stringify accepted-rule baseline; null provenance
+requires an absent allocated draft.id. Target field/operator and supported Date seed
+are separate. Original omission stays compatible. Source after hash:
+28ebb1a8181337a5aa9bfd867bebee621efaf75d67442f354d4aa982fea73aef.
+Main reads the API/capture/baseline logic, matches15 sealed inputs/126 protected
+source hashes and passes one own positive source-fixture TS6 compile. Aggregate:
+c022dceb49b363c0658d7247a9d37e69d1ac0fe90846c2765795dd871c45fa83.
+Runtime/negative/React/independent correction verification remains deferred.
+
+Main intakes this as1d7a890 only after the zero-edit S3a fence, leaving all active
+isolated trees unchanged. The [actual prerequisite handoff](../../tests/criteria-date-builder-draft/README.md)
+remains provisional. Main matches15 inputs/128 other integrated source hashes and
+passes one positive integrated fixture TS6 check; new129-source map is
+7d79f6c5ebf8516f915e99b77db9f13e99afccc252cdeaa8ff85e37826807a67.
+The [Builder fixture owner](../../tests/criteria-builder/README.md) preserves its
+zero-edit trace until the separately reactivated Builder implementation is intaken.
+
+Main archives the original Builder README as BLOCKER.md with identical bytes
+(98f98e73e7d67dccf2c2353a071820538270c27c856a2c0cdf4ecccb61e9db2b) and starts
+a new current README before Builder resumes. Old prerequisite maps still refer to
+the exact original43a3b02 state, not the later documentation archive/Builder edits.

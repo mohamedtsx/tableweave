@@ -31,6 +31,22 @@ existing-rule draft operator/field changes. The separately allocated
 Main will record its actual API/new map before resuming Builder; old127/source seals
 and tests/criteria-builder/README.md blocker remain unchanged history.
 
+## Reactivation after actual draft prerequisite
+
+Main preserves the resolved prerequisite as isolated43a3b02, inspects actual new
+binding.draft:{id,baseline,value} and matches15 inputs/126 protected sources, then
+passes one positive prerequisite source-fixture TS6 compile. It explicitly resumes
+only the original four-source/new-host lease in that same tree. Date source is now
+28ebb1a8… and read-only; no early/null-ID workaround is permitted.
+
+New canonical127 map /tmp/opencode/wp09-before-builder-resume-source127.json is
+2361efaa0666c9c126437f9f7d1b490eb609d75a4b0c85a18dd3a8bbfe2156ed. Protect the
+other123 sources and all old fixtures/seals. Main archives the old zero-edit blocker
+README byte-for-byte as BLOCKER.md and starts a current handoff README before this
+stage; the archive is explicit bookkeeping, not an old scope expectation rebase.
+Main shared-tree intake waits for active opaque-config handoff; isolated D2 stays
+unchanged. Actual F2/F3/Date APIs, not changing main source, remain dependencies.
+
 ## Proposed exact paths
 
 One isolated writer: existing filters/{types.ts,filter-builder.tsx,option-owners.tsx,

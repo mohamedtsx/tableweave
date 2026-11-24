@@ -11,7 +11,24 @@ export {
   englishDetailsMessages,
   useDetailsSession,
 } from "./details/index.js";
-export type * from "./details/types.js";
+export type {
+  DetailsAuthority,
+  DetailsChangeRequest,
+  DetailsContext,
+  DetailsCurrent,
+  DetailsMessages,
+  DetailsNativeFrame,
+  DetailsOpenOptions,
+  DetailsOptions,
+  DetailsOutcome,
+  DetailsPort,
+  DetailsReason,
+  DetailsRenderContext,
+  DetailsSession,
+  DetailsShellProps,
+  DetailsSource,
+  DetailsTriggerProps,
+} from "./details/types.js";
 export { FilterBuilder } from "./filters/filter-builder.js";
 export type {
   FilterBuilderMessages,

@@ -2,6 +2,57 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+D2 is preservedce3ea3b/intaken8fb811c. Main verifies61 own-tree file hashes and58
+tracked intaken hashes/121 other current sources, audits exactly16 legacy type names
+at both HeroUI barrels, and passes positive integrated D2 + existing S2 source TS6.
+Current133-source mapcf4b3671… includes only those deliberate deltas. Raw failed/log
+whitespace is preserved; runtime/cycle/focus/privacy/independent proof stays deferred.
+Core owner is now free; main commits audit/bookkeeping before serial S3a reactivation.
+Intake review16 records corrected legacy type-star leakage and an open neutral
+details region-label localization handoff for shell integration. Do not infer language
+from RTL or read private options to fix it before readiness. FR-16/AT remains unapproved.
+
+D2/P4 hands off PROVISIONALLY; its actual source core owner is now free. Main
+inspects session/binding/provider/types and stages an explicit legacy16-type export
+audit before future public integration. It will preserve/intake the handoff and run
+one positive integrated source check, then activate the queued serial core seam.
+No details/runtime/focus/privacy/independent acceptance follows from this handoff.
+
+After S3a's zero-edit fence, main intakes Date-draft prerequisite as1d7a890, matches
+15 inputs/128 other source hashes and passes one positive integrated TS6 fixture
+check. Current129-source map7d79f6c5… is preserved separately. All active isolated
+trees stay unchanged; this is not runtime/review14n1/independent approval.
+Current lightweight documentation replay passes203 Markdown/778 local links and
+18 checker regressions. It does not establish semantic/source equality, external
+Figma URL health, runtime or any deferred engineering gate.
+
+While S3a waits for serial core ownership, main allocates an independent isolated
+criteria/publication entrypoint: one new plain barrel, one additive manifest export
+and own discovery/confinement fixtures. Existing producers/client root/dependencies/
+old output profiles stay frozen. This is source/discovery authoring only; genuine
+packed/SSR/runtime/independent proof and new-generation approval stay deferred.
+
+S3a stops before producer edits (review15n1): actual capture catch always purges,
+so in-flight genuine ticket supersession cannot skip non-destructively. Main confirms
+the static trace and pauses that lease; all129 sources/1453 existing inputs unchanged.
+An inactive closed cancellation extension waits for D2's actual core handoff before
+serial allocation. No core writer is added while D2 owns it. Builder continues in
+isolation against the resolved Date API; no runtime/independent approval is claimed.
+
+The Date/Builder prerequisite is preserved as isolated43a3b02. Main inspects actual
+draft API, matches15 inputs/126 protected source hashes and passes one positive TS6
+fixture compile. New127 map2361efaa… preserves old maps. Main explicitly resumes
+Builder's four-source/new-host lease on that actual API, keeping Date frozen.
+Original zero-edit blocker bytes are archived as BLOCKER.md; a new current README
+records resumed work. Runtime/review14n1 correction/independent approval stays deferred.
+
+S2 is committed2401ce6; Date/state locales are intaken asfd428e1/54c3c9e. Main checks
+31+9 input hashes/all129 combined sources and passes positive Date/locale source
+fixtures. The isolated details/Date-fix worktrees are unchanged. Main activates only
+facade opaque-child config handoff in two existing/new one source, preserving each
+child's independent F3 callback ownership and actual layout publication. No UI shell
+or Builder adoption is claimed; all runtime/independent gates remain deferred.
+
 S2 now hands off PROVISIONALLY ata97a4a0187a9aa10818709d86604d2f364b094d0db15fb1b5d8f5b1038024e22.
 Main inspects target/collection/helper APIs, matches26 handoff inputs/120 protected
 source hashes/exact root delta and passes one positive integrated source-fixture TS6
@@ -158,10 +209,12 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
   and performs one successful whole-React TS6 noEmit compile. No runtime correction
   or independent approval is claimed. Main commits before disjoint intake.
 - P2 isd5be856, intended source exports5f9815f; Search/Tabs is e8529b0.
-  S1 isab9685c; D1 intake76c3823. Active shared writer: renderer collection/event
-  guards under its five-existing/one-new lease. Datef6ce6ab is preserved; new isolated
-  Builder owns four files/new host on actual Date/core base283bbad. Isolated bound
-  details owns core/five details/four new sources.
+  S1 isab9685c; D1 intake76c3823.
+  S2 is2401ce6; Date/state intakesfd428e1/54c3c9e. Shared opaque-config writer is
+  paused on the core cancellation seam; no active shared runtime writer. Isolated
+  criteria-entry owns one manifest/new barrel; Builder resumes four files/new host at43a3b02
+  after actual Date-draft fix; isolated bound details owns core/five details/four
+  new sources. No runtime acceptance follows from these provisional source stages.
   No source intake until handoffs. Other runtime paths freeze; full approval deferred.
 - Independent design writer owns only the newly authorized Tableweave Figma file;
   no runtime/API/source ownership. Composed scenes are pending, not design approval.
@@ -177,8 +230,8 @@ this source handoff, avoiding protected-inventory races. Final proof remains def
 - Generation harness is intaken asdbdc7a2 from isolated34fad4f. Current=fc01;
   both historical output identities remain unchanged. New generation registration
   and actual default-root generation checks are still unresolved, not passed.
-- Next integration: receive collection/Builder/bound-details handoffs, inspect APIs/
-  light compile, intake preserved Date/state locales, then allocate shell composition.
+- Next integration: receive opaque-config/Builder/bound-details handoffs, inspect APIs/
+  light compile, intake the Date-draft correction, then allocate actual shell composition.
   Do not
   duplicate running workers or their checks.
 - External runner access and real consumer are deferred by the user. Ask modal
