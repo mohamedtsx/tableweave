@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import { build } from "vite";
 import { forbiddenImports, inspectGraph } from "./boundaries.mjs";
 import { checkConsumerDeclarations } from "./consumer-declarations.mjs";
+import { checkPackedFilterTools } from "./packed-filter-tools.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const artifacts = join(root, ".artifacts");
@@ -71,6 +72,10 @@ for (const name of ["react", "heroui"]) {
             "filters/evaluate",
             "filters/translate",
             "filters/inverse",
+            "filters/editor-types",
+            "filters/editor-fields",
+            "filters/editor-draft",
+            "filters/options-source",
             "controller/types",
             "controller/validation",
             "controller/reducer",
@@ -96,12 +101,31 @@ for (const name of ["react", "heroui"]) {
           "sortable/index.js",
           "sortable/index.d.ts",
           "styles.css",
+          "filters/filters.css",
+          "date/date-editor.css",
+          "toolbar/filter-tools.css",
           ...[
             "table/group-column",
             "table/collection-projection",
             "table/header-navigation",
             "table/controlled-collection",
             "table/native-collection",
+            "filters/filter-builder",
+            "filters/types",
+            "filters/messages",
+            "filters/option-owners",
+            "filters/value-editors",
+            "filters/date-value",
+            "date/date-types",
+            "date/date-wire",
+            "date/date-picker",
+            "date/date-instant",
+            "date/date-segments",
+            "date/date-operand-editor",
+            "toolbar/filter-shared",
+            "toolbar/filter-search",
+            "toolbar/filter-tabs",
+            "toolbar/filter-date",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ];
   assert.deepEqual(
@@ -170,6 +194,7 @@ for (const name of ["react", "heroui"]) {
       "@heroui/styles",
       "react-aria",
       "react-aria-components",
+      ...(name === "heroui" ? ["@internationalized/date"] : []),
     ]),
     [],
     "Public declarations leaked vendor types requiring workspace-only repairs",
@@ -189,6 +214,9 @@ const vendor = JSON.parse(
 ).dependencies;
 const tooling = JSON.parse(
   await readFile(join(root, "package.json"), "utf8"),
+).devDependencies;
+const storyTooling = JSON.parse(
+  await readFile(join(root, "apps/storybook/package.json"), "utf8"),
 ).devDependencies;
 for (const kind of ["headless", "styled"]) {
   const dir = join(run, `consumer-${kind}`);
@@ -216,6 +244,16 @@ for (const kind of ["headless", "styled"]) {
         devDependencies: {
           "@types/react": tooling["@types/react"],
           "@types/react-dom": tooling["@types/react-dom"],
+          ...(kind === "styled" &&
+          process.argv.includes("--filter-tools-browser")
+            ? {
+                vite: tooling.vite,
+                "@playwright/test": tooling["@playwright/test"],
+                "@axe-core/playwright": tooling["@axe-core/playwright"],
+                "@types/node": tooling["@types/node"],
+                "@tailwindcss/vite": storyTooling["@tailwindcss/vite"],
+              }
+            : {}),
         },
       },
       null,
@@ -257,8 +295,17 @@ for (const kind of ["headless", "styled"]) {
   await cp(join(root, "tests/consumers/headless.ts"), join(dir, "headless.ts"));
   await cp(join(root, "tests/consumers/native.ts"), join(dir, "native.ts"));
   await cp(join(root, "tests/consumers/resource.ts"), join(dir, "resource.ts"));
-  if (kind === "styled")
+  await cp(
+    join(root, "tests/consumers/filter-tools.ts"),
+    join(dir, "filter-tools.ts"),
+  );
+  if (kind === "styled") {
     await cp(join(root, "tests/consumers/styled.ts"), join(dir, "styled.ts"));
+    await cp(
+      join(root, "tests/consumers/styled-tools.ts"),
+      join(dir, "styled-tools.ts"),
+    );
+  }
   await cp(join(root, "tests/consumers/runtime.mjs"), join(dir, "runtime.mjs"));
   await cp(
     join(root, "tests/consumers/native-runtime.mjs"),
@@ -370,6 +417,11 @@ for (const kind of ["headless", "styled"]) {
     runtime: "passed",
     bundleModules: [...modules],
   });
+  if (kind === "styled" && process.argv.includes("--filter-tools-browser"))
+    reports.push({
+      consumer: kind,
+      filterTools: await checkPackedFilterTools(root, dir),
+    });
 }
 await writeFile(join(run, "report.json"), JSON.stringify(reports, null, 2));
 console.log(

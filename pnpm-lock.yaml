@@ -7,6 +7,9 @@ settings:
 packageExtensionsChecksum: sha256-6GJRQyYqQ5EyLiKSjA1E8/kdIIBkIq8MxdFpMVyPgu0=
 
 patchedDependencies:
+  '@heroui/react@3.2.8':
+    hash: 4120eff74e2a59fcae0f3564f64d131f8ab66f9a72014638a06e7a75caded769
+    path: patches/@heroui__react@3.2.8.patch
   '@tanstack/start-plugin-core@1.171.50':
     hash: 59086fb49770b8ce2218ea6deb98093c7d8b75099a3828fb6ce472aaf36df728
     path: patches/@tanstack__start-plugin-core@1.171.50.patch
@@ -114,7 +117,7 @@ importers:
     dependencies:
       '@heroui/react':
         specifier: 3.2.8
-        version: 3.2.8(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(patch_hash=b05f0a8e8c0b44e67e893ae28dd66a654f5aee148ef13b20253a624384659222)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)
+        version: 3.2.8(patch_hash=4120eff74e2a59fcae0f3564f64d131f8ab66f9a72014638a06e7a75caded769)(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(patch_hash=b05f0a8e8c0b44e67e893ae28dd66a654f5aee148ef13b20253a624384659222)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)
       '@heroui/styles':
         specifier: 3.2.8
         version: 3.2.8(tailwindcss@4.3.5)
@@ -175,16 +178,17 @@ importers:
         version: 7.3.8(@types/node@24.19.2)(jiti@2.7.0)(lightningcss@1.33.0)(yaml@2.9.1)
 
   packages/heroui:
-    devDependencies:
-      '@heroui/react':
-        specifier: 3.2.8
-        version: 3.2.8(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(patch_hash=b05f0a8e8c0b44e67e893ae28dd66a654f5aee148ef13b20253a624384659222)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)
-      '@heroui/styles':
-        specifier: 3.2.8
-        version: 3.2.8(tailwindcss@4.3.5)
+    dependencies:
       '@internationalized/date':
         specifier: 3.12.4
         version: 3.12.4
+    devDependencies:
+      '@heroui/react':
+        specifier: 3.2.8
+        version: 3.2.8(patch_hash=4120eff74e2a59fcae0f3564f64d131f8ab66f9a72014638a06e7a75caded769)(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(patch_hash=b05f0a8e8c0b44e67e893ae28dd66a654f5aee148ef13b20253a624384659222)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)
+      '@heroui/styles':
+        specifier: 3.2.8
+        version: 3.2.8(tailwindcss@4.3.5)
       '@react-aria/ssr':
         specifier: 3.10.1
         version: 3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -3096,7 +3100,7 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@heroui/react@3.2.8(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(patch_hash=b05f0a8e8c0b44e67e893ae28dd66a654f5aee148ef13b20253a624384659222)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)':
+  '@heroui/react@3.2.8(patch_hash=4120eff74e2a59fcae0f3564f64d131f8ab66f9a72014638a06e7a75caded769)(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(patch_hash=b05f0a8e8c0b44e67e893ae28dd66a654f5aee148ef13b20253a624384659222)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)':
     dependencies:
       '@heroui/styles': 3.2.8(tailwindcss@4.3.5)
       '@internationalized/date': 3.12.4

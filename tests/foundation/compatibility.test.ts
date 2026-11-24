@@ -36,6 +36,31 @@ describe("exact declaration-only compatibility repair", () => {
     expect(workspace).toContain("cookie-es: '3.1.1'");
     expect(workspace).not.toMatch(/allowUnusedPatches|ignorePatchFailures/);
   });
+  it("narrows calendar type references to the same genuine scoped declarations", async () => {
+    const text = await readFile("patches/@heroui__react@3.2.8.patch", "utf8");
+    expect(
+      [...text.matchAll(/^diff --git a\/(\S+) b\/(\S+)$/gm)].map(
+        (match) => match[1],
+      ),
+    ).toEqual([
+      "dist/components/calendar/index.d.ts",
+      "dist/components/list-box/index.d.ts",
+      "dist/components/range-calendar/index.d.ts",
+    ]);
+    const additions = text.split("\n").filter((line) => line.startsWith("+"));
+    expect(
+      additions.filter((line) =>
+        line.includes('import("../calendar-year-picker")'),
+      ),
+    ).toHaveLength(12);
+    expect(
+      text.match(/^\+\/\/ Tableweave compatibility modification:/gm),
+    ).toHaveLength(3);
+    expect(text).not.toMatch(/deleted file mode|new file mode/);
+    expect(await readFile("pnpm-lock.yaml", "utf8")).toContain(
+      `hash: ${createHash("sha256").update(text).digest("hex")}`,
+    );
+  });
   it("patches only the two reviewed declarations, not runtime or package exports", async () => {
     const patch = await readFile(
       "patches/react-aria-components@1.22.1.patch",

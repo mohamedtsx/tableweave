@@ -1,0 +1,29 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "paths": {
+      "@tableweave/react": ["../../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../../packages/react/src/filters/index.ts"
+      ],
+      "@heroui/react/*": [
+        "../../../packages/heroui/node_modules/@heroui/react/dist/components/*/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../../packages/heroui/src/filters/**/*.ts",
+    "../../../packages/heroui/src/filters/**/*.tsx"
+  ]
+}

@@ -1,0 +1,14 @@
+HeroUI React 3.2.8
+Copyright 2025 NextUI Inc.
+Licensed under the Apache License, Version 2.0.
+http://www.apache.org/licenses/LICENSE-2.0
+
+Tableweave compatibility modifications are declaration-only:
+dist/components/calendar/index.d.ts
+dist/components/range-calendar/index.d.ts
+dist/components/list-box/index.d.ts
+The declarations reference the same CalendarYearPicker types through their
+genuine scoped entry. ListBox likewise references its genuine item/section types.
+Each modified declaration prominently identifies this modification. Runtime files,
+type properties and version remain unchanged. No separate upstream NOTICE file
+was present in the inspected package.

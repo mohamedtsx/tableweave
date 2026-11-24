@@ -1,0 +1,181 @@
+@layer tableweave {
+  .wp07 {
+    inline-size: 100%;
+    max-inline-size: 76rem;
+    min-inline-size: 0;
+    display: grid;
+    gap: 1rem;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    color: var(--foreground);
+    background: var(--background);
+    font-family: system-ui, sans-serif;
+  }
+  .wp07.wp07-narrow {
+    max-inline-size: 24rem;
+  }
+  .wp07 *,
+  .wp07 *::before,
+  .wp07 *::after {
+    box-sizing: border-box;
+  }
+  .wp07-heading h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 650;
+  }
+  .wp07-heading p,
+  .wp07-proposals p {
+    margin-block: 0.35rem 0;
+    color: var(--foreground);
+    font-size: 0.875rem;
+  }
+  .wp07-panel-content {
+    display: grid;
+    gap: 1rem;
+    min-inline-size: 0;
+  }
+  .wp07-external-tools,
+  .wp07-normal-tools,
+  .wp07-result-heading,
+  .wp07-fixture-actions,
+  .wp07-proposals {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 0.65rem;
+    min-inline-size: 0;
+  }
+  .wp07 [hidden] {
+    display: none;
+  }
+  .wp07-normal-tools > * {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+  .wp07-results {
+    min-inline-size: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .wp07-table-scroll {
+    inline-size: 100%;
+    max-inline-size: 100%;
+    overflow: auto;
+  }
+  .wp07-result-heading output {
+    font-size: 0.75rem;
+    color: var(--foreground);
+    overflow-wrap: anywhere;
+    padding-block: 0.5rem;
+  }
+  .wp07-fixture-actions button,
+  .wp07-result-heading > button,
+  .wp07-proposals > button,
+  .wp07-selection-slot > button {
+    min-block-size: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    font: inherit;
+    font-size: 0.8125rem;
+    background: var(--surface);
+    color: var(--foreground);
+  }
+  .wp07
+    :is(
+      .wp07-fixture-actions,
+      .wp07-result-heading,
+      .wp07-proposals,
+      .wp07-selection-slot
+    )
+    > button:disabled {
+    opacity: 0.5;
+  }
+  .wp07
+    :is(
+      .wp07-fixture-actions,
+      .wp07-result-heading,
+      .wp07-proposals,
+      .wp07-selection-slot
+    )
+    > button:focus-visible,
+  .wp07 summary:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .wp07-proposals {
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+  }
+  .wp07-proposals p {
+    flex-basis: 100%;
+  }
+  .wp07-selection-slot {
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+  }
+  .wp07-selection-slot p {
+    margin-block: 0 0.5rem;
+  }
+  .wp07-inspector {
+    min-inline-size: 0;
+    border-block-start: 1px solid var(--border);
+    padding-block-start: 0.75rem;
+  }
+  .wp07-inspector summary {
+    cursor: pointer;
+    font-size: 0.8125rem;
+    color: var(--foreground);
+  }
+  .wp07-fixture-actions {
+    padding-block: 1rem;
+  }
+  .wp07-provenance {
+    display: grid;
+    gap: 0.25rem 0.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    font-size: 0.75rem;
+  }
+  .wp07-provenance dt {
+    color: var(--foreground);
+  }
+  .wp07-provenance dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .wp07-inspector pre {
+    max-inline-size: 100%;
+    max-block-size: 18rem;
+    overflow: auto;
+    font-size: 0.6875rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .wp07-custom-editor {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .wp07-custom-editor input {
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    min-block-size: 2.5rem;
+    max-inline-size: 100%;
+  }
+  @media (max-width: 40rem) {
+    .wp07-normal-tools {
+      align-items: stretch;
+    }
+    .wp07-normal-tools > * {
+      flex-basis: 100%;
+    }
+    .wp07-provenance {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .wp07-provenance dd {
+      margin-block-end: 0.5rem;
+    }
+  }
+}

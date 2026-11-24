@@ -12,10 +12,17 @@ export {
   resolveDateOperand,
   resolveDateValue,
 } from "./dates.js";
+export { validateRuleDraft } from "./editor-draft.js";
+export { getBuilderFields, getFieldOperators } from "./editor-fields.js";
+export type * from "./editor-types.js";
 export type { EvaluationOptions, SearchMatcher } from "./evaluate.js";
 export { createFilterEvaluator } from "./evaluate.js";
 export type { InverseOptions } from "./inverse.js";
 export { invertRule } from "./inverse.js";
+export {
+  createOptionSource,
+  projectOptionSourceView,
+} from "./options-source.js";
 export type { CompiledRule, CompileOptions, FilterPlan } from "./plan.js";
 export { compileFilter } from "./plan.js";
 export {

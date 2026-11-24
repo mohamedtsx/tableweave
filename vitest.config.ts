@@ -11,9 +11,12 @@ export default defineConfig({
     alias: {
       react: dirname(vendor.resolve("react/package.json")),
       "react-dom": dirname(vendor.resolve("react-dom/package.json")),
+      "@internationalized/date": vendor.resolve("@internationalized/date"),
     },
   },
   test: {
+    // Keep graph/compiler fixtures bounded as the suite grows; no assertion or
+    // behavior timeout is relaxed by limiting concurrent worker processes.
     maxWorkers: 4,
     include: [
       "tests/foundation/**/*.test.ts",
@@ -21,6 +24,8 @@ export default defineConfig({
       "tests/controller/**/*.test.ts",
       "tests/native/**/*.test.ts",
       "tests/resource/**/*.test.ts",
+      "tests/filter-tools/unit/**/*.test.ts",
+      "tests/filter-tools/toolbar/**/*.test.ts",
     ],
     environment: "node",
   },

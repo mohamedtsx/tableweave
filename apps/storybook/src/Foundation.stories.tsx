@@ -10,8 +10,8 @@ function VendorSmoke() {
       <div className="space-y-2">
         <h1 className="text-base font-semibold">Workspace foundation</h1>
         <p className="text-sm text-muted">
-          Synthetic vendor smoke only. Tableweave components and final visuals
-          are not implemented.
+          Synthetic vendor smoke only. Tableweave feature states are reviewed
+          separately; this scene is not final design acceptance.
         </p>
       </div>
       <Button

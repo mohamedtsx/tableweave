@@ -19,6 +19,11 @@ not personal maintainer acceptance or the proposed whole-table facade. WP-05's
 `createResourceAdapter`, `projectResourceView`, `useTableweaveResource` and tagged
 types with scoped delegated G-03 proof; it is not a fetch cache or SSR integration.
 
+The [WP-07 tool candidate](wp-07-tools.md) adds actual server-safe editor/option
+helpers and independent styled FilterBuilder/Search/Tabs/Date components with own
+public prop types. Pure/public type checks pass, but UI findings/corrected packed
+interaction remain open; this is not a full table facade or release API freeze.
+
 ## Schema versus rendering definition
 
 The serializable shared schema contains schema ID/version, stable field IDs,
