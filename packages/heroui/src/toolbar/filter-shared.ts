@@ -8,8 +8,11 @@ import type {
 import { useTableweaveState } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import { useCallback, useLayoutEffect, useMemo, useRef } from "react";
+import type { CriteriaToolTarget } from "../filters/criteria-commit.js";
 
 export interface FilterToolProps<S extends QuerySchema> {
+  /** Opt into genuine committed criteria ownership. Omission alone is legacy. */
+  readonly criteria?: CriteriaToolTarget<NoInfer<S>>;
   readonly controller: TableController<S>;
   readonly expectedContext: ResourceContext;
   readonly disabled?: boolean;
