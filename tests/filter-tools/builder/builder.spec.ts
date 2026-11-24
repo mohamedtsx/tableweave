@@ -468,15 +468,19 @@ test("only allowed inverses appear and field/operator changes never coerce the p
   await addRule(page, "Name", "contains");
   await page.getByRole("textbox", { name: "Value", exact: true }).fill("Alpha");
   await page.getByRole("button", { name: "Apply filter", exact: true }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await page
     .getByRole("button", { name: "Rule options: Name", exact: true })
     .click();
+  await expect(page.getByRole("dialog")).toHaveCount(1);
+  await expect(page.getByRole("dialog")).toBeFocused();
   await expect(
     page.getByRole("button", { name: "Negate", exact: true }),
   ).toHaveCount(0);
   await page
     .getByRole("button", { name: "Cancel filter edit", exact: true })
     .click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("button", { name: "Field: Name", exact: true }).click();
   await page.getByRole("option", { name: "Amount", exact: true }).click();
   await page.getByRole("option", { name: "equals", exact: true }).click();

@@ -1314,3 +1314,32 @@ Actual runtime/RAC bytes stay unchanged. Main grants bounded harness-correction
 approval and pushes the same corrected code for fresh remote runs while complete
 CI-mode checks continue in the separate cold worktree. Final remote/full-clean
 acceptance is not inferred from the focused approval.
+
+## WP-08 existing builder transition — review session 21
+
+### n1 — Cancel locator matches consecutive popover exits (P2 test, open)
+
+Both e385104 replacement workflows pass cold type gating/652 units, then the
+existing inverse/operand builder case fails at its immediate Cancel locator. The
+preceding Apply and new Rule options trigger can leave two matching buttons during
+exit. Private causal review must distinguish an exiting noninteractive subtree
+from simultaneously live modal sessions before choosing a fix. No source/test
+assertion or behavior has been relaxed. Earlier local/full packed passes remain
+historical and do not replace current remote failures.
+
+Private causal evidence classifies this blocker as a test lifecycle precondition,
+not a verified producer/animation defect. Old Cancel is an exit-retained element
+with pointer-events:none and later inert; actual native pointer events do not hit
+its obsolete handler and rapid keyboard focus stays in the new session. Role-count
+two is not proof of two usable native/AX sessions. The rapid diagnostic reproduces
+the exact strict error, while the original first-rule case passes normally.
+Private focused5/full55 settled-assertion runs pass; its CSS import-specifier serving
+adaptation is explicitly qualified and proves no canonical or manual-AT boundary.
+All2043 fingerprints/180+275 roots remain unchanged. Main independently replays
+the canonical fixture before applying only four added lifecycle/focus assertions;
+no shouldSkipAnimation expansion/vendor/runtime or original assertion changes.
+Main's original canonical focused case passes; after only four added lifecycle/focus
+assertions, the complete canonical55, strict TS and Biome pass on6521 without private
+CSS serving adaptation. Separate independent correction review is active. The cold
+04b3bf7 complete CI-mode workflow independently passes652/42/411/110/54+54, including
+the original case; local success does not reclassify remote failures as passed.

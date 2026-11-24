@@ -120,6 +120,31 @@ two clean relocations and strict TS6/5.9 pass, original failures reproduced. Mai
 grants scoped harness approval and pushes corrected candidate04f3c10 plus this
 documentation disposition; complete cold CI-mode rehearsal and replacement remote
 workflows run separately. No runtime/archive input changes or final remote claim.
+Replacement workflows45383808554/45383819715 pass the repaired cold gate/652
+units and reach existing builder browser tests. Both fail the same inverse/operand
+case: two accessible Cancel filter edit buttons during consecutive popover sessions.
+Main allocates read-only/private causal reproduction of builder exit lifecycle on
+6517, retaining actual assertions/timeouts. Determine settled-session test precondition
+versus genuine overlapping-interaction defect before any fixture/producer edit.
+No .first/retry/forceclick/delays/vendor patch or broader runtime repair is approved.
+Private causal proof identifies exit-retained noninteractive Cancel markup, not
+two current editors: pointer-events:none/inert old exit, new native keyboard focus
+and pointer event targets. The exact strict error is reproduced in a rapid diagnostic;
+the unchanged original case passes locally. Main allocates a test-only correction
+in that one builder case: assert closed after valid Apply, one focused dialog after
+Rule options, closed after Cancel. Preserve all original actions/assertions, global
+strict Cancel, deadlines/retry0 and producer/animation code. Main canonical baseline
+runs first on6521; separate correction review/full55/type and remote checks follow.
+The separate cold04b3bf7 `CI=1 pnpm check` now exits0 without the workstation
+manifest:652 units/42 Node/411 browser/110 packed production/54+54 Start, frozen
+install/types/lint/docs pass. Original uncorrected builder case also passes locally,
+so this does not erase either remote timing failure. Main's canonical fixture
+baseline passes, then actual four-added-assertion full55/strict TS/Biome pass on6521
+with no CSS import/JS/source serving adaptation. Separate correction review remains
+pending before push. Only one test's preconditions change; runtime/archives stay fixed.
+Main commits this test-only candidate to replay the exact assertions in the separate
+clean checkout, preserving prior full-run results. Independent correction review
+still gates push and final remote success; candidate commit is not acceptance.
 **Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
 42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
 110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and
