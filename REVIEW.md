@@ -1376,7 +1376,7 @@ performance/general rapid-interaction or merge approval follows.
 
 ## WP-08 pagination open-Select contrast — review session 23
 
-### n1 — Immediate open-menu scan reports light-theme contrast (P1, open)
+### n1 — Immediate open-menu scan lacks settled-state precondition (P2 test, corrected)
 
 Push45390462746 passes builder correction and reaches pager62; its English/Arabic
 light cases fail axe color-contrast at line461 immediately after Enter opens Select.
@@ -1400,3 +1400,22 @@ corrected full62/strict TS/Biome pass. Main audits raw16 steady option nodes at 
 reported ratios and confirms all180 outputs unchanged. Only visible-listbox,
 entry-complete and opacity1 assertions are added before the open scan. Separate
 independent correction review and clean-checkout replay remain active before push.
+
+## WP-08 pager contrast preconditions — review session 24
+
+### n1 — Bounded test-only correction approved; no blocking finding
+
+Independent actual canonical4 cases and four fresh steady probes pass, retaining
+twelve zero-violation default axe scans/all16 option passing nodes at original4.5.
+Measured light17.71/dark17.26 ratios hold in English/Arabic. Strict TS5.9 actual
+845-file pager program and Biome pass. Corrected spec701436ff48c6429361d823949c45889bbb45cc1553261d717f00afd1e4cbbc68;
+removing the three assertions restores the complete original exact source hash.
+All10338 fingerprints and180/275 generation aggregates stay unchanged.
+
+Main canonical62 and separate clean CI-mode62 also pass, preserving the three
+LIMITATION characterizations. Main grants bounded **agent-approved under delegated
+authority** for test-only correction6df7914. All scans/rules/actions, original4.5
+threshold, deadlines/retry0 and actual animations remain unchanged. This does not
+repair or certify every transition frame or prove manual AT/WCAG compliance.
+Original red push/green PR remain historical; replacement full remote checks are
+still required before final delivery, and no PR merge is authorized.

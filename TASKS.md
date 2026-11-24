@@ -185,6 +185,12 @@ Canonical main62 now passes, preserving all three LIMITATION characterizations;
 actual test-only diff contains just the three added settled-open assertions. Main
 commits the candidate to replay it in the clean worktree without changing package
 outputs. Independent correction review is active; push/final acceptance remains held.
+Clean replaydb030c3 canonical62 now passes under CI=1. Independent canonical4+
+four fresh steady probes/twelve full axe scans/all16 option ratios, strict actual
+845-file TS5.9 program, Biome and10338/180/275 seals pass. Main grants scoped
+test-only correction approval at6df7914 and pushes it plus this disposition for
+fresh full workflows. No source/token/threshold/animation changes or all-frame AA
+waiver; final dual-workflow acceptance still waits, all PRs remain unmerged.
 **Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
 42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
 110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and
