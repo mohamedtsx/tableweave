@@ -150,6 +150,15 @@ function createController<S extends QuerySchema>(
     }
   };
   const validateIntent = (command: TableCommand<S>) => {
+    const type: unknown = Object.getOwnPropertyDescriptor(
+      command,
+      "type",
+    )?.value;
+    if (
+      definition.schema.pagination.enabled === false &&
+      (type === "pagination.change" || type === "pagination.clamp")
+    )
+      stateFail("state.capability");
     const result: unknown = validateCommand?.(command);
     if (result !== undefined) {
       // As with state constraints, async/nonvoid results cannot authorize a

@@ -72,3 +72,12 @@ before excluded edits, changed command semantics or a needed new policy decision
 Main accepts independent transport review and activates this exact lease after
 recording the [combined baseline](../evidence/wp-09-combined-baseline-2026-11-24.md).
 No other runtime or generation-integration path is allocated by this activation.
+
+[Source handoff](../../tests/pagination-policy/controller/README.md) records the
+review-ready two-file implementation, sealed before/after proof and remaining limits.
+Independent review is required before native U2 allocation.
+
+Independent345 reruns/67 probes, both24-case paged preimage replays and strict
+TS6/5.9/56 meaningful negatives pass. Main's actual345/guard-after/lint/docs replay
+passes; main grants bounded source approval at2c2d8f4df8efc57270a2f85d27d0c7c75abcf690e66daa85e4bef944e1496532.
+No excluded source owner or old output-generation disposition changes.

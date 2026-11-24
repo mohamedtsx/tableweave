@@ -52,6 +52,8 @@ The [initial adoption readiness](wp-09-bootstrap-readiness.md) distinguishes cer
 same-domain seeds from old-domain retirement without changing the producer API.
 The [two-file controller guard plan](wp-09-controller-guards-plan.md) is the next
 bounded implementation after the independent transport disposition activates it.
+The [native client plan](wp-09-native-client-plan.md) is prepared but remains inactive
+until U1's reviewed source handoff and a separate main allocation.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

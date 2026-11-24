@@ -145,12 +145,16 @@ function reduceState<S extends QuerySchema>(
       candidate = { ...query, sorting: update(command.update, query.sorting) };
       break;
     case "pagination.change":
+      if (definition.schema.pagination.enabled === false)
+        stateFail("state.capability");
       candidate = {
         ...query,
         pagination: update(command.update, query.pagination),
       };
       break;
     case "pagination.clamp": {
+      if (definition.schema.pagination.enabled === false)
+        stateFail("state.capability");
       if (command.queryIdentity !== previous.queryIdentity)
         stateFail("state.stale");
       if (!Number.isSafeInteger(command.pageCount) || command.pageCount < 0)

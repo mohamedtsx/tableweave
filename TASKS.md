@@ -38,6 +38,23 @@ and new tests/pagination-policy/controller/**, under the written exact guard pla
 Protected producer/native/resource/tool/exports/config/Git paths stay read-only;
 independent correction review and main integration follow. Root650/2-failed generation
 status remains explicit; no new hash/full workflow approval follows.
+Main reads the actual combined native seams and writes an inactive three-file U2
+client-unslicing plan. U1 remains the only active runtime writer. U2 excludes server
+complete/resource/presentation, requires real native row-model proof, and waits U1
+independent approval plus fresh protected input hashes before a worker allocation.
+U1 handoff is now review-ready at2c2d8f4df8efc57270a2f85d27d0c7c75abcf690e66daa85e4bef944e1496532:
+only13 inserted producer lines/two files plus new tests. Worker345 cases include51
+new;24 prechange paged captures/18 actual prechange failures are preserved. Strict
+TS6/5.9/56 meaningful negatives,13-module graph/Biome/103 protected sources and456
+existing inputs pass. Main inspects the minimal diff and allocates independent
+private review. No source approval/U2 activation/root-generation pass is inferred.
+Independent U1 review now passes345 reruns/67 fresh probes,24 dual-source paged
+golden replays, strict TS6/5.9/56 negatives and all protected seals. Main reruns345,
+guard-after/lint509/docs+18 and grants bounded source approval at2c2d8f4d… . Main
+commits exact producers/new tests and records separate pre-U2 source105 map
+abba84ba882b2d6d6fa596b74f91003308ed6d249001fa2084ebdef40a8403c2. Old maps stay
+preserved. U2 activates only after commit and explicit allocation; root generation
+failures remain open and no native/full-feature acceptance follows.
 
 ## Historical WP-08 integration and delivery
 

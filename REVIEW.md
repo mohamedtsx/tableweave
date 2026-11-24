@@ -1572,3 +1572,20 @@ recipe at b9a3e8ee… and verifies actual combined build/strict package/type/sco
 units. Main grants delegated transport acceptance, not an output-generation or
 whole-WP09 pass. Default650 pass/2 historical-generation failures remain open.
 Only the exact two-file U1 controller plan is activated; other runtime owners frozen.
+
+## WP-09 U1 controller guards — delegated review session 7
+
+### n1 — Exact two-file source candidate accepted; no blocking finding
+
+Independent345 scoped cases/67 fresh probes pass, with both source variants matching
+all24 sealed paged cases. Strict TS6/5.9 source/private declarations and56 meaningful
+negatives pass. Removing exactly13 insertions restores both preimages. Protected
+103 sources/456 existing inputs,794 manifest entries and historical seals stay intact.
+Main reruns actual345/guard-after/lint509/docs+18 and confirms source hashes:
+store089206a462fa68c8f544658446372efbb22779361249e63bb213efa41d97cd12;
+reducerfc6a10034a543af520a24bb2a1e2d6fbc66422f72ebf6680b0fd409ff58259aa.
+Main grants **agent-approved under delegated authority** at source/test aggregate
+2c2d8f4df8efc57270a2f85d27d0c7c75abcf690e66daa85e4bef944e1496532 only.
+No native/resource/pager/facade/generation/full-WP09 or merge approval follows.
+New pre-U2 source105 map is abba84ba… under the documented canonical JSON recipe;
+old baseline/seals remain historical, not rewritten to bless intentional deltas.
