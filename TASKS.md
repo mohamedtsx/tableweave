@@ -69,7 +69,9 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   combined checks pass. WP-06 actual Start corrections n1–n5 are independently
   reviewed; no residual source defect is verified. Main's full corrected guarded
   workflow/fresh actual-tarball checks pass and bounded G-04 is agent-approved
-  under delegated authority. Commit and deliver a separate stacked unmerged PR. Other packets
+  under delegated authority. Source `a7d0863` is pushed in open
+  [PR #6](https://github.com/mohamedtsx/tableweave/pull/6) against PR #5's branch;
+  remote checks are pending at handoff. Other packets
   continue only in their bounded isolated/primary paths. No deployment/publication.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
@@ -94,7 +96,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
-| TASK-014 | WP-06 Start/Query SSR integration | in progress | Guarded implementation approved; main Git/PR handoff | Delegated G-04;289 units/43 baseline +54 source/54 packed browser executions |
+| TASK-014 | WP-06 Start/Query SSR integration | in progress | Source approved/pushed; PR #6 open, remote checks pending | Delegated G-04;289 units/43 baseline +54 source/54 packed browser executions |
 | TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
 | TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
 | TASK-017 | WP-09 details/localization/responsive shell | planned | Assigned after producer handoffs | WP-04/WP-05 |
@@ -781,3 +783,9 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   is **agent-approved under delegated authority**, not personal maintainer/real-
   consumer/AT/performance/release acceptance. Next: commit, stack on actual PR #5,
   push/open separate PR and verify remote checks. No merge/publication/deploy.
+  **Git handoff:** source transport `f3507c1` was stacked as `a7d0863` on the actual
+  reviewed PR #5 head `3e4aaa8`. Pre-stack and stacked trees are byte-identical;
+  base ancestry verified. Pushed `feat/wp-06-start-query`; open PR #6 targets
+  `feat/wp-05-resources`. GitHub confirms OPEN and auto-merge disabled. Both
+  foundation checks are running at this handoff; main will verify their result.
+  No PR merge or further source changes are inferred from creating the PR.
