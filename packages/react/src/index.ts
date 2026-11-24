@@ -72,11 +72,25 @@ export {
   TableDefinitionError,
 } from "./table/definition.js";
 export type {
+  DataTableEmptyCause,
+  DataTableModel,
+  DataTableOptions,
+  DataTablePublicError,
+  DataTableRecovery,
+  DataTableSourceTarget,
+  DataTableToolTarget,
   DefineTableInput,
   TableDefinition,
   TableToolPlacement,
   ToolPlacement,
 } from "./table/types.js";
+export {
+  assertDataTableModel,
+  DataTableModelError,
+  getDataTableModelOwner,
+  requireDataTableModel,
+  useDataTable,
+} from "./table/use-data-table.js";
 export { createTableSortFn } from "./tanstack/sort.js";
 export type {
   EmptyKind,

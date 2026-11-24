@@ -22,3 +22,9 @@ source-authority metadata functions/types and useCriteriaFrame plus its public i
 result types. Replace broad frame type-star export with an explicit allowlist so
 private bridge receipt/capture helpers do not become root API by accident. No
 private owner lookup/capture registry/resource identity helper is exported.
+
+After provisional P2d5be856, main adds actual model/options/recovery/target types
+and useDataTable/model issuance lookup/require/assertion to the root source entry.
+Private source-derived hook/capture/committed-frame helper and pure recovery
+implementation remain internal. Existing server-safe contracts/filter boundaries
+and historical installed dist are unchanged; final emitted/archive checks are owed.

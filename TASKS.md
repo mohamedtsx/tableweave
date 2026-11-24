@@ -8,6 +8,11 @@ inputs/116 protected source hashes and passes one whole-React TS6 noEmit compile
 Post-P2 source121 map is49bd0090170ea5c18e33f19dc592099f8ac532ffedde4e0bbf0028709dee4c01.
 No runtime/React/negative/emitted/independent acceptance is claimed. Main commits
 before exports/intake; isolated Search/Tabs continues against unchanged F3 APIs.
+P2 is committedd5be856. Main adds only intended actual facade/model source exports;
+private source-derived frame/capture/recovery internals remain unexported. No new
+installed consumer or generated-output identity is claimed.
+The source-root facade export handoff passes one whole-React TS6 noEmit compile;
+it is still source-only/private, without runtime or ordinary installed/packed proof.
 
 React/source readiness now hands off PROVISIONALLY at716782d90f43c4656b0b55832392cc7e516621576fe9ddae8fb385a4014f7e0d.
 Main inspects source capability/hook contracts, matches20 handoff hashes,115 protected
