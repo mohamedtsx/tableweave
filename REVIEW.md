@@ -1810,3 +1810,17 @@ CSS-root static checks and full scoped Biome pass. Asset-copy closure and seven
 source-negative cases are authored but unrun; emitted/ordinary/archive/visual/
 independent correction verification remains deferred. Original profiles/seals are
 not rebaselined, and neither note is marked runtime-verified or packet-approved.
+
+## WP-10 admission intake — review session 19 (provisional)
+
+### n1 — Pure page cardinality rejects genuine disabled-pagination collections
+
+The admission worker traces real unpaged native rows beyond query pageSize against
+the unchanged pure parser's cardinality check. Main confirms canonical disabled
+queries retain their default page fields, native rows execute unsliced and fresh
+manual-order controls can allow those rows. This is a protocol mismatch, not a
+reason to slice rows, inflate pageSize or weaken the requirement. Preserve the
+held producer and original pure seal; allocate explicit extent provenance in the
+stamp/parser/origin+ack contract and derive it only from genuine pagination policy.
+The required11-row/default10 fixture is authored and unrun. No runtime reproduction,
+correction verification or independent closure is claimed; n1 remains open.

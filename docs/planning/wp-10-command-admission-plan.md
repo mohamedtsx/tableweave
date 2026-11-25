@@ -105,3 +105,19 @@ API/limits/fences/receiver semantics/hash/light results/deferred commands.
 Active base848c94b; canonical145 source map31da43d6873e3c73604244cc72142f2e62081727bf3df7e3c5d1ebf93feb0ebe is
 /tmp/opencode/wp10-before-core-entry-source145.json. Source bytes are unchanged by
 the additive manifest entry. Protect all145 sources and old tests/config/seals.
+
+## Held provisional implementation
+
+[Actual admission handoff](../../tests/reordering/admission/README.md) authors four
+new modules but is **held, not Stage2 activation-ready**. Main reads actual factory/
+capture/commit/command interfaces, matches29 own inputs/all145 original source hashes
+and passes one own positive source TS6 program. Four-source aggregatedb7eee30… and
+29-input aggregate5185a970… remain exact original stage identities. New149-source map:
+c49ff0b5a5ffae020fbdef637a037fcd5ccf038b5831a9a62fa81876469f6689.
+
+The [source-traced blocker](../../tests/reordering/admission/BLOCKER.md) identifies
+genuine unpaged rows beyond canonical pageSize conflicting with pure Stage1's bound.
+No protected workaround or runtime reproduction occurred. Main preserves this held
+producer before allocating the separate explicit extent compatibility correction;
+its authored11-row unpaged requirement remains unskipped/unverified. Native/handle/
+pager consumers cannot activate until that selected correction actually hands off.

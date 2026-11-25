@@ -86,7 +86,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 
 | Scope | Owner and boundary | Next step |
 | --- | --- | --- |
-| Guarded C/admission helper | Shared writer; four new headless client files + own fixtures only | Actual API/hash/light-check handoff; no existing source modifications |
+| Guarded C/admission helper | Held handoff delivered; writer released | Main matches29 inputs/all145 old sources + positive TS6; preserve before unpaged correction |
 | Closed native-ref lifetime | Isolated worker from848c94b; core/renderer + one new private module/own fixtures | Refs-only tickets/purge/release/refresh; protect other143 sources |
 | Definition reorder capabilities | Preserved isolated04941b2; two P1 files/own fixtures | Positive TS6/format/scope pass; intake waits for active handoffs |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
@@ -108,6 +108,14 @@ positive TS6/full scoped formatting/syntax,143 protected-source/1376 old tracked
 checks and staged whitespace. Twelve-input aggregate66cbea79…; source14535974bee…
 is separate from the active workers' baseline. Tests/four negatives are authored but
 unrun; intake waits for admission/lifetime handoffs, not an automatic source rebase.
+
+Admission helper is authored but held: genuine11-row unpaged/default10 tables fail
+the unchanged pure parser's cardinality assumption. Main confirms the source trace,
+reads actual interfaces, matches29 worker inputs/all145 original sources and passes
+one positive own source TS6 program. New149-source mapc49ff0b5… is preserved. Review19n1
+requires explicit stamp extent/origin/ack semantics, not slicing or page-size
+inflation; old source seal/blocker and unexecuted requirement fixture remain intact.
+Native consumer activation stays held. Main preserves before the bounded correction.
 
 ### Current ownership and next action
 
