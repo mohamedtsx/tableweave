@@ -203,3 +203,11 @@ genuine producer/tool/input review. Data-only capsule maps/status stay UNREVIEWE
 until independent inspection and a separately selected owned-tool runtime probe.
 Exact source/tool controls, genuine detached checkout/frozen installs/current
 generation180/199 and ordinary lock/archive proof remain later held phases.
+
+Read-only producer preparation observes all30 current non-evidence WP13 tooling
+files at mode0664. Future genuine clone/setup must deliberately use matching
+creation modes (for example a selected command-local umask0002), because CLI
+verifyMap requires one tooling map to match both primary and producer file modes
+as well as bytes. Do not chmod primary files or re-sign old maps to fit a clone;
+record actual fresh-clone modes and let mismatches hold before generation. No clone
+or source permission change is selected by this metadata observation.
