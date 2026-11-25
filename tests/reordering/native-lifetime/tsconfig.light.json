@@ -1,0 +1,30 @@
+{
+  "extends": "../../data-table/details-accessory/tsconfig.light.json",
+  "compilerOptions": {
+    "paths": {
+      "@tableweave/react": ["../../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../../packages/react/src/filters/index.ts"
+      ],
+      "@heroui/react/*": [
+        "../../../packages/heroui/node_modules/@heroui/react/dist/components/*/index.d.ts"
+      ],
+      "@internationalized/date": [
+        "../../../packages/heroui/node_modules/@internationalized/date"
+      ],
+      "@tanstack/react-table": [
+        "../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../../packages/heroui/src/**/*.ts",
+    "../../../packages/heroui/src/**/*.tsx"
+  ],
+  "exclude": ["./negative-types.ts", "./.artifacts"]
+}

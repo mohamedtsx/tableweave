@@ -1053,6 +1053,254 @@ export function requireTableRendererMember<
   check();
   return current;
 }
+
+/** Identity-only transient inspection for the closed native-ref owner. This is
+ * not a controls grant and never reads an alleged member before real membership. */
+const nativeLifetimeIdentities = new WeakMap<object, object>();
+function nativeIdentity(value: object): object {
+  let token = nativeLifetimeIdentities.get(value);
+  if (!token) {
+    token = Object.freeze({});
+    nativeLifetimeIdentities.set(value, token);
+  }
+  return token;
+}
+export interface NativeLifetimeMember {
+  readonly id: string;
+  readonly token: object;
+  readonly column?: object;
+}
+export interface NativeLifetimeReady {
+  readonly kind: "ready";
+  readonly domain: readonly (object | string | number | boolean)[];
+  readonly frame: object;
+  readonly native: object;
+  readonly rows: readonly NativeLifetimeMember[];
+  readonly leaves: readonly NativeLifetimeMember[];
+  readonly cells: readonly Readonly<{
+    token: object;
+    row: object;
+    column: object;
+    columnId: string;
+  }>[];
+  readonly selected?: Readonly<{
+    kind: "row" | "leaf" | "column" | "cell";
+    id: string;
+    token: object;
+    row?: object;
+    column?: object;
+    columnId?: string;
+  }>;
+}
+/** Association only, so a same-actor source wait can revoke native refs even
+ * when the normal live renderer require is unavailable. Never a display grant. */
+export function captureNativeResourceTarget<
+  S extends QuerySchema,
+  T extends object,
+>(input: unknown): TableRendererTarget<S, T> {
+  const cell = ownData(input, "cell");
+  if (!cell || typeof cell !== "object") deny();
+  const registration = rendererCells.get(cell) as
+    | RendererRegistration<S, T>
+    | undefined;
+  if (!registration) deny();
+  const actor = ownData(input, "actor");
+  if (
+    !actor ||
+    typeof actor !== "object" ||
+    registration.snapshot().actor !== actor
+  )
+    deny();
+  return Object.freeze({
+    cell: cell as TableRendererCell<S, T>,
+    actor: actor as TableRendererActor<S, T>,
+  });
+}
+export function inspectRendererNativeLifetime(
+  cell: unknown,
+  actor: unknown,
+  alleged?: Readonly<{
+    kind: "row" | "leaf" | "column" | "cell";
+    value: unknown;
+  }>,
+): NativeLifetimeReady | Readonly<{ kind: "blocked" }> {
+  if (!cell || typeof cell !== "object" || !rendererCells.has(cell)) deny();
+  // The erased envelope is only used for actual registry lookup/require. No row
+  // payload or consumer cast is manufactured by the resource registry.
+  const target = { cell, actor } as TableRendererTarget<QuerySchema, object>;
+  const source = requireTableRendererSourceTarget(target);
+  if (source.model.phase !== "display")
+    return Object.freeze({ kind: "blocked" });
+  const current = requireTableRendererTarget(target);
+  const { model } = current;
+  const view = model.view ?? deny();
+  const definition = model.definition ?? deny();
+  const check = () => {
+    if (requireTableRendererTarget(target).model !== model) deny();
+  };
+  const policies = definition.native.controllerDefinition.columns;
+  const selectionId = current.ports.collection?.selectionColumnId;
+  const visible = new Set(view.visibleColumns.map((column) => column.id));
+  const policy = (id: string) => policies.find((column) => column.id === id);
+  const movable = (id: string) =>
+    visible.has(id) &&
+    id !== selectionId &&
+    !!policy(id) &&
+    policy(id)?.utility !== true;
+  const rows: NativeLifetimeMember[] = [];
+  const cells: {
+    token: object;
+    row: object;
+    column: object;
+    columnId: string;
+  }[] = [];
+  for (const row of view.rows) {
+    check();
+    rows.push(Object.freeze({ id: row.id, token: nativeIdentity(row) }));
+    const visibleCells = row.getVisibleCells();
+    check();
+    for (const cell of visibleCells) {
+      if (
+        visible.has(cell.column.id) &&
+        cell.column.id !== selectionId &&
+        policy(cell.column.id)
+      )
+        cells.push(
+          Object.freeze({
+            token: nativeIdentity(cell),
+            row: nativeIdentity(row),
+            column: nativeIdentity(cell.column),
+            columnId: cell.column.id,
+          }),
+        );
+      check();
+    }
+    check();
+  }
+  const leaves: NativeLifetimeMember[] = [];
+  const visit = (
+    header: (typeof view.headerGroups)[number]["headers"][number],
+  ) => {
+    check();
+    if (
+      !header.isPlaceholder &&
+      header.subHeaders.length === 0 &&
+      movable(header.column.id)
+    )
+      leaves.push(
+        Object.freeze({
+          id: header.column.id,
+          token: nativeIdentity(header),
+          column: nativeIdentity(header.column),
+        }),
+      );
+    for (const child of header.subHeaders) visit(child);
+    check();
+  };
+  for (const group of view.headerGroups)
+    for (const header of group.headers) visit(header);
+  let selected: NativeLifetimeReady["selected"];
+  if (alleged !== undefined) {
+    const kind = ownData(alleged, "kind"),
+      value = ownData(alleged, "value");
+    if (
+      kind !== "row" &&
+      kind !== "leaf" &&
+      kind !== "column" &&
+      kind !== "cell"
+    )
+      deny();
+    requireTableRendererMember(
+      target,
+      kind === "leaf" ? "header" : kind,
+      value,
+    );
+    check();
+    // Recover the genuine argument from the inspected real collection, not an
+    // alleged object's id/prototype. All subsequent properties belong to it.
+    if (kind === "row") {
+      const row = view.rows.find((candidate) => candidate === value) ?? deny();
+      selected = Object.freeze({
+        kind,
+        id: row.id,
+        token: nativeIdentity(row),
+      });
+    } else if (kind === "leaf") {
+      const leaf =
+        leaves.find(
+          (candidate) => candidate.token === nativeIdentity(value as object),
+        ) ?? deny();
+      selected = Object.freeze({ kind, ...leaf });
+    } else if (kind === "column") {
+      const column =
+        view.visibleColumns.find((candidate) => candidate === value) ?? deny();
+      if (column.id === selectionId || !policy(column.id)) deny();
+      selected = Object.freeze({
+        kind,
+        id: column.id,
+        token: nativeIdentity(column),
+      });
+    } else {
+      let found: NativeLifetimeReady["selected"];
+      for (const row of view.rows) {
+        check();
+        const cells = row.getVisibleCells();
+        check();
+        const cell = cells.find((candidate) => candidate === value);
+        if (!cell) continue;
+        if (
+          !visible.has(cell.column.id) ||
+          cell.column.id === selectionId ||
+          !policy(cell.column.id)
+        )
+          deny();
+        found = Object.freeze({
+          kind,
+          id: cell.id,
+          token: nativeIdentity(cell),
+          row: nativeIdentity(row),
+          column: nativeIdentity(cell.column),
+          columnId: cell.column.id,
+        });
+        break;
+      }
+      selected = found ?? deny();
+    }
+    check();
+  }
+  const owner = model.sourceTarget?.owner ?? deny();
+  const controls = getControlsAuthorityOwner(model.authority ?? deny());
+  if (
+    controls?.definition !== definition.native ||
+    controls.controller !== model.controller
+  )
+    deny();
+  const origin = current.origin;
+  const result: NativeLifetimeReady = Object.freeze({
+    kind: "ready",
+    domain: Object.freeze([
+      nativeIdentity(definition),
+      nativeIdentity(definition.native),
+      nativeIdentity(definition.native.controllerDefinition),
+      nativeIdentity(origin.controller),
+      nativeIdentity(owner),
+      nativeIdentity(owner.publication),
+      origin.epoch,
+      origin.context.definitionKey,
+      origin.context.scopeKey,
+      origin.context.access,
+      current.metadata.mode,
+    ]),
+    frame: nativeIdentity(model.frame ?? deny()),
+    native: nativeIdentity(view.native),
+    rows: Object.freeze(rows),
+    leaves: Object.freeze(leaves),
+    cells: Object.freeze(cells),
+    ...(selected ? { selected } : {}),
+  });
+  check();
+  return result;
+}
 export function tableRendererBoundary<
   S extends QuerySchema,
   T extends object,

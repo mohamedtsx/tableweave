@@ -12,6 +12,12 @@ import {
 import type { QuerySchema } from "@tableweave/react/contracts";
 import { createDetailsAdapter } from "../details/committed-details.js";
 import type { DetailsCommitCell } from "../details/types.js";
+import {
+  installRendererNativeLifetime,
+  type NativeCoreLink,
+  type NativeCoreStamp,
+  type NativeLifetimeHooks,
+} from "../table/native-resource-lifetime.js";
 import { createTableRendererAdapter } from "../table/renderer-commit.js";
 import type { TableRendererCell } from "../table/types.js";
 import type { CriteriaToolTarget } from "./criteria-commit.js";
@@ -231,6 +237,23 @@ interface Work<Actor extends object, Committed> {
   finished: boolean;
 }
 
+// One-shot construction handshake, not a registration/policy setter. The seed is
+// created and consumed synchronously before the closed renderer factory returns.
+const nativeInstallSeeds = new WeakMap<
+  object,
+  { readonly cell: object; readonly link: NativeCoreLink }
+>();
+export function claimRendererNativeInstall(
+  cell: unknown,
+  seed: unknown,
+): NativeCoreLink | null {
+  if (!object(seed)) return null;
+  const issued = nativeInstallSeeds.get(seed);
+  if (!issued || issued.cell !== cell) return null;
+  nativeInstallSeeds.delete(seed);
+  return issued.link;
+}
+
 /** Sole lifecycle implementation. Tool policy preserves original F3 ordering;
  * renderer policy requires real registration before inspecting private ports. */
 function createCore<
@@ -241,7 +264,10 @@ function createCore<
   Lease extends object,
   Committed,
   Handle extends object,
->(adapter: CommitAdapter<S, Target, Ports, Actor, Committed>) {
+>(
+  adapter: CommitAdapter<S, Target, Ports, Actor, Committed>,
+  rendererNative = false,
+) {
   const { controller } = adapter;
   function deny(): never {
     return adapter.deny();
@@ -262,6 +288,27 @@ function createCore<
     notifying = false,
     modelVersion: object = Object.freeze({});
   let currentFacadeSource: object | null = null;
+  let native: NativeLifetimeHooks | null = null;
+  let nativeReconciling = false;
+  let nativeClearing = false;
+  const nativeStamps = new WeakMap<
+    object,
+    {
+      readonly operation: object;
+      readonly entry: Item | null;
+      readonly mount: Lease | null;
+    }
+  >();
+  const hasNativeDebt = () => {
+    for (const item of work) if (!item.valid && !item.finished) return true;
+    return false;
+  };
+  const invalidateWork = () => {
+    for (const item of work) {
+      item.valid = false;
+      item.callback = null;
+    }
+  };
   const makeSnapshot = (version: object) =>
     Object.freeze({
       version,
@@ -325,7 +372,24 @@ function createCore<
     }
     current = null;
     currentFacadeSource = null;
+    native?.revoke(); // Pure ref/ticket clearing, before metadata/native work.
     for (const node of nodes) node.value = null;
+    if (native) {
+      const wasClearing = nativeClearing;
+      nativeClearing = true;
+      try {
+        try {
+          adapter.clearMetadata?.();
+        } finally {
+          invalidateWork();
+          touch();
+          cancelAll();
+        }
+      } finally {
+        nativeClearing = wasClearing;
+      }
+      return;
+    }
     adapter.clearMetadata?.();
     for (const item of work) {
       item.valid = false;
@@ -333,6 +397,19 @@ function createCore<
     }
     touch();
     cancelAll(); // No app/reset/listener call in purge.
+  };
+  const reconcileNative = () => {
+    if (!native) return;
+    nativeReconciling = true;
+    try {
+      if (native.reconcile() !== "kept") {
+        invalidateWork();
+        cancelAll();
+      }
+      if (hasNativeDebt()) deny();
+    } finally {
+      nativeReconciling = false;
+    }
   };
   const validLease = (lease: Lease) =>
     object(lease) && leases.has(lease) && mount === lease;
@@ -462,6 +539,12 @@ function createCore<
     opaqueProps: unknown,
   ): Actor {
     if (!validLease(lease)) return deny();
+    if (native && nativeClearing) {
+      operation = {};
+      native.revoke();
+      invalidateWork();
+      return deny();
+    }
     if (busy || notifying) {
       try {
         purge();
@@ -582,6 +665,8 @@ function createCore<
         mode: captured.mode,
       });
       activateCriteriaFacadeCapture(facadeAttempt);
+      reconcileNative();
+      if (native) local();
       touch(); // L-config, no app callback before actor publication.
     } catch (error) {
       let skipped: object | null = null;
@@ -697,8 +782,10 @@ function createCore<
       !current
     )
       deny();
-    if (busy || notifying) {
+    if (busy || notifying || (native && nativeClearing)) {
       operation = {};
+      native?.revoke();
+      if (native) invalidateWork();
       deny();
     }
     busy = true;
@@ -716,6 +803,7 @@ function createCore<
       return undefined;
     };
     let changed = false;
+    let nativeFailed = false;
     try {
       const metadata = new CommitMetadata(check, deny),
         admission = adapter.admit(rawTarget, metadata, check, pin);
@@ -733,11 +821,23 @@ function createCore<
       const before = adapter.metadataReference();
       adapter.activate(admission.target);
       changed = before !== adapter.metadataReference();
+      reconcileNative();
+      if (native) check();
       if (changed) metadataTouch();
     } catch {
-      deny();
+      if (!native) deny();
+      nativeFailed = true;
+      try {
+        purge();
+      } catch {
+        // Ref state is already revoked. Exact native work debt stays in work.
+      }
     } finally {
       busy = false;
+    }
+    if (nativeFailed) {
+      notify(); // Revocation only, after clearing our own busy guard.
+      deny();
     }
     if (changed) notify();
     requireActor(prior.actor ?? deny());
@@ -781,7 +881,7 @@ function createCore<
     delay: number | null,
     callback: (committed: Committed) => undefined,
   ): Handle {
-    if (busy || notifying) return deny();
+    if (busy || notifying || (native && nativeClearing)) return deny();
     requireActor(actor);
     if (
       typeof callback !== "function" ||
@@ -882,7 +982,8 @@ function createCore<
       };
     },
     connect(): Lease {
-      if (busy || notifying || mount) return deny();
+      if (busy || notifying || mount || (native && nativeClearing))
+        return deny();
       const lease = Object.freeze({}) as Lease;
       leases.add(lease);
       mount = lease;
@@ -893,6 +994,12 @@ function createCore<
     disconnect(lease: Lease) {
       if (!object(lease) || !leases.has(lease)) return deny();
       if (mount !== lease) return;
+      if (native && nativeClearing) {
+        operation = {};
+        native.revoke();
+        invalidateWork();
+        return deny();
+      }
       mount = null;
       const entry = registration;
       try {
@@ -928,7 +1035,41 @@ function createCore<
       value: updateModel,
       enumerable: true,
     });
-  return Object.freeze(cell);
+  const frozen = Object.freeze(cell);
+  if (rendererNative) {
+    const link: NativeCoreLink = Object.freeze({
+      capture(): NativeCoreStamp {
+        const stamp = Object.freeze({}) as NativeCoreStamp;
+        nativeStamps.set(stamp, { operation, entry: current, mount });
+        return stamp;
+      },
+      require(stamp: NativeCoreStamp, mode: "idle" | "transition") {
+        const issued = object(stamp) ? nativeStamps.get(stamp) : undefined;
+        if (
+          !issued ||
+          issued.operation !== operation ||
+          issued.entry !== current ||
+          issued.mount !== mount ||
+          !current?.actor ||
+          current.phase !== "active" ||
+          !mount ||
+          current.lease !== mount ||
+          notifying ||
+          nativeClearing ||
+          hasNativeDebt() ||
+          (mode === "idle"
+            ? busy
+            : mode !== "transition" || !busy || !nativeReconciling)
+        )
+          return deny();
+        return Object.freeze({ mount, actor: current.actor });
+      },
+    });
+    const seed = Object.freeze({});
+    nativeInstallSeeds.set(seed, { cell: frozen, link });
+    native = installRendererNativeLifetime(frozen, seed);
+  }
+  return frozen;
 }
 
 export function createToolCommitCore<
@@ -946,7 +1087,7 @@ export function createRendererCommitCore<
   const adapter = createTableRendererAdapter(model);
   // The closed renderer adapter installs updateModel; all missing declaration
   // members are opaque lease/actor/local/work brands, not consumer data casts.
-  return createCore(adapter) as unknown as TableRendererCell<S, T>;
+  return createCore(adapter, true) as unknown as TableRendererCell<S, T>;
 }
 
 /** Closed details specialization; tool/renderer ordering and signatures unchanged. */
