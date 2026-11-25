@@ -88,10 +88,11 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | --- | --- | --- |
 | Guarded C/admission helper | Held producer preservede9d1721 | Original maps/11-row requirement remain unchanged; source readiness waits for extent correction |
 | Unpaged extent correction | Actual handoff delivered; writer released | Main diff/hash/type checks pass; preserve before explicit helper entry or isolated intakes |
-| Closed native-ref lifetime | Isolated worker from848c94b; core/renderer + one new private module/own fixtures | Refs-only tickets/purge/release/refresh; protect other143 sources |
-| Definition reorder capabilities | Preserved isolated04941b2; two P1 files/own fixtures | Positive TS6/format/scope pass; intake waits for active handoffs |
+| Closed native-ref lifetime | Preservede7d55d2/intakenc8e7880; worker released |70 local map inputs/143 original sources checked;20 tracked inputs+combined source types pass, runtime deferred |
+| Definition reorder capabilities | Preserved04941b2/intakeneb17ff9 | Positive combined source types; flags remain configuration, not authority |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
-| Native/handle/pager consumers | Inactive | Need both actual producer handoffs, not proposed method names |
+| Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
+| Admission/UI bridge | Read-only worker; external wp10-admission-ui-bridge report only | Exact app-owned lease/model join/navigation receipts; no source allocation |
 | Optional adapter/dependencies | Metadata preparation only | Installed selection and a closed vendor-resource extension remain later allocations |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
@@ -133,6 +134,23 @@ program. Source1491f9c2bc1… is preserved. Original bookkeeping-scope failure r
 separate; original pure/entry/admission seals and11-row fixture are unchanged. Actual
 paginated-server-complete denial stays enforced. Review19n1 remains runtime and
 independently unverified. Main preserves before source discovery/queued intake.
+U1 is preserved as6326b97. Main now owns only an additive explicit admission client
+entry/own source-discovery fixtures; all149 source bodies remain fixed. The actual
+four runtime/nine type exports exist, but historical dist/packed availability is
+not claimed. Isolated lifetime/definition intakes and neutral consumers stay pending.
+Native lifetime is now preservede7d55d2/intakenc8e7880 and definitioneb17ff9 is intaken.
+Main matches all150 combined source hashes/20 native tracked hashes and passes three
+positive native-lifetime/extent/definition TS6 programs. Source15080ce38f6… is captured.
+All runtime writers are released. Explicit helper entry remains unwritten pending
+a read-only bridge contract: DataTable cleanup must not confuse a temporary UI
+detach with admission.disconnect's real owner retirement/pending invalidation; saved
+pager origins need an actual metadata receipt rather than a fresh post-unlock command.
+No new helper/UI API, runtime proof or packet approval is inferred from these needs.
+Integrated documentation initially fails on one missing definition-handoff navigation
+edge, causing three related checker-regression failures. Review20n1 records the fix
+in the owning plan; replay passes237 Markdown/853 links and all18 checker probes.
+Old failed logs/seals are preserved. No semantic-source/external/runtime/independent
+acceptance is implied by the structural navigation pass.
 
 ### Current ownership and next action
 

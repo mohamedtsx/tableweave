@@ -104,3 +104,21 @@ Own README must freeze actual functions/types/issuance/purge/reconciliation/rele
 refresh/debt limits and hashes/light results/deferred commands. No root exports/
 host/pager/native markup consumer is allocated until this actual handoff and the
 independent admission helper are integrated. Stop before excluded producer changes.
+
+## Preserved and intaken provisional source
+
+Worker handoff is preserved in isolatede7d55d2/intakec8e7880 after main source/API
+inspection,70 local map hashes/143 original protected source hashes and one positive
+own TS6. Local70-input map digest:
+35a95f23d25387166668fab40f3ac2ba0aa6ec6d8966e8d78dbb9d07e80c7c85.
+Main explicitly tracks the one core preimage required by light.mjs; other raw local
+maps/logs/temporary formatter artifacts remain in the isolated producer evidence,
+not falsely claimed as70 portable tracked inputs. All20 tracked intake inputs match
+their original worker hashes. Full local handoff replay needs that retained evidence.
+
+Definition metadata is intakeneb17ff9 too. Main matches all150 combined source hashes
+and passes three positive native-lifetime/extent/definition source TS6 programs.
+Combined150-source map80ce38f6479ac13c80e925d519b9b6619921680513c15fdff0f0f4e4657bf8e7
+is separate from every original producer seal. Native consumer/Strict cached-ref/
+geometry/vendor disposal/runtime/SSR/browser/packed/independent acceptance remains
+unverified. Actual source supports refs only; future adapter resources are unsupported.

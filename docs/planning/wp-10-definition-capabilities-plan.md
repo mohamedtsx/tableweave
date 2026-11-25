@@ -50,3 +50,11 @@ new145-source map35974beec7f58f70b2f3a27114767cf4b4e036cfaadcd6a59447292ed0288c7
 Intake waits for the active admission/native-lifetime handoffs. Real factory/native
 identity regressions and four negative cases are authored but unexecuted. This is
 neither runtime/independent approval nor a claim that raw native supports reordering.
+The [actual definition fixture handoff](../../tests/reordering/definition/README.md)
+owns its authored cases/light checks/deferred commands; the navigation edge is
+required independently of naming the directory in prose.
+
+Main intakes this aseb17ff9 after actual U1 handoff, then native lifetimec8e7880.
+All150 expected combined source hashes match and three positive extent/definition/
+native-lifetime source programs pass. The original isolated map remains unchanged;
+no old protected143-source guard is relabeled a current combined-tree gate.

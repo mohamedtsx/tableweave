@@ -30,6 +30,9 @@ original pure/held seals and runtime requirements stay unchanged historical evid
 The [deferred verification inventory](wp-10-deferred-verification.md) records actual
 commands, historical/current lanes and missing runtime/consumer/input obligations.
 It neither activates those checks now nor grants whole-packet approval.
+After actual U1 source6326b97, main owns the separate [client entry discovery](wp-10-admission-entry-plan.md)
+lease. Existing helper/pure bodies stay fixed; ordinary installed/archive/API/runtime
+acceptance and the actual neutral/adapter integration remain deferred.
 
 ## Stage1 ownership and outcome
 

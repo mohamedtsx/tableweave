@@ -1832,3 +1832,19 @@ in the helper. Main reviews the full three-file diff, matches24 fixture/three-so
 held seals and11-row requirement remain unchanged. Existing paginated-server-complete
 denial is retained, not replaced by a fake allowing model. Runtime/ack/browser/
 independent correction verification remains deferred; n1 stays open.
+
+## WP-10 prerequisite integration — review session 20 (provisional)
+
+### n1 — Definition fixture handoff lacks a navigation edge
+
+The integrated documentation checker reports tests/reordering/definition/README.md
+unreachable from entrypoints; three checker-regression cases fail for that same
+workspace condition. Main adds the actual fixture link in its owning capability
+plan, preserving the handoff's bytes and original source seals. Structural checker/
+regression replay is required; this finding concerns navigation, not runtime or
+independent producer approval. Failed logs remain preserved externally.
+
+Session20 n1 structural replay: main's checker passes237 Markdown/853 local links;
+all18 checker regressions pass. The original one-finding/three-regression failures
+remain in the earlier logs. Independent final review, semantic-source comparison,
+external URL and runtime acceptance are not claimed by this navigation correction.
