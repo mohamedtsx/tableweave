@@ -2,7 +2,7 @@
 
 ## Live summary — later entries supersede earlier chronology
 
-## Current WP-11 provisional continuation
+## Current final verification continuation
 
 Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on
 feat/wp-15-integrated above provisional WP-14 head587d140, WP-13 head25fdfde, WP-12 head8c39a4f
@@ -742,6 +742,54 @@ not create/check out/install/build/mount/copy/move/clean or edit helpers. Actual
 producer/consumer install footprint is not yet proved to fit the remaining SSD;
 HDD recovery is not storage-relocation authority. Main will review concrete options
 before any new user decision/target allocation, preserving all old inputs/evidence.
+Independent Chromium002 replay passes all8 original cases once/exit0, with observed
+single-entry completed scan and7 actual optimized dependencies. Main verifies153
+sealed files/six matching protection maps/raw8 one-attempt results. Review42 closes
+review41n1's bounded scan defect; old001152 files/correction7 files/165 inputs and
+canonical155 match unchanged. Stderr remains nonempty/native/debug; live CDP version
+is not captured. Raw immediate bind failure plus later released-port/process checks
+remain exact. Receipt0113660d…; no styled-table DOM/general purge/framework/archive/
+manual/AT/performance/consumer/CI/gate approval. Storage planner is still read-only;
+no subsequent execution/relocation/install/build is selected by this browser pass.
+Main selects seventh final lane: sequential TS6.0.3/TS5.9.3 source annotated baselines
+and stock intended-line negative runners for criteria-facade-config, data-table/shell
+and public-entry only. Main inspects actual runner bodies/source paths/noEmit configs.
+A new external helper may check the two missing annotated baselines without editing
+fixtures or emitting files; public-entry already checks annotated then removed.
+All outputs/diagnostics/pins go to final-source-types-001; no repository/cache writes,
+install/emission/browser/actual archive proof. Failed baselines must not be promoted
+to negative proof. Installed private declaration profiles and source-only limits stay
+explicit; no new code ledger or historical map is inferred/re-signed.
+Storage planner releases final-storage-feasibility-001/PLAN.md. Main reads actual
+measured SSD2.33GiB/HDD869GiB, existing physical node_modules1,110,319,104 allocated
+bytes and source-size bounds; fresh install/Git/store/native/retained-output peak
+remains UNKNOWN. Current guards reject HDD paths; moving cwd alone does not fix
+them, precreated consumer bind mounts fail fresh-target rules and mounting over
+/tmp/opencode would mask protected work. No such action is performed or approved.
+The concrete new-only HDD option needs four existing MJS changes plus a new fixed
+root-contract module, bounded protocol/docs/tests and equal-strict path/owner/device/
+inode/approval checks. All current work/evidence stay put. Main asks the user to
+choose that separate scope, user-freed SSD space or deferred materialization; no
+code/HDD writes/installs/builds/privileged operations follow without an answer and
+reviewed per-phase selections. Read-only/non-emitting type verification continues.
+The storage modal is interrupted with no recorded answer. User says resume; main
+continues the existing final verification task, not a presumed HDD/storage choice.
+New HDD data/storage-guard edits/mount/relocation/cleanup remain unselected.
+Independent selection7 returns RED: six attempted commands all exit1; each compiler
+reports8 TS2307 criteria/shell annotated errors, public-entry annotated8!=0. Four
+criteria/shell removal commands and both public removal phases never run. Main
+verifies61 sealed entries/four unchanged protection maps and actual missing-subpath
+messages. Review43n1 selects only three leaf source tsconfigs to retain all prior
+effective paths and add real reordering/reordering-controller source entrypoints.
+No shared-parent/options/fixture/assertion/dependency/library/drag change; old failed
+receipts stay immutable. Preserve source fix before fresh independent dual replay.
+Main's three leaf-map correction passes JSON/path-target/options preservation/full
+scoped Biome/whitespace checks. Exactly3 of200 captured inputs change;197 protected
+inputs/library155/fixtures/directives/shared parents/dependencies/runners remain
+fixed. Only two real source aliases are added per map, preserving prior resolutions.
+Correction receipt41d481aa… remains distinct from old seals. Main preserves the
+fix then selects fresh independent source-types-002 gated dual replay; no compiler
+success or removed-line proof is assumed from static configuration checks.
 
 ## Current WP-10 implementation handoff
 

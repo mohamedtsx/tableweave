@@ -9,6 +9,12 @@
       "@tableweave/react/filters": [
         "../../../packages/react/src/filters/index.ts"
       ],
+      "@tableweave/react/reordering": [
+        "../../../packages/react/src/reordering/index.ts"
+      ],
+      "@tableweave/react/reordering-controller": [
+        "../../../packages/react/src/reordering-controller/index.ts"
+      ],
       "@tableweave/heroui": ["../../../packages/heroui/src/index.ts"],
       "@internationalized/date": [
         "../../../packages/heroui/node_modules/@internationalized/date"

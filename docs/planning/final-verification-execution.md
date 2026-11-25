@@ -425,3 +425,94 @@ HDD scope/guard seams or SSD alternative and the smallest required user decision
 Recovered HDD availability alone still does not authorize new staging, path-guard
 changes, bind mounts, moving existing work/caches or privileged operations. No
 storage action or packed execution is selected by this preparation report.
+
+## Chromium optimizer replay — actual result
+
+All8 original cases pass once/exit0, with positive one-entry scan/completion and7
+used optimized dependencies. Main verifies153 sealed files/six matching maps and
+raw statuses. Receipt `/tmp/opencode/final-facade-browser-002/receipt-hashes.json`,
+SHA2560113660df0a604dc8a6cf4cfe521ac2f85d0c01f61231bce83dd22aa64a342b3.
+Review42 independently closes review41n1's bounded scan defect. Original151-entry
+browser001/correction6-entry seals and165 inputs remain exact; no error filtering,
+dependency change/alias or optimization disable. Native/debug stderr stays nonempty,
+live engine version remains unobserved, cleanup follow-up preserves the raw first
+bind failure. Synthetic <output> behavior is not styled table/AT/general P purge/
+framework/archive/performance/consumer/CI or packet/stable acceptance.
+
+## Seventh selection — dual source-type baselines and targeted rejection
+
+Main reads the three stock negative runners, fixture markers and effective source
+tsconfigs. One independent worker may run only the following for each installed
+compiler typescript6.0.3 and typescript-5-9(5.9.3), sequentially/no emits:
+
+1. A NEW external annotated-baseline helper for criteria-facade-config, then stock
+   `node tests/criteria-facade-config/check-negatives.mjs COMPILER`.
+2. The same helper for data-table/shell, then stock
+   `node tests/data-table/shell/check-negatives.mjs COMPILER`.
+3. Stock `node tests/data-table/public-entry/check-negatives.mjs COMPILER`, which
+   already checks its annotated baseline before removed intended-line rejection.
+
+The external helper under NEW `/tmp/opencode/final-source-types-001/**` resolves
+only the named installed compiler from the actual workspace, parses the unchanged
+fixture tsconfig, adds its exact annotated negative-types.tsx to the program, and
+requires zero pre-emit diagnostics. Preserve strict/source paths/options; force
+noEmit:true/incremental:false only. Record program files/options/actual diagnostics,
+never call emit or evaluate fixture/app code. No fabricated declarations/global
+shim/rewritten fixtures or @ts directive removal on disk. The stock removed runners
+perform their own in-memory removal/line checks. If an annotated baseline fails,
+do not count a later incidental error as negative proof; leave that pair unrun and
+preserve its actual failure. Other independent families/compilers may still run.
+
+Commands use existing Node24.22.0 with NODE_DISABLE_COMPILE_CACHE=1, one compiler
+process at a time/180second host deadline plus delivery headroom/128MiB floor.
+Capture exact helper source/argv and actual compiler program/tool/vendor identities,
+raw diagnostics/statuses/meaningful-line counts and protected before/after maps.
+Only the new external root may receive writes; repository/cache/old evidence is
+fixed. No install/build/emission/pack/helper filesystem test/CLI app execution,
+browser/HTTP/framework/native provisioning/profile change/CI or source correction.
+Existing private installed declaration profiles stay disclosed; source-alias success
+is not ordinary/emitted/packed declarations or a comprehensive diagnostic-code ledger.
+Do not invent stronger runner assertions or re-sign historical counts/maps. Main
+reviews concrete failures and source-type coverage before any correction/replay.
+
+## Seventh selection — actual failure and three-leaf correction
+
+All six attempted commands exit1: both compilers' criteria/shell annotated programs
+report8 TS2307 errors; public-entry fails annotated8!=0. Four gated removal commands/
+both public removed phases remain unrun; no negative pass. Main verifies61 receipt
+entries/four unchanged maps and actual missing reordering subpath diagnostics.
+Receipt `/tmp/opencode/final-source-types-001/receipt-hashes.json`, SHA256
+0ebfe1f803988f7675184409ff699577e3b8454c574adaa1f45840e2606f4f5c.
+
+Review43n1 selects main-only edits to exactly three source configs:
+tests/criteria-facade-config/tsconfig.light.json,
+tests/data-table/shell/tsconfig.light.json and
+tests/data-table/public-entry/tsconfig.json. Preserve every existing effective path
+and compiler option/include/exclude; add only the two missing real source mappings
+for @tableweave/react/reordering and reordering-controller. The first two leaf maps
+must explicitly retain inherited entries because TypeScript replaces paths objects.
+Shared parents/library source/exports/fixtures/directives/dependencies stay fixed.
+NEW external `/tmp/opencode/final-source-type-alias-correction-001/**` captures
+preimages/source-map invariants/delta/format receipts, not a rewritten old seal.
+Syntax/JSON/full scoped Biome checks are selected; no compiler success is inferred.
+Independent affected dual replay needs fresh outputs and original baseline gating.
+Main captures200 before/after identities/three preimages and verifies all prior
+resolved path targets/non-path options/includes unchanged. Exactly3 leaf maps add
+the two genuine source entries;197 protected inputs/library155 stay fixed. Full
+scoped Biome/JSON/invariant checks pass. Correction receipt41d481aa… is separate
+from original001 failures and historical producer maps.
+
+Independent reviewer may repeat ONLY the same gated dual checks in NEW external
+`/tmp/opencode/final-source-types-002/**`. Copy the exact external annotated helper
+with only its output namespace changed, retaining compiler whitelist/config/target/
+strict noEmit/incremental semantics. Preserve all original00161 entries+seal and
+the correction receipts. Same source families/compiler versions, same stock removed
+runners, no directive/marker/test/config/expectation or dependency change. Run each
+baseline first; if it fails, its removed command remains unrun. Public-entry retains
+its own annotated prerequisite. Six commands previously failed; four removals may
+run for the first time only after clean matching baselines. Maximum10 commands,
+sequential/180seconds each/128MiB floor/no emits or repository/cache writes.
+Capture actual version/options/program reads/diagnostics/count/status before-after
+and preserve any new failure without repair or retry. Source aliases/private
+declaration profiles are not emitted/ordinary-package proof. Main reviews results
+before bounded closure or any further correction/execution selection.

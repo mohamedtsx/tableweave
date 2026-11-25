@@ -10,6 +10,61 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 43 (dual source-type resolution blocker)
+
+Selection7 is RED: six attempted commands exit1/no timeout/signal. TS6.0.3 and
+TS5.9.3 criteria/shell annotated programs each report8 TS2307 diagnostics; both
+public-entry runners fail their annotated8!=0 assertion. Four gated criteria/shell
+removed commands and both public-entry removed phases are NOT RUN, no negative
+passes. Main verifies61 receipt entries/four identical protected before-after maps
+and positioned diagnostics identifying only the two missing reordering subpaths.
+Receipt /tmp/opencode/final-source-types-001/receipt-hashes.json SHA256
+0ebfe1f803988f7675184409ff699577e3b8454c574adaa1f45840e2606f4f5c.
+
+### n1 — Effective source maps omit existing public reordering entrypoints
+
+Heroui source now imports @tableweave/react/reordering and reordering-controller;
+the three source-only programs map root/contracts/filters but not those subpaths.
+Both real source index files exist. Do not build/fabricate dist or count incidental
+module errors as meaningful rejection. Main selects leaf-local path additions in
+criteria-facade-config/tsconfig.light.json, data-table/shell/tsconfig.light.json and
+data-table/public-entry/tsconfig.json only. Since paths replaces rather than merges,
+copy each leaf's effective inherited mappings unchanged and add exactly those two
+real source targets, correctly rebased. Shared parents/options/includes/fixtures/
+directives/assertions/library/public exports/dependencies stay fixed. Capture exact
+preimages and preserve the RED attempt; independent fresh affected replay follows.
+Resolving inert source types is not drag activation or ordinary/emitted type proof.
+Main captures200 input identities/three preimages and changes exactly those leaf
+path maps. Other197 inputs/library155/test directives/shared parents/manifests/lock/
+runners match. All old absolute mapping targets and non-path leaf options/includes
+remain equal; each leaf adds only the two genuine source entrypoints. Full scoped
+Biome/JSON/invariant/whitespace checks pass, not a compiler result. Correction receipt
+41d481aae6135800529ef0afd0957263ea6b2c75dd3059a1e862c84521df98d1 at
+/tmp/opencode/final-source-type-alias-correction-001/receipt-hashes.json. n1 stays
+OPEN pending independent fresh annotated/removed dual replay; original001 remains RED.
+
+Independent browser002 runs all8 original cases once/exit0, no retries/timeout/
+signal or remaining observed process/port debt. Main reads raw results/scan metadata
+and verifies153 sealed files/six unchanged protection maps. Actual Vite debug names
+the one fixture HTML entry, reports scan completion, and fresh metadata contains
+all7 used optimized dependencies. Former broad-scan errors are absent, not filtered.
+Receipt SHA2560113660df0a604dc8a6cf4cfe521ac2f85d0c01f61231bce83dd22aa64a342b3
+at /tmp/opencode/final-facade-browser-002/receipt-hashes.json.
+
+**Review41n1 closed for the bounded dependency-scan scope/resolution defect.**
+The stock one-file correction is inherited; wrapper adds only diagnostic vite:deps*
+logging beyond the preserved output namespace, no entry/alias/optimizer disable.
+Original001151 sealed entries+seal and correction6 entries+seal remain exact;
+all165 correction inputs/canonical155 match. Native/debug stderr remains nonempty;
+version159.0.8154.6 is installation metadata, not captured live CDP observation.
+Initial EADDRINUSE stays raw; later kernel/bind/process evidence resolves cleanup
+without a diagnosed transient cause or ambient kill. No further in-scope defect.
+
+This proves only observed synthetic hook/model <output> browser behavior and the
+scoped scan fix. Styled table/native accessible DOM, private/backend lifecycle/P
+purge, framework/streaming/hydration, ordinary archives/profiles/CI/manual/AT/mobile/
+performance/real-consumer and packet/stable gates remain open. Drag stays blocked.
+
 ## Final verification — review session 41 (first source Chromium fixture)
 
 Independent selected react.spec.ts runs once:8/8 pass, CLI exit0/no retries/timeout/
@@ -48,6 +103,9 @@ deps remain unchanged. Syntax/full scoped Biome pass. Separate correction receip
 20aec5078ee43bdd40a40aa9fdeca7d31232043ae35cf04c8f9215fe3bdeed60 at
 /tmp/opencode/final-facade-scan-correction-001/receipt-hashes.json. n1 remains OPEN
 until independent replay observes the corrected scan and original assertions.
+Review42 subsequently independently verifies the corrected scan and all8 original
+assertions; n1 is closed only for this bounded harness defect, with original errors
+and broader proof limits preserved.
 
 ## Final verification — review session 40 (independent JSX correction replay)
 
