@@ -899,6 +899,26 @@ actual spec); appended interpretation counts raw spec without rerun or overwrite
 Receipt71c72ec8… at final-hdd-correction-units-001. No real FS/runtime confinement
 or G-05/packet approval follows. Unit worker is released; inert fixture preparer
 remains active. Main must review its actual script before any HDD fixture selection.
+Fixture author releases the inert344-line script. Main reads it completely and
+matches script f6077b34…/nine fixed source hashes/42 scenarios. No source/helper/
+test execution or HDD data occurred during authoring. Main now selects execution9A:
+once-only fixed fg48a01/42 cases/fg48c01/preserved-new-namespace construction, with
+exclusive absent-target/physical-parent/source/capacity checks and external raw
+capture. Only synthetic guard controls/empty fake .git/manifest/map data; never a
+real checkout/toolchain/archive/profile grant. No existing-work move/permissions/
+mount/cleanup/install/network action. 9B's independent baseline/exact-code probe
+and two once-only filesystem suites are conditional on successful setup/intake;
+tests remain unrun until that handoff. See final-verification-execution.md selection9.
+Main executes selected9A once/exit0/empty stderr/no timeout/signal. All45 allocated
+HDD top-level paths were absent;663 entries now contain only selected synthetic
+guard fixtures. Four protection maps/source1,199 pins/cache/parent stay exact. Main
+verifies15 receipt entries and actual inode/mode/hash/link inventories, receipt
+fd8bb136… at final-hdd-fs-selection9-001. Review48 records setup-only limits.
+Main activates9B independent baseline probe (35 valid+7 exact-code rejects+one
+correction context), then conditional45 original FS tests/one correction rejection
+test once each in fresh final-hdd-fs-tests-001 receipts. Only newly created proof
+fixtures may mutate as explicitly authored; no source/old data/parent mode/install/
+real producer/tool acquisition or cleanup. Current guard source stays52d165f.
 
 ## Current WP-10 implementation handoff
 

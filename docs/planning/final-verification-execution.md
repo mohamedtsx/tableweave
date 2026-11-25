@@ -570,3 +570,78 @@ count interpretation20fdd20a… is independently matched to raw/status/result ha
 No rerun/collector or assertion edit. Review47 satisfies only extracted-control/
 ordering unit obligations; real filesystem/CLI/runtime/archive/ordinary/G-05 proof
 stays open. Actual HDD fixture setup remains unselected pending main script review.
+
+## Ninth selection — new disposable HDD filesystem guards
+
+Main reviews all344 lines of external final-hdd-guard-prep-001/prepare.py, schema/
+42-case ledger and nine source pins, matching script SHA256
+f6077b3472f73dee19f922e682353f87c4d713e58cf25937dd5b9c65317915e1.
+Selection8's independent28/28 units and review46 documentation/byte checks satisfy
+the prerequisites for this small filesystem phase, NOT packed materialization.
+
+### 9A — main-only exclusive fixture construction
+
+Run the reviewed script exactly once with command-local TABLEWEAVE_GUARD_SETUP_FINAL=1:
+
+```sh
+python3 -B /tmp/opencode/final-hdd-guard-prep-001/prepare.py --prepare --suite fg48a01 --correction fg48c01
+```
+
+Only NEW fixed HDD paths from its complete ledger are allocated: suite-control
+namespace fg48a01,42 derived case namespaces, correction fg48c01 and one preserved
+namespace-symlink-original. All begin /mnt/data/Projects/tableweave-final-verification-.
+Any existing/dangling target or source/parent identity/mode drift aborts before
+staging. Directories0700 except one intentionally invalid NEW namespace0755;
+files0600/exclusive/no-follow. Exact existing Projects dev2065/inode6160385/UID+GID1000/
+mode0755 stays fixed. No existing data/permissions/mounts or installed sources change.
+Only brand-new disposable fixture directories may be renamed inside these allocated
+paths for preserved adversaries; no old work/evidence moves or deletion/cleanup.
+
+Synthetic manifest/empty .git/input maps and local controls certify ONLY selected
+filesystem leases/rejections, never a genuine producer/tools/archive/install/private
+profile/application grant. The old-root consumer fault lives in its owner marker,
+not its approved current-root prepared receipt, so initial load can be meaningful.
+Seven initially invalid cases are precisely declared; unowned-namespace is a mode
+fault, not a foreign-UID proof. Correction fixture retains its original inode while
+the same-path replacement carries an untrusted-marker sentinel. All data is synthetic.
+
+Setup events go only to NEW /tmp/opencode/final-hdd-guards-001/**. Main's exclusive
+capture /tmp/opencode/final-hdd-fs-selection9-001/** records source/pins/cache/parent/
+allocated target before-after inventories, raw stdout/stderr/status and seal. Deadline
+180seconds/capacity floor128MiB; retain partial failures, no retry or automatic repair.
+
+### 9B — independent read-only baseline and once-only filesystem suites
+
+Only after successful9A and main receipt review, an independent worker may create
+NEW /tmp/opencode/final-hdd-fs-tests-001/** capture/probe receipts and run sequentially:
+one reviewed read-only baseline probe (35 valid case contexts +7 exact-code rejection
+contexts +1 correction context; no mutation), then the two existing suites once:
+
+```sh
+NODE_DISABLE_COMPILE_CACHE=1 WP13_STORAGE_GUARDS_FINAL=1 node tests/consumers/wp13-storage/guards.mjs --run fg48a01
+NODE_DISABLE_COMPILE_CACHE=1 WP13_STORAGE_CORRECTION_FINAL=1 node tests/consumers/wp13-storage-correction/guards.mjs --run fg48c01
+```
+
+Probe imports only boundary/storage/receipt definitions to load/revalidate the
+selected filesystem fixtures; no CLI/producer/toolchain/installed/archive/native
+execution. Its actual errors/counts must be captured, not assumed from setup labels.
+If baseline fails, both suites stay unrun. If a suite fails, preserve it without
+repair/retry; the independent correction suite may proceed only if its inputs and
+scope remain intact. Own-child deadline180seconds each, format-aware raw spec/TAP
+count interpretation, unchanged source/1,199 pins/285 seal/cache/old receipts and
+bounded exact HDD mutation/identity inventories. Ordinary/profile tiny unit files
+prove only distinct file identities, not private-profile validation. Keep combined-
+fault/generic rejection assertions scoped to what they observe. Any unallocated
+write/signal/capacity breach stops further execution. Main reviews before bounded
+confinement dispositions or selecting any real producer/tool acquisition phase.
+
+### 9A actual intake and 9B activation
+
+Main's9A setup runs once/exit0/empty stderr/no timeout/signal;45 planned top-level
+paths all absent before,663 actual allocated entries after. Source/current1,199 pins/
+cache/parent before-after maps match. Main verifies all15 setup receipt entries and
+actual no-follow inode/mode/hash/link inventory. Receiptfd8bb136… at
+/tmp/opencode/final-hdd-fs-selection9-001/receipt-hashes.json. Review48 records only
+exclusive synthetic fixture construction, not real producer/tools/archive or test
+proof. With those prerequisites satisfied,9B's independent baseline and conditional
+two suites are now selected. No additional command or materialization is implicit.

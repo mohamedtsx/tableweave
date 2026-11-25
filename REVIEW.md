@@ -10,6 +10,28 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 48 (exclusive HDD guard setup intake)
+
+Main reviews all344 setup-script lines/nine current source pins and exact42-case
+ledger, selects9A and runs setup once/exit0/empty stderr/no timeout/signal. Its45
+planned top-level HDD paths were all absent beforehand; actual no-follow inventory
+has663 entries. Source/current1,199 pins/installed caches/existing parent identity/
+mode remain equal. No real producer/toolchain/install/archive or tests ran.
+
+Main independently verifies15 raw setup receipt entries, actual allocated path/
+inode/device/owner/mode/hash/link-target inventory and four exact protection maps.
+Receipt /tmp/opencode/final-hdd-fs-selection9-001/receipt-hashes.json SHA256
+fd8bb1361dbb60a96a426109063c76935ff716ba22114557178ee649a4c616b3.
+Setup events at /tmp/opencode/final-hdd-guards-001 remain setup-only evidence.
+New synthetic fixture .git directories are empty and manifests/maps are labelled
+guard-only; status strings confer no real checkout/profile/application certificate.
+
+Only these fresh fixtures may be mutated by selected9B. Main now hands off the
+independent read-only baseline probe, then conditional45-case original suite and
+one correction filesystem rejection test, once each. Existing data/parent modes/
+source/installed inputs/old seals stay fixed; no repair/retry/cleanup or real
+producer/tool acquisition follows. Actual FS results and bounded closure pending.
+
 ## Final verification — review session 47 (independent correction synthetic units)
 
 The selected extracted-body command runs once/exit0/empty stderr/no timeout/signal:
