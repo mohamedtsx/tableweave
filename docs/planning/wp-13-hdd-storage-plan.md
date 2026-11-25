@@ -211,3 +211,12 @@ verifyMap requires one tooling map to match both primary and producer file modes
 as well as bytes. Do not chmod primary files or re-sign old maps to fit a clone;
 record actual fresh-clone modes and let mismatches hold before generation. No clone
 or source permission change is selected by this metadata observation.
+
+Review50 subsequently matches the acquired package's1,111 real bodies/17,668,810
+bytes and all1,113 candidate tool files to the retained hard-SRI archive. Node copy
+bytes match with an independent inode. Phase10A's19-entry raw receipt d163cc5c…
+preserves six unchanged protection maps and an empty producer. This is genuine tool
+DATA, not version execution or a real producer/install/archive certificate.
+Only separately selected10B adds the owned private version-probe home/configs and
+two conditional isolated version commands. No project manifest/lock/patch/profile,
+source clone or install is selected by a successful artifact inspection.

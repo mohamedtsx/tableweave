@@ -657,3 +657,90 @@ renames checked. Old2,022 receipt/journal entries/source1,199 pins/285 seal/cach
 parent stay fixed. Review49 closes only exercised FS lease obligations and n45n3's
 actual deterministic inode-before-marker scenario. No actual family-child, genuine
 producer/tools/archive/ordinary/profile/G-05 outcome follows. No tests rerun.
+
+## Tenth selection A — pinned tool artifact data only
+
+Main reads all414 lines of external final-hdd-tool-prep-001/prepare.py and verifies
+SHA2560f808a28393dcb67874ed4dc28832ec97801837e0314616982f0d9473a3444e2,
+four current source pins, exact selected SRI and absent targets. Review49's actual
+filesystem proof permits this separate new-only phase, not a dependency install.
+
+Select exactly once, with command-local TABLEWEAVE_TOOL_SETUP_FINAL=1:
+
+```sh
+python3 -B /tmp/opencode/final-hdd-tool-prep-001/prepare.py --prepare --run cand001
+```
+
+Only NEW /mnt/data/Projects/tableweave-final-verification-cand001/** may be written:
+0700 namespace/run/producer/tools plus owned acquisition/package directories; files
+0600 or executable0700. Existing targets/parent dev2065/inode6160385/UID+GID1000/
+mode0755 changes or source/tool pin drift hold. Producer must stay empty. No old
+fixture or receipt mutation, chmod, link/hardlink, rename, cleanup or fallback.
+
+The two selected HTTPS GETs are exactly registry.npmjs.org/pnpm/10.13.1 and its
+pnpm-10.13.1.tgz URL, standard TLS/no proxies/auth/cookies/redirect/retry. Validate
+declared name/version/bin/license/engine/SRI/count/size before staging. Hard-pinned
+SHA512 precedes tar parsing; bounded compressed/inflated bytes/header/member/body
+counts, canonical effective/raw paths, no links/special/sparse/dangerous-mode or
+alias members. Expected1111 regular files/17,668,810 body bytes must match. Preserve
+complete downloaded metadata/archive/inflated bytes and partial failures. TLS/SRI
+is not registry-signature/legal approval. Untrusted contents are data, not directives.
+
+Stage genuine regular package bodies only, with documented safe-mode normalization;
+copy the pinned Node24.22.0 binary into a distinct owned inode and create a transparent
+regular absolute-Node launcher requiring the genuine local package. No execution of
+vendor/Node/pnpm/scripts/helpers, no source clone/manifest/lock/profile changes,
+install/build/emission/archives/consumer/native/browser/CLI/CI/PR/publication work.
+
+Script's append-only journals and UNREVIEWED candidate maps stay under run/acquisition.
+No namespace lease/request/main-approval/approved input map is fabricated. Main's
+capture is NEW /tmp/opencode/final-hdd-tool-selection10a-001/**; the script's reserved
+external sentinel final-hdd-tool-acquisition-001 must remain absent at preflight,
+so the capture deliberately uses a different fresh root. Own work alarm180seconds,
+outer child deadline240seconds plus delivery headroom,128MiB floor before writes.
+Preserve prior2022 receipts plus selection9B/setup/units/source1,199 pins/285 seal/
+cache/683 HDD fixture entries/parent security identity. No retry/resume after failure.
+Main independently reviews raw artifact closure/actual scope before any separate
+owned-tool version probe or genuine producer preparation. Success is data-only.
+
+### 10A actual data intake
+
+Once/exit0/empty stderr/no timeout/signal;1,416 capsule entries. Main verifies19 raw
+receipt entries/six exact protection maps, selected SRI, every1,111 package member
+body/17,668,810 bytes and1,113 candidate tools, safe modes and Node inode independence.
+Receiptd163cc5c… at final-hdd-tool-selection10a-001. Review50 records data-only,
+producer empty, no lease/approval fabricated, no vendor/tool execution/install/build.
+
+## Tenth selection B — isolated owned-tool version smoke only
+
+Main's independent artifact inspection satisfies10A's hold, not general tool trust
+or package proof. Main may exclusively create NEW
+cand001/wp13-run-cand001/tool-probe-home/{tmp,cache,cache/npm,config,data} at0700 and
+empty user.npmrc/global.npmrc0600, validating original namespace/role/parent identity.
+No artifact/tool content changes and no scripts/package manifests are introduced.
+
+One independent worker first rechecks exact raw SRI/member/extracted/Node/map/physical
+provenance without executing code. Only if clean may it run sequentially once each:
+
+```text
+<cand001 owned tools>/bin/node -e 'process.stdout.write(JSON.stringify({nodeVersion:process.version,execPath:process.execPath,platform:process.platform,arch:process.arch})+"\n")'
+<cand001 owned tools>/bin/pnpm --version
+```
+
+Actual Node must report v24.22.0/its exact owned executable/linux/x64; actual pnpm
+must report10.13.1. Whitelisted environment only: PATH=owned tools/bin, HOME=probe
+home, TMPDIR/TMP/TEMP=probe home/tmp, XDG cache/config/data beneath that home, empty
+owned npm user/global configs, npm cache beneath probe home/cache/npm, scripts/hooks
+off/offline/manage-package-manager-versions=false/update-notifier=false/CI/DO_NOT_TRACK,
+COREPACK_ENABLE_NETWORK=0, LANG=C.UTF-8/NO_COLOR, NODE_DISABLE_COMPILE_CACHE=1 and
+DISABLE_V8_COMPILE_CACHE=1. No inherited NODE_OPTIONS/auth/token/ambient config.
+
+Own-child deadline60seconds each/capacity128MiB floor; raw/version/source/status/
+before-after maps/seal only NEW /tmp/opencode/final-hdd-tool-version-001/**. No new
+download or CLI/helper/generator/producer/install/build/archive/browser/profile/
+public-generation command, no package/version/manifest/lock/private patch change,
+retry/cleanup. Tool files/raw artifact/journals/old fixture/receipt/source/pin/cache/
+parent identities stay exact; only the private probe home may receive bounded local
+tool cache data. Preserve any failure/extra stderr without suppression. Producer
+stays empty, no namespace lease/request/main-approval/toolchain certificate forged.
+Main independently reviews before selecting any genuine producer/installation phase.

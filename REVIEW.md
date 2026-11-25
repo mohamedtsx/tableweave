@@ -10,6 +10,28 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 50 (genuine tool artifact data intake)
+
+Selected10A runs once/exit0/empty stderr/no timeout/signal, with1,416 actual capsule
+entries. Main independently verifies19 raw capture entries/six equal source/pin/
+cache/parent/old-fixture/prior-receipt maps; receipt SHA256
+d163cc5c9e8506ee574846d33cf22c1e346c99c2a5ae5d4db5fa05f4a86468ae at
+/tmp/opencode/final-hdd-tool-selection10a-001/receipt-hashes.json.
+
+Independent main parsing recomputes the selected SRI from retained gzip bytes and
+checks every one of1,111 genuine pnpm package regular bodies/17,668,810 bytes against
+the extracted tree and documented0600/0700 mode normalization. All1,113 candidate
+tool-map files match, including a distinct-device/inode pinned Node byte copy and
+transparent regular absolute-owned-Node launcher. Actual package manifest declares
+pnpm10.13.1/MIT/main/bin/engine matching registry metadata; no invented ELF wrapper
+manifest or global fallback. TLS/SRI is not registry-signature/legal approval.
+
+Producer is still truly empty; no fake .git/manifest, namespace lease/request/main
+approval/approved toolchain receipt. No Node/pnpm/vendor code was executed, no
+install/clone/build/archive or dependency/profile/source change. Complete JS package
+absence is resolved as DATA ONLY; actual owned-tool version/closure execution stays
+pending separate10B. Existing683 guard-fixture entries and old evidence stay fixed.
+
 ## Final verification — review session 49 (independent real filesystem guards)
 
 All three commands run once/exit0/empty stderr/no timeout/signal: baseline35 valid

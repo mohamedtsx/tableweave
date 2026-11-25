@@ -934,6 +934,35 @@ No download/extraction/copy/tool execution/HDD namespace is selected by that wri
 task. Main reviews the script before separately selecting exact pinned pnpm10.13.1
 artifact acquisition/inspection and an independent owned Node copy. No dependency
 version/manifest/lock/profile/producer/install/build or old-evidence change.
+Tool-script author releases414 inert lines, SHA0f808a28…; main reads all lines and
+verifies source pins/SRI/absent namespace. Main selects only phase10A data acquisition:
+two fixed public registry GETs, strict authenticated tar inspection, genuine complete
+pnpm10.13.1 file bodies and distinct pinned Node copy/transparent launcher in NEW
+cand001. Capturefinal-hdd-tool-selection10a-001 is separate from script's absent
+reserved external sentinel. Producer stays empty; no lease/phase approval fabricated.
+No tool/package/helper execution, install/clone/dependency/profile/source change,
+cleanup/publication follows. Any mismatch/timeout preserves partial data without
+retry/fallback; independent artifact review precedes a separate runtime/tool phase.
+Phase10A runs once/exit0/empty stderr/no timeout/signal. Main independently verifies
+19 raw receipt entries/six exact protection maps/SRI/all1,111 genuine pnpm bodies/
+17,668,810 bytes and all1,113 tool-map candidates. Owned Node is byte-exact with a
+distinct inode; producer remains empty and no approval/lease fabricated. Receipt
+d163cc5c… at final-hdd-tool-selection10a-001. Review50 records DATA ONLY, not actual
+tool-version or runtime proof. No Node/pnpm/clone/install/build/archive ran.
+Main now selects10B: create only new cand001 run/tool-probe-home private scratch/
+empty config files, then an independent artifact reviewer conditionally runs exactly
+owned Node metadata and owned pnpm --version once each, isolated HOME/temp/cache/
+PATH/config/offline/CI environment. Outputfinal-hdd-tool-version-001 only. All tools/
+archive/journals/old fixtures/source/pins stay fixed; only that new probe home may
+receive bounded tool cache data. No producer/helper/CLI/install/clone/package or
+dependency action. Any artifact/version/scope failure stops without repair/retry.
+Main creates only10B's private tool-probe-home/six directories/two empty configs,
+binding unchanged namespace/role/parent identities. Receipt3143e685… at
+final-hdd-tool-probe-home-001; tool/package contents and acquisition receipts stay
+exact. Expected run-directory link-count change/new eight entries are separately
+disclosed, not a re-signed original1,416-entry capture. The independent10B worker
+now reinspects artifacts then conditionally runs only the two owned version probes.
+All other workers are released; actual producer remains empty until this handoff.
 
 ## Current WP-10 implementation handoff
 
