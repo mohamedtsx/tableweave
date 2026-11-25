@@ -91,6 +91,30 @@ inventory. Actual mounted Start/facade and Next integration require their own pl
 manifest/runtime leases; do not label a TSX recipe an SSR/App Router app.
 Keep original WP-06 request-scoped fixtures/config/driver/seals unchanged.
 
+### Next preparation delivered — still no installation lease
+
+The external `/tmp/opencode/wp11-next-boundary/PLAN.md` proposes one new App Router
+app, after A's real public-lifecycle handoff. Candidate pins are Next16.4.6 and
+@tailwindcss/postcss4.3.5, retaining current React/DOM19.3.1, HeroUI3.2.8,
+Tailwind4.3.5 and TS6.0.3. Main previously reads exact Next metadata and now rechecks
+the [published PostCSS plugin](https://registry.npmjs.org/@tailwindcss%2fpostcss/4.3.5)
+and actual lock: its PostCSS^8.5.25 can use existing8.5.33; do not force Next's
+own8.5.23 into that range. Keep exact current HeroUI mandatory peers under the
+unchanged strict/auto-install-peers=false policy.
+
+These are planning candidates, not selected installed-byte/runtime compatibility.
+No new manifest/lock/package/plugin/config file is allocated yet. Main must review
+A's actual shareable server/client graphs before an exact dependency/source lease.
+Use serializable fixed-UTC DTOs from a plain contracts server graph to a real client
+boundary; never pass D/C/P/functions/authority across RSC. Runtime imports must use
+public emitted exports, not LIGHT source aliases; preserve Next's condition-aware
+React handling. Ordinary outside-workspace packed proof remains separate.
+
+The report discloses one inadvertent read of the catalog worker's leased stylesheet,
+excluded from its evidence; no repository write or other WIP inspection is reported.
+No source readiness, SSR/App Router build, installation or acceptance follows from
+the report. No further vendor/drag work is reopened.
+
 ## Allowed checks, stop and next handoff
 
 Run only own positive TS6/noEmit/source-alias compilation, syntax/static exact public

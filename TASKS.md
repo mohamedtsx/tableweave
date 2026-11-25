@@ -53,6 +53,15 @@ all19 checker regressions (combined check headcaf60d2). Active primary still awa
 02a2479 intake after the catalog handoff; no green clean-checkout claim is made for
 missing evidence there. This replay verifies documentation portability only, not
 semantic-source/runtime/catalog correctness or independent packet acceptance.
+The Next read-only plan is delivered at `/tmp/opencode/wp11-next-boundary/PLAN.md`.
+Main reviews it and rechecks actual plugin metadata/lock policy: candidate Next16.4.6
+with @tailwindcss/postcss4.3.5 must preserve separate compatible PostCSS closures
+(Next8.5.23 versus plugin^8.5.25/existing8.5.33). Current React/TS/HeroUI pins stay
+fixed. These are preparation candidates, not an install/source lease or proof of
+compatibility. Actual shared-lifecycle/server-client graph intake still precedes
+Next materialization. No manifests/lock/framework files are changed. The reported
+accidental leased stylesheet read is excluded from evidence; no worker writes or
+other catalog WIP inspection are reported. Drag remains user-blocked.
 
 ## Current WP-10 implementation handoff
 
