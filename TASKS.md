@@ -47,6 +47,12 @@ metadata was read; nothing is installed/selected as compatible by that observati
 The worker cannot read active shared/catalog WIP or change any source/manifest/lock.
 Actual Next source/install waits for a bounded selected plan and the shared handoff;
 all new framework build/SSR/packed/independent checks remain final and unrun.
+Main preserves the selected WP-11 plan as7a0f316. In the separate evidence tree,
+that exact plan plus02a2479's original seven files passes254 Markdown/901 links and
+all19 checker regressions (combined check headcaf60d2). Active primary still awaits
+02a2479 intake after the catalog handoff; no green clean-checkout claim is made for
+missing evidence there. This replay verifies documentation portability only, not
+semantic-source/runtime/catalog correctness or independent packet acceptance.
 
 ## Current WP-10 implementation handoff
 

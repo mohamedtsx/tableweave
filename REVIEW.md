@@ -2088,3 +2088,8 @@ no source/README/seal is changed. That fresh branch passes253 Markdown/899 links
 and all19 documentation regressions without installing library dependencies.
 Intake into the active WP-11 tree and required packet branches is pending; its
 initial five-link failure is retained. Raw source-diff context is not reformatted.
+
+The exact new WP-11 plan7a0f316 combined with original evidence02a2479 is checked on
+the separate caf60d2 tree:254 Markdown/901 links and19 probes pass. The active
+writer tree's missing-evidence failure is not called corrected before actual intake.
+No historical result is rewritten or promoted to current runtime proof by this replay.
