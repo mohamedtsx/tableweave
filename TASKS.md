@@ -605,6 +605,26 @@ Review32n1/n2 unit slices are verified but broader runtime/independent closure s
 OPEN. Real installed ordinary/private profiles, native/P purge, browser/CDP/HTTP,
 paint/hardware/performance and all other packet checks are not proved by these units.
 Remaining-lane planner stays active read-only; no new command is selected yet.
+Remaining-lane planner releases external /tmp/opencode/final-remaining-lanes-001/
+PLAN.md. Main reads its actual-command/output-generation/port/native/capacity map
+and independently inspects R01 rejection/R02 CSS test bodies and direct-entry import
+guards. It selects exactly those two read-only Node unit commands in the final
+execution plan for an independent once-only run, with external immutable receipts,
+30second deadlines and protected source/CSS/tool hashes. No CLI/filesystem test,
+scope recapture/build/install/native/browser/framework/consumer action is selected.
+Map reports dist/Start generated routing absent, expected pinned Firefox/WebKit
+missing and new archive/toolchain/native/browser approval inputs unprovided. Those
+are reported prerequisites, not executed framework failures or cleanup/download
+authority. Old fc01/member assertions and historical failed results stay unchanged.
+Main also inspects U01/U02's complete configs/test bodies/fixtures and inert entry
+guards, and selects two explicit-file Vitest runs in the final execution plan:
+pagination native-client policy.test.ts with new final-policy-001 label, then
+facade-hook model.test.ts with absent fixed final-units output. One separate
+independent worker may load existing source/vendor/transform modules and neutral
+React renderToString only for those commands, writing their two new reporter/cache
+roots and external receipts. No broad include/build/emission/profile install/native
+download/browser/framework operation is selected. Main observed both outputs absent;
+worker rechecks before config load and preserves all real failures without retries.
 
 ## Current WP-10 implementation handoff
 

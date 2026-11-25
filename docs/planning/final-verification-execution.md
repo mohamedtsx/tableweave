@@ -73,3 +73,69 @@ Receipt: `/tmp/opencode/final-wp14-unit-001/receipt-hashes.json`, SHA256
 No test rerun/source correction is needed. Review34 records the bounded independent
 unit slice; broader review32n1/n2 compatibility/native/cleanup/paint/performance
 obligations remain OPEN. No other test or operation is activated by these results.
+
+## Second selection — read-only WP-13/CSS units
+
+Main reads the delivered external remaining-lane map and inspects both test bodies/
+import guards. At source head a316996b2836c8e26d3c021d7caa4d8596ebbc8e plus only
+main documentation WIP, one independent worker may run each command ONCE:
+
+```sh
+WP13_FINAL=1 NODE_DISABLE_COMPILE_CACHE=1 node --test tests/consumers/wp13-runtime-errors/rejection.test.mjs
+NODE_DISABLE_COMPILE_CACHE=1 node --test tests/data-table/style-contract/contract.test.mjs
+```
+
+Actual Node24.22.0, no ambient NODE_OPTIONS/NODE_PATH/preload hooks, fresh external
+`/tmp/opencode/final-report-css-units-001/**`,128MiB floor, one process at a time/
+30second command deadline. Capture actual command-local environment, Node/source/
+dependency/CSS hashes/modes/realpaths, raw outputs/statuses and protected before/
+after identities. No repository edits or test reruns/fixes by the worker.
+
+The first calls only validateReport/object/demand on rejection-only metadata. The
+second reads current CSS and uses a restricted text inventory; imported scope.mjs
+must remain behind its false direct-entry guard. No scope --before/--after command,
+compiler/CLI/spawn/filesystem adversary/cache/native/server/browser/framework/build/
+install/pack/config/HTTP/benchmark/consumer/CI action is authorized. Existing methods
+may be imported inertly only as dependencies of the two selected tests.
+
+Report-validator rejection is not a genuine live HTTP/RSC concurrent-page observation;
+CSS text tests are not computed cascade/geometry/visual/focus/AT proof. Review31's
+real browser-attribution obligation stays open regardless of unit outcome. Keep
+historical seal bytes intact; missing generation/Start routes/native/browser maps
+and Firefox/WebKit remain blockers, not permission to fabricate or download them.
+
+## Third selection — two source-native/neutral-SSR files
+
+Main inspects U01/U02's complete test/config/import fixtures from the command map.
+One separate independent worker may run these two commands once, sequentially:
+
+```sh
+U2_RUN=final-policy-001 NODE_DISABLE_COMPILE_CACHE=1 node node_modules/vitest/vitest.mjs run --configLoader native --config tests/pagination-policy/native-client/vitest.config.mjs tests/pagination-policy/native-client/policy.test.ts
+NODE_DISABLE_COMPILE_CACHE=1 node node_modules/vitest/vitest.mjs run --configLoader native --config tests/table-facade/hook/vitest.config.mjs tests/table-facade/hook/model.test.ts
+```
+
+The explicit filename filters are mandatory; do not run the broad config includes.
+This is the first selected actual Vitest/source-module/vendor evaluation, including
+in-memory synthetic records and React renderToString for neutral prelayout assertions.
+It is not an emitted/packed/browser/HTTP/framework-hydration or performance lane.
+No initial fixture certificate is evidence of real application admission/retirement.
+Existing guard/scope scripts are imported inertly only; no before/after recapture.
+
+The two fixed output roots must be absent before loading config:
+tests/pagination-policy/native-client/.artifacts/final-policy-001 and
+tests/table-facade/hook/.artifacts/final-units. Main observes both absent at selection.
+Only those NEW roots may receive reporter/cache outputs; never remove/reuse a prior
+attempt. Record their actual generated files, preserve failures and originals.
+No source/config/manifest/map/log edit, install, build/dist creation, native download,
+private profile activation, server/browser or remote action is authorized.
+
+Use installed Node24.22.0/Vitest5.1.1 and existing native transform dependencies;
+loading those installed tool components solely for these commands is selected.
+An absent/incompatible native tool is a recorded blocker, never permission to install
+or patch it. One worker/process lane, retries0, each host deadline180seconds with
+delivery headroom; no unrelated process killing. Stop below128MiB or if an output
+already exists. External `/tmp/opencode/final-source-native-001/**` owns command/
+tool/installed-input/source-before-after/raw status/review receipts. Capture relevant
+actual compiler/transform/vendor resolution identities, not a fabricated whole-store
+pin. Independent worker must stop rather than silently permit additional writes.
+Main reviews any failure and assigns corrections separately; no full-suite approval.
