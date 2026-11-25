@@ -1,9 +1,11 @@
 # Contributing to Tableweave
 
-This repository is in the documentation-foundation stage. There is no installable
-library/workspace yet; do not submit instructions claiming existing package APIs
-or passing runtime tests. Start with [PROJECT](PROJECT.md), [product map](product/README.md)
-and the affected [technical contract](docs/engineering/README.md).
+This repository contains a private React workspace and implemented package source,
+alongside reviewable contracts and provisional later-packet fixtures. It has no
+published software release or accepted complete stable table library. Do not infer
+current runtime, archive, browser or release approval from source existence or old
+packet results. Start with [PROJECT](PROJECT.md), [product map](product/README.md),
+the affected [technical contract](docs/engineering/README.md) and current TASKS.
 
 ## Propose and claim work
 
@@ -21,7 +23,7 @@ and acceptance aligned with implementation in the same change.
 ## Working conventions
 
 - One canonical owner per concept, one live task ledger; load focused context.
-- Future code: strict typed ESM, native TanStack concepts, explicit exports,
+- Code: strict typed ESM, native TanStack concepts, explicit exports,
   server-safe contracts and isolated optional UI/drag dependencies.
 - No copied `.repo/` code/data/assets/patches, mandatory backend/framework
   dependencies in core, secret/private records or generated build artifacts.
@@ -35,8 +37,11 @@ and acceptance aligned with implementation in the same change.
 ## Verify and hand off
 
 For documentation, run the actual [README checks](README.md#check-documentation)
-and inspect semantic source coverage. Runtime commands will be documented by the
-bootstrap task, not guessed here. Review the diff, update owning docs and
+and inspect semantic source coverage. Use the actual [README commands](README.md#local-foundation-workflow)
+and each fixture's declared scope; new source-only harnesses are not automatically
+registered in root CI or evidence of current runtime acceptance. Preserve historical
+producer/output identities and follow the [selected verification timing](docs/planning/final-verification-phase.md).
+Review the diff, update owning docs and
 [changelog](CHANGELOG.md) for relevant consumer-facing changes, record exact
 results/limits and provide a resumable task handoff. Use the PR template for
 authorized reviews; do not claim acceptance from an unchecked checklist.

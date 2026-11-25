@@ -36,6 +36,12 @@ Node 24 development baseline is not a browser-consumer Node requirement.
 
 ## Candidate checks
 
+Use the [exact-candidate protocol](candidate-readiness.md) to bind each claim to
+its actual source/artifact/observation/reviewer scope, and the
+[authorized real-consumer protocol](consumer-acceptance.md) before any target trial.
+These are unfilled review forms, not acceptance reports or operation permissions.
+TASKS remains the live authorization/status owner; required missing proof stays open.
+
 1. Inspect exact candidate revision/dirty state and all FR/G/AC evidence; resolve
    critical failures, final manual/browser/performance/consumer gates and known
    limitations. Advisory external participant counts do not block release.
