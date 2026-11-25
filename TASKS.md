@@ -37,7 +37,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
-| WP-13 archive tooling | One new-only primary source writer allocated | Exact plan under docs/planning; all actual build/pack/install/negative/dual/runtime work final |
+| WP-13 archive tooling | Source preserved10f6a8a/runner5853ef6; writer released | Main source/light intake passes; one-file error-attribution correction in main intake; actual build/pack/install/runtime/independent proof final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -462,6 +462,25 @@ disclosed body changes. No production helper/CLI/server/browser/consumer execute
 Review31n1 finds the API-only RSC negative's global browser-error time window can
 misclassify unrelated page errors. Preserve this exact producer before one-file
 runner correction; original source/attempts/seals must not be rewritten to fit it.
+Main preserves that runner producer5853ef6. The exact main-only follow-up changes
+only wp13/fixtures/family-runtime.mjs and adds new wp13-runtime-errors evidence/
+authored rejection cases. Every live browser-page error stays unexpected during an
+API-only RSC negative; only the separately matched server-log window is intentional.
+All other100-seal/1,282-pin/map/log bytes and production parent/host/library/app/
+manifest/profile inputs remain fixed. Scope/static/format/positive source checks
+are allowed; no runner/server/browser/test/process/runtime execution is activated.
+Main's review31n1 correction passes AST/static/syntax/full scoped Biome and strict
+positive source TS6. Other99 runtime-seal inputs/1,281 old pins/132 original-seal
+inputs and155 library bodies remain unchanged. The one-body drift has distinct
+correction evidence; no original map/log is re-signed. Previous integrated docs
+pass284 Markdown/1,054 links/19 checker probes, not a runtime result or automatic
+closure of review31/30. Current documentation replay follows after correction links.
+Correction's new four-input map8224dedb… matches hashes/modes/sizes; full scoped
+Biome passes. Current documentation passes285 Markdown/1,060 links/all19 checker
+probes and whitespace. Main freezes this provisional WP-13 source boundary before
+selecting the WP-14 source-only benchmark lease. That is not actual package/runtime,
+helper/test, family build/HTTP/SSR/browser, ordinary/profile install, negative/dual,
+CI/independent or G-05 acceptance; historical generationfc01 stays unchanged.
 
 ## Current WP-10 implementation handoff
 

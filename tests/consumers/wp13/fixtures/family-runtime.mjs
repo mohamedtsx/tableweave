@@ -180,7 +180,6 @@ export async function run() {
   let server,
     browser,
     expect,
-    negativeWindow = false,
     stopSignal = false,
     stopping = false;
   const contexts = [],
@@ -196,7 +195,7 @@ export async function run() {
     if (errors.length >= 128 || message.length > 4096) {
       report.truncated = true;
       stopSignal = true;
-    } else errors.push({ negative: negativeWindow, message });
+    } else errors.push(message);
   }
   async function observe(id, callback) {
     demand(
@@ -579,7 +578,6 @@ export async function run() {
       });
       if (input.variant === "rsc-negative")
         await observe("next-rsc-rejection", async () => {
-          negativeWindow = true;
           const before = logs.stderr.length,
             result = await response(regular, "/wp13-nonserializable");
           await expect
@@ -588,7 +586,6 @@ export async function run() {
             })
             .toBe(true);
           const window = logs.stderr.slice(before);
-          negativeWindow = false;
           demand(genuineRsc(result.status, window), "E_NOT_RSC_SERIALIZATION");
           expectedStderr.push({ start: before, end: logs.stderr.length });
           return {
@@ -729,16 +726,8 @@ export async function run() {
         server.signalCode === null,
       "E_RUNTIME_PROCESS_FAILURE",
     );
-    for (const error of errors) {
-      if (
-        error.negative &&
-        /Server Components render|Event handlers cannot be passed|Functions cannot be passed/.test(
-          error.message,
-        )
-      )
-        report.intentionalErrors++;
-      else report.unexpectedErrors++;
-    }
+    // APIRequestContext's negative response does not own any live page's errors.
+    report.unexpectedErrors = errors.length;
     let unclassified = logs.stderr;
     for (const range of expectedStderr.toReversed())
       unclassified =
@@ -783,27 +772,19 @@ export async function run() {
       } catch {
         report.cleanupDebt ??= "E_SERVER_CLEANUP_DEBT";
       }
-    const browserUnexpected = errors.filter(
-      (error) =>
-        !error.negative ||
-        !/Server Components render|Event handlers cannot be passed|Functions cannot be passed/.test(
-          error.message,
-        ),
-    ).length;
     let remainingStderr = logs.stderr;
     for (const range of expectedStderr.toReversed())
       remainingStderr =
         remainingStderr.slice(0, range.start) +
         remainingStderr.slice(range.end);
     report.unexpectedErrors =
-      browserUnexpected +
+      errors.length +
       Number(
         /(?:^|\n)(?:\s*Error:|\s*⨯|.*(?:Unhandled|TypeError:|ReferenceError:|SyntaxError:))/.test(
           remainingStderr,
         ),
       );
-    report.intentionalErrors =
-      errors.length - browserUnexpected + expectedStderr.length;
+    report.intentionalErrors = expectedStderr.length;
     report.intentionalFrameworkEvents = expectedStderr.length;
     if (report.unexpectedErrors || report.unexpectedNetwork)
       report.primaryFailure ??= "E_UNEXPECTED_BROWSER_ERROR";

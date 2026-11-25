@@ -98,3 +98,18 @@ seal and1,282-input pin checks. MJS remains untyped and every process/helper/ser
 browser/HTTP/framework/consumer/adversary execution stays final and UNRUN.
 Review31n1 separately narrows error attribution before source handoff completion;
 runtime/independent review30n1 closure is not implied by an authored call path.
+
+The runner producer is preserved5853ef6 with its100-file seal6f65c028… and1,282-pin
+map37d877e1… unchanged. Main owns a final source-only review31n1 correction to
+exactly fixtures/family-runtime.mjs under wp13, plus NEW
+tests/consumers/wp13-runtime-errors/** for static/adversary/receipt evidence. Treat
+every browser-page error as unexpected; only the separately matched server-log
+window can be intentional for the API-client negative request. Keep strict genuineRsc
+and unrelated500 rejection. All other runner/host/parent/protocol/library/app/profile/
+manifest/lock/map/log bytes stay fixed. Syntax/static/full scoped Biome and positive
+source TS6 only; all helper/process/browser/consumer/runtime tests remain UNRUN.
+The [one-file correction](../../tests/consumers/wp13-runtime-errors/README.md)
+passes main's AST/static/syntax/full scoped Biome/positive source TS6 checks. Other
+99 runtime-seal inputs and1,281 pins remain unchanged; the one new body is disclosed,
+not re-signed into the prior100-file/1,282-input producer. Actual concurrent browser/
+RSC error observation and independent closure remain final and UNRUN.

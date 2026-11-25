@@ -1,0 +1,27 @@
+{
+  "status": "source-only-browser-error-attribution-runtime-unrun",
+  "base": "5853ef6",
+  "inputs": {
+    "tests/consumers/wp13/fixtures/family-runtime.mjs": {
+      "mode": 436,
+      "size": 27286,
+      "sha256": "f5c85cfeb992e420431511901a7a4d7ce55ae1fd73244c152eabfab8ec1f9521"
+    },
+    "tests/consumers/wp13-runtime-errors/README.md": {
+      "mode": 436,
+      "size": 2322,
+      "sha256": "eb3e34a0b447fe14ac627f36ae2c78b741636fd404b6eb63d6190d5e1457179f"
+    },
+    "tests/consumers/wp13-runtime-errors/check-source.mjs": {
+      "mode": 436,
+      "size": 3079,
+      "sha256": "88c4bb1eac4dbd1284ecc251fe62ae9d41c8ffea1235e2a99a4587afb9428ef9"
+    },
+    "tests/consumers/wp13-runtime-errors/rejection.test.mjs": {
+      "mode": 436,
+      "size": 1014,
+      "sha256": "8ae2d63eb7b27374db477546ad433b3de3525a11f9b697f0169728a41e54dedb"
+    }
+  },
+  "aggregate": "8224dedb2038e85e233d3582d5ed8f57b02d14f263ee4b45bfa442ead996fc2a"
+}

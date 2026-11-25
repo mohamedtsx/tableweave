@@ -196,6 +196,29 @@ program deliberately excludes generated-dependent router assembly; actual genera
 whole-app typing and mounted SSR/hydration remain unrun. Drag/G-02 remains user-blocked
 and full WP-11 remains incomplete.
 
+## Provisional current-archive tooling
+
+The [WP-13 driver](tests/consumers/wp13/README.md) and
+[family-runner source](tests/consumers/wp13-runtime/README.md) are authored, not
+executed packed-consumer evidence. The current
+[error-attribution correction](tests/consumers/wp13-runtime-errors/README.md)
+supersedes the earlier runner's global browser-error exemption without rewriting
+its original seal or logs. Actual current archives, reviewed consumer locks/native
+files/browser inputs and per-phase main selection are still required.
+
+Checked source-only commands:
+
+```sh
+node tests/consumers/wp13-runtime-errors/check-source.mjs
+pnpm exec tsc -p tests/consumers/wp13-runtime/tsconfig.light.json --pretty false
+```
+
+The compile checks public TS positives/Playwright option types through explicit
+source aliases; production MJS remains untyped and unexecuted. Do not invoke the
+CLI, helper tests or family runtimes during LIGHT. Historical root generation/
+package expectations remain unchanged; these new fixtures are not automatically
+registered in `pnpm check`, and no new generation/package acceptance is claimed.
+
 ## Authority and licensing
 
 The [Notion PRD](https://app.notion.com/p/mohamedtsx/Tableweave-PRD-42061b5e62648054aa06dcb0ed4ba0c8)

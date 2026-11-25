@@ -30,6 +30,16 @@ server diagnostic. An unrelated live-page error must stay unexpected regardless
 of timing. Preserve this producer, then remove the global browser-error exemption;
 retain genuineRsc's strict server-log recognition and unrelated500 rejection.
 Source-derived finding only; runtime reproduction/independent closure remains final.
+Main removes only the global browser timing exemption: every pageerror/console
+error contributes to the unexpected count at both success and final cleanup.
+Strict genuineRsc server-log recognition is byte-identical. Own source TS6/AST/
+syntax/full scoped Biome pass, with99 other runtime inputs/1,281 old pins/132
+original inputs and155 library hashes unchanged. The rejection-only report case
+is authored but UNRUN; actual concurrent browser/HTTP/Flight and independent closure
+remain final. Original100/1,282 producer maps retain the disclosed one-body drift.
+Main verifies the separate four-input8224dedb… correction map/full scoped Biome and
+passes285 Markdown/1,060 links/19 checker probes/current whitespace. n1 is corrected
+at source level only; no runtime reproduction or independent closure is granted.
 
 ## WP-13 source intake — review session 30 (provisional)
 
