@@ -1785,3 +1785,28 @@ unchanged. Worker full formatter/lint/positive TS6 pass; main matches16 stage ha
 123 protected sources and independently runs AST/printer/import/comment preservation.
 Five required formatter reference inputs are retained for fresh-checkout replay.
 No behavior/runtime approval is claimed; final independent correction review is deferred.
+
+## WP-09 styled source discovery — review session 18 (provisional)
+
+### n1 — Facade Builder config unnecessarily requires raw defaults
+
+Main confirms actual S3 materialization already derives mode, schema-owned fields
+and missing field labels, while TableRendererToolConfigs still requires raw Builder
+evaluationMode/fields/label. Broaden only the facade input type to match those real
+defaults; keep raw FilterBuilderProps strict and explicit runtime conflicts denied.
+No runtime body or permission changes. Public source inference fixtures will cover
+minimal overrides; negative/runtime/independent correction proof remains deferred.
+
+### n2 — Root CSS import alone does not copy the new asset
+
+Main confirms actual copy-styles.mjs has an explicit owned-root list omitting
+data-table. Add only that root and an isolated asset-copy/relative-import closure
+regression, keeping original profile arrays/hashes untouched. No build/runtime test
+has run; copied/archive/CSS visual and independent correction proof remains deferred.
+
+Session18 n1/n2 source follow-up: actual public root positive TS6 now accepts minimal
+facade overrides while raw requirements stay strict. Explicit export/legacy-trigger/
+CSS-root static checks and full scoped Biome pass. Asset-copy closure and seven
+source-negative cases are authored but unrun; emitted/ordinary/archive/visual/
+independent correction verification remains deferred. Original profiles/seals are
+not rebaselined, and neither note is marked runtime-verified or packet-approved.

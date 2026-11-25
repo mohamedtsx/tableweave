@@ -21,8 +21,25 @@ It renders the current headless native view through real HeroUI/Aria grouped
 collections, stable row/cell keys, row headers, page-only selection and explicit
 sort priorities. The [candidate boundary](../../docs/engineering/wp-04-native.md)
 and [collection fixture notes](../../tests/native/collection/README.md) distinguish
-actual APIs and recorded delegated G-01 checks/limits. This is not the full `DataTable`,
-resource notices, details shell or final visual system.
+actual APIs and recorded delegated G-01 checks/limits. That bounded producer alone
+does not establish the full DataTable, resource notices, details or visual system.
+
+## Provisional WP-09 source composition
+
+The source root now explicitly exports `DataTable`, `useDetailsAccessory`,
+`RecordDetails`, context-bound `TableDetailsTrigger`, app-facing types and EN/AR
+table/neutral bundles. Legacy `DetailsTrigger` remains the raw session API. The
+actual shell composes existing producers; facade Builder overrides can omit actual
+schema/mode/label defaults without weakening raw `FilterBuilderProps` requirements.
+
+Root CSS source imports owned shell layout and the explicit copier includes that
+asset. Historical dist is unbuilt: source exports/positive root-alias types do not
+prove ordinary installed/archive imports, CSS assets or a functioning reviewed UI.
+The [source boundary](../../docs/engineering/wp-09-private-composition.md) and
+[entry fixture](../../tests/data-table/public-entry/README.md) record exact limits.
+Runtime/React/visual/SSR/packed/negative/independent verification is deferred; WP-09
+is not accepted or published. Applications still own C/P/resources, authorization,
+fetching/Retry/actions, correction causality and persistence.
 
 The root also exports private WP-07 `FilterBuilder`, `FilterSearch`, `FilterTabs`,
 `FilterDate` and genuine own prop/message/option-port types. Independently corrected

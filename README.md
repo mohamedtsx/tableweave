@@ -13,8 +13,11 @@ WP-01–WP-03 are accepted. The root provides controller/subscription hooks;
 WP-04's bounded native/collection producer is agent-approved under delegated
 authority for the recorded G-01 scope, not personal maintainer acceptance.
 WP-05's plain resource adapter/hook has delegated scoped G-03 approval as well.
-`DataTable` and the whole-table facade remain unavailable. Nothing is
-published; [TASKS.md](TASKS.md) owns current acceptance/review status.
+WP-09 now has provisional `defineTable`/`useDataTable`/`DataTable` and details source
+composition, explicit source exports and CSS wiring. Historical dist is not rebuilt;
+runtime/visual/SSR/packed and independent acceptance remain deferred. See the
+[qualified source boundary](docs/engineering/wp-09-private-composition.md). Nothing
+is published; [TASKS.md](TASKS.md) owns current acceptance/review status.
 
 ## Start here
 

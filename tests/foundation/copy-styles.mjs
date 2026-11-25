@@ -11,6 +11,7 @@ const componentRoots = [
   "columns",
   "pagination",
   "details",
+  "data-table",
 ];
 
 export async function copyStyles(

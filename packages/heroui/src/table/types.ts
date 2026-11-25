@@ -5,10 +5,14 @@ import type {
   DataTableRecovery,
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
+import type { BuilderFieldId } from "@tableweave/react/filters";
 import type { ReactNode } from "react";
 import type { ColumnChooserProps } from "../columns/types.js";
 import type { DetailsAccessory } from "../details/types.js";
-import type { FilterBuilderProps } from "../filters/types.js";
+import type {
+  FilterBuilderProps,
+  FilterFieldPresentation,
+} from "../filters/types.js";
 import type {
   TableweaveBuiltinOperatorLabels,
   TableweaveLocale,
@@ -95,8 +99,27 @@ export interface TableRendererToolbarContext<
 export interface TableRendererToolConfigs<S extends QuerySchema> {
   readonly builder?: Omit<
     FilterBuilderProps<S>,
-    "controller" | "criteria" | "expectedResourceContext" | "invalidationKey"
-  >;
+    | "controller"
+    | "criteria"
+    | "expectedResourceContext"
+    | "invalidationKey"
+    | "fields"
+    | "evaluationMode"
+  > & {
+    /** The facade derives real builder fields and falls back to their stable IDs. */
+    readonly fields?: Readonly<
+      Partial<
+        Record<
+          BuilderFieldId<S>,
+          Omit<FilterFieldPresentation<S>, "label"> & {
+            readonly label?: string;
+          }
+        >
+      >
+    >;
+    /** Omission uses actual native processing; a conflicting explicit mode denies. */
+    readonly evaluationMode?: FilterBuilderProps<S>["evaluationMode"];
+  };
   readonly search?: Omit<
     FilterSearchProps<S>,
     "controller" | "criteria" | "expectedContext" | "invalidationKey"

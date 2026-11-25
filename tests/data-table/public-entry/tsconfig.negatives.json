@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["./positive.tsx", "./negative.tsx", "./styles.d.ts"],
+  "exclude": ["./.artifacts"]
+}

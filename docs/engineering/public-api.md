@@ -13,9 +13,9 @@ their exact names, ownership and lifecycle. `defineTable`, `useTableweave`, the
 whole-table facade, `DataTable` and sortable integration remain unavailable.
 
 WP-09 now has [provisional source composition](wp-09-private-composition.md),
-including actual `defineTable`/`useDataTable` source exports. They are not an accepted
-packet, rebuilt installed package or packed/public release contract; the styled
-shell and integrated adoption remain incomplete. This qualified source status
+including actual `defineTable`/`useDataTable`/`DataTable`, details and locale source
+exports. They are not an accepted packet, rebuilt installed package or packed/public
+release contract; full runtime/visual/SSR/independent proof remains deferred. This source status
 supersedes only the blanket unavailability wording above, not prior gate limits.
 
 The separate [WP-04 producer](wp-04-native.md) exposes bounded root native

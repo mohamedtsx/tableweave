@@ -114,6 +114,9 @@ containers from the approved direction; no component, import or behavior activat
 After actual source intake, the [Builder host integration](wp-09-facade-builder-host-plan.md)
 and activated shell lease are disjoint, sharing only the already committed facade
 protocol; main owns their final type/runtime/export/style integration.
+The [styled source discovery lease](wp-09-styled-source-exports-plan.md) explicitly
+exports only app-facing APIs and imports the actual CSS, without claiming rebuilt
+dist/packed discovery or changing the historical output generation.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

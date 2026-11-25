@@ -38,6 +38,8 @@ compiles do not establish packed or runtime acceptance.
 | Neutral details label | [Neutral label](../../tests/details-neutral-label/README.md) | Provisionalaa5af97; review16n2 runtime/manual Arabic/AT unverified |
 | Shell layout slots | [CSS](../../tests/data-table/style-contract/README.md) | Provisionalcfe682a; inactive/unimported, static syntax/text checks only |
 | DataTable shell/owner join | [S3b](../../tests/data-table/shell/README.md) | Provisional source handoff; actual joint Builder/runtime/visual/SSR/packed proof pending |
+| Builder/facade host join | [F4d](../../tests/criteria-facade-builder/README.md) | Provisional914cd60; joint source types pass, runtime/coalescing/skip/SSR unverified |
+| Styled root/CSS source discovery | [Public entry](../../tests/data-table/public-entry/README.md) | Source-only positive/static checks; actual copy/negative/emitted/ordinary/archive proof deferred |
 
 Add Date/core-renderer/Builder/shell/details/export/generation/integrated SSR only
 when actual fixtures exist. No current-root output/hash is approved by this list.

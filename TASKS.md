@@ -7,23 +7,40 @@
 All WP-09 implementation below is provisional. User-selected final exhaustive/
 independent verification is deferred; no WP-09 approval/PR delivery or merge exists.
 
+WP-09 source implementation is now ready for a **provisional packet handoff** after
+explicit root/type/locale exports, real CSS import/copier wiring and facade-only
+Builder default types. Public source-root TS6/static/Biome pass; initial fixture and
+format failures remain preserved. Main matches136 protected sources/one exact copier
+append;14-input aggregate504cb892… and source1406a2acac6… are recorded separately.
+Actual documentation replay passes219 Markdown/812 links and18 checker probes.
+No build/runtime/negative/emitted/packed/browser/SSR/visual/independent acceptance is
+claimed. Current generation remainsfc01, historical failures stay failed, packages
+remain private. Main freezes this head before the next implementation packet; exact
+PR/CI and delegated approval are owed in the final phase, with every PR unmerged.
+
 | Scope | Current owner/location | Next integration boundary |
 | --- | --- | --- |
 | Opaque tool config + exact capture cancellation | Committed82a2091, worker released | Runtime/correction proof remains deferred |
-| Builder/format | Intaken54841a8/ba282fa; host preserved9733b92 | Main matches23 host inputs/136 protected sources + positive TS6; intake waits for shell |
-| Shell layout CSS | Intakencfe682a, inactive | Shared shell adopts classes; main alone later wires CSS import |
+| Builder/format | Intaken54841a8/ba282fa; host914cd60 | Actual joint shell/host source programs pass; runtime/skip/F2/Date/SSR proof deferred |
+| Shell layout CSS | Intakencfe682a, source import/copier wired | Actual copy/archive/computed cascade/visual proof deferred |
 | Plain criteria entry | Intakena5deab3 | Source export only; runtime/emitted/packed discovery deferred |
 | Neutral details label | Intakenaa5af97 | Review16n2 manual/runtime verification remains open |
-| DataTable shell | Handoff ready, worker released | Main matches76 hashes/131 protected sources; preserve before Builder-host intake and public/style wiring |
+| DataTable shell | Committed8fdbde6; public/style integration complete in source | Freeze provisional head; all runtime/visual/SSR/packed acceptance remains final |
 | Deferred command inventory | External report delivered, worker released | Actual scripts/producer-vs-current gates inventoried; missing runners/output isolation remain open, no checks run |
 | WP-10 next-slice preparation | External report delivered, worker released | Vendor-free authority/ref/interlock then optional adapter proposed; inactive pending WP-09/Stage1/API/dependency intake |
 
-Main alone owns docs/ledger/Git/manifests/exports/integration. Current shared source
-baseba282fa contains the queued intakes without conflict. Main matches79 merged
-intake hashes/all137 sources and passes three positive Builder/label/entry TS6
-programs. Source137 map1c28d45f… is preserved. One shared shell writer and one
-isolated Builder-host writer have disjoint paths/actual committed protocol. No
-intake until their handoffs; old seals and all runtime/independent gates stay open.
+Shell is committed8fdbde6 and Builder host is intaken914cd60. Main matches23 host
+inputs/all140 combined sources and passes actual joint shell/host positive TS6
+programs. Source1400d25b948… is preserved. Main now owns the explicit styled source
+export/CSS integration plus a facade-only Builder default typing correction
+(review18n1); all runtime/negative/emitted/packed/independent proof stays deferred.
+
+Main alone owns docs/ledger/Git/manifests/exports/integration. All WP-09 runtime
+workers are released. Shell8fdbde6 and host914cd60 are integrated; original source
+maps/input hashes/stopped reports stay preserved. Only main-owned explicit exports/
+CSS/default-type/discovery integration is pending preservation before the next
+packet. No authority is granted to auto-rebaseline output generations or approve
+required missing runtime/independent/manual/external gates.
 Actual shell handoff is now ready at map7c6fd92a…; main inspects APIs and matches
 all76 worker hashes/131 protected sources. New140-source map01e9abe4… is preserved.
 The worker's two-file main-document drift failure stays recorded separately. Main

@@ -5,6 +5,14 @@ export {
   defaultColumnChooserMessages,
 } from "./columns/index.js";
 export type * from "./columns/types.js";
+export { DataTable } from "./data-table/data-table.js";
+export {
+  RecordDetails,
+  useDetailsAccessory,
+} from "./data-table/details-provider.js";
+export type { RecordDetailsProps } from "./data-table/details-provider.js";
+export { DetailsTrigger as TableDetailsTrigger } from "./data-table/details-trigger.js";
+export type { BoundDetailsTriggerProps as TableDetailsTriggerProps } from "./data-table/details-trigger.js";
 export {
   DetailsShell,
   DetailsTrigger,
@@ -12,6 +20,8 @@ export {
   useDetailsSession,
 } from "./details/index.js";
 export type {
+  DetailsAccessory,
+  DetailsAccessoryOptions,
   DetailsAuthority,
   DetailsChangeRequest,
   DetailsContext,
@@ -38,6 +48,19 @@ export type {
   FilterOptionPort,
 } from "./filters/types.js";
 export {
+  arabicDataTableLocale,
+  arabicDataTableNeutralMessages,
+  arabicTableweaveLocale,
+  englishDataTableLocale,
+  englishDataTableNeutralMessages,
+  englishTableweaveLocale,
+} from "./localization/index.js";
+export type {
+  TableweaveBuiltinOperatorLabels,
+  TableweaveLocale,
+  TableweaveMessages,
+} from "./localization/types.js";
+export {
   formatPaginationNumber,
   Pagination,
   paginationMessages,
@@ -52,6 +75,17 @@ export type { CollectionMessages } from "./table/collection-messages.js";
 export { defaultCollectionMessages } from "./table/collection-messages.js";
 export type { NativeCollectionProps } from "./table/native-collection.js";
 export { NativeCollection } from "./table/native-collection.js";
+export type {
+  DataTableLocale,
+  DataTableMessages,
+  DataTableNeutralMessages,
+  DataTableProps,
+  DataTableStateMessages,
+  TableRendererCollectionConfig as DataTableCollectionConfig,
+  TableRendererStateContext as DataTableStateContext,
+  TableRendererToolConfigs as DataTableToolConfigs,
+  TableRendererToolbarContext as DataTableToolbarContext,
+} from "./table/types.js";
 export type {
   FilterDateContext,
   FilterDateMessages,

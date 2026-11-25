@@ -23,9 +23,15 @@ extended to these changes by dependency alone.
   emitted/archive import and SSR proof remain deferred. Historical dist is unbuilt.
 - HeroUI locale modules, committed cells and Search/Tabs/Date/Builder adoption exist
   as provisional source. Bound details and opaque child configuration also exist;
-  neither is full integrated runtime/privacy/focus acceptance. The actual DataTable
-  shell and Builder-facade host join are now allocated separately, not accepted APIs.
-  New shell CSS remains unimported and inactive pending main integration.
+  neither is full integrated runtime/privacy/focus acceptance. Actual DataTable shell
+  source8fdbde6 and Builder host914cd60 now compose those producers. Explicit styled
+  root/type/locale exports and the real CSS import/copier mapping are source-wired;
+  installed dist remains historical. No runtime/visual/packed acceptance is implied.
+
+The [styled entry fixture](../../tests/data-table/public-entry/README.md) records
+cast-free source-root inference, preserved raw trigger naming, facade-only Builder
+defaults and the unexecuted asset-copy/negative checks. Public aliases name slot
+contexts/collection/tool config, not private renderer actor/cell factories.
 
 ## Ownership and lifetime
 
