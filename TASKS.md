@@ -498,6 +498,16 @@ It may propose eligible readiness-document paths and a sanitized real-consumer
 acceptance protocol, but cannot select/mutate a consumer, resolve deferred runner/
 publication inputs, call an external account/registry, change source or run checks.
 No WP-15 implementation or acceptance is activated by this preparation report.
+WP-15 read-only report is delivered at the allocated path. Main reads its two-file
+candidate-readiness/consumer-acceptance proposal, actual private/UNLICENSED metadata,
+missing owned MIT notice/rightsholder/private reporting inputs, full-check CI facts,
+separate ordinary/private-profile provenance and real-target/change/data/rollback
+authorization protocol. It also flags stale public contribution/changelog wording
+as future documentation debt, not a license to edit those files now. No active
+benchmark WIP was read by that worker; no checks/registry/account/consumer operation
+ran. The new-only documentation lease remains unselected until WP-14 source intake.
+Real consumer/runner/manual/publication inputs stay deferred or unverified; no
+synthetic fixture, source proof or readiness document can pass AC-29/stable gates.
 
 ## Current WP-10 implementation handoff
 
