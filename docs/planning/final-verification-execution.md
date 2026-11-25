@@ -411,3 +411,17 @@ successful scan from silent prebundling disable/fallback. Nonempty native/debug
 stderr must stay truthful even if the scan error disappears. Stop on any actual
 new failure; worker does not repair/retry. Main closes only the bounded finding
 supported by that replay, never a whole browser/framework/package gate.
+
+## Fresh packed-run storage feasibility — read-only preparation
+
+A separate read-only planner may write only NEW external
+`/tmp/opencode/final-storage-feasibility-001/PLAN.md` while the Chromium replay is
+active. Exclude active browser002 outputs/progress. Inspect WP-13 fixed-root/target/
+producer/tool/consumer guards and current source/dependency allocated sizes using
+bounded metadata reads, plus root/HDD availability. No Git/checkouts/install/build/
+test/helper/config/browser/mount/copy/move/cleanup or repository changes.
+Return measured facts versus unknown build/install footprint, the exact new-only
+HDD scope/guard seams or SSD alternative and the smallest required user decision.
+Recovered HDD availability alone still does not authorize new staging, path-guard
+changes, bind mounts, moving existing work/caches or privileged operations. No
+storage action or packed execution is selected by this preparation report.

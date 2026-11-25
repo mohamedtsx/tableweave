@@ -735,6 +735,13 @@ Receipt20aec507…/preimage/delta are separate from all historical maps. Only th
 fixture HTML is selected; prebundling is not disabled and aliases/assertions stay.
 Preserve source correction, then replay the same8 Chromium cases once with fresh
 external final-facade-browser-002 outputs, same engine and all prior receipts fixed.
+Main independently allocates a read-only fresh-packed-run storage feasibility map
+at external final-storage-feasibility-001/PLAN.md, excluding active browser002 work.
+It may measure bounded source/dependency metadata and inspect fixed target guards,
+not create/check out/install/build/mount/copy/move/clean or edit helpers. Actual fresh
+producer/consumer install footprint is not yet proved to fit the remaining SSD;
+HDD recovery is not storage-relocation authority. Main will review concrete options
+before any new user decision/target allocation, preserving all old inputs/evidence.
 
 ## Current WP-10 implementation handoff
 
