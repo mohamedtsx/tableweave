@@ -1873,6 +1873,18 @@ adapter activation is blocked pending an explicit dependency remedy. No vendor
 patch/requirement waiver, corrective runtime verification or independent closure
 is granted by this review note.
 
+Session21 source clarification after the user-selected upstream investigation:
+main independently reads pinned React source, which explicitly uses `export type`
+for DragDropManager. n1 is a declaration/value-import hazard, not a missing intended
+React runtime API; importing the real DOM value would be same-family composition,
+subject to an actual ADR/dependency/API lease. Source inspection also distinguishes
+the shared constant noop and coordinate-only timer from table-private native/action
+routes. These are not measured private-data leaks. Scoped Scroller/keyboard/cleanup
+proof remains unresolved; no correction runtime/independent closure is claimed.
+The [dependency owner](docs/planning/wp-10-adapter-dependency-plan.md#user-selected-upstream-investigation--2026-11-25)
+records the pinned comparison and no-newer-fixed-artifact result. No patch or
+alternative installation is authorized by the investigation.
+
 ## WP-10 UI bridge intake — review session 22 (provisional)
 
 ### n1 — UI-only revocation can reach source-observation retirement

@@ -185,3 +185,21 @@ Generic offline/new-owner continuation is not inferred from equal IDs/strings an
 needs a separate closed protocol if required. Existing actual C/coordinator, source
 revocation and backend authorization remain intact. Implementation/runtime/Strict/
 origin/consumer/independent evidence is not granted by this engineering selection.
+
+## WP-10 ADR-03/08 operation handoff versus UI observer ordering
+
+Held bridgeccede5c demonstrates a source-traced shared-fence failure. Main selects
+[separate source/UI cuts and atomic handoff](../planning/wp-10-ui-source-fences-plan.md):
+empty-ID source observation ignores UI-only revocation; original command receipts
+still reject old interaction cuts. After pending creation, begin performs no external
+callback before returning its exact token; admission subscribers deliver afterward.
+This revises an unaccepted early-subscriber-veto choice, not the pure coordinator API,
+core query-first callbacks, stale-before-grant checks or backend authorization.
+
+Consumers must atomically hand the token to the captured app notification without a
+post-begin reentrant lookup/await. A prepared-operation API would be required if that
+delivery cannot be proved; no fake terminal outcome is allowed. Preserve original
+early-listener assertions and record their current-contract conflict for final review.
+Pre-entry waiting is distinct from real in-flight incoherent source failure, which
+keeps the existing pure detach semantics. No offline continuation, runtime/corrective
+verification, package approval or requirement waiver is inferred.

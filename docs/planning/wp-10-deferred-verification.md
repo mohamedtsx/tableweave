@@ -17,8 +17,10 @@ passed whole-table prerequisite by implication.
 | Definition enablement | [Plan](wp-10-definition-capabilities-plan.md), intakeneb17ff9 | Positive combined source types; no action/authority/adapter grant or runtime proof |
 | Explicit unpaged extent | [Actual handoff](../../tests/reordering/unpaged-extent/README.md) | Three-file source correction/light checks; runtime/ack/browser/independent proof unexecuted |
 | Closed native-ref lifetime | [Actual handoff](../../tests/reordering/native-lifetime/README.md), intakenc8e7880 | Refs-only APIs/combined positive types; actual native/Strict/SSR runtime and arbitrary vendor disposal unsupported/unverified |
+| Application-source/UI bridge | [Held candidate](../../tests/reordering/ui-bridge/README.md),ccede5c | Source/type intake preserved; shared observation fence can purge submitted pending during UI cleanup |
+| Separate SRC/UI correction | [Selected bounded plan](wp-10-ui-source-fences-plan.md) | One-source implementation allocated; deferred admission listeners revise provisional early-veto timing, not pure/source authorization |
 | Neutral refs/handles/pager consumers | Native-binding report/actual prerequisite APIs | Not allocated; no guessed producer method or wrapper collection is acceptance |
-| Optional new-generation adapter | [Dependency preparation](wp-10-adapter-dependency-plan.md) | Versioned metadata reads only; no DnD installed or G-02 result |
+| Optional new-generation adapter | [Dependency preparation](wp-10-adapter-dependency-plan.md) |0.5.3 installed/static-inspected only in isolated9a5f598; primary unchanged, no vendor runtime/G-02 result or newer fixed upstream candidate |
 
 ## Historical producer replay and current-source lanes
 
@@ -74,7 +76,15 @@ declarations, annotated and removal checks remain separate required boundaries.
   change; direct ordinary accept denial; controlled/uncontrolled transitions;
   callback clock/updater/validator/request effects, returns/receivers/reentry;
   query-first notification; selection/details cleanup liveness. Test positive own
-  begin notification as well as unrelated-listener revocation.
+  begin notification as well as unrelated-listener revocation. Distinguish the
+  selected callback-free token return/deferred admission delivery from the old
+  helper's synchronous early-listener veto. Preserve that historical assertion and
+  explicitly review its timing conflict rather than automatically rebaseline it.
+  Prove immediate delivery to the already-captured application notification without
+  a post-begin reentrant gate that can strand an issued operation. UI-only release/
+  suspend during settle/ack/reconcile must not retire a still-live source; combined
+  source loss must still fail closed. Pre-entry source waits retain app-owned notices;
+  no generic in-flight unavailable/offline continuation is claimed.
 - **Actual source/lifetime:** P-issued participants, synchronous private clearing
   before observers, source-only/retained/requested-domain distinctions, same-D second
   frame owner/P2/equal strings and ABA, truthful app counters, stale lease cleanup,

@@ -92,10 +92,12 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Definition reorder capabilities | Preserved04941b2/intakeneb17ff9 | Positive combined source types; flags remain configuration, not authority |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
-| Admission/UI bridge | HELD candidate handoff delivered; no source writer | UI-only fence changes can purge submitted pending during settlement; exact correction seam must be selected |
+| Neutral consumer contract | External read-only worker allocated | Freeze actual refs/row-submit/ordinary-C column-only/pager seams without reading active admission edits; source lease waits for correction |
+| Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
+| Source/UI cut correction | Shared one-source writer newly allocated | Separate SRC/UI, callback-free token handoff/deferred admission listeners; other149 sources freeze |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| Vendor lifetime preparation | External report delivered; worker released | Source-confirmed export/cleanup blockers; dependency remedy decision required, no adapter code |
+| Vendor lifetime/upstream preparation | Reports delivered; read-only follow-up active | No newer fixed artifact; exact supported Scroller prevention/keyboard path under investigation, no patch/install/adapter code |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
 proof, with inert failure on ended React ref callbacks plus bounded fresh-ticket
@@ -216,6 +218,32 @@ upstream-alternatives report while independent UI/source-fence work continues.
 Reports must distinguish table-owned private cleanup from intentional module-global
 platform behavior, and source/API concerns from measured runtime violations; no
 requirement is waived and no unsupported full-quiescence claim is fabricated.
+Main now selects the exact one-source correction after the external fence report:
+separate source/UI cuts, event-role finally checks, immutable command receipts and
+callback-free begin return followed by deferred admission listeners. This explicitly
+changes provisional early-veto ordering; the old listener assertion stays preserved
+and not claimed current-compatible. Token delivery must be immediate to captured app
+notification with no intervening reentrant lookup, otherwise stop for preparation
+API. Pure in-flight failure behavior remains unchanged; no offline continuation is
+authorized. Other149 sources/old seals freeze against held map9c7c0a8a… atccede5c.
+Upstream report is delivered: no newer fixed published artifact was found; main
+independently reads latest DOM0.5.3, pinned main comparison and React's explicit
+type-only manager export. Review21 is clarified, not runtime-closed: a shared noop/
+metadata-only timer is not a demonstrated private-data leak, while scoped queued
+scrolling remains unresolved. Dependencies remain unchanged/held. A read-only
+external follow-up owns only `/tmp/opencode/wp10-scroller-boundary/REPORT.md` and
+traces supported prevention/configuration versus required keyboard/touch usability.
+It grants no vendor patch, alternative install, adapter or native-resource code.
+Main allocates the independent neutral-consumer contract report only at
+`/tmp/opencode/wp10-neutral-consumer-contract/REPORT.md`. It may read frozen renderer/
+refs/pager sources and unchanged bridge types, not active admission/fence fixtures.
+Its outcome is a precise minimum wiring lease, including immediate operation-token
+notification and ordinary-C column-only composition; no consumer code starts before
+the corrected producer handoff. Main retains integration/manifest/docs/Git ownership.
+Main's documentation replay passes241 Markdown/863 local links and all18 checker
+regressions; scoped tracked-document whitespace also passes. External source reads
+and structural checks do not verify runtime cleanup, the source/UI correction,
+consumer behavior, semantic PRD equivalence or independently close numbered findings.
 
 ### Current ownership and next action
 

@@ -39,6 +39,10 @@ retirement and adds actual navigation-origin proofs before native/pager allocati
 While that independent producer is implemented, main owns an isolated optional-peer/
 dev dependency installation and static published-byte inspection under the selected
 dependency plan. No adapter or neutral-consumer source is activated by that work.
+The bridge is held asccede5c. Main selects the bounded
+[source/UI cut correction](wp-10-ui-source-fences-plan.md), including an explicit
+provisional admission-notification ordering change and unchanged pure waiting limit.
+No consumer activation or old fixture/profile rebaseline follows from that selection.
 
 ## Stage1 ownership and outcome
 

@@ -116,3 +116,56 @@ module. The candidate configuration type-checks; actual manager effects/style
 registration/preview/resource cleanup remain unverified. Initial formatting failures
 and separate fresh attempt outputs stay preserved. Intake waits for the active
 admission bridge; no primary manifest/lock or adapter source changes from this stage.
+
+## Installed source blockers — remedy not yet authorized
+
+The external vendor-lifetime report identifies a declaration/runtime mismatch in
+React's manager export, eager default manager construction, and incomplete native
+cleanup/drain APIs. Main independently reads installed React index.js imports/
+exports, DOM patchWindow and ScrollListener, and verifies latest registry tags
+remain0.5.3. These source facts do not alter the preserved positive type/static
+inspection result or constitute runtime/G-02 evidence. Review21n1/n2 stays open.
+
+The proposed commit-owned imperative DOM-family/indicator path avoids React render
+construction and optimistic DOM movement, but does not itself fix those cleanup
+gaps. No adapter or generic disposer workaround is activated. A new dependency
+patch/fork is outside the existing RAC-specific authority; main asks for a bounded
+remedy direction while neutral prerequisites continue. Required cleanup, source
+revocation and genuine packed/independent verification are not waived.
+
+## User-selected upstream investigation — 2026-11-25
+
+The user selects **Inspect upstream alternatives**, not a patch/fork or another
+installation. The external report at
+`/tmp/opencode/wp10-upstream-alternatives/REPORT.md` enumerates published family
+versions/tags and inspects relevant pinned upstream sources/PRs. It finds no newer
+fixed published artifact. Stable0.5.3 points to
+3910e2773d57482f58ba135623523fe97b588245; the reported beta precedes that stable.
+Main independently reads the [pinned comparison](https://github.com/clauderic/dnd-kit/compare/3910e2773d57482f58ba135623523fe97b588245...ccaf3d583903a5d0b68616310a24aec891ee0d69):
+the two later commits change tooling/framework dependencies, not these runtime
+paths. Main also rechecks registry latest DOM0.5.3. No floating head/beta adoption
+or new artifact download is selected.
+
+Correct the earlier export implication: [upstream React source](https://github.com/clauderic/dnd-kit/blob/3910e2773d57482f58ba135623523fe97b588245/packages/react/src/core/index.ts#L27-L36)
+explicitly exports DragDropManager **as a type**. Main independently reads that
+declaration. The installed declaration's unqualified export is a value-import
+hazard, not evidence that upstream intended a React runtime value. The real DOM
+value belongs to the same new-generation family. Choosing it would need an explicit
+ADR/import/manifest disposition; the isolated inspection's React pin is not silently
+removed. React module-default/render construction remains a separate ownership
+concern, not solved by a positive provider type check.
+
+The report also narrows cleanup claims: the shared constant touchmove noop captures
+no table-private data/callback, and the uncancelled ScrollListener timer's branch
+only clears coordinate metadata. Neither source fact alone proves a private-data
+leak. Scroller's queued native write, entered keyboard continuations and exact
+partial-allocation debt still require a closed table-owned source account. No
+runtime leak, successful retirement or universal vendor drain was measured.
+
+Relevant upstream work is not an adopted remedy: [#2117](https://github.com/clauderic/dnd-kit/pull/2117)
+changes provider destruction ordering but keeps eager construction; [#2109](https://github.com/clauderic/dnd-kit/pull/2109)
+changes AutoScroller metadata, not the queued Scroller write. Both are reported
+open/unmerged. A bounded read-only follow-up traces supported Scroller exclusion/
+prevention and keyboard usability against actual public APIs. It allocates no
+adapter/native-resource code, dependency patch or requirement change. Dependencies
+stay held; the independent source/UI correction continues.
