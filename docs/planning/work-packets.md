@@ -216,6 +216,10 @@ separate actual contract/code allocations, not G-02 acceptance.
 
 ## WP-11 Examples, recipes and complete workbench
 
+The [staged implementation plan](wp-11-implementation-plan.md) selects the actual
+provisional shared-fixture/facade catalog lease. TASKS owns live status; blocked
+WP-10 drag is not completed by downstream example authoring.
+
 - **Role/dependencies:** developer-experience worker; WP-06–WP-10 and design map.
 - **Read:** release gates, [Storybook contract](../design/storybook.md), AC-01/AC-27.
 - **Paths:** `apps/docs`, `apps/storybook`, `apps/example-vite`, `apps/example-next`,

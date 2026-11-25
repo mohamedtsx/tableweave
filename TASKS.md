@@ -2,6 +2,52 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+## Current WP-11 provisional continuation
+
+Main's primary is `/tmp/opencode/tableweave-wp11-workbench` on feat/wp-11-workbench,
+created from frozen WP-10d6a53f6 (source155bdfabded…). The user chooses **Keep drag
+blocked**: no vendor repair/research/patch registration/adapter activation. Full
+WP-10/G-02 remains incomplete; manual menus are not a scope waiver. The earlier
+WP-10 chronology below remains exact producer history, not an active writer lease.
+
+Under the user's one final verification-and-fix timing, main selects the bounded
+WP-11 plan at docs/planning/wp-11-implementation-plan.md. Stage A alone is allocated:
+new shared synthetic records/public composition and full-facade Storybook catalog,
+with155 library bodies/all old examples/stories/tests/profile/manifests frozen.
+Main owns source intake/Git/docs/dependencies/public exports; no worker install,
+runtime or publication authority. Only a necessary frozen existing-dependency
+ignore-scripts install ran in the fresh tree. Stage B, actual Next/Start variants,
+WP-12–WP-15 and final exact-revision verification remain separate pending handoffs.
+
+LIGHT now means positive source noEmit/static/scope/full scoped format only.
+Browser/SSR/negative/dual/emitted/packed/manual/performance/consumer/independent/CI
+checks stay final, not waived or claimed. No pushes, PRs, merges or publications.
+
+Stage A's sole writer is active on the selected new example/catalog paths only.
+Main's fresh tree install reuses367 packages with zero downloads. Main re-references
+the approved Figma appearance read-only (scene5:159); no Figma edit, redesigned
+system or new visual approval. Existing library/source/root-export/profile bytes
+remain fixed. Separate framework dependency work is not allocated to the writer.
+
+First WP-11 documentation replay fails on five linked N1/C1b evidence targets that
+were local-only/ignored in WP-10. Main allocates a separate preservation branch for
+only the exact sealed referenced bytes. The immutable README/source seals stay
+unchanged; no checker waiver or invented runtime result. Intake waits until the
+active catalog scope can remain intact. This clean-checkout evidence gap is not
+hidden by copying files into the active writer's baseline mid-task.
+Main preserves the seven exact sealed referenced artifacts as02a2479 in the
+separate preserve/wp10-handoff-evidence branch (346,853 bytes, no source/README/
+seal change). That fresh branch passes253 Markdown/899 links and all19 docs
+regressions; source-patch bytes are preserved, not formatter-rewritten. Intake into
+the active catalog tree waits for handoff so its immutable scope is not disturbed.
+The original five-link failure and3/18 earlier harness failures remain recorded.
+Main separately allocates read-only exact Next16.4.6/Tailwind4.3.5 App Router
+boundary preparation at `/tmp/opencode/wp11-next-boundary/PLAN.md`. Registry latest
+metadata was read; nothing is installed/selected as compatible by that observation.
+The worker cannot read active shared/catalog WIP or change any source/manifest/lock.
+Actual Next source/install waits for a bounded selected plan and the shared handoff;
+all new framework build/SSR/packed/independent checks remain final and unrun.
+
 ## Current WP-10 implementation handoff
 
 WP-09's provisional source boundary is frozen on feat/wp-09-details at

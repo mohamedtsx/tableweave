@@ -2071,3 +2071,20 @@ Main's corrected setup and new missing-directory test pass all19 documentation
 regressions. The real-tree checker also passes252 Markdown/894 links. The original
 three failed probes remain in the prior log. This verifies the narrow harness
 correction, not semantic-source equivalence or runtime/independent acceptance.
+
+### n2 — Fresh worktree loses ignored handoff evidence targets
+
+The first WP-11 checker run fails on five N1/C1b links: one three-log directory and
+four explicit artifact files. Unlike n1's temporary-checkout setup issue, the actual
+fresh Git worktree lacks these ignored evidence bytes. Main preserves the exact
+seven files against the existing101-input seal on a separate branch, without
+rewriting the handoff/source seal, copying unrelated artifacts or weakening checks.
+Intake must not disturb the active WP-11 writer's baseline. Source-only logs remain
+historical; portability of evidence is not proof that its unrun behavioral tests pass.
+
+Main preserves the exact seven files (346,853 bytes) as02a2479 on the isolated
+preserve/wp10-handoff-evidence branch. All match their original101-input seal;
+no source/README/seal is changed. That fresh branch passes253 Markdown/899 links
+and all19 documentation regressions without installing library dependencies.
+Intake into the active WP-11 tree and required packet branches is pending; its
+initial five-link failure is retained. Raw source-diff context is not reformatted.
