@@ -4,7 +4,7 @@ import { Button } from "@heroui/react/button";
 import { Checkbox } from "@heroui/react/checkbox";
 import { Table } from "@heroui/react/table";
 import type { ReactNode } from "react";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   type CollectionMessages,
   defaultCollectionMessages,
@@ -16,6 +16,16 @@ import type {
 import { projectCollectionColumns } from "./collection-projection.js";
 import { GroupColumn } from "./group-column.js";
 import { skipPlaceholderHeader } from "./header-navigation.js";
+import {
+  captureCollectionReordering,
+  captureReorderingProp,
+  collectionRowRef,
+  leafCollectionRefs,
+  reorderingSnapshot,
+  type requireCollectionReordering,
+} from "./reordering-binding.js";
+import type { CollectionReorderingBinding } from "./reordering-types.js";
+import { ColumnMoveControls, ReorderingNotice } from "./reordering-controls.js";
 
 export interface CollectionRow {
   readonly id: string;
@@ -32,6 +42,7 @@ export interface CollectionSort {
 
 /** Minimal, controlled collection boundary, not the final Tableweave renderer. */
 export interface ControlledCollectionProps {
+  readonly reordering?: CollectionReorderingBinding;
   readonly label: string;
   readonly selectionMode?: "none" | "single" | "multiple";
   readonly messages?: Partial<CollectionMessages>;
@@ -59,6 +70,32 @@ function CheckboxContents() {
 }
 
 export function ControlledCollection(props: ControlledCollectionProps) {
+  let reordering: ReturnType<typeof requireCollectionReordering> | undefined;
+  try {
+    const candidate = captureReorderingProp(props, "reordering", "collection");
+    if (candidate) reordering = captureCollectionReordering(props, candidate);
+  } catch {
+    return null;
+  }
+  return (
+    <ControlledCollectionContent
+      input={props}
+      {...(reordering ? { reordering } : {})}
+    />
+  );
+}
+function ControlledCollectionContent({
+  input: props,
+  reordering,
+}: {
+  readonly input: ControlledCollectionProps;
+  readonly reordering?: ReturnType<typeof requireCollectionReordering>;
+}) {
+  const [menu, setMenu] = useState<{
+    owner: NonNullable<typeof reordering>;
+    id: string;
+  } | null>(null);
+  const openMenu = reordering && menu?.owner === reordering ? menu.id : null;
   const messages = { ...defaultCollectionMessages, ...props.messages };
   const mode = props.selectionMode ?? "multiple";
   const projected = useMemo(() => {
@@ -138,21 +175,43 @@ export function ControlledCollection(props: ControlledCollectionProps) {
         ? "descending"
         : "ascending"
       : undefined;
+    const move = reordering ? leafCollectionRefs(reordering, column.id) : null;
     return (
       <Table.Column
         key={column.id}
         id={column.id}
+        ref={move?.ref}
         textValue={column.textValue}
         isRowHeader={column.isRowHeader === true}
         allowsSorting={index === 0 && column.allowsSorting === true}
         focusMode={
-          (column.isSelection && mode === "multiple") || column.allowsSorting
+          (column.isSelection && mode === "multiple") ||
+          column.allowsSorting ||
+          move
             ? "child"
             : "cell"
         }
         allowsArrowNavigation
         data-column-id={column.id}
       >
+        {move && reordering ? (
+          <ColumnMoveControls
+            collection={reordering}
+            id={column.id}
+            label={column.textValue}
+            messages={reordering.messages}
+            isOpen={openMenu === column.id}
+            onOpenChange={(open) =>
+              setMenu((current) =>
+                open
+                  ? { owner: reordering, id: column.id }
+                  : current?.owner === reordering && current.id === column.id
+                    ? null
+                    : current,
+              )
+            }
+          />
+        ) : null}
         {column.isSelection && mode === "multiple" ? (
           <Checkbox
             slot={null}
@@ -245,6 +304,22 @@ export function ControlledCollection(props: ControlledCollectionProps) {
       <Table.ScrollContainer
         onKeyDownCapture={(event) => {
           if (
+            event.key === "Escape" &&
+            openMenu !== null &&
+            reordering &&
+            reorderingSnapshot(reordering.binding).ready &&
+            !reorderingSnapshot(reordering.binding).pending
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            setMenu((current) =>
+              current?.owner === reordering && current.id === openMenu
+                ? null
+                : current,
+            );
+            return;
+          }
+          if (
             mode !== "none" &&
             event.key === "Escape" &&
             props.onCancelSelection
@@ -267,6 +342,7 @@ export function ControlledCollection(props: ControlledCollectionProps) {
         }}
       >
         <Table.Content
+          ref={reordering?.scope}
           aria-label={props.label}
           selectionMode={mode}
           selectionBehavior="toggle"
@@ -318,13 +394,21 @@ export function ControlledCollection(props: ControlledCollectionProps) {
           <Table.Header>{projected.columns.map(renderColumn)}</Table.Header>
           <Table.Body>
             {props.rows.map((row) => (
-              <Table.Row key={row.id} id={row.id} textValue={row.textValue}>
+              <Table.Row
+                key={row.id}
+                id={row.id}
+                textValue={row.textValue}
+                ref={
+                  reordering ? collectionRowRef(reordering, row.id) : undefined
+                }
+              >
                 {projected.leaves.map((column) => renderCell(row, column))}
               </Table.Row>
             ))}
           </Table.Body>
         </Table.Content>
       </Table.ScrollContainer>
+      {reordering ? <ReorderingNotice collection={reordering} /> : null}
       {props.diagnostics !== false ? (
         <Table.Footer>
           <span data-selected-count>

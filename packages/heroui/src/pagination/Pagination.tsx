@@ -6,12 +6,99 @@ import { ListBox } from "@heroui/react/list-box";
 import { Pagination as HeroPagination } from "@heroui/react/pagination";
 import { Select } from "@heroui/react/select";
 import { ControlsError } from "@tableweave/react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useSyncExternalStore } from "react";
+import {
+  captureReorderingProp,
+  navigateTable,
+  observeTableNavigation,
+  renderTableNavigation,
+  subscribeTableNavigation,
+  tableNavigationMetadata,
+  tableNavigationPendingReason,
+  tableNavigationPaginationInput,
+} from "../table/reordering-binding.js";
+import { TableRendererCommitError } from "../table/renderer-commit.js";
+import { ReorderAdmissionError } from "@tableweave/react/reordering-controller";
+import type { TableReorderingNavigation } from "../table/reordering-types.js";
+import type { QuerySchema } from "@tableweave/react/contracts";
 import { formatPaginationNumber, paginationMessages } from "./messages.js";
 import { paginationTargets } from "./model.js";
-import type { PaginationComponent } from "./types.js";
+import type { PaginationComponent, PaginationProps } from "./types.js";
 
-export const Pagination: PaginationComponent = (props) => {
+export const Pagination: PaginationComponent = function Pagination<
+  S extends QuerySchema,
+  T extends object,
+>(props: PaginationProps<S, T>) {
+  // No interlock/presentation/locale/formatter read whatsoever in disabled mode.
+  if (props.schema.pagination.enabled === false) return null;
+  let interlock: TableReorderingNavigation<S, T> | undefined;
+  let input = props;
+  try {
+    interlock = captureReorderingProp(
+      props,
+      "reorderInterlock",
+      "navigation",
+    ) as typeof interlock;
+    if (interlock) {
+      const authority = Object.getOwnPropertyDescriptor(props, "authority");
+      if (!authority || !Object.hasOwn(authority, "value")) return null;
+      observeTableNavigation(interlock, authority.value);
+      input = tableNavigationPaginationInput(interlock, props.schema);
+    }
+  } catch {
+    return null;
+  }
+  return (
+    <NavigationPagination input={input} {...(interlock ? { interlock } : {})} />
+  );
+};
+function NavigationPagination<S extends QuerySchema, T extends object>({
+  input: props,
+  interlock,
+}: {
+  readonly input: PaginationProps<S, T>;
+  readonly interlock?: TableReorderingNavigation<S, T>;
+}) {
+  const navigationMetadata = useSyncExternalStore(
+    (listener) =>
+      interlock ? subscribeTableNavigation(interlock, listener) : () => {},
+    () => (interlock ? tableNavigationMetadata(interlock) : null),
+    () => null,
+  );
+  let receipt: TableReorderingNavigation<S, T> | null = null;
+  let input = props;
+  try {
+    receipt = interlock
+      ? renderTableNavigation(interlock, props.authority)
+      : null;
+    if (receipt) input = tableNavigationPaginationInput(receipt, props.schema);
+  } catch {
+    receipt = null;
+  }
+  if (interlock && !receipt) return null;
+  return (
+    <EnabledPagination
+      input={input}
+      receipt={receipt}
+      pendingReason={receipt ? tableNavigationPendingReason(receipt) : ""}
+      interlocked={
+        !!interlock &&
+        (!navigationMetadata?.joined || navigationMetadata.pending)
+      }
+    />
+  );
+}
+function EnabledPagination<S extends QuerySchema, T extends object>({
+  input: props,
+  receipt,
+  interlocked,
+  pendingReason,
+}: {
+  readonly input: PaginationProps<S, T>;
+  readonly receipt: TableReorderingNavigation<S, T> | null;
+  readonly interlocked: boolean;
+  readonly pendingReason: string;
+}) {
   const generatedId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const focusedControl = useRef<HTMLElement | null>(null);
@@ -102,14 +189,23 @@ export const Pagination: PaginationComponent = (props) => {
   ]
     .filter(Boolean)
     .join(" ");
-  const blocked = !facts.canNavigate ? m.navigationUnavailable : "";
+  const blocked = !facts.canNavigate
+    ? m.navigationUnavailable
+    : interlocked
+      ? pendingReason
+      : "";
   // An invalidated old handler is an expected no-op, not an uncaught UI error.
   // Unexpected app callback errors are not swallowed.
   const guarded = (action: () => void) => {
     try {
       action();
     } catch (error) {
-      if (!(error instanceof ControlsError)) throw error;
+      if (
+        !(error instanceof ControlsError) &&
+        !(error instanceof TableRendererCommitError) &&
+        !(error instanceof ReorderAdmissionError)
+      )
+        throw error;
     }
   };
   const reasonId = `${rootId}-reason`;
@@ -161,10 +257,15 @@ export const Pagination: PaginationComponent = (props) => {
             id={`${rootId}-size`}
             className="tw-pagination__size"
             value={String(displayed.pagination.pageSize)}
-            isDisabled={!facts.canNavigate}
+            isDisabled={!facts.canNavigate || interlocked}
             {...(blocked ? { "aria-describedby": reasonId } : {})}
             onChange={(value) =>
               guarded(() => {
+                if (receipt) {
+                  if (!receipt) return;
+                  navigateTable(receipt, authority, "size", value);
+                  return;
+                }
                 const size = Number(value);
                 if (schema.pagination.sizes.includes(size))
                   authority.setPageSize(size);
@@ -199,8 +300,8 @@ export const Pagination: PaginationComponent = (props) => {
                 id={`${rootId}-previous`}
                 variant="tertiary"
                 size="sm"
-                isDisabled={!facts.canPreviousPage}
-                {...(!facts.canPreviousPage
+                isDisabled={!facts.canPreviousPage || interlocked}
+                {...(!facts.canPreviousPage || interlocked
                   ? {
                       "aria-describedby": blocked
                         ? reasonId
@@ -209,6 +310,10 @@ export const Pagination: PaginationComponent = (props) => {
                   : {})}
                 onPress={() =>
                   guarded(() => {
+                    if (receipt) {
+                      navigateTable(receipt, authority, "previous");
+                      return;
+                    }
                     authority.previousPage();
                   })
                 }
@@ -226,10 +331,14 @@ export const Pagination: PaginationComponent = (props) => {
                   {...(target === index
                     ? { "aria-current": "page" as const }
                     : {})}
-                  isDisabled={!facts.canNavigate}
+                  isDisabled={!facts.canNavigate || interlocked}
                   {...(blocked ? { "aria-describedby": reasonId } : {})}
                   onPress={() =>
                     guarded(() => {
+                      if (receipt) {
+                        navigateTable(receipt, authority, "index", target);
+                        return;
+                      }
                       authority.setPageIndex(target);
                     })
                   }
@@ -243,8 +352,8 @@ export const Pagination: PaginationComponent = (props) => {
                 id={`${rootId}-next`}
                 variant="tertiary"
                 size="sm"
-                isDisabled={!facts.canNextPage}
-                {...(!facts.canNextPage
+                isDisabled={!facts.canNextPage || interlocked}
+                {...(!facts.canNextPage || interlocked
                   ? {
                       "aria-describedby": blocked
                         ? reasonId
@@ -253,6 +362,10 @@ export const Pagination: PaginationComponent = (props) => {
                   : {})}
                 onPress={() =>
                   guarded(() => {
+                    if (receipt) {
+                      navigateTable(receipt, authority, "next");
+                      return;
+                    }
                     authority.nextPage();
                   })
                 }
@@ -285,4 +398,4 @@ export const Pagination: PaginationComponent = (props) => {
       </div>
     </div>
   );
-};
+}

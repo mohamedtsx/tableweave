@@ -35,6 +35,12 @@ import { usePaginationCorrection } from "../pagination/usePaginationCorrection.j
 import { SelectionToolbar } from "../selection/selection-toolbar.js";
 import { NativeCollection } from "../table/native-collection.js";
 import {
+  captureTableNavigation,
+  getTableReorderingBinding,
+  publishTableReordering,
+} from "../table/reordering-binding.js";
+import { TableReorderingHost } from "../table/reordering-host.js";
+import {
   createDataTableRendererCell,
   requireTableRendererSourceTarget,
   requireTableRendererTarget,
@@ -73,6 +79,7 @@ class Host<S extends QuerySchema, T extends object> {
     null;
   failed = false;
   private neutralDefaults: Readonly<DataTableNeutralMessages> | null = null;
+  private reorderSignature: readonly unknown[] | null = null;
   neutral(explicit: Readonly<DataTableNeutralMessages>) {
     return explicit === englishDataTableNeutralMessages
       ? (this.neutralDefaults ?? explicit)
@@ -120,6 +127,7 @@ class Host<S extends QuerySchema, T extends object> {
       const joined = this.joined;
       this.joined = null;
       this.lease = null;
+      this.reorderSignature = null;
       try {
         joined?.binding.releaseTable(joined.token);
       } finally {
@@ -157,6 +165,38 @@ class Host<S extends QuerySchema, T extends object> {
       };
       const capture = new CommitMetadata(check, deny),
         signature: unknown[] = [];
+      // Fixed reorder refs first. A changed/invalid B is fully authenticated by
+      // renderer capture before reflection of private locale/body/formatter refs.
+      const reorder = capture.data(input, "reordering", true);
+      const reorderSignature: unknown[] = [reorder];
+      if (capture.has(input, "reordering")) {
+        if (!reorder || typeof reorder !== "object") deny();
+        const rows = capture.data(reorder, "rows", true);
+        reorderSignature.push(capture.data(reorder, "columns", true), rows);
+        if (rows !== undefined) {
+          for (const key of [
+            "admission",
+            "lease",
+            "handleColumnId",
+            "onSubmit",
+          ])
+            reorderSignature.push(capture.data(rows, key));
+        }
+      }
+      const reordered =
+        !this.reorderSignature ||
+        this.reorderSignature.length !== reorderSignature.length ||
+        reorderSignature.some(
+          (value, index) => value !== this.reorderSignature?.[index],
+        );
+      let capturedEarly = false;
+      if (
+        reordered &&
+        (reorder !== undefined || this.reorderSignature?.[0] !== undefined)
+      ) {
+        actor = this.cell.commit(lease, table, input);
+        capturedEarly = true;
+      }
       // Consumed references/scalars only, under actual metadata proof at layout.
       // No child config internals, callback invocation or candidate spread.
       for (const key of [
@@ -177,6 +217,7 @@ class Host<S extends QuerySchema, T extends object> {
         "detailsRegionLabel",
         "neutralMessages",
         "paginationCorrection",
+        "reordering",
       ]) {
         if (
           this.owner.controller.getDefinition().schema.pagination.enabled ===
@@ -197,6 +238,7 @@ class Host<S extends QuerySchema, T extends object> {
             "columns",
             "messages",
             "paginationCorrection",
+            "reordering",
           ].includes(key) &&
           value !== undefined
         ) {
@@ -237,17 +279,20 @@ class Host<S extends QuerySchema, T extends object> {
                           "selectionToolbar",
                           "pagination",
                           "state",
+                          "reordering",
                         ]
-                      : key === "paginationCorrection"
-                        ? ["definition", "context", "epoch", "readCurrent"]
-                        : [
-                            "label",
-                            "rowHeaderColumnId",
-                            "selectionColumnId",
-                            "rowTextValue",
-                            "columnTextValue",
-                            "cellTextValue",
-                          ];
+                      : key === "reordering"
+                        ? ["rows", "columns"]
+                        : key === "paginationCorrection"
+                          ? ["definition", "context", "epoch", "readCurrent"]
+                          : [
+                              "label",
+                              "rowHeaderColumnId",
+                              "selectionColumnId",
+                              "rowTextValue",
+                              "columnTextValue",
+                              "cellTextValue",
+                            ];
           for (const nested of keys) {
             const item = capture.data(
               value,
@@ -271,9 +316,12 @@ class Host<S extends QuerySchema, T extends object> {
         previous.length !== signature.length ||
         signature.some((value, index) => value !== previous[index])
       ) {
-        actor = this.cell.commit(lease, table, input);
+        if (!capturedEarly || !actor)
+          actor = this.cell.commit(lease, table, input);
         this.signatures.write(actor, Object.freeze(signature));
       }
+      this.reorderSignature = Object.freeze(reorderSignature);
+      if (!actor) deny();
       check();
       const value = requireTableRendererSourceTarget({
         cell: this.cell,
@@ -294,6 +342,8 @@ class Host<S extends QuerySchema, T extends object> {
           this.joined = { binding, token };
         }
       }
+      if (table.phase === "display")
+        publishTableReordering({ cell: this.cell, actor });
       if (table.phase === "display")
         for (const source of Object.values(this.sources))
           publishCriteriaFacadeSource(source, { cell: this.cell, actor });
@@ -377,6 +427,7 @@ const Surface = memo(
           .join(" ")}
         dir={ports.locale?.direction}
       >
+        {ports.reordering ? <TableReorderingHost target={target} /> : null}
         <div
           className="tw-data-table"
           hidden={status !== "ready"}
@@ -558,13 +609,21 @@ function EnabledPager<S extends QuerySchema, T extends object>({
       false
   )
     return null;
+  const binding = getTableReorderingBinding(target);
+  const reorderInterlock = binding ? captureTableNavigation(binding) : null;
   return (
     <>
-      {ports.paginationCorrection ? <Correction target={target} /> : null}
+      {ports.paginationCorrection ? (
+        <Correction
+          target={target}
+          {...(reorderInterlock ? { reorderInterlock } : {})}
+        />
+      ) : null}
       <Pagination
         schema={model.definition.native.controllerDefinition.schema}
         presentation={model.presentation}
         authority={model.authority}
+        {...(reorderInterlock ? { reorderInterlock } : {})}
         {...(ports.locale ? { locale: ports.locale.locale } : {})}
         {...(ports.messages.pagination
           ? { messages: ports.messages.pagination }
@@ -587,8 +646,13 @@ function EnabledPager<S extends QuerySchema, T extends object>({
 }
 function Correction<S extends QuerySchema, T extends object>({
   target,
+  reorderInterlock,
 }: {
   readonly target: TableRendererTarget<S, T>;
+  readonly reorderInterlock?: import("../table/reordering-types.js").TableReorderingNavigation<
+    S,
+    T
+  >;
 }) {
   const { model, ports } = requireTableRendererTarget(target);
   if (
@@ -603,6 +667,7 @@ function Correction<S extends QuerySchema, T extends object>({
     model.presentation,
     model.authority,
     ports.paginationCorrection,
+    reorderInterlock,
   );
   return null;
 }

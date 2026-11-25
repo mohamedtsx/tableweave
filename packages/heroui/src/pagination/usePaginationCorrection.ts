@@ -8,7 +8,15 @@ import type {
 import { getControlsAuthorityOwner } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import { canonicalJson, getQueryIdentity } from "@tableweave/react/contracts";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+import {
+  observeTableNavigation,
+  renderTableNavigation,
+  requireTableNavigation,
+  subscribeTableNavigation,
+  tableNavigationMetadata,
+} from "../table/reordering-binding.js";
+import type { TableReorderingNavigation } from "../table/reordering-types.js";
 import {
   captureCorrectionOrigin,
   captureKnownCorrection,
@@ -29,6 +37,7 @@ export function usePaginationCorrection<
   presentation: ControlsPresentation<S, T>,
   authority: ControlsAuthority<S, T>,
   context: PaginationCorrectionContext<S, T>,
+  interlock?: TableReorderingNavigation<S, T>,
 ): void {
   // Read only the supplied controller's immutable definition before touching
   // context/authority ports. Normalized legacy enabled schemas omit the flag.
@@ -42,9 +51,24 @@ export function usePaginationCorrection<
   }
   // Descriptors capture primitive tags and the callback/receiver exactly once.
   // No application lifecycle callback runs while rendering.
-  const origin = paginationEnabled
-    ? captureCorrectionOrigin<S, T>(context)
-    : null;
+  let navigation: TableReorderingNavigation<S, T> | null = null,
+    valid = true;
+  if (paginationEnabled && interlock !== undefined) {
+    try {
+      observeTableNavigation(interlock, authority);
+      navigation = renderTableNavigation(interlock, authority);
+    } catch {
+      valid = false;
+    }
+  }
+  useSyncExternalStore(
+    (listener) =>
+      navigation ? subscribeTableNavigation(navigation, listener) : () => {},
+    () => (navigation ? tableNavigationMetadata(navigation) : null),
+    () => null,
+  );
+  const origin =
+    paginationEnabled && valid ? captureCorrectionOrigin<S, T>(context) : null;
   const attempted = useRef<{
     controller: TableController<S>;
     definition: object;
@@ -54,6 +78,11 @@ export function usePaginationCorrection<
   useEffect(() => {
     if (!paginationEnabled) return;
     try {
+      if (!valid) return;
+      const gate = () => {
+        if (navigation) requireTableNavigation(navigation, authority);
+      };
+      gate();
       if (!origin?.access) return;
       const { definition, stamp: epoch } = origin;
       const ownsTarget = () => {
@@ -69,6 +98,7 @@ export function usePaginationCorrection<
       const rendered = captureKnownCorrection(presentation);
       if (!rendered || controller.isDisposed()) return;
       const currentEpoch = readCorrectionEpoch(origin);
+      gate();
       if (!currentEpoch?.access || currentEpoch.stamp !== epoch) return;
       if (
         canonicalJson(controller.getDefinition()) !==
@@ -76,10 +106,13 @@ export function usePaginationCorrection<
       )
         return;
       const readAuthorized = () => {
+        gate();
         if (!ownsTarget()) return null;
-        return captureKnownCorrection(
+        const value = captureKnownCorrection(
           Reflect.apply(requireIntent, authority, [{ type: "navigate" }]),
         );
+        gate();
+        return value;
       };
       const displayed = readAuthorized();
       if (!displayed || displayed.stamp !== rendered.stamp) return;
@@ -109,6 +142,7 @@ export function usePaginationCorrection<
       )
         return;
       const latestEpoch = readCorrectionEpoch(origin);
+      gate();
       if (
         !latestEpoch?.access ||
         latestEpoch.stamp !== epoch ||
@@ -118,6 +152,7 @@ export function usePaginationCorrection<
       const latest = readAuthorized();
       if (!latest || latest.stamp !== displayed.stamp) return;
       const finalEpoch = readCorrectionEpoch(origin);
+      gate();
       // Final mutation boundary repeats BOTH owner refs and current accepted state.
       if (
         !finalEpoch?.access ||
@@ -127,6 +162,7 @@ export function usePaginationCorrection<
         controller.getSnapshot() !== state
       )
         return;
+      gate();
       attempted.current = { controller, definition, epoch, semantic };
       controller.dispatch({
         type: "pagination.clamp",
@@ -138,5 +174,13 @@ export function usePaginationCorrection<
       // This does not suppress unobservable application Promise rejections. A
       // dispatched attempt stays spent even if its callback rejects or throws.
     }
-  }, [controller, presentation, authority, origin, paginationEnabled]);
+  }, [
+    controller,
+    presentation,
+    authority,
+    origin,
+    paginationEnabled,
+    valid,
+    navigation,
+  ]);
 }

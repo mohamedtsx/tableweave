@@ -33,6 +33,14 @@ import {
   tableRendererBoundary,
 } from "./renderer-commit.js";
 import type { TableRendererTarget } from "./types.js";
+import {
+  acquireTableReorderingScope,
+  captureReorderingProp,
+  prepareTableReordering,
+  projectTableReordering,
+  requireTableReordering,
+} from "./reordering-binding.js";
+import type { TableReorderingBinding } from "./reordering-types.js";
 
 /** Presentation only: callers supply the current view, not just a stable handle. */
 export interface NativeCollectionProps<
@@ -41,6 +49,7 @@ export interface NativeCollectionProps<
 > {
   /** @internal Presence opts into exact factory renderer ownership, never a grant. */
   readonly renderer?: TableRendererTarget<S, T>;
+  readonly reordering?: TableReorderingBinding<S, T>;
   readonly view: NativeTableView<S, T>;
   readonly label: string;
   readonly rowHeaderColumnId: string;
@@ -83,10 +92,25 @@ const NativeSelectionCount = memo(function NativeSelectionCount({
 export function NativeCollection<S extends QuerySchema, T extends object>(
   props: NativeCollectionProps<S, T>,
 ) {
+  let reorder: TableReorderingBinding<S, T> | undefined;
+  try {
+    reorder = captureReorderingProp(props, "reordering", "native") as
+      | TableReorderingBinding<S, T>
+      | undefined;
+  } catch {
+    return null;
+  }
   const candidate = captureTableRendererProp<S, T>(props);
   if (candidate.kind === "denied") return null;
-  if (candidate.kind === "target")
+  if (candidate.kind === "target") {
+    try {
+      if (reorder) requireTableReordering(reorder, candidate.target);
+    } catch {
+      return null;
+    }
     return <TableRendererCollection target={candidate.target} />;
+  }
+  if (reorder) return null;
   return <NativeCollectionContent input={props} />;
 }
 
@@ -97,13 +121,23 @@ export function NativeCollectionContent<
 >({
   input: props,
   target,
+  refPass,
 }: {
   readonly input: NativeCollectionProps<S, T>;
   readonly target?: TableRendererTarget<S, T>;
+  readonly refPass?: object;
 }) {
   // The shared projection may be scheduled after its parent. Deny before any
   // input view/message/action payload, not just before app formatter invocation.
+  const reorder = captureReorderingProp(props, "reordering", "native") as
+    | TableReorderingBinding<S, T>
+    | undefined;
   if (target) requireTableRendererTarget(target);
+  if (reorder) {
+    if (!target) throw new TableRendererCommitError();
+    requireTableReordering(reorder, target);
+    prepareTableReordering(reorder);
+  }
   const entry = useCallback(
     <Value,>(read: () => Value): Value =>
       target ? tableRendererBoundary(target, read) : read(),
@@ -163,6 +197,7 @@ export function NativeCollectionContent<
   const projected = useMemo(() => {
     try {
       return entry(() => {
+        if (reorder) acquireTableReorderingScope(reorder, refPass);
         if (masked) return null;
         const visible = new Map(
           view.visibleColumns.map((column) => [column.id, column]),
@@ -267,7 +302,31 @@ export function NativeCollectionContent<
             cells,
           };
         });
-        return { columns, rows };
+        if (reorder) {
+          // Only library-owned projection scaffolding is frozen. Never freeze
+          // NativeRows, records, native columns, React content or app objects.
+          const sealColumns = (items: readonly CollectionColumn[]) => {
+            for (const item of items) {
+              if (item.kind === "group") sealColumns(item.children);
+              Object.freeze(item);
+            }
+            Object.freeze(items);
+          };
+          sealColumns(columns);
+          for (const row of rows) {
+            for (const cell of Object.values(row.cells)) Object.freeze(cell);
+            Object.freeze(row.cells);
+            Object.freeze(row);
+          }
+          Object.freeze(rows);
+        }
+        return {
+          columns,
+          rows,
+          reordering: reorder
+            ? projectTableReordering(reorder, columns, rows, refPass)
+            : undefined,
+        };
       });
     } catch (error) {
       if (target && error instanceof TableRendererCommitError) return null;
@@ -288,6 +347,8 @@ export function NativeCollectionContent<
     messages,
     target,
     entry,
+    reorder,
+    refPass,
   ]);
 
   if (!projected || masked || !eligible())
@@ -391,6 +452,7 @@ export function NativeCollectionContent<
         }
         columns={projected.columns}
         rows={projected.rows}
+        {...(projected.reordering ? { reordering: projected.reordering } : {})}
         selectedIds={new Set(selected)}
         eligiblePageIds={eligibleIds}
         isSelectionDisabled={

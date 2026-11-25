@@ -17,6 +17,12 @@ import {
   tableRendererSnapshot,
 } from "./renderer-commit.js";
 import type { TableRendererTarget } from "./types.js";
+import {
+  getTableReorderingBinding,
+  reorderingRefPass,
+  requireTableReordering,
+  subscribeReordering,
+} from "./reordering-binding.js";
 
 /** Stable type across config/model/query epochs; original app types remain React-owned.
  * Selection branches match installed TanStack9.3.1 FlexRender, not another engine. */
@@ -105,8 +111,19 @@ function RendererCollection<S extends QuerySchema, T extends object>({
     useCallback(() => tableRendererSnapshot(target), [target]),
     useCallback(() => tableRendererSnapshot(target), [target]),
   );
+  const binding = getTableReorderingBinding(target);
+  const refs = useSyncExternalStore(
+    useCallback(
+      (listener) =>
+        binding ? subscribeReordering(binding, listener) : () => {},
+      [binding],
+    ),
+    useCallback(() => (binding ? reorderingRefPass(binding) : null), [binding]),
+    () => null,
+  );
   try {
     const { model, ports } = requireTableRendererTarget(target);
+    if (binding) requireTableReordering(binding, target);
     const collection = ports.collection;
     if (
       !collection ||
@@ -120,6 +137,7 @@ function RendererCollection<S extends QuerySchema, T extends object>({
       <NativeCollectionContent
         input={{
           ...collection,
+          ...(binding ? { reordering: binding } : {}),
           view: model.view,
           controls: {
             definition: model.definition.native,
@@ -131,6 +149,7 @@ function RendererCollection<S extends QuerySchema, T extends object>({
             : { messages: ports.messages.collection }),
         }}
         target={target}
+        {...(refs ? { refPass: refs } : {})}
       />
     );
   } catch (error) {

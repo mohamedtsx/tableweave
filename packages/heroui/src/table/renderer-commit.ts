@@ -23,6 +23,10 @@ import {
 } from "../filters/criteria-commit-core.js";
 import type { TableweaveMessages } from "../localization/types.js";
 import { selectionActionContext } from "../selection/action.js";
+import {
+  captureTableReordering,
+  retireTableReordering,
+} from "./reordering-binding.js";
 import type {
   DataTableStateMessages,
   TableRendererActor,
@@ -190,6 +194,16 @@ const columnMessages = {
   disabled: "text",
 } as const;
 const schemas = {
+  reordering: {
+    column: "text",
+    before: "text",
+    after: "text",
+    unavailable: "text",
+    pending: "text",
+    boundary: "text",
+    submitted: "text",
+    rowUnavailable: "text",
+  } satisfies SchemaOf<NonNullable<TableweaveMessages["reordering"]>>,
   state: stateMessages satisfies SchemaOf<DataTableStateMessages>,
   collection: collectionMessages satisfies SchemaOf<
     TableweaveMessages["collection"]
@@ -231,6 +245,7 @@ class RendererCapture<S extends QuerySchema, T extends object> {
     private readonly check: CommitCheck,
     private readonly role: (role: Role) => Binding<S, T>,
     private readonly binding: Binding<S, T>,
+    private readonly reorderOwner: object,
   ) {
     this.cache = new CommitMetadata(check, deny);
   }
@@ -517,13 +532,17 @@ class RendererCapture<S extends QuerySchema, T extends object> {
         this.binding.origin.definition.schema.pagination.enabled === false
       )
         continue;
-      const input = this.data(source, key, !complete);
-      if (input === undefined && !complete) continue;
+      const optional = !complete || key === "reordering";
+      const input = this.data(source, key, optional);
+      if (input === undefined && optional) continue;
       owned[key] = this.dictionary(
         input,
         schema,
         key,
-        complete || (key !== "collection" && key !== "selectionToolbar"),
+        complete ||
+          (key !== "collection" &&
+            key !== "selectionToolbar" &&
+            key !== "reordering"),
       );
     }
     for (const key of childMessages) {
@@ -535,6 +554,25 @@ class RendererCapture<S extends QuerySchema, T extends object> {
   capture(input: unknown): TableRendererPorts<S, T> {
     const source = this.object(input),
       result: Record<string, unknown> = Object.create(null);
+    // Reorder issuance and exact row app-lease authentication precede every
+    // private locale/message/text/body/formatter capture, including replacement B.
+    if (this.cache.has(source, "reordering")) {
+      const raw = this.data(source, "reordering");
+      const collection = this.data(source, "collection", true);
+      const selectionId =
+        collection === undefined
+          ? undefined
+          : this.data(this.object(collection), "selectionColumnId", true);
+      result.reordering = captureTableReordering(
+        raw,
+        this.binding.model,
+        this.reorderOwner,
+        this.cache,
+        (value, receiver) =>
+          this.callback(value, receiver, "onSubmit", "display", "event"),
+        selectionId,
+      );
+    }
     const owned: Record<string, unknown> = Object.create(null),
       children: Record<string, unknown> = Object.create(null);
     let builtinOperatorLabels: object | undefined;
@@ -1330,6 +1368,7 @@ export function createTableRendererAdapter<
   const initialOwner = getDataTableModelOwner(initialModel);
   if (!initialOwner) return deny();
   const { definition, controller } = initialOwner;
+  const reorderOwner = Object.freeze({});
   let current: Binding<S, T> | null = null,
     pinnedOwner: CriteriaFrameOwner<S> | null = null,
     pinnedMode: CriteriaSourceMetadata<S>["mode"] | null = null;
@@ -1432,10 +1471,14 @@ export function createTableRendererAdapter<
         return deny();
     },
     capture(admission, input, _metadata, check, pin) {
+      retireTableReordering(reorderOwner);
       if (pin && pin.mode !== admission.target.metadata.mode) return deny();
-      const ports = new RendererCapture(check, role, admission.target).capture(
-        input,
-      );
+      const ports = new RendererCapture(
+        check,
+        role,
+        admission.target,
+        reorderOwner,
+      ).capture(input);
       return { ports, stamp: undefined, mode: admission.target.metadata.mode };
     },
     activate(target) {
@@ -1444,7 +1487,11 @@ export function createTableRendererAdapter<
       pinnedMode ??= target.metadata.mode;
     },
     clearMetadata() {
-      current = null;
+      try {
+        retireTableReordering(reorderOwner);
+      } finally {
+        current = null;
+      }
     },
     metadataReference: () => current?.model ?? null,
     validateUpdate(admission, pin, origin) {

@@ -30,6 +30,11 @@ import type { FilterDateProps } from "../toolbar/filter-date.js";
 import type { FilterSearchProps } from "../toolbar/filter-search.js";
 import type { FilterTabsProps } from "../toolbar/filter-tabs.js";
 import type { NativeCollectionProps } from "./native-collection.js";
+import type {
+  CapturedTableReordering,
+  ReorderingMessages,
+  TableRendererReorderingConfig,
+} from "./reordering-types.js";
 
 export interface DataTableStateMessages {
   readonly uncommitted: string;
@@ -49,6 +54,7 @@ export interface DataTableStateMessages {
 }
 export interface DataTableMessages extends TableweaveMessages {
   readonly state: Readonly<DataTableStateMessages>;
+  readonly reordering?: Readonly<ReorderingMessages>;
 }
 export interface DataTableLocale extends Omit<TableweaveLocale, "messages"> {
   readonly messages: DataTableMessages;
@@ -135,10 +141,11 @@ export interface TableRendererToolConfigs<S extends QuerySchema> {
 }
 export type TableRendererMessageConfig = Omit<
   Partial<DataTableMessages>,
-  "collection" | "selectionToolbar"
+  "collection" | "selectionToolbar" | "reordering"
 > & {
   readonly collection?: Partial<TableweaveMessages["collection"]>;
   readonly selectionToolbar?: Partial<TableweaveMessages["selectionToolbar"]>;
+  readonly reordering?: Partial<ReorderingMessages>;
 };
 export type TableRendererOwnedMessages = Pick<
   TableRendererMessageConfig,
@@ -148,12 +155,14 @@ export type TableRendererOwnedMessages = Pick<
   | "selectionToolbar"
   | "pagination"
   | "state"
+  | "reordering"
 >;
 export type TableRendererChildMessages = Pick<
   TableRendererMessageConfig,
   "builder" | "search" | "tabs" | "date" | "dateEditor" | "details"
 >;
 export interface TableRendererConfig<S extends QuerySchema, T extends object> {
+  readonly reordering?: TableRendererReorderingConfig<S, T>;
   readonly neutralMessages?: Readonly<DataTableNeutralMessages>;
   readonly layout?: Readonly<{
     readonly id?: string;
@@ -189,7 +198,11 @@ export interface TableRendererConfig<S extends QuerySchema, T extends object> {
   readonly tools?: TableRendererToolConfigs<S>;
 }
 export interface TableRendererPorts<S extends QuerySchema, T extends object>
-  extends Omit<TableRendererConfig<S, T>, "locale" | "messages" | "tools"> {
+  extends Omit<
+    TableRendererConfig<S, T>,
+    "locale" | "messages" | "tools" | "reordering"
+  > {
+  readonly reordering?: CapturedTableReordering<S, T>;
   readonly messages: Readonly<TableRendererOwnedMessages>;
   readonly locale?: Readonly<Pick<DataTableLocale, "locale" | "direction">>;
   readonly childDefaults: Readonly<{

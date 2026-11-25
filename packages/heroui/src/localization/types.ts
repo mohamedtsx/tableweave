@@ -13,16 +13,19 @@ import type { CollectionMessages } from "../table/collection-messages.js";
 import type { FilterDateMessages } from "../toolbar/filter-date.js";
 import type { FilterSearchMessages } from "../toolbar/filter-search.js";
 import type { FilterTabsMessages } from "../toolbar/filter-tabs.js";
+import type { ReorderingMessages } from "../table/reordering-types.js";
 
 /** Existing per-field presentation port, with all accepted built-in IDs required.
  * Custom operator presentation remains application-owned.
  */
 export type TableweaveBuiltinOperatorLabels = NonNullable<
   FilterFieldPresentation<QuerySchema>["operatorLabels"]
-> & Readonly<Record<BuiltinOperator, string>>;
+> &
+  Readonly<Record<BuiltinOperator, string>>;
 
 /** Complete existing message ports only; no future table-state message contract. */
 export interface TableweaveMessages {
+  readonly reordering?: Readonly<ReorderingMessages>;
   readonly builder: Readonly<FilterBuilderMessages>;
   readonly search: Readonly<FilterSearchMessages>;
   readonly tabs: Readonly<FilterTabsMessages>;

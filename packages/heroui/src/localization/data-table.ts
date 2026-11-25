@@ -5,6 +5,10 @@ import type {
 } from "../table/types.js";
 import { arabicTableweaveLocale } from "./arabic.js";
 import { englishTableweaveLocale } from "./english.js";
+import {
+  englishReorderingMessages,
+  arabicReorderingMessages,
+} from "../table/reordering-messages.js";
 export const englishDataTableNeutralMessages = Object.freeze({
   uncommitted: "Preparing the table.",
   unavailable: "The table is unavailable.",
@@ -57,6 +61,7 @@ export const englishDataTableLocale = Object.freeze({
   messages: Object.freeze({
     ...englishTableweaveLocale.messages,
     state: englishState,
+    reordering: englishReorderingMessages,
   }),
 } satisfies DataTableLocale);
 
@@ -67,5 +72,6 @@ export const arabicDataTableLocale = Object.freeze({
   messages: Object.freeze({
     ...arabicTableweaveLocale.messages,
     state: arabicState,
+    reordering: arabicReorderingMessages,
   }),
 } satisfies DataTableLocale);

@@ -6,6 +6,7 @@ import type {
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ReactElement } from "react";
+import type { TableReorderingNavigation } from "../table/reordering-types.js";
 
 export type PaginationNumberFormatter = (
   value: number,
@@ -37,6 +38,7 @@ export interface PaginationMessages {
 }
 
 export interface PaginationProps<S extends QuerySchema, T extends object> {
+  readonly reorderInterlock?: TableReorderingNavigation<S, T>;
   readonly schema: S;
   /** Render facts from projectControls for this render, not authority.read(). */
   readonly presentation: ControlsPresentation<S, T>;
