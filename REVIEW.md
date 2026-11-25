@@ -10,7 +10,37 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
-## Final verification — review session 38 (contracts/controller/native source batch)
+## Final verification — review session 39 (workbench JSX harness failure)
+
+Both once-only commands exit1. Catalog's neutral SSR case fails; corrected Next
+connection has10 passes/1 failed neutral SSR case, server2 passes. Aggregate12
+passes/2 failures, no skipped/todo. Main verifies379 sealed receipt entries/all2,886
+current baseline file identities/285 external outputs and reads raw reports plus
+actual cached transforms. Containment/protected-input checks pass, not test success.
+Receipt /tmp/opencode/final-workbench-source-001/receipt-hashes.json SHA256
+1757934010dad756cbf29ece4ef105566ea9537e713185cfc6a3e69b13e321cf.
+
+### n1 — Test TSX falls back to an unbound classic React runtime
+
+Both test caches emit React.createElement without a React namespace binding, while
+application components import jsxDEV. Root tsconfig is absent/base has no JSX;
+app-only configs select react-jsx. Actual ReferenceErrors occur before renderToString,
+so neither neutral SSR assertion is evaluated. This is an execution-harness defect,
+not a passed SSR case or proof of private-row exposure. All original failures stay.
+
+Main selects a two-file config-only correction: catalog vitest.config.mjs and
+corrected Next-connection vitest.config.mjs explicitly set esbuild.jsx automatic.
+Installed Vite7.3.8/esbuild0.28.2 declarations support that option. No test/assertion/
+include/alias/dependency/application/renderer/lifecycle change or global React shim.
+Capture exact preimages, preserve original producer maps with two disclosed config
+drifts, then independently replay only the affected catalog/Next source lanes in
+fresh external outputs. No framework/browser/RSC/streaming/ordinary-package claim.
+Main captures166 input identities/two preimages and changes only the two selected
+esbuild config properties. Other164 inputs, including155 library files and exact
+test/assertion/baseline/manifest/lock/map bytes, match. Both syntax checks/full scoped
+Biome/whitespace pass. New external correction receipt SHA256ec14e0abc36fb4da4157874d09bede24fb1cb59a88e0e5579ac633b68cbde55f
+at /tmp/opencode/final-workbench-jsx-correction-001/receipt-hashes.json. Source fix
+does not close n1 until independent affected replay reaches the SSR assertions.
 
 Independent command runs once:13 files/235 assertions pass, exit0/empty stderr/no
 timeout/signal/cleanup debt. Main reads raw JSON/status/review and verifies65

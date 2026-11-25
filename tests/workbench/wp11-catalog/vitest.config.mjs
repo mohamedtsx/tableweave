@@ -7,6 +7,7 @@ const entries = [
   ["@tableweave/heroui", "heroui"],
 ];
 export default defineConfig({
+  esbuild: { jsx: "automatic" },
   resolve: {
     alias: [
       ...entries.map(([name, packageName]) => ({

@@ -4,6 +4,7 @@ import baseline from "../wp11-next/vitest.config.mjs";
 // obsolete client test selection. This is never a Next runtime configuration.
 export default {
   ...baseline,
+  esbuild: { ...baseline.esbuild, jsx: "automatic" },
   test: {
     ...baseline.test,
     include: [

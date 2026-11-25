@@ -686,6 +686,22 @@ disposal cases stay superseded, not silently run/relabelled. Existing public GET
 handler is invoked directly with synthetic Request/Response, never via HTTP/Next.
 Independent runs are once/sequential/180seconds/cache-confined. Actual frameworks/
 RSC/browser/retained scheduling/hydration/archives/profiles remain unselected.
+Independent workbench source runs both exit1: catalog0/1, Next connection10/11 and
+server2/2, aggregate12 passes/2 pre-render React-reference failures. Main verifies
+379 sealed receipts/all2,886 current baseline identities/285 external outputs and
+actual cache bodies; containment passes but test commands remain RED. Review39n1
+identifies unbound classic JSX in test TSX versus application jsxDEV. Main selects
+only two stock Vitest configs for explicit esbuild.jsx automatic, with preimages/
+old producer maps preserved and all test assertions/includes/aliases/app code fixed.
+Installed Vite/esbuild types confirm the option. Independent fresh affected replay
+follows after source correction; no package/framework/browser/hydration approval.
+Main's config-only JSX correction passes syntax/full scoped Biome/whitespace.
+External final-workbench-jsx-correction-001 captures two preimages/166 before-after
+inputs; only the two config bodies change, other164/library155/test assertions/
+source aliases/manifests/lock/old maps match. Receipt ec14e0ab… stays distinct from
+all historical producer maps. Main preserves the source fix before selecting two
+fresh independent affected replays under final-workbench-source-002; no shim,
+assertion suppression, dependency/renderer/application change or old-output reuse.
 
 ## Current WP-10 implementation handoff
 

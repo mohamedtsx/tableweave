@@ -273,3 +273,39 @@ of shared reordering definitions remain inert: no adapter/drag activation/repair
 No test deletion/suppression/retry/fix is allowed by this lease. A resolution/native/
 vendor/API failure is real evidence to preserve, not permission to install or alias
 around it. Main reviews failures before any correction or further command.
+
+## Fifth selection — actual failure and bounded JSX correction
+
+Both commands exit1: catalog0/1, Next connection10/11/server2/2. The two neutral
+SSR cases throw React is not defined before renderToString. Main verifies379
+receipt entries/all2,886 current baseline identities/285 external outputs and
+cached test React.createElement versus app jsxDEV imports. Original raw tests are
+RED despite successful containment. Receipt17579340… under final-workbench-source-001.
+
+Review39n1 selects only these two repository config bodies for main correction:
+tests/workbench/wp11-catalog/vitest.config.mjs and
+tests/workbench/wp11-next-connection/vitest.config.mjs. Set explicit esbuild.jsx
+automatic using the installed Vite/esbuild option; no test-source/assertion/include/
+alias/dependency/app/root compiler setting changes. Main writes NEW external
+`/tmp/opencode/final-workbench-jsx-correction-001/**` preimages/input hashes/delta/
+syntax/format receipts. Old seals/pins/config preimages remain unchanged history;
+their two expected current-config drifts must be disclosed, never re-signed.
+Syntax/full scoped Biome are selected; independent affected replay requires fresh
+external wrappers/output roots and the same preserved instrumentation/selection.
+Do not reuse the failed outputs or inject a global React binding.
+Main captures166 before/after identities/two preimages; other164 inputs stay exact.
+Both syntax/full scoped Biome/whitespace pass. New correction receiptec14e0ab… is
+separate from historical seals; config-only source correction awaits actual replay.
+
+The independent reviewer may now replay the SAME two selected lanes once each in
+NEW `/tmp/opencode/final-workbench-source-002/**`, with source configs inheriting
+the two intended automatic-JSX changes. External wrappers preserve all test/alias/
+plugin/compiler semantics from the corrected baselines, overriding ONLY the same
+root/output/cache/worker/retry/report fields as before. No wrapper JSX override or
+global binding injection. Both failed prior outputs/caches/wrappers/379 receipt
+entries remain immutable; old source seals retain exactly two declared config drifts.
+Use the same two explicit Node/Vitest native-config commands against new wrapper
+paths,180second deadlines/one worker/retries0/128MiB floor. No test selection/name
+filter/skip changes, dependencies, source edits or new application/browser/framework
+action. Retain every actual failure; worker does not fix/retry. Main separately
+records independent correction disposition and remaining real-runtime limits.
