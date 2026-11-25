@@ -100,7 +100,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Admission client discovery | Preserveddda8166 | Actual12-runtime/13-type producer entry source checks pass; emitted/installed/packed proof final; C1a additive export is a new stage |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| DOM native-read repair spike | Isolated writer active from9a5f598 | User-authorized exact0.5.3 DOM-only repair;16 vendor paths/500 added ESM-line cap, no algorithm/package widening or primary intake |
+| DOM native-read repair spike | Held candidate preservede8b3311; bounded continuation selected | First116-ESM-line sketch incomplete, not infeasibility proof; same16 paths/500 total added ESM cap, new v2 edit/asset/fixtures only |
 | Vendor lifetime/upstream preparation | Final contract delivered; worker released | STOP minimal adapter: native observer/keyboard geometry reads precede adapter fences; explicit remedy authority required |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
@@ -354,6 +354,31 @@ Latest allocation documentation passes246 Markdown/870 links and18 checker
 regressions plus scoped whitespace. Neutral install reuses367 packages with zero
 downloads; no new dependency is added there. Checks do not establish source/UI,
 adapter, semantic-source, runtime, consumer or independent acceptance.
+The first patch handoff is HELD, not ready: its protected option is rejected before
+manager construction, and native helper/property/observer/keyboard/pointer/cleanup
+gates remain incomplete. Main reads actual source/README, matches72 sealed local
+inputs/150 source hashes/32 edit postimages/both original unpatched packages and
+passes own positive TS6/scope checks. Main preserves isolatede8b3311; no primary
+intake, patch registration, vendor runtime or independent approval occurs.
+Because this is an unfinished116-ESM-line candidate rather than evidence that the
+500-line envelope is impossible, main selects a bounded continuation under the same
+user authority. Old candidate bytes/maps/logs remain frozen. Fresh original edit-v2,
+new v2 patch asset and new closure fixture directory are the only new worker paths;
+total added ESM lines are still capped500 against original0.5.3. No scope widening
+or automatic enablement follows. Default whitespace flags unified patch blank context
+lines; fixture-only whitespace passes without changing Git settings or asset bytes.
+Main materializes fresh edit-v2 without an install/registration and verifies all32
+original vendor byte identities before releasing the continuation writer. The old
+edit-v1 and installed copies remain unchanged. The new worker must either complete
+the same native-read closure or demonstrate an actual capped/ownership blocker,
+not use a partial unwired kernel as an infeasibility finding.
+During the independent docs replay, the checker finds two in-progress C1a Markdown
+files unreachable. Review22n3 records main-owned navigation links labelled unreviewed
+authoring; no worker WIP is treated as a handoff or modified. Original failed log
+is preserved, with structural replay pending. Source/runtime findings remain open.
+The navigation replay now passes248 Markdown/873 links and18 checker regressions;
+the original two-finding failure is retained. This checks only the owner links,
+not worker readiness, semantic-source equivalence or independent/runtime approval.
 
 ### Current ownership and next action
 

@@ -65,3 +65,11 @@ final and unrun; current checks are own positive TS6/noEmit/static/syntax/scoped
 Biome/148-source and old-input scope only. Preserve B2/entry maps as historical
 producer lanes, not automatically re-signed export expectations. Seal a new delta.
 No UI/adapter readiness, review22n2 closure or whole-packet approval follows.
+
+## In-progress authoring navigation
+
+The current worker's [C1a README](../../tests/reordering/interaction-cut/README.md)
+and [C1b boundary note](../../tests/reordering/interaction-cut/C1B-BLOCKED.md) are
+in-progress authoring, not an intaken handoff or reviewed API. Their presence grants
+no row submission, source readiness or correction approval. Main reviews exact
+source/hash/check evidence only after the worker releases its actual handoff.

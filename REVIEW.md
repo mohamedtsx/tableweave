@@ -1914,6 +1914,15 @@ or separately authorized dependency remedy is required; no monkey patch, copied
 engine, raw geometry callback or requirement waiver follows. Runtime/corrective/
 independent verification and review21n4 remain open.
 
+The user-authorized first patch spike is preserved isolated ase8b3311, not intaken
+or registered. Main matches72 sealed local inputs/150 source hashes/full32 edit
+postimages/both original installed packages and passes own positive TS6/scope checks.
+The actual asset rejects protected construction and leaves the kernel/helper/native
+coverage incomplete. It does not close n4 or demonstrate that the500-line envelope
+is impossible. Main allocates a fresh-copy continuation under the same bounds;
+old candidate/seals/failures remain unchanged and runtime/independent proof stays
+final. A source/format/scope pass is not proof of a usable repaired native domain.
+
 ## WP-10 UI bridge intake — review session 22 (provisional)
 
 ### n1 — UI-only revocation can reach source-observation retirement
@@ -1952,3 +1961,15 @@ native-cut bridge. Deny retired actions before pending creation, not by a post-t
 veto, raw callback escape or fabricated backend rejection. Common refs, ordinary-C
 column controls and pager authoring remain separately possible after that producer
 handoff; actual row submission stays held pending this seam. n2 remains open.
+
+### n3 — In-progress C1a fixture documentation lacks owner navigation
+
+The structural checker finds two new C1a Markdown files unreachable from entrypoints
+while the worker is still authoring. Main adds owner-plan links explicitly labelled
+in-progress, without reading/accepting worker WIP or changing its files. Failed log
+is preserved; structural replay is pending. This finding concerns navigation only,
+not source correctness or review22n1/n2 runtime/independent closure.
+
+Main's replay passes248 Markdown/873 links and all18 checker regressions after those
+links. Original two-finding failure remains preserved. This verifies the structural
+navigation correction only; no semantic-source/runtime/independent acceptance follows.

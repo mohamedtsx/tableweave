@@ -94,3 +94,36 @@ native ownership cannot supply the proposed subject proof, another package/algor
 or wider envelope is needed, or partial debt is acknowledged without a receipt.
 Report the exact site, not a larger fork. Code/positive types alone establish no
 supported adapter, closed numbered finding or packet approval.
+
+## Held first candidate and bounded continuation
+
+The first spike is preserved **isolated only** ase8b3311. It is deliberately HELD:
+the manager rejects every supplied nativeRead option, the private kernel is unwired,
+and observer/keyboard/pointer/partial-cleanup coverage is incomplete. Main reads the
+actual asset/README, verifies72 sealed local inputs/all150 source hashes/full32 edit
+postimages/both original installed packages and passes one own positive TS6/scope
+check. Asset SHA74c884db… is not a registered patch hash. No runtime evidence exists.
+
+Its116 added ESM lines are below the cap, and the handoff expressly does not prove
+completion impossible within scope. Main therefore leases a continuation, not a
+broader fork. Preserve the old asset, tests, seals, edit copy and failed logs. Main
+materializes a **fresh original** edit copy at `/tmp/opencode/wp10-dnd-patch-edit-v2`.
+Only the same16 vendor paths may change there, plus the new
+`patches/@dnd-kit__dom@0.5.3-tableweave-native-read-v2.patch` and new
+`tests/reordering/dnd-native-read-closure/**`. No old candidate input is rewritten.
+The500-line limit is measured against the original0.5.3 bytes, not as500 extra lines
+on top of the held sketch. No new install/registration/dependency change is needed.
+
+Complete actual helper/property-getter, observer, keyboard continuation, pointer and
+exact cleanup gates rather than only a manager rejection or an unwired kernel. Remove
+the unsolicited scope field: the selected capability is not an application/source
+provenance substitute. No public protected mode is enabled until all retained paths
+are covered. Return a source-ready provisional patch or a demonstrated excluded
+site/line-budget/ownership blocker; an unfinished candidate alone is not proof of
+infeasibility. All original stop rules and final-phase verification limits remain.
+
+The first default staged whitespace check flags blank context lines inside the
+standard unified patch text; they must not be trimmed into an invalid asset. Scoped
+fixture whitespace passes; no global Git whitespace setting is changed. Local raw
+preimages/logs remain preserved but are not all Git-tracked; the tracked HANDOFF map
+records their identities and the actual sealed asset separately.
