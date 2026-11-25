@@ -148,3 +148,16 @@ be assumed retrofitted with pending/queued-proposal guards. New dnd-kit0.5.3 reg
 metadata remains a candidate, not installed/API/DOM-identity evidence. No product
 constraint, optional-entry isolation, manual/real-consumer gate or final-phase
 verification/approval requirement is weakened by this elaboration.
+
+## WP-10 ADR-03/08 command-origin composition selection
+
+Main confirms existing core captures a command once and reuses that exact object
+at final acceptance; final state validation and query-first observers are existing
+seams. The selected [bounded helper](../planning/wp-10-command-admission-plan.md)
+explicitly creates the real C through its actual factory with private command/
+proposal/fence composition. This is not a wrapper, retrofit or second accepted-state
+store. Pure application validators stay pure; private receipt bookkeeping performs
+no command, network or accepted-state mutation. Existing core/native producers and
+their acceptance semantics remain unchanged. Callback ordering, reentry, source/
+lease purity, stale proposal and cleanup enforcement are unverified implementation
+obligations; no runtime/G-02 or independent approval is granted by this selection.

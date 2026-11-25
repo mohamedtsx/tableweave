@@ -6,6 +6,25 @@ reviewed WP-08 authority contract. No package install, optional adapter, rendere
 change, G-02 approval, merge, deployment or publication is authorized by stage1.
 Final packet stacks after reviewed WP-09; personal maintainer review is separate.
 
+## Current provisional continuation
+
+The user's [single final verification phase](final-verification-phase.md) supersedes
+old per-stage exhaustive timing, not scope requirements. Pure Stage1 is preserved/
+intakena7b8627 with source identity unchanged on provisional WP-09 head119c8d1;
+the [explicit pure entry](wp-10-core-entry-plan.md) is848c94b, source discovery only.
+Main now activates only the [guarded controller/admission prerequisite](wp-10-command-admission-plan.md).
+Native ref/handle/pager contract is still read-only preparation; optional DnD
+selection/install/adapter and G-02 remain separate. No whole-packet approval follows.
+The [dependency preparation](wp-10-adapter-dependency-plan.md) records actual
+versioned0.5.3 metadata and the unsafe optimistic DOM-sort default; it is not an
+install/code lease or a passed collection-compatibility result.
+The [closed native-ref lifetime](wp-10-native-lifetime-plan.md) is now selected as
+an isolated prerequisite. It owns refs only; future adapter disposal and actual
+native/handle/pager integration require separate actual handoffs and code leases.
+Main separately owns the isolated [definition capability metadata](wp-10-definition-capabilities-plan.md)
+addition. It creates no action grant/coordinator; both actual flags and genuine
+current renderer/admission proofs are required by later integration.
+
 ## Stage1 ownership and outcome
 
 One worker owns packages/react/src/reordering/{types,capture,rows,columns,index}.ts

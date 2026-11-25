@@ -48,6 +48,67 @@ Main verifies all145 source hashes and exact additive manifest bytes; entry8-inp
 aggregate93918012… is preserved. Actual documentation/whitespace checks pass225
 Markdown/824 local links and18 checker probes, not semantic/external/runtime proof.
 
+Main receives the exact command-admission report and reads actual core/factory
+seams. It activates one source-only four-new-file client helper lease plus new
+admission fixtures at848c94b; all existing145 source bodies remain frozen. The helper
+returns actual factory C, not a proxy/retrofit, commits genuine models separately
+from explicit app metadata, and owns exact command/proposal/interaction receipts.
+Native ref/pager report remains read-only. Only lightweight checks are authorized
+now; callbacks/lifetimes/pending/final-accept enforcement and all runtime/G-02/
+independent approval remain deferred implementation/final-phase obligations.
+
+Main inspects published0.5.3 new-generation registry/type/source metadata only.
+The sortable default includes OptimisticSortingPlugin; its source directly moves
+elements through insertAdjacentElement. The adapter dependency plan requires an
+explicit replacement plugin/feedback configuration and later real DOM-identity proof.
+No DnD install, adapter implementation, browser/runtime or G-02 check is authorized
+or claimed by this preparation. Native-ref contract handoff is still outstanding.
+
+Native-ref/pager report is delivered at `/tmp/opencode/wp10-native-bindings/REPORT.md`.
+Main selects its direct real-compound refs/designated functional handles/one issued
+pager interlock direction, conditional on actual admission and a closed cleanup
+lifetime. Upstream ref unions/null-or-returned-cleanup/cached collection traces are
+read-only evidence, not browser compatibility. A bounded follow-up refines the exact
+core lifetime seam externally before source activation; no generic app disposer/
+permission callback or second resource engine is authorized by a proposed diagram.
+
+Main reads existing GitHub PR metadata: #4–#8 stay open/unmerged; no #9 exists yet.
+WP-09 branch/base merge-base match119c8d1/fadb9a8, respectively. Existing CI triggers
+on every push/PR and runs full pnpm check. Main therefore defers push/draft creation
+to the selected final phase instead of triggering exhaustive checks early or editing
+CI to bypass them. Separate exact-head unmerged packet PRs remain owed.
+The exact frozen-head WP-09 draft body is prepared externally at
+`/tmp/opencode/wp09-draft-pr-body.md`; it is not pushed, opened or CI-verified.
+It records actual source checks, historical failures, open numbered corrections,
+unchangedfc01/RAC limits and final/manual/external obligations without approval.
+
+### Active WP-10 ownership
+
+| Scope | Owner and boundary | Next step |
+| --- | --- | --- |
+| Guarded C/admission helper | Shared writer; four new headless client files + own fixtures only | Actual API/hash/light-check handoff; no existing source modifications |
+| Closed native-ref lifetime | Isolated worker from848c94b; core/renderer + one new private module/own fixtures | Refs-only tickets/purge/release/refresh; protect other143 sources |
+| Definition reorder capabilities | Preserved isolated04941b2; two P1 files/own fixtures | Positive TS6/format/scope pass; intake waits for active handoffs |
+| Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
+| Native/handle/pager consumers | Inactive | Need both actual producer handoffs, not proposed method names |
+| Optional adapter/dependencies | Metadata preparation only | Installed selection and a closed vendor-resource extension remain later allocations |
+
+Main selects the report's refs-only lifecycle, exact core installation and renderer
+proof, with inert failure on ended React ref callbacks plus bounded fresh-ticket
+handoff. It owns no DOM listener/style/observer/vendor disposer and invents no ref
+cleanup debt; existing native timer/rAF debt remains real and blocking. The isolated
+allocation avoids racing the shared admission worker's145-source baseline. Necessary
+frozen existing-dependency installation is main-owned; no DnD install is allocated.
+Main also selects the missing separate definition flags under a two-file isolated
+lease. Explicit handle configuration/manual order/selection eligibility cannot stand
+in for feature enablement. The actual admission worker's existing-source baseline
+stays unchanged, and no new property alone authorizes rows, columns or backend writes.
+Definition metadata is preserved in isolated04941b2 after main source-diff inspection,
+positive TS6/full scoped formatting/syntax,143 protected-source/1376 old tracked-byte
+checks and staged whitespace. Twelve-input aggregate66cbea79…; source14535974bee…
+is separate from the active workers' baseline. Tests/four negatives are authored but
+unrun; intake waits for admission/lifetime handoffs, not an automatic source rebase.
+
 ### Current ownership and next action
 
 All WP-09 implementation below is provisional. User-selected final exhaustive/
