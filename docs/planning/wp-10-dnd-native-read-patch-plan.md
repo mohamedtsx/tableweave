@@ -171,3 +171,31 @@ must not invoke a stale grant or treat an uncertain prior cleanup as successful.
 Enable protected construction only after the fixed source account is complete;
 genuine N issuance/live geometry/integration and all runtime/independent proof still
 remain separate. A new partial candidate stays held, never registered by default.
+
+## Final v3 disposition — no automatic continuation
+
+V3 is preserved isolated as2db2a4c, asset SHA57babb5b…. Main matches75 sealed local
+inputs/150 source bytes/32 edit postimages/both prior seals, passes the actual full
+positive TS6 program and checks the old-input scope. Required utility operations
+solve the structural type failure; that is not native lifecycle closure.
+
+Actual handlePointerUp still has ungated event/target/document/window accesses and
+unowned suppress-click listener/timer work. Its first two proposed guard lines would
+take this encoding from600 to602, not finish the tail or prove an in-cap redesign
+impossible. The context lookup additionally returns mutable authority state despite
+its opaque type (review21n5). A private-state/immutable-token representation is still
+needed. Native call-graph/provenance classification also remains incomplete; do not
+present these two witnesses as an exhaustive proof that everything else is closed.
+
+Protected construction remains disabled. No patch registration/install/primary
+intake, actual N issuer/live geometry/adapter, runtime/packed or independent approval
+occurs. Original installations and all three candidates/seals/raw failures remain
+preserved. The final stop is honored: no fourth code lease or cap/envelope increase
+is inferred. Main requests a new explicit direction while independent N1/C1b work
+continues. A same-generation headless primitive route is a possible **research**
+alternative, not selected implementation or permission to replace requirements.
+
+The user subsequently chooses **Keep drag blocked**. No fourth continuation,
+headless-route research, scope increase, patch registration/install or adapter lease
+is authorized. Preserve all three candidates unregistered. The independent neutral/
+row-control integration may proceed, but cannot close drag/G-02/full WP-10 scope.

@@ -21,7 +21,7 @@ passed whole-table prerequisite by implication.
 | Separate SRC/UI correction | [Selected bounded plan](wp-10-ui-source-fences-plan.md), preserved8ba59fd | Source/light intake passed; deferred admission listeners revise provisional early-veto timing, not pure/source authorization; runtime/independent proof remains final |
 | Release-only interaction revocation | [Actual C1a source](../../tests/reordering/interaction-cut/README.md) |13-runtime/13-type entry, physical ACT cut and source/light intake; C1b renderer/native retirement and atomic notification remain held |
 | Neutral refs/handles/pager consumers | Native-binding report/actual prerequisite APIs | Not allocated; no guessed producer method or wrapper collection is acceptance |
-| Optional new-generation adapter | [Dependency preparation](wp-10-adapter-dependency-plan.md) |0.5.3 installed/static-inspected only in isolated9a5f598; primary unchanged, no vendor runtime/G-02 result or newer fixed upstream candidate |
+| Optional new-generation adapter | [Dependency preparation](wp-10-adapter-dependency-plan.md) | User chooses Keep drag blocked after three held unregistered spikes; primary dependencies unchanged, no usable adapter/runtime/G-02 result |
 
 ## Historical producer replay and current-source lanes
 

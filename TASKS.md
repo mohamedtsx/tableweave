@@ -99,9 +99,9 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
 | Admission client discovery | Preserveddda8166 | Actual12-runtime/13-type producer entry source checks pass; emitted/installed/packed proof final; C1a additive export is a new stage |
-| Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
+| Optional adapter | USER-BLOCKED | User chooses Keep drag blocked after final held spike; no further vendor repair/research, registration or adapter activation |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| DOM native-read repair spike | Held v2 preservedb968bf3; final closure lease selected | Required utility-function projection avoids manager narrowing; same16 paths, explicit final600 added ESM cap; no registration/primary intake |
+| DOM native-read repair spike | Stopped by user; FINAL HELD v3 preserved2db2a4c | No writer/registration/primary intake; all candidates and failures preserved, full WP-10/G-02 incomplete |
 | Vendor lifetime/upstream preparation | Final contract delivered; worker released | STOP minimal adapter: native observer/keyboard geometry reads precede adapter fences; explicit remedy authority required |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
@@ -446,6 +446,26 @@ or old patch/producer seal changes. Main retains docs/Git/integration ownership.
 Allocation navigation replay passes250 Markdown/878 links and scoped document
 whitespace. It checks no semantic-source, live worker behavior, runtime or independent
 approval; the earlier18 checker regression pass is not a new execution here.
+Final vendor v3 arrives HELD at600 ESM/600 CJS/76 declaration lines, exact16 paths.
+Main reads actual context/guard and pointer-up source, verifies75 sealed local inputs/
+150 source bytes/32 postimages/old seals and passes its actual full positive TS6 plus
+old-input scope. Main preserves isolated2db2a4c. No registered/installed patch exists.
+Review21n5 records mutable runtime authority despite typed opacity; pointer-up native
+reads/click suppression tail and complete native provenance coverage remain open.
+The promised final stop is honored: no automatic fourth code continuation or cap
+increase. Main requests a new explicit route/scope decision; N1/C1b continues in
+primary and must not depend on an enabled vendor profile or implement drag meanwhile.
+User explicitly answers **Keep drag blocked** in the renewed direction modal. This
+supersedes continuation/remedy suggestions: no further vendor repair, alternative-
+route research, patch registration/installation or adapter activation is allocated.
+All three isolated candidates remain disabled/held and preserved. Primary manifests/
+lock stay unchanged by the spike. Independent N1/C1b row/column menus, renderer
+lifetime and pager corrections continue under their existing vendor-free lease.
+Accessible non-drag controls are not drag/G-02 or full WP-10 acceptance; the mandatory
+drag scope remains incomplete rather than waived, skipped or approved by this choice.
+User-block documentation replay passes250 Markdown/879 links and scoped whitespace.
+This establishes only navigation/bookkeeping, not semantic-source equivalence,
+native safety, live row behavior, G-02 or independent approval.
 
 ### Current ownership and next action
 

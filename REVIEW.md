@@ -1923,6 +1923,19 @@ is impossible. Main allocates a fresh-copy continuation under the same bounds;
 old candidate/seals/failures remain unchanged and runtime/independent proof stays
 final. A source/format/scope pass is not proof of a usable repaired native domain.
 
+### n5 — V3's typed opaque context exposes mutable authority state
+
+Main reads nativeReadContext/nativeCheck in the actual v3 edit. The exported lookup
+returns the mutable record containing domain/subject/activation; WeakSet membership
+authenticates that object but does not protect its fields afterward. The type brand
+does not make the runtime state private or immutable. This violates the selected
+closed capability contract; use a frozen empty token with private state rather than
+exposed authority fields. Main also reads the remaining ungated handlePointerUp
+event/document/window/click-listener/timer path. No exploit, browser reproduction,
+genuine N integration or independent verification ran. V3 is preserved held and
+unregistered; full positive types do not close n4/n5. Further scope/design needs a
+new explicit decision, not an automatic fourth patch continuation.
+
 ## WP-10 UI bridge intake — review session 22 (provisional)
 
 ### n1 — UI-only revocation can reach source-observation retirement

@@ -221,3 +221,10 @@ the earlier stopped minimal adapter lease. Exact one-package/16-path envelope,
 runtime-diff cap, preserved inspection baseline, no-algorithm-change and LIGHT-only
 rules apply. Broad fork, adapter/native issuer implementation, primary dependency
 intake and independent/runtime approval remain outside that allocation.
+
+After three held isolated candidates, the user chooses **Keep drag blocked**.
+The [final spike disposition](wp-10-dnd-native-read-patch-plan.md#final-v3-disposition--no-automatic-continuation)
+records the type-compatible but incomplete/disabled result. No vendor patch is
+registered or installed, no inspection dependency commit is intaken into primary,
+and no further remedy/alternative research is allocated. Neutral simple move
+controls remain independent; drag and full WP-10/G-02 are incomplete, not waived.
