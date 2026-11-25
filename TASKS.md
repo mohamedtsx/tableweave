@@ -94,7 +94,8 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
-| Source/UI cut correction | B2 handoff delivered; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; preservation pending, runtime/independent approval deferred |
+| Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
+| Admission client discovery | Main additive manifest/own-fixture lease active | Actual12 runtime/13 types; all150 production bodies freeze at source15039adeb5d…; row cut/consumer still separate |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
 | Vendor lifetime/upstream preparation | Final contract delivered; worker released | STOP minimal adapter: native observer/keyboard geometry reads precede adapter fences; explicit remedy authority required |
@@ -298,6 +299,22 @@ Source1 aggregate57f2b371… / own-inputdd591503… remain separate from histori
 held272ab0a1…/6503dae1…. Main preserves this provisional source before new leases.
 No runtime/corrective/independent review22n1 closure, actual row-submit readiness or
 G-02 approval follows. Review22n2 pre-token renderer/native cut remains unresolved.
+B2 is now preserved8ba59fd. Main activates only the existing additive admission
+client-entry plan updated for the actual12-runtime/13-type index. The single manifest
+exports hunk/new own discovery fixtures may change; all150 source bodies/old seals/
+tests/lock/dependencies remain frozen at39adeb5d…. No future cut API is guessed and
+no neutral/drag consumer is activated by exposing the genuine client entry.
+Main's additive client entry now exists in source: positive bare-alias TS6,
+exact-manifest/150-source/runtime-type-list/static relative-graph and syntax checks
+pass; full scoped Biome passes5 files. Initial fixture signature and formatter
+failures are preserved separately. No existing production body or dependency/lock
+changed. Negative/dual/emitted/installed/packed/runtime/cycle/independent proof remains
+unrun; client source discovery is not review22n2 row-submit readiness.
+Its six-input seal61a36055… includes the exact new manifest/README/positive/negative/
+config/static helper bytes; no producer/public-output seal is rewritten.
+Final sealed-entry Biome passes6 files; documentation passes243 Markdown/867 links
+and whitespace passes. These are source/navigation checks, not runtime/installed or
+independent approval.
 
 ### Current ownership and next action
 

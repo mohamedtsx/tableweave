@@ -37,3 +37,26 @@ new bridge APIs, if needed, require an explicit actual producer handoff before a
 entry fixture claims their export list. Current combined source baseline is
 /tmp/opencode/wp10-integrated-prerequisites-source150.json, digest
 80ce38f6479ac13c80e925d519b9b6619921680513c15fdff0f0f4e4657bf8e7.
+
+## Actual B2 activation
+
+B2 is preserved as8ba59fd after main's complete one-source diff/hash/scope and
+positive own TS6 intake. Main now activates this additive manifest/discovery lease
+against all150 production hashes in
+`/tmp/opencode/wp10-b2-integrated-source150.json`, digest39adeb5d… . The actual client
+index now has **twelve runtime/thirteen type exports**, including the eight bridge
+functions, rather than the earlier four/nine producer surface. Capture that actual
+index, not a guessed future prepared-operation API. All150 bodies and old tests/
+seals/entries/lock/dependency/private/version metadata remain fixed. Preserve the
+exact pre-entry package manifest and its one additive exports hunk.
+
+Source entry availability does not activate row submission: review22n2 remains held
+for the actual pre-token renderer/native cut. No native consumer, dependency patch,
+public output generation, build, installed export or archive proof follows here.
+
+The [actual source discovery fixture](../../tests/reordering/admission-entry/README.md)
+now covers all twelve/thirteen exports. Main's positive TS6, exact additive manifest/
+150-source/static graph and syntax checks pass. Full scoped Biome passes five files
+after own fixture signature/formatter corrections; both initial failed logs remain.
+No existing production body/dependency/lock/default-root entry changes. Actual
+emitted/ordinary/installed/packed/negative/dual/runtime proof remains deferred.

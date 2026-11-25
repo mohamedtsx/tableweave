@@ -29,6 +29,10 @@
     "./reordering": {
       "types": "./dist/reordering/index.d.ts",
       "import": "./dist/reordering/index.js"
+    },
+    "./reordering-controller": {
+      "types": "./dist/reordering-controller/index.d.ts",
+      "import": "./dist/reordering-controller/index.js"
     }
   },
   "scripts": {
