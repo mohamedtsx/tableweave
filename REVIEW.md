@@ -1979,3 +1979,40 @@ not source correctness or review22n1/n2 runtime/independent closure.
 Main's replay passes248 Markdown/873 links and all18 checker regressions after those
 links. Original two-finding failure remains preserved. This verifies the structural
 navigation correction only; no semantic-source/runtime/independent acceptance follows.
+
+### n4 — Neutral retirement fans out before the core finishes pure clearing
+
+Main reads the handed-off neutral binding and existing core purge. The renderer's
+clearMetadata calls retireTableReordering; that function calls changed, which invokes
+binding subscribers before clearMetadata's finally nulls renderer metadata and before
+core purge's finally invalidates/cancels work. This contradicts the selected pure
+clearing-before-observers boundary. Binding.collection is nulled, but the old lower
+collection's private ID→ref/ticket maps are not physically cleared. These are source
+traces, not an executed failure or memory measurement. Preserve this candidate, then
+make retirement pure/complete and wake retained widgets from genuine post-clear cell
+metadata rather than an inline observer. Do not add an app disposer/policy or source
+read to cleanup. Runtime/independent correction verification remains final; n4 is open.
+
+### n5 — Row config capture collapses source-only readiness into display readiness
+
+Neutral captureTableReordering unconditionally joins/requires the supplied model
+before private locale capture. Actual headless commitModel/checkModel require a view/
+frame, so a genuine source-only loading model cannot be that exact display join.
+The worker documents an app-side ready-before-row-config restriction, but the selected
+outer source/state branch must not require invented row readiness. Authenticate actual
+definition/controller/lease plus genuine source configuration first; keep row UI
+suspended and actions/pager grants unavailable until a genuine ready-model join.
+No copied model, fake actor/frame, P2 continuation by strings or private row callback
+may authorize the waiting branch. This is a source-derived requirement gap, not a
+runtime reproduction. Preserve the original and author the real loading/ready/wait
+case; n5 remains open for correction/final verification.
+
+### n6 — Bound navigation needs an immediate post-coercion cut
+
+The handed-off navigateTable checks before Number(value), then consults captured
+definition/presentation facts before its next source gate. Coercion can reenter UI/
+source ownership; the selected before/after callback boundary requires a gate before
+continuing those reads, not only the final dispatch gate. Add that exact retained-
+origin check without recapturing a fresh origin, changing omitted WP-08 behavior or
+spending a blocked clamp. No backend mutation/runtime failure is claimed; n6 remains
+open for source correction and final independent verification.

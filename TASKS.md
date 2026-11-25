@@ -93,14 +93,14 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
-| Neutral consumer implementation | Isolated lease newly selected fromdda8166 | Common refs/functional column controls/row-pending pager; row begin/onSubmit held for C1b |
+| Neutral consumer implementation | Handoff delivered; held for source-found lifecycle corrections | Source16/90-input/139-protected-source/1,520-old-input and positive TS6 intake passes; preserve before N1/C1b corrections |
 | C1a interaction cut | Preserved03b96c6; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; C1b/runtime/independent closure still open |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
 | Admission client discovery | Preserveddda8166 | Actual12-runtime/13-type producer entry source checks pass; emitted/installed/packed proof final; C1a additive export is a new stage |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| DOM native-read repair spike | Held candidate preservede8b3311; bounded continuation selected | First116-ESM-line sketch incomplete, not infeasibility proof; same16 paths/500 total added ESM cap, new v2 edit/asset/fixtures only |
+| DOM native-read repair spike | Held v2 preservedb968bf3; final closure lease selected | Required utility-function projection avoids manager narrowing; same16 paths, explicit final600 added ESM cap; no registration/primary intake |
 | Vendor lifetime/upstream preparation | Final contract delivered; worker released | STOP minimal adapter: native observer/keyboard geometry reads precede adapter fences; explicit remedy authority required |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
@@ -399,6 +399,35 @@ C1a intake navigation passes248 Markdown/874 links and source/doc whitespace; no
 runtime proof follows. Its actual browser runner owns6565, also initially chosen by
 the neutral allocation; final execution must serialize them or explicitly revise
 the later current fixture, not overwrite the sealed C1a producer.
+V2 patch arrives HELD at498 ESM lines, not source-ready: full positive TS6 fails
+because added required manager methods narrow inherited sensor/plugin types;
+pointer/cleanup/denial boundaries are unfinished. Main verifies86 local sealed
+inputs/150 sources/full32 postimages/v1 seal, reproduces the full failed TS6 gate,
+and preserves isolatedb968bf3. No registration or runtime proof follows.
+Main's metadata-only in-memory positive probe confirms a supported type projection:
+required utility retirement/debt exports, original manager instance shape, zero
+diagnostics versus four original-projection diagnostics. No casts/optional methods/
+sortable declaration edits are selected. The final v3 allocation keeps16 paths and
+explicitly replaces main's500-line guardrail with600 total ESM lines for the existing
+unfinished ownership gates, not new features or algorithms. No further automatic
+cap/envelope expansion; preserve both prior candidates and return a real decision
+if this final scope cannot close. Actual neutral handoff also arrives; main intake
+is pending before any C1b source lease.
+Main now reads the actual neutral16-source handoff (all five new modules and the
+complete eleven-file diff). Its90 sealed inputs/139 protected source hashes and
+1,520 old regular inputs match; the actual positive tsconfig.light.json passes.
+The first main command guessed tsconfig.json and failed TS5058; that log is retained,
+not a worker compile failure. Review22n4/n5/n6 records source-traced retirement
+fanout/private map clearing, source-only row readiness and post-coercion cut gaps.
+No runtime reproduction or independent finding closure is claimed. Main preserves
+this held candidate before integrating a bounded N1/C1b correction; row/drag remain
+inactive and all historical seals stay intact.
+Neutral candidate is now preserved isolated10a417a, with source16 aggregate215cc09f…
+and its own source155be895ceb…. Primary intake will be a held correction baseline,
+not approval. Headless C1a03b96c6 must remain unchanged when combined; N1/C1b owns
+the actual native/renderer correction afterward. Vendor v3 edit is independently
+materialized, matches the held v2 postimage, and changes no installed package or
+prior edit copy. Its writer is active within the final selected16-path/600-line scope.
 
 ### Current ownership and next action
 

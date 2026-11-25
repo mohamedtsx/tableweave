@@ -127,3 +127,47 @@ standard unified patch text; they must not be trimmed into an invalid asset. Sco
 fixture whitespace passes; no global Git whitespace setting is changed. Local raw
 preimages/logs remain preserved but are not all Git-tracked; the tracked HANDOFF map
 records their identities and the actual sealed asset separately.
+
+## Held v2 and final bounded closure allocation
+
+V2 is preserved isolated asb968bf3, asset SHAa1e32cd3…, still disabled/unregistered.
+Main matches86 sealed inputs/150 source hashes/32 edit postimages/old v1 seal and
+reproduces its full positive TS6 failure. Utility-only types do not replace that
+failed gate. Runtime/native callback coverage is still incomplete. The current
+498-line encoding plus one capture hunk projects501, not a proof of impossibility.
+
+Main selects **required free utility operations**, not required manager instance
+methods: `retireNativeReads(manager: object): undefined` and
+`hasNativeReadDebt(manager: object): boolean`. Implemented exports authenticate the
+actual private domain lookup before fields. Keep the manager instance type upstream-
+compatible; do not make methods optional, cast plugin constructors, change generic
+constraints, or edit the two excluded sortable declarations. Main's in-memory
+positive TS6 probe reproduces four current-projection diagnostics and obtains zero
+with this required-function projection. No vendor file or old fixture was modified
+by the probe, and it is not runtime/installed-package evidence.
+
+For this **final** code continuation main explicitly replaces its500-line engineering
+cap with **600 added nonblank/noncomment ESM lines total against original0.5.3**.
+The small headroom is for the already-selected capture/listener/timer/constraint/
+denial-safe cleanup closure, not additional functionality. Do not minify/join code
+solely to game the limit or omit a required guard. The same16 vendor paths, one
+package, unchanged algorithms/math/exports metadata/license and all other stop rules
+remain. No further cap/envelope expansion is automatic; if600 is insufficient or
+another package/algorithm is needed, stop and return the concrete decision to main.
+
+Preserve both old candidates, fixtures/seals/raw failures and edit copies. Main
+materializes `/tmp/opencode/wp10-dnd-patch-edit-v3` from original0.5.3, checks all32
+bytes, and may apply the exact held v2 asset as the starting code without registering
+it. Only those16 paths in edit-v3, new
+`patches/@dnd-kit__dom@0.5.3-tableweave-native-read-v3.patch` and new
+`tests/reordering/dnd-native-read-final/**` are worker-owned. No install, old source/
+fixture rewrite, primary intake, silent private profile or actual N/adapter code.
+
+Close the full positive program and every retained native-read/retirement path,
+including constructor/plugin allocation order, pointer capture/suppress-click and
+DelayConstraint work, metadata-only ScrollListener's actual native attachment,
+StyleInjector denial boundary and keyboard temporary-shape restoration. Retirement
+must not invoke a stale grant or treat an uncertain prior cleanup as successful.
+Enable protected construction only after the fixed source account is complete;
+genuine N issuance/live geometry/integration and all runtime/independent proof still
+remain separate. A new partial candidate stays held, never registered by default.

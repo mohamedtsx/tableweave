@@ -96,3 +96,20 @@ agents, build, vendor/plugin or source-profile rebaseline by the worker. Preserv
 failures and seal a new bounded delta. Stop on an unsupported cached-ref refresh or
 mutation/source gate; no permissive model/capability substitute. Main reviews actual
 APIs/diff/hashes before intake. Row-submit and full WP-10/G-02 remain incomplete.
+
+## First neutral handoff — preserved held for N1/C1b
+
+Main preserves the isolated candidate as10a417a after reading its complete16-source
+delta, matching90 sealed local inputs/139 protected source bodies/1,520 old regular
+inputs, and passing the actual positive tsconfig.light.json. The initial main
+tsconfig.json guess fails TS5058 and remains a separate log, not a worker failure.
+Source16 aggregate215cc09f… and isolated source155be895ceb… are this producer's
+identities, not a replacement of B2/C1a or a runtime acceptance result.
+
+Review22n4/n5/n6 identifies source-traced corrections before row activation: pure
+retirement/physical lower-map clearing before observers, source-only configuration
+without a forced display join, and immediate post-coercion retained navigation
+checks. The candidate is **held**, despite positive types. Main may intake it only
+as a preserved correction baseline, keeping C1a's separate headless hashes intact.
+The next N1/C1b lease must correct these boundaries and close prepared notification
+using actual APIs; no existing seal or unskipped original assertion is re-signed.
