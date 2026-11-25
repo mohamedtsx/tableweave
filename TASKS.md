@@ -963,6 +963,26 @@ exact. Expected run-directory link-count change/new eight entries are separately
 disclosed, not a re-signed original1,416-entry capture. The independent10B worker
 now reinspects artifacts then conditionally runs only the two owned version probes.
 All other workers are released; actual producer remains empty until this handoff.
+Independent10B passes both once-only commands: actual owned Node v24.22.0/owned
+execPath/linux/x64 and pnpm10.13.1, exit0/empty stderr/no timeout/signal. Main verifies
+47 sealed entries/11 exact preservation maps/raw outputs; HOME zero new files/bytes,
+producer empty. Receipt39c2f5f5… at final-hdd-tool-version-001. Review51 closes only
+owned-tool version smoke, not approved toolchain/lease/producer/G-05. All workers
+released. Main selects phase11 genuine detached clone ONLY into the already-owned
+empty cand001 producer, with isolated Git config/hooks/file transport and command-
+local umask0002. Selected code52d165f has3,078 regular100644 blobs. Actual dependency
+install/build/pack/consumer/patch/profile/native/framework operations stay unselected.
+Phase11 completes seven selected Git commands once/exit0/no timeout/signal, normal
+clone/detach stderr retained. Main verifies51 receipt entries/eight exact protection
+maps and real detached.git/3,078 selected tracked files/canonical155/all30 primary-
+matching tooling bodies/modes. Receipt234fa226… at final-hdd-producer-clone-001.
+Primary Git controls/source/cache/prior fixtures/tools stay fixed; no dependencies/
+dist/generation/archives or lease approval fabricated. Review52 records actual
+genuine source only. Main allocates independent read-only checkout review and exact
+frozen producer-bootstrap planning to final-hdd-producer-review-001. No Git/tool/
+install/test/network or data writes outside that new report root by its reviewer.
+Actual online frozen install/existing producer patch application remains unselected
+pending explicit user authorization and reviewed scope; no new drag patch allowed.
 
 ## Current WP-10 implementation handoff
 

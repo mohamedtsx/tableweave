@@ -10,6 +10,50 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 52 (genuine detached producer intake)
+
+Main's seven selected Git commands run once/exit0/no timeout/signal. Real clone
+uses no-local/no-hardlinks/no-checkout/empty templates, then genuine detached
+checkout52d165f, actual HEAD verification and clean producer status. Clone/detach
+normal stderr is preserved verbatim, not treated as an assertion failure. Main
+verifies51 receipt entries/eight equal source/pin/cache/fixture/prior/capsule/Git-
+control/parent maps; receipt /tmp/opencode/final-hdd-producer-clone-001/receipt-hashes.json
+SHA256234fa226aa5f1eb3920b48c426b750c8703f5bdceed2ce96852bd0bda6e5a587.
+
+All3,078 tracked regular files match selected Git blob IDs and canonical155; all30
+non-evidence WP13 tooling bodies/physical modes match primary. Genuine .git is a
+directory, HEAD a regular detached40-hex record, no commondir/objects alternates.
+Producer role identity/mode remains fixed; primary Git HEAD/index/config controls
+stay unchanged. No primary/untracked/.repo data or dist/node_modules is borrowed.
+New clone HOME is confined to its selected new run path, no global config/hooks.
+
+This establishes actual source materialization, not dependency/compiler/build/
+archive or an approved lease/input certificate. Root/app/package node_modules and
+package dist remain absent. Main requests independent read-only checkout review
+and a frozen-bootstrap plan; actual installation requires a separately selected
+phase and explicit authorization for its network/existing producer patch materialization.
+
+## Final verification — review session 51 (independent owned-tool version smoke)
+
+Main independently verifies47 receipt entries/11 exact protection maps and actual
+raw outputs: owned Node v24.22.0/exact owned execPath/linux/x64 and genuine local
+pnpm10.13.1. Both selected commands run once/exit0/empty stderr/no timeout/signal;
+HOME adds zero files/bytes. Receipt /tmp/opencode/final-hdd-tool-version-001/receipt-hashes.json
+SHA25639c2f5f57eb5cf5314f801c21fdbd4426437cebc70e61178f92c979d9428d3c4.
+
+Independent artifact baseline covers raw checksums/1,111 tar headers and bodies/
+safe-mode extraction/1,113 tool-map files before execution. All1,424 capsule entries/
+tools/source1,199 pins/285 seal/cache/683 fixtures/2,103 prior receipt records stay
+fixed; producer remains empty, no toolchain approval/namespace lease fabricated.
+pnpm interpreter ownership follows immutable absolute shebang plus the observed
+owned Node path, not instrumentation inside the pnpm process. Offline variables
+are not an OS network sandbox. Only bounded owned-tool VERSION smoke is satisfied.
+Actual family-child/clone/install/archive/ordinary/G-05/packet/stable gates stay open.
+
+Main's read-only selected-source Git catalog contains3,078 regular100644 blobs,
+no symlink/gitlink modes. Future genuine detached clone may use that immutable
+52d165f code frame; later primary commits are bookkeeping, not CI/exact-HEAD proof.
+
 ## Final verification — review session 50 (genuine tool artifact data intake)
 
 Selected10A runs once/exit0/empty stderr/no timeout/signal, with1,416 actual capsule

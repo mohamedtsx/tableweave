@@ -744,3 +744,64 @@ parent identities stay exact; only the private probe home may receive bounded lo
 tool cache data. Preserve any failure/extra stderr without suppression. Producer
 stays empty, no namespace lease/request/main-approval/toolchain certificate forged.
 Main independently reviews before selecting any genuine producer/installation phase.
+
+### 10B actual independent result
+
+Both commands run once/exit0/empty stderr/no timeout/signal: owned Node v24.22.0,
+exact owned execPath/linux/x64; local genuine pnpm10.13.1. HOME creates zero files/
+bytes. Main verifies47 receipt entries/11 exact preservation maps/raw actual versions;
+receipt39c2f5f5… at final-hdd-tool-version-001. Review51 satisfies VERSION smoke only,
+not a namespace lease, install/build, general trust or G-05 approval. Producer empty.
+
+## Eleventh selection — genuine fresh detached checkout only
+
+With verified owned tools/source guards, main selects only real Git source
+materialization in cand001's explicitly allocated empty producer role. Immutable
+code revision52d165fa4ee7e2108585a9a985927ddf31838ec8 has3,078 regular100644 tracked
+blobs, no symlink/submodule modes. Primary's Git common directory is the real
+Tableweave repository, not .repo/Gamila. Do not copy working-tree/untracked data or
+borrow primary dist/node_modules; no dependency/patch/profile/tool/build action.
+
+Main alone uses /usr/bin/git with hooks/fsmonitor/untracked cache/auto-maintenance/
+auto-GC disabled, no system/global config or system attributes, file protocol only,
+no terminal prompt/pager, isolated new run/producer-clone-home HOME/tmp/config/cache/
+data and whitelist PATH. umask0002 applies only to new clone files to match primary
+non-executable tooling0664; existing namespace/role/source permissions stay fixed.
+Main captures read-only primary HEAD and selected ls-tree catalog; then once each:
+
+```text
+git [isolated global options] clone --no-local --no-hardlinks --no-checkout --template= -- PRIMARY EMPTY_OWNED_PRODUCER
+git [isolated global options] -C PRODUCER checkout --detach --no-recurse-submodules 52d165fa4ee7e2108585a9a985927ddf31838ec8
+git [isolated global options] -C PRODUCER rev-parse HEAD
+git [isolated global options] -C PRODUCER status --porcelain=v1 --untracked-files=all
+```
+
+Capture primary HEAD again; it must remain unchanged. Genuine .git directory and
+regular detached HEAD must match, with no commondir/objects alternates or borrowed
+Git/worktree pointer. Every checkout file must match the selected Git blob/hash/
+mode catalog; canonical155 and all30 non-evidence WP13 tooling bytes/actual modes
+must match primary. Packages' dist/node_modules, app node_modules and root
+node_modules stay absent. No hand-written Git metadata or generated framework tree.
+
+Only producer contents and newly allocated clone-home data may change. Tools/
+artifact journals/version home/683 fixtures/source1,199 pins/cache/old receipts/
+parent security identity remain fixed. New external capture
+/tmp/opencode/final-hdd-producer-clone-001/** keeps full raw command outputs/status/
+Git catalog/before-after/physical/seal records. Clone deadline240seconds; checkout
+180seconds; read-only queries60seconds;128MiB floor, sequential once/no retry. Git
+normal stderr is retained, not suppressed or conflated with failure. Any unexpected
+existing producer content, source/identity drift or failed checkout holds with all
+partial data retained, no reset/rollback/cleanup. Main reviews genuine source facts
+before independent checkout review and any separately selected frozen installation.
+
+### Eleventh selection actual result
+
+Seven selected Git commands once/exit0/no timeout/signal. Normal clone/detach stderr
+preserved; HEAD52d165f/clean new producer status, real.git directory/detached regular
+HEAD/no alternates/commondir,3,078 Git-blob-checked files/canonical155/30 matching
+tooling entries. Main verifies51 sealed records/eight exact protection maps; receipt
+234fa226… at final-hdd-producer-clone-001. Primary Git controls/source/cache/old data/
+tools stay fixed. Review52 source-only intake; no install/compiler/build/dist/
+archive/namespace lease or approved input map. Independent read-only review/next
+bootstrap planning is selected, NOT an install. Network/frozen producer patch
+materialization needs explicit user authorization and a new bounded phase.
