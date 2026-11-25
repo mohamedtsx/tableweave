@@ -159,3 +159,12 @@ Current checks get fresh labels/maps and old failures remain. All other producti
 helpers/source/exports/dependencies/old evidence remain fixed. Source/AST checks
 and authored but unrun adversaries cannot close runtime confinement. Independent
 review precedes any separately selected HDD fixture/test/materialization phase.
+
+Main preserves the original producer as af5ad20 before correction. The exact
+authorized parent-only operation is completed once: actual0775→0755 through a
+verified owned nonsymlink directory fd, same dev2065/inode6160385/UID1000/GID1000,
+only0020 removed. Before/after external receipt SHA256
+933e77b1ce560c7cb8f2bd8d5b8f962226fa18c365207a0f02f2e44a64a9a073 at
+/tmp/opencode/final-hdd-parent-permission-001/receipt-hashes.json. This corrects
+the physical prerequisite only; no HDD proof namespace/guard/helper/runtime or
+tool acquisition/materialization has run. Other permissions/contents stay fixed.

@@ -38,6 +38,14 @@ Do not silently relax the guard, choose a different root or chmod a shared exist
 parent under new-only authority. Main asks whether the user authorizes exactly
 0775→0755 on that owned parent, retaining all contents/ownership/other permissions,
 or keeps HDD staging blocked. No permission operation has occurred.
+The user subsequently explicitly authorizes the parent-only change. Main checks
+canonical nonsymlink components/owned target/exact identity, opens the directory
+O_DIRECTORY|O_NOFOLLOW, journals before, fchmods only that verified fd0775→0755,
+then confirms dev/inode/UID/GID unchanged and exactly0020 removed. Receipt SHA256
+933e77b1ce560c7cb8f2bd8d5b8f962226fa18c365207a0f02f2e44a64a9a073 at
+/tmp/opencode/final-hdd-parent-permission-001/receipt-hashes.json. **n2's specific
+permission prerequisite is corrected**; actual HDD guards/CLI remain unrun. No
+recursive/content/ownership/namespace/mount change or broader permission grant.
 
 ### n3 — Consumer marker is read before its approved physical binding is checked
 

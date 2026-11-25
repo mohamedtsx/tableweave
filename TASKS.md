@@ -33,9 +33,10 @@ The final phase is now active under
 Reviews34–44 record actual bounded unit/source/neutral-SSR/Chromium/dual-type
 results and independently verified harness corrections, not whole-packet approval.
 Library155 stays unchanged; original failures/seals and per-packet provenance stay
-separate. Fresh packed materialization still needs a storage choice: both HDD modals
-were interrupted, with no recorded selection/authority. No HDD staging/guard changes,
-build/install/ordinary package or full CI action is selected by current source passes.
+separate. The user subsequently authorizes new-only HDD storage and review45's
+specific parent-only permission/source-packaging corrections. Fresh packed
+materialization remains gated by independent guard review and per-phase selection;
+no build/install/ordinary package or full CI action follows from current passes.
 
 ### TASK-019 ownership and next handoffs
 
@@ -47,7 +48,7 @@ build/install/ordinary package or full CI action is selected by current source p
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
-| WP-13 archive tooling | Provisional source frozen25fdfde; writer released | Main source/light intake passes; actual build/pack/install/runtime/independent proof final |
+| WP-13 archive tooling | Historical25fdfde plus provisional HDD sourceaf5ad20; bounded review45 corrections active | Source receipts verified; guard tests/current build/pack/install/runtime/independent proof remain open |
 | WP-14 benchmark source | Provisional source frozen587d140; writer released | Final phase selects independent unit validators only; actual runner/profile/paint/measurements still deferred |
 | WP-15 eligible protocols | Isolatedcb4de1c/bd2cec0 transported0bc3877/c837b32 | Main integrated docs/byte checks selected; actual consumer/release gates unverified/deferred |
 
@@ -853,6 +854,23 @@ tests and byte-identical new preimage .md→.md.txt correction. Main first prese
 the exact producer/seal in Git, then allocates this follow-up under the HDD plan.
 Old maps/seals stay original; the packaging path change is separately disclosed,
 not silently re-baselined. HDD fixtures/CLI/test/build/install remain unselected.
+Main preserves original provisional producer as af5ad20 with the exact184-entry
+seal and the raw .md preimage at its historical path (documentation failure is
+explicit). Main now allocates one correction writer: only runtime.mjs:runFamily()
+postflight/inventory, storage-roots.mjs:consumerStorage() ordering, authored tests,
+new wp13-storage-correction/** source receipts, and byte-identical .md→.md.txt plus
+linked handoff/protocol follow-up. Original raw logs/maps/pins/seals and all other
+production bodies stay fixed. Source/syntax/AST/Biome/positive noEmit only, no HDD
+data/tests/CLI/runtime acquisition/build/install. Main alone performs the separately
+approved exact existing-parent permission change and records its physical receipt.
+Main performs the specifically authorized existing-parent change once through a
+verified nonsymlink directory fd: /mnt/data/Projects0775→0755, retaining dev2065/
+inode6160385/UID1000/GID1000. Only0020 group-write is removed; no content/ownership/
+descendant/mount operation. The external before/after seal is
+/tmp/opencode/final-hdd-parent-permission-001/receipt-hashes.json SHA256
+933e77b1ce560c7cb8f2bd8d5b8f962226fa18c365207a0f02f2e44a64a9a073.
+Review45n2's observed permission prerequisite is corrected, NOT a passing HDD
+guard/CLI phase. No proof namespace/producer/tools/consumer or acquisition exists.
 
 ## Current WP-10 implementation handoff
 
