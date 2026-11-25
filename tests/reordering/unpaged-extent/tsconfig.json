@@ -1,0 +1,17 @@
+{
+  "extends": "../admission/tsconfig.json",
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../admission/*.ts",
+    "../admission/*.tsx",
+    "../../../packages/react/src/reordering/*.ts",
+    "../../../packages/react/src/reordering-controller/*.ts"
+  ],
+  "exclude": [
+    "./negative/**",
+    "./.artifacts",
+    "../admission/negative/**",
+    "../admission/packed/**"
+  ]
+}

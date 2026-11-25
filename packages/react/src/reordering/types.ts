@@ -10,6 +10,8 @@ export interface ReorderStamp {
   readonly pageIndex: number;
   readonly pageSize: number;
   readonly revision: ReorderRevision;
+  /** Omitted/page is one displayed page; complete is an unsliced unpaged extent. */
+  readonly extent?: "page" | "complete";
 }
 
 export interface RowReorderFrame {

@@ -15,7 +15,7 @@ passed whole-table prerequisite by implication.
 | Explicit pure subpath | [Entry README](../../tests/reordering/entry/README.md),848c94b | Positive source alias/static mapping only; old exact-body guard is a historical producer gate |
 | Guarded real controller/admission | [Held handoff](../../tests/reordering/admission/README.md),e9d1721 | Type/static checks pass; unpaged source-traced blocker/11-row requirement remain unwaived |
 | Definition enablement | [Plan](wp-10-definition-capabilities-plan.md), isolated04941b2 | Rows/columns metadata authoring; no action/authority/adapter grant, intake pending |
-| Explicit unpaged extent | [Selected plan](wp-10-unpaged-extent-plan.md) | Active source correction; actual handoff/combined proof pending |
+| Explicit unpaged extent | [Actual handoff](../../tests/reordering/unpaged-extent/README.md) | Three-file source correction/light checks; runtime/ack/browser/independent proof unexecuted |
 | Closed native-ref lifetime | [Selected plan](wp-10-native-lifetime-plan.md) | Active isolated refs-only implementation; actual handoff pending, arbitrary vendor disposal unsupported |
 | Neutral refs/handles/pager consumers | Native-binding report/actual prerequisite APIs | Not allocated; no guessed producer method or wrapper collection is acceptance |
 | Optional new-generation adapter | [Dependency preparation](wp-10-adapter-dependency-plan.md) | Versioned metadata reads only; no DnD installed or G-02 result |

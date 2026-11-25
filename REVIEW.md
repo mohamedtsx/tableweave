@@ -1824,3 +1824,11 @@ held producer and original pure seal; allocate explicit extent provenance in the
 stamp/parser/origin+ack contract and derive it only from genuine pagination policy.
 The required11-row/default10 fixture is authored and unrun. No runtime reproduction,
 correction verification or independent closure is claimed; n1 remains open.
+
+Session19 n1 source follow-up: U1 adds normalized optional stamp extent, complete
+cardinality handling and origin equality, plus genuine disabled-policy derivation
+in the helper. Main reviews the full three-file diff, matches24 fixture/three-source/
+146 protected hashes and passes one positive source TS6 program. Original pure/
+held seals and11-row requirement remain unchanged. Existing paginated-server-complete
+denial is retained, not replaced by a fake allowing model. Runtime/ack/browser/
+independent correction verification remains deferred; n1 stays open.

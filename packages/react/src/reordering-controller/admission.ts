@@ -403,6 +403,14 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     if (ids.length) authority.require({ type: "reorder", ids });
     checkModel(expected, mounted);
     const state = value.view.state;
+    const complete =
+      definition.native.controllerDefinition.schema.pagination.enabled ===
+      false;
+    if (
+      definition.native.paginationEnabled !== !complete ||
+      value.view.pagination.enabled !== !complete
+    )
+      return deny();
     return captureReorderFrame({
       stamp: Object.freeze({
         ownerEpoch: after.ownerEpoch,
@@ -413,6 +421,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         queryIdentity: state.queryIdentity,
         pageIndex: state.query.pagination.pageIndex,
         pageSize: state.query.pagination.pageSize,
+        ...(complete ? { extent: "complete" } : {}),
       }),
       pageIds: Object.freeze(facts.rows.map((row) => row.id)),
       baseRevision: after.baseRevision,

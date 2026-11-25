@@ -83,3 +83,20 @@ stay unchanged; new README links their held state to the selected correction.
 Own handoff records actual three-source delta/hashes/light results, limits and
 deferred proof. Main must independently verify review19n1 in the final phase; source
 compatibility authoring does not close it or deliver the whole Stage2/adapter packet.
+
+## Provisional implemented handoff
+
+[Actual U1 handoff](../../tests/reordering/unpaged-extent/README.md) changes exactly
+the selected three files. Main reads the complete small diff, matches24 fixture
+inputs/three source-delta hashes/146 protected source hashes and passes one positive
+own source TS6 program. New149-source map:
+1f9c2bc1ba0ee8656630ec4feb1498a9aea6c9354972462bf702c75602ddf8d5.
+Three-source aggregate6a1a919b… and24-input04dffdd1… are separate U1 identities,
+not rewritten original pure/held seals. Original strict bookkeeping-scope failure
+and later explicit main-document drift remain preserved; runtime is not reproduced.
+
+The worker confirms actual protected producers reject paginated server-complete
+input. U1 preserves that denial; its enabled-policy page branch does not create a
+new allowing source mode. Disabled client/complete-server and full paged client
+fixtures use real producers. Original11-row assertion remains untouched/unexecuted.
+No native/handle/pager/full Stage2 or independent review19n1 closure follows.

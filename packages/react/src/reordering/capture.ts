@@ -115,7 +115,7 @@ export function ids(value: unknown, charge: Budget): readonly string[] {
   return Object.freeze(result);
 }
 export function stamp(value: unknown, charge: Budget): ReorderStamp {
-  const fields = data(value, [
+  const required = [
     "ownerEpoch",
     "sourceVersion",
     "definitionKey",
@@ -124,7 +124,14 @@ export function stamp(value: unknown, charge: Budget): ReorderStamp {
     "pageIndex",
     "pageSize",
     "revision",
-  ]);
+  ];
+  const fields = data(value, [...required, "extent"], required);
+  const extent = fields.extent;
+  if (Object.hasOwn(fields, "extent")) {
+    if (extent !== "page" && extent !== "complete") invalid();
+  } else if (Reflect.has(value as object, "extent")) invalid();
+  const pageIndex = integer(fields.pageIndex);
+  if (extent === "complete" && pageIndex !== 0) invalid();
   const revision = fields.revision;
   if (
     revision !== null &&
@@ -138,17 +145,22 @@ export function stamp(value: unknown, charge: Budget): ReorderStamp {
     definitionKey: text(fields.definitionKey, charge),
     scopeKey: text(fields.scopeKey, charge),
     queryIdentity: text(fields.queryIdentity, charge),
-    pageIndex: integer(fields.pageIndex),
+    pageIndex,
     pageSize: integer(fields.pageSize, 1),
     revision:
       typeof revision === "string" ? text(revision, charge, true) : revision,
+    ...(extent === "complete" ? { extent } : {}),
   });
 }
 export function frame(value: unknown, charge = budget()): RowReorderFrame {
   const fields = data(value, ["stamp", "pageIds", "baseRevision"]);
   const capturedStamp = stamp(fields.stamp, charge);
   const pageIds = ids(fields.pageIds, charge);
-  if (pageIds.length > capturedStamp.pageSize) invalid();
+  if (
+    capturedStamp.extent !== "complete" &&
+    pageIds.length > capturedStamp.pageSize
+  )
+    invalid();
   return Object.freeze({
     stamp: capturedStamp,
     pageIds,
@@ -213,7 +225,8 @@ export function sameOrigin(a: ReorderStamp, b: ReorderStamp): boolean {
     a.scopeKey === b.scopeKey &&
     a.queryIdentity === b.queryIdentity &&
     a.pageIndex === b.pageIndex &&
-    a.pageSize === b.pageSize
+    a.pageSize === b.pageSize &&
+    (a.extent ?? "page") === (b.extent ?? "page")
   );
 }
 export function sameStamp(a: ReorderStamp, b: ReorderStamp): boolean {

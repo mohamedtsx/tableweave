@@ -87,7 +87,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Scope | Owner and boundary | Next step |
 | --- | --- | --- |
 | Guarded C/admission helper | Held producer preservede9d1721 | Original maps/11-row requirement remain unchanged; source readiness waits for extent correction |
-| Unpaged extent correction | Shared three-source writer newly allocated | Explicit stamp extent + origin/ack equality, genuine disabled-policy derivation; other146 sources freeze |
+| Unpaged extent correction | Actual handoff delivered; writer released | Main diff/hash/type checks pass; preserve before explicit helper entry or isolated intakes |
 | Closed native-ref lifetime | Isolated worker from848c94b; core/renderer + one new private module/own fixtures | Refs-only tickets/purge/release/refresh; protect other143 sources |
 | Definition reorder capabilities | Preserved isolated04941b2; two P1 files/own fixtures | Positive TS6/format/scope pass; intake waits for active handoffs |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
@@ -127,6 +127,12 @@ Main records a focused WP-10 deferred verification inventory: historical pure/en
 held-helper gates are not automatically rebased onto intentional extent changes.
 Known commands/ports and missing diagnostics/current/ordinary/native/adapter lanes
 remain explicit. This records no new test execution or independent approval.
+U1 handoff now exists. Main reads the full three-file diff, matches24 fixture inputs/
+three source hashes/146 protected sources and passes one positive own source TS6
+program. Source1491f9c2bc1… is preserved. Original bookkeeping-scope failure remains
+separate; original pure/entry/admission seals and11-row fixture are unchanged. Actual
+paginated-server-complete denial stays enforced. Review19n1 remains runtime and
+independently unverified. Main preserves before source discovery/queued intake.
 
 ### Current ownership and next action
 
