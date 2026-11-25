@@ -47,3 +47,7 @@ not authorize deployment, paid resources, manual acceptance claims or publicatio
 
 The [WP-09 deferred inventory](wp-09-deferred-verification.md) links actual authored
 handoffs and historical failures without treating test code as executed evidence.
+The [WP-11 inventory](wp-11-deferred-verification.md) separately tracks actual
+catalog/example/framework source producers, interrupted handoffs and the real
+generated-route/current-archive/browser/manual prerequisites. It grants no early
+framework/runtime execution or approval of blocked WP-10/G-02.

@@ -198,6 +198,30 @@ Markdown/919 links and19 checker regressions; whitespace passes. Those checks ar
 not a build/index/play/SSR/browser/ordinary/independent result. The preserved Next
 producer remains isolated while its connection correction is authored; mounted
 Start's standard-route source writer is active in its separate pinned tree.
+Recovery after server restart: primary remains2b82612, isolated Next35780bf and
+Startf7ad033. No worktree/source/evidence was deleted. Next connection source/light
+correction was authored but ENOSPC interrupted its README before final pins/seal;
+that producer is NOT handoff-complete. Startup capacity check now reports688,549,888
+available bytes and ample inodes, so only the unfinished small handoff/source work
+may resume within existing leases; no install/build/cache cleanup is allocated.
+Start has partial uncommitted new source, not a released handoff. Resume its original
+writer rather than starting a second owner or repeating completed source/checks.
+Main records the task-sized WP-11 final proof inventory at
+docs/planning/wp-11-deferred-verification.md while the two isolated writers resume.
+It distinguishes authored33-story/Vite/recipe source from incomplete Next correction
+and Start route assembly, actual ports6570–6573, historical output/producer identities
+and unresolved ordinary/manual/runner/consumer gates. No runtime or new packet
+implementation is executed by this inventory; WP-12–WP-15 remain unskipped.
+Main allocates read-only WP-12 preparation to
+`/tmp/opencode/wp12-integrated-boundary/PLAN.md`: inspect only preserved Stage A/B,
+existing public fixtures/contracts and authored scene gaps, not either active
+framework worktree. Return the smallest nonduplicating integrated/manual acceptance
+lease and exact missing input gates. No repository source/test/manifest write or
+runtime/browser/build/manual/performance/consumer execution is granted. This is
+independent preparation, not WP-11 completion or WP-12 acceptance.
+Recovery/inventory documentation passes265 Markdown/926 links and all19 checker
+regressions, with scoped whitespace clean. This does not rerun completed source
+implementation/checks or promote the interrupted Next/Start handoffs to acceptance.
 
 ## Current WP-10 implementation handoff
 
