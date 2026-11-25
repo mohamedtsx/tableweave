@@ -880,6 +880,16 @@ Main preserves the correction, then selects exactly the extracted-body synthetic
 unit command in fresh final-hdd-correction-units-001 external receipts. No HDD
 fixture/helper/CLI/runtime/build/install/acquisition action follows from this unit
 selection. Original51-link failure/first AST failure/184 seal stay historical.
+Correction is preserved52d165fa4ee7e2108585a9a985927ddf31838ec8; selection8's
+independent unit worker is active with no source or HDD write authority. Main
+allocates separate inert fixture-setup authoring ONLY in NEW external
+/tmp/opencode/final-hdd-guard-prep-001/** for planned fixed IDs fg48a01 (suite +
+exclusive derived disposable cases) and fg48c01 (new-context marker rejection).
+The script is not permission to create namespaces/controls or execute tests. Main
+reviews it and actual unit results before separately selecting HDD fixture setup.
+Synthetic guard controls/placeholder producer manifest/.git never certify a real
+checkout, toolchain, archive/install/profile or application grant. No old-work
+move/cleanup/parent permission change or tool acquisition is in this preparation.
 
 ## Current WP-10 implementation handoff
 
