@@ -309,3 +309,70 @@ paths,180second deadlines/one worker/retries0/128MiB floor. No test selection/na
 filter/skip changes, dependencies, source edits or new application/browser/framework
 action. Retain every actual failure; worker does not fix/retry. Main separately
 records independent correction disposition and remaining real-runtime limits.
+
+## Affected JSX replay — actual result
+
+Independent002 replay passes3 files/14 tests (catalog1, connection11, server2),
+both exit0/empty stderr/no timeout/signal/debt. Main verifies375 external receipt
+entries/2,886 current baseline identities/285 new outputs/772 preserved prior files.
+Receipt `/tmp/opencode/final-workbench-source-002/receipt-hashes.json`, SHA256
+05aa0f133e4e4ec5d1583067f2be454bcac92e34bff12ba24a574189ce472771.
+Actual cached test expressions import/call jsxDEV and reach renderToString; all
+original assertions pass, app-component hashes unchanged. Review40 independently
+closes review39n1's bounded harness defect, not real framework/hydration/browser/
+transport/retirement/package/performance gates. Original001 failures and source
+producer maps remain exact with two disclosed current config drifts.
+
+## Sixth selection — one source-only Chromium facade fixture
+
+Main reads hook playwright.config.ts/vite.config.mjs, all8 react.spec.ts cases,
+react.html/react.entry.ts and prior fixture/owner modules. Node24.22.0/Playwright
+1.65.1 declares installed Chromium/headless-shell1255 (159.0.8154.6); local1255
+directories exist. SSD observation2.9GiB is not provisioning/relocation authority.
+
+One independent worker may launch ONLY tests/table-facade/hook/react.spec.ts through
+NEW external wrappers under `/tmp/opencode/final-facade-browser-001/**`:
+
+- Vite wrapper imports the exact source-only hook vite.config.mjs and changes only
+  cacheDir to its own external output path; preserve root/aliases/plugins/strict
+  127.0.0.1:6548. No build/emit/compiler/JSX/fixture or dependency changes.
+- Playwright wrapper imports stock config, rebases testDir to the actual hook
+  directory, keeps react.spec.ts/all8 cases, workers1/retries0/fullyParallel:false,
+  and moves results/JSON/list reporting into fresh external paths. Use Chromium
+  only and the actual existing revision1255 executable after canonical hash/mode/
+  dependency-manifest preflight; no system fallback or download/version provisioning.
+- Rebase webServer cwd to primary and command to the fixed installed Vite CLI with
+  native config loader/external Vite wrapper. Preserve stock ready URL/reuse:false,
+  headless/baseURL/trace behavior and source aliases. Bind-probe6548 before launch,
+  release probe, rely on strictPort; existing listener blocks rather than takeover.
+
+Exact selected invocation uses installed Playwright CLI with the external config,
+`NODE_DISABLE_COMPILE_CACHE=1 node node_modules/@playwright/test/cli.js test --config ABS_EXTERNAL_PLAYWRIGHT_CONFIG`.
+Pin wrapper/config/test/browser/tool bytes and argv before execution; fresh outputs
+must be absent. Tool/native loading, real local HTTP/WebSocket source serving and
+existing headless Chromium are selected ONLY for this fixture. Browser identity
+must be observed where available, not invented from a metadata claim.
+
+Child HOME/XDG cache/TMPDIR/TMP/TEMP point into NEW owned external directories;
+explicit browser executable avoids fresh-HOME engine lookup. No authentication,
+private app input, user profile or browser extension is borrowed. All application
+traffic is loopback; no external requests/downloads/accounts are authorized. Preserve
+the baseline tests/assertions, including failures/timeouts. No alias/shim/native
+repair/test skip/retry or source/config/manifest edits. Worker stops for missing/
+incompatible native inputs rather than installing dependencies or weakening checks.
+
+One command once, own-child deadline420seconds plus cleanup/delivery headroom,
+128MiB floor checked before writes/launch, no heavy parallel jobs. Native process
+cleanup may stop only created processes and remove their newly created temporary
+profiles/runtime scratch within the owned root; never old evidence/caches/files or
+ambient processes. Normal transient native shared-memory/runtime handles are not
+repository/cache write authority. Preserve failure traces/raw reports/server logs,
+signal/timeouts/cleanup debt and existing source/tool/cache identities. Check owned
+server port release; do not infer browser/native termination merely from a timer.
+
+This can prove only the observed source-fixture Chromium outcomes. Initial fixture
+certificates/source labels do not establish backend authorization or general private
+P purge. No Storybook/Next/Start/WP-12 multi-engine/ordinary archive/native collection
+styling/manual AT/mobile/performance/real-consumer/CI/stable acceptance; user-blocked
+drag and deferred runner/consumer remain untouched. Main reviews actual failures
+before allocating any correction or another run.

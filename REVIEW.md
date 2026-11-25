@@ -10,6 +10,27 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 40 (independent JSX correction replay)
+
+Independent reviewer runs each affected corrected lane once: catalog1/1, Next
+connection11/11/server2/2, aggregate3 files/14 tests pass, both exit0/empty stderr/
+no timeout/signal/cleanup debt. Main reads raw reports/statuses/automatic-JSX caches
+and verifies375 sealed entries/all2,886 current baseline identities/285 external
+outputs/772 prior external files unchanged. Receipt SHA256
+05aa0f133e4e4ec5d1583067f2be454bcac92e34bff12ba24a574189ce472771 at
+/tmp/opencode/final-workbench-source-002/receipt-hashes.json.
+
+Both former failure expressions now call imported jsxDEV and reach renderToString;
+full original SSR assertions pass. Wrapper instrumentation is unchanged apart from
+fresh output namespace; no wrapper JSX override/shim/test cut. App-component cache
+hashes remain identical. The two config-only main changes are independently verified.
+**Review39n1 closed for the bounded source-unit JSX harness defect/SSR assertions.**
+Original001 exits1/two failures/379-entry seal and main correction receipts remain
+exact history, not overwritten green. Review36 remains RED, review37 wrapper finding
+stays preserved. No new concrete defect in this slice, no framework/RSC/browser/
+retained React scheduling/hydration/actual HTTP/private purge/ordinary archive/CI/
+performance/real-consumer or packet/gate/stable approval follows.
+
 ## Final verification — review session 39 (workbench JSX harness failure)
 
 Both once-only commands exit1. Catalog's neutral SSR case fails; corrected Next
@@ -41,6 +62,8 @@ test/assertion/baseline/manifest/lock/map bytes, match. Both syntax checks/full 
 Biome/whitespace pass. New external correction receipt SHA256ec14e0abc36fb4da4157874d09bede24fb1cb59a88e0e5579ac633b68cbde55f
 at /tmp/opencode/final-workbench-jsx-correction-001/receipt-hashes.json. Source fix
 does not close n1 until independent affected replay reaches the SSR assertions.
+Review40 subsequently verifies that replay and closes this bounded defect. Original
+failed attempt/source seal drift remains preserved; broader boundaries stay open.
 
 Independent command runs once:13 files/235 assertions pass, exit0/empty stderr/no
 timeout/signal/cleanup debt. Main reads raw JSON/status/review and verifies65

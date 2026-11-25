@@ -702,6 +702,23 @@ source aliases/manifests/lock/old maps match. Receipt ec14e0ab… stays distinct
 all historical producer maps. Main preserves the source fix before selecting two
 fresh independent affected replays under final-workbench-source-002; no shim,
 assertion suppression, dependency/renderer/application change or old-output reuse.
+Source config fix is preserved7fa5602. Independent affected replay002 passes
+catalog1/1/Next connection11/11/server2/2, both exits0/empty stderr/no timeout/debt.
+Main verifies375 receipts/all2,886 current identities/285 external outputs/772 old
+external files and actual imported-jsxDEV renderToString call sites. Review40 closes
+review39n1 only for the config defect/two neutral SSR assertions. Originalfailed001
+bytes/two failures and all historical seals remain exact; two config drifts are
+disclosed, not re-signed. No framework/RSC/browser/hydration/ordinary consumer/CI/
+manual/performance or whole-library/packet/gate approval is inferred.
+Main selects the sixth final lane: only hook react.spec.ts (8 cases) against its
+source-only Vite fixture on strict loopback6548 and existing pinned Chromium1255.
+Independent worker may write only NEW final-facade-browser-001 external wrappers/
+cache/report/browser temp roots, preserving exact test/assertion/source aliases and
+existing engine bytes. No download/install/build/emit/profile/repair or repository
+writes. The plan explicitly selects local HTTP/WebSocket/native browser execution
+for this fixture, with fresh child HOME/XDG/TMP/explicit executable, one worker/
+retries0/420seconds/128MiB floor and truthful owned-process cleanup/debt. No real
+framework/WP-12 matrix/manual/AT/performance/ordinary consumer or drag activation.
 
 ## Current WP-10 implementation handoff
 
