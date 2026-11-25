@@ -376,3 +376,38 @@ P purge. No Storybook/Next/Start/WP-12 multi-engine/ordinary archive/native coll
 styling/manual AT/mobile/performance/real-consumer/CI/stable acceptance; user-blocked
 drag and deferred runner/consumer remain untouched. Main reviews actual failures
 before allocating any correction or another run.
+
+## Sixth selection — actual assertions and optimizer correction
+
+Eight Chromium assertions pass once/exit0; headless-shell1255 actual launch/clean exit
+is observed, live CDP version not captured. Main verifies151 sealed files/six matching
+before-after maps and8 one-attempt results. Raw stderr retains broad **/*.html scan
+errors/unresolved @tableweave/heroui from unrelated static HTML discovery. Review41n1
+is OPEN; assertion pass is not a fully clean harness result. Later port/process
+checks resolve the raw immediate bind failure without an ambient kill or takeover.
+
+Main selects exactly tests/table-facade/hook/vite.config.mjs for an explicit
+optimizeDeps.entries array containing only tests/table-facade/hook/react.html,
+relative to preserved primary root. Installed Vite7.3.8 documents this option and
+uses it before the broad HTML fallback. Preserve dependency optimization, root/
+aliases/plugins/server/test/assertions; no exclusion list, disabled prebundling,
+new package/alias/dist/fixture or vendor fix. NEW external
+`/tmp/opencode/final-facade-scan-correction-001/**` captures preimage/input hashes/
+syntax/Biome/delta/receipt, leaving old source seals with one disclosed config drift.
+Main preserves the one-file correction before independent fresh affected replay.
+Syntax/full scoped Biome pass;165 captured identities show one config change and
+164 fixed inputs/library155. Correction receipt20aec507… remains separate history.
+
+Independent reviewer may now repeat ONLY the same8-case selected source Chromium
+fixture once in NEW `/tmp/opencode/final-facade-browser-002/**`. Wrappers must
+inherit the stock corrected optimizeDeps entry unchanged; they may still override
+only the prior output/cache/testDir/executable/server-command instrumentation fields.
+Preserve the original151-entry browser001 seal, all old caches/reports and correction
+receipts. Use the same existing1255 executable, safe literal child HOME/XDG/TMP,
+strict6548 bind preflight/no reuse, deadlines/one worker/retries0 and cleanup/debt
+rules. No new browser version probe, live CDP instrumentation or test assertion cut.
+Capture actual optimizer metadata/raw diagnostics to distinguish an observed scoped
+successful scan from silent prebundling disable/fallback. Nonempty native/debug
+stderr must stay truthful even if the scan error disappears. Stop on any actual
+new failure; worker does not repair/retry. Main closes only the bounded finding
+supported by that replay, never a whole browser/framework/package gate.

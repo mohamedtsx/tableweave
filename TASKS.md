@@ -719,6 +719,22 @@ writes. The plan explicitly selects local HTTP/WebSocket/native browser executio
 for this fixture, with fresh child HOME/XDG/TMP/explicit executable, one worker/
 retries0/420seconds/128MiB floor and truthful owned-process cleanup/debt. No real
 framework/WP-12 matrix/manual/AT/performance/ordinary consumer or drag activation.
+First Chromium fixture8/8 assertions pass once/exit0, pinned headless-shell1255
+launch/clean exit observed, no remaining observed port/process debt. Live CDP engine
+version is not captured. Main verifies151 sealed files/six unchanged protection maps/
+all8 once-only results. Review41n1 stays OPEN: Vite's default **/*.html optimizer
+scan sees unrelated Storybook entries and reports unresolved @tableweave/heroui.
+This is static discovery, not another app/drag execution; passing assertions do not
+make the harness green. Initial bind-probe failure and later released-port evidence
+remain distinct. Main selects only hook/vite.config.mjs for fixture-specific optimizer
+entries, preserving aliases/tests/prebundling/deps/app code and all original receipts.
+Fresh independent affected replay follows, with no original-output reuse or cleanup.
+Main's one-file optimizer-entry correction passes syntax/full scoped Biome, with
+165 captured inputs/164 unchanged protected identities including155 library files.
+Receipt20aec507…/preimage/delta are separate from all historical maps. Only the
+fixture HTML is selected; prebundling is not disabled and aliases/assertions stay.
+Preserve source correction, then replay the same8 Chromium cases once with fresh
+external final-facade-browser-002 outputs, same engine and all prior receipts fixed.
 
 ## Current WP-10 implementation handoff
 

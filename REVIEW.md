@@ -10,6 +10,45 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 41 (first source Chromium fixture)
+
+Independent selected react.spec.ts runs once:8/8 pass, CLI exit0/no retries/timeout/
+signal. Actual pinned headless-shell1255 executable/PID/clean exit is observed;
+159.0.8154.6 is installation metadata, not captured live CDP version. Main verifies
+151 sealed files/six unchanged protection maps and raw8 one-attempt statuses.
+Receipt /tmp/opencode/final-facade-browser-001/receipt-hashes.json SHA256
+dc93af83c11b382505400e7a63976c993019d8de46809e49a45cec81ffc52574.
+
+### n1 — OPEN: default optimizer discovers unrelated HTML and logs a resolution error
+
+Raw stderr reports failed dependency scan/unresolved @tableweave/heroui through
+unrelated Storybook entries. Stock source Vite config has repository root but no
+optimizeDeps.entries; installed Vite7.3.8 computeEntries falls back to **/*.html.
+This is static discovery/resolution, not evidence that other apps or drag ran.
+Assertions pass but the harness is not fully green. Main selects only the hook
+vite.config.mjs to set the exact fixture HTML optimizer entry; no alias, dependency,
+prebundling disable, source/test assertion or renderer change. Preserve first run,
+capture preimage and independently replay the affected fixture in fresh outputs.
+
+### n2 — Immediate bind-probe failure is preserved; later cleanup evidence resolves port
+
+Initial post-run EADDRINUSE stays raw. Later empty kernel TCP rows, successful
+released normal/reuse binds and absent owned process-group members show6548 released.
+No ambient kill/takeover; transient TCP is an explanation hypothesis, not captured
+cause. Native DBus/debug/sandbox/developer diagnostics are not empty stderr or a
+private-P cleanup certificate. Preflight audit/count interpretation corrections
+are append-only; no CLI rerun or source repair occurred during that worker run.
+
+Tests mount real hooks/models and inspect synthetic <output> phase/counts, not
+styled DataTable/native accessible DOM. No backend admission/general purge/SSR/
+hydration/framework/multi-engine/AT/archive/performance or packet/stable approval.
+Main captures165 before/after identities and exact config preimage, then changes
+only optimizeDeps.entries to the selected HTML. Other164/library155/tests/aliases/
+deps remain unchanged. Syntax/full scoped Biome pass. Separate correction receipt
+20aec5078ee43bdd40a40aa9fdeca7d31232043ae35cf04c8f9215fe3bdeed60 at
+/tmp/opencode/final-facade-scan-correction-001/receipt-hashes.json. n1 remains OPEN
+until independent replay observes the corrected scan and original assertions.
+
 ## Final verification — review session 40 (independent JSX correction replay)
 
 Independent reviewer runs each affected corrected lane once: catalog1/1, Next
