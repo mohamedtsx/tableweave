@@ -31,6 +31,13 @@ compiles do not establish packed or runtime acceptance.
 | EN/AR state extension | [State locales](../../tests/localization-state/README.md) | Provisional54c3c9e; five units/four negatives unexecuted |
 | Date Builder draft provenance | [Prerequisite](../../tests/criteria-date-builder-draft/README.md) | Provisional1d7a890; review14n1 runtime/independent correction unverified |
 | Bound details/accessory | [D2/P4](../../tests/data-table/details-accessory/README.md) | Provisional8fb811c; runtime/policy/focus/waiting/form/golden/SSR unverified |
+| Opaque facade source/capture skip | [S3a](../../tests/criteria-facade-config/README.md) | Provisional82a2091; review15n1 correction/runtime/Builder host proof unverified |
+| Builder adoption | [F4c](../../tests/criteria-builder/README.md) | Provisional54841a8; runtime/F2/React/SSR unexecuted |
+| Builder format-only delta | [Format](../../tests/criteria-builder-format/README.md) | Provisionalba282fa; preserved AST/import order is not behavior proof |
+| Plain criteria entry | [Entry](../../tests/criteria-entry/README.md) | Provisionala5deab3; source aliases/static graph are not installed/archive discovery |
+| Neutral details label | [Neutral label](../../tests/details-neutral-label/README.md) | Provisionalaa5af97; review16n2 runtime/manual Arabic/AT unverified |
+| Shell layout slots | [CSS](../../tests/data-table/style-contract/README.md) | Provisionalcfe682a; inactive/unimported, static syntax/text checks only |
+| DataTable shell/owner join | [S3b](../../tests/data-table/shell/README.md) | Provisional source handoff; actual joint Builder/runtime/visual/SSR/packed proof pending |
 
 Add Date/core-renderer/Builder/shell/details/export/generation/integrated SSR only
 when actual fixtures exist. No current-root output/hash is approved by this list.

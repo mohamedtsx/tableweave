@@ -38,3 +38,7 @@ Worker1147-input/index protection is historical to its actual precommit stage.
 Runtime units/computed cascade/browser/visual/RTL/zoom/AT/manual/independent proof
 stays deferred. Intake and later CSS import/asset wiring wait for the actual shared
 S3/shell handoff; no unavailable live-reference inspection is claimed.
+
+After S3a, main intakes this ascfe682a. The [actual stylesheet handoff](../../tests/data-table/style-contract/README.md)
+remains inactive; root styles import/asset/export wiring is main-owned after real
+shell handoff. Current source integration does not prove computed cascade or visuals.

@@ -39,3 +39,8 @@ sources/1112 old inputs. Exact15-input aggregate:
 Interrupted empty compile logs are explicitly incomplete; resumed successful calls
 are separate. No runtime/manual Arabic/AT/independent acceptance or n2 closure.
 Intake waits for shared S3 handoff; old D2 source maps remain historical.
+
+After S3a, main intakes this asaa5af97 and passes one positive integrated source
+fixture TS6. [Actual label handoff](../../tests/details-neutral-label/README.md)
+still defers runtime/manual/AT/independent correction proof. Actual shell wiring is
+newly allocated; old D2 maps and prior source-stage results remain scoped history.

@@ -1,7 +1,10 @@
 import {
+  type CriteriaFrameOwner,
+  type CriteriaSourceMetadata,
   type DataTableModel,
   getDataTableModelOwner,
   type NativeRow,
+  requireCriteriaSource,
   type TableState,
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
@@ -42,7 +45,16 @@ import {
   type DetailsRequestData,
   runDetailsRequest,
 } from "../details/use-details-session.js";
-import { CommitMetadata } from "../filters/criteria-commit-core.js";
+import {
+  CommitMetadata,
+  sameCommitOrigin,
+} from "../filters/criteria-commit-core.js";
+import {
+  getTableRendererOwner,
+  requireTableRendererSourceTarget,
+  tableRendererStatus,
+} from "../table/renderer-commit.js";
+import type { TableRendererCell } from "../table/types.js";
 
 interface Trigger<S extends QuerySchema, T extends object> {
   ticket: object;
@@ -137,6 +149,150 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
   private observedRevision = -1;
   private snapshot: DetailsCommitSnapshot<S, T> | null = null;
   private shellMount: object | null = null;
+  private shellJoin: object | null = null;
+  canFocusNeutral(token: object): boolean {
+    return (
+      this.shellMount === token &&
+      (!this.joinedOnce ||
+        (!!this.tableJoin && this.shellJoin === this.tableJoin.token))
+    );
+  }
+  private tableJoin: {
+    readonly cell: TableRendererCell<S, T>;
+    readonly token: object;
+    stop: () => void;
+  } | null = null;
+  private tableDomain: {
+    readonly owner: CriteriaFrameOwner<S>;
+    readonly metadata: Pick<CriteriaSourceMetadata<S>, "origin" | "mode">;
+  } | null = null;
+  private joinedOnce = false;
+  private readonly actorJoins = new WeakMap<object, object>();
+  private joinVersion: object = Object.freeze({});
+  private readonly joinListeners = new Set<() => void>();
+  readonly getJoinSnapshot = () => this.joinVersion;
+  readonly subscribeJoin = (listener: () => void) => {
+    this.joinListeners.add(listener);
+    return () => {
+      this.joinListeners.delete(listener);
+    };
+  };
+  private notifyJoin() {
+    this.joinVersion = Object.freeze({});
+    for (const listener of [...this.joinListeners]) listener();
+  }
+  /** Exclusive actual table-cell claim, independent of parent config actor revision. */
+  claimTable(cell: TableRendererCell<S, T>): object {
+    const owner = getTableRendererOwner(cell) ?? denyDetails();
+    if (
+      owner.definition !== this.definition ||
+      owner.controller !== this.controller ||
+      this.tableJoin
+    )
+      denyDetails();
+    const actor = cell.getSnapshot().actor;
+    if (actor) {
+      const value = requireTableRendererSourceTarget({ cell, actor }),
+        source = value.model.sourceTarget ?? denyDetails(),
+        domain = this.tableDomain;
+      if (
+        domain &&
+        (source.owner !== domain.owner ||
+          !sameCommitOrigin(value.origin, domain.metadata.origin) ||
+          value.metadata.mode !== domain.metadata.mode)
+      )
+        denyDetails();
+      const existingActor = this.cell.getSnapshot().actor;
+      if (existingActor) {
+        const existing = this.cell.require(existingActor);
+        if (
+          existing.owner !== source.owner ||
+          !sameCommitOrigin(existing.origin, value.origin) ||
+          existing.metadata.mode !== value.metadata.mode
+        )
+          denyDetails();
+      }
+    }
+    const token = Object.freeze({});
+    this.joinedOnce = true;
+    const join = { cell, token, stop: () => {} };
+    this.tableJoin = join;
+    // The old standalone/old-join actor is never retagged as this table lifetime.
+    const prior = this.lease;
+    if (prior) this.disconnect(prior);
+    join.stop = cell.subscribe(() => {
+      if (this.tableJoin !== join) return;
+      // Actual renderer purge revokes the join and purges the real details core;
+      // a parent config B (nonnull actor) does not retire the details actor A.
+      if (!cell.getSnapshot().actor) {
+        const lease = this.lease;
+        if (lease) this.disconnect(lease);
+        this.notifyJoin();
+      }
+    });
+    this.notifyJoin();
+    return token;
+  }
+  releaseTable(token: object): void {
+    const join = this.tableJoin;
+    if (!join || join.token !== token) return;
+    this.tableJoin = null;
+    join.stop();
+    const lease = this.lease;
+    if (lease) this.disconnect(lease);
+    this.notifyJoin();
+  }
+  private requireFreshTable() {
+    if (!this.joinedOnce) return null;
+    const join = this.tableJoin ?? denyDetails(),
+      actor = join.cell.getSnapshot().actor ?? denyDetails();
+    const value = requireTableRendererSourceTarget({ cell: join.cell, actor }),
+      source = value.model.sourceTarget ?? denyDetails();
+    const domain = this.tableDomain;
+    if (
+      domain &&
+      (source.owner !== domain.owner ||
+        source.owner.publication !== domain.owner.publication ||
+        !sameCommitOrigin(value.origin, domain.metadata.origin) ||
+        value.metadata.mode !== domain.metadata.mode)
+    )
+      denyDetails();
+    return { join, value, source };
+  }
+  private requireActor(actor: DetailsCommitActor<S, T>) {
+    const value = this.cell.require(actor);
+    if (this.joinedOnce) {
+      const join = this.tableJoin ?? denyDetails();
+      if (this.actorJoins.get(actor) !== join.token) denyDetails();
+      try {
+        this.requireFreshTable();
+      } catch {
+        const current = join.cell.getSnapshot().actor,
+          domain = this.tableDomain;
+        if (
+          !current ||
+          !domain ||
+          tableRendererStatus({ cell: join.cell, actor: current }) !== "waiting"
+        )
+          denyDetails();
+        const metadata = requireCriteriaSource(value.source, value.owner);
+        if (
+          value.owner !== domain.owner ||
+          !sameCommitOrigin(metadata.origin, domain.metadata.origin) ||
+          metadata.mode !== domain.metadata.mode
+        )
+          denyDetails();
+      }
+      if (
+        !this.tableDomain ||
+        value.owner !== this.tableDomain.owner ||
+        !sameCommitOrigin(value.origin, this.tableDomain.metadata.origin) ||
+        value.metadata.mode !== this.tableDomain.metadata.mode
+      )
+        denyDetails();
+    }
+    return value;
+  }
   constructor(model: DataTableModel<S, T>) {
     const owner = getDataTableModelOwner(model) ?? denyDetails();
     this.definition = owner.definition;
@@ -203,18 +359,23 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     };
   };
   connect(): DetailsCommitLease<S, T> {
+    if (this.joinedOnce && !this.tableJoin) denyDetails();
     const lease = this.cell.connect();
     this.lease = lease;
     return lease;
   }
   disconnect(lease: DetailsCommitLease<S, T>): void {
-    this.cell.disconnect(lease);
-    if (this.lease === lease) this.lease = null;
+    try {
+      this.cell.disconnect(lease);
+    } finally {
+      if (this.lease === lease) this.lease = null;
+    }
   }
   private actor(): DetailsCommitActor<S, T> {
     return this.cell.getSnapshot().actor ?? denyDetails();
   }
   private state(actor: DetailsCommitActor<S, T>): Owned<S, T> {
+    this.requireActor(actor);
     return this.owned.read(actor) ?? denyDetails();
   }
   private publish(actor: DetailsCommitActor<S, T>): void {
@@ -226,6 +387,30 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     model: DataTableModel<S, T>,
     options: DetailsAccessoryOptions<S, T>,
   ): void {
+    const joined = this.requireFreshTable();
+    if (joined) {
+      const identity = getDataTableModelOwner(model);
+      if (
+        identity?.definition !== this.definition ||
+        identity.controller !== this.controller
+      )
+        denyDetails();
+      const source = model.sourceTarget;
+      if (!source || source.owner !== joined.source.owner) denyDetails();
+      const metadata = requireCriteriaSource(source.authority, source.owner);
+      if (
+        !sameCommitOrigin(metadata.origin, joined.value.origin) ||
+        metadata.mode !== joined.value.metadata.mode
+      )
+        denyDetails();
+      this.tableDomain ??= {
+        owner: source.owner,
+        metadata: Object.freeze({
+          origin: metadata.origin,
+          mode: metadata.mode,
+        }),
+      };
+    }
     let actor = this.cell.getSnapshot().actor;
     if (actor) {
       try {
@@ -253,7 +438,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
           !this.cell.require(actor).ports))
     ) {
       actor = this.cell.commit(lease, model, options);
-      const value = this.cell.require(actor),
+      if (joined) this.actorJoins.set(actor, joined.join.token);
+      const value = this.requireActor(actor),
         ports = value.ports;
       if (ports) {
         const key = detailsContentKey(ports.authority),
@@ -329,7 +515,7 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
   }
   owner(): DetailsAccessoryOwner<S, T> | null {
     try {
-      const v = this.cell.require(this.actor());
+      const v = this.requireActor(this.actor());
       return Object.freeze({
         definition: this.definition,
         controller: this.controller,
@@ -348,16 +534,20 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     actor: DetailsCommitActor<S, T>,
     baseline?: TableState<S>["details"],
   ) {
-    if (!this.shellMount) return denyDetails();
-    const v = this.cell.require(actor),
+    if (!this.shellMount || !this.canFocusNeutral(this.shellMount))
+      return denyDetails();
+    this.requireFreshTable();
+    const v = this.requireActor(actor),
       ports = v.ports ?? denyDetails();
     const state = this.controller.getSnapshot();
     if (baseline && state.details !== baseline) return denyDetails();
     // Actual app reader is a committed port; never a permitting table proof.
     const result = ports.port.read();
-    this.cell.require(actor);
+    this.requireActor(actor);
+    this.requireFreshTable();
     const check = () => {
-      this.cell.require(actor);
+      this.requireActor(actor);
+      this.requireFreshTable();
     };
     const authority = captureAuthority(
       ownData(result, "authority", check),
@@ -378,13 +568,15 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
       this.controller.getSnapshot().details !== state.details
     )
       return denyDetails();
-    this.cell.require(actor);
+    this.requireActor(actor);
+    this.requireFreshTable();
     return { value: v, ports, authority: actual.authority, state };
   }
   private display(actor: DetailsCommitActor<S, T>) {
-    const model = requireDetailsDisplay(this.cell.require(actor));
+    this.requireFreshTable();
+    const model = requireDetailsDisplay(this.requireActor(actor));
     const actual = this.current(actor);
-    if (requireDetailsDisplay(this.cell.require(actor)) !== model)
+    if (requireDetailsDisplay(this.requireActor(actor)) !== model)
       return denyDetails();
     return { ...actual, model };
   }
@@ -399,7 +591,7 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     )
       return { contentKey: "", isOpen: false, canRetry: false, context: null };
     try {
-      const value = this.cell.require(actor),
+      const value = this.requireActor(actor),
         ports = value.ports;
       if (!ports)
         return {
@@ -420,7 +612,7 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
       try {
         requireDetailsDisplay(value);
       } catch {
-        this.cell.require(actor);
+        this.requireActor(actor);
         return {
           contentKey: stored.key,
           isOpen: accepted.rowId === ports.authority.rowId,
@@ -448,10 +640,12 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
         candidate &&
         current.model.view?.rows.includes(candidate) &&
         ownData(candidate, "id", () => {
-          this.cell.require(actor);
+          this.requireActor(actor);
+          this.requireFreshTable();
         }) === current.authority.rowId &&
         ownData(candidate, "original", () => {
-          this.cell.require(actor);
+          this.requireActor(actor);
+          this.requireFreshTable();
         }) === record
           ? candidate
           : undefined;
@@ -568,9 +762,11 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
           valid: true,
           invoke: (outcome, change) => {
             try {
-              const v = this.cell.require(actor);
+              this.requireFreshTable();
+              const v = this.requireActor(actor);
               v.ports?.onOutcome?.(outcome, change);
-              this.cell.require(actor);
+              this.requireActor(actor);
+              this.requireFreshTable();
             } catch {
               /* Stale A never calls B observer. */
             }
@@ -578,7 +774,7 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
         }),
         mounted: () => {
           try {
-            this.cell.require(actor);
+            this.requireActor(actor);
             return true;
           } catch {
             return false;
@@ -607,7 +803,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
             "restoreFocus",
             false,
             () => {
-              this.cell.require(actor);
+              this.requireActor(actor);
+              this.requireFreshTable();
             },
           );
           this.current(actor, baseline());
@@ -694,7 +891,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     }
   }
   requireRow(actor: DetailsCommitActor<S, T>, id: string): void {
-    const value = this.cell.require(actor),
+    this.requireFreshTable();
+    const value = this.requireActor(actor),
       model = requireDetailsDisplay(value),
       facts = model.authority?.read() ?? denyDetails();
     if (
@@ -713,7 +911,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
       model.view.state !== this.controller.getSnapshot()
     )
       denyDetails();
-    requireDetailsDisplay(this.cell.require(actor));
+    requireDetailsDisplay(this.requireActor(actor));
+    this.requireFreshTable();
   }
   retain(actor: DetailsCommitActor<S, T>, key: string, node: ReactNode): void {
     try {
@@ -820,6 +1019,9 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
       this.cell.timeout(actor, 0, () => this.runCloseFocus(actor));
     } catch {
       if (
+        (!this.joinedOnce ||
+          (this.tableJoin &&
+            this.actorJoins.get(actor) === this.tableJoin.token)) &&
         neutral?.isConnected &&
         !neutral.closest("[inert]") &&
         this.controller.getSnapshot().details.rowId === null
@@ -830,17 +1032,20 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
   private readFocusAuthority(
     actor: DetailsCommitActor<S, T>,
   ): DetailsAuthority {
-    const ports = this.cell.require(actor).ports ?? denyDetails();
+    this.requireFreshTable();
+    const ports = this.requireActor(actor).ports ?? denyDetails();
     const result = ports.port.read(),
       check = () => {
-        this.cell.require(actor);
+        this.requireActor(actor);
+        this.requireFreshTable();
       };
     const authority = captureAuthority(
       ownData(result, "authority", check),
       check,
     );
     if (!authority?.context.access) return denyDetails();
-    this.cell.require(actor);
+    this.requireActor(actor);
+    this.requireFreshTable();
     return authority;
   }
   private runCloseFocus(actor: DetailsCommitActor<S, T>): undefined {
@@ -901,7 +1106,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
         if (focused) return undefined;
       }
       check();
-      this.cell.require(actor).ports?.focusFallback("closed");
+      this.requireFreshTable();
+      this.requireActor(actor).ports?.focusFallback("closed");
       check();
       if (
         neutral?.isConnected &&
@@ -932,9 +1138,11 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     modelVersion: object,
   ): object {
     if (this.cell.getSnapshot().modelVersion !== modelVersion) denyDetails();
-    requireDetailsDisplay(this.cell.require(actor));
+    this.requireFreshTable();
+    requireDetailsDisplay(this.requireActor(actor));
     const admission = new CommitMetadata(() => {
-      requireDetailsDisplay(this.cell.require(actor));
+      this.requireFreshTable();
+      requireDetailsDisplay(this.requireActor(actor));
       return undefined;
     }, denyDetails);
     const rowId = admission.data(props, "rowId");
@@ -977,7 +1185,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     token: object,
   ): Trigger<S, T> | null {
     try {
-      this.cell.require(actor);
+      this.requireActor(actor);
+      this.requireFreshTable();
       const v = this.state(actor).triggers.get(token);
       if (v?.actor !== actor) return null;
       this.requireRow(actor, v.rowId);
@@ -1059,6 +1268,8 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
     actor: DetailsCommitActor<S, T>,
     session: DetailsSession<S, T>,
   ): void {
+    if (!this.shellMount || !this.canFocusNeutral(this.shellMount))
+      denyDetails();
     const issued = getAdoptedDetailsSessionOwner(session);
     if (
       !issued ||
@@ -1068,17 +1279,19 @@ export class DetailsBinding<S extends QuerySchema, T extends object> {
       issued.mount !== this.mount
     )
       denyDetails();
-    this.cell.require(actor);
+    this.requireActor(actor);
   }
   claimShell(token: object): void {
     if (this.shellMount && this.shellMount !== token) denyDetails();
     this.shellMount = token;
+    this.shellJoin = this.tableJoin?.token ?? null;
     const actor = this.cell.getSnapshot().actor;
     if (actor) this.publish(actor);
   }
   releaseShell(token: object): void {
     if (this.shellMount !== token) return;
     this.shellMount = null;
+    this.shellJoin = null;
     const actor = this.cell.getSnapshot().actor;
     if (actor) {
       try {

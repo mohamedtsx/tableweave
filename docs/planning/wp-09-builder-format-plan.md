@@ -34,3 +34,8 @@ logs/other evidence remain unstaged. All original Builder fixtures/seals are unc
 New source128 map23d42b42c3dc9c9e47d9e260c354532246eca3bc5ba22141d3c72c49260b5694
 does not rebase the historicalbec322f producer. Runtime/React/SSR/negative/packed/
 independent correction verification remains deferred; main holds intake for S3a.
+
+Main intakes this asba282fa after S3a, preserving the original Builder commit as
+54841a8. The current [format handoff](../../tests/criteria-builder-format/README.md)
+proves only its actual source-quality boundary; integrated Builder positive TS6
+passes, while behavior and independent verification remain deferred.

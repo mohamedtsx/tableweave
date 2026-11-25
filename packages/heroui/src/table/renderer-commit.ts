@@ -12,6 +12,8 @@ import {
   requireDataTableModel,
 } from "@tableweave/react";
 import type { QuerySchema } from "@tableweave/react/contracts";
+import { getDetailsBinding } from "../data-table/details-binding.js";
+import type { DetailsAccessory } from "../details/types.js";
 import {
   type CommitAdapter,
   type CommitCheck,
@@ -228,6 +230,7 @@ class RendererCapture<S extends QuerySchema, T extends object> {
   constructor(
     private readonly check: CommitCheck,
     private readonly role: (role: Role) => Binding<S, T>,
+    private readonly binding: Binding<S, T>,
   ) {
     this.cache = new CommitMetadata(check, deny);
   }
@@ -254,6 +257,18 @@ class RendererCapture<S extends QuerySchema, T extends object> {
   text(value: unknown): string {
     if (typeof value !== "string") return deny();
     return value;
+  }
+  neutralText(value: unknown): string {
+    const text = this.text(value);
+    if (!text.trim()) deny();
+    return text;
+  }
+  neutralMessages(value: unknown) {
+    const input = this.object(value);
+    return Object.freeze({
+      uncommitted: this.neutralText(this.data(input, "uncommitted")),
+      unavailable: this.neutralText(this.data(input, "unavailable")),
+    });
   }
   flag(value: unknown): boolean {
     if (typeof value !== "boolean") return deny();
@@ -349,13 +364,26 @@ class RendererCapture<S extends QuerySchema, T extends object> {
         finish();
         callArgs = [context];
       } else if (name === "onRetry") callArgs = [];
-      const receiver = message
-        ? this &&
-          typeof this === "object" &&
-          capture.originals.get(this) === owner
-          ? owner
-          : this
-        : owner;
+      let receiver: unknown = message ? this : owner;
+      if (message && this && typeof this === "object") {
+        let copied = capture.originals.get(this) === owner;
+        if (!copied) {
+          finish();
+          try {
+            const descriptor = Object.getOwnPropertyDescriptor(
+              this,
+              name.slice(name.lastIndexOf(".") + 1),
+            );
+            copied =
+              !!descriptor &&
+              Object.hasOwn(descriptor, "value") &&
+              descriptor.value === wrapped;
+          } finally {
+            finish();
+          }
+        }
+        if (copied) receiver = owner;
+      }
       let result: unknown;
       finish(); // Argument reflection/context construction cannot authorize stale entry.
       try {
@@ -363,6 +391,43 @@ class RendererCapture<S extends QuerySchema, T extends object> {
       } finally {
         finish();
         if (argumentKind) member(before, argumentKind, args[0], finish);
+      }
+      // These are owned callback-return promises, not arbitrary React component
+      // bodies/effects. Keep opaque synchronous React nodes React-owned.
+      if (
+        (behavior === "state" || behavior === "toolbar") &&
+        result !== null &&
+        typeof result === "object"
+      ) {
+        let prototype: unknown;
+        try {
+          prototype = Object.getPrototypeOf(result);
+        } finally {
+          finish();
+        }
+        if (prototype === promisePrototype) {
+          try {
+            return Reflect.apply(promiseThen, result, [
+              (node: unknown) => {
+                finish();
+                return node;
+              },
+              (error: unknown) => {
+                finish();
+                throw error;
+              },
+            ]);
+          } finally {
+            finish();
+          }
+        }
+        let thenable: boolean;
+        try {
+          thenable = Reflect.has(result, "then");
+        } finally {
+          finish();
+        }
+        if (thenable) return deny(); // Unsupported thenables never acquire React delivery.
       }
       if (behavior !== "event" && behavior !== "action") return result;
       // Void callbacks' ordinary non-Promise values are intentionally ignored.
@@ -447,6 +512,11 @@ class RendererCapture<S extends QuerySchema, T extends object> {
       owned: Record<string, unknown> = Object.create(null),
       children: Record<string, unknown> = Object.create(null);
     for (const [key, schema] of Object.entries(schemas)) {
+      if (
+        key === "pagination" &&
+        this.binding.origin.definition.schema.pagination.enabled === false
+      )
+        continue;
       const input = this.data(source, key, !complete);
       if (input === undefined && !complete) continue;
       owned[key] = this.dictionary(
@@ -475,6 +545,14 @@ class RendererCapture<S extends QuerySchema, T extends object> {
         direction = this.data(value, "direction");
       if (direction !== "ltr" && direction !== "rtl") return deny();
       result.locale = Object.freeze({ locale: name, direction });
+      if (this.cache.has(value, "detailsRegionLabel"))
+        result.detailsRegionLabel = this.neutralText(
+          this.data(value, "detailsRegionLabel"),
+        );
+      if (this.cache.has(value, "neutralMessages"))
+        result.neutralMessages = this.neutralMessages(
+          this.data(value, "neutralMessages"),
+        );
       const messages = this.messages(this.data(value, "messages"), true);
       Object.assign(owned, messages.owned);
       Object.assign(children, messages.children);
@@ -509,6 +587,36 @@ class RendererCapture<S extends QuerySchema, T extends object> {
       }
     }
     result.toolConfigs = Object.freeze(toolConfigs);
+    if (this.cache.has(source, "layout")) {
+      const layout = this.object(this.data(source, "layout")),
+        out: Record<string, unknown> = Object.create(null);
+      for (const key of ["id", "className"])
+        if (this.cache.has(layout, key))
+          out[key] = this.text(this.data(layout, key));
+      result.layout = Object.freeze(out);
+    }
+    if (this.cache.has(source, "neutralMessages"))
+      result.neutralMessages = this.neutralMessages(
+        this.data(source, "neutralMessages"),
+      );
+    if (this.cache.has(source, "accessory")) {
+      const accessory = this.data(source, "accessory") as DetailsAccessory<
+          S,
+          T
+        >,
+        binding = getDetailsBinding(accessory);
+      if (
+        binding.definition !==
+          getDataTableModelOwner(this.binding.model)?.definition ||
+        binding.controller !== this.binding.origin.controller
+      )
+        deny();
+      result.accessory = accessory;
+    }
+    if (this.cache.has(source, "detailsRegionLabel"))
+      result.detailsRegionLabel = this.neutralText(
+        this.data(source, "detailsRegionLabel"),
+      );
     this.optional(source, result, "collection", (value) => {
       const collection = this.object(value),
         out: Record<string, unknown> = Object.create(null);
@@ -541,9 +649,35 @@ class RendererCapture<S extends QuerySchema, T extends object> {
     this.optional(source, result, "onError", (value) =>
       this.callback(value, source, "onError", "display", "event"),
     );
-    this.optional(source, result, "formatNumber", (value) =>
-      this.callback(value, source, "formatNumber", "display"),
-    );
+    if (this.binding.origin.definition.schema.pagination.enabled !== false) {
+      this.optional(source, result, "formatNumber", (value) =>
+        this.callback(value, source, "formatNumber", "display"),
+      );
+      this.optional(source, result, "paginationCorrection", (v) => {
+        const context = this.object(v),
+          out: Record<string, unknown> = Object.create(null);
+        const owner = getDataTableModelOwner(this.binding.model) ?? deny();
+        if (this.data(context, "definition") !== owner.definition.native)
+          deny();
+        out.definition = owner.definition.native;
+        out.context = this.cache.context(this.data(context, "context"));
+        const epoch = this.data(context, "epoch");
+        if (
+          typeof epoch !== "string" &&
+          (typeof epoch !== "number" || !Number.isFinite(epoch))
+        )
+          deny();
+        out.epoch = epoch;
+        out.readCurrent = this.callback(
+          this.data(context, "readCurrent"),
+          context,
+          "readCurrent",
+          "display",
+          "value",
+        );
+        return Object.freeze(out);
+      });
+    }
     this.optional(source, result, "actions", (value) => {
       if (!this.cache.reflect(() => Array.isArray(value))) return deny();
       const array = value as object,
@@ -646,6 +780,19 @@ export function createTableRendererCell<
   );
   return cell;
 }
+// Shell display subscribers retain only their last snapshot identity during a
+// same-actor source-only wait. The source surface still reads the real core
+// snapshot. This is never event/callback permission or a private output cache.
+const shellRendererCells = new WeakSet<object>();
+const shellDisplaySnapshots = new WeakMap<object, object>();
+export function createDataTableRendererCell<
+  S extends QuerySchema,
+  T extends object,
+>(model: DataTableModel<S, T>): TableRendererCell<S, T> {
+  const cell = createTableRendererCell(model);
+  shellRendererCells.add(cell);
+  return cell;
+}
 
 // No exported registration function and no allegedly supplied cell method reads.
 const rendererCells = new WeakMap<object, object>();
@@ -726,6 +873,43 @@ export function requireTableRendererTarget<
   registration.models.set(actor as object, model);
   return after;
 }
+/** Source role only. Exact real cell/actor and current P2/F1 metadata; no tool,
+ * frame or empty collection is fabricated for loading/initial-error callbacks. */
+export function requireTableRendererSourceTarget<
+  S extends QuerySchema,
+  T extends object,
+>(target: TableRendererTarget<S, T>): TableRendererCommitted<S, T> {
+  const cell = ownData(target, "cell");
+  if (!cell || typeof cell !== "object") return deny();
+  const registration = rendererCells.get(cell) as
+    | RendererRegistration<S, T>
+    | undefined;
+  if (!registration) return deny();
+  const actor = ownData(target, "actor") as TableRendererActor<S, T>,
+    value = registration.require(actor),
+    model = value.model;
+  const identity = getDataTableModelOwner(model);
+  if (
+    identity?.definition !== registration.owner.definition ||
+    identity.controller !== registration.owner.controller
+  )
+    deny();
+  requireDataTableModel(model, registration.owner.definition);
+  const source = model.sourceTarget;
+  if (!source || getCriteriaSourceOwner(source.authority) !== source.owner)
+    deny();
+  const metadata = requireCriteriaSource(source.authority, source.owner);
+  if (
+    !sameCommitOrigin(metadata.origin, value.origin) ||
+    metadata.mode !== value.metadata.mode ||
+    source.owner.controller !== registration.owner.controller ||
+    source.owner.definition !== value.origin.definition
+  )
+    deny();
+  const after = registration.require(actor);
+  if (after.model !== model) deny();
+  return after;
+}
 /** Metadata-only waiting classification, NEVER event/callback permission. A prior
  * genuine display model may retain a subtree while a same-origin model refresh is
  * not yet committed. Every private entry still requires the fresh exact model. */
@@ -787,7 +971,21 @@ export function tableRendererSnapshot<S extends QuerySchema, T extends object>(
   const registration = rendererCells.get(cell) as
     | RendererRegistration<S, T>
     | undefined;
-  return registration ? registration.snapshot() : deny();
+  if (!registration) return deny();
+  const snapshot = registration.snapshot();
+  if (!shellRendererCells.has(cell)) return snapshot;
+  const previous = shellDisplaySnapshots.get(cell) as
+    | ReturnType<TableRendererCell<S, T>["getSnapshot"]>
+    | undefined;
+  if (
+    snapshot.actor &&
+    previous?.actor === snapshot.actor &&
+    tableRendererStatus(target) === "waiting"
+  )
+    return previous;
+  if (snapshot.actor) shellDisplaySnapshots.set(cell, snapshot);
+  else shellDisplaySnapshots.delete(cell);
+  return snapshot;
 }
 /** Presence semantics: only actual absence is the raw legacy route. */
 export function captureTableRendererProp<
@@ -987,7 +1185,9 @@ export function createTableRendererAdapter<
     },
     capture(admission, input, _metadata, check, pin) {
       if (pin && pin.mode !== admission.target.metadata.mode) return deny();
-      const ports = new RendererCapture(check, role).capture(input);
+      const ports = new RendererCapture(check, role, admission.target).capture(
+        input,
+      );
       return { ports, stamp: undefined, mode: admission.target.metadata.mode };
     },
     activate(target) {

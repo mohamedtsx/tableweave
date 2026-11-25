@@ -9,20 +9,49 @@ independent verification is deferred; no WP-09 approval/PR delivery or merge exi
 
 | Scope | Current owner/location | Next integration boundary |
 | --- | --- | --- |
-| Opaque tool config + exact capture cancellation | Handoff delivered, worker released | Main matches82 hashes/130 protected sources and positive TS6; preserve before queued intake |
-| Builder formatting | Preserved1e0c218 afterbec322f, worker released | Main matches16 stage hashes/123 protected sources and AST preservation; intake waits for S3a |
-| Shell layout CSS | Preserved004f945, worker released | Six input/130 protected-source hashes, static parser/contract and staged whitespace checked; intake waits for S3 |
-| Plain criteria entry | Preserved1665830, no active writer | Intake after S3a; source export is not packed availability |
-| Neutral details label | Preserved5e09726, no active source writer | Intake after S3a; keep review16n2 runtime/manual acceptance open |
-| DataTable shell | Inactive written plan, no writer allocated | Requires actual S3a + Builder + neutral metadata integration |
+| Opaque tool config + exact capture cancellation | Committed82a2091, worker released | Runtime/correction proof remains deferred |
+| Builder/format | Intaken54841a8/ba282fa; host preserved9733b92 | Main matches23 host inputs/136 protected sources + positive TS6; intake waits for shell |
+| Shell layout CSS | Intakencfe682a, inactive | Shared shell adopts classes; main alone later wires CSS import |
+| Plain criteria entry | Intakena5deab3 | Source export only; runtime/emitted/packed discovery deferred |
+| Neutral details label | Intakenaa5af97 | Review16n2 manual/runtime verification remains open |
+| DataTable shell | Handoff ready, worker released | Main matches76 hashes/131 protected sources; preserve before Builder-host intake and public/style wiring |
 | Deferred command inventory | External report delivered, worker released | Actual scripts/producer-vs-current gates inventoried; missing runners/output isolation remain open, no checks run |
+| WP-10 next-slice preparation | External report delivered, worker released | Vendor-free authority/ref/interlock then optional adapter proposed; inactive pending WP-09/Stage1/API/dependency intake |
 
 Main alone owns docs/ledger/Git/manifests/exports/integration. Current shared source
-basebfb12c3 has only the S3a leased source edits in progress. Do not read those as
-an accepted handoff, race their protected inputs or rebaseline old seals. Once S3a
-hands off: inspect actual APIs, match hashes, light-compile, preserve it; intake
-entry/neutral/Builder deltas, integrate the actual Builder host skip seam, then
-activate the bounded shell lease. Packet sequencing/external blocks remain as below.
+baseba282fa contains the queued intakes without conflict. Main matches79 merged
+intake hashes/all137 sources and passes three positive Builder/label/entry TS6
+programs. Source137 map1c28d45f… is preserved. One shared shell writer and one
+isolated Builder-host writer have disjoint paths/actual committed protocol. No
+intake until their handoffs; old seals and all runtime/independent gates stay open.
+Actual shell handoff is now ready at map7c6fd92a…; main inspects APIs and matches
+all76 worker hashes/131 protected sources. New140-source map01e9abe4… is preserved.
+The worker's two-file main-document drift failure stays recorded separately. Main
+preserves the source, intakes isolated9733b92, then light-compiles actual joint
+source before explicit exports/styles. Runtime/manual/independent proof stays final.
+Main's activation navigation check passes215 Markdown/802 local links; scoped
+docs/ledger whitespace passes. Qualified engineering status now reflects actual
+plain entry/Date/Builder/details sources while keeping shell/style/public-runtime
+availability distinct. No external URL/semantic/runtime/independent check is claimed.
+
+Builder facade-host integration is preserved in isolated9733b92 after main actual
+API/source review,23 input/136 protected-source hashes and one positive own fixture
+TS6 program. Shared shell inputs remain untouched until its handoff; old unformatted/
+format/Date/S3 seals stay historical. Runtime/skip/F2/form/SSR/independent proof stays
+deferred and the isolated host worker is released.
+A free worker prepares a read-only WP-10 next-slice intake from the approved pure
+stage1 and stable native/controls contracts, without reading active shell code or
+editing/installing/running tests. Only an external report is authorized. WP-09
+remains the active implementation packet; future sortable source/dependency leases
+must be explicitly activated after its actual handoff.
+Read-only `/tmp/opencode/wp10-stage2-intake/REPORT.md` is delivered. Main reads its
+actual Stage1/status/ref/proposal-interlock trace and selects the vendor-free Stage2
+then isolated adapter Stage3 sequence for later activation. Stage1 source intake,
+actual WP-09 handoff and frozen ref/queued-proposal gates are still prerequisites.
+No DnD is installed; published0.5.3 metadata is a candidate only, not a resolved or
+runtime-verified family. Main must reconcile HLD/status semantics and explicitly
+select/install dependencies later. No code/checks/Git/consumer operations ran for
+this preparation; no new user product-policy question is identified.
 
 S3a is provisionally ready at implementation-map77fea517… after main actual source/
 API inspection,82 handoff hashes/130 protected sources and one own positive TS6

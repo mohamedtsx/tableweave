@@ -1,9 +1,18 @@
 import type {
   DataTableLocale,
+  DataTableNeutralMessages,
   DataTableStateMessages,
 } from "../table/types.js";
 import { arabicTableweaveLocale } from "./arabic.js";
 import { englishTableweaveLocale } from "./english.js";
+export const englishDataTableNeutralMessages = Object.freeze({
+  uncommitted: "Preparing the table.",
+  unavailable: "The table is unavailable.",
+} satisfies DataTableNeutralMessages);
+export const arabicDataTableNeutralMessages = Object.freeze({
+  uncommitted: "جارٍ تجهيز الجدول.",
+  unavailable: "الجدول غير متاح.",
+} satisfies DataTableNeutralMessages);
 
 const englishState = Object.freeze({
   uncommitted: "Preparing the table.",
@@ -42,6 +51,8 @@ const arabicState = Object.freeze({
 
 /** Source-module composition only; existing eleven-port bundles are unchanged. */
 export const englishDataTableLocale = Object.freeze({
+  neutralMessages: englishDataTableNeutralMessages,
+  detailsRegionLabel: "Record details region",
   ...englishTableweaveLocale,
   messages: Object.freeze({
     ...englishTableweaveLocale.messages,
@@ -50,6 +61,8 @@ export const englishDataTableLocale = Object.freeze({
 } satisfies DataTableLocale);
 
 export const arabicDataTableLocale = Object.freeze({
+  neutralMessages: arabicDataTableNeutralMessages,
+  detailsRegionLabel: "منطقة تفاصيل السجل",
   ...arabicTableweaveLocale,
   messages: Object.freeze({
     ...arabicTableweaveLocale.messages,

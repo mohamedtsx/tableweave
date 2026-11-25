@@ -7,13 +7,17 @@ import type {
 import type { QuerySchema } from "@tableweave/react/contracts";
 import type { ReactNode } from "react";
 import type { ColumnChooserProps } from "../columns/types.js";
+import type { DetailsAccessory } from "../details/types.js";
 import type { FilterBuilderProps } from "../filters/types.js";
 import type {
   TableweaveBuiltinOperatorLabels,
   TableweaveLocale,
   TableweaveMessages,
 } from "../localization/types.js";
-import type { PaginationProps } from "../pagination/types.js";
+import type {
+  PaginationCorrectionContext,
+  PaginationProps,
+} from "../pagination/types.js";
 import type {
   SelectionAction,
   SelectionToolbarProps,
@@ -44,6 +48,20 @@ export interface DataTableMessages extends TableweaveMessages {
 }
 export interface DataTableLocale extends Omit<TableweaveLocale, "messages"> {
   readonly messages: DataTableMessages;
+  readonly neutralMessages?: Readonly<DataTableNeutralMessages>;
+  readonly detailsRegionLabel?: string;
+}
+/** Explicit nonsensitive metadata. Never put row, dataset, scope or error data here. */
+export interface DataTableNeutralMessages {
+  readonly uncommitted: string;
+  readonly unavailable: string;
+}
+export interface DataTableProps<S extends QuerySchema, T extends object>
+  extends Omit<TableRendererConfig<NoInfer<S>, NoInfer<T>>, "collection"> {
+  readonly table: DataTableModel<S, T>;
+  readonly collection: TableRendererCollectionConfig<NoInfer<S>, NoInfer<T>>;
+  /** Usable before layout; metadata, not a private locale/readiness grant. */
+  readonly neutralMessages?: Readonly<DataTableNeutralMessages>;
 }
 export type TableRendererCollectionConfig<
   S extends QuerySchema,
@@ -113,6 +131,15 @@ export type TableRendererChildMessages = Pick<
   "builder" | "search" | "tabs" | "date" | "dateEditor" | "details"
 >;
 export interface TableRendererConfig<S extends QuerySchema, T extends object> {
+  readonly neutralMessages?: Readonly<DataTableNeutralMessages>;
+  readonly layout?: Readonly<{
+    readonly id?: string;
+    readonly className?: string;
+  }>;
+  readonly accessory?: DetailsAccessory<S, T>;
+  readonly detailsRegionLabel?: string;
+  /** App-owned external navigation/query causality; never inferred from P epoch. */
+  readonly paginationCorrection?: PaginationCorrectionContext<S, T>;
   /** Optional outer branch permits source-only state without invented row ports. */
   readonly collection?: TableRendererCollectionConfig<S, T>;
   readonly renderToolbar?: (

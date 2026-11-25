@@ -111,6 +111,9 @@ The [inactive shell composition plan](wp-09-data-table-shell-plan.md) waits for 
 child-config/Builder/neutral-label APIs and records exact table/details owner joining.
 The [isolated layout CSS lease](wp-09-shell-layout-css-plan.md) prepares only scoped
 containers from the approved direction; no component, import or behavior activation.
+After actual source intake, the [Builder host integration](wp-09-facade-builder-host-plan.md)
+and activated shell lease are disjoint, sharing only the already committed facade
+protocol; main owns their final type/runtime/export/style integration.
 
 The later read-only [readiness decisions](wp-09-next-stage-readiness.md) select
 compatibility/provenance/lifecycle constraints and record a verified custom-time

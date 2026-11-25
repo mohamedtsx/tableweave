@@ -119,3 +119,9 @@ Runtime/React/SSR/negative/packed/independent proof remains deferred. Main separ
 allocates a [format-only correction](wp-09-builder-format-plan.md), preserving the
 original producer seal rather than replacing it after source formatting. Shared
 intake still waits for actual serial S3a handoff.
+
+After S3a, main intakes actual Builder as54841a8 and format-only delta asba282fa;
+[Builder](../../tests/criteria-builder/README.md) and [format](../../tests/criteria-builder-format/README.md)
+retain distinct original seals. One positive integrated Builder TS6 passes. The
+separate actual facade-host integration is now allocated; runtime/F2/continuity/
+private-purge/SSR/independent acceptance is not established by source intake.

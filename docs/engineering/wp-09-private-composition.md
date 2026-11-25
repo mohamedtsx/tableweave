@@ -17,9 +17,15 @@ extended to these changes by dependency alone.
   `registerOptionCriteriaSource` and its safe error, beside existing filter APIs.
   The internal source capability core is not exported. Final server-safe graph/
   emitted-entry tests remain deferred.
-- HeroUI locale modules, committed cells and Search/Tabs adoption exist as source.
-  The complete styled `DataTable` shell, Builder/Date adoption and accepted integrated
-  details accessory are **not** implied by the headless exports.
+- `packages/react/src/criteria/index.ts` and the additive manifest `./criteria`
+  mapping expose actual authority/publication producers through a plain entry.
+  Static closure checks see no React/native/client runtime; ordinary installed/
+  emitted/archive import and SSR proof remain deferred. Historical dist is unbuilt.
+- HeroUI locale modules, committed cells and Search/Tabs/Date/Builder adoption exist
+  as provisional source. Bound details and opaque child configuration also exist;
+  neither is full integrated runtime/privacy/focus acceptance. The actual DataTable
+  shell and Builder-facade host join are now allocated separately, not accepted APIs.
+  New shell CSS remains unimported and inactive pending main integration.
 
 ## Ownership and lifetime
 

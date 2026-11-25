@@ -43,3 +43,9 @@ whitespace. Worker light TS6/static three-node graph/scope pass129 existing sour
 Import/runtime/archive/typed emitted/SSR/independent checks remain deferred; the
 conservative authored archive runner is unexecuted, not consumer evidence. Intake
 waits for shared S3 handoff; current generation staysfc01.
+
+After S3a82a2091, main intakes this asa5deab3 without conflict. The
+[actual entry handoff](../../tests/criteria-entry/README.md) retains all runtime/
+archive/emitted obligations. Main matches own hashes/additive manifest and passes
+one positive integrated source fixture TS6. Installed dist is still historical;
+this does not authorize new-output generation approval or ordinary consumer claims.
