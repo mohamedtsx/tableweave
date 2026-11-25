@@ -403,6 +403,16 @@ Return one source-authoring lease with deterministic workloads, validated timing
 aggregation obligations and an explicit dedicated-runner hold; missing runner
 inputs do not become fabricated numbers or shared-host acceptance. No WP-14 source
 lease is activated by this planning allocation.
+WP-14 read-only report is delivered at its allocated path (17,721 bytes). Main
+reads actual public source/request APIs, deterministic20/30-field workload proposal,
+34/33/33 measured distribution across three fresh sessions, separate action/commit/
+validated-paint intervals, strict statistics/adversaries and runner/candidate holds.
+No source lease, timing interpretation or candidate receipt schema is activated yet:
+main must first inspect the WP-13 handoff. The report's proposed stronger action-
+to-paint and initial all-samples gates need explicit engineering disposition before
+authoring; canonical product budgets are not silently changed by a proposal.
+Dedicated runner/image/browser readiness remains user-deferred, not permission
+for shared-host measurements, provisioning or invented approvals/results.
 
 ## Current WP-10 implementation handoff
 
