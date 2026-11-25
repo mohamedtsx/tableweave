@@ -10,6 +10,26 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 44 (independent source-type alias replay)
+
+Independent002 replay runs10 selected commands once, all exit0/empty stderr/no
+timeout/signal. TS6.0.3 and5.9.3 each pass criteria/shell annotated baselines before
+their4/7 removed checks; public-entry passes annotated baseline and all7 intended
+lines. Six clean baselines/36 marked-line assertions, not a diagnostic-code ledger.
+Main verifies79 sealed entries/five matching preservation maps/raw versions/statuses/
+success messages and actual annotated zero-diagnostic program receipts. Receipt
+5efa5878a01b5e634e4624303c8e8b37cce87a8d3acf29670aba54c9a623d355 at
+/tmp/opencode/final-source-types-002/receipt-hashes.json.
+
+Actual source graphs now include both real reordering entrypoints. Independent
+option/path review shows only the three intended leaf maps/pathsBasePath changes,
+retaining prior absolute targets, roots, strictness/includes/directives/assertions.
+All70 old001/correction receipt files remain exact; original001 stays RED. No new
+concrete defect. **Review43n1 closed for the bounded source-alias resolution defect.**
+Existing installed private declarations/source aliases remain disclosed: no emitted/
+ordinary archive consumer, runtime/profile/support-matrix/packet/G-05/stable proof.
+Drag remains blocked, no adapter activation or vendor change.
+
 ## Final verification — review session 43 (dual source-type resolution blocker)
 
 Selection7 is RED: six attempted commands exit1/no timeout/signal. TS6.0.3 and
@@ -42,6 +62,8 @@ Biome/JSON/invariant/whitespace checks pass, not a compiler result. Correction r
 41d481aae6135800529ef0afd0957263ea6b2c75dd3059a1e862c84521df98d1 at
 /tmp/opencode/final-source-type-alias-correction-001/receipt-hashes.json. n1 stays
 OPEN pending independent fresh annotated/removed dual replay; original001 remains RED.
+Review44 subsequently verifies the gated dual replay and closes only this bounded
+alias defect, preserving original001 and all broader proof limits.
 
 Independent browser002 runs all8 original cases once/exit0, no retries/timeout/
 signal or remaining observed process/port debt. Main reads raw results/scan metadata

@@ -516,3 +516,17 @@ Capture actual version/options/program reads/diagnostics/count/status before-aft
 and preserve any new failure without repair or retry. Source aliases/private
 declaration profiles are not emitted/ordinary-package proof. Main reviews results
 before bounded closure or any further correction/execution selection.
+
+## Affected source-type replay — actual result
+
+Independent002 replay passes10/10 commands once/exit0/empty stderr/no timeout/signal.
+TS6.0.3/TS5.9.3 each pass all3 annotated families and criteria4/shell7/public7 intended
+line checks:6 clean baselines/36 marked-line assertions, not a diagnostic-code ledger.
+Main verifies79 sealed entries/five matching protection maps/raw actual compiler
+statuses/messages/zero-diagnostic program receipts. Receipt
+`/tmp/opencode/final-source-types-002/receipt-hashes.json`, SHA256
+5efa5878a01b5e634e4624303c8e8b37cce87a8d3acf29670aba54c9a623d355.
+Review44 independently closes review43n1's bounded alias defect. All70 previous001/
+correction files remain unchanged, old001 stays RED, no source/vendor/test change
+or new stronger expectation. No emitted/ordinary consumer/runtime/profile/CI or
+packet/stable proof follows. No new command or HDD action is implicitly selected.

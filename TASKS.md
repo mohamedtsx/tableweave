@@ -28,13 +28,22 @@ LIGHT now means positive source noEmit/static/scope/full scoped format only.
 Browser/SSR/negative/dual/emitted/packed/manual/performance/consumer/independent/CI
 checks stay final, not waived or claimed. No pushes, PRs, merges or publications.
 
+The final phase is now active under
+[exact execution selections](docs/planning/final-verification-execution.md).
+Reviews34–44 record actual bounded unit/source/neutral-SSR/Chromium/dual-type
+results and independently verified harness corrections, not whole-packet approval.
+Library155 stays unchanged; original failures/seals and per-packet provenance stay
+separate. Fresh packed materialization still needs a storage choice: both HDD modals
+were interrupted, with no recorded selection/authority. No HDD staging/guard changes,
+build/install/ordinary package or full CI action is selected by current source passes.
+
 ### TASK-019 ownership and next handoffs
 
 | Slice | Current owner/state | Next action |
 | --- | --- | --- |
-| Shared synthetic facade catalog | Preservedc9c36cb; main source/light intake complete | Final plays/matrix/ordinary proof remain unrun; do not rewrite Stage A seals |
+| Shared synthetic facade catalog | Preservedc9c36cb; neutral source SSR replay passes review40 | Actual build/plays/matrix/ordinary proof unrun; original seals and JSX config drift preserved |
 | Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
-| Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
+| Next App Router example | Intaken8720f7c/17a1439/16500a0; source connection/neutral SSR/direct GET checks pass review40 | Actual Next/RSC/browser retained scheduling/hydration/ordinary gates unrun; source units do not close them |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
@@ -790,6 +799,16 @@ fixed. Only two real source aliases are added per map, preserving prior resoluti
 Correction receipt41d481aa… remains distinct from old seals. Main preserves the
 fix then selects fresh independent source-types-002 gated dual replay; no compiler
 success or removed-line proof is assumed from static configuration checks.
+Independent source-types-002 replay executes10/10 selected commands once/exit0/
+empty stderr/no timeout/signal: both compilers' three annotated families pass, with
+criteria4/shell7/public-entry7 intended lines each. Six clean baselines/36 marked
+line assertions, not a diagnostic-code ledger. Main verifies79 entries/five matching
+maps and actual versions/raw statuses/program diagnostics. Receipt5efa5878…;
+review44 closes review43n1's source-alias defect only. All70 prior receipt/correction
+files stay exact and old001 stays RED. Library155, dependencies/private profiles/
+source assertions remain fixed; no emitted/ordinary/runtime/packet/G-05 approval.
+All current workers are released; no additional command or HDD work follows from
+these passes. Pending storage choice remains unanswered, not inferred from resume.
 
 ## Current WP-10 implementation handoff
 
