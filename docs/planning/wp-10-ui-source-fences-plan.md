@@ -122,3 +122,18 @@ verification stays final. Preserve failed outputs/preimage/new stage map. Own RE
 must state actual cut/notification/token-delivery/waiting limits and known historical
 timing conflicts. No consumer/client entry activation or full review22n1 closure
 follows from source authoring or positive types. Main owns preservation/intake.
+
+## B2 provisional handoff intake
+
+[Actual B2 handoff](../../tests/reordering/fence-domains/README.md) implements the
+one-source correction. Main reads the complete admission diff, matches23 own inputs/
+149 protected production sources/1,558 old non-bookkeeping inputs, and passes the
+positive own TS6 program. Source15039adeb5d… and source1 aggregate57f2b371… are new
+stage identities; original candidate/seals remain unchanged. Runtime/browser/SSR/
+negative/dual/emitted/packed/independent correction proof remains unrun.
+
+The independent neutral-consumer report identifies the anticipated existing-port
+limit: normal renderer callback checks after begin can strand a token, while one
+outer boundary alone can notify retired A after a pre-token B commit. Review22n2
+therefore holds row submission for a real prepared-operation or fixed synchronous
+renderer/native-cut protocol. B2 is not authorization to bypass callback checks.

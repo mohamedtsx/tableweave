@@ -94,10 +94,10 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
-| Source/UI cut correction | Shared one-source writer newly allocated | Separate SRC/UI, callback-free token handoff/deferred admission listeners; other149 sources freeze |
+| Source/UI cut correction | B2 handoff delivered; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; preservation pending, runtime/independent approval deferred |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| Vendor lifetime/upstream preparation | Scroller report delivered; worker released | Public idle unregister can prevent Scroller work; Feedback.none lacks live targeting shape, no adapter readiness or patch/install |
+| Vendor lifetime/upstream preparation | Final contract delivered; worker released | STOP minimal adapter: native observer/keyboard geometry reads precede adapter fences; explicit remedy authority required |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
 proof, with inert failure on ended React ref callbacks plus bounded fresh-ticket
@@ -272,6 +272,32 @@ The later docs replay passes241 Markdown/864 links and18 checker regressions bef
 this report note; it does not establish either consumer seam or runtime behavior.
 Structural replay after the neutral-contract links passes241 Markdown/865 local
 links; scoped document whitespace passes. No runtime/correction approval follows.
+Final closed-adapter contract is delivered at its allocated path. Main reads actual
+installed Droppable/inner-observer callbacks and keyboard continuation. Review21n4
+records the unsupported before-read closure, not a measured browser failure. A live
+shape plugin/field clearing does not alone fence captured native reads. The minimal
+adapter/native-resource code lease is STOPPED; no deps/patches/source were changed
+by the investigation. Main requests a new explicit remedy decision rather than
+infer patch permission from the earlier upstream-inspection choice. Source/UI
+correction continues in its unchanged exclusive one-source scope.
+User explicitly selects **Scoped patch spike** in the renewed remedy modal. Main
+allocates only an external exact pinned repair plan first at
+`/tmp/opencode/wp10-dnd-patch-plan/PLAN.md`. A narrow private/prerelease dependency
+repair is now authorized in principle; broad fork, primary dependency edits and
+implementation before a bounded plan/isolated lease are not. Existing inspection9a
+and all source/failed evidence stay preserved. Final independent/runtime/packed
+verification remains required and deferred; unrelated neutral work continues.
+
+B2 source/UI correction is delivered. Main reads its complete one-file diff and
+actual observation/interruption/notification/begin tail, matches23 sealed inputs and
+all149 protected production sources plus1,558 protected old non-bookkeeping inputs,
+and passes its positive own TS6 program. Current source150 map is
+`/tmp/opencode/wp10-b2-integrated-source150.json`, digest
+39adeb5db9bfb8d7b772d4cd67097741c3a34205a6e62edd6a9ceb77a45caaa4.
+Source1 aggregate57f2b371… / own-inputdd591503… remain separate from historical
+held272ab0a1…/6503dae1…. Main preserves this provisional source before new leases.
+No runtime/corrective/independent review22n1 closure, actual row-submit readiness or
+G-02 approval follows. Review22n2 pre-token renderer/native cut remains unresolved.
 
 ### Current ownership and next action
 

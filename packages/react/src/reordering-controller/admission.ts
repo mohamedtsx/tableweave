@@ -13,7 +13,6 @@ import {
   requireCriteriaTool,
 } from "../presentation/criteria-frame.js";
 import {
-  errorCode,
   frame as captureReorderFrame,
   observePromise,
   ReorderError,
@@ -66,15 +65,18 @@ export class AdmissionCapture {
   constructor(private readonly check: () => void = () => {}) {}
   call<V>(read: () => V): V {
     this.check();
+    let failed = false;
     try {
       const value = read();
       observePromise(value);
       return value;
     } catch (error) {
+      failed = true;
       observePromise(error);
       throw error;
     } finally {
-      this.check();
+      // Never replace an original callback failure with an interruption marker.
+      if (!failed) this.check();
     }
   }
   data(input: unknown, allowed: readonly string[]): Map<string, unknown> {
@@ -119,6 +121,7 @@ export interface AdmissionCallbacks {
 }
 interface Receipt {
   readonly fence: number;
+  readonly source: number;
   readonly lease: object | null;
   readonly revision: number;
   readonly metadata: ReorderApplicationMetadata | null;
@@ -161,6 +164,7 @@ interface NavigationRecord {
   join: object | null;
   lease: object | null;
   readonly fence: number;
+  readonly source: number;
   readonly revision: number;
   metadata: ReorderApplicationMetadata | null;
 }
@@ -301,6 +305,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
 ) {
   let controller: TableController<S> | null = null;
   let fence = 0,
+    sourceFence = 0,
     disposed = false,
     working = false,
     notifying = false,
@@ -328,11 +333,14 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     token: ReorderInteraction<S, T>;
     lease: object;
     fence: number;
+    source: number;
     frame: RowReorderFrame;
   } | null = null;
   let lastPending: RowMoveOperation | null = null;
   let ownBegin: {
     fence: number;
+    source: number;
+    lease: object | null;
     operation: RowMoveOperation | null;
     credited: number | null;
   } | null = null;
@@ -353,6 +361,24 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     bridge: null,
   };
   const interactionProof = new WeakMap<object, object>();
+  interface Cut {
+    readonly source: number;
+    readonly ui: number;
+    readonly lease: object | null;
+  }
+  type Role = "observe" | "act";
+  let boundary: object | null = null;
+  const interruptions = new WeakMap<
+    object,
+    {
+      readonly boundary: object;
+      readonly cut: Cut;
+      readonly metadata: ReorderApplicationMetadata | null;
+      readonly signature: readonly object[] | null;
+    }
+  >();
+  const eligibilityFailures = new WeakMap<object, object | null>();
+  const cut = (): Cut => ({ source: sourceFence, ui: fence, lease });
   const invoke = (fn: Fn | undefined, args: readonly unknown[]) => {
     try {
       const result: unknown = fn
@@ -372,19 +398,41 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     const hadInteraction = interaction !== null;
     interaction = null;
     if (fence === Number.MAX_SAFE_INTEGER) {
-      disposed = true;
-      return;
+      return exhaust();
     }
     fence++;
     bridgeFenceChanged();
     if (hadInteraction) update();
   };
-  const checkAt = (expected: number, mounted = lease) => {
-    live();
-    if (fence !== expected || lease !== mounted) return deny();
+  const advanceSource = () => {
+    if (sourceFence === Number.MAX_SAFE_INTEGER) {
+      return exhaust();
+    }
+    sourceFence++;
+    advanceFence();
   };
-  const readMetadata = (expected: number, mounted = lease) => {
-    const capture = new AdmissionCapture(() => checkAt(expected, mounted));
+  const checkSource = (expected: Cut) => {
+    live();
+    if (sourceFence !== expected.source || lease !== expected.lease)
+      return deny();
+  };
+  const checkAt = (expected: Cut, role: Role = "act") => {
+    checkSource(expected);
+    if (role === "observe" || fence === expected.ui) return;
+    if (!boundary) return deny();
+    const signal = Object.freeze(Object.create(null)) as object;
+    interruptions.set(signal, {
+      boundary,
+      cut: expected,
+      metadata,
+      signature: model ? sourceSignature(model) : null,
+    });
+    throw signal;
+  };
+  const readMetadata = (expected: Cut, role: Role = "act") => {
+    // Parse/validate the original result under SRC first. Malformed values and
+    // original throws cannot be hidden by a simultaneous UI change.
+    const capture = new AdmissionCapture(() => checkSource(expected));
     const raw = capture.call(() => Reflect.apply(readCurrent, receiver, []));
     const fields = capture.data(raw, [
       "ownerEpoch",
@@ -426,14 +474,14 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     )
       return deny();
     latestMetadata = value;
+    checkAt(expected, role);
     return value;
   };
-  const checkModel = (expected: number, mounted = lease) => {
-    checkAt(expected, mounted);
-    const value = model;
+  const checkModel = (expected: Cut, role: Role = "act", value = model) => {
+    checkSource(expected);
     if (
       !value ||
-      !mounted ||
+      !expected.lease ||
       !metadata ||
       metadata.ownerEpoch <= retiredThrough
     )
@@ -469,14 +517,19 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       value.sourceTarget.owner.publication !== registration.publication
     )
       return deny();
-    checkAt(expected, mounted);
-    if (model !== value) return deny();
+    checkSource(expected);
+    if (model !== value && (!model || !sameSourceModel(value, model)))
+      return deny();
+    checkAt(expected, role);
     return value;
   };
   const readFrame = (ids: readonly string[]): RowReorderFrame => {
-    const expected = fence,
-      mounted = lease;
-    const value = checkModel(expected, mounted);
+    const role: Role = ids.length ? "act" : "observe";
+    const expected: Cut =
+      ids.length && ownBegin
+        ? { source: ownBegin.source, ui: ownBegin.fence, lease: ownBegin.lease }
+        : cut();
+    const value = checkModel(expected, role);
     const authority = value.authority;
     if (
       !authority ||
@@ -488,7 +541,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     const facts = ids.length
       ? authority.require({ type: "reorder", ids })
       : authority.read();
-    checkModel(expected, mounted);
+    checkModel(expected, role, value);
     if (
       !facts.displayed ||
       facts.obsolete ||
@@ -500,38 +553,42 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       facts.rows.some((row, index) => row !== value.view?.rows[index])
     )
       return deny();
-    const before = readMetadata(expected, mounted);
+    const before = readMetadata(expected, role);
     if (!metadata || !sameMetadata(before, metadata)) return deny();
     if (ids.length && movable) {
       for (const id of ids) {
-        if (!sameMetadata(before, readMetadata(expected, mounted)))
-          return deny();
+        if (!sameMetadata(before, readMetadata(expected, role))) return deny();
         const row: NativeRow<T> | undefined = facts.rows.find(
           (item) => item.id === id,
         );
         if (!row) return deny();
-        checkModel(expected, mounted);
+        checkModel(expected, role, value);
         let allowed: unknown;
+        let failed = false;
         try {
           allowed = Reflect.apply(movable, receiver, [row]);
           observePromise(allowed);
         } catch (error) {
+          failed = true;
           observePromise(error);
           throw error;
         } finally {
-          checkModel(expected, mounted);
+          if (!failed) checkModel(expected, role, value);
         }
-        if (!sameMetadata(before, readMetadata(expected, mounted)))
-          return deny();
-        if (allowed !== true) throw new ReorderError("reorder.eligibility");
+        if (!sameMetadata(before, readMetadata(expected, role))) return deny();
+        if (allowed !== true) {
+          const failure = new ReorderError("reorder.eligibility");
+          eligibilityFailures.set(failure, boundary);
+          throw failure;
+        }
         authority.require({ type: "reorder", ids });
-        checkModel(expected, mounted);
+        checkModel(expected, role, value);
       }
     }
-    const after = readMetadata(expected, mounted);
+    const after = readMetadata(expected, role);
     if (!sameMetadata(before, after)) return deny();
     if (ids.length) authority.require({ type: "reorder", ids });
-    checkModel(expected, mounted);
+    checkModel(expected, role, value);
     const state = value.view.state;
     const complete =
       definition.native.controllerDefinition.schema.pagination.enabled ===
@@ -564,7 +621,15 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       try {
         return readFrame(ids);
       } catch (error) {
-        if (errorCode(error) !== "reorder.eligibility") failObservation();
+        if (takeUIInterruption(error)) return deny();
+        const eligibility =
+          error &&
+          typeof error === "object" &&
+          eligibilityFailures.has(error) &&
+          eligibilityFailures.get(error) === boundary;
+        if (error && typeof error === "object")
+          eligibilityFailures.delete(error);
+        if (!eligibility) failObservation();
         throw error;
       }
     },
@@ -601,7 +666,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     dirty = true;
   };
   const emit = () => {
-    if (!dirty || purging || commandDepth || notifying) return;
+    if (!dirty || working || beginLatch || purging || commandDepth || notifying)
+      return;
     dirty = false;
     notifying = true;
     try {
@@ -647,7 +713,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       metadata = null;
       identity = null;
       interaction = null;
-      advanceFence();
+      advanceSource();
       coordinator.invalidate("context");
       update();
     } finally {
@@ -657,19 +723,27 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   failObservation = purge;
   coordinator.subscribe(() => {
     const pending = coordinator.getSnapshot().pending?.operation ?? null;
-    if (pending !== lastPending) {
+    if (disposed) {
       lastPending = pending;
-      const previous = fence;
-      advanceFence();
-      if (
-        ownBegin &&
-        pending &&
-        ownBegin.operation === null &&
-        ownBegin.fence === previous
-      ) {
-        ownBegin.operation = pending;
-        ownBegin.credited = fence;
-      }
+      touchUI();
+      update();
+      return;
+    }
+    const previousPending = lastPending;
+    lastPending = pending;
+    const previous = fence;
+    advanceFence();
+    if (
+      ownBegin &&
+      pending &&
+      previousPending === null &&
+      ownBegin.operation === null &&
+      ownBegin.fence === previous &&
+      ownBegin.source === sourceFence &&
+      ownBegin.lease === lease
+    ) {
+      ownBegin.operation = pending;
+      ownBegin.credited = fence;
     }
     touchUI();
     update();
@@ -693,17 +767,37 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     purge();
     cleanupRegistration();
   };
+  function exhaust(): never {
+    // Terminal private-generation exhaustion is owner shutdown, not a UI cleanup
+    // outcome. Do not wrap/regrant or leave a newly created undelivered token.
+    disposed = true;
+    if (metadata)
+      retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
+    model = null;
+    metadata = null;
+    identity = null;
+    interaction = null;
+    retireUI();
+    coordinator.dispose();
+    cleanupRegistration();
+    update();
+    schedule();
+    return deny();
+  }
   const run = <V>(action: () => V): V => {
     live();
     if (working || notifying || commandDepth || purging) return deny();
     working = true;
+    const previous = boundary;
+    boundary = Object.freeze({});
     try {
       return action();
     } catch (error) {
       observePromise(error);
-      retire();
+      if (!takeUIInterruption(error)) retire();
       return deny();
     } finally {
+      boundary = previous;
       working = false;
       schedule();
     }
@@ -756,12 +850,17 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     live();
     if (working || notifying || commandDepth || purging) return deny();
     working = true;
+    const previous = boundary;
+    boundary = Object.freeze({});
     try {
       return action();
     } catch (error) {
       observePromise(error);
+      // Consume before the public bridge boundary; never expose a reusable signal.
+      takeUIInterruption(error);
       return deny();
     } finally {
+      boundary = previous;
       working = false;
       if (dirty) schedule();
     }
@@ -824,6 +923,80 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       ].map(bridgeIdentity),
     );
   }
+  function sameSourceModel(
+    a: DataTableModel<S, T>,
+    b: DataTableModel<S, T>,
+  ): boolean {
+    requireDataTableModel(a, definition);
+    requireDataTableModel(b, definition);
+    const left = sourceSignature(a),
+      right = sourceSignature(b);
+    return (
+      left.length === right.length &&
+      left.every((token, index) => token === right[index]) &&
+      a.state === b.state &&
+      a.metadata?.mode === b.metadata?.mode &&
+      a.metadata?.origin.epoch === b.metadata?.origin.epoch
+    );
+  }
+  function sourceSignature(value: DataTableModel<S, T>): readonly object[] {
+    // Exact registered frame/caps/owner/query, not wrapper or copied context
+    // container identity. Both models' metadata are independently authenticated
+    // by requireDataTableModel before an observation can pin the old live cut.
+    return modelSignature(value).slice(1, -1);
+  }
+  function takeUIInterruption(error: unknown): boolean {
+    if (!error || typeof error !== "object") return false;
+    const proof = interruptions.get(error);
+    interruptions.delete(error);
+    if (
+      !proof ||
+      !boundary ||
+      proof.boundary !== boundary ||
+      proof.cut.ui === fence ||
+      !proof.metadata
+    )
+      return false;
+    try {
+      checkSource(proof.cut);
+      if (proof.signature) {
+        const value = checkModel(proof.cut, "observe");
+        const current = sourceSignature(value);
+        if (
+          current.length !== proof.signature.length ||
+          current.some((token, index) => token !== proof.signature?.[index])
+        )
+          return false;
+      }
+      const current = readMetadata(proof.cut, "observe");
+      checkSource(proof.cut);
+      return sameMetadata(current, proof.metadata);
+    } catch (failure) {
+      observePromise(failure);
+      return false;
+    }
+  }
+  function readyToObserve(): boolean {
+    if (!lease || !model || !metadata) return false;
+    const expected = cut();
+    try {
+      // A readiness read is outside pure: failure cannot consume a correlated
+      // notice or reach pure.observe's intentionally retiring catch.
+      readFrame([]);
+      checkSource(expected);
+      return true;
+    } catch (error) {
+      observePromise(error);
+      // P/lease retirement may already have purged. Otherwise close this cut,
+      // not the backend domain, until the retained producer genuinely commits.
+      if (lease && model && !registration?.purged) {
+        advanceSource();
+        clearModelJoin();
+        touchUI();
+      }
+      return false;
+    }
+  }
   function requireJoin(handle: object, input: unknown): DataTableModel<S, T> {
     const record = modelJoins.get(handle);
     if (
@@ -837,9 +1010,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       return deny();
     const binding = requireBinding(record.binding);
     if (binding.suspended) return deny();
-    const expected = fence,
-      mounted = lease;
-    const value = checkModel(expected, mounted);
+    const expected = cut();
+    const value = checkModel(expected);
     try {
       const current = modelSignature(value);
       if (
@@ -850,7 +1022,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         return deny();
       return value;
     } finally {
-      checkAt(expected, mounted);
+      checkAt(expected);
       if (
         model !== value ||
         modelJoinRecord !== record ||
@@ -898,11 +1070,10 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         return deny();
       return bridgeEntry(() => {
         const binding = requireBinding(handle);
-        const expected = fence,
-          mounted = lease;
-        const value = checkModel(expected, mounted);
+        const expected = cut();
+        const value = checkModel(expected);
         const signature = modelSignature(value);
-        checkAt(expected, mounted);
+        checkAt(expected);
         if (
           input !== model ||
           value !== model ||
@@ -988,6 +1159,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         join: handle,
         lease,
         fence,
+        source: sourceFence,
         revision: record.revision,
         metadata,
       };
@@ -1004,6 +1176,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         receipt.join !== joined ||
         receipt.lease !== lease ||
         receipt.fence !== fence ||
+        receipt.source !== sourceFence ||
         !receipt.metadata ||
         beginLatch ||
         coordinator.getSnapshot().pending
@@ -1011,9 +1184,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         return deny();
       bridgeEntry(() => {
         const value = requireJoin(joined, input);
-        const expected = fence,
-          mounted = lease;
-        const before = readMetadata(expected, mounted);
+        const expected = cut();
+        const before = readMetadata(expected);
         if (
           !sameMetadata(receipt.metadata ?? deny(), before) ||
           !metadata ||
@@ -1022,8 +1194,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           return deny();
         value.authority?.require({ type: "navigate" });
         requireJoin(joined, input);
-        const after = readMetadata(expected, mounted);
-        checkModel(expected, mounted);
+        const after = readMetadata(expected);
+        checkModel(expected);
         if (
           !sameMetadata(before, after) ||
           navigationRecord !== receipt ||
@@ -1043,57 +1215,70 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     if (!receipt.guarded) return;
     if (
       receipt.fence !== fence ||
+      receipt.source !== sourceFence ||
       receipt.lease !== lease ||
       receipt.revision !== controller?.getSnapshot().revision
     )
       return deny();
+    const expected: Cut = {
+      source: receipt.source,
+      ui: receipt.fence,
+      lease: receipt.lease,
+    };
     if (receipt.navigation) {
       if (beginLatch || coordinator.getSnapshot().pending) return deny();
-      const value = checkModel(fence);
+      const value = checkModel(expected);
       value.authority?.require({ type: "navigate" });
-      checkModel(fence);
+      checkModel(expected);
     }
-    const current = readMetadata(
-      receipt.fence,
-      receipt.lease as ReorderAdmissionLease<S, T> | null,
-    );
+    const current = readMetadata(expected);
     if (!receipt.metadata || !sameMetadata(receipt.metadata, current))
       return deny();
   };
   const callback = <V>(action: () => V): V => {
     commandDepth++;
+    const previous = boundary;
+    boundary = Object.freeze({});
     try {
       return action();
+    } catch (error) {
+      if (error && typeof error === "object" && interruptions.has(error)) {
+        if (!takeUIInterruption(error)) purge();
+        return deny();
+      }
+      throw error;
     } finally {
+      boundary = previous;
       commandDepth--;
       if (dirty) schedule();
     }
   };
   const validateCurrent = () => {
     if (!currentReceipt) return deny();
+    if (
+      !currentReceipt.valid ||
+      (currentReceipt.guarded &&
+        (currentReceipt.fence !== fence ||
+          currentReceipt.source !== sourceFence ||
+          currentReceipt.lease !== lease))
+    ) {
+      currentReceipt.valid = false;
+      return deny();
+    }
     try {
       validateReceipt(currentReceipt);
-    } catch {
-      const current =
-        currentReceipt.guarded &&
-        currentReceipt.fence === fence &&
-        currentReceipt.lease === lease;
+    } catch (error) {
       currentReceipt.valid = false;
-      if (current) purge();
+      if (!takeUIInterruption(error)) purge();
       return deny();
     }
   };
   const publish = (transition: StateTransition<S>) => {
     if (transition.state.revision === committedRevision) return;
     committedRevision = transition.state.revision;
-    const queryOrColumns =
-      transition.changedGroups.includes("query") ||
-      transition.changedGroups.includes("columns");
-    if (queryOrColumns) {
-      advanceFence();
-      if (transition.queryChanged && metadata)
-        retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
-    }
+    advanceSource();
+    if (transition.queryChanged && metadata)
+      retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
     clearModelJoin();
     touchUI();
     model = null;
@@ -1117,6 +1302,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           if (guarded) advanceFence();
           receipt = {
             fence,
+            source: sourceFence,
             lease,
             revision: controller?.getSnapshot().revision ?? -1,
             guarded,
@@ -1132,16 +1318,17 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           )
             return deny();
           let captured: ReorderApplicationMetadata | null;
+          const expected = cut();
           try {
             if (navigation) {
-              const value = checkModel(fence);
+              const value = checkModel(expected);
               value.authority?.require({ type: "navigate" });
-              checkModel(fence);
+              checkModel(expected);
             }
-            captured = guarded ? readMetadata(fence) : null;
+            captured = guarded ? readMetadata(expected) : null;
           } catch (error) {
             observePromise(error);
-            purge();
+            if (!takeUIInterruption(error)) purge();
             return deny();
           }
           receipt = { ...receipt, metadata: captured, valid: true };
@@ -1227,7 +1414,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     mount() {
       return run(() => {
         if (lease) return deny();
-        advanceFence();
+        advanceSource();
         lease = Object.freeze({}) as ReorderAdmissionLease<S, T>;
         update();
         return lease;
@@ -1249,7 +1436,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         if (lease !== token) return deny();
         if (registration?.purged) cleanupRegistration();
         if (retiredRegistration) return deny();
-        const expected = fence;
+        const expected = cut();
         const owner = getDataTableModelOwner(value);
         if (
           !owner ||
@@ -1268,7 +1455,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           !value.presentation?.displayed
         )
           return deny();
-        const current = readMetadata(expected, token);
+        const current = readMetadata(expected, "observe");
         if (current.ownerEpoch <= retiredThrough) return deny();
         const nextIdentity = {
           source: value.sourceTarget.owner,
@@ -1329,15 +1516,25 @@ export function createAdmission<S extends QuerySchema, T extends object>(
             },
           });
         }
-        checkAt(expected, token);
+        checkSource(expected);
         requireDataTableModel(value, definition);
-        advanceFence();
+        let wrapperOnly = false;
+        if (model && metadata && sameMetadata(metadata, current)) {
+          try {
+            wrapperOnly = sameSourceModel(model, value);
+          } catch {
+            /* Old caps are not a continuation proof. */
+          }
+        }
+        checkSource(expected);
+        if (wrapperOnly) advanceFence();
+        else advanceSource();
         clearModelJoin();
         touchUI();
         model = value;
         metadata = current;
         identity = nextIdentity;
-        checkModel(fence, token);
+        checkModel(cut(), "observe");
         coordinator.reconcile();
         if (!model || !metadata || metadata.ownerEpoch <= retiredThrough)
           return deny();
@@ -1355,10 +1552,18 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       if (lease !== token) return deny();
       return run(() => {
         if (lease !== token) return deny();
+        const expected = cut();
         const frame = readFrame([]);
+        checkAt(expected);
         const handle = Object.freeze({}) as ReorderInteraction<S, T>;
         interactionProof.set(handle, token);
-        interaction = { token: handle, lease: token, fence, frame };
+        interaction = {
+          token: handle,
+          lease: token,
+          fence,
+          source: sourceFence,
+          frame,
+        };
         update(true);
         return handle;
       });
@@ -1372,6 +1577,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         interaction.token !== handle ||
         interactionProof.get(handle) !== lease ||
         interaction.lease !== lease ||
+        interaction.source !== sourceFence ||
         interaction.fence !== fence
       )
         return deny();
@@ -1382,6 +1588,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           slot.token !== handle ||
           interactionProof.get(handle) !== lease ||
           slot.lease !== lease ||
+          slot.source !== sourceFence ||
           slot.fence !== fence
         )
           return deny();
@@ -1389,6 +1596,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         advanceFence();
         const attempt = {
           fence,
+          source: sourceFence,
+          lease: mounted,
           operation: null as RowMoveOperation | null,
           credited: null as number | null,
         };
@@ -1401,9 +1610,16 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           beginLatch = false;
           ownBegin = null;
         }
-        emit();
         const expected = attempt.credited ?? attempt.fence;
-        checkAt(expected, mounted);
+        // Callback-free final handoff. No source getter or listener after pure
+        // created pending. The only permitted UI credit is its exact publication.
+        if (sourceFence !== attempt.source || lease !== mounted || disposed)
+          return deny();
+        if (fence !== expected) {
+          if (result.status !== "started")
+            return Object.freeze({ status: "blocked", reason: "unavailable" });
+          return deny();
+        }
         if (
           result.status === "started" &&
           (attempt.operation !== result.operation ||
@@ -1418,6 +1634,16 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       outcome: Parameters<typeof coordinator.settle>[1],
     ) {
       return run(() => {
+        if (coordinator.getSnapshot().pending?.operation !== operation)
+          return Object.freeze({
+            status: "ignored",
+            reason: "operation",
+          } as const);
+        if (!readyToObserve())
+          return Object.freeze({
+            status: "ignored",
+            reason: "authority",
+          } as const);
         const result = coordinator.settle(operation, outcome);
         if (!model) purge();
         return result;
@@ -1428,6 +1654,16 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       acknowledgement: Parameters<typeof coordinator.acknowledge>[1],
     ) {
       return run(() => {
+        if (coordinator.getSnapshot().pending?.operation !== operation)
+          return Object.freeze({
+            status: "ignored",
+            reason: "operation",
+          } as const);
+        if (!readyToObserve())
+          return Object.freeze({
+            status: "ignored",
+            reason: "authority",
+          } as const);
         const result = coordinator.acknowledge(operation, acknowledgement);
         if (!model) purge();
         return result;
@@ -1435,6 +1671,11 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     },
     reconcile() {
       return run(() => {
+        if (!readyToObserve())
+          return Object.freeze({
+            status: "ignored",
+            reason: "authority",
+          } as const);
         const result = coordinator.reconcile();
         if (!model) purge();
         return result;
@@ -1458,6 +1699,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         candidate.guarded &&
         (!candidate.valid ||
           candidate.fence !== fence ||
+          candidate.source !== sourceFence ||
           candidate.lease !== lease)
       ) {
         candidate.valid = false;

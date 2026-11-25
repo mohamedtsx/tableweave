@@ -195,3 +195,22 @@ geometry/lifetime owner and exact native retirement still precede code. Offscree
 current-page reachability, touch/overflow, RTL, keyboard targeting and focus remain
 required feasibility checks. No normal Feedback/overlay/clone behavior, replacement
 keyboard algorithm, vendor patch or private-field manipulation is silently adopted.
+
+## Minimal adapter lease stopped at the native read boundary
+
+The final read-only contract at
+`/tmp/opencode/wp10-closed-adapter-contract/REPORT.md` does **not** establish a
+complete fixed backend. Main reads the actual installed observer and keyboard
+continuation paths recorded by review21n4. Standard Droppable creates internal
+observers whose captured-element reads can precede adapter callbacks; a later shape
+getter or guarded updateShape cannot retroactively fence them. The retained keyboard
+continuation also scrolls its target before a fresh adapter source check.
+
+This is an unsupported proof seam in the proposed minimal protocol, not a measured
+browser failure, a blanket claim that dnd-kit can never work, or a demand for universal
+vendor quiet. Public replacement of effect suppliers alone does not close the other
+native paths. The bounded N/core/R geometry/resource extension described in the report
+is necessary but insufficient, so it is not allocated as code. No additional general
+upstream search is needed. Main must obtain explicit remedy authority or keep drag
+blocked; the independent UI/source correction and future neutral controls remain
+separate. Existing RAC patch authorization does not cover this dependency.

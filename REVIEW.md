@@ -1898,6 +1898,22 @@ task from arming before enrollment, but does not resolve this geometry gap or pr
 touch/overflow/RTL usability. No runtime reproduction, native cleanup verification
 or independent closure is claimed; the original static inspection seal is preserved.
 
+### n4 — Standard native enrollment has geometry reads before adapter fences
+
+The final contract report stops the minimal additive-shape-plugin lease. Main reads
+installed utilities.js observer callbacks: the ratio-1 branch measures the captured
+element before the disconnected guard in the later throttled function, and visibility
+delivery can allocate a ResizeNotifier without an entry retirement check. DOM
+Droppable owns those observer handles internally. Main also reads the retained
+keyboard target Promise continuation, which scrolls/measures before any fresh
+adapter gate. These source facts do not prove a browser callback runs after cleanup,
+but the proposed protocol does not establish the required before-read closure.
+No source-ready adapter contract is accepted. Existing refs-only N/core/R and frozen
+dependency inspection remain unchanged. A supported gate/complete enrollment profile
+or separately authorized dependency remedy is required; no monkey patch, copied
+engine, raw geometry callback or requirement waiver follows. Runtime/corrective/
+independent verification and review21n4 remain open.
+
 ## WP-10 UI bridge intake — review session 22 (provisional)
 
 ### n1 — UI-only revocation can reach source-observation retirement
@@ -1912,6 +1928,13 @@ loss, retagging old command receipts or fabricating a backend outcome. Pre-token
 begin notification creates a separate orphan risk and requires explicit ordering
 disposition before implementation. Preserve the held candidate and old assertions;
 runtime/independent correction verification stays final and n1 remains open.
+
+Main's B2 source intake reads the complete one-file correction and matches23 sealed
+inputs/149 protected sources/1,558 protected old non-bookkeeping inputs; positive
+own TS6 passes. Separate source/UI reads, exact interruptions/receipt issuance and
+callback-free return are authored. This is not an executed reproduction/correction
+verification or independent closure of n1. Old seals and the historical listener
+timing assertion remain unchanged; final review must disposition that timing conflict.
 
 ### n2 — Existing renderer callback wrapper cannot be the atomic submit handoff
 
