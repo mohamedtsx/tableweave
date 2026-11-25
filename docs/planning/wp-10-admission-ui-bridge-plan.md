@@ -94,8 +94,15 @@ only at safe existing boundaries; no app notifications inside purge/validators.
 
 ## Exact later consumer flow — not allocated here
 
-DataTable config will carry admission plus explicit app lease, optional rows with
-handleColumnId/onSubmit and columns/messages, all model-anchored. Only actual
+Row-enabled DataTable config will carry admission plus explicit app lease, rows with
+handleColumnId/onSubmit and optional columns/messages, all model-anchored. A
+column-only presentation configuration must also work with its genuine ordinary
+factory C/columns authority: it requires no row coordinator, transport callback or
+invented app backend epoch/revision counters. That later closed consumer branch uses
+renderer/native source/member proofs directly, not a fabricated admission join.
+Applications composing external row operations can explicitly supply the guarded
+admission branch for its shared pending/pager interlock. No hidden raw-C retrofit
+or automatic allowing lookup is selected. Only actual
 definition rows/columns flags and explicit UI configuration enable surfaces; every
 intent still requires actual native authority/admission. L-config authenticates
 producer before nested private messages/callbacks, suspends A before parent publication

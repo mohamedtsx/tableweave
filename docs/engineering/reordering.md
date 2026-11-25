@@ -76,6 +76,13 @@ UI cancellation is not proof that a submitted mutation did not happen.
 
 ## Column order and visibility
 
+Column-only presentation moves use the genuine current columns authority/accepted
+C state and explicit definition/UI configuration. They do not require a row move
+coordinator, transport callback or fabricated backend epoch/revision counters. When
+row operations are also composed, their explicit guarded admission/pager interlock
+is a separate proof/lifetime, not a replacement columns grant. Optional rendering
+must preserve this distinction rather than making application persistence mandatory.
+
 Maintain a complete stable leaf order including hidden IDs. Validate every
 proposed order is a permutation: no missing/duplicate/new IDs. Move visible data
 leaves inside their current group/utility partition and merge into existing

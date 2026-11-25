@@ -178,6 +178,12 @@ the active bridge WIP as accepted, import a vendor module, run tests or write co
 The goal is a closed, commit-only, one-manager resource protocol that preserves
 application forms and does not insert speculative hook/provider work or arbitrary
 app disposers. Neutral UI and adapter source remain inactive pending real handoffs.
+Main also preserves the FR-03-only integration path: ordinary genuine factory C/
+columns authority plus explicit column configuration needs no row coordinator,
+transport callback or artificial backend counters. The selected admission bridge
+remains for guarded row/shared interlock composition. Later neutral consumer code
+must use a closed columns-only proof branch, never fabricate an admission join or
+retrofit an unregistered C. No consumer source is activated by this clarification.
 
 ### Current ownership and next action
 
