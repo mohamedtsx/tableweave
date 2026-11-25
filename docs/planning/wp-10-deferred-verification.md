@@ -18,7 +18,8 @@ passed whole-table prerequisite by implication.
 | Explicit unpaged extent | [Actual handoff](../../tests/reordering/unpaged-extent/README.md) | Three-file source correction/light checks; runtime/ack/browser/independent proof unexecuted |
 | Closed native-ref lifetime | [Actual handoff](../../tests/reordering/native-lifetime/README.md), intakenc8e7880 | Refs-only APIs/combined positive types; actual native/Strict/SSR runtime and arbitrary vendor disposal unsupported/unverified |
 | Application-source/UI bridge | [Held candidate](../../tests/reordering/ui-bridge/README.md),ccede5c | Source/type intake preserved; shared observation fence can purge submitted pending during UI cleanup |
-| Separate SRC/UI correction | [Selected bounded plan](wp-10-ui-source-fences-plan.md) | One-source implementation allocated; deferred admission listeners revise provisional early-veto timing, not pure/source authorization |
+| Separate SRC/UI correction | [Selected bounded plan](wp-10-ui-source-fences-plan.md), preserved8ba59fd | Source/light intake passed; deferred admission listeners revise provisional early-veto timing, not pure/source authorization; runtime/independent proof remains final |
+| Release-only interaction revocation | [Actual C1a source](../../tests/reordering/interaction-cut/README.md) |13-runtime/13-type entry, physical ACT cut and source/light intake; C1b renderer/native retirement and atomic notification remain held |
 | Neutral refs/handles/pager consumers | Native-binding report/actual prerequisite APIs | Not allocated; no guessed producer method or wrapper collection is acceptance |
 | Optional new-generation adapter | [Dependency preparation](wp-10-adapter-dependency-plan.md) |0.5.3 installed/static-inspected only in isolated9a5f598; primary unchanged, no vendor runtime/G-02 result or newer fixed upstream candidate |
 

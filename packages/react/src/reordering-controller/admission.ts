@@ -168,6 +168,22 @@ interface NavigationRecord {
   readonly revision: number;
   metadata: ReorderApplicationMetadata | null;
 }
+/** Release-only metadata; deliberately no owner, lease, source or payload link. */
+interface InteractionCut {
+  revoked: boolean;
+}
+const interactionCuts = new WeakMap<object, InteractionCut>();
+/** Exact issuance only. Safe even for unknown or already-ended release inputs. */
+export function revokeReorderInteraction(interaction: unknown): undefined {
+  if (
+    (typeof interaction === "object" && interaction !== null) ||
+    typeof interaction === "function"
+  ) {
+    const physical = interactionCuts.get(interaction);
+    if (physical) physical.revoked = true;
+  }
+  return undefined;
+}
 const uiBindings = new WeakMap<object, UIBindingRecord>();
 const modelJoins = new WeakMap<object, ModelJoinRecord>();
 const navigationOrigins = new WeakMap<object, NavigationRecord>();
@@ -334,6 +350,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     lease: object;
     fence: number;
     source: number;
+    physical: InteractionCut;
     frame: RowReorderFrame;
   } | null = null;
   let lastPending: RowMoveOperation | null = null;
@@ -341,6 +358,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     fence: number;
     source: number;
     lease: object | null;
+    physical: InteractionCut;
     operation: RowMoveOperation | null;
     credited: number | null;
   } | null = null;
@@ -365,6 +383,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     readonly source: number;
     readonly ui: number;
     readonly lease: object | null;
+    readonly physical?: InteractionCut;
   }
   type Role = "observe" | "act";
   let boundary: object | null = null;
@@ -394,9 +413,14 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   const live = () => {
     if (disposed || !controller || controller.isDisposed()) return deny();
   };
-  const advanceFence = () => {
-    const hadInteraction = interaction !== null;
+  function retireInteraction(preserve?: InteractionCut): void {
+    if (interaction && interaction.physical !== preserve)
+      interaction.physical.revoked = true;
     interaction = null;
+  }
+  const advanceFence = (preserve?: InteractionCut) => {
+    const hadInteraction = interaction !== null;
+    retireInteraction(preserve);
     if (fence === Number.MAX_SAFE_INTEGER) {
       return exhaust();
     }
@@ -418,7 +442,11 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   };
   const checkAt = (expected: Cut, role: Role = "act") => {
     checkSource(expected);
-    if (role === "observe" || fence === expected.ui) return;
+    if (
+      role === "observe" ||
+      (fence === expected.ui && !expected.physical?.revoked)
+    )
+      return;
     if (!boundary) return deny();
     const signal = Object.freeze(Object.create(null)) as object;
     interruptions.set(signal, {
@@ -527,7 +555,12 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     const role: Role = ids.length ? "act" : "observe";
     const expected: Cut =
       ids.length && ownBegin
-        ? { source: ownBegin.source, ui: ownBegin.fence, lease: ownBegin.lease }
+        ? {
+            source: ownBegin.source,
+            ui: ownBegin.fence,
+            lease: ownBegin.lease,
+            physical: ownBegin.physical,
+          }
         : cut();
     const value = checkModel(expected, role);
     const authority = value.authority;
@@ -618,8 +651,19 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   const coordinator = createRowMoveCoordinator({
     instanceId,
     readCurrent(ids) {
+      const attempt = ids.length ? ownBegin : null;
       try {
-        return readFrame(ids);
+        const frame = readFrame(ids);
+        // Last ACT exit after frame extraction, before pure parses owned data.
+        // Never replace this with a fresh UI cut or a post-creation port read.
+        if (attempt)
+          checkAt({
+            source: attempt.source,
+            ui: attempt.fence,
+            lease: attempt.lease,
+            physical: attempt.physical,
+          });
+        return frame;
       } catch (error) {
         if (takeUIInterruption(error)) return deny();
         const eligibility =
@@ -641,6 +685,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     moves: coordinator.getSnapshot(),
   });
   const update = (force = false) => {
+    // Lazy local pruning only: revocation itself does not invoke this publisher.
+    if (interaction?.physical.revoked) retireInteraction();
     const phase: ReorderAdmissionSnapshot["phase"] = disposed
       ? "disposed"
       : !lease
@@ -712,7 +758,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       model = null;
       metadata = null;
       identity = null;
-      interaction = null;
+      retireInteraction();
+      if (ownBegin) ownBegin.physical.revoked = true;
       advanceSource();
       coordinator.invalidate("context");
       update();
@@ -776,7 +823,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     model = null;
     metadata = null;
     identity = null;
-    interaction = null;
+    retireInteraction();
+    if (ownBegin) ownBegin.physical.revoked = true;
     retireUI();
     coordinator.dispose();
     cleanupRegistration();
@@ -953,7 +1001,11 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       !proof ||
       !boundary ||
       proof.boundary !== boundary ||
-      proof.cut.ui === fence ||
+      (proof.cut.ui === fence &&
+        !(
+          proof.cut.physical?.revoked &&
+          ownBegin?.physical === proof.cut.physical
+        )) ||
       !proof.metadata
     )
       return false;
@@ -1282,7 +1334,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     clearModelJoin();
     touchUI();
     model = null;
-    interaction = null;
+    retireInteraction();
+    if (ownBegin) ownBegin.physical.revoked = true;
     update(true);
   };
   const composed = {
@@ -1394,6 +1447,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   };
   const implementation = {
     getSnapshot() {
+      if (interaction?.physical.revoked) update();
       if (!disposed && controller?.isDisposed()) {
         retire();
         disposed = true;
@@ -1556,12 +1610,16 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         const frame = readFrame([]);
         checkAt(expected);
         const handle = Object.freeze({}) as ReorderInteraction<S, T>;
+        const physical: InteractionCut = { revoked: false };
+        retireInteraction();
+        interactionCuts.set(handle, physical);
         interactionProof.set(handle, token);
         interaction = {
           token: handle,
           lease: token,
           fence,
           source: sourceFence,
+          physical,
           frame,
         };
         update(true);
@@ -1572,6 +1630,11 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       handle: ReorderInteraction<S, T>,
       placement: Parameters<typeof coordinator.begin>[1],
     ): RowMoveBeginResult {
+      if (
+        interactionProof.get(handle) === lease &&
+        interactionCuts.get(handle)?.revoked
+      )
+        return Object.freeze({ status: "blocked", reason: "unavailable" });
       if (
         !interaction ||
         interaction.token !== handle ||
@@ -1593,11 +1656,12 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         )
           return deny();
         const mounted = lease;
-        advanceFence();
+        advanceFence(slot.physical);
         const attempt = {
           fence,
           source: sourceFence,
           lease: mounted,
+          physical: slot.physical,
           operation: null as RowMoveOperation | null,
           credited: null as number | null,
         };
@@ -1615,9 +1679,11 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         // created pending. The only permitted UI credit is its exact publication.
         if (sourceFence !== attempt.source || lease !== mounted || disposed)
           return deny();
-        if (fence !== expected) {
-          if (result.status !== "started")
+        if (fence !== expected || attempt.physical.revoked) {
+          if (result.status !== "started") {
+            attempt.physical.revoked = true;
             return Object.freeze({ status: "blocked", reason: "unavailable" });
+          }
           return deny();
         }
         if (
@@ -1626,6 +1692,9 @@ export function createAdmission<S extends QuerySchema, T extends object>(
             coordinator.getSnapshot().pending?.operation !== result.operation)
         )
           return deny();
+        // End the consumed cut only after final checks, never before the ACT read.
+        // The delivered operation is independent of this release-only flag.
+        attempt.physical.revoked = true;
         return result;
       });
     },

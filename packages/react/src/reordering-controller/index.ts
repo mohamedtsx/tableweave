@@ -12,6 +12,7 @@ export {
   requireReorderAdmission,
   requireReorderModel,
   requireReorderNavigation,
+  revokeReorderInteraction,
   suspendReorderUI,
 } from "./admission.js";
 export type {

@@ -1962,6 +1962,12 @@ veto, raw callback escape or fabricated backend rejection. Common refs, ordinary
 column controls and pager authoring remain separately possible after that producer
 handoff; actual row submission stays held pending this seam. n2 remains open.
 
+C1a source intake now matches22 sealed inputs/148 protected sources/1,638 old
+non-bookkeeping inputs and passes own positive TS6 after main reads both source
+diffs. Exact release-only revocation/physical ACT cuts are implemented; actual R/N
+retirement and prepared notification are not. This is not an executed counterexample
+or independent correction proof, and n2 remains open for C1b/final verification.
+
 ### n3 — In-progress C1a fixture documentation lacks owner navigation
 
 The structural checker finds two new C1a Markdown files unreachable from entrypoints

@@ -94,7 +94,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Neutral consumer implementation | Isolated lease newly selected fromdda8166 | Common refs/functional column controls/row-pending pager; row begin/onSubmit held for C1b |
-| C1a interaction cut | Primary two-source lease newly selected | Pure release-only exact-token revoke plus ACT pre-token checks; no styled/neutral or pure coordinator changes |
+| C1a interaction cut | Handoff delivered; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; preservation pending, C1b still open |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
 | Admission client discovery | Preserveddda8166 | Actual12-runtime/13-type producer entry source checks pass; emitted/installed/packed proof final; C1a additive export is a new stage |
@@ -379,6 +379,15 @@ is preserved, with structural replay pending. Source/runtime findings remain ope
 The navigation replay now passes248 Markdown/873 links and18 checker regressions;
 the original two-finding failure is retained. This checks only the owner links,
 not worker readiness, semantic-source equivalence or independent/runtime approval.
+C1a handoff is delivered: main reads the complete two-source diff, release-only
+one-bit registry/ACT propagation/final port-exit and callback-free tail; matches22
+sealed inputs/148 protected sources/1,638 protected old non-bookkeeping inputs and
+passes its own positive TS6 program. Actual client source is now13 runtime/13 types.
+New source150 map `/tmp/opencode/wp10-c1a-integrated-source150.json` has digest
+b755341e946ba27883403d21f9aca8b325cab162224745ddcdf063313d035992;
+source2 aggregate3aa2521f… / own22-input e7715a6e… do not replace B2/dda seals.
+Main preserves before C1b allocation. No actual renderer/ref retirement wiring,
+row submit, runtime/corrective/independent review22n2 closure or G-02 follows.
 
 ### Current ownership and next action
 

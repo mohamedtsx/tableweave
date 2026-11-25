@@ -66,10 +66,18 @@ Biome/148-source and old-input scope only. Preserve B2/entry maps as historical
 producer lanes, not automatically re-signed export expectations. Seal a new delta.
 No UI/adapter readiness, review22n2 closure or whole-packet approval follows.
 
-## In-progress authoring navigation
+## Actual C1a handoff and remaining C1b boundary
 
 The current worker's [C1a README](../../tests/reordering/interaction-cut/README.md)
-and [C1b boundary note](../../tests/reordering/interaction-cut/C1B-BLOCKED.md) are
-in-progress authoring, not an intaken handoff or reviewed API. Their presence grants
-no row submission, source readiness or correction approval. Main reviews exact
-source/hash/check evidence only after the worker releases its actual handoff.
+and [C1b boundary note](../../tests/reordering/interaction-cut/C1B-BLOCKED.md) now
+form the released provisional handoff. Main reads the complete two-source diff,
+matches22 own inputs/148 protected source bodies/1,638 old non-bookkeeping inputs,
+and passes own positive TS6. New source150b755341e… and source2 aggregate3aa2521f…
+remain distinct from B2/dda identities. Actual explicit client index has13 runtime/
+13 type exports; existing admission method/snapshot/type shapes remain unchanged.
+
+The release-only primitive is implemented in source, not runtime/independently
+approved. C1b still must wire genuine renderer/core/N retirement and prepare the
+exact notification before token creation. Its lease waits for the neutral binding/
+capture APIs to be handed off, not guessed from worker WIP. No row activation or
+review22n2 closure follows from main's lightweight source intake.
