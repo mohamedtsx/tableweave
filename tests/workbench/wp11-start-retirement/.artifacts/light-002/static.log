@@ -1,0 +1,1 @@
+Static AST/source order: closed snapshot before first child callback; independent cleanup/verification and old assertions retained. NOT runtime callback/cache/SSR proof.

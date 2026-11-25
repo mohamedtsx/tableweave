@@ -1,0 +1,11 @@
+[
+  {
+    "name": "inputs-before",
+    "args": [
+      "tests/workbench/wp11-start-retirement/inputs.mjs",
+      "tests/workbench/wp11-start-retirement/.artifacts/light-001/inputs.json"
+    ],
+    "status": 1,
+    "signal": null
+  }
+]

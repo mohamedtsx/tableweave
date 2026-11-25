@@ -1,0 +1,12 @@
+{
+  "extends": "../../../apps/example-start-facade/tsconfig.source-light.json",
+  "include": [
+    "../../../apps/example-start-facade/src/application/*.ts",
+    "../../../apps/example-start-facade/src/table/*.tsx",
+    "../../../apps/example-start-facade/src/start.ts",
+    "../../../apps/example-start-facade/vite.config.ts",
+    "../wp11-start-facade/sdk-contracts.ts",
+    "../wp11-start-facade/final/contracts.test.ts",
+    "./final/*.ts"
+  ]
+}

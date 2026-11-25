@@ -60,6 +60,9 @@ export function createBootstrapSession(
   let operation: { readonly controller: AbortController } | null = null;
   let lease: object | null = null;
   const children: { retire(): boolean }[] = [];
+  // Cleanup identities outlive the public receipt, including interrupted removal.
+  const pendingPartitions = new Set<string>();
+  let pendingCanary = false;
   let retiredIds = new Set<string>(),
     ending = false,
     retiringNow = false,
@@ -89,6 +92,9 @@ export function createBootstrapSession(
   }
   const current = (value: Bootstrap) =>
     !ending &&
+    !retiringNow &&
+    pendingPartitions.size === 0 &&
+    !pendingCanary &&
     receipt === value &&
     (phase === "preparing" || phase === "adopted");
   function owns(value: CacheValue, boot: Bootstrap, initial = false) {
@@ -107,15 +113,61 @@ export function createBootstrapSession(
       (!initial || sameInput(value.input, input))
     );
   }
-  function clearCache(id: string | null) {
-    if (id) {
-      void client.cancelQueries({ queryKey: cachePrefix(id) }).catch(() => {});
-      client.removeQueries({ queryKey: cachePrefix(id) });
+  function clearCache(): boolean {
+    const cache = client.getQueryCache();
+    function clear(queryKey: readonly string[], exact = false): boolean {
+      const filter = { queryKey, exact };
+      let complete = true;
+      try {
+        // Best-effort local cancellation only, NOT a backend cancellation receipt.
+        // No promise continuation may reopen or retire a later application owner.
+        void client.cancelQueries(filter).catch(() => {});
+      } catch {
+        complete = false;
+      }
+      try {
+        // Remove actual captured entries independently: one observer throwing must
+        // not prevent the other domain's removal, or target a replacement entry.
+        for (const query of cache.findAll(filter)) {
+          try {
+            cache.remove(query);
+          } catch {
+            complete = false;
+          }
+        }
+      } catch {
+        complete = false;
+      }
+      try {
+        if (cache.findAll(filter).length !== 0) complete = false;
+      } catch {
+        complete = false;
+      }
+      // Even a throw after deletion retains an obligation until a clean retry.
+      return complete;
     }
-    void client
-      .cancelQueries({ queryKey: canaryKey, exact: true })
-      .catch(() => {});
-    client.removeQueries({ queryKey: canaryKey, exact: true });
+    let complete = true;
+    for (const id of [...pendingPartitions]) {
+      if (!clear(cachePrefix(id))) complete = false;
+    }
+    if (pendingCanary && !clear(canaryKey, true)) complete = false;
+    return complete;
+  }
+  function cacheGone(): boolean {
+    let complete = true;
+    const filters: { queryKey: readonly string[]; exact: boolean }[] = [
+      ...pendingPartitions,
+    ].map((id) => ({ queryKey: cachePrefix(id), exact: false }));
+    if (pendingCanary) filters.push({ queryKey: canaryKey, exact: true });
+    for (const filter of filters) {
+      try {
+        if (client.getQueryCache().findAll(filter).length !== 0)
+          complete = false;
+      } catch {
+        complete = false;
+      }
+    }
+    return complete;
   }
   function retire(reason = "Application source ended."): boolean {
     if (retiringNow) return false;
@@ -125,10 +177,19 @@ export function createBootstrapSession(
       // Close app command/read guards before any child or Query observer can reenter.
       phase = "retiring";
       lease = null;
-      if (old) retiredIds.add(old.id);
+      if (old) {
+        retiredIds.add(old.id);
+        pendingPartitions.add(old.id);
+      }
+      pendingCanary = true;
       const abandoned = operation;
       operation = null;
       sources = null;
+      receipt = null;
+      notice = reason;
+      // Child P/resource/C cleanup can notify synchronously. Close the public
+      // snapshot before the FIRST callback, without notifying parent listeners yet.
+      stageSnapshot();
       let complete = true;
       for (const child of children) {
         try {
@@ -137,20 +198,8 @@ export function createBootstrapSession(
           complete = false;
         }
       }
-      notice = reason;
-      receipt = null;
-      // Query cancellation/removal can synchronously notify its own observers.
-      // Their parent read must already see cleared bootstrap/source references.
-      stageSnapshot();
       abandoned?.controller.abort();
-      clearCache(old?.id ?? null);
-      if (!complete) {
-        notice =
-          "Application retirement is blocked; retry cleanup. No new source is allowed.";
-        publish();
-        return false;
-      }
-      children.length = 0;
+      if (!clearCache()) complete = false;
       if (ending) {
         let removed = true;
         for (const remove of [...removers]) {
@@ -161,13 +210,20 @@ export function createBootstrapSession(
             removed = false;
           }
         }
-        if (!removed) {
-          notice =
-            "Application callbacks remain in cleanup debt; source stays closed.";
-          publish();
-          return false;
-        }
+        if (!removed || removers.size !== 0) complete = false;
       }
+      // A later domain/canary/remover callback can reinsert an earlier old key.
+      // Keep ALL exact obligations through the last independent cleanup attempt.
+      if (!cacheGone()) complete = false;
+      if (!complete) {
+        notice =
+          "Application retirement has cleanup debt; retry cleanup. No new source is allowed.";
+        publish();
+        return false;
+      }
+      pendingPartitions.clear();
+      pendingCanary = false;
+      children.length = 0;
       phase = "ended";
       publish();
       return true;
