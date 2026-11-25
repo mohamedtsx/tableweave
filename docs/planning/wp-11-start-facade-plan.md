@@ -99,3 +99,8 @@ source permission is inferred from this plan beyond the exact writer lease.
 
 Main reviews source receipts and actual public call ordering before preservation.
 Drag/G-02 remains user-blocked; full WP-11 and WP-12–WP-15 remain incomplete.
+
+The original source is preserved isolated3929614 after main's actual source/light
+intake. Main then selects the bounded [parent retirement correction](wp-11-start-retirement-plan.md)
+for review28n1/n2. Original producer maps/results remain exact; no current runtime/
+generated typing/independent approval or primary source intake is implied.

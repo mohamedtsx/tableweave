@@ -235,6 +235,10 @@ WP-10 drag is not completed by downstream example authoring.
 
 ## WP-12 Integrated browser and manual accessibility acceptance
 
+The [bounded source-authoring plan](wp-12-implementation-plan.md) selects a new
+two-instance integrated fixture/manual workbook. Runtime/manual acceptance remains
+in the user's final phase; blocked WP-10/G-02 and unfinished framework proof stay open.
+
 - **Role/dependencies:** verification reviewer; integrated WP-11.
 - **Read:** [testing](../testing/README.md), AC-01–AC-27, quality and scenes.
 - **Paths:** interaction/accessibility/browser fixtures and dated evidence;

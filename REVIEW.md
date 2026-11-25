@@ -2242,3 +2242,32 @@ Do not repair frozen app source or weaken to P-only/eventual checks within a tes
 lease. If confirmed, assign a bounded app-owner correction and independently verify
 the exact failure/correction in the final phase. No enabling grant or test-only
 permitting publication certificate may be introduced to force the scenario.
+
+## WP-11 Start source intake — review session 28 (provisional)
+
+Main reads all21 handwritten app/config paths and actual parent/cache/child/codec/
+reader/transport/route wiring. Own source-only TS6/seal/scope/input checks match39
+new inputs/69 preserved raw artifacts,155 unchanged library bodies/1,736 old inputs
+and769 pinned inputs. Generated-dependent routing/whole-app typing and every runtime
+test remain unrun; no old G-04 approval is inherited.
+
+### n1 — Closed parent snapshot is staged after child callbacks
+
+bootstrap-session.ts closes internal phase/lease/source fields, then retires children,
+and only afterwards clears receipt/stages the externally readable snapshot. Child
+P/resource/C cleanup can synchronously notify before that staging. getSnapshot can
+still return the old adopted receipt/sources during those notifications despite
+closed command guards. Stage a closed/cleared parent snapshot before child callbacks;
+notify parent listeners only after the required cleanup. The original Query-removal
+observer test does not cover this earlier boundary. This is source-derived, UNRUN.
+
+### n2 — A throwing cache observer can lose the partition needed for retry
+
+retire nulls receipt before clearCache, but stores the old cache id only in that
+call's local variable. Query cancellation/removal can synchronously throw from an
+observer. A later retry then sees null receipt and may clear only the canary, leaving
+the old partition while allowing a new adoption. Retain exact pending cleanup ids/
+debt until all owned cache removals really complete; attempt independent cleanup
+without falsely reporting success or forcing a grant. Callback failures must keep
+the app closed/retryable. Preserve the original producer and author a distinct
+correction. This trace is not an executed failure or independent closure.

@@ -31,7 +31,8 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
 | Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
-| Mounted Start facade | Isolated source writer allocated fromf7ad033 | Standard file routes; handwritten-source LIGHT only; real generation/whole-app/SSR final |
+| Mounted Start facade | Original preserved3929614; one isolated retirement-correction writer active | Main source/light intake passes; primary intake waits for correction and active primary fixture scope |
+| WP-12 integrated fixture | One primary writer active under the new-only plan | Frozen Stage A/B/library inputs; six integrated flows/manual workbook authored only; runtime/manual final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -274,6 +275,27 @@ The corrected real-tree replay passes271 Markdown/934 links and19 checker probes
 current whitespace is clean. Snapshot bytes and original three-finding log remain
 unchanged. No Next runtime, filesystem adversary, archive install, framework build,
 review26 runtime closure or full WP-11 approval follows from these checks.
+Start original source handoff is delivered. Main reads all21 handwritten app/config
+paths, actual parent/child source/cache/codec/transport/reader wiring, routes and
+SDK probe. Own source-only TS6, seal39-input/69-artifact, scope155-library/1,736-old
+input and769 pinned-input checks pass. New inputs06b55f21…/raw artifacts3718197b…
+remain the original producer identities, with generation/whole-app typing unrun.
+Main source review opens review28n1/n2 for parent snapshot staging before child
+callbacks and cache cleanup identity/debt after a throwing observer. Preserve this
+baseline before one parent-file correction; no runtime reproduction/closure or
+primary Start intake is claimed yet.
+Start original source is preserved isolated3929614, including69 raw artifacts in
+Git. Main also passes own static checks and verifies root .npmrc/workspace/manifests/
+lock are unchanged against the isolated baseline. The selected bounded correction
+at docs/planning/wp-11-start-retirement-plan.md allocates only bootstrap-session.ts
+and new retirement fixtures to the same isolated writer. No other app/library/
+profile/router/manifest/old-test changes or runtime execution is authorized.
+After static intake/preservation of the actual Start source3929614, main selects
+docs/planning/wp-12-implementation-plan.md for one independent primary new-only
+client fixture/manual workbook owner. It consumes frozen shared Stage A/B APIs;
+the isolated Start one-parent-file correction cannot collide with those paths.
+Only source/light authoring is allowed. No WP-11 completion, earlier runtime phase,
+manual result, G-02 waiver or WP-12–WP-15 skip follows from this provisional handoff.
 
 ## Current WP-10 implementation handoff
 
@@ -1759,7 +1781,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-017 | WP-09 details/localization/responsive shell | in progress | Details/plain criteria producers approved; facade/adoption held | Exact later WP-08 handoff, unpaged/live-context contracts |
 | TASK-018 | WP-10 optional sortable | blocked | Manual/source handoff preservedd6a53f6; user blocks drag | Full G-02/runtime/independent acceptance unmet, not waived by downstream work |
 | TASK-019 | WP-11 examples/docs/workbench | in progress | Main intake; Stage B primary and isolated Next source writers active | Preserved sharedc9c36cb/manual WP-10 source; drag and final evidence remain incomplete |
-| TASK-020 | WP-12 integrated browser/manual accessibility | planned | Verification owner assigned after WP-11 | Manual/support-matrix evidence cannot be fabricated |
+| TASK-020 | WP-12 integrated browser/manual accessibility | in progress | Provisional new-only fixture/workbook source authoring after WP-11 static intakes | Browser/manual/independent acceptance remains final; G-02 and unfinished framework proof are not waived |
 | TASK-021 | WP-13 packed compatibility/release tooling | planned | Package owner assigned after WP-11 | No publication rights inferred |
 | TASK-022 | WP-14 reproducible performance | planned | Benchmark owner assigned after WP-11/13 | Approved runner/workload required; no invented timings |
 | TASK-023 | WP-15 real consumer/stable readiness | planned | Integration reviewer assigned when inputs exist | Separate actual target/access/write inputs and WP-12–14 evidence required |
