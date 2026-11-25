@@ -1,0 +1,83 @@
+{
+  "action": "pins",
+  "status": "source-only-completed",
+  "results": [
+    {
+      "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/consumers/wp13-storage/tsconfig.json",
+        "--listFilesOnly",
+        "--pretty",
+        "false"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/consumers/wp13/tsconfig.light.json",
+        "--listFilesOnly",
+        "--pretty",
+        "false"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "changedDuring": [],
+  "scopeBefore": {
+    "oldRegularFiles": 3065,
+    "canonical155": 155,
+    "delta": [
+      "tests/consumers/wp13/lib/runtime.mjs",
+      "tests/consumers/wp13/lib/storage-roots.mjs",
+      "tests/consumers/wp13-storage/README.md",
+      "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md",
+      "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md.txt"
+    ],
+    "metadata": [],
+    "pinDrift": [
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/storage-roots.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/runtime.mjs"
+    ],
+    "newOwnPinDrift": [
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13-storage-correction/proof.mjs"
+    ],
+    "rename": {
+      "mode": 436,
+      "size": 19096,
+      "sha256": "e426cdbdfda3e156f1f3393ba12bb7ba94b19260d6b1766efb837e9261d7c1ad"
+    }
+  },
+  "scopeAfter": {
+    "oldRegularFiles": 3065,
+    "canonical155": 155,
+    "delta": [
+      "tests/consumers/wp13/lib/runtime.mjs",
+      "tests/consumers/wp13/lib/storage-roots.mjs",
+      "tests/consumers/wp13-storage/README.md",
+      "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md",
+      "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md.txt"
+    ],
+    "metadata": [],
+    "pinDrift": [
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/storage-roots.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/runtime.mjs"
+    ],
+    "newOwnPinDrift": [
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13-storage-correction/proof.mjs"
+    ],
+    "rename": {
+      "mode": 436,
+      "size": 19096,
+      "sha256": "e426cdbdfda3e156f1f3393ba12bb7ba94b19260d6b1766efb837e9261d7c1ad"
+    }
+  }
+}

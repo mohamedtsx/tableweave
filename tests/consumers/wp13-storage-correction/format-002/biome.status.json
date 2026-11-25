@@ -1,0 +1,30 @@
+{
+  "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+  "args": [
+    "node_modules/@biomejs/biome/bin/biome",
+    "check",
+    "--write",
+    "--assist-enabled=false",
+    "--formatter-enabled=true",
+    "--vcs-enabled=false",
+    "tests/consumers/wp13/cli.mjs",
+    "tests/consumers/wp13/lib/boundary.mjs",
+    "tests/consumers/wp13/lib/installer.mjs",
+    "tests/consumers/wp13/lib/generation.mjs",
+    "tests/consumers/wp13/lib/storage-roots.mjs",
+    "tests/consumers/wp13/protocol.json",
+    "tests/consumers/wp13-storage/evidence.mjs",
+    "tests/consumers/wp13-storage/checks.mjs",
+    "tests/consumers/wp13-storage/static.mjs",
+    "tests/consumers/wp13-storage/guards.mjs",
+    "tests/consumers/wp13-storage/schema.ts",
+    "tests/consumers/wp13-storage/tsconfig.json",
+    "tests/consumers/wp13/lib/runtime.mjs",
+    "tests/consumers/wp13-storage-correction/proof.mjs",
+    "tests/consumers/wp13-storage-correction/static.mjs",
+    "tests/consumers/wp13-storage-correction/guards.mjs"
+  ],
+  "status": 0,
+  "signal": null,
+  "error": null
+}

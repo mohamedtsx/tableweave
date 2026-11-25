@@ -871,6 +871,15 @@ descendant/mount operation. The external before/after seal is
 933e77b1ce560c7cb8f2bd8d5b8f962226fa18c365207a0f02f2e44a64a9a073.
 Review45n2's observed permission prerequisite is corrected, NOT a passing HDD
 guard/CLI phase. No proof namespace/producer/tools/consumer or acquisition exists.
+The correction writer releases wp13-storage-correction/README.md. Main verifies
+285 sealed entries/1,199 pins/canonical155 and byte-exact raw-preimage relocation
+against original af5ad20 Git bytes. Review46 reads both actual function changes/
+all authored cases; current docs pass299 Markdown/1,190 links and19 regressions.
+Review45n4 packaging closes; n1/n3 await independent tests, no runtime claim.
+Main preserves the correction, then selects exactly the extracted-body synthetic
+unit command in fresh final-hdd-correction-units-001 external receipts. No HDD
+fixture/helper/CLI/runtime/build/install/acquisition action follows from this unit
+selection. Original51-link failure/first AST failure/184 seal stay historical.
 
 ## Current WP-10 implementation handoff
 

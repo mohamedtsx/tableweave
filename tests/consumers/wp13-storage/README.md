@@ -203,7 +203,7 @@ profile/native/browser proof remains a separately selected later phase.
 [Before map](before.json) captured2,886 old regular files/modes and1,179 actual
 current pinned source/tool inputs at its recorded time, before production edits.
 [Canonical155](source155.json) retains original SHA256 `bdfabded…`. Byte-exact six
-preimages (original modes in the before map) include the [original README](preimage-tests__consumers__wp13__README.md)
+preimages (original modes in the before map) include the [original README](preimage-tests__consumers__wp13__README.md.txt)
 and four MJS/protocol copies named `preimage-tests__consumers__wp13__...` here.
 All old regular map/seal/log bytes remain protected, including original137
 `ca6706bd…`, runtime100 `6f65c028…`, API correction and current six-field alias fixes.
@@ -309,3 +309,20 @@ correction or actual HDD guard phase/namespace. No affected runtime selection or
 complete confinement/WP13/G-05 approval follows from these source passes. All
 guard tests, real detached producer/owned tool/archive/current-lock/ordinary and
 private consumer/native/framework/browser execution remain **UNRUN** here.
+
+## Authorized review45 correction follow-up — source only
+
+Main preserved this original producer as `af5ad20` before the user explicitly
+authorized the two-function correction and exact raw-preimage packaging rename.
+The STOP and packaging observations above remain original history, not current
+claims of an unresolved allocation. [The separate correction handoff](../wp13-storage-correction/README.md)
+owns new source checks/pins/seal and authored **UNRUN** regressions. The original
+184-entry seal and1,186-input pin are unchanged historical bytes, NOT a current
+file-set pass after this correction. Runtime/storage-root body changes, this
+append/link change and the `.md`→`.md.txt` path change are disclosed separately.
+The old raw Markdown path is intentionally absent; its bytes/size/mode remain
+exact at the linked `.md.txt` path. No stub, alias, exclusion or target copies
+replace the original51-finding documentation failure, which main preserved.
+Only main performs the separately approved existing-parent permission operation;
+this writer neither changes permissions nor creates HDD data. No test/helper/
+runtime/materialization or WP13/G-05 approval is granted by this source follow-up.

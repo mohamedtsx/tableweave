@@ -501,20 +501,15 @@ export function consumerStorage(ctx, root, supplied) {
   );
   demand(key, "E_STORAGE_CONSUMER_ROOT");
   const prepared = receipt(ctx, `consumer-prepared-${key}.json`);
-  const marker = object(
-    JSON.parse(capture(root, "wp13-owner.json").bytes.toString("utf8")),
-  );
   const binding = object(prepared.storage);
+  const family = families.find((family) => key.startsWith(`${family}-`));
   demand(
     binding.layout === state.layout &&
       binding.leaseSHA256 === state.leaseSHA256 &&
       binding.root === root &&
-      marker.protocol === "wp13-current-archives-v1" &&
-      marker.run === ctx.runId &&
-      marker.key === key &&
       prepared.candidate === ctx.request.candidate &&
       prepared.key === key &&
-      equal(marker.storage, binding) &&
+      prepared.profile === key.slice(family.length + 1) &&
       (!supplied || equal(supplied, binding)),
     "E_STORAGE_CONSUMER_RECEIPT",
   );
@@ -528,7 +523,19 @@ export function consumerStorage(ctx, root, supplied) {
       equal(state.consumers.get(root), binding.identity),
       "E_STORAGE_PHYSICAL_REPLACEMENT",
     );
-  else state.consumers.set(root, freeze(binding.identity));
+  const marker = object(
+    JSON.parse(capture(root, "wp13-owner.json").bytes.toString("utf8")),
+  );
+  demand(
+    marker.protocol === "wp13-current-archives-v1" &&
+      marker.run === ctx.runId &&
+      marker.key === key &&
+      equal(marker.storage, binding),
+    "E_STORAGE_CONSUMER_RECEIPT",
+  );
+  physical(root, binding.identity, true);
+  if (!state.consumers.has(root))
+    state.consumers.set(root, freeze(binding.identity));
 }
 export function scratch(ctx, create = false) {
   const state = context(ctx);

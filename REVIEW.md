@@ -10,6 +10,32 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 46 (HDD correction source intake)
+
+Main independently verifies285 current sealed files SHA256
+ce64bcc965630af7e245ab225de6071e79056fe1bb1296ad35c51f3066b12fd0,
+all1,199 current pins and canonical155. The original184-file seal stays exact;
+its three declared current differences are original handoff follow-up, consumer
+function body, and authorized raw preimage path relocation. Runtime's additional
+body is separately pinned. The relocated preimage matches af5ad20's original Git
+blob byte-for-byte (19,096bytes/mode0664/SHA256e426cdbd…), no old seal rewrite.
+
+Main reads both actual function deltas and all authored unit/FS cases. Source
+now checks approved consumer identity before marker access, aborts unclassified
+execute failures without retry, stops postflight failure before inventory/write,
+and retains primary plus secondary errors. Ordinary logged child/report failures
+with healthy guards retain failed-observation behavior. Other preconditions and
+function bodies remain frozen. These are source findings, not runtime closure.
+
+Documentation replay002 passes299 Markdown/1,190 local links and all19 checker
+regressions. Raw logs /tmp/opencode/final-hdd-correction-intake-docs-002.log and
+/tmp/opencode/final-hdd-correction-intake-docs-regressions-002.log. Original001's51
+findings and the correction producer's first AST-locator failure remain preserved.
+**Review45n4 closed for exact byte-preserving evidence packaging.** n1/n3 stay
+open for independent selected tests; no HDD fixtures/helper/test/runtime or pnpm
+acquisition/materialization has occurred. Selection8 permits only extracted-body
+synthetic units in fresh external receipts, not production/helper/CLI execution.
+
 ## Final verification — review session 45 (provisional HDD source intake)
 
 Main independently verifies the184-entry seal SHA256

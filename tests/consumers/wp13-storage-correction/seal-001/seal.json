@@ -1,0 +1,1431 @@
+{
+  "capturedAt": "2026-11-25T22:26:16.890Z",
+  "status": "provisional-correction-source-not-review-approval",
+  "files": {
+    "tests/consumers/wp13-storage-correction/README.md": {
+      "mode": 436,
+      "size": 14202,
+      "sha256": "de067809ac6692ee8add868ce1bf5cc69ee6005e3d2806a5ef0ee4c19e6f4139"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/README.md.preimage.txt": {
+      "mode": 436,
+      "size": 19895,
+      "sha256": "26d3c9e9f74aca6337ef758354428b51cba490d3cdbdb208bb8c9807d4925fa7"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before-graph-0.status.json": {
+      "mode": 436,
+      "size": 290,
+      "sha256": "bc1fc3817bde46cfe8dc02042b86756879e10efd1bd3cb41ef0dca4cf0a56ecc"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before-graph-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before-graph-0.stdout.log": {
+      "mode": 436,
+      "size": 20682,
+      "sha256": "bd0890d667c7a9cdbe689ff330f9d4e7cc1642c90c5322c6e628ec23ffd65e0d"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before-graph-1.status.json": {
+      "mode": 436,
+      "size": 288,
+      "sha256": "79e64f2fa0098b602f86e96814a3aac401afea4d09739338d54ae8a12d8c48cb"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before-graph-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before-graph-1.stdout.log": {
+      "mode": 436,
+      "size": 182548,
+      "sha256": "5d6c9bdf3d6d61937c75c746a786e330759fa6be6c9227fa94aaada216e8751d"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/before.json": {
+      "mode": 436,
+      "size": 935287,
+      "sha256": "c02dea1400807c21a3add0fe6007980ffce0c81f636b4099239e097808f156f3"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/inputs-after.json": {
+      "mode": 436,
+      "size": 351309,
+      "sha256": "b487644e18eaac03ac03e6ddc9856e1964013b128492f6ed5968fc77e037ed8c"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/inputs-before.json": {
+      "mode": 436,
+      "size": 351309,
+      "sha256": "e9de9cf307ae889f8481eaeb8e78fc2aef68f370def4c50d6921723fb8bca396"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/results.json": {
+      "mode": 436,
+      "size": 985,
+      "sha256": "c2435d16703d0291cdb3f429dcc9f04697ef1e7b87426f4beb7d7ba7a8c92db7"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/runtime.mjs.preimage.txt": {
+      "mode": 436,
+      "size": 13608,
+      "sha256": "fdc792d45750a64080bd418a1fb0f721c53f0672b59a088c063645e7c9369d7b"
+    },
+    "tests/consumers/wp13-storage-correction/before-001/storage-roots.mjs.preimage.txt": {
+      "mode": 436,
+      "size": 17148,
+      "sha256": "eda7d7b87041915267a03409728b55ed6c22af5d007e18843211a340a4ac32d1"
+    },
+    "tests/consumers/wp13-storage-correction/format-001/biome.status.json": {
+      "mode": 436,
+      "size": 1070,
+      "sha256": "9751bd405c8136643a081e8256b8815013c73eacc699c7d3c1e7cdec81a4226a"
+    },
+    "tests/consumers/wp13-storage-correction/format-001/biome.stderr.log": {
+      "mode": 436,
+      "size": 41,
+      "sha256": "141f33f68d7a479af54b6cde43b87955ec5bde629057236c8183356d2519b8b9"
+    },
+    "tests/consumers/wp13-storage-correction/format-001/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/format-001/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "1339e8e79b53b0bb9746de537a7207e701a155d920fe80f5c6231f141aca4bb2"
+    },
+    "tests/consumers/wp13-storage-correction/format-001/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "9616a811607d9d6f8f3e46b1b83d0bf80640ac0aa7c2a88c392be39d633e5662"
+    },
+    "tests/consumers/wp13-storage-correction/format-001/results.json": {
+      "mode": 436,
+      "size": 3577,
+      "sha256": "9c1c88c0a7363769a6352175b2b4440de0da974d37b05aa1155875cbc8428b38"
+    },
+    "tests/consumers/wp13-storage-correction/format-002/biome.status.json": {
+      "mode": 436,
+      "size": 1070,
+      "sha256": "9751bd405c8136643a081e8256b8815013c73eacc699c7d3c1e7cdec81a4226a"
+    },
+    "tests/consumers/wp13-storage-correction/format-002/biome.stderr.log": {
+      "mode": 436,
+      "size": 40,
+      "sha256": "a252c03088494bf9847f11d77d6f9e91b07e35392040eb83d2d905f5ae216819"
+    },
+    "tests/consumers/wp13-storage-correction/format-002/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/format-002/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "1f9b02028b4112c37d84391fc1f7ba6e1f1cf7ae17dc989a45be7e96052a8cb8"
+    },
+    "tests/consumers/wp13-storage-correction/format-002/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "1fd3e60950402ade4950c1b8570352a3e7ef94195c93280f328113fed78a50ce"
+    },
+    "tests/consumers/wp13-storage-correction/format-002/results.json": {
+      "mode": 436,
+      "size": 3208,
+      "sha256": "b29df61a986ec89da092d10b6adca3292457d1f35fe4e0a05125b78a103273e3"
+    },
+    "tests/consumers/wp13-storage-correction/format-003/biome.status.json": {
+      "mode": 436,
+      "size": 1070,
+      "sha256": "9751bd405c8136643a081e8256b8815013c73eacc699c7d3c1e7cdec81a4226a"
+    },
+    "tests/consumers/wp13-storage-correction/format-003/biome.stderr.log": {
+      "mode": 436,
+      "size": 40,
+      "sha256": "79afc584bc5689e6b76dddaf648e3b62d9ef8929ee46ad25953cdb0f669d202e"
+    },
+    "tests/consumers/wp13-storage-correction/format-003/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/format-003/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "0e3f96e03e25838a35f87396ec63831f90a8438710b63cad2423b3b29b5a1197"
+    },
+    "tests/consumers/wp13-storage-correction/format-003/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "4f67449c25a42468bdfb2124d1f63d5d4a3929a6902fe0960f55e59e2f22993a"
+    },
+    "tests/consumers/wp13-storage-correction/format-003/results.json": {
+      "mode": 436,
+      "size": 3208,
+      "sha256": "c3b04c01dab6377f93bd1260c9386b5dc4b6e3ed17d97c0a748a478646e35993"
+    },
+    "tests/consumers/wp13-storage-correction/format-004/biome.status.json": {
+      "mode": 436,
+      "size": 1070,
+      "sha256": "9751bd405c8136643a081e8256b8815013c73eacc699c7d3c1e7cdec81a4226a"
+    },
+    "tests/consumers/wp13-storage-correction/format-004/biome.stderr.log": {
+      "mode": 436,
+      "size": 40,
+      "sha256": "b7a04c6ae4bdc6ddad2ea76b4eb46f96bc74e577269cc16fa7328a5f5443d731"
+    },
+    "tests/consumers/wp13-storage-correction/format-004/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/format-004/inputs-after.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "077d905f31540604c699768cf8cb82dcc9ef690698cec0887ab9d2d6f0048af7"
+    },
+    "tests/consumers/wp13-storage-correction/format-004/inputs-before.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "3c5b30ff06a6792efcc81e41bdac31a712569b8da5bef5acf7d7b76ead57df65"
+    },
+    "tests/consumers/wp13-storage-correction/format-004/results.json": {
+      "mode": 436,
+      "size": 3207,
+      "sha256": "62f8ad67bdc934555b83dbc9b3c219f80fe351ce679e3d2cb5fef985c97e5b7e"
+    },
+    "tests/consumers/wp13-storage-correction/guards.mjs": {
+      "mode": 436,
+      "size": 16076,
+      "sha256": "87d4c22afa278b4cd3a992ab757c21f684f446abd0f9c39fb60b139de6288263"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/biome.status.json": {
+      "mode": 436,
+      "size": 1055,
+      "sha256": "6a12f91666e7dac5f5333b17d2ee2e562fc34374ba6a8fd5d7b99721012a5e63"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/biome.stderr.log": {
+      "mode": 436,
+      "size": 45,
+      "sha256": "2f2653eb38688d7d60ad14cff0d7ac4d93e5daf7538030f3194c30d70cb0e5d8"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "a349a1d96cb847faa2509a8e022ceb622af4dc687886bcd8430b0cbe6b01e8a2"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "9f9da6641aaa4cdb6967324e781297289553b85741646ff8e194bfadeda0dc6d"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/positive-0.status.json": {
+      "mode": 436,
+      "size": 267,
+      "sha256": "1e0de670ceaecaff0d83e0104899bce4a92a3698c2e5d9da40c337882b4b1d03"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/positive-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/positive-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/positive-1.status.json": {
+      "mode": 436,
+      "size": 265,
+      "sha256": "50487b06827cfbec37c864caee46a730059e8c84e7c5e047f0b0579b88e89840"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/positive-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/positive-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/results.json": {
+      "mode": 436,
+      "size": 7124,
+      "sha256": "56cccccca38f636d3b8c961c94a52292f686bac22e622645e19e8a68bef045b9"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/static.status.json": {
+      "mode": 436,
+      "size": 197,
+      "sha256": "8dd6e73b33d312542c8f8ab3077c83163e25bd32c08be9dec4e90ca7bb89d1b3"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/static.stderr.log": {
+      "mode": 436,
+      "size": 620,
+      "sha256": "9e6728153cb55c4a6a2029d27015debb12f7cda5ed79455e1cb2687bc0805d6f"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/static.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-0.status.json": {
+      "mode": 436,
+      "size": 190,
+      "sha256": "5c5e369a9e40e0c9580dc7136f0bf3397df011f6c1114dc5ef7883113dc53a8b"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-1.status.json": {
+      "mode": 436,
+      "size": 199,
+      "sha256": "313aa8f99b3114f235b9021843c5891cfaa7dd548c6aa4bf7dfac7e09467a2ae"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-10.status.json": {
+      "mode": 436,
+      "size": 211,
+      "sha256": "9934caf542f1524ddc6c5e8bf9a018116382e53f62e7d30893c24dd4a9a6d79e"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-10.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-10.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-11.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "4d2d71c70d97b6a3d88d34952d01e989ed8e9c53f82f011b0fc615ff2a8e31dc"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-11.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-11.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-12.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "d7214a47724cc35e8e74b37edbb3d8c4d9704f0a80872479b0438b56c2d40394"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-12.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-12.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-2.status.json": {
+      "mode": 436,
+      "size": 200,
+      "sha256": "e6f6134b97190d2955eaa0118dbec7ea6061e157fd4b80d0b8ac2d132734f0aa"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-2.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-2.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-3.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "2955a9ad9f8972c2dcffca92307b72a89d4e64e51d90498639c6ae8d9a7ec972"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-3.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-3.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-4.status.json": {
+      "mode": 436,
+      "size": 204,
+      "sha256": "59503e5f488c3aba5291a6c75fb2fd9d50befd1a344893f195cd707d5f6b500a"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-4.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-4.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-5.status.json": {
+      "mode": 436,
+      "size": 203,
+      "sha256": "a9043e3cd0a6ae7b5c40019c0948d97418380a09c315341c516d5d315b0843fd"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-5.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-5.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-6.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "8861322db07575e4aa314d27b97640eb10ff7a92e206e7a64dc4032d30237fe6"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-6.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-6.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-7.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "9e95d3a81465521af620ea8e701c2a335d1379a4d174ffea6bf7614959607f6b"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-7.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-7.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-8.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "76556c41b4a4da32444668681fec35bccd5927ed7d50e9f000f837e4856cfa5e"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-8.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-8.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-9.status.json": {
+      "mode": 436,
+      "size": 198,
+      "sha256": "adf70e7de723ddabc1039c066b0b2208787385afe4c52520186a24180547ee6a"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-9.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-001/syntax-9.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/biome.status.json": {
+      "mode": 436,
+      "size": 1055,
+      "sha256": "6a12f91666e7dac5f5333b17d2ee2e562fc34374ba6a8fd5d7b99721012a5e63"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/biome.stderr.log": {
+      "mode": 436,
+      "size": 44,
+      "sha256": "3983d5e1e8c86d96fbd2af87dc3c282ef047f5f76b685f13cbe523ff2085b6b5"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "862836b88dba3259bd89d5ec4c3512bf4d3f13e24506156c7bbce120917c634a"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "4434a33d9a7fd132db13c1a0c7c9bdfbb593af80c7bc1db42e3691c33ac6b15b"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/positive-0.status.json": {
+      "mode": 436,
+      "size": 267,
+      "sha256": "1e0de670ceaecaff0d83e0104899bce4a92a3698c2e5d9da40c337882b4b1d03"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/positive-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/positive-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/positive-1.status.json": {
+      "mode": 436,
+      "size": 265,
+      "sha256": "50487b06827cfbec37c864caee46a730059e8c84e7c5e047f0b0579b88e89840"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/positive-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/positive-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/results.json": {
+      "mode": 436,
+      "size": 7126,
+      "sha256": "88019d2f72b6d95e024560ce2868d1b9a892d8797eb15064058c4e4d01436bb9"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/static.status.json": {
+      "mode": 436,
+      "size": 197,
+      "sha256": "37098c8fd249a1977581180a0ebfb4e7aa2acbb0d84d270bba9ec3ea33ffa279"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/static.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/static.stdout.log": {
+      "mode": 436,
+      "size": 140,
+      "sha256": "d4f94c6264ac5d89615e2094f22589611c9fe8b7e9909a06b1ae1deef0a2b2df"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-0.status.json": {
+      "mode": 436,
+      "size": 190,
+      "sha256": "5c5e369a9e40e0c9580dc7136f0bf3397df011f6c1114dc5ef7883113dc53a8b"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-1.status.json": {
+      "mode": 436,
+      "size": 199,
+      "sha256": "313aa8f99b3114f235b9021843c5891cfaa7dd548c6aa4bf7dfac7e09467a2ae"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-10.status.json": {
+      "mode": 436,
+      "size": 211,
+      "sha256": "9934caf542f1524ddc6c5e8bf9a018116382e53f62e7d30893c24dd4a9a6d79e"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-10.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-10.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-11.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "4d2d71c70d97b6a3d88d34952d01e989ed8e9c53f82f011b0fc615ff2a8e31dc"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-11.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-11.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-12.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "d7214a47724cc35e8e74b37edbb3d8c4d9704f0a80872479b0438b56c2d40394"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-12.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-12.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-2.status.json": {
+      "mode": 436,
+      "size": 200,
+      "sha256": "e6f6134b97190d2955eaa0118dbec7ea6061e157fd4b80d0b8ac2d132734f0aa"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-2.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-2.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-3.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "2955a9ad9f8972c2dcffca92307b72a89d4e64e51d90498639c6ae8d9a7ec972"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-3.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-3.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-4.status.json": {
+      "mode": 436,
+      "size": 204,
+      "sha256": "59503e5f488c3aba5291a6c75fb2fd9d50befd1a344893f195cd707d5f6b500a"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-4.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-4.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-5.status.json": {
+      "mode": 436,
+      "size": 203,
+      "sha256": "a9043e3cd0a6ae7b5c40019c0948d97418380a09c315341c516d5d315b0843fd"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-5.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-5.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-6.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "8861322db07575e4aa314d27b97640eb10ff7a92e206e7a64dc4032d30237fe6"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-6.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-6.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-7.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "9e95d3a81465521af620ea8e701c2a335d1379a4d174ffea6bf7614959607f6b"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-7.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-7.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-8.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "76556c41b4a4da32444668681fec35bccd5927ed7d50e9f000f837e4856cfa5e"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-8.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-8.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-9.status.json": {
+      "mode": 436,
+      "size": 198,
+      "sha256": "adf70e7de723ddabc1039c066b0b2208787385afe4c52520186a24180547ee6a"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-9.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-002/syntax-9.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/biome.status.json": {
+      "mode": 436,
+      "size": 1055,
+      "sha256": "6a12f91666e7dac5f5333b17d2ee2e562fc34374ba6a8fd5d7b99721012a5e63"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/biome.stderr.log": {
+      "mode": 436,
+      "size": 44,
+      "sha256": "d51ea3797e883f14ea8cf3fd3312202608882b6e071e31efc26a73f57e01891a"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "f77f2f0ae3b42d12a9f312e34d3456e601048b6cf8a65ce9d92ee5c3e06f7efd"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "8ac5278d654a4408be8012ed88d31131aafa4877570131fc87a43cc148929dc4"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/positive-0.status.json": {
+      "mode": 436,
+      "size": 267,
+      "sha256": "1e0de670ceaecaff0d83e0104899bce4a92a3698c2e5d9da40c337882b4b1d03"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/positive-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/positive-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/positive-1.status.json": {
+      "mode": 436,
+      "size": 265,
+      "sha256": "50487b06827cfbec37c864caee46a730059e8c84e7c5e047f0b0579b88e89840"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/positive-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/positive-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/results.json": {
+      "mode": 436,
+      "size": 7126,
+      "sha256": "88019d2f72b6d95e024560ce2868d1b9a892d8797eb15064058c4e4d01436bb9"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/static.status.json": {
+      "mode": 436,
+      "size": 197,
+      "sha256": "37098c8fd249a1977581180a0ebfb4e7aa2acbb0d84d270bba9ec3ea33ffa279"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/static.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/static.stdout.log": {
+      "mode": 436,
+      "size": 140,
+      "sha256": "d4f94c6264ac5d89615e2094f22589611c9fe8b7e9909a06b1ae1deef0a2b2df"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-0.status.json": {
+      "mode": 436,
+      "size": 190,
+      "sha256": "5c5e369a9e40e0c9580dc7136f0bf3397df011f6c1114dc5ef7883113dc53a8b"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-1.status.json": {
+      "mode": 436,
+      "size": 199,
+      "sha256": "313aa8f99b3114f235b9021843c5891cfaa7dd548c6aa4bf7dfac7e09467a2ae"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-10.status.json": {
+      "mode": 436,
+      "size": 211,
+      "sha256": "9934caf542f1524ddc6c5e8bf9a018116382e53f62e7d30893c24dd4a9a6d79e"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-10.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-10.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-11.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "4d2d71c70d97b6a3d88d34952d01e989ed8e9c53f82f011b0fc615ff2a8e31dc"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-11.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-11.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-12.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "d7214a47724cc35e8e74b37edbb3d8c4d9704f0a80872479b0438b56c2d40394"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-12.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-12.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-2.status.json": {
+      "mode": 436,
+      "size": 200,
+      "sha256": "e6f6134b97190d2955eaa0118dbec7ea6061e157fd4b80d0b8ac2d132734f0aa"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-2.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-2.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-3.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "2955a9ad9f8972c2dcffca92307b72a89d4e64e51d90498639c6ae8d9a7ec972"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-3.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-3.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-4.status.json": {
+      "mode": 436,
+      "size": 204,
+      "sha256": "59503e5f488c3aba5291a6c75fb2fd9d50befd1a344893f195cd707d5f6b500a"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-4.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-4.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-5.status.json": {
+      "mode": 436,
+      "size": 203,
+      "sha256": "a9043e3cd0a6ae7b5c40019c0948d97418380a09c315341c516d5d315b0843fd"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-5.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-5.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-6.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "8861322db07575e4aa314d27b97640eb10ff7a92e206e7a64dc4032d30237fe6"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-6.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-6.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-7.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "9e95d3a81465521af620ea8e701c2a335d1379a4d174ffea6bf7614959607f6b"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-7.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-7.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-8.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "76556c41b4a4da32444668681fec35bccd5927ed7d50e9f000f837e4856cfa5e"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-8.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-8.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-9.status.json": {
+      "mode": 436,
+      "size": 198,
+      "sha256": "adf70e7de723ddabc1039c066b0b2208787385afe4c52520186a24180547ee6a"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-9.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-003/syntax-9.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/biome.status.json": {
+      "mode": 436,
+      "size": 1055,
+      "sha256": "6a12f91666e7dac5f5333b17d2ee2e562fc34374ba6a8fd5d7b99721012a5e63"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/biome.stderr.log": {
+      "mode": 436,
+      "size": 44,
+      "sha256": "975cbfa90e014f97d9a29cca4c34b555cf643cb0e73d31073ecd668e72d1562e"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/biome.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/inputs-after.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "c7409ffc34742e0631bc10f06ab66c1476ccee3c8840fc2274c8405997174870"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/inputs-before.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "75566abbe637ef01e3c0375c67b18c152273639c3823c827463b3ef3fc0acec1"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/positive-0.status.json": {
+      "mode": 436,
+      "size": 267,
+      "sha256": "1e0de670ceaecaff0d83e0104899bce4a92a3698c2e5d9da40c337882b4b1d03"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/positive-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/positive-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/positive-1.status.json": {
+      "mode": 436,
+      "size": 265,
+      "sha256": "50487b06827cfbec37c864caee46a730059e8c84e7c5e047f0b0579b88e89840"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/positive-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/positive-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/results.json": {
+      "mode": 436,
+      "size": 7126,
+      "sha256": "88019d2f72b6d95e024560ce2868d1b9a892d8797eb15064058c4e4d01436bb9"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/static.status.json": {
+      "mode": 436,
+      "size": 197,
+      "sha256": "37098c8fd249a1977581180a0ebfb4e7aa2acbb0d84d270bba9ec3ea33ffa279"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/static.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/static.stdout.log": {
+      "mode": 436,
+      "size": 140,
+      "sha256": "d4f94c6264ac5d89615e2094f22589611c9fe8b7e9909a06b1ae1deef0a2b2df"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-0.status.json": {
+      "mode": 436,
+      "size": 190,
+      "sha256": "5c5e369a9e40e0c9580dc7136f0bf3397df011f6c1114dc5ef7883113dc53a8b"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-0.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-1.status.json": {
+      "mode": 436,
+      "size": 199,
+      "sha256": "313aa8f99b3114f235b9021843c5891cfaa7dd548c6aa4bf7dfac7e09467a2ae"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-1.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-10.status.json": {
+      "mode": 436,
+      "size": 211,
+      "sha256": "9934caf542f1524ddc6c5e8bf9a018116382e53f62e7d30893c24dd4a9a6d79e"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-10.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-10.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-11.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "4d2d71c70d97b6a3d88d34952d01e989ed8e9c53f82f011b0fc615ff2a8e31dc"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-11.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-11.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-12.status.json": {
+      "mode": 436,
+      "size": 212,
+      "sha256": "d7214a47724cc35e8e74b37edbb3d8c4d9704f0a80872479b0438b56c2d40394"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-12.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-12.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-2.status.json": {
+      "mode": 436,
+      "size": 200,
+      "sha256": "e6f6134b97190d2955eaa0118dbec7ea6061e157fd4b80d0b8ac2d132734f0aa"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-2.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-2.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-3.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "2955a9ad9f8972c2dcffca92307b72a89d4e64e51d90498639c6ae8d9a7ec972"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-3.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-3.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-4.status.json": {
+      "mode": 436,
+      "size": 204,
+      "sha256": "59503e5f488c3aba5291a6c75fb2fd9d50befd1a344893f195cd707d5f6b500a"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-4.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-4.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-5.status.json": {
+      "mode": 436,
+      "size": 203,
+      "sha256": "a9043e3cd0a6ae7b5c40019c0948d97418380a09c315341c516d5d315b0843fd"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-5.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-5.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-6.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "8861322db07575e4aa314d27b97640eb10ff7a92e206e7a64dc4032d30237fe6"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-6.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-6.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-7.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "9e95d3a81465521af620ea8e701c2a335d1379a4d174ffea6bf7614959607f6b"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-7.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-7.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-8.status.json": {
+      "mode": 436,
+      "size": 201,
+      "sha256": "76556c41b4a4da32444668681fec35bccd5927ed7d50e9f000f837e4856cfa5e"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-8.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-8.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-9.status.json": {
+      "mode": 436,
+      "size": 198,
+      "sha256": "adf70e7de723ddabc1039c066b0b2208787385afe4c52520186a24180547ee6a"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-9.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/light-004/syntax-9.stdout.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/graph-0.status.json": {
+      "mode": 436,
+      "size": 290,
+      "sha256": "bc1fc3817bde46cfe8dc02042b86756879e10efd1bd3cb41ef0dca4cf0a56ecc"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/graph-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/graph-0.stdout.log": {
+      "mode": 436,
+      "size": 20682,
+      "sha256": "bd0890d667c7a9cdbe689ff330f9d4e7cc1642c90c5322c6e628ec23ffd65e0d"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/graph-1.status.json": {
+      "mode": 436,
+      "size": 288,
+      "sha256": "79e64f2fa0098b602f86e96814a3aac401afea4d09739338d54ae8a12d8c48cb"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/graph-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/graph-1.stdout.log": {
+      "mode": 436,
+      "size": 182548,
+      "sha256": "5d6c9bdf3d6d61937c75c746a786e330759fa6be6c9227fa94aaada216e8751d"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/inputs-after.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "227402934741ba3ec973a93fa619780aa4ec357aa6b08d9bc3b2c4b44b11f468"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/inputs-before.json": {
+      "mode": 436,
+      "size": 351986,
+      "sha256": "d544619e76a004c3500c1c528ee5b2b670bc3c223f5734cc2a4280b8ba447e95"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/inputs.json": {
+      "mode": 436,
+      "size": 352175,
+      "sha256": "238e78517abe735aeafc4f9fc5e7e9376c568572d12554bbcacc7d1b2d9768de"
+    },
+    "tests/consumers/wp13-storage-correction/pins-001/results.json": {
+      "mode": 436,
+      "size": 2607,
+      "sha256": "81bad3162da7e6bf05cd7f4aed7b9ff4b2a6f2ebacbb0469c9eae8fcb94aad9a"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/graph-0.status.json": {
+      "mode": 436,
+      "size": 290,
+      "sha256": "bc1fc3817bde46cfe8dc02042b86756879e10efd1bd3cb41ef0dca4cf0a56ecc"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/graph-0.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/graph-0.stdout.log": {
+      "mode": 436,
+      "size": 20682,
+      "sha256": "bd0890d667c7a9cdbe689ff330f9d4e7cc1642c90c5322c6e628ec23ffd65e0d"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/graph-1.status.json": {
+      "mode": 436,
+      "size": 288,
+      "sha256": "79e64f2fa0098b602f86e96814a3aac401afea4d09739338d54ae8a12d8c48cb"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/graph-1.stderr.log": {
+      "mode": 436,
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/graph-1.stdout.log": {
+      "mode": 436,
+      "size": 182548,
+      "sha256": "5d6c9bdf3d6d61937c75c746a786e330759fa6be6c9227fa94aaada216e8751d"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/inputs-after.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "e8ba32edf3578238dc28628c1bcba5fd34dcc30cd8993a8bc9a5bc0580c9a888"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/inputs-before.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "cbe141b6f5c8027fa6928aeabcd80976f7fbbafd9fb55a492a1c0a24fbf3e37a"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/inputs.json": {
+      "mode": 436,
+      "size": 354122,
+      "sha256": "08658289ef702de433e20e4b41f8fd52cc727183cc593751707f3d6987cc21c9"
+    },
+    "tests/consumers/wp13-storage-correction/pins-002/results.json": {
+      "mode": 436,
+      "size": 2607,
+      "sha256": "81bad3162da7e6bf05cd7f4aed7b9ff4b2a6f2ebacbb0469c9eae8fcb94aad9a"
+    },
+    "tests/consumers/wp13-storage-correction/proof.mjs": {
+      "mode": 436,
+      "size": 13349,
+      "sha256": "766b3c0ce5091cad5413fb33ae26a64d77fecc4f1e867c123782b860350847eb"
+    },
+    "tests/consumers/wp13-storage-correction/seal-001/historical184-disclosure.json": {
+      "mode": 436,
+      "size": 1637,
+      "sha256": "7e60c3829d070b830f1814c0af398669a11957ec70f57fdba5e1c1ee08944351"
+    },
+    "tests/consumers/wp13-storage-correction/seal-001/inputs-after.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "fc2be4ba73b5900232c0eb08d8ea46f03c6b725358211d91aa253341fd3aaca4"
+    },
+    "tests/consumers/wp13-storage-correction/seal-001/inputs-before.json": {
+      "mode": 436,
+      "size": 353933,
+      "sha256": "043b492cfcb27e9866196f5801e867f5f354e91bd6e43afba5507e5235914342"
+    },
+    "tests/consumers/wp13-storage-correction/seal-001/results.json": {
+      "mode": 436,
+      "size": 1913,
+      "sha256": "0622f5d94e5f3bfc8e5a4d53200baa1e01ea28adc2f173b8ef021c9a5f42c234"
+    },
+    "tests/consumers/wp13-storage-correction/static.mjs": {
+      "mode": 436,
+      "size": 5339,
+      "sha256": "6b00ad441dc2ff78c95af444ac256b0296e968d3b4996f0611771cd8aa774e5c"
+    },
+    "tests/consumers/wp13/lib/runtime.mjs": {
+      "mode": 436,
+      "size": 14906,
+      "sha256": "9886d32c5b9dee75202911a672b8666f3d3fccacfef6cbc48db5744ce9520d35"
+    },
+    "tests/consumers/wp13/lib/storage-roots.mjs": {
+      "mode": 436,
+      "size": 17399,
+      "sha256": "a944a29fc24eacf859112c0290841d4c8e0514fd4264ebcd2221865572fabc35"
+    },
+    "tests/consumers/wp13-storage/README.md": {
+      "mode": 436,
+      "size": 21103,
+      "sha256": "eab60da6513ee5e78726bf45c6cc41ae337fcddc259d2818500b63536d84896c"
+    },
+    "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md.txt": {
+      "mode": 436,
+      "size": 19096,
+      "sha256": "e426cdbdfda3e156f1f3393ba12bb7ba94b19260d6b1766efb837e9261d7c1ad"
+    }
+  }
+}

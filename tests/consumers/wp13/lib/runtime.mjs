@@ -15,7 +15,7 @@ import {
   relative,
   directory,
 } from "./receipts.mjs";
-import { local, revalidate } from "./boundary.mjs";
+import { local, revalidate, ownedConsumer } from "./boundary.mjs";
 import { installed, nativeInputs } from "./installer.mjs";
 import { toolchain, producerInputs, execute } from "./generation.mjs";
 
@@ -376,18 +376,43 @@ export function runFamily(ctx) {
   const inputSHA256 = digest(regular(target, "wp13-runtime/attempt.json"));
   let failure = null,
     report;
+  function abort(error, message) {
+    return failure === null
+      ? error
+      : new AggregateError([failure, error], message);
+  }
   try {
     execute(ctx, "family-runtime");
-    report = validateReport(
-      json(target, "wp13-runtime/report.json"),
-      attempt,
-      inputSHA256,
-    );
   } catch (error) {
+    // Only this fixed execute outcome proves an ordinary logged child failure.
+    // Other errors may already report lost identity; never resume cached reads.
+    if (
+      !(error instanceof Error) ||
+      error instanceof AggregateError ||
+      error.message !== "E_CHILD_FAILURE_RETAINED"
+    )
+      throw error;
     failure = error;
   }
   try {
     revalidate(ctx);
+    demand(ownedConsumer(ctx) === target, "E_RUNTIME_CONSUMER_TARGET");
+  } catch (error) {
+    throw abort(error, "E_RUNTIME_CHILD_AND_REPORT_BOUNDARY_FAILURE");
+  }
+  if (failure === null)
+    try {
+      report = validateReport(
+        json(target, "wp13-runtime/report.json"),
+        attempt,
+        inputSHA256,
+      );
+    } catch (error) {
+      failure = error;
+    }
+  try {
+    revalidate(ctx);
+    demand(ownedConsumer(ctx) === target, "E_RUNTIME_CONSUMER_TARGET");
     toolchain(ctx);
     producerInputs(ctx);
     installed(ctx);
@@ -398,31 +423,40 @@ export function runFamily(ctx) {
       digest(regular(target, "wp13-runtime/attempt.json")) === inputSHA256,
       "E_RUNTIME_ATTEMPT_REPLACED",
     );
+    revalidate(ctx);
+    demand(ownedConsumer(ctx) === target, "E_RUNTIME_CONSUMER_TARGET");
   } catch (error) {
-    failure ??= error;
+    // Any failed postflight aborts: no retry, inventory, or result receipt.
+    throw abort(error, "E_RUNTIME_PRIMARY_AND_POSTFLIGHT_FAILURE");
   }
-  const files = Object.fromEntries(
-    Object.entries(tree(path.join(target, "wp13-runtime"))).map(
-      ([file, value]) => [`wp13-runtime/${file}`, value],
-    ),
-  );
-  record(ctx.run, `runtime-result-${ctx.key}.json`, {
-    status: failure
-      ? "failed-runtime-observations"
-      : "observed-runtime-smoke-only",
-    candidate: ctx.request.candidate,
-    key: ctx.key,
-    profile: ctx.profile,
-    report: report ?? null,
-    failure: failure instanceof Error ? failure.message : null,
-    files,
-    limits: [
-      "not full WP11/12/13 acceptance",
-      "fresh-cache read count not proved",
-      "not Safari/mobile/AT/security/performance",
-      "drag/G02 blocked",
-    ],
-  });
+  try {
+    const files = Object.fromEntries(
+      Object.entries(tree(path.join(target, "wp13-runtime"))).map(
+        ([file, value]) => [`wp13-runtime/${file}`, value],
+      ),
+    );
+    revalidate(ctx);
+    demand(ownedConsumer(ctx) === target, "E_RUNTIME_CONSUMER_TARGET");
+    record(ctx.run, `runtime-result-${ctx.key}.json`, {
+      status: failure
+        ? "failed-runtime-observations"
+        : "observed-runtime-smoke-only",
+      candidate: ctx.request.candidate,
+      key: ctx.key,
+      profile: ctx.profile,
+      report: report ?? null,
+      failure: failure instanceof Error ? failure.message : null,
+      files,
+      limits: [
+        "not full WP11/12/13 acceptance",
+        "fresh-cache read count not proved",
+        "not Safari/mobile/AT/security/performance",
+        "drag/G02 blocked",
+      ],
+    });
+  } catch (error) {
+    throw abort(error, "E_RUNTIME_PRIMARY_AND_INVENTORY_OR_RECEIPT_FAILURE");
+  }
   if (failure) throw failure;
   return {
     status: "observed-runtime-smoke-only",

@@ -530,3 +530,30 @@ Review44 independently closes review43n1's bounded alias defect. All70 previous0
 correction files remain unchanged, old001 stays RED, no source/vendor/test change
 or new stronger expectation. No emitted/ordinary consumer/runtime/profile/CI or
 packet/stable proof follows. No new command or HDD action is implicitly selected.
+
+## Eighth selection — HDD correction synthetic units only
+
+The user explicitly selected new-only HDD proof storage and narrowly approved the
+runtime helper, consumer-check ordering and raw-preimage packaging corrections.
+Main preserves original produceraf5ad20 and independently reviews the correction
+source/seal285/current pins1,199/canonical155; review46 records documentation299/
+1,190 links/19 regression passes. Original184 seal/51-link failure/AST failure stay
+historical and unmodified. Parent-only0775→0755 has its separate authorized receipt.
+
+After correction preservation, one independent worker may run exactly once:
+
+```sh
+NODE_DISABLE_COMPILE_CACHE=1 WP13_STORAGE_CORRECTION_FINAL=1 node tests/consumers/wp13-storage-correction/guards.mjs --unit
+```
+
+This registers only synthetic extracted actual function-body/tail tests. The test
+uses installed TS parsing and supplied callbacks, never imports production helpers
+or opens a real issued context. No filesystem mode/old guard suite/CLI/producer/
+archive/child/native/browser/ordinary profile/performance/dependency action, HDD
+write or permission change is selected. No test/config/assertion/source edits or
+retry. Deadline180seconds, external raw stdout/stderr/status/tool/input/actual-count
+receipts only in NEW /tmp/opencode/final-hdd-correction-units-001/**. Capacity floor
+128MiB before writes/command; preserve exact correction285/old184 artifacts with
+declared relocation/current1199 pins/source/cache maps before/after. No production
+or installed-cache writes. Main reviews actual failure/pass before closing only
+bounded unit obligations or selecting the separate real filesystem guard phase.
