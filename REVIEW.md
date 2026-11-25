@@ -10,6 +10,36 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 37 (neutral SSR continuation)
+
+Hook model.test.ts runs once with the selected fsModuleCachePath:4/4 pass in one
+file, exit0/empty stderr/no timeout/signal. Main reads raw output/JSON/status/review
+and verifies89 receipt entries/all2,769 original recorded file identities,44 new
+files confined to final-units, and before/after25 old cache files/28 outputs/167
+prior receipt files/1,876 pinned tools unchanged. Receipt SHA256
+977d27ee084c4a9daf22dcc7290f70ed94be24c77be4fc109239bcef0307b4c4 at
+/tmp/opencode/final-facade-ssr-001/receipt-hashes.json.
+
+### n1 — Necessary output-parent creation is not an outside-root file write
+
+The strict directory checker also flags the absent .artifacts parent needed to
+create selected final-units. Main verifies exactly six new directories: that one
+necessary parent plus five at/under the selected root, with no changed/removed old
+directory and zero outside-root new files. Creating this empty necessary parent
+is covered by selecting creation of its child output root; no sibling artifacts,
+old-directory mutation or broader cache writes are permitted by that disposition.
+The original wrapper exit1/diagnostic is preserved, not overwritten or rerun green.
+The corrected continuation's file containment is verified. Review36's distinct25
+unauthorized global-cache writes stay historical RED and untouched.
+
+### n2 — Four neutral prelayout assertions are not admission/lifecycle proof
+
+The actual renderToString assertions verify neutral uncommitted output, owner/model
+provenance, no private-reader access and blocked P state. No concrete defect is
+found within this bounded independent slice. The fixture's initial-constructor
+certificate does not prove application admission, private purge/retirement, real
+transport/streaming/SSR hydration, browser or stable gates. Those remain open.
+
 ## Final verification — review session 36 (native policy/write boundary)
 
 Independent command1 runs once: policy.test.ts passes32/32 in one file, exit0,

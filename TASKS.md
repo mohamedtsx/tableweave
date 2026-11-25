@@ -647,6 +647,25 @@ unrun hook command with explicit --fsModuleCachePath under its fresh allowed out
 New independent receipts must fence all old caches and source; original failed
 write-boundary attempt remains unchanged. This continuation grants no wider tests,
 source/config edits/install/build/browser/profile or native-provisioning authority.
+Neutral-SSR continuation runs once with the selected explicit cache path:4/4 pass,
+exit0/empty stderr/no timeout/signal. Main verifies89 receipts/all2,769 recorded
+original identities/44 new files only under final-units. Old25 global cache files,
+28 outputs/167 receipts/1,876 tool pins match before/after. Receipt977d27ee… at
+/tmp/opencode/final-facade-ssr-001/receipt-hashes.json. Strict directory diagnostic
+flags only necessary absent .artifacts parent; review37 main disposition permits
+that empty ancestor as part of creating the selected child root, not outside-root
+files/siblings/mutation. Original wrapper exit1 is preserved. No rerun or cleanup.
+Corrected continuation file confinement is verified; review36's prior25-file scope
+failure stays RED. Four neutral-prelayout assertions grant no application admission,
+P purge/lifecycle/streaming/hydration/browser/gate or whole-facade acceptance.
+Main selects one13-file contracts/controller/native source batch via the already
+reviewed native-client config with exactly those three filename filters and new
+final-core-001 output/cache paths. Resource tests are held for absent library dist;
+earlier policy/hook/unit groups are not repeated. One independent worker may execute
+the command once after inspecting import side effects; no source/config edits,
+build/install/native/browser/framework or broader suite action. All old caches/
+reports/receipts stay fixed; exact selected config/report provenance stays separate
+from the root full-suite/emitted/archive/CI obligations.
 
 ## Current WP-10 implementation handoff
 

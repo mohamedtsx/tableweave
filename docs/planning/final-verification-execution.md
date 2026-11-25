@@ -177,3 +177,52 @@ any new/changed outside-root write stops execution. Keep180second host deadline/
 deletion, extra CLI/helper/config or package/browser/native/build/install action.
 Successful continuation can verify corrected command confinement only; it cannot
 erase the first attempt's failure or prove real application/P/native/browser cleanup.
+
+## Corrected neutral-SSR continuation — actual result
+
+The unrun hook file now passes4/4 once/exit0/empty stderr, with44 new files confined
+to final-units. Main verifies89 external receipts/all2,769 original recorded file
+identities and unchanged old25 global caches/28 outputs/167 prior receipts/1,876
+tool pins. Receipt `/tmp/opencode/final-facade-ssr-001/receipt-hashes.json`, SHA256
+977d27ee084c4a9daf22dcc7290f70ed94be24c77be4fc109239bcef0307b4c4.
+
+Review37 dispositions the strict directory check's sole outside-child entry: the
+absent necessary .artifacts parent. Creation of that empty parent is part of creating
+the selected output root, not permission for sibling/outside files or old-directory
+mutation. Raw wrapper exit1/diagnostic remains unchanged. File containment is
+verified without rerun. Review36's prior unselected25 global files remain RED/
+untouched. Neutral renderToString is not real application admission/lifecycle/
+retirement/streaming/hydration/browser or packed-consumer acceptance.
+
+## Fourth selection — contracts/controller/native source batch
+
+Main inspects the installed loader/config, current source import patterns and actual
+13 test filenames under tests/contracts, tests/controller and tests/native. Source
+fixtures use real installed TanStack; its vendor dist is not Tableweave dist.
+Resource files import absent library dist and are explicitly EXCLUDED. Foundation,
+UI/browser/controls/collection, benchmark and all earlier selected tests are excluded.
+
+One independent worker may run this command ONCE after reading the selected test/
+helper bodies for side-effecting out-of-scope entrypoints:
+
+```sh
+U2_RUN=final-core-001 NODE_DISABLE_COMPILE_CACHE=1 node node_modules/vitest/vitest.mjs run --configLoader native --config tests/pagination-policy/native-client/vitest.config.mjs --fsModuleCachePath /tmp/opencode/tableweave-wp11-workbench/tests/pagination-policy/native-client/.artifacts/final-core-001/fs-module-cache tests/contracts tests/controller tests/native
+```
+
+The existing reviewed source config already includes these13 files; its three
+mandatory filename filters exclude policy and other config defaults. Preserve
+maxWorkers1/fileParallelism:false/retries0. Only NEW
+tests/pagination-policy/native-client/.artifacts/final-core-001/** may receive
+reporter/Vite/filesystem-module caches. Recheck that root absent/canonical before
+config load; necessary empty output-parent creation is allowed, not sibling writes
+or mutation of existing artifacts. Every prior global/cache/report byte stays fixed.
+
+External NEW `/tmp/opencode/final-core-source-001/**` owns actual command/tool/
+resolved vendor/source-before-after/raw JSON/status/installed-output review receipts.
+No source/config/manifest edits, guard recapture, install/native provisioning/build/
+emission/root full suite/browser/server/SSR app/hydration/packed/profile/performance/
+remote operation. Existing source/vendor/tool evaluation and small synthetic unit
+records are selected only for these13 files. Stop if import inspection requires
+library dist or an unselected process/filesystem/server helper. Host deadline
+240seconds with cleanup/delivery headroom;128MiB floor, zero test retries. Preserve
+any actual failure once; main assigns corrections/replays, never suppresses it.
