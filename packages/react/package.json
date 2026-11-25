@@ -25,6 +25,10 @@
     "./criteria": {
       "types": "./dist/criteria/index.d.ts",
       "import": "./dist/criteria/index.js"
+    },
+    "./reordering": {
+      "types": "./dist/reordering/index.d.ts",
+      "import": "./dist/reordering/index.js"
     }
   },
   "scripts": {

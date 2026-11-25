@@ -196,6 +196,11 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-10 Optional sortable feasibility and delivery
 
+The [staged plan](wp-10-implementation-plan.md) and [research](wp-10-research.md)
+record the delivered pure Stage1. Its [explicit core entry](wp-10-core-entry-plan.md)
+adds source discovery only; authority/ref/interlock and optional adapter remain
+separate actual contract/code allocations, not G-02 acceptance.
+
 - **Role/dependencies:** reorder worker; WP-04/WP-05.
 - **Read:** [reordering](../engineering/reordering.md), G-02, AC-12/AC-13/AC-21.
 - **Paths:** `packages/heroui/src/sortable`, optional export integration and move

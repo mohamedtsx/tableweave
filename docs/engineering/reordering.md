@@ -19,17 +19,34 @@ non-drag move buttons/menus share eligibility and boundaries.
 
 ## Row move contract
 
-```ts
-type RowMove = {
-  operationId: string; scopeKey: string;
-  movedId: string; beforeId: string | null; afterId: string | null;
-  pageIds: readonly string[];
-  baseRevision: string | null;
-};
-type RowMoveOutcome =
-  | { ok: true; revision?: string }
-  | { ok: false; message: string };
-```
+The actual bounded Stage1 protocol supersedes the HLD's illustrative `ok` outcome.
+`RowMove` has operationId/scopeKey/movedId/beforeId/afterId/pageIds/baseRevision;
+the complete current-page IDs and explicit string-or-null wire revision are captured
+from one atomic application port. The operation itself is a factory-issued token,
+not authenticated by a copied operationId or array resemblance.
+
+| Actual event | Meaning |
+| --- | --- |
+| begin started | One issued operation; application may submit its ID intent |
+| accepted settlement | Backend acceptance metadata; remain awaiting-authority |
+| rejected/conflict settlement | Definitive refusal; release pending, never roll back rows |
+| indeterminate unavailable/timeout/cancel-requested | Effect uncertain; keep reconciliation pending, no automatic retry/undo |
+| authoritative acknowledgement | Exact token/current matching stamp/strictly newer sourceVersion plus app-established applied/not-applied/superseded disposition |
+
+Acknowledgement may precede transport settlement; old/foreign completions cannot
+settle a replacement operation. The coordinator holds only operation metadata and
+safe feedback, no records/accepted query/order/rollback array. `changed` describes
+bookkeeping, not successful persistence. Explicit application ownerEpoch and
+sourceVersion integers are not aliases for criteria epoch, C revision or opaque P/
+frame versions. The app must publish truthful committed transitions and authorize
+all backend effects independently.
+
+[Actual pure source contract](../../tests/reordering/core/README.md) owns signatures,
+bounds and synthetic limits. Approved five-source identityf0b483b7… is intaken as
+a7b8627; old worker131 tests and recorded independent151-case scope remain historical.
+The [explicit pure entry](../planning/wp-10-core-entry-plan.md) adds source discovery,
+not an installed/packed/native adapter/G-02 proof. Ref/command-origin/navigation and
+new-generation adapter contracts still require separate actual allocations.
 
 Eligibility: manual order, no active sort or effective filter, stable IDs, fresh
 records, current-page scope, eligible row and no conflicting pending move.

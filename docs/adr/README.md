@@ -130,3 +130,21 @@ negative unpatched behavior and removal criteria. Headless remains unaffected.
 Candidate construction alone approves no registration, install or package shipping.
 Stable/full G-05, third-party legal/publication, manual/device/performance and
 personal PR review remain separate; all PRs stay unmerged.
+
+## WP-10 ADR-08 operation lifecycle elaboration
+
+TASK-018, FR-02/03/06, AC-12/13/21. Main preserves the previously approved bounded
+pure producer as isolated7c98628/intakea7b8627; five source hashes still match its
+recorded identity. Historical source approval is not current adapter/G-02 proof.
+The [actual lifecycle](../engineering/reordering.md#row-move-contract) separates
+backend settlement from authoritative acknowledgement and keeps uncertain cancellation
+pending. This replaces only the illustrative HLD `ok` result, retaining application
+persistence/revision/authorization ownership, no rollback cache and one row processor.
+
+A pure explicit subpath avoids importing UI/native/drag code for operation metadata.
+The next vendor-free authority/ref/interlock and optional adapter stages stay held
+until their actual protocols/dependencies are selected. Existing controllers cannot
+be assumed retrofitted with pending/queued-proposal guards. New dnd-kit0.5.3 registry
+metadata remains a candidate, not installed/API/DOM-identity evidence. No product
+constraint, optional-entry isolation, manual/real-consumer gate or final-phase
+verification/approval requirement is weakened by this elaboration.

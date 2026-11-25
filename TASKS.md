@@ -2,6 +2,52 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+## Current WP-10 implementation handoff
+
+WP-09's provisional source boundary is frozen on feat/wp-09-details at
+119c8d1b15c1220cdf2341ce726dae8d3485335a. Source140 map6a2acac6… and14-input styled
+entry aggregate504cb892… remain preserved. No WP-09 runtime/visual/SSR/negative/
+packed/independent approval or delivered PR is claimed; exact-head PR/CI review is
+owed in the selected final phase, with every PR unmerged.
+
+Main's new primary tree is /tmp/opencode/tableweave-wp10-integration on
+feat/wp-10-sortable. It intakes only the previously approved pure Stage1 as a7b8627
+from isolated7c98628, not the older workspace/ledger/manifests/dependency symlinks.
+All five approved source hashes match aggregatef0b483b71de105c8e760be837a0adf64225420fd86f7007cec387e8ebd30569d;
+one pure-source TS6 noEmit preservation check passes. Historical worker131 tests
+and recorded scoped independent151-case approval are distinct, not rerun today.
+Old untracked tool links and prior work remain untouched in the original tree.
+
+Main now prepares the vendor-free Stage2 contract/authority/ref/navigation admission
+slice before code. Exact queued-proposal/C-factory admission and ref seams must be
+frozen first; no retrofit wrapper, fake grant or DnD dependency is allocated yet.
+Only a necessary frozen install of existing dependencies in this fresh primary
+tree is authorized. DnD selection/install, actual Stage2/Stage3 code leases and full
+runtime/G-02/SSR/packed/AT/performance/independent proof remain separate. The user's
+single final verification-and-fix phase still governs timing; no WP-11–WP-14 skip.
+
+The detailed WP-09 chronology below is historical to that frozen head; this current
+WP-10 section supersedes its active-worker/next-packet wording, not evidence limits.
+
+Two read-only contract workers are allocated external reports only: exact genuine
+controller/proposal-origin admission, and the native ref/handle/pager seam. Neither
+may implement APIs, install DnD or execute tests. Main must select bounded actual
+contracts/paths before Stage2 source work; no new controller/accept wrapper or
+structural permitting callback is authorized merely by the research proposal.
+Main concurrently allocates only an additive pure ./reordering manifest entry and
+own discovery/type fixtures, plus ADR-08 protocol reconciliation. Approved five-body
+source stays untouched; no client/native/drag dependency enters that plain graph.
+Source aliases/static checks do not establish emitted/installed/packed availability.
+That additive entry now has a passing positive ES2022/no-DOM/no-React source type
+program, static declaration-edge/manifest proof and final scoped7-file Biome/syntax.
+One helper-only formatting failure is preserved. The five approved bodies and all
+145 sources remain unchanged; no negative/runtime/build/packed/G-02 suite ran.
+ADR-08/engineering now records actual accepted-versus-authoritative/indeterminate
+semantics, not the HLD's shorthand ok result. Stage2 contracts still precede code.
+Main verifies all145 source hashes and exact additive manifest bytes; entry8-input
+aggregate93918012… is preserved. Actual documentation/whitespace checks pass225
+Markdown/824 local links and18 checker probes, not semantic/external/runtime proof.
+
 ### Current ownership and next action
 
 All WP-09 implementation below is provisional. User-selected final exhaustive/
