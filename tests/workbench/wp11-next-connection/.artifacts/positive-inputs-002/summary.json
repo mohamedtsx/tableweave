@@ -1,0 +1,8 @@
+{
+  "inputs": 3322,
+  "compilerFiles": 1557,
+  "sha256": "8187ea5b877b6f0ce0624a97b3ba43d433b31d409a7235c22da45a427bf29bf9",
+  "node": "v24.22.0",
+  "typescript": "6.0.3",
+  "scope": "Actual positive compiler files, compiler bodies, protected regular and original pinned inspection inputs, own code/receipts; not runtime/native proof"
+}

@@ -1,0 +1,20 @@
+{
+  "regularInputs": 1773,
+  "originalProtected": 1692,
+  "source155": 155,
+  "originalSeal": {
+    "unchanged": 79,
+    "drift": [
+      "apps/example-next/lib/client-owner.ts"
+    ]
+  },
+  "originalPins": {
+    "unchanged": 1727,
+    "drift": [
+      "apps/example-next/lib/client-owner.ts"
+    ]
+  },
+  "changed": [
+    "apps/example-next/lib/client-owner.ts"
+  ]
+}

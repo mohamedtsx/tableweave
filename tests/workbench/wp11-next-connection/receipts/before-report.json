@@ -1,0 +1,14 @@
+{
+  "regularInputs": 1773,
+  "originalProtected": 1692,
+  "source155": 155,
+  "originalSeal": {
+    "unchanged": 80,
+    "drift": []
+  },
+  "originalPins": {
+    "unchanged": 1728,
+    "drift": []
+  },
+  "changed": []
+}

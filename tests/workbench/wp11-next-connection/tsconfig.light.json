@@ -1,0 +1,16 @@
+{
+  "extends": "../../../apps/example-next/tsconfig.light.json",
+  "include": [
+    "../../../apps/example-next/next-env.d.ts",
+    "../../../apps/example-next/styles.d.ts",
+    "../../../apps/example-next/*.mjs",
+    "../../../apps/example-next/app/**/*.ts",
+    "../../../apps/example-next/app/**/*.tsx",
+    "../../../apps/example-next/lib/**/*.ts",
+    "./*.ts",
+    "./*.tsx",
+    "../wp11-next/server.test.ts",
+    "../wp11-next/types.ts"
+  ],
+  "exclude": ["./.artifacts", "./receipts"]
+}

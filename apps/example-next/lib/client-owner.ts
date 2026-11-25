@@ -25,11 +25,9 @@ export function createClientOwner(initial: InitialPayload) {
   const app = createExampleOwner(minimalTransactionDefinition(), initial.rows, {
     id: `next-transactions:${initial.instance}`,
   });
-  let mounted: object | null = null,
-    ending: object | null = null,
-    disposed = false;
-  function dispose() {
-    disposed = true;
+  if (app.C.getSnapshot().queryIdentity !== initial.queryIdentity) {
+    // This rejected bootstrap has never returned an owner or connected a source.
+    // Do not force downstream cleanup if publication disposal reports a blocker.
     const result = app.P.dispose();
     if (result.status !== "disposed")
       throw new Error(
@@ -39,36 +37,66 @@ export function createClientOwner(initial: InitialPayload) {
     app.numericOptions.source.dispose();
     app.stringOptions.source.dispose();
     app.C.dispose();
-  }
-  if (app.C.getSnapshot().queryIdentity !== initial.queryIdentity) {
-    dispose();
     throw new Error("Initial server/client query identity differs.");
   }
+  let mounted: object | null = null;
+  let changingConnection = false;
+  let connectionFailed = false;
   return {
     app,
     initial,
     connect() {
-      if (disposed || mounted)
+      if (mounted || changingConnection || connectionFailed)
         throw new Error("Example source owner cannot reconnect.");
-      const mount = {};
-      mounted = mount;
-      ending = null;
-      const disconnect = app.connect();
-      return () => {
-        if (mounted !== mount) return;
-        mounted = null;
-        // This is whole source-owner cleanup, NOT optional table visibility.
-        // Retire inputs synchronously; allow immediate Strict effect replay to
-        // reclaim this same source mount before terminal C/P disposal.
-        disconnect();
-        const ticket = {};
-        ending = ticket;
-        queueMicrotask(() => {
-          if (ending !== ticket || mounted) return;
-          ending = null;
-          dispose();
-        });
-      };
+      changingConnection = true;
+      try {
+        const disconnect = app.connect();
+        if (!app.getSnapshot().access) {
+          // A terminal A owner returns no connection and cannot be resurrected.
+          disconnect();
+          return () => {};
+        }
+        const mount = {};
+        mounted = mount;
+        return () => {
+          if (mounted !== mount) return;
+          mounted = null;
+          changingConnection = true;
+          try {
+            // Effect release is synchronous, temporary and exact. A later retained
+            // effect may reconnect this same C/P; no final-unmount guess is made.
+            disconnect();
+          } catch (error) {
+            connectionFailed = true;
+            try {
+              app.revoke();
+            } catch (revocationError) {
+              throw new AggregateError(
+                [error, revocationError],
+                "Source release and revocation failed.",
+              );
+            }
+            throw error;
+          } finally {
+            changingConnection = false;
+          }
+        };
+      } catch (error) {
+        // No connection receipt was returned. Fail closed through the actual A
+        // owner; never invent a disconnect receipt, replacement C/P or new grant.
+        connectionFailed = true;
+        try {
+          app.revoke();
+        } catch (revocationError) {
+          throw new AggregateError(
+            [error, revocationError],
+            "Source connection and revocation failed.",
+          );
+        }
+        throw error;
+      } finally {
+        changingConnection = false;
+      }
     },
   };
 }

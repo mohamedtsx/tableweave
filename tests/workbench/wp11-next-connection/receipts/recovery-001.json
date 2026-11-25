@@ -1,0 +1,60 @@
+{
+  "kind": "recovery observation, not a reconstructed raw failure log",
+  "suppliedHead": "35780bf (user supplied; no Git command)",
+  "incident": "Prior patch tool reported ENOSPC while writing README; observed partial file is preserved verbatim. No contemporaneous on-disk ENOSPC log was preserved; do not invent one.",
+  "restart": "Server restart/capacity recovery reported by user; no cleanup, install or restart performed by this writer.",
+  "availableBytesBeforeWrites": 675237888,
+  "availableInodes": 7752259,
+  "stopBelowBytes": 134217728,
+  "partialReadme": {
+    "bytes": 4096,
+    "lines": 62,
+    "sha256": "736672c47faf61b6e5bc40a3ae32312b6925b1da4ad7356fa5d2a1065107cb36",
+    "copy": "tests/workbench/wp11-next-connection/receipts/README.enospc-partial-001.txt"
+  },
+  "unchangedCodeAtRecovery": {
+    "apps/example-next/lib/client-owner.ts": {
+      "sha256": "30301ad42ff1cb431ff6235e5988981abb4c3870032ff2ab98630e5849db7bef",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/connection.test.tsx": {
+      "sha256": "c2a9f8372bbb9b67309b7b91f875d49ace0001bdbdb34c183f366162967bfa0c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/pins.mjs": {
+      "sha256": "e23a1ad30413ff3163f8c6be553bd8b5fed808f5864346dc7badf0ba1c22bbb1",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/run.mjs": {
+      "sha256": "5dde5a83cdc8240b85bb02999e96663bdd73c2b082ec5d9a8402e01dad7b72ff",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/scope.mjs": {
+      "sha256": "a538d612f065c8d63a1011e58284fcf17eb7a1eeed13f7d9e44582b8b238279c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/seal.mjs": {
+      "sha256": "41de81c0fcb5cc8c64e0605d41b0855afc94552b919ea560233a6a6672ce3888",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/static.mjs": {
+      "sha256": "84a53bdbb4d138674f8102c16a48b75efb1a28892aa2a4eaa7077e935c279d72",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/tsconfig.light.json": {
+      "sha256": "d5e4c451a37fb4804c3ac1d3326ddf4d216b3cf51be220270ca0eb40fc0a6f2c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-connection/vitest.config.mjs": {
+      "sha256": "a57c239a2001e467b62ae96e1b5e9cd547c6fb04e365f3456cfb6017666e1835",
+      "mode": 436
+    }
+  },
+  "completedAttemptsPreserved": [
+    "light-002",
+    "biome-001"
+  ],
+  "newReplayReserved": "light-003",
+  "newPinReserved": "positive-inputs-001",
+  "runtime": "UNRUN"
+}
