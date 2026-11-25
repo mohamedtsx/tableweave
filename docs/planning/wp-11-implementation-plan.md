@@ -138,6 +138,11 @@ shared APIs read-only; new framework manifests/lock are isolated/main-owned, not
 concurrent changes to the example worker's frozen baseline. Mounted Start remains
 a separate unmet integration rather than a recipe renamed as an SSR application.
 
+Main subsequently selects the [mounted Start source plan](wp-11-start-facade-plan.md)
+with standard file routes and real generation deferred. Its independent parent-cache/
+child-source ownership must close the unmounted recipe's cross-realm seam; the plan
+does not supply actual generated typing, hydration or G-04 proof.
+
 ## Allowed checks, stop and next handoff
 
 Run only own positive TS6/noEmit/source-alias compilation, syntax/static exact public

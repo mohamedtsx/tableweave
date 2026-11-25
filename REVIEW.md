@@ -2141,3 +2141,46 @@ checks. Static original-driver/other-input/155-library comparison, syntax and fu
 scoped Biome pass; the first new-helper format/lint failure is retained. Four filesystem
 adversaries remain authored and UNRUN. This is not executed/independent closure or
 ordinary archive compatibility; no consumer preparation/driver/install was invoked.
+
+## WP-11 Next source intake — review session 26 (provisional)
+
+Main reads16 app files and the original source-owner/effect cleanup. Own static,
+80 sealed-input,1,692 protected-old-input and1,728 pinned-input checks pass. Main's
+positive TS6 times out at120 seconds with no diagnostics; a longer distinct replay
+is pending. No framework, React, native, SSR, browser or independent result follows.
+
+### n1 — A microtask is not a terminal React owner-lifetime signal
+
+The effect cleanup synchronously disconnects but then schedules C/P disposal after
+one microtask unless an immediate reconnect cancels it. It cannot distinguish final
+unmount from a later retained React/Next effect reconnection; connect then throws on
+the retained owner. The existing authored test covers only immediate replay and
+assumes terminal disposal after a microtask. Preserve that test and seal as producer
+history, but do not let it define framework lifetime. Use synchronous real release
+and an explicit lifecycle distinction, not a larger timer, per-query remount or a
+fabricated new grant. Actual retained disconnect/reconnect remains unrun.
+
+### n2 — Blocked disposal is marked terminal before the receipt succeeds
+
+client-owner.ts sets disposed=true before P.dispose returns. If publication cleanup
+is blocked, the queued throw leaves no explicit retry/status path and prevents
+reconnection, while resources/C are not disposed. Preserve cleanup debt and the
+failed/blocked state until a real successful receipt; do not force cleanup or claim
+disposal from a timer. This is source-derived, not a reproduced runtime failure.
+
+Main's distinct longer TS6 replay passes without changing the original source.
+The earlier timeout is retained and not called a diagnostics-free pass. Original
+source/80-input evidence is preserved35780bf; only a separate exact connection
+correction is allocated. It must explicitly disposition the old microtask-disposal
+test semantics without editing/resealing the historical producer. No current
+runtime/React/Next/independent closure is granted by preservation or compilation.
+
+### n3 — Next ordinary fixture target guard is not ready for an install lane
+
+The authored Next preparation runner excludes only its lexical checkout prefix;
+it does not exclude a new child under a sibling worktree/workspace or symlinked
+ancestor. It currently copies files only, not installs, and has never been invoked.
+Before any final consumer preparation/installation, apply a reviewed outside-target
+guard and separate strict ordinary lock/materialization confinement. Do not infer
+that review25n2's distinct corrected runner fixes this separate file. No ordinary
+Next archive/runtime claim is made.

@@ -29,9 +29,9 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | --- | --- | --- |
 | Shared synthetic facade catalog | Preservedc9c36cb; main source/light intake complete | Final plays/matrix/ordinary proof remain unrun; do not rewrite Stage A seals |
 | Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
-| Next App Router example | One isolated source worker active from47e20df | Protect main-owned exact manifest/lock; return source/light handoff before primary intake |
+| Next App Router example | Original preserved35780bf; one isolated correction writer active | Main seal/scope/static/pinned/longer positive compile intake passes; connection correction still pending |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
-| Mounted Start facade | Not yet allocated | Use actual Stage B recipe handoff before a bounded real mount/dependency lease |
+| Mounted Start facade | Isolated source writer allocated fromf7ad033 | Standard file routes; handwritten-source LIGHT only; real generation/whole-app/SSR final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -153,6 +153,51 @@ new driver hash and unchanged original-driver preimage anchored at5e72c95. Full
 scoped Biome passes5 supported files and documentation263 Markdown/910 links;
 the initial formatting/lint log remains preserved. The Next source handoff is also
 delivered in its isolated tree and queued for main review, not automatically intaken.
+The runner correction is preserved39363f4; current documentation regression replay
+passes19 probes. No filesystem/consumer test or install was run.
+
+Next main intake reads all16 app files and the actual effect/owner cleanup path.
+Own static/80-input seal/1,692 old-input protection and1,728 pinned-input checks
+pass. The sealed map SHA391ded6f… remains original. Own positive compile times out
+at120 seconds without diagnostics; a separately logged longer replay is running,
+not passed. Worker positive evidence remains historical and separate.
+Review26n1/n2 record the microtask terminal-disposal heuristic and blocked-cleanup
+state: source inspection is not runtime reproduction. Preserve the original producer
+before a distinct correction; no primary Next intake or approval yet.
+
+The mounted Start read-only report is delivered at its allocated path. It finds a
+real production manifest dependency on route-generator output; disabled generation
+is not a supported proven variant. Main selects standard file-route authoring with
+actual generation/whole-app typing deferred to the final phase. No handcrafted
+generated tree/types, fake successful whole-app compile or early generation. A
+bounded app/dependency/ownership plan still precedes implementation; no Start
+install/source lease is activated by selecting this direction alone.
+Main now selects docs/planning/wp-11-start-facade-plan.md for one isolated headless
+app from39363f4, with old Start direct pins and only an additive importer. Main owns
+lock resolution/materialization before source activation. Standard route source is
+authorized; generation/full route typing remain explicitly final and not passed by
+the scoped handwritten-source LIGHT program. Parent Query cache and retained child
+source ownership must be actual public composition, not Stage B's cleanup workaround.
+Main's longer own Next positive TS6 replay passes without source changes; the
+earlier120-second timeout is retained. Original app/80-input producer is preserved
+isolated35780bf, including sealed raw artifacts in Git. A narrow connection
+correction is now allocated only to lib/client-owner.ts plus new correction fixtures:
+no terminal-disposal timing heuristic, synchronous release and genuine retained
+reattach, with explicit supersession of old microtask test semantics. All other
+app/manifest/lock/library/producer files remain frozen. No primary Next intake yet.
+Main materializes the selected isolated Start app: exact original Start direct pins,
+only55 importer lines, all5 old importers/468 packages/468 snapshots/settings/profile/
+155 library hashes unchanged. Frozen ignore-scripts install passes367 reused/zero
+downloads. Main preserves manifest/lockf7ad033 (lock190f5b37…/manifest73048928…).
+The exact new source lease now activates in that tree; standard route generation/
+whole-app typing stay final. No primary/Next lock change, old G-04 mutation, new
+profile/native installer, framework invocation or runtime proof follows.
+Main updates the actual Storybook/README owner from planned-only labels to authored
+CSF33/source-only boundaries and checked LIGHT commands. Documentation passes264
+Markdown/919 links and19 checker regressions; whitespace passes. Those checks are
+not a build/index/play/SSR/browser/ordinary/independent result. The preserved Next
+producer remains isolated while its connection correction is authored; mounted
+Start's standard-route source writer is active in its separate pinned tree.
 
 ## Current WP-10 implementation handoff
 

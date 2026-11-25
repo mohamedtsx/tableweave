@@ -110,3 +110,37 @@ profile and unpatched outside-workspace lanes remain separate final obligations.
 Stop on old lock drift, extra dependency/profile/patch/export/React-version needs,
 native script policy conflicts, suppression/cast workaround or a public-lifecycle
 seam. No broad authorization, mounted Start/G-04, WP-11/G-02 or release acceptance.
+
+## Preserved source and bounded connection correction
+
+Main preserves the original16-file source and all80 sealed handoff inputs as35780bf
+in the isolated tree, following own static/seal/protected/pinned checks. Its first
+own TS6 run times out at120 seconds without diagnostics; a separately logged longer
+replay passes without source changes. Worker and main results stay distinct.
+No Next framework/React/native/SSR/browser module executes. Primary intake waits.
+
+Review26n1/n2 identify a source-lifetime heuristic: effect disconnect schedules
+terminal disposal after one microtask and sets disposed before P's receipt succeeds.
+Main permits only apps/example-next/lib/client-owner.ts and NEW
+tests/workbench/wp11-next-connection/** to correct this. All other app files,
+manifest/lock, original80-input seal/fixtures and155 library bodies stay frozen.
+
+React effect disconnect must synchronously release its exact app connection and
+callbacks/input publication, with no timer or microtask. A retained effect can
+reconnect the same local genuine C/P; cleanup is not a proof of final component
+destruction. Explicit application revocation remains terminal/fail-closed through
+the existing Stage A owner. Do not add page/global listeners, a new lifetime manager,
+replacement controller/authority, remount key, larger delay or automatic source grant.
+No terminal C/P disposal is promised merely from temporary effect release. The
+local inactive objects are not a GC-based disposal receipt. For invalid bootstrap
+rejection before any source connection, dispose only against the actual successful
+P receipt; never pre-mark a blocked object successfully disposed or force C cleanup.
+
+The original client test's microtask-disposal assertions remain sealed history and
+must be explicitly dispositioned as superseded semantics, not silently changed or
+called passed. New final-only fixtures cover immediate/delayed retained reattach,
+stale detach, synchronous release, access revocation and independent sources with
+real React/public owners. Author a distinct final correction lane; no runtime tests
+now. Allowed own strict positive TS6/static/scope/syntax/full Biome and new pinned/
+preimage/seal inputs do not establish runtime/independent closure. Main reviews the
+exact delta before intake; actual React/Next lifecycle verification remains final.

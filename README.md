@@ -164,13 +164,38 @@ consumer automatically. Unpatched public declarations remain separately tested;
 ordinary unpatched grouped/Strict styled runtime is not advertised as supported.
 
 
+## Provisional WP-11 examples
+
+The [workbench source catalog](docs/design/storybook.md#provisional-wp-11-catalog)
+authors33 facade stories over three synthetic domains. Separate
+[styled/headless Vite entries](apps/examples/vite/README.md),
+[wired recipes](apps/examples/recipes/README.md) and an
+[unmounted Start recipe](apps/example-start/src/recipes/wp11/README.md) use public
+APIs. Source/light intake passes; story plays, current emitted builds, routing,
+SSR/hydration, ordinary packed consumers and independent acceptance remain unrun.
+Historical root-command results above are not exact-current-head WP-11 CI proof.
+
+Actual checked source-only programs, without build/emission:
+
+```sh
+pnpm exec tsc -p apps/storybook/src/workbench/tsconfig.light.json --pretty false
+pnpm exec tsc -p apps/storybook/tsconfig.examples-light.json --pretty false
+pnpm exec tsc -p apps/example-start/tsconfig.wp11-light.json --pretty false
+```
+
+These use explicit public-entry source aliases, not published/packed declarations.
+Do not substitute them for framework/consumer checks or run a deferred fixture's
+install/build commands as part of LIGHT. Next and mounted Start have separate
+isolated plans; drag/G-02 remains user-blocked and full WP-11 remains incomplete.
+
 ## Authority and licensing
 
 The [Notion PRD](https://app.notion.com/p/mohamedtsx/Tableweave-PRD-42061b5e62648054aa06dcb0ed4ba0c8)
 owns product intent. The [Notion HLD](https://app.notion.com/p/mohamedtsx/Tableweave-HLD-42061b5e626480e3a52acda4a3c00527)
 is the completed technical/design baseline **ready for review**. Local focused
 owners preserve both, with provenance and any conflicts recorded explicitly.
-The existing Figma prototype is exploratory, not an approved visual contract.
+The specific referenced table scene has appearance-only approval; the broader
+prototype is exploratory. Neither is behavioral, accessibility or release approval.
 
 MIT is selected for Tableweave's own source. [Licensing readiness](docs/operations/releasing.md#licensing-and-publication-inputs)
 tracks the legal notice, third-party obligations and publication rights; no
