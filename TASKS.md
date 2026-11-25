@@ -625,6 +625,16 @@ React renderToString only for those commands, writing their two new reporter/cac
 roots and external receipts. No broad include/build/emission/profile install/native
 download/browser/framework operation is selected. Main observed both outputs absent;
 worker rechecks before config load and preserves all real failures without retries.
+Independent R01/R02 worker releases external final-report-css-units-001/README-final.md.
+Actual once-only results are1/1 report rejection and5/5 CSS text units, exit0/empty
+stderr/no failures/skips/cancellations/timeouts. Main reads raw/status/corrected
+receipts and verifies30 final entries/all191 protected identities with identical
+before/after source maps. Final receipt SHA25683ac67f7…;155 canonical files match.
+Collector preflight's omitted Markdown files and initial TAP-versus-spec count
+interpretation are preserved append-only, not source defects; no tests rerun.
+Review35 records bounded unit validation only. Live RSC/browser attribution and
+computed CSS/layout/focus/AT/visual proof remain open. Source-native/neutral-SSR
+independent worker remains active; no further command is selected by these passes.
 
 ## Current WP-10 implementation handoff
 

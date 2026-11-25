@@ -139,3 +139,14 @@ tool/installed-input/source-before-after/raw status/review receipts. Capture rel
 actual compiler/transform/vendor resolution identities, not a fabricated whole-store
 pin. Independent worker must stop rather than silently permit additional writes.
 Main reviews any failure and assigns corrections separately; no full-suite approval.
+
+## Second selection — actual results
+
+R01 passes1/1 and R02 passes5/5, both once/exit0/empty stderr/zero failures, skips,
+cancellations, todos or timeouts. Main checks raw spec outputs/statuses and30 final
+receipt entries/191 protected current source identities including canonical155.
+Final receipt: `/tmp/opencode/final-report-css-units-001/receipt-hashes-final.json`,
+SHA25683ac67f73442e7b78781e03df258d1ad80b5a5c5d7cbb6778b4f245fa3a652c4.
+Initial collector preflight/count-parser issues stay in original receipts; corrected
+interpretation is append-only from unchanged raw output, without a test rerun.
+Review35 keeps live RSC/browser and computed CSS/layout/AT boundaries open.

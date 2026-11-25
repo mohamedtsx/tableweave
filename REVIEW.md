@@ -10,6 +10,25 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 35 (report/CSS unit slice)
+
+Independent selected R01 report rejection passes1/1 and R02 CSS text contracts5/5,
+each once sequentially/exit0/no failures/skips/cancellations/todos/timeouts/empty
+stderr. Main reads actual raw spec outputs, command/status and append-only corrected
+handoff; verifies30 receipt entries/all191 protected current source/config identities
+and identical before/after file maps, including155 canonical library bodies.
+External final receipt SHA25683ac67f73442e7b78781e03df258d1ad80b5a5c5d7cbb6778b4f245fa3a652c4
+at /tmp/opencode/final-report-css-units-001/receipt-hashes-final.json.
+
+Collector preflight initially excludes two canonical Markdown files; it stops before
+tests or receipt-root creation. The initial postprocessor expects TAP counts, while
+actual Node output uses spec ℹ counts. Original failure note/empty-count statuses/
+manifest remain unchanged; new append-only count/review receipts interpret the same
+raw outputs. No test rerun, product source fix or producer re-sign occurs.
+No concrete defect is found in this bounded unit scope. Review31's live browser/
+HTTP/RSC error-attribution proof and computed CSS/cascade/layout/focus/AT/visual
+checks remain open; no packet/package/stable approval follows.
+
 ## Final verification — review session 34 (WP-14 unit slice)
 
 Independent reviewer runs each selected command once against the preserved source:
