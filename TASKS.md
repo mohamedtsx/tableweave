@@ -446,6 +446,14 @@ checker regressions; current whitespace passes. Preserve the original WP-13
 source/evidence before the next exact source lease; current full runtime, helpers,
 tar parsing, filesystem adversaries, archive installs and independent results stay
 unrun. The source handoff cannot approve a new public output generation.
+Original WP-13 tooling is preserved10f6a8a. Main selects the exact follow-up at
+docs/planning/wp-13-runtime-plan.md: five existing runtime adapter/dispatch/staging
+files plus three new runtime/host files and new wp13-runtime evidence/fixtures only.
+The same writer owns this follow-up; all other original137-input bytes/maps,155
+library bodies, apps/manifests/lock/profiles/outputs are frozen. Author actual future
+family runners instead of unconditional holds, retaining real main/native/lock/
+profile/capacity prerequisites. No runtime/helper/CLI/browser/build/install execution
+is activated. WP-14 source selection stays after reviewed WP-13 runtime source seam.
 
 ## Current WP-10 implementation handoff
 

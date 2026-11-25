@@ -128,3 +128,6 @@ Review30n1 identifies the three runtime methods as unconditional explicit holds.
 This avoids fabricated passes but leaves required ordinary-family runner source
 unfinished. Preserve this bounded producer before a distinct remaining-authoring
 lease; no full WP-13 acceptance or automatic final-phase execution is granted.
+Original tooling is preserved10f6a8a. Main selects the distinct
+[remaining family-runtime source lease](wp-13-runtime-plan.md) for review30n1;
+original137-file/1,179-input maps and all historical generations remain exact.
