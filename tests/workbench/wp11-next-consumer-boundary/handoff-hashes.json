@@ -1,0 +1,24 @@
+{
+  "status": "source-only-preparation-and-install-unrun",
+  "beforeCommit": "17a1439",
+  "prepareBeforeSHA256": "67738274e81993a018e52473421215f0ee6e7ee1a8eb6be9b69f9b7e218d1b83",
+  "inputs": {
+    "tests/workbench/wp11-next/packed/prepare.mjs": {
+      "sha256": "1d7058ae37fd497b782adb03c9d765a9e15e8f96025474e14a3a63eedc8ac86e",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-consumer-boundary/README.md": {
+      "sha256": "501a9060363c4b29915e215d0c24b69f8ae8c0f5f3bec34a6bffb17ecb9ed2e8",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-consumer-boundary/check-source.mjs": {
+      "sha256": "e9ea6e8ed707a1d18f7994217b1864a499d4bc9c71183cc1b97fafe501dc6810",
+      "mode": 436
+    },
+    "tests/workbench/wp11-next-consumer-boundary/preparation.test.mjs": {
+      "sha256": "e557e1041109db2dea9ee92d3b899d29c6a915877494c2007400c09c87dba198",
+      "mode": 436
+    }
+  },
+  "aggregate": "942458e49558cef11ebe4553949135f98af9e3d9bab943ad94c29bd711d3b7b5"
+}

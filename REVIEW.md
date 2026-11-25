@@ -2200,3 +2200,45 @@ Scoped current-source whitespace passes with immutable receipts/raw artifacts
 excluded. This is a documented evidence-byte exception, not formatter or source
 lint acceptance with errors hidden. Main intakes dependencies/original/correction
 as separate commits; n1/n2 runtime and independent verification stay open.
+Main separately allocates n3's preparation-only target hardening after Next intake.
+Reuse the existing shared approved-parent helper and strict standalone marker/
+config, guard before archive reads or any target write, require absolute archives
+and nonrecursive fresh-directory creation. Only the preparation file/new correction
+fixtures change. No preparation/install or filesystem test executes during LIGHT;
+source corrections do not establish ordinary Next compatibility or independent closure.
+Main's n3 current-source/static comparison passes78 other original inputs,44
+connection inputs and155 library hashes. Syntax/full scoped Biome pass after
+retaining the first formatting failure; the original producer maps stay unchanged.
+No preparation/helper filesystem/Node test/ordinary install executes. Own primary
+Next positive TS6 also passes after frozen materialization, separately from these
+runner source checks. n1/n2/n3 runtime and independent verification remain open.
+
+### n4 — Intaken Next snapshots need navigation without receipt rewriting
+
+Main's first integrated documentation replay finds three unreachable Markdown files:
+the original app README and two sealed plan receipts. Add explicit links in the
+current plan, identifying them as historical/superseded snapshots. Do not edit their
+sealed bytes or weaken the checker. This is navigation, not runtime or semantics.
+Main's corrected navigation replay passes271 Markdown/934 links and all19 checker
+regressions; scoped whitespace passes. The original three-finding log remains.
+This verifies the navigation correction, not semantic/source or independent runtime
+acceptance of Next or any other packet.
+
+## WP-12 preparation — review session 27 (static hypothesis)
+
+### n1 — App detail buffers may survive an intermediate controller notification
+
+The read-only integrated-coverage report traces shared/owner.ts's purge: records,
+resource/options are cleared before selection/details C commands notify subscribers.
+The separately registered shared/details.tsx participant may purge its buffers only
+later in P's fanout. P notifying after all participants does not establish what a
+synchronous intermediate C observer can read. This is an unexecuted source-derived
+hypothesis, not a reproduced privacy failure or closure of a library finding.
+
+The selected candidate WP-12 flow must observe both actual C and P notifications
+with nonvacuous event counts while dirty details/selection/options/resource work is
+pending. Inspect real buffer/source/decision/record state, not eventual DOM hiding.
+Do not repair frozen app source or weaken to P-only/eventual checks within a test
+lease. If confirmed, assign a bounded app-owner correction and independently verify
+the exact failure/correction in the final phase. No enabling grant or test-only
+permitting publication certificate may be introduced to force the scenario.

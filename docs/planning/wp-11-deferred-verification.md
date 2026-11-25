@@ -12,7 +12,7 @@ is incomplete, not waived by downstream authoring or manual move menus.
 | Shared domains and facade catalog | c9c36cb; [Stage A handoff](../../tests/workbench/wp11-catalog/README.md), [33 CSF declarations/gaps](../../apps/storybook/src/workbench/scenes.md) | Main LIGHT intake passes; no built index, play, visual or runtime approval |
 | Styled/headless Vite and recipes | 5e72c95; [Stage B handoff](../../tests/workbench/wp11-examples/README.md) | Both positive source programs pass; actual Vite graphs/SSR/browser/archives unrun |
 | Deferred ordinary driver hardening | 39363f4; [five-input correction](../../tests/workbench/wp11-consumer-boundary/README.md) | Static/syntax/format only; four filesystem adversaries and install/typecheck lane unrun |
-| Next App Router | Isolated47e20df dependencies/35780bf source, original80-input seal391ded6f… | Main source/static/pins/longer positive compile passes; connection correction interrupted by ENOSPC, not sealed/intaken yet |
+| Next App Router | Intaken8720f7c/17a1439/16500a0; original80-input seal391ded6f… plus recovered44-input seal `eddded53…` | Main isolated/primary positive source intake passes; retained lifecycle/RSC/SSR/framework/ordinary runtime unrun |
 | Mounted headless Start | Isolatedf7ad033 dependencies, [standard-route source lease](wp-11-start-facade-plan.md) | Partial source survived restart; no released handoff, genuine generator output or whole-app typing |
 
 All155 library bodies remain source155bdfabded… at the preserved baseline.
@@ -60,8 +60,9 @@ The scene map owns per-story authored gaps; do not replace it with a blanket cla
 that33 stories satisfy every FR/F/AC. Old Next microtask-terminal-disposal assertions
 must receive an explicit superseded-semantics disposition in the correction lane,
 not a silent skip or a claim that unchanged original tests pass new behavior.
-Review26n3's separate Next archive-preparation guard remains unresolved; correcting
-the Vite declaration driver does not fix that other runner. No preparation/install
+Review26n3's separate [Next archive-preparation guard](../../tests/workbench/wp11-next-consumer-boundary/README.md)
+now has its own source correction, not inherited proof from the Vite driver.
+Its filesystem adversary and actual install/confinement remain unrun. No preparation/install
 runner may execute before its target/confinement obligations are verified.
 
 ## Ports, evidence and external limits

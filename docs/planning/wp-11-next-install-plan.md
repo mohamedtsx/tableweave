@@ -144,3 +144,36 @@ real React/public owners. Author a distinct final correction lane; no runtime te
 now. Allowed own strict positive TS6/static/scope/syntax/full Biome and new pinned/
 preimage/seal inputs do not establish runtime/independent closure. Main reviews the
 exact delta before intake; actual React/Next lifecycle verification remains final.
+
+## Actual provisional primary intake
+
+Main intakes47e20df/35780bf/6616fa3 separately as8720f7c/17a1439/16500a0.
+The [original source handoff](../../tests/workbench/wp11-next/README.md) remains
+sealed history, including old timing-based assertions. The
+[connection correction](../../tests/workbench/wp11-next-connection/README.md)
+explicitly supersedes those semantics without editing original fixtures/maps.
+Main inspects the one-source delta/all11 corrected cases and passes own static,
+scope,44-input seal,3,322 pinned-input and strict positive TS6 checks in isolation.
+
+Primary frozen ignore-scripts materialization adds15 packages, all reused/zero
+downloads, with the reviewed lock unchanged. Main matches44 correction inputs,
+79 original protected inputs and155 library bodies, then passes the actual primary
+positive TS6 program. Old isolated whole-tree/pin maps are not rebased onto primary
+metadata/additional examples. No runtime/framework/SSR/ordinary result follows.
+
+The later [ordinary-preparation target correction](../../tests/workbench/wp11-next-consumer-boundary/README.md)
+addresses review26n3 at source level using the preserved strict external-target
+helper. It leaves the44 connection inputs fixed and discloses the original80-map's
+second changed body. Static/syntax/format checks pass; the filesystem adversary,
+consumer preparation/install and ordinary Next/RSC/browser/hydration acceptance
+remain unrun. Review26n1/n2/n3 runtime and independent closure are still final.
+
+### Archived navigation, not current authority
+
+The [original app README](../../apps/example-next/README.md) and the archived
+[materialization selection](../../tests/workbench/wp11-next/receipts/install-plan.md)
+and [connection selection](../../tests/workbench/wp11-next-connection/receipts/selected-plan.md)
+are preserved producer snapshots. The current connection correction above supersedes
+the old app README's microtask-terminal-disposal description. Relative source paths
+in snapshots describe their original context; these receipts do not grant a new
+lease or substitute for actual current checks. Main's current plan/TASKS own status.

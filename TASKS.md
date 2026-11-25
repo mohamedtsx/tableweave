@@ -29,7 +29,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | --- | --- | --- |
 | Shared synthetic facade catalog | Preservedc9c36cb; main source/light intake complete | Final plays/matrix/ordinary proof remain unrun; do not rewrite Stage A seals |
 | Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
-| Next App Router example | Original preserved35780bf; one isolated correction writer active | Main seal/scope/static/pinned/longer positive compile intake passes; connection correction still pending |
+| Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Isolated source writer allocated fromf7ad033 | Standard file routes; handwritten-source LIGHT only; real generation/whole-app/SSR final |
 
@@ -240,6 +240,40 @@ passes with only that immutable receipt/raw artifacts excluded, not rewritten.
 Main now intakes the isolated manifest47e20df, original source35780bf and correction
 6616fa3 in order, keeping the original producer and corrective evidence separate.
 No Next framework/runtime, current archive or independent approval is implied.
+The exact Next stack is intaken as8720f7c/17a1439/16500a0. Primary frozen
+ignore-scripts materialization adds15 packages, all reused/zero downloads; no old
+lock block changes. Main matches44 correction inputs,79 original protected inputs,
+155 library hashes and the reviewed lock. Own primary positive TS6 is pending.
+The isolated old regular-input/pin maps remain history and are not rewritten for
+primary metadata/additional examples.
+
+Main now allocates review26n3 correction only to
+tests/workbench/wp11-next/packed/prepare.mjs plus NEW
+tests/workbench/wp11-next-consumer-boundary/**. Reuse the already preserved
+approved-target helper/strict standalone marker/config from39363f4; no consumer
+preparation/install/helper filesystem test runs now. Static/syntax/format/source
+scope checks only. All app/library/manifest/lock/connection44 evidence remain
+fixed; original80-map's additional preparation-runner drift will be explicit.
+The WP-12 read-only report is delivered; main reads its actual six-flow/two-instance
+proposal and observer-order hypothesis, but source activation still waits for the
+remaining Start handoff. No extra fixture owner is activated by that report.
+Own primary Next positive TS6 passes after the exact frozen materialization. Main's
+n3 source correction adds approved-target guarding before archive reads/writes,
+absolute archive paths and exact standalone strict markers; static78-original/
+44-connection/155-library comparison, syntax and full scoped Biome pass. The first
+formatter-only failure remains; no preparation/helper filesystem test or install
+runner executes. Original80 map now has two disclosed changed bodies, not an
+automatic new seal. New fixtures own the authored unrun adversary and final gate.
+The n3 correction has its own four-input seal942458e4…; hashes/modes match and
+sealed scoped Biome passes. First integrated docs replay fails on three unreachable
+Next snapshot Markdown files, not missing evidence bytes. Main adds current-plan
+navigation to the original app README/two archived plans without editing/resealing
+them or treating their old timing semantics as current authority. Failure log is
+preserved; corrected structural replay is pending, not inferred from source checks.
+The corrected real-tree replay passes271 Markdown/934 links and19 checker probes;
+current whitespace is clean. Snapshot bytes and original three-finding log remain
+unchanged. No Next runtime, filesystem adversary, archive install, framework build,
+review26 runtime closure or full WP-11 approval follows from these checks.
 
 ## Current WP-10 implementation handoff
 

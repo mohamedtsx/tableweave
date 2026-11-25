@@ -181,12 +181,16 @@ Actual checked source-only programs, without build/emission:
 pnpm exec tsc -p apps/storybook/src/workbench/tsconfig.light.json --pretty false
 pnpm exec tsc -p apps/storybook/tsconfig.examples-light.json --pretty false
 pnpm exec tsc -p apps/example-start/tsconfig.wp11-light.json --pretty false
+pnpm exec tsc -p tests/workbench/wp11-next-connection/tsconfig.light.json --pretty false
 ```
 
 These use explicit public-entry source aliases, not published/packed declarations.
 Do not substitute them for framework/consumer checks or run a deferred fixture's
-install/build commands as part of LIGHT. Next and mounted Start have separate
-isolated plans; drag/G-02 remains user-blocked and full WP-11 remains incomplete.
+install/build commands as part of LIGHT. The [Next source correction](tests/workbench/wp11-next-connection/README.md)
+is now intaken provisionally; it supersedes the original sealed README's timing-based
+cleanup description. Actual Next build/RSC/hydration remains unrun. Mounted Start
+source is still isolated/pending; drag/G-02 remains user-blocked and full WP-11
+remains incomplete.
 
 ## Authority and licensing
 

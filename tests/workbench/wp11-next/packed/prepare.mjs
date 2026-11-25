@@ -2,6 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import {
+  consumerNpmrc,
+  consumerWorkspace,
+  requireConsumerTarget,
+} from "../../wp11-consumer-boundary/boundary.mjs";
 
 // AUTHORING ONLY NOW. This copies fixture inputs; it does not install, execute
 // Next, emit libraries, apply patches or pretend directories are real tarballs.
@@ -14,19 +19,16 @@ if (
   !directory ||
   !path.isAbsolute(directory) ||
   !reactArchive ||
+  !path.isAbsolute(reactArchive) ||
   !styledArchive ||
+  !path.isAbsolute(styledArchive) ||
   !["ordinary", "rsc-negative"].includes(mode)
 )
   throw Error(
     "Absolute fresh consumer directory, two actual archives and ordinary/rsc-negative mode required",
   );
-const destination = path.resolve(directory);
-if (
-  destination === path.resolve(root) ||
-  destination.startsWith(`${path.resolve(root)}${path.sep}`) ||
-  fs.existsSync(destination)
-)
-  throw Error("Consumer must be fresh and outside this workspace");
+// This guards writes, not an installation or a successful ordinary consumer.
+const destination = await requireConsumerTarget(directory, "prepare");
 const archive = (file) => {
   const actual = fs.realpathSync(file);
   if (!actual.endsWith(".tgz") || !fs.statSync(actual).isFile())
@@ -42,7 +44,17 @@ const archives = {
 };
 const app = path.join(root, "apps/example-next"),
   fixture = path.dirname(fileURLToPath(import.meta.url));
-fs.mkdirSync(destination, { recursive: true });
+fs.mkdirSync(destination);
+fs.writeFileSync(
+  path.join(destination, "pnpm-workspace.yaml"),
+  consumerWorkspace,
+  {
+    flag: "wx",
+  },
+);
+fs.writeFileSync(path.join(destination, ".npmrc"), consumerNpmrc, {
+  flag: "wx",
+});
 for (const name of ["postcss.config.mjs", "next-env.d.ts", "styles.d.ts"])
   fs.copyFileSync(path.join(app, name), path.join(destination, name));
 function copy(directory, relative = "") {
@@ -101,10 +113,6 @@ manifest.packageManager = "pnpm@10.13.1";
 fs.writeFileSync(
   path.join(destination, "package.json"),
   `${JSON.stringify(manifest, null, 2)}\n`,
-);
-fs.writeFileSync(
-  path.join(destination, ".npmrc"),
-  "save-exact=true\nstrict-peer-dependencies=true\nauto-install-peers=false\nengine-strict=true\npackage-manager-strict=true\n",
 );
 if (mode === "rsc-negative") {
   const page = fs
