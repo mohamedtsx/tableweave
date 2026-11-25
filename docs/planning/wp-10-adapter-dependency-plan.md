@@ -69,3 +69,50 @@ Touch/keyboard/cancel/focus, actual parser/runtime/import/SSR/packed exclusion a
 manual/AT/performance/consumer gates remain distinct. No unit, browser, module import,
 build, install or independent verification was run for this preparation. Registry
 source availability is not evidence that controlled previews are feasible.
+
+## Main-owned isolated dependency inspection selection
+
+After actual refs-only lifetimec8e7880 and extent6326b97, main authorizes **dependency
+installation/static inspection only** in a fresh isolated tree from6f157bf. This
+does not activate adapter/neutral UI source or bypass the active admission bridge.
+Main owns only heroui/package.json, generated pnpm-lock.yaml and new
+tests/reordering/adapter-inspection/**, plus ordinary main metadata in the primary
+tree. All150 source bodies/old fixtures/config/patches/public generations freeze.
+
+Add exactly @dnd-kit/react0.5.3 and @dnd-kit/dom0.5.3 as optional peers and exact dev
+dependencies. Those direct packages provide the selected provider/hooks plus explicit
+sortable keyboard/feedback plugin imports; no direct abstract/state/geometry/collision
+API is selected. Review the actual resolved family/transitives rather than claiming
+their ranges are exact pins. If another direct import is genuinely needed, stop for
+an explicit manifest allocation. No legacy core/sortable packages, second manager,
+root headless dependency or patch is added.
+
+Run one main-owned lock-updating `pnpm install --ignore-scripts` in that isolated
+tree, then inspect actual package/type/source files as bytes without importing a
+vendor module or invoking a build/plugin/test. Existing onlyBuiltDependencies and
+all patch registrations stay unchanged; no new install lifecycle script is allowed.
+Review manifest/lock diff before preservation/intake. Preserve the initial manifests/
+lock and exact source map. Static inspection records chosen entrypoints/plugins/
+unsafe optimistic insertions and resolved versions, not browser compatibility,
+preview feasibility, legal/publication readiness or G-02. Actual vendor enrollment/
+geometry/disposal code still needs a separate closed contract/source lease.
+One small noEmit installed-API type program may check provider/sortable plugin/ref
+signatures as a lightweight static aid. It must execute no vendor constructor/hook/
+configure method and is not a DOM/preview/SSR or package-consumer feasibility pass.
+
+## Preserved isolated inspection
+
+Main preserves exactly six files as isolated9a5f598 after the selected ignore-scripts
+install, installed-byte/export/type inspection, one positive noEmit API program,
+full scoped Biome and staged whitespace. Actual manifest/lock review finds exactly
+the two optional peer/dev pins and71 lock additions/zero removals; old resolutions/
+patch registration bytes are unchanged. All150 isolated production hashes and1468
+other tracked file byte identities match. Six-input aggregate:
+e90bdf9508d2df58f5a4cdaaa8e5ecea89028ffb2f7c36019c95f3b45d4d8e76.
+
+Actual resolved family is six dnd-kit packages0.5.3, signals-core1.14.5 and existing
+tslib2.9.1. Inspect output hashes declarations/compiled source but executes no vendor
+module. The candidate configuration type-checks; actual manager effects/style
+registration/preview/resource cleanup remain unverified. Initial formatting failures
+and separate fresh attempt outputs stay preserved. Intake waits for the active
+admission bridge; no primary manifest/lock or adapter source changes from this stage.

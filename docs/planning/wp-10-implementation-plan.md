@@ -33,6 +33,12 @@ It neither activates those checks now nor grants whole-packet approval.
 After actual U1 source6326b97, main owns the separate [client entry discovery](wp-10-admission-entry-plan.md)
 lease. Existing helper/pure bodies stay fixed; ordinary installed/archive/API/runtime
 acceptance and the actual neutral/adapter integration remain deferred.
+The [app-owned admission/UI bridge](wp-10-admission-ui-bridge-plan.md) is now selected
+as the next three-source prerequisite. It separates UI cleanup from backend owner
+retirement and adds actual navigation-origin proofs before native/pager allocation.
+While that independent producer is implemented, main owns an isolated optional-peer/
+dev dependency installation and static published-byte inspection under the selected
+dependency plan. No adapter or neutral-consumer source is activated by that work.
 
 ## Stage1 ownership and outcome
 

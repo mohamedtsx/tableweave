@@ -92,8 +92,10 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Definition reorder capabilities | Preserved04941b2/intakeneb17ff9 | Positive combined source types; flags remain configuration, not authority |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
-| Admission/UI bridge | Read-only worker; external wp10-admission-ui-bridge report only | Exact app-owned lease/model join/navigation receipts; no source allocation |
-| Optional adapter/dependencies | Metadata preparation only | Installed selection and a closed vendor-resource extension remain later allocations |
+| Admission/UI bridge | Report selected; shared three-source writer allocated | App-owned lease/retained producer, separate UI claim/exact-model joins/navigation receipts; other147 sources freeze |
+| Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
+| Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
+| Vendor lifetime preparation | Read-only worker; external wp10-vendor-lifetime report only | Inspect installed0.5.3 constructor/registration/cleanup APIs; no plugin/source activation |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
 proof, with inert failure on ended React ref callbacks plus bounded fresh-ticket
@@ -151,6 +153,31 @@ edge, causing three related checker-regression failures. Review20n1 records the 
 in the owning plan; replay passes237 Markdown/853 links and all18 checker probes.
 Old failed logs/seals are preserved. No semantic-source/external/runtime/independent
 acceptance is implied by the structural navigation pass.
+Bridge report is delivered. Main selects retained application lease/model-source
+ownership plus separate UI binding/model join/nav origins, not owner disconnect on
+Strict UI cleanup. Live source permits hidden-UI settlement; waiting notices remain
+app transport ownership until genuine commit. Generic destroyed/new source-owner
+continuation is not guessed or granted. Three helper sources/new bridge fixtures are
+now allocated against150-source80ce38f6…; all other147 sources/old seals stay fixed.
+Client entry and actual native/handle/pager code wait for that real producer handoff.
+Main separately selects a necessary isolated dependency inspection: only styled
+manifest/lock/new own fixtures may change; all150 sources remain fixed. Exact
+@dnd-kit/react/dom0.5.3 optional peers/dev pins and one ignore-scripts install are
+allocated before static installed types/source inspection. No vendor execution,
+adapter code, new patch/drag manager or G-02/runtime proof is authorized by it.
+The dependency inspection is preserved as isolated9a5f598 after actual install/static
+bytes/noEmit API/Biome checks. It adds exactly two optional peer/dev pins and71 lock
+lines, removes no resolution and preserves all150 isolated source hashes/1468 other
+tracked files. Six-input aggregatee90bdf95…; six family packages resolve0.5.3 with
+signals1.14.5/existing tslib2.9.1. No vendor module/constructor/hook was executed.
+Primary dependencies remain unchanged while the active bridge owns its baseline;
+actual adapter/plugin/geometry/resource/G-02 behavior remains unimplemented/unverified.
+A free worker now inspects actual installed vendor constructor/registration/destroy
+and native-ref extension seams into an external contract report only. It cannot read
+the active bridge WIP as accepted, import a vendor module, run tests or write code.
+The goal is a closed, commit-only, one-manager resource protocol that preserves
+application forms and does not insert speculative hook/provider work or arbitrary
+app disposers. Neutral UI and adapter source remain inactive pending real handoffs.
 
 ### Current ownership and next action
 

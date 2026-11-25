@@ -172,3 +172,16 @@ bounded and part of origin/authoritative acknowledgement equality. Application
 integer epochs/revisions, exact tokens and backend authorization remain separate.
 Original pure/held source seals and failures remain intact; correction runtime/
 independent verification and whole-packet G-02 approval remain deferred.
+
+## WP-10 ADR-03/08 application lease versus optional renderer lifetime
+
+Actual admission owner disconnect retires epoch/model/pending metadata; it cannot
+serve as a temporary DataTable effect cleanup. Main selects the
+[retained application-source/UI bridge](../planning/wp-10-admission-ui-bridge-plan.md):
+application-owned lease and source producer, separate exclusive UI claim, exact-model
+joins and independent metadata-only navigation origins. UI detach preserves backend
+uncertainty; source waits delay app-owned correlated notices until genuine publication.
+Generic offline/new-owner continuation is not inferred from equal IDs/strings and
+needs a separate closed protocol if required. Existing actual C/coordinator, source
+revocation and backend authorization remain intact. Implementation/runtime/Strict/
+origin/consumer/independent evidence is not granted by this engineering selection.
