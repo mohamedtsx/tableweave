@@ -1,0 +1,120 @@
+[
+  {
+    "name": "pins-before",
+    "args": [
+      "tests/integration/wp12/evidence/inputs.mjs",
+      "tests/integration/wp12/evidence/.artifacts/light-003/inputs.json"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "positive",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "tests/integration/wp12/tsconfig.light.json",
+      "--pretty",
+      "false"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "static",
+    "args": [
+      "tests/integration/wp12/evidence/static.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "scope",
+    "args": [
+      "tests/integration/wp12/evidence/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "syntax-inputs.mjs",
+    "args": [
+      "--check",
+      "tests/integration/wp12/evidence/inputs.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "syntax-light.mjs",
+    "args": [
+      "--check",
+      "tests/integration/wp12/evidence/light.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "syntax-scope.mjs",
+    "args": [
+      "--check",
+      "tests/integration/wp12/evidence/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "syntax-seal.mjs",
+    "args": [
+      "--check",
+      "tests/integration/wp12/evidence/seal.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "syntax-static.mjs",
+    "args": [
+      "--check",
+      "tests/integration/wp12/evidence/static.mjs"
+    ],
+    "status": 0,
+    "signal": null,
+    "executionError": null
+  },
+  {
+    "name": "biome",
+    "args": [
+      "node_modules/@biomejs/biome/bin/biome",
+      "check",
+      "--vcs-enabled=false",
+      "--assist-enabled=false",
+      "tests/integration/wp12/main.tsx",
+      "tests/integration/wp12/application.tsx",
+      "tests/integration/wp12/events.ts",
+      "tests/integration/wp12/styles.css",
+      "tests/integration/wp12/styles.d.ts",
+      "tests/integration/wp12/vite.config.ts",
+      "tests/integration/wp12/playwright.config.ts",
+      "tests/integration/wp12/browser.spec.ts",
+      "tests/integration/wp12/tsconfig.light.json",
+      "tests/integration/wp12/evidence/inputs.mjs",
+      "tests/integration/wp12/evidence/light.mjs",
+      "tests/integration/wp12/evidence/scope.mjs",
+      "tests/integration/wp12/evidence/seal.mjs",
+      "tests/integration/wp12/evidence/static.mjs",
+      "--max-diagnostics=100"
+    ],
+    "status": 1,
+    "signal": null,
+    "executionError": null
+  }
+]

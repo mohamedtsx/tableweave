@@ -2307,3 +2307,18 @@ Fixture-only correction is preserved3ce59e2 with separate four-input seal07d178b
 hashes/modes/scoped Biome verified. The original parent/source correction70c95ac
 and prior producer3929614 remain distinct. No final test, generated route, cache
 observer failure/correction replay, independent review or G-04 claim has run.
+
+## WP-12 source intake — review session 29 (provisional)
+
+Main reads actual application/events/all I1–I6 assertions, config/styles and manual
+workbook. Own strict positive TS6/static/scope/seal/pin checks match21 source inputs/
+89 raw artifacts,155 unchanged library bodies/1,883 old protected inputs and1,312
+program/inspection pins. Root settings/manifests/lock remain unchanged. No browser,
+React, manual, runtime or independent result is claimed.
+
+The fixture retains real intermediate C/P observations with nonzero preconditions
+and an unsuppressed review27n1 obligation; a soft assertion still fails the case.
+No automatic clamp or unavailable regrant/pause authority is fabricated. Runtime
+registration must verify fresh output paths before starting final configs/servers;
+the current run-label regex alone is not a directory-freshness receipt. All required
+manual/browser/device/AT/G-02/consumer/performance/independent gates remain open.

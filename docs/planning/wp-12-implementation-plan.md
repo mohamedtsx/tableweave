@@ -110,3 +110,21 @@ Root check does not automatically discover this new group; main must register it
 actual final commands separately without dropping old suites. WP-13 archive tooling,
 WP-14 dedicated performance runner and WP-15 authorized real consumer remain
 separate/unskipped. No packet completion, deployment, publication or merge authority.
+
+## Provisional source handoff intake
+
+The [actual fixture](../../tests/integration/wp12/README.md),
+[source receipts](../../tests/integration/wp12/evidence/README.md) and
+[unfilled manual workbook](../../tests/integration/wp12/manual.md) now exist. Main
+reads the application/events/all I1–I6 assertions, runtime configuration, styles and
+workbook. Own strict positive TS6/static/scope/seal/pin checks match21 new inputs
+c6aaccf1…/89 artifacts4b2c7188…,155 unchanged library bodies/1,883 protected old
+inputs and1,312 pinned program/inspection inputs. Root settings/manifests/lock are
+unchanged. None of these checks executes the application or browser.
+
+Review27n1 remains a real unsuppressed intermediate C/P observer assertion. Automatic
+shrink correction and unavailable pause-before-begin/regrant seams are explicit gaps,
+not fabricated epochs/authority or inferred whole-facade acceptance. Final runtime
+registration must enforce fresh output identities before invoking config/server/
+engine commands; a run-label shape check alone is not evidence preservation. No
+root command is silently registered or historical guard removed by source intake.

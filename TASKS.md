@@ -35,7 +35,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
-| WP-12 integrated fixture | Provisional producer preservede0463d3; writer released | Main source/light intake passes; separate packet branch next; browser/manual/independent final |
+| WP-12 integrated fixture | Provisional producer preservede0463d3; transport onto separate packet branch | Main source/light intake passes; browser/manual/independent final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -339,6 +339,15 @@ writer releases its captured primary scope. Existing producer maps/failed logs s
 exact; review28 runtime/independent findings remain open. The last full primary
 documentation replay remains271 Markdown/934 links/19 probes, not a new check of
 active fixture WIP or later allocation metadata. Own metadata whitespace passes.
+Original WP-12 intake at producere0463d3: main reads application/events/I1–I6,
+config/styles/workbook and source procedures. Own strict positive TS6/seal/scope/
+static/pin checks match21 inputs c6aaccf1…/89 artifacts4b2c7188…,
+155 libraries/1,883 frozen old inputs and1,312 pins. Root settings/manifests/lock
+were unchanged at that producer; its maps remain historical after Start intake.
+Review27n1 stays unsuppressed/UNRUN; no browser/manual/SSR/performance/consumer/
+independent result or final command registration is implied. Its source/structural
+replay passes276 Markdown/955 links/19 probes and whitespace, not runtime cases.
+
 The original workbench preservese0463d3: main reads WP-12 application/events/all
 I1–I6 cases/config/styles/workbook and passes own strict source TS6/static/scope/
 21-input/89-artifact/1,312-pin checks plus276 Markdown/955 links/19 doc probes.
