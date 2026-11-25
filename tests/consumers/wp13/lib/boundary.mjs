@@ -1,6 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  storageRoots,
+  openStorage,
+  storageControl,
+  bindStorage,
+  storageRevalidate,
+  storageExternal,
+  selectedRoots,
+  consumerStorage,
+} from "./storage-roots.mjs";
+import {
   demand,
   directory,
   json,
@@ -32,7 +42,9 @@ export function noProjectAncestors(parents) {
       demand(!present(path.join(parent, marker)), "E_ANCESTOR_PROJECT_CONFIG");
   }
 }
-export function external(location, fresh = false, producer = false) {
+export function external(location, fresh = false, producer = false, ctx) {
+  if (ctx !== undefined && selectedRoots(ctx).namespace !== "/tmp/opencode")
+    return storageExternal(ctx, location, fresh, producer);
   demand(
     typeof location === "string" &&
       path.isAbsolute(location) &&
@@ -57,7 +69,14 @@ export function external(location, fresh = false, producer = false) {
   }
   return location;
 }
-export function load(runId, phase, family, profile, final) {
+export function load(
+  runId,
+  phase,
+  family,
+  profile,
+  final,
+  layout = "legacy-ssd",
+) {
   demand(final === true, "E_FINAL_PHASE_REQUIRED");
   safeId(runId);
   demand(
@@ -96,16 +115,27 @@ export function load(runId, phase, family, profile, final) {
       (profile === "start-sdk-declarations" && family === "start"),
     "E_PROFILE_FAMILY",
   );
-  const run = external(`/tmp/opencode/wp13-run-${runId}`);
-  const marker = json(run, "owner.json");
+  const token = openStorage(runId, layout),
+    roots = storageRoots(runId, layout);
+  const run = layout === "hdd-v1" ? roots.run : external(roots.run);
+  const controls = {};
+  function control(name) {
+    const bytes =
+      layout === "hdd-v1" ? storageControl(token, name) : regular(run, name);
+    controls[name] = digest(bytes);
+    return bytes;
+  }
+  const marker = object(JSON.parse(control("owner.json").toString("utf8")));
   demand(
     marker.protocol === "wp13-current-archives-v1" &&
       marker.run === runId &&
       marker.owner === "main",
     "E_MAIN_OWNER_MARKER",
   );
-  const approval = json(run, "main-approval.json"),
-    bytes = regular(run, "request.json");
+  const approval = object(
+      JSON.parse(control("main-approval.json").toString("utf8")),
+    ),
+    bytes = control("request.json");
   demand(
     approval.run === runId &&
       approval.requestSHA256 === digest(bytes) &&
@@ -122,16 +152,15 @@ export function load(runId, phase, family, profile, final) {
     request.protocol === marker.protocol && request.run === runId,
     "E_PROTOCOL",
   );
-  const producer = external(
-    `/tmp/opencode/wp13-producer-${runId}`,
-    false,
-    true,
-  );
+  const producer =
+    layout === "hdd-v1"
+      ? roots.producer
+      : external(roots.producer, false, true);
   demand(
     fs.existsSync(path.join(producer, ".git")),
     "E_REAL_CHECKOUT_REQUIRED",
   );
-  const tools = external(`/tmp/opencode/wp13-tools-${runId}`);
+  const tools = layout === "hdd-v1" ? roots.tools : external(roots.tools);
   const producerName = json(producer, "package.json");
   demand(
     producerName.name === "tableweave-workspace" &&
@@ -148,25 +177,22 @@ export function load(runId, phase, family, profile, final) {
     profile,
     request,
     approval,
+    owner: marker,
     key: `${family}-${profile}`,
-    controls: Object.fromEntries(
-      ["owner.json", "main-approval.json", "request.json"].map((file) => [
-        file,
-        digest(regular(run, file)),
-      ]),
-    ),
+    controls,
   };
   demand(
     request.candidate === `wp13-candidate-${runId}` &&
       !Object.hasOwn(request, "generation"),
     "E_NO_HISTORICAL_GENERATION_SELECTION",
   );
-  return ctx;
+  return bindStorage(token, ctx);
 }
 export function revalidate(ctx) {
-  external(ctx.run);
-  external(ctx.tools);
-  external(ctx.producer, false, true);
+  storageRevalidate(ctx);
+  external(ctx.run, false, false, ctx);
+  external(ctx.tools, false, false, ctx);
+  external(ctx.producer, false, true, ctx);
   for (const [file, expected] of Object.entries(ctx.controls))
     demand(
       digest(regular(ctx.run, file)) === expected,
@@ -181,10 +207,10 @@ export function revalidate(ctx) {
   ])
     demand(!present(path.join(ctx.run, file)), "E_RUN_CONFIG_HAZARD");
 }
-export const consumerPath = (ctx) =>
-  `/tmp/opencode/wp13-consumer-${ctx.runId}-${ctx.key}`;
+export const consumerPath = (ctx) => selectedRoots(ctx).consumers[ctx.key];
 export function ownedConsumer(ctx) {
-  const root = external(consumerPath(ctx));
+  const root = external(consumerPath(ctx), false, false, ctx);
+  consumerStorage(ctx, root);
   demand(!fs.existsSync(path.join(root, ".git")), "E_WORKTREE_CONSUMER");
   const marker = json(root, "wp13-owner.json");
   demand(

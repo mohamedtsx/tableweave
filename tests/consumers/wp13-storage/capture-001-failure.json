@@ -1,0 +1,7 @@
+{
+  "status": "failed-before-any-preimage-or-map-write",
+  "command": "node tests/consumers/wp13-storage/evidence.mjs before",
+  "exitCode": 1,
+  "error": "ENOENT lstat node_modules/@biomejs/cli-linux-x64",
+  "correction": "Resolve installed formatter binary relative to canonical @biomejs/biome package; no install or dependency change. Initial collector invocation not production execution."
+}

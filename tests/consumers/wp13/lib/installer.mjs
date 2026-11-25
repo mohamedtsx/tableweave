@@ -20,6 +20,14 @@ import {
 import { external, consumerPath, ownedConsumer, local } from "./boundary.mjs";
 import { pair } from "./archive.mjs";
 import { execute, producerInputs } from "./generation.mjs";
+import {
+  selectedRoots,
+  storageLayout,
+  captureConsumer,
+  consumerStorage,
+  storageProvenance,
+  scratch,
+} from "./storage-roots.mjs";
 
 export const ordinaryWorkspace = "packages: []\n";
 export function ordinaryNpmrc(ctx) {
@@ -151,7 +159,8 @@ export function selection(ctx, archives) {
   return { recipe, pkg, packageBytes, lock, approved };
 }
 export function ensureHome(ctx) {
-  mkdir(ctx.run, `home/${ctx.key}`);
+  if (storageLayout(ctx) === "hdd-v1") scratch(ctx, true);
+  else mkdir(ctx.run, `home/${ctx.key}`);
   for (const file of ["user.npmrc", "global.npmrc"]) {
     const name = `home/${ctx.key}/${file}`;
     if (fs.existsSync(path.join(ctx.run, name)))
@@ -168,7 +177,7 @@ export function prepare(ctx, familyStage) {
     ctx.profile === "ordinary",
     "E_HOLD_PROFILE_REQUIRES_MAIN_MANUAL_STAGING",
   );
-  const target = external(consumerPath(ctx), true);
+  const target = external(consumerPath(ctx), true, false, ctx);
   const npmrc = ordinaryNpmrc(ctx);
   demand(
     digest(npmrc) === selected.approved.npmrcSHA256 &&
@@ -220,8 +229,17 @@ export function prepare(ctx, familyStage) {
     demand(!Object.hasOwn(files, file), "E_STAGE_COLLISION");
     files[file] = bytes;
   }
-  capacity("/tmp/opencode");
-  fs.mkdirSync(target);
+  capacity(selectedRoots(ctx).namespace);
+  external(target, true, false, ctx);
+  fs.mkdirSync(
+    target,
+    storageLayout(ctx) === "hdd-v1" ? { mode: 0o700 } : undefined,
+  );
+  const storage =
+    storageLayout(ctx) === "hdd-v1" ? captureConsumer(ctx, target) : undefined;
+  if (storage)
+    files["wp13-owner.json"] =
+      `${JSON.stringify({ protocol: "wp13-current-archives-v1", run: ctx.runId, key: ctx.key, storage }, null, 2)}\n`;
   for (const [file, bytes] of Object.entries(files)) write(target, file, bytes);
   ensureHome(ctx);
   const frozen = tree(target),
@@ -231,6 +249,7 @@ export function prepare(ctx, familyStage) {
     delete frozen["next-env.d.ts"];
   }
   record(ctx.run, `consumer-prepared-${ctx.key}.json`, {
+    ...(storage ? { storage } : {}),
     protocol: "wp13-current-archives-v1",
     candidate: ctx.request.candidate,
     key: ctx.key,
@@ -246,6 +265,7 @@ export function prepared(ctx) {
     archives = pair(ctx),
     selected = selection(ctx, archives);
   const frozen = receipt(ctx, `consumer-prepared-${ctx.key}.json`);
+  consumerStorage(ctx, target, frozen.storage);
   demand(
     frozen.key === ctx.key &&
       frozen.profile === ctx.profile &&
@@ -494,6 +514,7 @@ export function install(ctx) {
   }
   inventory("node_modules");
   record(ctx.run, `installed-${ctx.key}.json`, {
+    ...storageProvenance(ctx),
     candidate: ctx.request.candidate,
     key: ctx.key,
     profile: ctx.profile,
@@ -507,6 +528,12 @@ export function install(ctx) {
 export function installed(ctx) {
   const state = prepared(ctx),
     value = receipt(ctx, `installed-${ctx.key}.json`);
+  if (storageLayout(ctx) === "hdd-v1")
+    demand(
+      JSON.stringify(value.storage) ===
+        JSON.stringify(storageProvenance(ctx).storage),
+      "E_STORAGE_INSTALLED_RECEIPT",
+    );
   demand(
     value.key === ctx.key &&
       value.profile === ctx.profile &&
@@ -567,8 +594,12 @@ export function verifyProfile(ctx) {
     "E_INDEPENDENT_ORDINARY_MAP_REQUIRED",
   );
   const ordinaryRoot = external(
-    `/tmp/opencode/wp13-consumer-${ctx.runId}-${ctx.family}-ordinary`,
+    selectedRoots(ctx).consumers[`${ctx.family}-ordinary`],
+    false,
+    false,
+    ctx,
   );
+  consumerStorage(ctx, ordinaryRoot);
   verifyMap(ordinaryRoot, handoff.independentOrdinaryBefore);
   if (ctx.profile === "rac-runtime") {
     const descriptor = json(

@@ -836,6 +836,23 @@ candidate, not downloaded bytes/verified tool/runtime proof. No tarball/download
 install/HDD write or tool-contract relaxation occurs. The source writer remains
 bounded to storage code, while actual acquisition/namespace/tool/producer/lock
 materialization awaits independent guard review and separate main phase selection.
+The storage writer releases provisional source at wp13-storage/README.md. Main
+verifies184 sealed artifacts/1,186 pins/canonical155, and records review45n1–n4:
+unleased runtime postflight inventory after known identity failure; actual HDD
+parent0775 incompatible with strict ancestors; consumer marker read before its
+approved inode binding;51 actual documentation failures from raw .md packaging.
+No HDD namespace/permission/CLI/helper/test/build/install action occurs. Main asks
+for exact runtime scope extension, parent group-write removal or hold, and byte-
+preserving raw-preimage packaging disposition before selecting further actions.
+The five-module source and original failed docs output remain unmodified pending
+that decision; source checks do not close complete confinement or packet G-05.
+The user explicitly answers both follow-up questions: allow exactly existing
+/mnt/data/Projects0775→0755 after physical/owner checks (no sudo/recursive work),
+and approve scoped runtime postflight/inventory + consumer binding order + authored
+tests and byte-identical new preimage .md→.md.txt correction. Main first preserves
+the exact producer/seal in Git, then allocates this follow-up under the HDD plan.
+Old maps/seals stay original; the packaging path change is separately disclosed,
+not silently re-baselined. HDD fixtures/CLI/test/build/install remain unselected.
 
 ## Current WP-10 implementation handoff
 

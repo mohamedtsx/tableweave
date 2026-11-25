@@ -22,17 +22,15 @@ import { checkTypes } from "./lib/types.mjs";
 import * as vite from "./families/vite.mjs";
 import * as next from "./families/next.mjs";
 import * as start from "./families/start.mjs";
+import {
+  parseStorageArguments,
+  storageProvenance,
+} from "./lib/storage-roots.mjs";
 
 export async function main(args, final) {
-  demand(
-    args.length === 8 &&
-      args[0] === "--run" &&
-      args[2] === "--phase" &&
-      args[4] === "--family" &&
-      args[6] === "--profile",
-    "E_EXPLICIT_ARGUMENTS_NO_DEFAULT_OR_HELP",
-  );
-  const ctx = load(args[1], args[3], args[5], args[7], final);
+  const layout = parseStorageArguments(args);
+  const ctx = load(args[1], args[3], args[5], args[7], final, layout);
+  revalidate(ctx);
   capacity(ctx.run);
   const toolingRoot = path.resolve(
       fileURLToPath(new URL("../../../", import.meta.url)),
@@ -48,6 +46,7 @@ export async function main(args, final) {
     "matrix.json",
     "protocol.json",
     "lib/boundary.mjs",
+    "lib/storage-roots.mjs",
     "lib/archive.mjs",
     "lib/generation.mjs",
     "lib/installer.mjs",
@@ -114,6 +113,7 @@ export async function main(args, final) {
     verifyMap(toolingRoot, toolingRuntime);
     producerInputs(ctx);
     record(ctx.run, `phase-${ctx.phase}-${ctx.key}.json`, {
+      ...storageProvenance(ctx),
       phase: ctx.phase,
       candidate: ctx.request.candidate,
       result,
@@ -123,15 +123,30 @@ export async function main(args, final) {
     });
     return result;
   } catch (error) {
-    record(ctx.run, `failure-${ctx.phase}-${ctx.key}.json`, {
-      phase: ctx.phase,
-      candidate: ctx.request.candidate,
-      error: error instanceof Error ? error.message : "E_UNKNOWN",
-      status: "failed-or-held-not-passed",
-      noFallback: true,
-    });
+    try {
+      revalidate(ctx);
+      record(ctx.run, `failure-${ctx.phase}-${ctx.key}.json`, {
+        ...storageProvenance(ctx),
+        phase: ctx.phase,
+        candidate: ctx.request.candidate,
+        error: error instanceof Error ? error.message : "E_UNKNOWN",
+        status: "failed-or-held-not-passed",
+        noFallback: true,
+      });
+    } catch (guardError) {
+      throw new AggregateError(
+        [error, guardError],
+        "E_PRIMARY_FAILURE_AND_UNSAFE_FAILURE_RECEIPT",
+      );
+    }
     throw error;
   }
+}
+function failureText(error) {
+  const message = error instanceof Error ? error.message : "E_UNKNOWN";
+  return error instanceof AggregateError
+    ? `${message}: ${error.errors.map(failureText).join(" | ")}`
+    : message;
 }
 if (
   process.argv[1] &&
@@ -140,7 +155,7 @@ if (
   main(process.argv.slice(2), process.env.WP13_FINAL === "1")
     .then((value) => console.log(JSON.stringify(value)))
     .catch((error) => {
-      console.error(error instanceof Error ? error.message : "E_UNKNOWN");
+      console.error(failureText(error));
       process.exitCode = 1;
     });
 }

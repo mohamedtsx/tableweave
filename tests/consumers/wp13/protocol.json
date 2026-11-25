@@ -4,7 +4,7 @@
   "base": "8c39a4f (supplied; no worker Git operation)",
   "canonicalSource155": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
   "finalGate": "WP13_FINAL=1; necessary, never sufficient authorization",
-  "cli": "--run SAFE_ID --phase PHASE --family FAMILY --profile PROFILE (all four pairs mandatory; no defaults/help)",
+  "cli": "--run SAFE_ID --phase PHASE --family FAMILY --profile PROFILE [--storage hdd-v1] (four ordered pairs mandatory; only the terminal HDD pair is optional; no defaults/help/root/env/cwd selector)",
   "phases": [
     "generate",
     "inspect",
@@ -80,5 +80,38 @@
   },
   "runtimeHold": "Family build/source staging is authored. Family runtime throws an explicit hold for separately selected real HTTP/Flight/stream/browser/native runner; it cannot return a success marker. Port6575, strict serialized, reuseExistingServer=false.",
   "securityLimit": "No OS sandbox or defense against a hostile same-user process/concurrent filesystem replacement. Exclusive writes, no-follow reads and repeated realpath/hash guards are best effort.",
-  "execution": "All production helpers, CLI, filesystem adversaries, installs, emission, archives, framework/consumer/negative/dual/runtime/CI remain UNRUN during authoring. Drag/G-02 blocked."
+  "execution": "All production helpers, CLI, filesystem adversaries, installs, emission, archives, framework/consumer/negative/dual/runtime/CI remain UNRUN during authoring. Drag/G-02 blocked.",
+  "storageFollowup": {
+    "status": "provisional-source-HDD-UNRUN-no-namespace-allocation",
+    "legacy": "Exact original eight arguments select legacy-ssd roots above; controls with storage fields are rejected. Historical receipts/maps are not re-signed.",
+    "selector": "Only terminal --storage hdd-v1; explicit main phase/controls still required; never automatic fallback",
+    "namespace": "/mnt/data/Projects/tableweave-final-verification-ID",
+    "roles": "Same wp13-run-ID, wp13-producer-ID, wp13-tools-ID, wp13-consumer-ID-FAMILY-PROFILE basenames inside namespace; consumer absent before prepare",
+    "leaseFile": "namespace/storage-lease.json; read-only main-created immutable regular0600 single-link control; namespace/run/producer/tools0700, effective UID",
+    "leaseFields": [
+      "schema=wp13-storage-lease-v1",
+      "status=main-owned-new-namespace",
+      "layout=hdd-v1",
+      "run",
+      "candidate",
+      "uid",
+      "selectedRevision",
+      "producerInputsSHA256",
+      "toolingInputsSHA256",
+      "toolingRuntimeInputsSHA256",
+      "toolchainInputsSHA256",
+      "roots",
+      "parent",
+      "namespace",
+      "roles"
+    ],
+    "physicalIdentity": "parent/namespace/roles.run/roles.producer/roles.tools: exact {dev,ino,uid}, nonnegative safe integers captured from actual stat; roles must share namespace and parent device",
+    "rootsShape": "Exact {parent,namespace,run,producer,tools,consumers}; consumers contains all ten valid FAMILY-PROFILE keys, each with the derived absolute target",
+    "controlBinding": "owner.json, request.json and main-approval.json each require identical storage={layout:hdd-v1,leaseSHA256,roots}. Approval also requires storageReceiptBindings[NAME]={leaseSHA256,sha256}, with exact approval.receipts key set and actual receipt hashes. Missing fields fail closed.",
+    "inputBinding": "Lease's four input hashes must equal actual regular input maps AND approval.receipts entries. Control/receipt physical identity, bytes and stat stamps captured once and rechecked; source revision/candidate must match request.",
+    "consumerBinding": "prepare adds storage={layout,leaseSHA256,root,identity:{dev,ino,uid}} to both wp13-owner.json and consumer-prepared-KEY.json; later reads require exact match and approved prepared receipt, actual root identity/owner/device; installed receipt carries full storage provenance",
+    "scratch": "HDD only: owned0700 run/home/KEY/.cache/tmp is TMPDIR/TMP/TEMP; run/home/KEY/.cache is XDG_CACHE_HOME. Fixed home, key, cache and tmp identities are pinned before/after children; no ambient temp inheritance.",
+    "provenance": "New generation/installed/phase/failure records carry storage={layout,leaseSHA256,roots,parent,namespace,roles}. Frozen other receipt schemas remain unchanged and are bound by main's storageReceiptBindings, not retroactively relabelled.",
+    "limits": "Trusted main local filesystem lease only, not application/backend/P authority, cryptographic approval, real-checkout proof, hostile same-user sandbox or package G-05 approval. Source checks cannot select actual HDD guard tests/provisioning/materialization."
+  }
 }

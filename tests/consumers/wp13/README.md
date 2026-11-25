@@ -229,3 +229,31 @@ vendor execution, HTTP/browser/SSR/hydration, CI, manual/AT, performance, networ
 write, credential access or agent delegation is a LIGHT outcome. Main independent
 review/replay, final-phase selection and all WP14/15/manual/real-consumer gates remain
 open. This worker handoff cannot self-approve complete WP13 or change G-02.
+
+## Fixed HDD layout follow-up — source only, not old-result replacement
+
+The user now explicitly selected NEW-only HDD proof storage in
+[the bounded plan](../../../docs/planning/wp-13-hdd-storage-plan.md). Earlier
+interrupted modals and the original receipts above remain historical nonanswers;
+no old producer/map/result is re-signed. This follow-up changes only four existing
+driver modules plus the new inert [storage root contract](lib/storage-roots.mjs),
+with bounded current protocol/docs. Other helpers/families/fixtures/profiles and
+the original137/runtime100 source/evidence seals remain exact historical bytes.
+
+The exact eight ordered arguments still select the original SSD layout. Only
+terminal `--storage hdd-v1` selects the fixed NEW namespace
+`/mnt/data/Projects/tableweave-final-verification-ID`, with the same derived role
+basenames inside. No environment/root/cwd selector, implicit adoption, mount,
+fallback, default phase or HDD creation at import/load is provided. Main must
+precreate the namespace and three0700 roles, bind their actual physical identities
+and all current input/tool hashes in a regular immutable lease, and select each
+phase independently. Consumer must remain absent until ordinary prepare.
+
+[The storage handoff](../wp13-storage/README.md) documents the complete new schema,
+source checks, precise limits, authored **UNRUN** guard tests and independently
+reviewed future selection gate. The append-only `storageFollowup` section of
+[protocol.json](protocol.json) is current layout documentation, not evidence of a
+new approval or actual materialization. In particular, changed absolute archive,
+store and npmrc paths need NEW reviewed lock/receipt identities, never old SSD
+receipt relabelling. Driver filesystem selection grants no application authority,
+public output generation or G-05/stable acceptance. **Drag/G-02 stays blocked.**

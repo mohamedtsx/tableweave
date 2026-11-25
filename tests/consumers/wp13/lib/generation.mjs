@@ -20,6 +20,7 @@ import {
 } from "./receipts.mjs";
 import { ownedConsumer, local, revalidate } from "./boundary.mjs";
 import { packageArchive } from "./archive.mjs";
+import { scratch, storageProvenance, storageLayout } from "./storage-roots.mjs";
 
 export function toolchain(ctx) {
   revalidate(ctx);
@@ -68,6 +69,7 @@ export function safeEnvironment(ctx) {
       "E_HOME_UNSELECTED_CONFIG",
     );
   return {
+    ...scratch(ctx),
     PATH: `${ctx.tools}/bin`,
     HOME: home,
     XDG_CONFIG_HOME: `${home}/.config`,
@@ -219,6 +221,23 @@ export function execute(ctx, task, options = {}) {
     timeout: 480000,
     maxBuffer: 8 * 1024 * 1024,
   });
+  // Never write child logs into a lost/replaced lease, even on child failure.
+  try {
+    revalidate(ctx);
+    ownedConsumerAfterChild(ctx, task);
+  } catch (guardError) {
+    if (result.status !== 0 || result.error)
+      throw new AggregateError(
+        [
+          new Error(
+            `E_CHILD_FAILURE_WITH_UNSAFE_LOG status=${result.status} signal=${result.signal} spawn=${result.error?.code ?? "none"}`,
+          ),
+          guardError,
+        ],
+        "E_CHILD_AND_STORAGE_FAILURE_NO_LOG_WRITE",
+      );
+    throw guardError;
+  }
   write(
     ctx.run,
     `${prefix}.log`,
@@ -235,6 +254,10 @@ export function execute(ctx, task, options = {}) {
   if (!options.allowFailure)
     demand(result.status === 0 && !result.error, "E_CHILD_FAILURE_RETAINED");
   return result;
+}
+function ownedConsumerAfterChild(ctx, task) {
+  if (!["producer-build", "pack-react", "pack-heroui"].includes(task))
+    ownedConsumer(ctx);
 }
 export function producerInputs(ctx) {
   revalidate(ctx);
@@ -391,9 +414,11 @@ export function generate(ctx) {
     ])
       demand(!pkg.scripts?.[event], "E_UNREVIEWED_LIFECYCLE");
   }
-  mkdir(ctx.run, `home/${ctx.key}`);
+  if (storageLayout(ctx) === "hdd-v1") scratch(ctx, true);
+  else mkdir(ctx.run, `home/${ctx.key}`);
   write(ctx.run, `home/${ctx.key}/user.npmrc`, "");
   write(ctx.run, `home/${ctx.key}/global.npmrc`, "");
+  scratch(ctx, true);
   execute(ctx, "producer-build");
   const output = {},
     archives = {},
@@ -476,6 +501,7 @@ export function generate(ctx) {
   }
   verifyMap(ctx.producer, inputs);
   record(ctx.run, "generation.json", {
+    ...storageProvenance(ctx),
     status: "emitted-and-packed-unapproved",
     candidate: ctx.request.candidate,
     inputsSHA256: digest(regular(ctx.run, "producer-inputs.json")),

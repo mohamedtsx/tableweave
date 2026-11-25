@@ -10,6 +10,56 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 45 (provisional HDD source intake)
+
+Main independently verifies the184-entry seal SHA256
+56f5b96b67ba168b0d428e3b828e77a7ff40a7fe6651e684a0205cdc71ba961b,
+all1,186 current input pins and canonical155. Source-only syntax/AST/two strict
+positive noEmit/Biome results remain producer evidence, not filesystem/CLI/MJS
+typing proof. No HDD namespace/data/tool acquisition/helper/test/runtime action.
+The user chose new-only HDD storage; no existing-parent permission change or
+sixth production-module lease was included in that five-module allocation.
+
+### n1 — Runtime catch continues inventory after failed identity checks
+
+Worker correctly stops at untouched lib/runtime.mjs:runFamily(). Lines389–403
+catch postflight revalidate/installed failure;404–408 then inventory the cached
+target unconditionally. A replaced consumer can be read after known lease loss.
+The guarded run getter blocks later writes but cannot protect this cached string.
+Requires an explicit narrowly extended runtime postflight/inventory lease and
+authored rejection coverage; no affected runtime phase is selected meanwhile.
+
+### n2 — Actual HDD parent permissions do not meet the authored guard
+
+Read-only stat observes /mnt/data/Projects UID1000/mode0775/dev2065/inode6160385;
+effective UID/GID1000. storage-roots ancestors() requires no group/world writes,
+so even a private fresh namespace beneath this parent will correctly fail closed.
+Do not silently relax the guard, choose a different root or chmod a shared existing
+parent under new-only authority. Main asks whether the user authorizes exactly
+0775→0755 on that owned parent, retaining all contents/ownership/other permissions,
+or keeps HDD staging blocked. No permission operation has occurred.
+
+### n3 — Consumer marker is read before its approved physical binding is checked
+
+storage-roots consumerStorage() obtains the main-approved prepared receipt, then
+reads consumer/wp13-owner.json before checking physical(root,binding.identity).
+A newly issued context has not yet pinned that consumer, so a replaced directory
+can supply bytes before rejection. Reorder validation to establish the receipt's
+layout/root/key/candidate/physical identity/device before reading that marker;
+retain the later marker equality and state pin. This is a deterministic ordering
+finding, not a hostile same-user-race guarantee. No source fix/test run yet.
+
+### n4 — Markdown preimage is byte-preserved but wrongly packaged as live docs
+
+Main's actual python3 scripts/check_docs.py exits1 with51 missing targets, all in
+wp13-storage/preimage-tests__consumers__wp13__README.md. Raw output is preserved at
+/tmp/opencode/final-hdd-source-intake-docs-001.log (299 Markdown/1,220 local checks).
+No checker exemption, alias target copies, rewritten preimage or old-seal re-signing.
+Main requests an exact byte-preserving .md→.md.txt packaging rename AFTER preserving
+the original producer in Git; the original184-entry seal remains historical and
+any changed path is explicitly disclosed by a new correction receipt. No evidence
+content is discarded; rename permission is not inferred from new-only HDD choice.
+
 ## Final verification — review session 44 (independent source-type alias replay)
 
 Independent002 replay runs10 selected commands once, all exit0/empty stderr/no

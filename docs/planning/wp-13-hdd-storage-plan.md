@@ -135,3 +135,27 @@ Node maps inside the new proof namespace. Nothing auto-downloads or falls back i
 inputs are missing. Fresh producer deps, standalone headless lock drafting/frozen
 install, archive/current-public-generation/consumer/native evidence remain distinct
 future selections; no current run/receipt/lock is invented by this planning note.
+
+## Review45 — explicit narrow follow-up authority
+
+Main verifies the provisional184-file seal56f5b96b…/1,186 pins/canonical155 and
+records review45n1–n4. The user then explicitly approves both ask-modal decisions:
+
+- Parent-only /mnt/data/Projects0775→0755, after owner/canonical path/device/inode
+  verification. No sudo, recursive change, ownership/content/descendant permission
+  change, mount, move or cleanup. This is a specific exception to new-only writes,
+  not standing authority to change existing storage permissions.
+- Extend source scope only to lib/runtime.mjs:runFamily() postflight/inventory
+  handling, consumerStorage() binding-before-marker ordering, authored rejection
+  tests and exact new README preimage .md→.md.txt packaging. Preserve the original
+  producer/seal first in Git. Do not modify preimage bytes or old map/seal contents;
+  disclose historical/current path differences with a separate correction receipt.
+
+Main records before/after parent identity/mode externally and verifies the sole
+permission bit change. The source correction writer does NOT change permissions
+or create HDD namespaces. Original184-file seal remains tied to its original
+producer revision, not silently re-signed as current after the packaging rename.
+Current checks get fresh labels/maps and old failures remain. All other production
+helpers/source/exports/dependencies/old evidence remain fixed. Source/AST checks
+and authored but unrun adversaries cannot close runtime confinement. Independent
+review precedes any separately selected HDD fixture/test/materialization phase.

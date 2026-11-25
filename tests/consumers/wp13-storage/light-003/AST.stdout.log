@@ -1,0 +1,1 @@
+{"status":"source-AST-only-not-runtime-or-MJS-semantic-check","modules":5,"limits":"AST control paths only; no helper imports or runtime assertions"}
