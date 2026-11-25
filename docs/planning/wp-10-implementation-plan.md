@@ -44,6 +44,25 @@ The bridge is held asccede5c. Main selects the bounded
 provisional admission-notification ordering change and unchanged pure waiting limit.
 No consumer activation or old fixture/profile rebaseline follows from that selection.
 
+The read-only neutral-consumer contract is delivered at
+`/tmp/opencode/wp10-neutral-consumer-contract/REPORT.md`. After the corrected
+producer is preserved/intaken, main can allocate one serialized vendor-free consumer
+owner for renderer config/issuer, real collection refs/functional controls and pager
+origins. Proposed config is one optional reordering group: rows identify actual
+admission/app lease/designated handle column/exact onSubmit receiver; columns:true
+also works independently with ordinary genuine C/columns authority. No config alone
+is a grant. Existing renderer capture and host signature allowlists need genuine
+provenance preflight before private locale/cell/formatter work.
+
+Review22n2 separately holds row submission: existing wrapped onSubmit checks can
+fail after pending creation, whereas an outer boundary around a raw callback can
+notify retired A after a pre-token callback commits B. Select an issued pre-token
+renderer/native cut or prepared-operation seam against the released producer before
+row activation. Do not extend the active source lease or invent a public API now.
+Common refs/column/pager authoring need not implement a fake row transport to proceed.
+The [selected handoff constraints](wp-10-ui-source-fences-plan.md#explicit-admission-notification-order-disposition)
+remain binding; source types/light checks do not establish atomic callback delivery.
+
 ## Stage1 ownership and outcome
 
 One worker owns packages/react/src/reordering/{types,capture,rows,columns,index}.ts

@@ -1885,6 +1885,19 @@ The [dependency owner](docs/planning/wp-10-adapter-dependency-plan.md#user-selec
 records the pinned comparison and no-newer-fixed-artifact result. No patch or
 alternative installation is authorized by the investigation.
 
+### n3 — Feedback.none leaves the proposed drag path without a live shape
+
+The Scroller follow-up traces Feedback.none returning before shape production and
+KeyboardSensor returning before movement when no shape exists. Main independently
+reads both pinned source branches. A separate indicator does not fill the manager's
+shape; the current native lifetime owns refs only. The proposed static configuration
+is therefore not a demonstrated keyboard/collision adapter. Source authoring needs
+a closed live geometry/lifetime protocol, not a fake shape, raw DOM lookup callback
+or automatic requirement waiver. Public direct Scroller unregister can prevent its
+task from arming before enrollment, but does not resolve this geometry gap or prove
+touch/overflow/RTL usability. No runtime reproduction, native cleanup verification
+or independent closure is claimed; the original static inspection seal is preserved.
+
 ## WP-10 UI bridge intake — review session 22 (provisional)
 
 ### n1 — UI-only revocation can reach source-observation retirement
@@ -1899,3 +1912,20 @@ loss, retagging old command receipts or fabricating a backend outcome. Pre-token
 begin notification creates a separate orphan risk and requires explicit ordering
 disposition before implementation. Preserve the held candidate and old assertions;
 runtime/independent correction verification stays final and n1 remains open.
+
+### n2 — Existing renderer callback wrapper cannot be the atomic submit handoff
+
+The neutral-consumer report traces two unsafe combinations. A normal captured
+onSubmit wrapper performs callback-role source checks after begin returns; failure
+can strand a newly issued pending operation before notification. A single outer
+renderer boundary around begin/rawSubmit instead checks too late if a pre-token
+application read commits renderer B on the same model without invalidating A's
+admission UI cut. Main reads actual RendererCapture.callback entry/finally checks,
+tableRendererBoundary and renderer capture/activate/clear hooks; they do not supply
+the missing closed pre-token cut. No runtime counterexample or independent proof
+has run. Preserve the active one-source correction lease unchanged; after its
+handoff, select a narrowly issued prepared-operation or fixed synchronous renderer/
+native-cut bridge. Deny retired actions before pending creation, not by a post-token
+veto, raw callback escape or fabricated backend rejection. Common refs, ordinary-C
+column controls and pager authoring remain separately possible after that producer
+handoff; actual row submission stays held pending this seam. n2 remains open.

@@ -92,12 +92,12 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Definition reorder capabilities | Preserved04941b2/intakeneb17ff9 | Positive combined source types; flags remain configuration, not authority |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
-| Neutral consumer contract | External read-only worker allocated | Freeze actual refs/row-submit/ordinary-C column-only/pager seams without reading active admission edits; source lease waits for correction |
+| Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Shared one-source writer newly allocated | Separate SRC/UI, callback-free token handoff/deferred admission listeners; other149 sources freeze |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| Vendor lifetime/upstream preparation | Reports delivered; read-only follow-up active | No newer fixed artifact; exact supported Scroller prevention/keyboard path under investigation, no patch/install/adapter code |
+| Vendor lifetime/upstream preparation | Scroller report delivered; worker released | Public idle unregister can prevent Scroller work; Feedback.none lacks live targeting shape, no adapter readiness or patch/install |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
 proof, with inert failure on ended React ref callbacks plus bounded fresh-ticket
@@ -244,6 +244,34 @@ Main's documentation replay passes241 Markdown/863 local links and all18 checker
 regressions; scoped tracked-document whitespace also passes. External source reads
 and structural checks do not verify runtime cleanup, the source/UI correction,
 consumer behavior, semantic PRD equivalence or independently close numbered findings.
+Scroller follow-up is delivered. Main independently reads pinned registry removal,
+Feedback.none early return and KeyboardSensor's absent-shape movement exit. Review21n3
+records the missing live geometry owner; direct public removal before enrollment is
+not recovery of armed work. Required touch/overflow/RTL/keyboard feasibility remains
+unproved. No dependency/code activation follows, and the source/UI writer continues
+independently. Reports do not establish a configuration-only usable adapter.
+Main selects the provisional ADR-08 boundary of proved table-owned retirement,
+not universal vendor quiet. Exact private/native effects and real partial/armed debt
+remain blocking; metadata-only/shared effects are not silently called drained. No
+adapter lease follows. A final read-only geometry/retirement contract pass is
+allocated externally at `/tmp/opencode/wp10-closed-adapter-contract/REPORT.md`, using
+only frozen refs/core/renderer and installed vendor sources, not active admission
+edits. It must either supply one closed implementable protocol or name the exact
+unsupported seam; no patch/install/alternative keyboard engine is allocated.
+Neutral-consumer report is delivered at its allocated path. Main reads actual
+RendererCapture.callback checks, outer renderer boundary and capture/activate/clear
+hooks. Review22n2 records the additional source-traced atomic-submit gap: a wrapped
+notification can fail after pending creation; raw notification under only an outer
+boundary can call retired A after pre-token callback installs B. No runtime case is
+claimed. Do not expand the active admission writer lease: preserve its corrected
+handoff first, then select a closed prepared-operation or synchronous renderer/native
+cut bridge. Common issuer/refs, ordinary-C column-only and receipt-backed pager can
+be allocated separately afterward; row terminal action remains held until that cut
+is implemented. No raw onSubmit escape, post-token veto or fake refusal is allowed.
+The later docs replay passes241 Markdown/864 links and18 checker regressions before
+this report note; it does not establish either consumer seam or runtime behavior.
+Structural replay after the neutral-contract links passes241 Markdown/865 local
+links; scoped document whitespace passes. No runtime/correction approval follows.
 
 ### Current ownership and next action
 

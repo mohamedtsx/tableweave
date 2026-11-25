@@ -169,3 +169,29 @@ open/unmerged. A bounded read-only follow-up traces supported Scroller exclusion
 prevention and keyboard usability against actual public APIs. It allocates no
 adapter/native-resource code, dependency patch or requirement change. Dependencies
 stay held; the independent source/UI correction continues.
+
+## Scroller prevention and live-shape limitation
+
+The follow-up report at `/tmp/opencode/wp10-scroller-boundary/REPORT.md` finds that
+the public direct `manager.registry.plugins.unregister(Scroller)` removes the core
+plugin; merely omitting it from a replacement plugin list does not. Main independently
+reads the pinned [registry implementation](https://github.com/clauderic/dnd-kit/blob/3910e2773d57482f58ba135623523fe97b588245/packages/abstract/src/core/plugins/registry.ts).
+Removal before **any** native enrollment/input is a possible source-level prevention
+protocol, not cancellation of an already-armed write or a tested cleanup result.
+Fixed lists must exclude AutoScroller and any subsequent Scroller registration.
+
+The same report identifies a separate blocker in the earlier proposed configuration:
+[Feedback.none](https://github.com/clauderic/dnd-kit/blob/3910e2773d57482f58ba135623523fe97b588245/packages/dom/src/core/plugins/feedback/Feedback.ts)
+returns before assigning/updating the active drag shape. Main independently reads
+that branch and [KeyboardSensor](https://github.com/clauderic/dnd-kit/blob/3910e2773d57482f58ba135623523fe97b588245/packages/dom/src/core/sensors/keyboard/KeyboardSensor.ts),
+whose movement exits without a shape. A sibling indicator alone supplies none.
+Thus the earlier static configuration is not established as keyboard/drop-target
+usable. The refs-only lifetime has no geometry producer/grant; one initial rectangle
+does not account for subsequent movement/layout/scroll changes. Review21n3 records
+this source-only finding without changing the original inspection seal.
+
+No adapter activation follows from removable Scroller. A separately selected closed
+geometry/lifetime owner and exact native retirement still precede code. Offscreen
+current-page reachability, touch/overflow, RTL, keyboard targeting and focus remain
+required feasibility checks. No normal Feedback/overlay/clone behavior, replacement
+keyboard algorithm, vendor patch or private-field manipulation is silently adopted.

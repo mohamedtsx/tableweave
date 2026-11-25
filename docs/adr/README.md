@@ -203,3 +203,32 @@ early-listener assertions and record their current-contract conflict for final r
 Pre-entry waiting is distinct from real in-flight incoherent source failure, which
 keeps the existing pure detach semantics. No offline continuation, runtime/corrective
 verification, package approval or requirement waiver is inferred.
+
+## WP-10 ADR-08 vendor ownership boundary — provisional engineering selection
+
+FR-02/03/06, AC-12/13/21/25 and G-02 retain source isolation, real collection
+identity and input parity. The upstream investigation finds no fixed upgrade and
+does not authorize a patch. Main selects **proved table-owned retirement**, not a
+promise that every vendor microtask, shared platform shim or externally retained
+object has vanished. This matches the existing native lifetime's owned-reference
+boundary; it is not permission for late private/native effects.
+
+Before cleanup can acknowledge success, Tableweave's private routes/configuration/
+joins/tickets must be cleared, exact owned native callbacks/enrollments retired and
+any remaining work proved unable to read private geometry, invoke application
+actions or mutate owned DOM. In-progress vendor dispatch still needs tombstones;
+unsubscription alone is insufficient. Throwing/partial/armed cleanup retains exact
+debt, blocks conflicting enrollment and cannot acknowledge P cleanup as successful.
+No timer guess, shared scheduler flush, invented disposer receipt or backend outcome
+may discharge it. A retired manager is never reused for a new incarnation.
+
+The [dependency investigation](../planning/wp-10-adapter-dependency-plan.md#scroller-prevention-and-live-shape-limitation)
+identifies supported idle Scroller removal but also the missing live shape under
+Feedback.none. A fixed same-family DOM backend remains only a candidate: actual
+geometry ownership/update order, all retained native routes and partial-construction
+cleanup must be source-accounted before a code lease. Root/runtime/type optionality,
+no reparenting, keyboard/touch/overflow/RTL/focus and genuine packed G-02 evidence
+remain required. No normal Feedback fallback, vendor patch/install, custom permissive
+plugin, arbitrary app geometry/disposer callback or adapter implementation is
+authorized by this ownership selection. Independent final review may reject its
+proof; no numbered finding or packet is approved here.

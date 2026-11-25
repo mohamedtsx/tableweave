@@ -85,6 +85,11 @@ declarations, annotated and removal checks remain separate required boundaries.
   suspend during settle/ack/reconcile must not retire a still-live source; combined
   source loss must still fail closed. Pre-entry source waits retain app-owned notices;
   no generic in-flight unavailable/offline continuation is claimed.
+  Review22n2 additionally requires a real renderer/native pre-token cut: normal
+  callback wrappers cannot be inserted after token creation and an outer boundary
+  alone cannot excuse retired A notification following a callbackful pre-token B
+  commit. Test source/UI/frame/actor changes independently, without a fake refusal
+  or an app-supplied allowing checker.
 - **Actual source/lifetime:** P-issued participants, synchronous private clearing
   before observers, source-only/retained/requested-domain distinctions, same-D second
   frame owner/P2/equal strings and ABA, truthful app counters, stale lease cleanup,
