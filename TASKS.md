@@ -413,6 +413,24 @@ to-paint and initial all-samples gates need explicit engineering disposition bef
 authoring; canonical product budgets are not silently changed by a proposal.
 Dedicated runner/image/browser readiness remains user-deferred, not permission
 for shared-host measurements, provisioning or invented approvals/results.
+WP-13 writer stopped before format-003 at102,400,000 available bytes, below the
+128MiB safety floor. Earlier light-002 is historical only: later edits still need
+fresh format/LIGHT/pins/seal. No partial artifact for that refused attempt is
+invented. Its read-only scope check matches2,286 old files/canonical155/14 initial
+installed inputs, with only main TASKS drift disclosed; source remains unsealed.
+
+User requested recovery of the unmounted1TB drive. The existing ext4 data partition
+at/mnt/data mounts read-only; user metadata inspection reports clean and UDisks
+SMART reports no current failure/pending/reallocated/uncorrectable sectors. User
+then mounts it normally read/write. Main verifies one exclusive temporary write/
+fsync/read-back and removes only that check file/directory; no existing disk data,
+filesystem repair/format/fstab rewrite, project move or cleanup was performed.
+After another server restart, main observes the read/write mount still present and
+3.8GiB free on the SSD (about870GiB on HDD). This is an observation, not proof of
+what freed SSD capacity. The interrupted relocation modal had no answer/authority;
+no relocation is needed for the remaining small source checks. Resume only the
+unfinished WP-13 format/LIGHT/pin/seal steps under the existing lease and capacity
+floor. No completed source work/rebaseline or runtime/build/install is repeated.
 
 ## Current WP-10 implementation handoff
 
