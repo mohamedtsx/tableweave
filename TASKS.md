@@ -919,6 +919,21 @@ correction context), then conditional45 original FS tests/one correction rejecti
 test once each in fresh final-hdd-fs-tests-001 receipts. Only newly created proof
 fixtures may mutate as explicitly authored; no source/old data/parent mode/install/
 real producer/tool acquisition or cleanup. Current guard source stays52d165f.
+Independent9B passes all three once-only commands: baseline35 valid+7 exact-code
+rejects+1 valid correction context, original45/45 FS tests and correction1/1. Main
+verifies46 sealed entries/six exact protection maps and all683 actual HDD records,
+30 mutated namespaces/15 unchanged allocations, preserving all renamed objects.
+Current1,199 pins/285 seal/cache/parent and2,022 old receipt/journal entries stay
+fixed. Receiptd13becda… at final-hdd-fs-tests-001. Review49 closes review45n3's
+deterministic inode-before-marker scenario and only exercised FS lease obligations.
+Actual family-child n45n1/real checkout/tool/archive/ordinary/profile/G-05 gates
+remain OPEN; no real candidate materialization has run. Drag remains blocked.
+Main allocates inert source-only tool-capsule acquisition authoring in NEW external
+/tmp/opencode/final-hdd-tool-prep-001/** for a planned distinct NEW cand001 namespace.
+No download/extraction/copy/tool execution/HDD namespace is selected by that writing
+task. Main reviews the script before separately selecting exact pinned pnpm10.13.1
+artifact acquisition/inspection and an independent owned Node copy. No dependency
+version/manifest/lock/profile/producer/install/build or old-evidence change.
 
 ## Current WP-10 implementation handoff
 

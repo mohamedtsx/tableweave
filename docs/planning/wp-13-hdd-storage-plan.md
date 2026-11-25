@@ -168,3 +168,38 @@ only0020 removed. Before/after external receipt SHA256
 /tmp/opencode/final-hdd-parent-permission-001/receipt-hashes.json. This corrects
 the physical prerequisite only; no HDD proof namespace/guard/helper/runtime or
 tool acquisition/materialization has run. Other permissions/contents stay fixed.
+
+## After review49 — planned genuine tool capsule, not executed
+
+Independent filesystem baseline43 contexts/original45 tests/correction1 test now
+pass with exact mutation confinement. Review49 closes only exercised lease guards
+and deterministic inode-before-marker behavior; actual family-child/ordinary/G-05
+gates stay open. All fresh adversary data and old receipts remain in place.
+
+Main allocates inert authoring at /tmp/opencode/final-hdd-tool-prep-001, planning a
+distinct NEW namespace /mnt/data/Projects/tableweave-final-verification-cand001.
+No namespace/download/extraction/copy/tool execution is selected merely by authoring.
+Main must review the complete script and explicitly select its exact phase first.
+
+The proposed data-only capsule consists of an integrity-checked complete genuine
+pnpm10.13.1 JS artifact from the already identified exact registry endpoint/tarball,
+a regular independent byte copy of the already pinned Node24.22.0 ELF, and a
+transparent regular launcher using that exact owned Node and local genuine package.
+No disguised standalone ELF, invented package manifest, symlink/global fallback,
+project dependency/version/lock/profile change, tool execution or install script.
+
+Any selected acquisition phase must reject existing targets/redirects/foreign URLs,
+validate hard-pinned SRI before strict path/type/size-limited tar inspection, retain
+all original bytes/partial failures, and extract only regular bodies into owned
+directories with explicit safe modes. Actual member count/bytes/license declarations
+must match the selected metadata; no signature/legal or runtime compatibility claim
+follows from integrity. Node copying must preserve selected source bytes/identity
+and create a distinct destination inode. No source clone, producer install, package
+emission/archive or consumer target is part of this capsule phase.
+
+The real producer role must remain empty, with no fake .git/manifest. No request/
+main-approval/namespace lease or approved toolchain receipt is fabricated before
+genuine producer/tool/input review. Data-only capsule maps/status stay UNREVIEWED
+until independent inspection and a separately selected owned-tool runtime probe.
+Exact source/tool controls, genuine detached checkout/frozen installs/current
+generation180/199 and ordinary lock/archive proof remain later held phases.

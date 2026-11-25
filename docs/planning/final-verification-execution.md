@@ -645,3 +645,15 @@ actual no-follow inode/mode/hash/link inventory. Receiptfd8bb136… at
 exclusive synthetic fixture construction, not real producer/tools/archive or test
 proof. With those prerequisites satisfied,9B's independent baseline and conditional
 two suites are now selected. No additional command or materialization is implicit.
+
+### 9B actual independent result
+
+The readonly baseline observes35 valid+7 exact-code rejects+1 valid correction
+context, then original45/45 and correction1/1 pass once/exit0/empty stderr/no timeout/
+signal/failures/skips. Main verifies46 sealed receipts/six equal protection maps and
+raw counts; receipt d13becda… at final-hdd-fs-tests-001. All683 actual allocated HDD
+records match;30 namespace deltas/15 unchanged allocations and all preserved inode
+renames checked. Old2,022 receipt/journal entries/source1,199 pins/285 seal/cache/
+parent stay fixed. Review49 closes only exercised FS lease obligations and n45n3's
+actual deterministic inode-before-marker scenario. No actual family-child, genuine
+producer/tools/archive/ordinary/profile/G-05 outcome follows. No tests rerun.

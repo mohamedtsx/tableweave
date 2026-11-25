@@ -10,6 +10,32 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 49 (independent real filesystem guards)
+
+All three commands run once/exit0/empty stderr/no timeout/signal: baseline35 valid
+cases+7 exact-code rejections+1 valid correction context; original FS45/45; correction
+FS1/1, with no failures/skips/cancellations/todos. Main independently verifies46
+receipt entries/six exact protection maps/raw counts and baseline outcomes. Receipt
+/tmp/opencode/final-hdd-fs-tests-001/receipt-hashes.json SHA256
+d13becda363fc31db906f2bed4089c4416a1bc8f0aa732c57601fce70c198f69.
+
+Main also checks all683 actual HDD inventory entries against sealed identity/mode/
+size/hash/link records, exactly30 changed case namespaces/15 unchanged allocations,
+and original inode/device/mode/content preservation for all nine renamed path names.
+663→683 entries; no object deleted. Source/current1,199 pins/285 correction seal/
+cache/parent and2,022 previous receipt/journal entries remain unchanged. No installed
+source, private profile or parent permission operation occurs.
+
+Bounded exercised filesystem-lease/control/fresh-target/owned-scratch obligations
+pass. **Review45n3 closed for the deterministic actual-inode-before-marker scenario:**
+fresh real context, replaced consumer inode, E_STORAGE_PHYSICAL_REPLACEMENT, zero
+owner-marker metadata reads and unchanged correction namespace. Generic/combined-
+fault assertions are not a per-field diagnostic ledger; parent replacement is a
+stat mock and unowned-namespace is same-UID0755, not foreign-user/hostile race proof.
+Empty fixture .git/maps/manifests certify no real checkout/tool/archive/profile or
+application grant. Review45n1's actual family-child/postflight runtime stays OPEN;
+earlier extracted-control units remain separate. No G-05/packet/stable acceptance.
+
 ## Final verification — review session 48 (exclusive HDD guard setup intake)
 
 Main reviews all344 setup-script lines/nine current source pins and exact42-case
