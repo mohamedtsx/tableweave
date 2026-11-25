@@ -290,6 +290,10 @@ authored instrumentation cannot pass performance acceptance.
 
 ## WP-15 Real consumer and stable readiness
 
+The [eligible documentation lease](wp-15-readiness-plan.md) authors candidate/
+consumer protocols only. No actual target/consumer/release acceptance follows;
+separately deferred authority and engineering gates remain required.
+
 - **Role/dependencies:** integration/release reviewer; WP-12–WP-14 and separate
   actual consumer target/access/change authorization.
 - **Read:** release gates, AC-29, operations, full traceability/evidence.

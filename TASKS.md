@@ -38,7 +38,9 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
-| WP-13 archive tooling | Source preserved10f6a8a/runner5853ef6; writer released | Main source/light intake passes; one-file error-attribution correction in main intake; actual build/pack/install/runtime/independent proof final |
+| WP-13 archive tooling | Provisional source frozen25fdfde; writer released | Main source/light intake passes; actual build/pack/install/runtime/independent proof final |
+| WP-14 benchmark source | Original preservedf60df08; bounded guard-correction writer active | Source/light intake passes; candidate/runner/paint/measurements deferred; no execution |
+| WP-15 eligible protocols | Isolated new-only documentation writer allocated | Two protocols only; real target/release gates remain separately deferred/unverified |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -516,6 +518,26 @@ No generator/oracle/checksum/statistics/helper/config/driver/browser/paint/bench
 or consumer runs. Review32n1/n2 record incomplete explicit-profile conformance and
 unbounded cleanup waits. Preserve this baseline, then allocate only candidate.mjs/
 driver.mjs and new correction receipts; do not re-sign the old31/117/1,335 maps.
+Main preserves original WP-14 sourcef60df08 and selects the two-file/new-only
+correction in docs/planning/wp-14-guards-plan.md. The source writer owns only
+candidate.mjs/driver.mjs and new tests/benchmarks/wp14-guards/**. All other source,
+31/117/1,335 maps/logs, profiles/library/app/manifests/lock/output identities stay
+fixed. Ordinary/private profile closure and bounded cleanup need actual source
+guards, not caller-selected arbitrary maps or unbounded waits; all corresponding
+runtime/statistics/paint/hardware/benchmark tests remain UNRUN.
+After actual provisional WP-14 source intake/preservationf60df08, main selects the
+independent two-document WP-15 lease in docs/planning/wp-15-readiness-plan.md. The
+writer uses isolated feat/wp-15-readiness-docs at that base and writes only the two
+new operations protocols plus external handoff receipts. It does not read active
+primary guard-correction WIP or change any existing repository file. Main retains
+navigation/shared-policy/Git/status ownership. No runtime/performance/consumer/
+registry/account/publication/remote operation is authorized, and no currently
+deferred consumer/runner/manual inputs are requested again.
+The preserved original WP-14 source/navigation replay passes289 Markdown/1,082
+links and19 checker probes; current main metadata whitespace passes. That result
+predates active guard-correction/isolated protocol WIP and is not a new whole-tree
+check or an observed benchmark. Primary remains the WP-14 packet; isolated WP-15
+documents will be reviewed/preserved separately before later stack intake.
 
 ## Current WP-10 implementation handoff
 
@@ -2004,7 +2026,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-020 | WP-12 integrated browser/manual accessibility | in progress | Provisional new-only fixture/workbook source authoring after WP-11 static intakes | Browser/manual/independent acceptance remains final; G-02 and unfinished framework proof are not waived |
 | TASK-021 | WP-13 packed compatibility/release tooling | in progress | One new-only additive source-tooling owner after WP-12 static intake | Actual archive/install/type-negative/runtime/independent proof final; no publication rights |
 | TASK-022 | WP-14 reproducible performance | in progress | One new-only source fixture/timing/report owner after provisional WP-13 intake | Dedicated runner/paint/candidate/profile/execution deferred; no measurements claimed |
-| TASK-023 | WP-15 real consumer/stable readiness | planned | Integration reviewer assigned when inputs exist | Separate actual target/access/write inputs and WP-12–14 evidence required |
+| TASK-023 | WP-15 real consumer/stable readiness | in progress (eligible docs only) | Isolated two-file candidate/consumer protocol lease after WP-14 source intake | Actual target/access/change authority and WP-12–14 runtime/manual/performance proof still required |
 
 ## TASK-001 — Documentation foundation
 

@@ -138,3 +138,6 @@ scope/seal/pin checks pass31 source/metadata inputs1cd83de1…/117 artifacts68f1
 checksums/statistics/driver/browser/paint/benchmark remain unexecuted, not validated
 data or performance facts. Review32n1/n2 assign separate profile-closure/cleanup
 corrections; preserve original maps/raw failures before changing those bodies.
+Main preserves originalf60df08 and selects the bounded
+[profile/cleanup source correction](wp-14-guards-plan.md). It grants no benchmark,
+dedicated-runner, ordinary/private-profile or independent performance approval.
