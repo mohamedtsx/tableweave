@@ -63,6 +63,150 @@ const FRONTEND = [
   "vite.config.ts",
 ];
 const SCHEDULER = "committed-dom-double-raf-message-task-v1";
+export const OWNED_WAIT_MS = 30_000;
+/** Deadline snapshot is permanent. Late settlement is consumed, never a success upgrade. */
+export function boundedOwnedWait(label, task, milliseconds = OWNED_WAIT_MS) {
+  demand(
+    typeof label === "string" &&
+      typeof task === "function" &&
+      Number.isSafeInteger(milliseconds) &&
+      milliseconds > 0 &&
+      milliseconds <= OWNED_WAIT_MS,
+    "E_OWNED_DEADLINE",
+  );
+  return new Promise((resolve) => {
+    let decided = false;
+    const finish = (status, pendingAtDeadline = false, failureCode = null) => {
+      if (decided) return;
+      decided = true;
+      clearTimeout(timer);
+      resolve(
+        Object.freeze({
+          label,
+          status,
+          deadlineMs: milliseconds,
+          pendingAtDeadline,
+          failureCode,
+        }),
+      );
+    };
+    const timer = setTimeout(() => finish("timeout", true), milliseconds);
+    Promise.resolve()
+      .then(task)
+      .then(
+        () => finish("completed"),
+        (error) =>
+          finish(
+            "failed",
+            false,
+            error instanceof Error && /^E_[A-Z0-9_]{1,96}$/.test(error.message)
+              ? error.message
+              : "E_OWNED_OPERATION_FAILED",
+          ),
+      );
+  });
+}
+export async function runOwnedCleanup(steps, milliseconds = OWNED_WAIT_MS) {
+  const attempts = [];
+  for (const step of steps)
+    attempts.push(
+      await boundedOwnedWait(step.label, step.action, milliseconds),
+    );
+  return Object.freeze({
+    attempts: Object.freeze(attempts),
+    debts: Object.freeze(
+      attempts.filter((value) => value.status !== "completed"),
+    ),
+  });
+}
+function ownedFailure(debts, attempts = debts) {
+  const error = new Error("E_OWNED_LIFECYCLE_DEBT");
+  error.ownedDebts = Object.freeze([...debts]);
+  error.ownedAttempts = Object.freeze([...attempts]);
+  return error;
+}
+export function retainPrimary(primary, fallback) {
+  return primary ?? fallback;
+}
+async function requireOwnedWait(label, task) {
+  const result = await boundedOwnedWait(label, task);
+  if (result.status !== "completed") throw ownedFailure([result]);
+}
+export async function finishOwnedTrace(
+  cdp,
+  completion,
+  milliseconds = OWNED_WAIT_MS,
+) {
+  return runOwnedCleanup(
+    [
+      { label: "trace-end", action: () => cdp.send("Tracing.end") },
+      {
+        label: "trace-completion",
+        action: () => {
+          demand(
+            completion && typeof completion.then === "function",
+            "E_TRACE_COMPLETION_UNAVAILABLE",
+          );
+          return completion;
+        },
+      },
+      { label: "trace-detach", action: () => cdp.detach() },
+    ],
+    milliseconds,
+  );
+}
+export async function closeOwnedContext(
+  context,
+  browser,
+  milliseconds = OWNED_WAIT_MS,
+) {
+  const first = await runOwnedCleanup(
+    [{ label: "browser-context-close", action: () => context.close() }],
+    milliseconds,
+  );
+  if (!first.debts.length || !browser) return first;
+  const fallback = await runOwnedCleanup(
+    [{ label: "owned-browser-close-fallback", action: () => browser.close() }],
+    milliseconds,
+  );
+  return Object.freeze({
+    attempts: Object.freeze([...first.attempts, ...fallback.attempts]),
+    debts: Object.freeze([...first.debts, ...fallback.debts]),
+  });
+}
+export async function closeOwnedServer(server, milliseconds = OWNED_WAIT_MS) {
+  const closed = new Promise((resolve, reject) => {
+    try {
+      server.close((error) => (error ? reject(error) : resolve()));
+    } catch (error) {
+      reject(error);
+    }
+  });
+  // Attach immediately, even if closeIdleConnections throws independently.
+  closed.catch(() => {});
+  const first = await runOwnedCleanup(
+    [
+      { label: "http-close-idle", action: () => server.closeIdleConnections() },
+      { label: "http-close", action: () => closed },
+    ],
+    milliseconds,
+  );
+  if (!first.debts.length) return first;
+  const fallback = await runOwnedCleanup(
+    [
+      {
+        label: "http-close-owned-connections",
+        action: () => server.closeAllConnections(),
+      },
+      { label: "http-close-after-fallback", action: () => closed },
+    ],
+    milliseconds,
+  );
+  return Object.freeze({
+    attempts: Object.freeze([...first.attempts, ...fallback.attempts]),
+    debts: Object.freeze([...first.debts, ...fallback.debts]),
+  });
+}
 function tree(root) {
   const result = {};
   function visit(prefix) {
@@ -292,11 +436,11 @@ async function serve(ctx, built) {
     server.once("error", reject);
     server.listen({ host: "127.0.0.1", port: 6576, exclusive: true }, resolve);
   });
-  return () =>
-    new Promise((resolve, reject) => {
-      server.close((error) => (error ? reject(error) : resolve()));
-      server.closeIdleConnections();
-    });
+  return async () => {
+    const cleanup = await closeOwnedServer(server);
+    if (cleanup.debts.length)
+      throw ownedFailure(cleanup.debts, cleanup.attempts);
+  };
 }
 export function paintReview(ctx, run, built) {
   demand(ctx.selection.paintReview, "E_HOLD_PAINT_REVIEW");
@@ -435,7 +579,12 @@ async function session(ctx, run, built, index, validation) {
     primary = null,
     cdp = null,
     completeTrace = null,
-    sessionResult = null;
+    sessionResult = null,
+    ownedBrowser = null,
+    preflight = null,
+    traceCleanupAttempted = false;
+  const cleanupAttempts = [],
+    cleanupDebts = [];
   const trace = [],
     samples = [],
     paths = [],
@@ -456,13 +605,14 @@ async function session(ctx, run, built, index, validation) {
       },
     );
     const browser = context.browser();
+    ownedBrowser = browser;
     demand(browser, "E_BROWSER_PROCESS");
     demand(
       browser.version() === observed.spec.browser.engineVersion,
       "E_ACTUAL_ENGINE_VERSION",
     );
-    const preflight = await browser.newBrowserCDPSession(),
-      info = await preflight.send("SystemInfo.getProcessInfo"),
+    preflight = await browser.newBrowserCDPSession();
+    const info = await preflight.send("SystemInfo.getProcessInfo"),
       command = await preflight.send("Browser.getBrowserCommandLine");
     const process = info.processInfo.find((value) => value.type === "browser");
     demand(Number.isSafeInteger(process?.id), "E_BROWSER_PID");
@@ -476,7 +626,8 @@ async function session(ctx, run, built, index, validation) {
         observed.spec.browser.launchArgumentsSHA256,
       "E_ACTUAL_BROWSER_FLAGS",
     );
-    await preflight.detach();
+    await requireOwnedWait("preflight-detach", () => preflight.detach());
+    preflight = null;
     page = context.pages()[0] ?? (await context.newPage());
     page.on("pageerror", () => errors.push("E_UNEXPECTED_PAGE_ERROR"));
     page.on("console", (message) => {
@@ -504,11 +655,13 @@ async function session(ctx, run, built, index, validation) {
       completeTrace = new Promise((resolve) =>
         cdp.once("Tracing.tracingComplete", resolve),
       );
-      await cdp.send("Tracing.start", {
-        categories:
-          "devtools.timeline,blink.user_timing,disabled-by-default-devtools.screenshot",
-        transferMode: "ReportEvents",
-      });
+      await requireOwnedWait("trace-start", () =>
+        cdp.send("Tracing.start", {
+          categories:
+            "devtools.timeline,blink.user_timing,disabled-by-default-devtools.screenshot",
+          transferMode: "ReportEvents",
+        }),
+      );
     }
     for (const scenarioId of scenarioIds) {
       const [mode, kind] = scenarioId.split(":"),
@@ -544,16 +697,23 @@ async function session(ctx, run, built, index, validation) {
           demand(sample && errors.length === 0, "E_SAMPLE_OR_PAGE_FAILURE");
           samples.push(sample);
           if (kind === "initial") {
-            await page.evaluate(() => window.wp14.end());
+            await requireOwnedWait("source-end-after-initial", () =>
+              page.evaluate(() => window.wp14.end()),
+            );
             mounted = false;
           }
         }
-      await page.evaluate(() => window.wp14.end());
+      await requireOwnedWait("source-end-after-scenario", () =>
+        page.evaluate(() => window.wp14.end()),
+      );
     }
     if (validation) {
-      await cdp.send("Tracing.end");
-      await completeTrace;
-      await cdp.detach();
+      traceCleanupAttempted = true;
+      const traceCleanup = await finishOwnedTrace(cdp, completeTrace);
+      cleanupAttempts.push(...traceCleanup.attempts);
+      cleanupDebts.push(...traceCleanup.debts);
+      if (traceCleanup.debts.length)
+        throw ownedFailure(traceCleanup.debts, traceCleanup.attempts);
       cdp = null;
       const traceBytes = `${JSON.stringify({ traceEvents: trace })}\n`;
       write(run, `${output}/trace.json`, traceBytes);
@@ -632,10 +792,15 @@ async function session(ctx, run, built, index, validation) {
         if (entry.frameFile)
           value.files[entry.frameFile] = record(run, entry.frameFile);
     }
-    put(run, `${output}/session.json`, value);
     sessionResult = value;
   } catch (error) {
     primary = error;
+    if (error instanceof Error) {
+      for (const debt of error.ownedDebts ?? [])
+        if (!cleanupDebts.includes(debt)) cleanupDebts.push(debt);
+      for (const attempt of error.ownedAttempts ?? [])
+        if (!cleanupAttempts.includes(attempt)) cleanupAttempts.push(attempt);
+    }
     put(run, `${output}/failure.json`, {
       status: "FAILED_RAW_RETAINED",
       code: error instanceof Error ? error.message.slice(0, 100) : "E_FAILURE",
@@ -643,36 +808,72 @@ async function session(ctx, run, built, index, validation) {
       pageErrors: errors,
     });
   } finally {
-    let cleanup = null;
-    try {
-      if (page && !page.isClosed())
-        await page.evaluate(() => window.wp14?.end());
-    } catch {
-      cleanup = "E_SOURCE_CLEANUP_DEBT";
-    }
-    try {
-      if (cdp) {
-        await cdp.send("Tracing.end");
-        await completeTrace;
-      }
-    } catch {
-      cleanup ??= "E_TRACE_CLEANUP";
-    }
-    try {
-      await context?.close();
-    } catch {
-      cleanup ??= "E_OWNED_BROWSER_CLEANUP";
-    }
-    if (cleanup) {
+    const retain = (result) => {
+      cleanupAttempts.push(...result.attempts);
+      cleanupDebts.push(...result.debts);
+    };
+    if (page)
+      retain(
+        await runOwnedCleanup([
+          {
+            label: "source-end-finally",
+            action: () =>
+              page.isClosed()
+                ? undefined
+                : page.evaluate(() => window.wp14?.end()),
+          },
+        ]),
+      );
+    if (preflight)
+      retain(
+        await runOwnedCleanup([
+          {
+            label: "preflight-detach-finally",
+            action: () => preflight.detach(),
+          },
+        ]),
+      );
+    if (cdp && !traceCleanupAttempted)
+      retain(await finishOwnedTrace(cdp, completeTrace));
+    if (context) retain(await closeOwnedContext(context, ownedBrowser));
+    if (cleanupDebts.length) {
+      primary = retainPrimary(primary, ownedFailure(cleanupDebts));
       put(run, `${output}/cleanup-debt.json`, {
-        status: "CLOSED_WITH_CLEANUP_DEBT",
-        code: cleanup,
+        status: "HOLD_UNRESOLVED_OWNED_CLEANUP_DEBT",
+        primary:
+          primary instanceof Error ? primary.message.slice(0, 100) : null,
+        attempts: cleanupAttempts,
+        debts: cleanupDebts,
+        lateSettlement:
+          "Cannot erase this attempt's failure; no termination or P-purge receipt inferred from timeout/fallback",
+        capturedSamples: samples.length,
       });
-      primary ??= new Error(cleanup);
+    }
+    if (primary) {
+      if (!fs.existsSync(path.join(run, `${output}/failure.json`)))
+        put(run, `${output}/failure.json`, {
+          status: "FAILED_RAW_RETAINED",
+          code:
+            primary instanceof Error
+              ? primary.message.slice(0, 100)
+              : "E_FAILURE",
+          capturedSamples: samples.length,
+          pageErrors: errors,
+        });
+      put(run, `${output}/failure-samples.json`, {
+        status: "FAILED_PARTIAL_RAW_NOT_MEASUREMENT_APPROVAL",
+        samples,
+      });
+      if (validation && trace.length)
+        put(run, `${output}/failure-trace.json`, {
+          status: "FAILED_PARTIAL_TRACE_NOT_PAINT_OR_COMPLETION_PROOF",
+          traceEvents: trace,
+        });
     }
   }
   if (primary) throw primary;
   demand(sessionResult, "E_NO_SESSION_RESULT");
+  put(run, `${output}/session.json`, sessionResult);
   return sessionResult;
 }
 export async function execute(ctx, run, validation) {
@@ -703,11 +904,17 @@ export async function execute(ctx, run, validation) {
   } finally {
     try {
       await close();
-    } catch {
+    } catch (error) {
       put(run, `${mode}/server-cleanup-debt.json`, {
-        status: "CLOSED_WITH_SERVER_CLEANUP_DEBT",
+        status: "HOLD_UNRESOLVED_OWNED_SERVER_CLEANUP_DEBT",
+        primary:
+          primary instanceof Error ? primary.message.slice(0, 100) : null,
+        debts: error instanceof Error ? (error.ownedDebts ?? []) : [],
+        attempts: error instanceof Error ? (error.ownedAttempts ?? []) : [],
+        lateSettlement:
+          "No success upgrade or process/connection termination inferred from timeout",
       });
-      primary ??= new Error("E_SERVER_CLEANUP_DEBT");
+      primary = retainPrimary(primary, error);
     }
   }
   if (primary) throw primary;

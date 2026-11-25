@@ -68,6 +68,22 @@ safe cleanup independently, preserve primary error/debt and stop subsequent samp
 Do not kill ambient processes, delete files, pretend signal/timeout is successful
 cleanup or turn an unresolved browser into a green final report. Runtime reproduction/
 independent closure remains final; the current source is preserved before fixes.
+Main independently reads the two-body correction and its ten authored rejection/
+owned-handle cases. The canonical descriptor/runtime/companion set matches the
+existing profile source; actual ordinary-root derivation, full installed map,
+before/current/after fences, exact configs and independent runtime inodes are
+checked. Cleanup deadlines retain late/fallback debt and defer successful session/
+aggregate receipts until cleanup completes. No further source blocker is found in
+this bounded review; conformance/termination/runtime reproduction is still UNRUN.
+Own static/eight syntax/seal/pin checks pass:17 inputsaf0ad5b4…/69 raw artifacts
+f2e06396…/1,356 pins/1,307 program files;2,675 protected old inputs and155 libraries
+match with exactly two disclosed body deltas plus main bookkeeping drift. Own first
+Biome invocation fails only because main misspells format.mjs as formatter.mjs;
+that raw failure stays external. Corrected11-file invocation passes without edits.
+These source checks do not independently close n1/n2's runtime obligations.
+Own strict positive TS6 and integrated293-Markdown/1,092-link/19-regression checks
+also pass. The correction is ready for provisional source preservation, not final
+profile/deadline/benchmark or independent approval.
 
 ## WP-13 family-runner intake — review session 31 (provisional)
 

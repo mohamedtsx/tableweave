@@ -168,6 +168,446 @@ function equivalent(a, b) {
         : v;
   return JSON.stringify(sorted(a)) === JSON.stringify(sorted(b));
 }
+export const RAC_FILES = Object.freeze(
+  [
+    {
+      path: "dist/private/Table.js",
+      format: "legacy-esm",
+      beforeSha256:
+        "93ef6ab34eb5da85006dc7615e76d2e52eb506114cb0a8a71d0a0f13f7f5152d",
+      afterSha256:
+        "4cbd2a4ba6e9a7e74082c497f3ec0c596c2048fb7d5f30c6e64176374091eacd",
+    },
+    {
+      path: "dist/private/Table.mjs",
+      format: "esm",
+      beforeSha256:
+        "aa49fcfc87cc494b97c6e77eb79e79b9dec6d13de9a0090ae249ee7683d32623",
+      afterSha256:
+        "22edf3fc5423744d2682beadddac018332431bb3e9ebb33c8335d12c776035b6",
+    },
+    {
+      path: "dist/private/Table.cjs",
+      format: "commonjs",
+      beforeSha256:
+        "ba44d79b191776374c4fdf998a38e8af4dd323665f3191627dca37f7400aa4cf",
+      afterSha256:
+        "dc263287e3d9b966416c47818f3adbb7d6d058ce24ffde6b90b183dacbb28ead",
+    },
+  ].map((file) => Object.freeze(file)),
+);
+export const RAC_COMPANIONS = Object.freeze({
+  "runtime.patch":
+    "f3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35",
+  "verify.mjs":
+    "edb10823e1abc6801905641c8a90fce59a72f4eb5dc2fca0250899ccb556c95b",
+  "README.md":
+    "bd2c78e6ef2168f7f62c8f2a42cdb703a67a08107c89af1551a5a2da02dc8671",
+  "NOTICE-RAC":
+    "f8a0dd6c0c050362918b561b015b11e9d95412e655e5af263e5c88134d68dfdb",
+  "LICENSE-APACHE-2.0":
+    "7dfe6526888bac51759c99f9a51262ba2711a8c12a067f2181609dd9a4066b84",
+});
+const RAC_ASSETS = Object.freeze([
+  "profile.json",
+  ...Object.keys(RAC_COMPANIONS),
+]);
+const RAC_PREFIX = "patches/tableweave-rac-table-clone/";
+export function exactKeys(value, required, code) {
+  object(value);
+  demand(equivalent(Object.keys(value).sort(), [...required].sort()), code);
+}
+export function validateRacDescriptor(profile) {
+  object(profile);
+  demand(
+    profile.schemaVersion === 1 &&
+      profile.id === "rac-1.22.1-table-clone-v1" &&
+      profile.status === "private-unlicensed-candidate" &&
+      profile.layout === "isolated-pnpm-project" &&
+      profile.upstream?.name === "react-aria-components" &&
+      profile.upstream.version === "1.22.1",
+    "E_CANONICAL_RAC_PROFILE",
+  );
+  demand(
+    equivalent(profile.files, RAC_FILES) &&
+      equivalent(profile.assets, RAC_COMPANIONS),
+    "E_CANONICAL_RAC_CLOSURE",
+  );
+}
+export function packagedRac(members) {
+  const prefix = "package/compat/rac-table-clone/";
+  const names = [...members]
+    .filter(
+      ([file, member]) => file.startsWith(prefix) && member.type === "file",
+    )
+    .map(([file]) => file.slice(prefix.length));
+  demand(
+    equivalent(names.sort(), [...RAC_ASSETS].sort()),
+    "E_PACKAGED_RAC_SIX_ASSETS",
+  );
+  const bytes = {};
+  for (const name of RAC_ASSETS) {
+    const member = members.get(`${prefix}${name}`);
+    demand(
+      member?.type === "file" && Buffer.isBuffer(member.bytes),
+      "E_PACKAGED_RAC_ASSET",
+    );
+    bytes[name] = member.bytes;
+  }
+  const profile = object(JSON.parse(bytes["profile.json"].toString("utf8")));
+  validateRacDescriptor(profile);
+  for (const [name, expected] of Object.entries(RAC_COMPANIONS))
+    demand(
+      hash(bytes[name]) === expected && profile.assets[name] === expected,
+      "E_PACKAGED_RAC_COMPANION_HASH",
+    );
+  return { profile, bytes };
+}
+/** Pure strict config check; no config application, environment inheritance or install. */
+export function validateProfileConfig(
+  profile,
+  workspace,
+  npmrc,
+  expectedStore = null,
+) {
+  const ordinary = "packages: []\n";
+  const rac = `${ordinary}patchedDependencies:\n  'react-aria-components@1.22.1': patches/tableweave-rac-table-clone/runtime.patch\n`;
+  demand(
+    ["ordinary", "rac-runtime"].includes(profile) &&
+      workspace === (profile === "ordinary" ? ordinary : rac),
+    "E_EXACT_PROFILE_REGISTRATION",
+  );
+  demand(
+    typeof npmrc === "string" &&
+      npmrc.endsWith("\n") &&
+      !npmrc.includes("\r") &&
+      !npmrc.includes("\0"),
+    "E_NPMRC_SHAPE",
+  );
+  const entries = npmrc
+    .slice(0, -1)
+    .split("\n")
+    .map((line) => {
+      demand(/^[a-z][a-z-]*=[^\s$;#]+$/.test(line), "E_NPMRC_LINE");
+      const at = line.indexOf("=");
+      return [line.slice(0, at), line.slice(at + 1)];
+    });
+  demand(
+    new Set(entries.map(([key]) => key)).size === entries.length,
+    "E_NPMRC_DUPLICATE",
+  );
+  const config = Object.fromEntries(entries),
+    required = {
+      registry: "https://registry.npmjs.org/",
+      "save-exact": "true",
+      "strict-peer-dependencies": "true",
+      "auto-install-peers": "false",
+      "engine-strict": "true",
+      "package-manager-strict": "true",
+      "ignore-scripts": "true",
+      "ignore-pnpmfile": "true",
+      "shared-workspace-lockfile": "false",
+      "node-linker": "isolated",
+      "package-import-method": "copy",
+    };
+  exactKeys(config, [...Object.keys(required), "store-dir"], "E_NPMRC_KEY_SET");
+  for (const [key, value] of Object.entries(required))
+    demand(config[key] === value, "E_NPMRC_VALUE");
+  demand(
+    path.isAbsolute(config["store-dir"]) &&
+      path.resolve(config["store-dir"]) === config["store-dir"] &&
+      !config["store-dir"].split("/").includes(".repo") &&
+      (!expectedStore || config["store-dir"] === expectedStore),
+    "E_NPMRC_STORE",
+  );
+  return Object.freeze(config);
+}
+export function requireIndependentFiles(before, after) {
+  demand(
+    before.nlink === 1 &&
+      after.nlink === 1 &&
+      !(before.dev === after.dev && before.ino === after.ino),
+    "E_RAC_RUNTIME_NOT_INDEPENDENT",
+  );
+}
+export function validateConsumerManifest(pkg) {
+  object(pkg);
+  demand(
+    Object.keys(pkg).every((key) =>
+      [
+        "name",
+        "private",
+        "type",
+        "packageManager",
+        "dependencies",
+        "devDependencies",
+      ].includes(key),
+    ) &&
+      pkg.private === true &&
+      pkg.type === "module" &&
+      pkg.packageManager === "pnpm@10.13.1",
+    "E_ISOLATED_PROFILE_MANIFEST",
+  );
+  const dependencies = object(pkg.dependencies ?? {}),
+    development = object(pkg.devDependencies ?? {});
+  demand(
+    Object.keys(dependencies).every((key) => !Object.hasOwn(development, key)),
+    "E_DUPLICATE_PROFILE_DEPENDENCY",
+  );
+}
+function localRac(root) {
+  const actual = directory(
+    fs.realpathSync(path.join(root, "node_modules/react-aria-components")),
+  );
+  demand(actual.startsWith(`${root}/node_modules/`), "E_RAC_ROOT_ESCAPE");
+  const manifest = json(actual, "package.json");
+  demand(
+    manifest.name === "react-aria-components" && manifest.version === "1.22.1",
+    "E_RAC_LOCAL_VERSION",
+  );
+  return actual;
+}
+export function requireRuntimeMaps(profile, beforePaths, afterPaths) {
+  exactKeys(
+    profile.assets,
+    RAC_ASSETS.map((name) => `${RAC_PREFIX}${name}`),
+    "E_RAC_ASSET_MAP_SET",
+  );
+  exactKeys(profile.before, beforePaths, "E_RAC_BEFORE_MAP_SET");
+  exactKeys(profile.after, afterPaths, "E_RAC_AFTER_MAP_SET");
+  for (let index = 0; index < RAC_FILES.length; index++)
+    demand(
+      profile.before[beforePaths[index]].sha256 ===
+        RAC_FILES[index].beforeSha256 &&
+        profile.after[afterPaths[index]].sha256 ===
+          RAC_FILES[index].afterSha256,
+      "E_RAC_CANONICAL_RUNTIME_MAP",
+    );
+}
+export function requireOrdinaryRuntimeMap(ordinary, paths) {
+  object(ordinary.inputs);
+  demand(paths.length === RAC_FILES.length, "E_ORDINARY_RUNTIME_PATHS");
+  for (let index = 0; index < RAC_FILES.length; index++)
+    demand(
+      Object.hasOwn(ordinary.inputs, paths[index]) &&
+        ordinary.inputs[paths[index]].sha256 === RAC_FILES[index].beforeSha256,
+      "E_ORDINARY_REQUIRED_RUNTIME_MAP",
+    );
+}
+function verifyProfile(
+  root,
+  input,
+  wp13Root,
+  request,
+  approval,
+  archive,
+  packaged,
+) {
+  const currentConfig = validateProfileConfig(
+    input.profile,
+    read(root, "pnpm-workspace.yaml").toString("utf8"),
+    read(root, ".npmrc").toString("utf8"),
+  );
+  const currentRac = localRac(root);
+  if (input.profile === "ordinary") {
+    for (const file of RAC_FILES)
+      demand(
+        record(currentRac, file.path).sha256 === file.beforeSha256,
+        "E_ORDINARY_RAC_CHANGED",
+      );
+    return () => {
+      for (const file of RAC_FILES)
+        demand(
+          record(currentRac, file.path).sha256 === file.beforeSha256,
+          "E_ORDINARY_RAC_CHANGED",
+        );
+    };
+  }
+  demand(packaged, "E_MISSING_INSPECTED_RAC");
+  const profile = selected(input.profileReceipt),
+    ordinary = selected(profile.ordinaryReceipt);
+  demand(
+    profile.status === "main-reviewed-wp14-explicit-rac-profile" &&
+      profile.root === root &&
+      profile.archive === archive,
+    "E_EXPLICIT_PROFILE",
+  );
+  demand(
+    ordinary.status === "installed-not-runtime-approved" &&
+      ordinary.profile === "ordinary" &&
+      ordinary.candidate === input.candidate &&
+      /^(styled|vite-styled|next)-ordinary$/.test(ordinary.key),
+    "E_GENUINE_ORDINARY_RAC_RECEIPT",
+  );
+  const ordinaryName = `installed-${ordinary.key}.json`;
+  demand(
+    profile.ordinaryReceipt.path === path.join(wp13Root, ordinaryName) &&
+      approval.receipts[ordinaryName] === profile.ordinaryReceipt.sha256,
+    "E_ORDINARY_RECEIPT_ORIGIN",
+  );
+  const ordinaryRoot = directory(
+    `/tmp/opencode/wp13-consumer-${request.run}-${ordinary.key}`,
+  );
+  demand(
+    ordinaryRoot !== root && !fs.existsSync(path.join(ordinaryRoot, ".git")),
+    "E_ORDINARY_SEPARATE_ROOT",
+  );
+  const owner = json(ordinaryRoot, "wp13-owner.json");
+  demand(
+    owner.protocol === "wp13-current-archives-v1" &&
+      owner.run === request.run &&
+      owner.key === ordinary.key,
+    "E_ORDINARY_OWNER",
+  );
+  const recipe = object(request.consumers[ordinary.key]).package;
+  validateConsumerManifest(recipe);
+  const ordinaryDependencies = {
+    ...recipe.dependencies,
+    ...recipe.devDependencies,
+  };
+  demand(
+    ordinaryDependencies["react-aria-components"] === "1.22.1" &&
+      ordinaryDependencies["@tableweave/react"] ===
+        `file:${path.join(wp13Root, json(wp13Root, "generation.json").archives.react.file)}` &&
+      ordinaryDependencies["@tableweave/heroui"] ===
+        `file:${path.join(wp13Root, json(wp13Root, "generation.json").archives.heroui.file)}`,
+    "E_ORDINARY_RECIPE_ARCHIVE_VERSION",
+  );
+  demand(
+    read(ordinaryRoot, "package.json").toString("utf8") ===
+      `${JSON.stringify(recipe, null, 2)}\n`,
+    "E_ORDINARY_PACKAGE_RECIPE",
+  );
+  const wantedLock = object(approval.consumerLocks[ordinary.key]);
+  demand(
+    wantedLock.status === "main-reviewed-standalone-lock" &&
+      wantedLock.profile === "ordinary" &&
+      wantedLock.herouiArchive === archive &&
+      wantedLock.reactArchive === input.reactArchive,
+    "E_ORDINARY_LOCK_PAIR",
+  );
+  demand(
+    hash(read(ordinaryRoot, "package.json")) === wantedLock.packageSHA256 &&
+      hash(read(ordinaryRoot, "pnpm-lock.yaml")) === wantedLock.lockSHA256 &&
+      equivalent(record(ordinaryRoot, "pnpm-lock.yaml"), ordinary.lock),
+    "E_ORDINARY_FROZEN_LOCK",
+  );
+  validateProfileConfig(
+    "ordinary",
+    read(ordinaryRoot, "pnpm-workspace.yaml").toString("utf8"),
+    read(ordinaryRoot, ".npmrc").toString("utf8"),
+    path.join(wp13Root, "store", ordinary.key),
+  );
+  demand(
+    currentConfig["store-dir"] !== path.join(wp13Root, "store", ordinary.key),
+    "E_RAC_SEPARATE_STORE",
+  );
+  demand(
+    hash(read(ordinaryRoot, ".npmrc")) === wantedLock.npmrcSHA256 &&
+      hash(read(ordinaryRoot, "pnpm-workspace.yaml")) ===
+        wantedLock.workspaceSHA256,
+    "E_ORDINARY_CONFIG_BINDING",
+  );
+  const ordinaryRac = localRac(ordinaryRoot),
+    beforePaths = RAC_FILES.map((file) =>
+      path.relative(ordinaryRoot, path.join(ordinaryRac, file.path)),
+    ),
+    afterPaths = RAC_FILES.map((file) =>
+      path.relative(root, path.join(currentRac, file.path)),
+    );
+  requireRuntimeMaps(profile, beforePaths, afterPaths);
+  requireOrdinaryRuntimeMap(ordinary, beforePaths);
+  const ordinaryControls = Object.fromEntries(
+    [
+      "package.json",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+      ".npmrc",
+      "wp13-owner.json",
+    ].map((file) => [file, record(ordinaryRoot, file)]),
+  );
+  const beforeIdentities = beforePaths.map((file) => {
+    const s = fs.statSync(path.join(ordinaryRoot, file));
+    return {
+      dev: s.dev,
+      ino: s.ino,
+      nlink: s.nlink,
+      mtimeMs: s.mtimeMs,
+      ctimeMs: s.ctimeMs,
+    };
+  });
+  function baseline() {
+    selected(profile.ordinaryReceipt);
+    verifyMap(ordinaryRoot, ordinaryControls);
+    const all = inventory(ordinaryRoot);
+    demand(
+      equivalent(all.files, ordinary.inputs) &&
+        equivalent(all.links, ordinary.links),
+      "E_ORDINARY_BASELINE_CHANGED",
+    );
+    verifyMap(ordinaryRoot, profile.before);
+    for (let index = 0; index < RAC_FILES.length; index++) {
+      const expected = ordinary.inputs[beforePaths[index]],
+        s = fs.statSync(path.join(ordinaryRoot, beforePaths[index]));
+      demand(
+        equivalent(
+          {
+            dev: s.dev,
+            ino: s.ino,
+            nlink: s.nlink,
+            mtimeMs: s.mtimeMs,
+            ctimeMs: s.ctimeMs,
+          },
+          beforeIdentities[index],
+        ),
+        "E_ORDINARY_IDENTITY_CHANGED",
+      );
+      demand(
+        expected &&
+          equivalent(record(ordinaryRoot, beforePaths[index]), expected) &&
+          expected.sha256 === RAC_FILES[index].beforeSha256,
+        "E_ORDINARY_BEFORE_BYTES",
+      );
+    }
+  }
+  baseline();
+  function current() {
+    selected(input.profileReceipt);
+    validateProfileConfig(
+      input.profile,
+      read(root, "pnpm-workspace.yaml").toString("utf8"),
+      read(root, ".npmrc").toString("utf8"),
+    );
+    demand(
+      localRac(root) === currentRac && localRac(ordinaryRoot) === ordinaryRac,
+      "E_RAC_ROOT_CHANGED",
+    );
+    verifyMap(root, profile.assets);
+    verifyMap(root, profile.after);
+    for (const name of RAC_ASSETS)
+      demand(
+        read(root, `${RAC_PREFIX}${name}`).equals(packaged.bytes[name]),
+        "E_INSTALLED_RAC_ASSET_FROM_ARCHIVE",
+      );
+    for (let index = 0; index < RAC_FILES.length; index++) {
+      demand(
+        record(root, afterPaths[index]).sha256 === RAC_FILES[index].afterSha256,
+        "E_RAC_AFTER_BYTES",
+      );
+      requireIndependentFiles(
+        fs.statSync(path.join(ordinaryRoot, beforePaths[index])),
+        fs.statSync(path.join(root, afterPaths[index])),
+      );
+    }
+  }
+  current();
+  baseline();
+  return () => {
+    baseline();
+    current();
+    baseline();
+  };
+}
 export function selectCandidate(selectionPath, phase) {
   demand(path.isAbsolute(selectionPath), "E_ABSOLUTE_SELECTION");
   const selectionRoot = directory(path.dirname(selectionPath)),
@@ -299,6 +739,7 @@ export function selectCandidate(selectionPath, phase) {
     "E_PUBLIC_FACADE_INSPECTION",
   );
   const archivePair = {};
+  let inspectedRac = null;
   for (const name of ["react", "heroui"]) {
     const archive = object(generation.archives[name]);
     relative(archive.file);
@@ -352,6 +793,7 @@ export function selectCandidate(selectionPath, phase) {
           read(packageRoot, target.slice(2));
         }
     archivePair[name] = archive.sha256;
+    if (name === "heroui") inspectedRac = packagedRac(parsed.members);
   }
   const installed = selected(input.installed),
     actual = inventory(root);
@@ -366,6 +808,7 @@ export function selectCandidate(selectionPath, phase) {
   );
   const pkg = json(root, "package.json"),
     dependencies = { ...pkg.dependencies, ...pkg.devDependencies };
+  validateConsumerManifest(pkg);
   demand(
     !pkg.scripts &&
       pkg.private === true &&
@@ -379,6 +822,7 @@ export function selectCandidate(selectionPath, phase) {
     "@tanstack/react-table": "9.3.1",
     "@heroui/react": "3.2.8",
     "@heroui/styles": "3.2.8",
+    "react-aria-components": "1.22.1",
     vite: "7.3.8",
     "@vitejs/plugin-react": "5.2.0",
     "@tailwindcss/vite": "4.3.5",
@@ -404,41 +848,14 @@ export function selectCandidate(selectionPath, phase) {
         `file:${path.join(wp13Root, generation.archives.heroui.file)}`,
     "E_MANIFEST_ARCHIVE_PAIR",
   );
-  if (input.profile === "ordinary")
-    demand(
-      read(root, "pnpm-workspace.yaml").toString("utf8") === "packages: []\n",
-      "E_ORDINARY_PROFILE",
-    );
-  else {
-    const profile = selected(input.profileReceipt);
-    demand(
-      profile.status === "main-reviewed-wp14-explicit-rac-profile" &&
-        profile.root === root &&
-        profile.archive === archivePair.heroui,
-      "E_EXPLICIT_PROFILE",
-    );
-    verifyMap(root, profile.assets);
-    verifyMap(root, profile.after);
-    const ordinary = selected(profile.ordinaryReceipt);
-    demand(
-      ordinary.status === "installed-not-runtime-approved" &&
-        ordinary.profile === "ordinary" &&
-        ordinary.candidate === input.candidate &&
-        Object.keys(profile.before).length > 0,
-      "E_ORDINARY_BEFORE_LINK",
-    );
-    for (const [file, before] of Object.entries(profile.before))
-      demand(
-        ordinary.inputs[file]?.sha256 === before.sha256,
-        "E_PROFILE_BEFORE",
-      );
-  }
-  demand(
-    read(root, ".npmrc").toString("utf8").includes("ignore-scripts=true") &&
-      !read(root, ".npmrc")
-        .toString("utf8")
-        .includes("strict-peer-dependencies=false"),
-    "E_CONFIG_PROFILE",
+  const recheckProfile = verifyProfile(
+    root,
+    { ...input, reactArchive: archivePair.react },
+    wp13Root,
+    request,
+    approval,
+    archivePair.heroui,
+    inspectedRac,
   );
   demand(process.version === "v24.22.0", "E_NODE_VERSION");
   for (const file of [
@@ -483,6 +900,7 @@ export function selectCandidate(selectionPath, phase) {
         "E_SELECTION_CHANGED",
       );
       verifyMap(root, input.files);
+      recheckProfile();
       for (const reference of [
         selection.materialization,
         input.generation,

@@ -39,7 +39,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
 | WP-13 archive tooling | Provisional source frozen25fdfde; writer released | Main source/light intake passes; actual build/pack/install/runtime/independent proof final |
-| WP-14 benchmark source | Original preservedf60df08; bounded guard-correction writer active | Source/light intake passes; candidate/runner/paint/measurements deferred; no execution |
+| WP-14 benchmark source | Originalf60df08 and guard correction under main preservation; writer released | Main source/light/seal/pin intake passes; actual runner/profile/paint/measurements/independent proof deferred |
 | WP-15 eligible protocols | Preserved isolatedcb4de1c/bd2cec0; writer released | Isolated documentation checks pass; intake after WP-14 scope release; actual consumer/release gates unverified/deferred |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
@@ -558,6 +558,20 @@ WP-15 main documentation correction is preserved isolatedbd2cec0. The primary
 runtime/library/source and dependency profiles are unaffected. Main retains the
 two commits for later exact-stack intake rather than mutating the active benchmark
 baseline or claiming the isolated doc pass covers primary WIP.
+WP-14 guard writer releases exactly candidate.mjs/driver.mjs plus its new receipt
+subtree. Main reads both complete deltas, actual receipt/profile producers, API
+probes/static guards and ten authored adversaries. Own static/eight syntax/exact
+17-input sealaf0ad5b4…/69-artifact sealf2e06396…/1,356-input pin checks pass.
+All2,675 old inputs/155 libraries match with precisely two authorized body drifts
+and main bookkeeping drift. First main Biome command names a nonexistent formatter
+file; its actual failure stays external. Corrected11-file Biome passes without
+source changes. No production helper/test/driver/browser/statistics/benchmark runs.
+Review32n1/n2 have bounded source corrections, not runtime/independent closure.
+Main's own strict positive source TS6 passes with the correction config. Integrated
+documentation passes293 Markdown/1,092 links/all19 checker probes and whitespace.
+This confirms the bounded source/documentation handoff only; MJS implementations
+remain unchecked/unexecuted and no runtime/deadline/profile/performance evidence
+is manufactured. Preserve the WP-14 source boundary before separate WP-15 intake.
 
 ## Current WP-10 implementation handoff
 

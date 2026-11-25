@@ -64,3 +64,16 @@ config/driver/process/browser/HTTP/paint/benchmark/consumer/build/install/pack/n
 provision/CI/manual/performance execution. Capacity guard128MiB, no HDD relocation
 or cleanup. Main independently reviews/replays before preservation; n1/n2 runtime
 and independent closure, candidate/runner/profile/paint selection remain final.
+
+## Main source intake
+
+Main reads the [actual correction](../../tests/benchmarks/wp14-guards/README.md),
+both full deltas and their receipt/profile/API/adversary boundaries. Own static/
+syntax/seal/pin and corrected11-file Biome checks pass17 inputsaf0ad5b4…/69 artifacts
+f2e06396…/1,356 pins/1,307 program files, with2,675 protected old inputs/155 library
+bodies unchanged except the two disclosed production deltas/main bookkeeping.
+Main's initial misspelled formatter path produces a preserved command failure,
+not a product defect or green result. Runtime profile/deadline/late-handle tests
+remain UNRUN; no benchmark/hardware/paint or independent acceptance follows.
+Own strict source TS6 and integrated documentation293 Markdown/1,092 links/all19
+checker probes also pass. Runtime/independent review32 closure remains final.
