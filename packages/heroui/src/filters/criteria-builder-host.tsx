@@ -41,6 +41,15 @@ import type {
   CriteriaWorkHandle,
 } from "./criteria-commit.js";
 import {
+  closeCriteriaFacadeHost,
+  consumeCriteriaFacadeHostSkip,
+  criteriaFacadeIdentity,
+  criteriaFacadeSameSource,
+  criteriaFacadeState,
+  prepareCriteriaFacadeHost,
+  takeCriteriaFacadePresentation,
+} from "./criteria-facade-config.js";
+import {
   createCriteriaDateBundle,
   beginCriteriaDateEdit,
   closeCriteriaDateEdit,
@@ -328,6 +337,7 @@ export function createCriteriaBuilderStore<
   let stopC: (() => void) | null = null,
     stopCell: (() => void) | null = null,
     counter = 0;
+  let facadePin: object | null = null;
   const listeners = new Set<() => void>(),
     claims = new Map<string, FieldClaim<S>>(),
     connections = new Map<object, BuilderConnection>();
@@ -627,6 +637,7 @@ export function createCriteriaBuilderStore<
       return () => {
         if (mount !== token) return;
         mount = null;
+        facadePin = null;
         operation = {};
         stopC?.();
         stopC = null;
@@ -642,13 +653,23 @@ export function createCriteriaBuilderStore<
         retire();
         return;
       }
-      const token = {};
+      const token = {},
+        mounted = mount;
       operation = token;
       busy = true;
+      let silent = false,
+        handback: object | null = null;
       try {
         const candidate = captureCriteriaCandidate<S>(input);
+        if (operation !== token || mount !== mounted) return deny();
         if (candidate.kind === "omitted" && mode !== "adopted") {
           mode = "legacy";
+          return;
+        }
+        if (candidate.kind === "unready" && mode !== "legacy") {
+          mode = "adopted";
+          facadePin = null;
+          retire();
           return;
         }
         if (candidate.kind !== "target" || mode === "legacy") {
@@ -662,17 +683,77 @@ export function createCriteriaBuilderStore<
         )
           return deny();
         const origin = requireCriteriaTool(target.authority, target.owner);
+        const actualC = target.owner.controller,
+          publication = target.owner.publication;
+        if (
+          origin.controller !== actualC ||
+          origin.definition !== target.owner.definition
+        )
+          return deny();
         const check = () => {
           if (
             operation !== token ||
-            !mount ||
+            mount !== mounted ||
+            target.owner.publication !== publication ||
             getCriteriaToolOwner(target.authority) !== target.owner
           )
             return deny();
           requireCriteriaTool(target.authority, target.owner);
+          if (operation !== token || mount !== mounted) return deny();
         };
         check();
-        const className = own(input, "className", check, true);
+        const facadeState = criteriaFacadeState(input),
+          identity = criteriaFacadeIdentity(input);
+        if (facadeState === "denied" || facadeState === "unready")
+          return deny();
+        let evaluationMode: unknown;
+        if (identity) {
+          // Only registered own metadata is read here. Private config and its
+          // presentation are materialized by the real child L-config capture.
+          if (
+            own(input, "controller", check) !== actualC ||
+            own(input, "criteria", check) !== identity ||
+            own(input, "invalidationKey", check) !== 0
+          )
+            return deny();
+          const context = own(input, "expectedResourceContext", check);
+          if (
+            own(context, "definitionKey", check) !==
+              origin.context.definitionKey ||
+            own(context, "scopeKey", check) !== origin.context.scopeKey ||
+            own(context, "access", check) !== origin.context.access
+          )
+            return deny();
+          evaluationMode = own(input, "evaluationMode", check);
+          if (evaluationMode !== "client" && evaluationMode !== "server")
+            return deny();
+        }
+        if (
+          facadeState === "waiting" ||
+          facadeState === "superseded" ||
+          (identity && identity === facadePin)
+        ) {
+          if (!criteriaFacadeSameSource(input, facadePin)) return deny();
+          const actor = cell?.getSnapshot().actor;
+          if (!actor || !cell || !lease || mode !== "adopted") return deny();
+          // requireActor checks the actual presentation-to-actor association,
+          // not just a core actor or a previously observed facade marker.
+          const old = requireActor(actor);
+          if (
+            old.owner !== target.owner ||
+            old.owner.publication !== publication ||
+            !sameOrigin(old.origin, origin) ||
+            !old.origin.context.access ||
+            old.ports.evaluationMode !== evaluationMode
+          )
+            return deny();
+          check();
+          silent = true;
+          return;
+        }
+        const className = identity
+          ? undefined
+          : own(input, "className", check, true);
         check();
         if (className !== undefined && typeof className !== "string")
           return deny();
@@ -684,21 +765,39 @@ export function createCriteriaBuilderStore<
           stopCell = cell.subscribe(signal);
         }
         if (!lease || !presentation || !local) return deny();
-        targetAuthority = target.authority;
+        handback = prepareCriteriaFacadeHost(input);
         const actor = cell.commit(lease, target, input);
+        cell.require(actor);
         check();
-        presentation.write(actor, { actor, className: className ?? "" });
+        const validated = handback
+          ? takeCriteriaFacadePresentation(handback, input)
+          : { className: className ?? "" };
+        presentation.write(actor, { actor, className: validated.className });
+        cell.require(actor);
         check();
+        targetAuthority = target.authority;
         owner = target.owner;
         mode = "adopted";
+        facadePin = identity;
         stopC ??= origin.controller.subscribe(signal);
         reconcileBuilder(store, actor);
         check();
-      } catch {
-        retire();
+      } catch (error) {
+        if (
+          cell &&
+          operation === token &&
+          mount === mounted &&
+          consumeCriteriaFacadeHostSkip(error, input, cell, handback)
+        )
+          silent = true;
+        else {
+          facadePin = null;
+          retire();
+        }
       } finally {
+        closeCriteriaFacadeHost(handback);
         busy = false;
-        signal();
+        if (!silent) signal();
       }
     },
   });
