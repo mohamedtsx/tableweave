@@ -1,0 +1,5 @@
+{
+  "extends": "../../../../apps/example-start-facade/tsconfig.source-light.json",
+  "include": ["./negative.ts"],
+  "exclude": []
+}

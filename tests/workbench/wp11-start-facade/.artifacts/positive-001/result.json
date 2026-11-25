@@ -1,0 +1,11 @@
+{
+  "args": [
+    "node_modules/typescript/bin/tsc",
+    "-p",
+    "apps/example-start-facade/tsconfig.source-light.json",
+    "--pretty",
+    "false"
+  ],
+  "status": 2,
+  "signal": null
+}

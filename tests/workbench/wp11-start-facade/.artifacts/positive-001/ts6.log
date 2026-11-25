@@ -1,0 +1,18 @@
+apps/example-start-facade/src/application/bootstrap-session.ts(5,85): error TS6133: 'envelope' is declared but its value is never read.
+apps/example-start-facade/src/application/codec.ts(30,3): error TS2322: Type 'readonly JsonValue[] | { readonly [key: string]: JsonValue; }' is not assignable to type 'Readonly<Record<string, JsonValue>>'.
+  Type 'readonly JsonValue[]' is not assignable to type 'Readonly<Record<string, JsonValue>>'.
+    Index signature for type 'string' is missing in type 'readonly JsonValue[]'.
+apps/example-start-facade/src/application/codec.ts(87,40): error TS2322: Type 'Readonly<{ kind: "rows"; domain: "transactions"; input: TransactionInput; result: { records: Transaction[]; source: "fresh"; page: { kind: "known"; total: number; }; emptyKind: string; receivedAt: string; }; }>' is not assignable to type 'Envelope'.
+  Type 'Readonly<{ kind: "rows"; domain: "transactions"; input: TransactionInput; result: { records: Transaction[]; source: "fresh"; page: { kind: "known"; total: number; }; emptyKind: string; receivedAt: string; }; }>' is not assignable to type '{ readonly kind: "rows"; readonly domain: "transactions"; readonly input: TransactionInput; readonly result: ResourceSuccess<Transaction>; }'.
+    The types of 'result.emptyKind' are incompatible between these types.
+      Type 'string' is not assignable to type 'EmptyKind'.
+apps/example-start-facade/src/application/codec.ts(88,3): error TS2322: Type 'Readonly<{ kind: "rows"; domain: "inventory"; input: InventoryInput; result: { records: InventoryItem[]; source: "fresh"; page: { kind: "known"; total: number; }; emptyKind: string; receivedAt: string; }; }>' is not assignable to type 'Envelope'.
+  Type 'Readonly<{ kind: "rows"; domain: "inventory"; input: InventoryInput; result: { records: InventoryItem[]; source: "fresh"; page: { kind: "known"; total: number; }; emptyKind: string; receivedAt: string; }; }>' is not assignable to type '{ readonly kind: "rows"; readonly domain: "inventory"; readonly input: InventoryInput; readonly result: ResourceSuccess<InventoryItem>; }'.
+    The types of 'result.emptyKind' are incompatible between these types.
+      Type 'string' is not assignable to type 'EmptyKind'.
+tests/workbench/wp11-start-facade/sdk-contracts.ts(1,58): error TS2307: Cannot find module '@tanstack/react-router' or its corresponding type declarations.
+tests/workbench/wp11-start-facade/sdk-contracts.ts(2,48): error TS2307: Cannot find module '@tanstack/react-router-ssr-query' or its corresponding type declarations.
+tests/workbench/wp11-start-facade/sdk-contracts.ts(3,34): error TS2307: Cannot find module '@tanstack/react-query' or its corresponding type declarations.
+tests/workbench/wp11-start-facade/sdk-contracts.ts(14,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+tests/workbench/wp11-start-facade/sdk-contracts.ts(15,139): error TS7006: Parameter 'ssr' implicitly has an 'any' type.
+tests/workbench/wp11-start-facade/sdk-contracts.ts(16,48): error TS7006: Parameter 'event' implicitly has an 'any' type.

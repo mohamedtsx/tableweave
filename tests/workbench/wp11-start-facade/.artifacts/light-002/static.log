@@ -1,0 +1,29 @@
+{
+  "status": "Static/source syntax and ownership receipts, NOT generated routing/SSR/browser proof",
+  "appCodeFiles": [
+    "apps/example-start-facade/src/application/bootstrap-session.ts",
+    "apps/example-start-facade/src/application/codec.ts",
+    "apps/example-start-facade/src/application/functions.ts",
+    "apps/example-start-facade/src/application/query-options.ts",
+    "apps/example-start-facade/src/application/reader.server.ts",
+    "apps/example-start-facade/src/application/table-source.ts",
+    "apps/example-start-facade/src/application/transport.ts",
+    "apps/example-start-facade/src/application/types.ts",
+    "apps/example-start-facade/src/register.d.ts",
+    "apps/example-start-facade/src/router.tsx",
+    "apps/example-start-facade/src/routes/__root.tsx",
+    "apps/example-start-facade/src/routes/away.tsx",
+    "apps/example-start-facade/src/routes/index.tsx",
+    "apps/example-start-facade/src/start.ts",
+    "apps/example-start-facade/src/table/HeadlessTable.tsx",
+    "apps/example-start-facade/src/table/TablePage.tsx",
+    "apps/example-start-facade/vite.config.ts"
+  ],
+  "domains": [
+    "transactions",
+    "inventory"
+  ],
+  "uiTablesAuthored": 2,
+  "generatedAssembly": "excluded and absent",
+  "runtimeResolution": "bare package emitted exports; no source aliases"
+}

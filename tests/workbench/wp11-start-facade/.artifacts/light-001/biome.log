@@ -1,0 +1,2821 @@
+apps/example-start-facade/src/application/bootstrap-session.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      1   1 │   import { queryOptions, type QueryClient } from "@tanstack/react-query";
+      2     │ - import·{·inventoryDefinition,·transactionDefinition·}·from·"../../../examples/shared/definitions.js";
+      3     │ - import·type·{·InventoryItem,·Transaction·}·from·"../../../examples/shared/records.js";
+      4     │ - import·type·{·InventorySchema,·TransactionSchema·}·from·"../../../examples/shared/schemas.js";
+      5     │ - import·{·bootstrap·as·decodeBootstrap,·bootstrapOutcome,·cacheValue,·canaryOutcome,·sameInput,·wireEqual·}·from·"./codec.js";
+      6     │ - import·{·cachePrefix,·initialInputs,·rowsKey,·rowsOptions·}·from·"./query-options.js";
+          2 │ + import·{
+          3 │ + ··inventoryDefinition,
+          4 │ + ··transactionDefinition,
+          5 │ + }·from·"../../../examples/shared/definitions.js";
+          6 │ + import·type·{
+          7 │ + ··InventoryItem,
+          8 │ + ··Transaction,
+          9 │ + }·from·"../../../examples/shared/records.js";
+         10 │ + import·type·{
+         11 │ + ··InventorySchema,
+         12 │ + ··TransactionSchema,
+         13 │ + }·from·"../../../examples/shared/schemas.js";
+         14 │ + import·{
+         15 │ + ··bootstrap·as·decodeBootstrap,
+         16 │ + ··bootstrapOutcome,
+         17 │ + ··cacheValue,
+         18 │ + ··canaryOutcome,
+         19 │ + ··sameInput,
+         20 │ + ··wireEqual,
+         21 │ + }·from·"./codec.js";
+         22 │ + import·{
+         23 │ + ··cachePrefix,
+         24 │ + ··initialInputs,
+         25 │ + ··rowsKey,
+         26 │ + ··rowsOptions,
+         27 │ + }·from·"./query-options.js";
+      7  28 │   import { createTableSource, type TableSource } from "./table-source.js";
+      8     │ - import·{·SourceEnded,·SourceUnavailable,·type·Bootstrap,·type·CacheValue,·type·Dataset,·type·Envelope,·type·ReadInput,·type·ReaderPort·}·from·"./types.js";
+         29 │ + import·{
+         30 │ + ··SourceEnded,
+         31 │ + ··SourceUnavailable,
+         32 │ + ··type·Bootstrap,
+         33 │ + ··type·CacheValue,
+         34 │ + ··type·Dataset,
+         35 │ + ··type·Envelope,
+         36 │ + ··type·ReadInput,
+         37 │ + ··type·ReaderPort,
+         38 │ + }·from·"./types.js";
+      9  39 │   
+     10     │ - export·interface·Sources·{·readonly·transactions:·TableSource<TransactionSchema,·Transaction>;·readonly·inventory:·TableSource<InventorySchema,·InventoryItem>·}
+         40 │ + export·interface·Sources·{
+         41 │ + ··readonly·transactions:·TableSource<TransactionSchema,·Transaction>;
+         42 │ + ··readonly·inventory:·TableSource<InventorySchema,·InventoryItem>;
+         43 │ + }
+     11  44 │   export interface SessionSnapshot {
+     12  45 │     readonly phase: "absent" | "preparing" | "adopted" | "retiring" | "ended";
+    ······· │ 
+     17  50 │   const canaryKey = ["wp11-facade-request-canary"] as const;
+     18  51 │   /** Request/router-owned cache, distinct from every child resource's ownership. */
+     19     │ - export·function·createBootstrapSession(client:·QueryClient,·reader:·ReaderPort,·realm:·"server"·|·"client")·{
+     20     │ - ··let·phase:·SessionSnapshot["phase"]·=·"absent",·receipt:·Bootstrap·|·null·=·null,·sources:·Sources·|·null·=·null;
+         52 │ + export·function·createBootstrapSession(
+         53 │ + ··client:·QueryClient,
+         54 │ + ··reader:·ReaderPort,
+         55 │ + ··realm:·"server"·|·"client",
+         56 │ + )·{
+         57 │ + ··let·phase:·SessionSnapshot["phase"]·=·"absent",
+         58 │ + ····receipt:·Bootstrap·|·null·=·null,
+         59 │ + ····sources:·Sources·|·null·=·null;
+     21  60 │     let operation: { readonly controller: AbortController } | null = null;
+     22  61 │     let lease: object | null = null;
+     23  62 │     const children: { retire(): boolean }[] = [];
+     24     │ - ··let·retiredIds·=·new·Set<string>(),·ending·=·false,·retiringNow·=·false,·choice:·Dataset·|·null·=·null;
+     25     │ - ··let·notice·=·"Public·synthetic·data·only;·no·production·authentication·or·persistence.";
+     26     │ - ··let·snapshot:·SessionSnapshot·=·Object.freeze({·phase,·receipt,·sources,·notice·});
+     27     │ - ··const·neutral:·SessionSnapshot·=·Object.freeze({·phase:·"absent",·receipt:·null,·sources:·null,·notice·});
+     28     │ - ··const·listeners·=·new·Set<()·=>·void>(),·removers·=·new·Set<()·=>·void>();
+     29     │ - ··function·publish()·{·snapshot·=·Object.freeze({·phase,·receipt,·sources,·notice·});·for·(const·listener·of·listeners)·listener();·}
+     30     │ - ··const·current·=·(value:·Bootstrap)·=>·!ending·&&·receipt·===·value·&&·(phase·===·"preparing"·||·phase·===·"adopted");
+         63 │ + ··let·retiredIds·=·new·Set<string>(),
+         64 │ + ····ending·=·false,
+         65 │ + ····retiringNow·=·false,
+         66 │ + ····choice:·Dataset·|·null·=·null;
+         67 │ + ··let·notice·=
+         68 │ + ····"Public·synthetic·data·only;·no·production·authentication·or·persistence.";
+         69 │ + ··let·snapshot:·SessionSnapshot·=·Object.freeze({
+         70 │ + ····phase,
+         71 │ + ····receipt,
+         72 │ + ····sources,
+         73 │ + ····notice,
+         74 │ + ··});
+         75 │ + ··const·neutral:·SessionSnapshot·=·Object.freeze({
+         76 │ + ····phase:·"absent",
+         77 │ + ····receipt:·null,
+         78 │ + ····sources:·null,
+         79 │ + ····notice,
+         80 │ + ··});
+         81 │ + ··const·listeners·=·new·Set<()·=>·void>(),
+         82 │ + ····removers·=·new·Set<()·=>·void>();
+         83 │ + ··function·publish()·{
+         84 │ + ····snapshot·=·Object.freeze({·phase,·receipt,·sources,·notice·});
+         85 │ + ····for·(const·listener·of·listeners)·listener();
+         86 │ + ··}
+         87 │ + ··const·current·=·(value:·Bootstrap)·=>
+         88 │ + ····!ending·&&
+         89 │ + ····receipt·===·value·&&
+         90 │ + ····(phase·===·"preparing"·||·phase·===·"adopted");
+     31  91 │     function owns(value: CacheValue, boot: Bootstrap, initial = false) {
+     32     │ - ····if·(value.kind·===·"canary")·return·value.bootstrapId·===·boot.id·&&·value.dataset·===·boot.dataset·&&·value.value·===·boot.canary;
+         92 │ + ····if·(value.kind·===·"canary")
+         93 │ + ······return·(
+         94 │ + ········value.bootstrapId·===·boot.id·&&
+         95 │ + ········value.dataset·===·boot.dataset·&&
+         96 │ + ········value.value·===·boot.canary
+         97 │ + ······);
+     33  98 │       const input = boot[value.domain];
+     34     │ - ····return·value.input.bootstrapId·===·input.bootstrapId·&&·value.input.dataset·===·input.dataset·&&·value.input.scopeKey·===·input.scopeKey·&&·value.input.clock·===·input.clock·&&·(!initial·||·sameInput(value.input,·input));
+         99 │ + ····return·(
+        100 │ + ······value.input.bootstrapId·===·input.bootstrapId·&&
+        101 │ + ······value.input.dataset·===·input.dataset·&&
+        102 │ + ······value.input.scopeKey·===·input.scopeKey·&&
+        103 │ + ······value.input.clock·===·input.clock·&&
+        104 │ + ······(!initial·||·sameInput(value.input,·input))
+        105 │ + ····);
+     35 106 │     }
+     36 107 │     function clearCache(id: string | null) {
+     37     │ - ····if·(id)·{·void·client.cancelQueries({·queryKey:·cachePrefix(id)·}).catch(()·=>·{});·client.removeQueries({·queryKey:·cachePrefix(id)·});·}
+     38     │ - ····void·client.cancelQueries({·queryKey:·canaryKey,·exact:·true·}).catch(()·=>·{});·client.removeQueries({·queryKey:·canaryKey,·exact:·true·});
+        108 │ + ····if·(id)·{
+        109 │ + ······void·client.cancelQueries({·queryKey:·cachePrefix(id)·}).catch(()·=>·{});
+        110 │ + ······client.removeQueries({·queryKey:·cachePrefix(id)·});
+        111 │ + ····}
+        112 │ + ····void·client
+        113 │ + ······.cancelQueries({·queryKey:·canaryKey,·exact:·true·})
+        114 │ + ······.catch(()·=>·{});
+        115 │ + ····client.removeQueries({·queryKey:·canaryKey,·exact:·true·});
+     39 116 │     }
+     40 117 │     function retire(reason = "Application source ended."): boolean {
+    ······· │ 
+     42 119 │       retiringNow = true;
+     43 120 │       try {
+     44     │ - ····const·old·=·receipt;
+     45     │ - ····//·Close·app·command/read·guards·before·any·child·or·Query·observer·can·reenter.
+     46     │ - ····phase·=·"retiring";·lease·=·null;·if·(old)·retiredIds.add(old.id);
+     47     │ - ····operation?.controller.abort();·operation·=·null;
+     48     │ - ····sources·=·null;
+     49     │ - ····let·complete·=·true;
+     50     │ - ····for·(const·child·of·children)·{·try·{·if·(!child.retire())·complete·=·false;·}·catch·{·complete·=·false;·}·}
+     51     │ - ····notice·=·reason;
+     52     │ - ····receipt·=·null;
+     53     │ - ····clearCache(old?.id·??·null);
+     54     │ - ····if·(!complete)·{·notice·=·"Application·retirement·is·blocked;·retry·cleanup.·No·new·source·is·allowed.";·publish();·return·false;·}
+     55     │ - ····children.length·=·0;
+     56     │ - ····if·(ending)·{·for·(const·remove·of·removers)·remove();·removers.clear();·}
+     57     │ - ····phase·=·"ended";·publish();·return·true;
+     58     │ - ····}·finally·{·retiringNow·=·false;·}
+  360 more lines truncated
+  
+
+apps/example-start-facade/src/application/codec.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      1     │ - import·{·canonicalJson,·getQueryIdentity,·parseQuery,·type·JsonValue·}·from·"@tableweave/react/contracts";
+      2     │ - import·{·fixedNow,·type·InventoryItem,·type·Transaction·}·from·"../../../examples/shared/records.js";
+      3     │ - import·{·exampleOperators,·inventorySchema,·transactionSchema·}·from·"../../../examples/shared/schemas.js";
+      4     │ - import·{·SourceUnavailable,·type·Bootstrap,·type·Canary,·type·Dataset,·type·Envelope,·type·ReadInput·}·from·"./types.js";
+          1 │ + import·{
+          2 │ + ··canonicalJson,
+          3 │ + ··getQueryIdentity,
+          4 │ + ··parseQuery,
+          5 │ + ··type·JsonValue,
+          6 │ + }·from·"@tableweave/react/contracts";
+          7 │ + import·{
+          8 │ + ··fixedNow,
+          9 │ + ··type·InventoryItem,
+         10 │ + ··type·Transaction,
+         11 │ + }·from·"../../../examples/shared/records.js";
+         12 │ + import·{
+         13 │ + ··exampleOperators,
+         14 │ + ··inventorySchema,
+         15 │ + ··transactionSchema,
+         16 │ + }·from·"../../../examples/shared/schemas.js";
+         17 │ + import·{
+         18 │ + ··SourceUnavailable,
+         19 │ + ··type·Bootstrap,
+         20 │ + ··type·Canary,
+         21 │ + ··type·Dataset,
+         22 │ + ··type·Envelope,
+         23 │ + ··type·ReadInput,
+         24 │ + }·from·"./types.js";
+      5  25 │   
+      6  26 │   /** Own JSON capture: accessors/prototype tricks/cycles/non-finite values are rejected. */
+      7  27 │   function capture(value: unknown, seen = new Set<object>()): JsonValue {
+      8     │ - ··if·(value·===·null·||·typeof·value·===·"string"·||·typeof·value·===·"boolean")·return·value;
+         28 │ + ··if·(value·===·null·||·typeof·value·===·"string"·||·typeof·value·===·"boolean")
+         29 │ + ····return·value;
+      9  30 │     if (typeof value === "number" && Number.isFinite(value)) return value;
+     10     │ - ··if·(typeof·value·!==·"object"·||·value·===·null·||·seen.has(value))·throw·new·SourceUnavailable();
+         31 │ + ··if·(typeof·value·!==·"object"·||·value·===·null·||·seen.has(value))
+         32 │ + ····throw·new·SourceUnavailable();
+     11  33 │     seen.add(value);
+     12  34 │     try {
+     13     │ - ····if·(!Array.isArray(value)·&&·Object.getPrototypeOf(value)·!==·Object.prototype·&&·Object.getPrototypeOf(value)·!==·null)·throw·new·SourceUnavailable();
+         35 │ + ····if·(
+         36 │ + ······!Array.isArray(value)·&&
+         37 │ + ······Object.getPrototypeOf(value)·!==·Object.prototype·&&
+         38 │ + ······Object.getPrototypeOf(value)·!==·null
+         39 │ + ····)
+         40 │ + ······throw·new·SourceUnavailable();
+     14  41 │       const result: Record<string, JsonValue> = {};
+     15  42 │       const elements: JsonValue[] = [];
+     16     │ - ····const·length·=·Array.isArray(value)·?·Object.getOwnPropertyDescriptor(value,·"length")·:·null;
+     17     │ - ····if·(length·&&·(!Object.hasOwn(length,·"value")·||·!Number.isSafeInteger(length.value)·||·length.value·<·0·||·length.value·>·10000))·throw·new·SourceUnavailable();
+     18     │ - ····const·keys·=·length·?·Array.from({·length:·length.value·},·(_,·index)·=>·String(index))·:·Object.keys(value);
+         43 │ + ····const·length·=·Array.isArray(value)
+         44 │ + ······?·Object.getOwnPropertyDescriptor(value,·"length")
+         45 │ + ······:·null;
+         46 │ + ····if·(
+         47 │ + ······length·&&
+         48 │ + ······(!Object.hasOwn(length,·"value")·||
+         49 │ + ········!Number.isSafeInteger(length.value)·||
+         50 │ + ········length.value·<·0·||
+         51 │ + ········length.value·>·10000)
+         52 │ + ····)
+         53 │ + ······throw·new·SourceUnavailable();
+         54 │ + ····const·keys·=·length
+         55 │ + ······?·Array.from({·length:·length.value·},·(_,·index)·=>·String(index))
+         56 │ + ······:·Object.keys(value);
+     19  57 │       if (keys.length > 10000) throw new SourceUnavailable();
+     20  58 │       for (const key of keys) {
+     21  59 │         const descriptor = Object.getOwnPropertyDescriptor(value, key);
+     22     │ - ······if·(!descriptor·||·!Object.hasOwn(descriptor,·"value")·||·!descriptor.enumerable·||·key·===·"__proto__")·throw·new·SourceUnavailable();
+         60 │ + ······if·(
+         61 │ + ········!descriptor·||
+         62 │ + ········!Object.hasOwn(descriptor,·"value")·||
+         63 │ + ········!descriptor.enumerable·||
+         64 │ + ········key·===·"__proto__"
+         65 │ + ······)
+         66 │ + ········throw·new·SourceUnavailable();
+     23  67 │         const child = capture(descriptor.value, seen);
+     24     │ - ······if·(Array.isArray(value))·elements.push(child);·else·result[key]·=·child;
+         68 │ + ······if·(Array.isArray(value))·elements.push(child);
+         69 │ + ······else·result[key]·=·child;
+     25  70 │       }
+     26  71 │       return Array.isArray(value) ? elements : result;
+     27     │ - ··}·finally·{·seen.delete(value);·}
+         72 │ + ··}·finally·{
+         73 │ + ····seen.delete(value);
+         74 │ + ··}
+     28  75 │   }
+     29  76 │   function object(value: unknown): Readonly<Record<string, JsonValue>> {
+     30  77 │     const copy = capture(value);
+     31     │ - ··if·(!copy·||·typeof·copy·!==·"object"·||·list(copy))·throw·new·SourceUnavailable();
+         78 │ + ··if·(!copy·||·typeof·copy·!==·"object"·||·list(copy))
+         79 │ + ····throw·new·SourceUnavailable();
+     32  80 │     return copy;
+     33  81 │   }
+     34     │ - function·list(value:·JsonValue):·value·is·readonly·JsonValue[]·{·return·Array.isArray(value);·}
+     35     │ - function·text(value:·JsonValue·|·undefined):·string·{·if·(typeof·value·!==·"string")·throw·new·SourceUnavailable();·return·value;·}
+     36     │ - function·number(value:·JsonValue·|·undefined):·number·{·if·(typeof·value·!==·"number"·||·!Number.isFinite(value))·throw·new·SourceUnavailable();·return·value;·}
+     37     │ - function·bool(value:·JsonValue·|·undefined):·boolean·{·if·(typeof·value·!==·"boolean")·throw·new·SourceUnavailable();·return·value;·}
+     38     │ - function·strings(value:·JsonValue·|·undefined):·readonly·string[]·{·if·(!Array.isArray(value))·throw·new·SourceUnavailable();·return·value.map(text);·}
+     39     │ - function·nullableText(value:·JsonValue·|·undefined):·string·|·null·{·return·value·===·null·?·null·:·text(value);·}
+     40     │ - export·function·dataset(value:·unknown):·Dataset·{·if·(value·!==·"alpha"·&&·value·!==·"beta")·throw·new·SourceUnavailable();·return·value;·}
+         82 │ + function·list(value:·JsonValue):·value·is·readonly·JsonValue[]·{
+         83 │ + ··return·Array.isArray(value);
+         84 │ + }
+         85 │ + function·text(value:·JsonValue·|·undefined):·string·{
+         86 │ + ··if·(typeof·value·!==·"string")·throw·new·SourceUnavailable();
+         87 │ + ··return·value;
+         88 │ + }
+         89 │ + function·number(value:·JsonValue·|·undefined):·number·{
+         90 │ + ··if·(typeof·value·!==·"number"·||·!Number.isFinite(value))
+         91 │ + ····throw·new·SourceUnavailable();
+         92 │ + ··return·value;
+         93 │ + }
+         94 │ + function·bool(value:·JsonValue·|·undefined):·boolean·{
+         95 │ + ··if·(typeof·value·!==·"boolean")·throw·new·SourceUnavailable();
+         96 │ + ··return·value;
+         97 │ + }
+         98 │ + function·strings(value:·JsonValue·|·undefined):·readonly·string[]·{
+         99 │ + ··if·(!Array.isArray(value))·throw·new·SourceUnavailable();
+        100 │ + ··return·value.map(text);
+        101 │ + }
+        102 │ + function·nullableText(value:·JsonValue·|·undefined):·string·|·null·{
+        103 │ + ··return·value·===·null·?·null·:·text(value);
+        104 │ + }
+        105 │ + export·function·dataset(value:·unknown):·Dataset·{
+        106 │ + ··if·(value·!==·"alpha"·&&·value·!==·"beta")·throw·new·SourceUnavailable();
+        107 │ + ··return·value;
+        108 │ + }
+     41 109 │   export function readInput(value: unknown): ReadInput {
+     42 110 │     const input = object(value);
+     43     │ - ··const·selected·=·dataset(input.dataset),·domain·=·input.domain;
+     44     │ - ··const·bootstrapId·=·text(input.bootstrapId),·scopeKey·=·text(input.scopeKey),·clock·=·number(input.clock);
+     45     │ - ··if·(input.version·!==·1·||·!/^[a-f0-9-]{36}$/.test(bootstrapId)·||·clock·!==·fixedNow·||·scopeKey·!==·`synthetic:${selected}:${domain}`)·throw·new·SourceUnavailable();
+     46     │ - ··const·base·=·{·version:·1·as·const,·bootstrapId,·dataset:·selected,·scopeKey,·clock·};
+        111 │ + ··const·selected·=·dataset(input.dataset),
+        112 │ + ····domain·=·input.domain;
+        113 │ + ··const·bootstrapId·=·text(input.bootstrapId),
+        114 │ + ····scopeKey·=·text(input.scopeKey),
+        115 │ + ····clock·=·number(input.clock);
+        116 │ + ··if·(
+        117 │ + ····input.version·!==·1·||
+        118 │ + ····!/^[a-f0-9-]{36}$/.test(bootstrapId)·||
+        119 │ + ····clock·!==·fixedNow·||
+        120 │ + ····scopeKey·!==·`synthetic:${selected}:${domain}`
+        121 │ + ··)
+        122 │ + ····throw·new·SourceUnavailable();
+        123 │ + ··const·base·=·{
+        124 │ + ····version:·1·as·const,
+        125 │ + ····bootstrapId,
+  233 more lines truncated
+  
+
+apps/example-start-facade/src/application/functions.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1  1 │   import { createServerFn } from "@tanstack/react-start";
+    2  2 │   import { bootstrap, dataset, readInput } from "./codec.js";
+    3    │ - import·{·bootstrapReader,·canaryReader,·requestSignal,·rowsReader·}·from·"./reader.server.js";
+    4    │ - export·const·bootstrapRpc·=·createServerFn({·method:·"POST"·}).validator(dataset).handler(({·data·})·=>·bootstrapReader(data));
+    5    │ - export·const·rowsRpc·=·createServerFn({·method:·"POST"·}).validator(readInput).handler(({·data·})·=>·rowsReader(data,·requestSignal()));
+    6    │ - export·const·canaryRpc·=·createServerFn({·method:·"POST"·}).validator(bootstrap).handler(({·data·})·=>·canaryReader(data,·requestSignal()));
+       3 │ + import·{
+       4 │ + ··bootstrapReader,
+       5 │ + ··canaryReader,
+       6 │ + ··requestSignal,
+       7 │ + ··rowsReader,
+       8 │ + }·from·"./reader.server.js";
+       9 │ + export·const·bootstrapRpc·=·createServerFn({·method:·"POST"·})
+      10 │ + ··.validator(dataset)
+      11 │ + ··.handler(({·data·})·=>·bootstrapReader(data));
+      12 │ + export·const·rowsRpc·=·createServerFn({·method:·"POST"·})
+      13 │ + ··.validator(readInput)
+      14 │ + ··.handler(({·data·})·=>·rowsReader(data,·requestSignal()));
+      15 │ + export·const·canaryRpc·=·createServerFn({·method:·"POST"·})
+      16 │ + ··.validator(bootstrap)
+      17 │ + ··.handler(({·data·})·=>·canaryReader(data,·requestSignal()));
+    7 18 │   
+  
+
+apps/example-start-facade/src/application/query-options.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   import { queryOptions } from "@tanstack/react-query";
+     2  2 │   import { inputIdentity, rowsOutcome, sameInput } from "./codec.js";
+     3    │ - import·{·SourceEnded,·SourceUnavailable,·type·Bootstrap,·type·ReadInput,·type·ReaderPort·}·from·"./types.js";
+        3 │ + import·{
+        4 │ + ··SourceEnded,
+        5 │ + ··SourceUnavailable,
+        6 │ + ··type·Bootstrap,
+        7 │ + ··type·ReadInput,
+        8 │ + ··type·ReaderPort,
+        9 │ + }·from·"./types.js";
+     4 10 │   export const cachePrefix = (id: string) => ["wp11-start-facade", id] as const;
+     5    │ - export·const·rowsKey·=·(input:·ReadInput)·=>·[...cachePrefix(input.bootstrapId),·input.domain,·input.scopeKey,·input.clock,·inputIdentity(input)]·as·const;
+     6    │ - export·function·rowsOptions(input:·ReadInput,·reader:·ReaderPort,·current:·()·=>·boolean)·{
+     7    │ - ··return·queryOptions({·queryKey:·rowsKey(input),·retry:·false,·staleTime:·30_000,·queryFn:·async·({·signal·})·=>·{
+     8    │ - ····if·(!current())·throw·new·SourceEnded();
+     9    │ - ····const·result·=·rowsOutcome(await·reader.rows(input,·signal));
+    10    │ - ····signal.throwIfAborted();
+    11    │ - ····if·(!current())·throw·new·SourceEnded();
+    12    │ - ····if·(!sameInput(input,·result.input))·throw·new·SourceUnavailable();
+    13    │ - ····return·result;
+    14    │ - ··}·});
+       11 │ + export·const·rowsKey·=·(input:·ReadInput)·=>
+       12 │ + ··[
+       13 │ + ····...cachePrefix(input.bootstrapId),
+       14 │ + ····input.domain,
+       15 │ + ····input.scopeKey,
+       16 │ + ····input.clock,
+       17 │ + ····inputIdentity(input),
+       18 │ + ··]·as·const;
+       19 │ + export·function·rowsOptions(
+       20 │ + ··input:·ReadInput,
+       21 │ + ··reader:·ReaderPort,
+       22 │ + ··current:·()·=>·boolean,
+       23 │ + )·{
+       24 │ + ··return·queryOptions({
+       25 │ + ····queryKey:·rowsKey(input),
+       26 │ + ····retry:·false,
+       27 │ + ····staleTime:·30_000,
+       28 │ + ····queryFn:·async·({·signal·})·=>·{
+       29 │ + ······if·(!current())·throw·new·SourceEnded();
+       30 │ + ······const·result·=·rowsOutcome(await·reader.rows(input,·signal));
+       31 │ + ······signal.throwIfAborted();
+       32 │ + ······if·(!current())·throw·new·SourceEnded();
+       33 │ + ······if·(!sameInput(input,·result.input))·throw·new·SourceUnavailable();
+       34 │ + ······return·result;
+       35 │ + ····},
+       36 │ + ··});
+    15 37 │   }
+    16    │ - export·const·initialInputs·=·(value:·Bootstrap)·=>·[value.transactions,·value.inventory]·as·const;
+       38 │ + export·const·initialInputs·=·(value:·Bootstrap)·=>
+       39 │ + ··[value.transactions,·value.inventory]·as·const;
+    17 40 │   
+  
+
+apps/example-start-facade/src/application/reader.server.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import { createQuery } from "@tableweave/react/contracts";
+     2   2 │   import { createFilterEvaluator } from "@tableweave/react/filters";
+     3     │ - import·{·getCookie,·getRequest,·setResponseHeader·}·from·"@tanstack/react-start/server";
+     4     │ - import·{·fixedNow,·inventory,·receivedAt,·transactions·}·from·"../../../examples/shared/records.js";
+     5     │ - import·{·exampleOperators,·inventorySchema,·transactionSchema·}·from·"../../../examples/shared/schemas.js";
+         3 │ + import·{
+         4 │ + ··getCookie,
+         5 │ + ··getRequest,
+         6 │ + ··setResponseHeader,
+         7 │ + }·from·"@tanstack/react-start/server";
+         8 │ + import·{
+         9 │ + ··fixedNow,
+        10 │ + ··inventory,
+        11 │ + ··receivedAt,
+        12 │ + ··transactions,
+        13 │ + }·from·"../../../examples/shared/records.js";
+        14 │ + import·{
+        15 │ + ··exampleOperators,
+        16 │ + ··inventorySchema,
+        17 │ + ··transactionSchema,
+        18 │ + }·from·"../../../examples/shared/schemas.js";
+     6  19 │   import { dataset, readInput } from "./codec.js";
+     7     │ - import·type·{·Bootstrap,·BootstrapOutcome,·Dataset,·ReadInput,·RowsOutcome·}·from·"./types.js";
+        20 │ + import·type·{
+        21 │ + ··Bootstrap,
+        22 │ + ··BootstrapOutcome,
+        23 │ + ··Dataset,
+        24 │ + ··ReadInput,
+        25 │ + ··RowsOutcome,
+        26 │ + }·from·"./types.js";
+     8  27 │   
+     9  28 │   const serverOnlyMarker = "WP11_START_FACADE_READER_SERVER_ONLY";
+    10     │ - function·unavailable()·{·setResponseHeader("Cache-Control",·"private,·no-store");·return·getCookie("wp11-facade-availability")·===·"closed";·}
+        29 │ + function·unavailable()·{
+        30 │ + ··setResponseHeader("Cache-Control",·"private,·no-store");
+        31 │ + ··return·getCookie("wp11-facade-availability")·===·"closed";
+        32 │ + }
+    11  33 │   export const requestSignal = () => getRequest().signal;
+    12     │ - export·const·initialDatasetReader·=·()·=>·dataset(getCookie("wp11-facade-dataset")·??·"alpha");
+        34 │ + export·const·initialDatasetReader·=·()·=>
+        35 │ + ··dataset(getCookie("wp11-facade-dataset")·??·"alpha");
+    13  36 │   export async function canaryReader(input: Bootstrap, signal: AbortSignal) {
+    14  37 │     signal.throwIfAborted();
+    15  38 │     if (unavailable()) return { kind: "denied" as const };
+    16     │ - ··return·{·kind:·"ready"·as·const,·canary:·{·kind:·"canary"·as·const,·bootstrapId:·input.id,·dataset:·input.dataset,·value:·`public-canary:${input.dataset}:${input.id}`·}·};
+        39 │ + ··return·{
+        40 │ + ····kind:·"ready"·as·const,
+        41 │ + ····canary:·{
+        42 │ + ······kind:·"canary"·as·const,
+        43 │ + ······bootstrapId:·input.id,
+        44 │ + ······dataset:·input.dataset,
+        45 │ + ······value:·`public-canary:${input.dataset}:${input.id}`,
+        46 │ + ····},
+        47 │ + ··};
+    17  48 │   }
+    18  49 │   export function bootstrapReader(selected: Dataset): BootstrapOutcome {
+    19  50 │     if (unavailable()) return { kind: "denied" };
+    20  51 │     const id = crypto.randomUUID();
+    21     │ - ··const·base·=·{·version:·1·as·const,·bootstrapId:·id,·dataset:·selected,·clock:·fixedNow·};
+    22     │ - ··return·{·kind:·"ready",·bootstrap:·{·version:·1,·id,·dataset:·selected,·clock:·fixedNow,·canary:·`public-canary:${selected}:${id}`,
+    23     │ - ····transactions:·{·...base,·domain:·"transactions",·scopeKey:·`synthetic:${selected}:transactions`,·query:·createQuery(transactionSchema,·{·locale:·"en-US",·timeZone:·"UTC"·})·},
+    24     │ - ····inventory:·{·...base,·domain:·"inventory",·scopeKey:·`synthetic:${selected}:inventory`,·query:·createQuery(inventorySchema,·{·locale:·"en-US",·timeZone:·"UTC"·})·},
+    25     │ - ··}·};
+        52 │ + ··const·base·=·{
+        53 │ + ····version:·1·as·const,
+        54 │ + ····bootstrapId:·id,
+        55 │ + ····dataset:·selected,
+        56 │ + ····clock:·fixedNow,
+        57 │ + ··};
+        58 │ + ··return·{
+        59 │ + ····kind:·"ready",
+        60 │ + ····bootstrap:·{
+        61 │ + ······version:·1,
+        62 │ + ······id,
+        63 │ + ······dataset:·selected,
+        64 │ + ······clock:·fixedNow,
+        65 │ + ······canary:·`public-canary:${selected}:${id}`,
+        66 │ + ······transactions:·{
+        67 │ + ········...base,
+        68 │ + ········domain:·"transactions",
+        69 │ + ········scopeKey:·`synthetic:${selected}:transactions`,
+        70 │ + ········query:·createQuery(transactionSchema,·{
+        71 │ + ··········locale:·"en-US",
+        72 │ + ··········timeZone:·"UTC",
+        73 │ + ········}),
+        74 │ + ······},
+        75 │ + ······inventory:·{
+        76 │ + ········...base,
+        77 │ + ········domain:·"inventory",
+        78 │ + ········scopeKey:·`synthetic:${selected}:inventory`,
+        79 │ + ········query:·createQuery(inventorySchema,·{
+        80 │ + ··········locale:·"en-US",
+        81 │ + ··········timeZone:·"UTC",
+        82 │ + ········}),
+        83 │ + ······},
+        84 │ + ····},
+        85 │ + ··};
+    26  86 │   }
+    27     │ - function·compare(left:·unknown,·right:·unknown):·number·{·return·typeof·left·===·"number"·&&·typeof·right·===·"number"·?·left·-·right·:·String(left·??·"").localeCompare(String(right·??·""),·"en-US");·}
+        87 │ + function·compare(left:·unknown,·right:·unknown):·number·{
+        88 │ + ··return·typeof·left·===·"number"·&&·typeof·right·===·"number"
+        89 │ + ····?·left·-·right
+        90 │ + ····:·String(left·??·"").localeCompare(String(right·??·""),·"en-US");
+        91 │ + }
+    28  92 │   /** Full authoritative synthetic INPUT is filtered/sorted/paged exactly once here. */
+    29     │ - export·async·function·rowsReader(value:·ReadInput,·signal:·AbortSignal):·Promise<RowsOutcome>·{
+        93 │ + export·async·function·rowsReader(
+        94 │ + ··value:·ReadInput,
+        95 │ + ··signal:·AbortSignal,
+        96 │ + ):·Promise<RowsOutcome>·{
+    30  97 │     const input = readInput(value);
+    31  98 │     signal.throwIfAborted();
+    ······ │ 
+    34 101 │     const prefix = input.dataset === "alpha" ? "Alpha" : "Beta";
+    35 102 │     if (input.domain === "transactions") {
+    36     │ - ····const·all·=·transactions.map((row)·=>·({·...row,·id:·`${input.dataset}:${row.id}`,·description:·`${prefix}·${row.description}`·}));
+    37     │ - ····const·evaluate·=·createFilterEvaluator(transactionSchema,·input.query,·{·now:·input.clock,·registry:·exampleOperators·});
+       103 │ + ····const·all·=·transactions.map((row)·=>·({
+       104 │ + ······...row,
+       105 │ + ······id:·`${input.dataset}:${row.id}`,
+       106 │ + ······description:·`${prefix}·${row.description}`,
+       107 │ + ····}));
+       108 │ + ····const·evaluate·=·createFilterEvaluator(transactionSchema,·input.query,·{
+       109 │ + ······now:·input.clock,
+       110 │ + ······registry:·exampleOperators,
+       111 │ + ····});
+    38 112 │       const filtered = all.filter(evaluate).sort((a, b) => {
+    39     │ - ······for·(const·sort·of·input.query.sorting)·{·const·result·=·compare(a[sort.id],·b[sort.id]);·if·(result)·return·sort.desc·?·-result·:·result;·}
+       113 │ + ······for·(const·sort·of·input.query.sorting)·{
+       114 │ + ········const·result·=·compare(a[sort.id],·b[sort.id]);
+       115 │ + ········if·(result)·return·sort.desc·?·-result·:·result;
+       116 │ + ······}
+    40 117 │         return a.id.localeCompare(b.id);
+    41 118 │       });
+    42 119 │       signal.throwIfAborted();
+    43 120 │       const { pageIndex, pageSize } = input.query.pagination;
+    44     │ - ····return·{·kind:·"ready",·envelope:·{·kind:·"rows",·domain:·input.domain,·input,·result:·{·source:·"fresh",·records:·filtered.slice(pageIndex·*·pageSize,·(pageIndex·+·1)·*·pageSize),·page:·{·kind:·"known",·total:·filtered.length·},·emptyKind:·"filtered",·receivedAt·}·}·};
+       121 │ + ····return·{
+       122 │ + ······kind:·"ready",
+       123 │ + ······envelope:·{
+       124 │ + ········kind:·"rows",
+       125 │ + ········domain:·input.domain,
+       126 │ + ········input,
+       127 │ + ········result:·{
+       128 │ + ··········source:·"fresh",
+       129 │ + ··········records:·filtered.slice(
+       130 │ + ············pageIndex·*·pageSize,
+       131 │ + ············(pageIndex·+·1)·*·pageSize,
+       132 │ + ··········),
+       133 │ + ··········page:·{·kind:·"known",·total:·filtered.length·},
+       134 │ + ··········emptyKind:·"filtered",
+  46 more lines truncated
+  
+
+apps/example-start-facade/src/application/table-source.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1     │ - import·{·beginControlsRequest,·createCriteriaPublication,·createResourceAdapter,·getControlsRequestBinding,·type·DataTableOptions,·type·ResourceRequest,·type·ResourceSuccess,·type·TableDefinition·}·from·"@tableweave/react";
+         1 │ + import·{
+         2 │ + ··beginControlsRequest,
+         3 │ + ··createCriteriaPublication,
+         4 │ + ··createResourceAdapter,
+         5 │ + ··getControlsRequestBinding,
+         6 │ + ··type·DataTableOptions,
+         7 │ + ··type·ResourceRequest,
+         8 │ + ··type·ResourceSuccess,
+         9 │ + ··type·TableDefinition,
+        10 │ + }·from·"@tableweave/react";
+     2  11 │   import type { QueryFor, QuerySchema } from "@tableweave/react/contracts";
+     3  12 │   import { SourceEnded } from "./types.js";
+    ······ │ 
+     8  17 │     readonly query: QueryFor<S>;
+     9  18 │     isCurrent(): boolean;
+    10     │ - ··read(request:·ResourceRequest<QueryFor<S>>,·force:·boolean):·Promise<ResourceSuccess<T>>;
+        19 │ + ··read(
+        20 │ + ····request:·ResourceRequest<QueryFor<S>>,
+        21 │ + ····force:·boolean,
+        22 │ + ··):·Promise<ResourceSuccess<T>>;
+    11  23 │     lost(): void;
+    12  24 │   }
+    13  25 │   /** Retained APPLICATION source. Its UI borrower never owns connect/dispose. */
+    14     │ - export·function·createTableSource<S·extends·QuerySchema,·T·extends·object>(D:·TableDefinition<S,·T>,·port:·SourcePort<S,·T>)·{
+    15     │ - ··const·context·=·{·definitionKey:·D.native.controllerDefinition.schema.id,·scopeKey:·port.scopeKey,·access:·true·};
+    16     │ - ··let·live·=·true,·disposed·=·false,·activated·=·false;
+    17     │ - ··let·pending:·ResourceRequest<QueryFor<S>>·|·null·=·null,·accepted:·ResourceRequest<QueryFor<S>>·|·null·=·null;
+        26 │ + export·function·createTableSource<S·extends·QuerySchema,·T·extends·object>(
+        27 │ + ··D:·TableDefinition<S,·T>,
+        28 │ + ··port:·SourcePort<S,·T>,
+        29 │ + )·{
+        30 │ + ··const·context·=·{
+        31 │ + ····definitionKey:·D.native.controllerDefinition.schema.id,
+        32 │ + ····scopeKey:·port.scopeKey,
+        33 │ + ····access:·true,
+        34 │ + ··};
+        35 │ + ··let·live·=·true,
+        36 │ + ····disposed·=·false,
+        37 │ + ····activated·=·false;
+        38 │ + ··let·pending:·ResourceRequest<QueryFor<S>>·|·null·=·null,
+        39 │ + ····accepted:·ResourceRequest<QueryFor<S>>·|·null·=·null;
+    18  40 │     const drafts = new Set<() => void>();
+    19  41 │     const resource = createResourceAdapter<T, QueryFor<S>>(context);
+    20     │ - ··const·C·=·D.createController({·initial:·{·query:·port.query·},·now:·()·=>·port.clock,
+        42 │ + ··const·C·=·D.createController({
+        43 │ + ····initial:·{·query:·port.query·},
+        44 │ + ····now:·()·=>·port.clock,
+    21  45 │       validateCommand(command) {
+    22     │ - ······if·((!live·||·!port.isCurrent())·&&·command.type·!==·"selection.cancel"·&&·!(command.type·===·"details.change"·&&·typeof·command.update·===·"object"·&&·command.update.rowId·===·null))·throw·new·SourceEnded();
+        46 │ + ······if·(
+        47 │ + ········(!live·||·!port.isCurrent())·&&
+        48 │ + ········command.type·!==·"selection.cancel"·&&
+        49 │ + ········!(
+        50 │ + ··········command.type·===·"details.change"·&&
+        51 │ + ··········typeof·command.update·===·"object"·&&
+        52 │ + ··········command.update.rowId·===·null
+        53 │ + ········)
+        54 │ + ······)
+        55 │ + ········throw·new·SourceEnded();
+    23  56 │       },
+    24     │ - ····onQueryChange()·{·if·(activated·&&·live·&&·port.isCurrent())·load();·},
+        57 │ + ····onQueryChange()·{
+        58 │ + ······if·(activated·&&·live·&&·port.isCurrent())·load();
+        59 │ + ····},
+    25  60 │     });
+    26  61 │     function purge(): undefined {
+    27     │ - ····pending·=·null;·accepted·=·null;
+        62 │ + ····pending·=·null;
+        63 │ + ····accepted·=·null;
+    28  64 │       resource.clear();
+    29  65 │       for (const clear of drafts) clear();
+    ······ │ 
+    32  68 │       return undefined;
+    33  69 │     }
+    34     │ - ··const·P·=·createCriteriaPublication({·controller:·C,·definition:·C.getDefinition(),·retirement:·{·retire()·{
+    35     │ - ····purge();
+    36     │ - ····if·(resource.getSnapshot().snapshot·!==·null·||·C.getSnapshot().details.rowId·!==·null·||·Object.values(C.getSnapshot().selection).some(Boolean))·throw·new·SourceEnded();
+    37     │ - ····return·undefined;
+    38     │ - ··}·}·});
+    39     │ - ··const·begin·=·P.begin({·controller:·C,·definition:·C.getDefinition(),·expected:·context,·actual:·context·});
+    40     │ - ··if·(begin.status·!==·"pending"·||·P.complete(begin.ticket).status·!==·"settled")·throw·new·SourceEnded();
+        70 │ + ··const·P·=·createCriteriaPublication({
+        71 │ + ····controller:·C,
+        72 │ + ····definition:·C.getDefinition(),
+        73 │ + ····retirement:·{
+        74 │ + ······retire()·{
+        75 │ + ········purge();
+        76 │ + ········if·(
+        77 │ + ··········resource.getSnapshot().snapshot·!==·null·||
+        78 │ + ··········C.getSnapshot().details.rowId·!==·null·||
+        79 │ + ··········Object.values(C.getSnapshot().selection).some(Boolean)
+        80 │ + ········)
+        81 │ + ··········throw·new·SourceEnded();
+        82 │ + ········return·undefined;
+        83 │ + ······},
+        84 │ + ····},
+        85 │ + ··});
+        86 │ + ··const·begin·=·P.begin({
+        87 │ + ····controller:·C,
+        88 │ + ····definition:·C.getDefinition(),
+        89 │ + ····expected:·context,
+        90 │ + ····actual:·context,
+        91 │ + ··});
+        92 │ + ··if·(
+        93 │ + ····begin.status·!==·"pending"·||
+        94 │ + ····P.complete(begin.ticket).status·!==·"settled"
+        95 │ + ··)
+        96 │ + ····throw·new·SourceEnded();
+    41  97 │     const current = P.getSnapshot().current;
+    42  98 │     if (!current || !port.isCurrent()) throw new SourceEnded();
+    43     │ - ··const·criteria·=·P.issue({·controller:·C,·definition:·C.getDefinition(),·context,·epoch:·current.epoch·});
+        99 │ + ··const·criteria·=·P.issue({
+       100 │ + ····controller:·C,
+       101 │ + ····definition:·C.getDefinition(),
+       102 │ + ····context,
+       103 │ + ····epoch:·current.epoch,
+       104 │ + ··});
+    44 105 │     const unregister = P.registerParticipant(criteria, { purge });
+    45 106 │     const stop = resource.connect();
+    46 107 │     let serial = 0;
+    47     │ - ··async·function·execute(request:·ResourceRequest<QueryFor<S>>,·force:·boolean)·{
+       108 │ + ··async·function·execute(
+       109 │ + ····request:·ResourceRequest<QueryFor<S>>,
+       110 │ + ····force:·boolean,
+       111 │ + ··)·{
+    48 112 │       if (!live || !port.isCurrent()) return;
+    49 113 │       pending = request;
+    50 114 │       try {
+    51 115 │         const result = await port.read(request, force);
+    52     │ - ······if·(!live·||·!port.isCurrent()·||·pending·!==·request·||·resource.getSnapshot().request·!==·request)·return;
+    53     │ - ······const·previous·=·accepted;·accepted·=·request;
+    54     │ - ······try·{·if·(!resource.succeed(request,·result)·&&·live·&&·port.isCurrent()·&&·pending·===·request)·accepted·=·previous;·}
+    55     │ - ······catch·(error)·{·if·(live·&&·port.isCurrent()·&&·pending·===·request)·accepted·=·previous;·throw·error;·}
+       116 │ + ······if·(
+       117 │ + ········!live·||
+       118 │ + ········!port.isCurrent()·||
+       119 │ + ········pending·!==·request·||
+       120 │ + ········resource.getSnapshot().request·!==·request
+       121 │ + ······)
+       122 │ + ········return;
+       123 │ + ······const·previous·=·accepted;
+       124 │ + ······accepted·=·request;
+       125 │ + ······try·{
+       126 │ + ········if·(
+       127 │ + ··········!resource.succeed(request,·result)·&&
+       128 │ + ··········live·&&
+       129 │ + ··········port.isCurrent()·&&
+       130 │ + ··········pending·===·request
+       131 │ + ········)
+       132 │ + ··········accepted·=·previous;
+       133 │ + ······}·catch·(error)·{
+  98 more lines truncated
+  
+
+apps/example-start-facade/src/application/transport.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   import { createIsomorphicFn } from "@tanstack/react-start";
+     2  2 │   import { bootstrapRpc, canaryRpc, rowsRpc } from "./functions.js";
+     3    │ - import·{·bootstrapReader,·canaryReader,·initialDatasetReader,·rowsReader·}·from·"./reader.server.js";
+        3 │ + import·{
+        4 │ + ··bootstrapReader,
+        5 │ + ··canaryReader,
+        6 │ + ··initialDatasetReader,
+        7 │ + ··rowsReader,
+        8 │ + }·from·"./reader.server.js";
+     4  9 │   import type { Bootstrap, Dataset, ReadInput, ReaderPort } from "./types.js";
+     5    │ - const·bootstrap·=·createIsomorphicFn().server(async·(selected:·Dataset,·signal:·AbortSignal)·=>·{·signal.throwIfAborted();·return·bootstrapReader(selected);·}).client((selected:·Dataset,·signal:·AbortSignal)·=>·bootstrapRpc({·data:·selected,·signal·}));
+     6    │ - const·rows·=·createIsomorphicFn().server((input:·ReadInput,·signal:·AbortSignal)·=>·rowsReader(input,·signal)).client((input:·ReadInput,·signal:·AbortSignal)·=>·rowsRpc({·data:·input,·signal·}));
+     7    │ - const·canary·=·createIsomorphicFn().server((input:·Bootstrap,·signal:·AbortSignal)·=>·canaryReader(input,·signal)).client((input:·Bootstrap,·signal:·AbortSignal)·=>·canaryRpc({·data:·input,·signal·}));
+       10 │ + const·bootstrap·=·createIsomorphicFn()
+       11 │ + ··.server(async·(selected:·Dataset,·signal:·AbortSignal)·=>·{
+       12 │ + ····signal.throwIfAborted();
+       13 │ + ····return·bootstrapReader(selected);
+       14 │ + ··})
+       15 │ + ··.client((selected:·Dataset,·signal:·AbortSignal)·=>
+       16 │ + ····bootstrapRpc({·data:·selected,·signal·}),
+       17 │ + ··);
+       18 │ + const·rows·=·createIsomorphicFn()
+       19 │ + ··.server((input:·ReadInput,·signal:·AbortSignal)·=>·rowsReader(input,·signal))
+       20 │ + ··.client((input:·ReadInput,·signal:·AbortSignal)·=>
+       21 │ + ····rowsRpc({·data:·input,·signal·}),
+       22 │ + ··);
+       23 │ + const·canary·=·createIsomorphicFn()
+       24 │ + ··.server((input:·Bootstrap,·signal:·AbortSignal)·=>
+       25 │ + ····canaryReader(input,·signal),
+       26 │ + ··)
+       27 │ + ··.client((input:·Bootstrap,·signal:·AbortSignal)·=>
+       28 │ + ····canaryRpc({·data:·input,·signal·}),
+       29 │ + ··);
+     8 30 │   export const reader: ReaderPort = { bootstrap, canary, rows };
+     9    │ - export·const·initialDataset·=·createIsomorphicFn().server(initialDatasetReader).client(():·Dataset·=>·"alpha");
+       31 │ + export·const·initialDataset·=·createIsomorphicFn()
+       32 │ + ··.server(initialDatasetReader)
+       33 │ + ··.client(():·Dataset·=>·"alpha");
+    10 34 │   
+  
+
+apps/example-start-facade/src/application/types.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   import type { ResourceSuccess } from "@tableweave/react";
+     2  2 │   import type { QueryFor } from "@tableweave/react/contracts";
+     3    │ - import·type·{·InventoryItem,·Transaction·}·from·"../../../examples/shared/records.js";
+     4    │ - import·type·{·InventorySchema,·TransactionSchema·}·from·"../../../examples/shared/schemas.js";
+        3 │ + import·type·{
+        4 │ + ··InventoryItem,
+        5 │ + ··Transaction,
+        6 │ + }·from·"../../../examples/shared/records.js";
+        7 │ + import·type·{
+        8 │ + ··InventorySchema,
+        9 │ + ··TransactionSchema,
+       10 │ + }·from·"../../../examples/shared/schemas.js";
+     5 11 │   
+     6 12 │   export type Dataset = "alpha" | "beta";
+    ····· │ 
+    13 19 │     readonly clock: number;
+    14 20 │   }
+    15    │ - export·interface·TransactionInput·extends·InputBase·{·readonly·domain:·"transactions";·readonly·query:·QueryFor<TransactionSchema>·}
+    16    │ - export·interface·InventoryInput·extends·InputBase·{·readonly·domain:·"inventory";·readonly·query:·QueryFor<InventorySchema>·}
+       21 │ + export·interface·TransactionInput·extends·InputBase·{
+       22 │ + ··readonly·domain:·"transactions";
+       23 │ + ··readonly·query:·QueryFor<TransactionSchema>;
+       24 │ + }
+       25 │ + export·interface·InventoryInput·extends·InputBase·{
+       26 │ + ··readonly·domain:·"inventory";
+       27 │ + ··readonly·query:·QueryFor<InventorySchema>;
+       28 │ + }
+    17 29 │   export type ReadInput = TransactionInput | InventoryInput;
+    18 30 │   export interface Bootstrap {
+    ····· │ 
+    26 38 │   }
+    27 39 │   export type Envelope =
+    28    │ - ··|·{·readonly·kind:·"rows";·readonly·domain:·"transactions";·readonly·input:·TransactionInput;·readonly·result:·ResourceSuccess<Transaction>·}
+    29    │ - ··|·{·readonly·kind:·"rows";·readonly·domain:·"inventory";·readonly·input:·InventoryInput;·readonly·result:·ResourceSuccess<InventoryItem>·};
+       40 │ + ··|·{
+       41 │ + ······readonly·kind:·"rows";
+       42 │ + ······readonly·domain:·"transactions";
+       43 │ + ······readonly·input:·TransactionInput;
+       44 │ + ······readonly·result:·ResourceSuccess<Transaction>;
+       45 │ + ····}
+       46 │ + ··|·{
+       47 │ + ······readonly·kind:·"rows";
+       48 │ + ······readonly·domain:·"inventory";
+       49 │ + ······readonly·input:·InventoryInput;
+       50 │ + ······readonly·result:·ResourceSuccess<InventoryItem>;
+       51 │ + ····};
+    30 52 │   export interface ReaderPort {
+    31 53 │     bootstrap(dataset: Dataset, signal: AbortSignal): Promise<unknown>;
+    ····· │ 
+    33 55 │     rows(input: ReadInput, signal: AbortSignal): Promise<unknown>;
+    34 56 │   }
+    35    │ - export·type·BootstrapOutcome·=·{·readonly·kind:·"ready";·readonly·bootstrap:·Bootstrap·}·|·{·readonly·kind:·"denied"·};
+    36    │ - export·type·RowsOutcome·=·{·readonly·kind:·"ready";·readonly·envelope:·Envelope·}·|·{·readonly·kind:·"denied"·};
+    37    │ - export·interface·Canary·{·readonly·kind:·"canary";·readonly·bootstrapId:·string;·readonly·dataset:·Dataset;·readonly·value:·string·}
+       57 │ + export·type·BootstrapOutcome·=
+       58 │ + ··|·{·readonly·kind:·"ready";·readonly·bootstrap:·Bootstrap·}
+       59 │ + ··|·{·readonly·kind:·"denied"·};
+       60 │ + export·type·RowsOutcome·=
+       61 │ + ··|·{·readonly·kind:·"ready";·readonly·envelope:·Envelope·}
+       62 │ + ··|·{·readonly·kind:·"denied"·};
+       63 │ + export·interface·Canary·{
+       64 │ + ··readonly·kind:·"canary";
+       65 │ + ··readonly·bootstrapId:·string;
+       66 │ + ··readonly·dataset:·Dataset;
+       67 │ + ··readonly·value:·string;
+       68 │ + }
+    38 69 │   export type CacheValue = Envelope | Canary;
+    39    │ - export·class·SourceUnavailable·extends·Error·{·constructor()·{·super("Synthetic·source·unavailable.");·}·}
+    40    │ - export·class·SourceEnded·extends·Error·{·constructor()·{·super("Synthetic·source·ended.");·}·}
+       70 │ + export·class·SourceUnavailable·extends·Error·{
+       71 │ + ··constructor()·{
+       72 │ + ····super("Synthetic·source·unavailable.");
+       73 │ + ··}
+       74 │ + }
+       75 │ + export·class·SourceEnded·extends·Error·{
+       76 │ + ··constructor()·{
+       77 │ + ····super("Synthetic·source·ended.");
+       78 │ + ··}
+       79 │ + }
+    41 80 │   
+  
+
+apps/example-start-facade/src/register.d.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1  1 │   import type { getRouter } from "./router.js";
+    2  2 │   import type { startInstance } from "./start.js";
+    3    │ - declare·module·"@tanstack/react-router"·{·interface·Register·{·router:·Awaited<ReturnType<typeof·getRouter>>·}·}
+    4    │ - declare·module·"@tanstack/react-start"·{·interface·Register·{
+    5    │ - ··ssr:·true;
+    6    │ - ··router:·Awaited<ReturnType<typeof·getRouter>>;
+    7    │ - ··config:·Awaited<ReturnType<typeof·startInstance.getOptions>>;
+    8    │ - }·}
+       3 │ + declare·module·"@tanstack/react-router"·{
+       4 │ + ··interface·Register·{
+       5 │ + ····router:·Awaited<ReturnType<typeof·getRouter>>;
+       6 │ + ··}
+       7 │ + }
+       8 │ + declare·module·"@tanstack/react-start"·{
+       9 │ + ··interface·Register·{
+      10 │ + ····ssr:·true;
+      11 │ + ····router:·Awaited<ReturnType<typeof·getRouter>>;
+      12 │ + ····config:·Awaited<ReturnType<typeof·startInstance.getOptions>>;
+      13 │ + ··}
+      14 │ + }
+    9 15 │   
+  
+
+apps/example-start-facade/src/router.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7  7 │   import type { Bootstrap } from "./application/types.js";
+     8  8 │   
+     9    │ - function·freshDocumentOnRestore(event:·PageTransitionEvent)·{·if·(event.persisted)·window.location.reload();·}
+        9 │ + function·freshDocumentOnRestore(event:·PageTransitionEvent)·{
+       10 │ + ··if·(event.persisted)·window.location.reload();
+       11 │ + }
+    10 12 │   export function getRouter() {
+    11    │ - ··const·queryClient·=·new·QueryClient({·defaultOptions:·{·queries:·{·retry:·false,·staleTime:·30_000·}·}·});
+       13 │ + ··const·queryClient·=·new·QueryClient({
+       14 │ + ····defaultOptions:·{·queries:·{·retry:·false,·staleTime:·30_000·}·},
+       15 │ + ··});
+    12 16 │     const realm = typeof document === "undefined" ? "server" : "client";
+    13 17 │     const session = createBootstrapSession(queryClient, reader, realm);
+    14    │ - ··const·router·=·createRouter({·routeTree,·context:·{·queryClient,·session·},·defaultPreload:·false,·defaultPreloadStaleTime:·0,
+    15    │ - ····dehydrate:·()·=>·session.serialize(),·hydrate:·(data:·{·bootstrap:·Bootstrap·|·null·})·=>·{·session.prepareHydration(data.bootstrap);·},
+       18 │ + ··const·router·=·createRouter({
+       19 │ + ····routeTree,
+       20 │ + ····context:·{·queryClient,·session·},
+       21 │ + ····defaultPreload:·false,
+       22 │ + ····defaultPreloadStaleTime:·0,
+       23 │ + ····dehydrate:·()·=>·session.serialize(),
+       24 │ + ····hydrate:·(data:·{·bootstrap:·Bootstrap·|·null·})·=>·{
+       25 │ + ······session.prepareHydration(data.bootstrap);
+       26 │ + ····},
+    16 27 │     });
+    17 28 │     // Register our parent close before SQ appends its own Query teardown. Preserve
+    18 29 │     // existing attachers; neither callback ends a stream before SDK onCleanup.
+    19    │ - ··router.serverSsrLifecycle·=·{·...router.serverSsrLifecycle,·onServerSsrAttach:·[
+    20    │ - ····...router.serverSsrLifecycle?.onServerSsrAttach·??·[],
+    21    │ - ····(ssr)·=>·ssr.onCleanup(()·=>·{·session.dispose();·}),
+    22    │ - ··]·};
+    23    │ - ··setupRouterSsrQueryIntegration({·router,·queryClient,
+    24    │ - ····dehydrateOptions:·{·shouldDehydrateQuery:·(query)·=>·query.state.status·===·"success"·&&·session.shouldDehydrate(query.state.data)·},
+    25    │ - ····hydrateOptions:·{·defaultOptions:·{·deserializeData:·session.deserializeData·}·},
+       30 │ + ··router.serverSsrLifecycle·=·{
+       31 │ + ····...router.serverSsrLifecycle,
+       32 │ + ····onServerSsrAttach:·[
+       33 │ + ······...(router.serverSsrLifecycle?.onServerSsrAttach·??·[]),
+       34 │ + ······(ssr)·=>
+       35 │ + ········ssr.onCleanup(()·=>·{
+       36 │ + ··········session.dispose();
+       37 │ + ········}),
+       38 │ + ····],
+       39 │ + ··};
+       40 │ + ··setupRouterSsrQueryIntegration({
+       41 │ + ····router,
+       42 │ + ····queryClient,
+       43 │ + ····dehydrateOptions:·{
+       44 │ + ······shouldDehydrateQuery:·(query)·=>
+       45 │ + ········query.state.status·===·"success"·&&
+       46 │ + ········session.shouldDehydrate(query.state.data),
+       47 │ + ····},
+       48 │ + ····hydrateOptions:·{
+       49 │ + ······defaultOptions:·{·deserializeData:·session.deserializeData·},
+       50 │ + ····},
+    26 51 │     });
+    27 52 │     const sdkHydrate = router.options.hydrate;
+    28    │ - ··router.update({·context:·{·session,·queryClient·},·hydrate:·async·(data)·=>·{
+    29    │ - ····try·{·await·sdkHydrate?.(data);·session.adoptHydration();·}
+    30    │ - ····catch·(error)·{·session.retire("Hydration·input·was·rejected;·source·remains·closed.");·throw·error;·}
+    31    │ - ··}·});
+    32    │ - ··session.addRemover(router.subscribe("onBeforeNavigate",·(event)·=>·{
+    33    │ - ····if·(event.pathChanged)·session.retire("Leaving·the·application·domain.");
+    34    │ - ··}));
+       53 │ + ··router.update({
+       54 │ + ····context:·{·session,·queryClient·},
+       55 │ + ····hydrate:·async·(data)·=>·{
+       56 │ + ······try·{
+       57 │ + ········await·sdkHydrate?.(data);
+       58 │ + ········session.adoptHydration();
+       59 │ + ······}·catch·(error)·{
+       60 │ + ········session.retire("Hydration·input·was·rejected;·source·remains·closed.");
+       61 │ + ········throw·error;
+       62 │ + ······}
+       63 │ + ····},
+       64 │ + ··});
+       65 │ + ··session.addRemover(
+       66 │ + ····router.subscribe("onBeforeNavigate",·(event)·=>·{
+       67 │ + ······if·(event.pathChanged)·session.retire("Leaving·the·application·domain.");
+       68 │ + ····}),
+       69 │ + ··);
+    35 70 │     if (realm === "client") {
+    36 71 │       const pagehide = (event: PageTransitionEvent) => {
+    37    │ - ······if·(event.persisted)·window.addEventListener("pageshow",·freshDocumentOnRestore,·{·once:·true·});
+       72 │ + ······if·(event.persisted)
+       73 │ + ········window.addEventListener("pageshow",·freshDocumentOnRestore,·{
+       74 │ + ··········once:·true,
+       75 │ + ········});
+    38 76 │         session.dispose();
+    39 77 │       };
+    40 78 │       window.addEventListener("pagehide", pagehide);
+    41 79 │       session.addRemover(() => window.removeEventListener("pagehide", pagehide));
+    42    │ - ····import.meta.hot?.dispose(()·=>·{·session.dispose();·});
+       80 │ + ····import.meta.hot?.dispose(()·=>·{
+       81 │ + ······session.dispose();
+       82 │ + ····});
+    43 83 │     }
+    44 84 │     return router;
+  
+
+apps/example-start-facade/src/routes/__root.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1  1 │   import type { QueryClient } from "@tanstack/react-query";
+    2    │ - import·{·createRootRouteWithContext,·HeadContent,·Outlet,·Scripts·}·from·"@tanstack/react-router";
+       2 │ + import·{
+       3 │ + ··createRootRouteWithContext,
+       4 │ + ··HeadContent,
+       5 │ + ··Outlet,
+       6 │ + ··Scripts,
+       7 │ + }·from·"@tanstack/react-router";
+    3  8 │   import { StrictMode } from "react";
+    4  9 │   import type { BootstrapSession } from "../application/bootstrap-session.js";
+    5    │ - export·const·Route·=·createRootRouteWithContext<{·queryClient:·QueryClient;·session:·BootstrapSession·}>()({
+    6    │ - ··head:·()·=>·({·meta:·[{·charSet:·"utf-8"·},·{·name:·"viewport",·content:·"width=device-width,·initial-scale=1"·},·{·title:·"Tableweave·public·synthetic·Start·facade"·}]·}),
+    7    │ - ··component:·()·=>·<html·lang="en"><head><HeadContent·/></head><body><StrictMode><Outlet·/></StrictMode><Scripts·/></body></html>,
+      10 │ + export·const·Route·=·createRootRouteWithContext<{
+      11 │ + ··queryClient:·QueryClient;
+      12 │ + ··session:·BootstrapSession;
+      13 │ + }>()({
+      14 │ + ··head:·()·=>·({
+      15 │ + ····meta:·[
+      16 │ + ······{·charSet:·"utf-8"·},
+      17 │ + ······{·name:·"viewport",·content:·"width=device-width,·initial-scale=1"·},
+      18 │ + ······{·title:·"Tableweave·public·synthetic·Start·facade"·},
+      19 │ + ····],
+      20 │ + ··}),
+      21 │ + ··component:·()·=>·(
+      22 │ + ····<html·lang="en">
+      23 │ + ······<head>
+      24 │ + ········<HeadContent·/>
+      25 │ + ······</head>
+      26 │ + ······<body>
+      27 │ + ········<StrictMode>
+      28 │ + ··········<Outlet·/>
+      29 │ + ········</StrictMode>
+      30 │ + ········<Scripts·/>
+      31 │ + ······</body>
+      32 │ + ····</html>
+      33 │ + ··),
+    8 34 │   });
+    9 35 │   
+  
+
+apps/example-start-facade/src/routes/away.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1  1 │   import { createFileRoute, useRouter } from "@tanstack/react-router";
+    2  2 │   export const Route = createFileRoute("/away")({ component: Away });
+    3    │ - function·Away()·{·const·router·=·useRouter();·return·<main><h1>Outside·the·table·application</h1><p>The·previous·source·is·retired,·not·merely·hidden.</p><button·type="button"·onClick={()·=>·{·void·router.navigate({·to:·"/"·});·}}>Request·a·fresh·source</button></main>;·}
+       3 │ + function·Away()·{
+       4 │ + ··const·router·=·useRouter();
+       5 │ + ··return·(
+       6 │ + ····<main>
+       7 │ + ······<h1>Outside·the·table·application</h1>
+       8 │ + ······<p>The·previous·source·is·retired,·not·merely·hidden.</p>
+       9 │ + ······<button
+      10 │ + ········type="button"
+      11 │ + ········onClick={()·=>·{
+      12 │ + ··········void·router.navigate({·to:·"/"·});
+      13 │ + ········}}
+      14 │ + ······>
+      15 │ + ········Request·a·fresh·source
+      16 │ + ······</button>
+      17 │ + ····</main>
+      18 │ + ··);
+      19 │ + }
+    4 20 │   
+  
+
+apps/example-start-facade/src/routes/index.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3  3 │   import { TablePage } from "../table/TablePage.js";
+     4  4 │   export const Route = createFileRoute("/")({
+     5    │ - ··loader:·({·context,·abortController,·preload·})·=>·context.session.load(context.session.requestedDataset()·??·initialDataset(),·abortController.signal,·preload),
+        5 │ + ··loader:·({·context,·abortController,·preload·})·=>
+        6 │ + ····context.session.load(
+        7 │ + ······context.session.requestedDataset()·??·initialDataset(),
+        8 │ + ······abortController.signal,
+        9 │ + ······preload,
+       10 │ + ····),
+     6 11 │     headers: () => ({ "Cache-Control": "private, no-store" }),
+     7    │ - ··component:·Page,·errorComponent:·Failure,
+       12 │ + ··component:·Page,
+       13 │ + ··errorComponent:·Failure,
+     8 14 │   });
+     9 15 │   function Page() {
+    10    │ - ··const·receipt·=·Route.useLoaderData(),·{·session·}·=·Route.useRouteContext(),·router·=·useRouter();
+    11    │ - ··return·<TablePage·session={session}·receipt={receipt}·recheck={(selected)·=>·{
+    12    │ - ····session.selectDataset(selected);·void·router.invalidate();
+    13    │ - ··}}·away={()·=>·{·void·router.navigate({·to:·"/away"·});·}}·/>;
+       16 │ + ··const·receipt·=·Route.useLoaderData(),
+       17 │ + ····{·session·}·=·Route.useRouteContext(),
+       18 │ + ····router·=·useRouter();
+       19 │ + ··return·(
+       20 │ + ····<TablePage
+       21 │ + ······session={session}
+       22 │ + ······receipt={receipt}
+       23 │ + ······recheck={(selected)·=>·{
+       24 │ + ········session.selectDataset(selected);
+       25 │ + ········void·router.invalidate();
+       26 │ + ······}}
+       27 │ + ······away={()·=>·{
+       28 │ + ········void·router.navigate({·to:·"/away"·});
+       29 │ + ······}}
+       30 │ + ····/>
+       31 │ + ··);
+    14 32 │   }
+    15 33 │   function Failure() {
+    16    │ - ··const·{·session·}·=·Route.useRouteContext(),·router·=·useRouter();
+    17    │ - ··return·<main><h1>Synthetic·application·unavailable</h1><p>No·source·grant·is·inferred·from·an·error·response.</p><button·type="button"·onClick={()·=>·{·if·(session.retire())·void·router.invalidate();·}}>Recheck·source</button><button·type="button"·onClick={()·=>·{·void·router.navigate({·to:·"/away"·});·}}>Leave·application·route</button></main>;
+       34 │ + ··const·{·session·}·=·Route.useRouteContext(),
+       35 │ + ····router·=·useRouter();
+       36 │ + ··return·(
+       37 │ + ····<main>
+       38 │ + ······<h1>Synthetic·application·unavailable</h1>
+       39 │ + ······<p>No·source·grant·is·inferred·from·an·error·response.</p>
+       40 │ + ······<button
+       41 │ + ········type="button"
+       42 │ + ········onClick={()·=>·{
+       43 │ + ··········if·(session.retire())·void·router.invalidate();
+       44 │ + ········}}
+       45 │ + ······>
+       46 │ + ········Recheck·source
+       47 │ + ······</button>
+       48 │ + ······<button
+       49 │ + ········type="button"
+       50 │ + ········onClick={()·=>·{
+       51 │ + ··········void·router.navigate({·to:·"/away"·});
+       52 │ + ········}}
+       53 │ + ······>
+       54 │ + ········Leave·application·route
+       55 │ + ······</button>
+       56 │ + ····</main>
+       57 │ + ··);
+    18 58 │   }
+    19 59 │   
+  
+
+apps/example-start-facade/src/start.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1    │ - import·{·createCsrfMiddleware,·createMiddleware,·createStart·}·from·"@tanstack/react-start";
+        1 │ + import·{
+        2 │ + ··createCsrfMiddleware,
+        3 │ + ··createMiddleware,
+        4 │ + ··createStart,
+        5 │ + }·from·"@tanstack/react-start";
+     2  6 │   import { setResponseHeader } from "@tanstack/react-start/server";
+     3    │ - const·privateResponses·=·createMiddleware({·type:·"request"·}).server(async·({·next·})·=>·{
+     4    │ - ··setResponseHeader("Cache-Control",·"private,·no-store");
+     5    │ - ··const·result·=·await·next();·result.response.headers.set("Cache-Control",·"private,·no-store");
+     6    │ - ··//·No·disposal·here:·the·streamed·response·still·owns·its·lifetime.
+     7    │ - ··return·result;
+     8    │ - });
+     9    │ - export·const·startInstance·=·createStart(()·=>·({·requestMiddleware:·[privateResponses,·createCsrfMiddleware({·filter:·(context)·=>·context.handlerType·===·"serverFn"·})]·}));
+        7 │ + const·privateResponses·=·createMiddleware({·type:·"request"·}).server(
+        8 │ + ··async·({·next·})·=>·{
+        9 │ + ····setResponseHeader("Cache-Control",·"private,·no-store");
+       10 │ + ····const·result·=·await·next();
+       11 │ + ····result.response.headers.set("Cache-Control",·"private,·no-store");
+       12 │ + ····//·No·disposal·here:·the·streamed·response·still·owns·its·lifetime.
+       13 │ + ····return·result;
+       14 │ + ··},
+       15 │ + );
+       16 │ + export·const·startInstance·=·createStart(()·=>·({
+       17 │ + ··requestMiddleware:·[
+       18 │ + ····privateResponses,
+       19 │ + ····createCsrfMiddleware({
+       20 │ + ······filter:·(context)·=>·context.handlerType·===·"serverFn",
+       21 │ + ····}),
+       22 │ + ··],
+       23 │ + }));
+    10 24 │   
+  
+
+apps/example-start-facade/src/table/HeadlessTable.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1     │ - import·{·renderNativeComponent,·requireCriteriaTool,·requireDataTableModel,·useDataTable,·useTableweaveState·}·from·"@tableweave/react";
+         1 │ + import·{
+         2 │ + ··renderNativeComponent,
+         3 │ + ··requireCriteriaTool,
+         4 │ + ··requireDataTableModel,
+         5 │ + ··useDataTable,
+         6 │ + ··useTableweaveState,
+         7 │ + }·from·"@tableweave/react";
+     2   8 │   import type { QuerySchema } from "@tableweave/react/contracts";
+     3   9 │   import { useLayoutEffect, useState, useSyncExternalStore } from "react";
+    ······ │ 
+     5  11 │   
+     6  12 │   /** Borrows an already-owned source; UI detach never ends the application source. */
+     7     │ - export·function·HeadlessTable<S·extends·QuerySchema,·T·extends·object>({·source,·title,·rowHeader,·rowText·}:·{
+     8     │ - ··readonly·source:·TableSource<S,·T>;·readonly·title:·string;·readonly·rowHeader:·string;·readonly·rowText:·(record:·T)·=>·string;
+        13 │ + export·function·HeadlessTable<S·extends·QuerySchema,·T·extends·object>({
+        14 │ + ··source,
+        15 │ + ··title,
+        16 │ + ··rowHeader,
+        17 │ + ··rowText,
+        18 │ + }:·{
+        19 │ + ··readonly·source:·TableSource<S,·T>;
+        20 │ + ··readonly·title:·string;
+        21 │ + ··readonly·rowHeader:·string;
+        22 │ + ··readonly·rowText:·(record:·T)·=>·string;
+     9  23 │   }) {
+    10     │ - ··useSyncExternalStore(source.resource.subscribe,·source.resource.getSnapshot,·source.resource.getServerSnapshot);
+        24 │ + ··useSyncExternalStore(
+        25 │ + ····source.resource.subscribe,
+        26 │ + ····source.resource.getSnapshot,
+        27 │ + ····source.resource.getServerSnapshot,
+        28 │ + ··);
+    11  29 │     const state = useTableweaveState(source.C);
+    12  30 │     const model = useDataTable(source.D, source.modelOptions());
+    ······ │ 
+    14  32 │     useLayoutEffect(() => source.registerDraft(() => setDraft("")), [source]);
+    15  33 │     let ready = false;
+    16     │ - ··try·{·requireDataTableModel(model,·source.D);·ready·=·model.phase·===·"display";·}·catch·{·/*·Neutral·before·a·genuine·commit,·or·after·source·end.·*/·}
+    17     │ - ··const·view·=·ready·?·model.view·:·null,·facts·=·ready·?·model.presentation·:·null;
+    18     │ - ··return·<section·aria-label={title}><h2>{title}</h2>
+    19     │ - ····<form·onSubmit={(event)·=>·{
+    20     │ - ······event.preventDefault();
+    21     │ - ······try·{
+    22     │ - ········if·(!source.isCurrent())·return;
+    23     │ - ········requireDataTableModel(model,·source.D);·const·tool·=·model.toolTarget;·if·(!tool)·return;
+    24     │ - ········requireCriteriaTool(tool.authority,·tool.owner);·source.C.dispatch({·type:·"search.commit",·search:·draft·});
+    25     │ - ······}·catch·{·/*·Saved·form·cannot·borrow·a·replacement·source·grant.·*/·}
+    26     │ - ····}}><label>Search·records<input·value={draft}·disabled={!view·||·!source.isCurrent()}·onChange={(...
+    27     │ - ····<p·role="status">{model.recovery.kind·===·"records"·?·model.recovery.notice·??·"Current·records"·:·model.recovery.kind}</p>
+    28     │ - ····<button·type="button"·disabled={!source.isCurrent()·||·!!model.presentation?.busy}·onClick={source.refresh}>Refresh·synthetic·records</button>
+    29     │ - ····<button·type="button"·disabled={!model.presentation?.canRetry}·onClick={()·=>·{·try·{·model.authority?.retry();·}·catch·{·/*·Stale·retry·denied.·*/·}·}}>Retry·current·request</button>
+    30     │ - ····{view·&&·facts·?·<>
+    31     │ - ······<p><output·aria-label="Selected·count">{facts.selectedIds.length}·selected;·{facts.loadedSelected.length}·loaded</output></p>
+    32     │ - ······<button·type="button"·disabled={!facts.canCancelSelection}·onClick={()·=>·{·try·{·model.authority?.cancelSelection();·}·catch·{·/*·Ended·owner.·*/·}·}}>Cancel·row·selection</button>
+    33     │ - ······<table·aria-label={title}><thead>{view.headerGroups.map((group)·=>·<tr·key={group.id}>{group.h...
+    34     │ - ······<tbody>{view.rows.map((row)·=>·<tr·key={row.id}>{row.getVisibleCells().map((cell)·=>·cell.colu...
+    35     │ - ······<nav·aria-label="Pagination"><button·type="button"·disabled={!facts.canPreviousPage}·onClick={...
+    36     │ - ····</>·:·<p>No·granted·table·view·is·mounted·yet.</p>}
+    37     │ - ··</section>;
+        34 │ + ··try·{
+        35 │ + ····requireDataTableModel(model,·source.D);
+        36 │ + ····ready·=·model.phase·===·"display";
+        37 │ + ··}·catch·{
+        38 │ + ····/*·Neutral·before·a·genuine·commit,·or·after·source·end.·*/
+        39 │ + ··}
+        40 │ + ··const·view·=·ready·?·model.view·:·null,
+        41 │ + ····facts·=·ready·?·model.presentation·:·null;
+        42 │ + ··return·(
+        43 │ + ····<section·aria-label={title}>
+        44 │ + ······<h2>{title}</h2>
+        45 │ + ······<form
+        46 │ + ········onSubmit={(event)·=>·{
+        47 │ + ··········event.preventDefault();
+        48 │ + ··········try·{
+        49 │ + ············if·(!source.isCurrent())·return;
+        50 │ + ············requireDataTableModel(model,·source.D);
+        51 │ + ············const·tool·=·model.toolTarget;
+        52 │ + ············if·(!tool)·return;
+        53 │ + ············requireCriteriaTool(tool.authority,·tool.owner);
+        54 │ + ············source.C.dispatch({·type:·"search.commit",·search:·draft·});
+        55 │ + ··········}·catch·{
+        56 │ + ············/*·Saved·form·cannot·borrow·a·replacement·source·grant.·*/
+        57 │ + ··········}
+        58 │ + ········}}
+        59 │ + ······>
+        60 │ + ········<label>
+        61 │ + ··········Search·records
+        62 │ + ··········<input
+        63 │ + ············value={draft}
+        64 │ + ············disabled={!view·||·!source.isCurrent()}
+        65 │ + ············onChange={(event)·=>·{
+        66 │ + ··············if·(source.isCurrent())·setDraft(event.target.value);
+        67 │ + ············}}
+        68 │ + ··········/>
+        69 │ + ········</label>
+        70 │ + ········<button·type="submit"·disabled={!view·||·!source.isCurrent()}>
+        71 │ + ··········Apply·search
+        72 │ + ········</button>
+        73 │ + ········<button
+        74 │ + ··········type="button"
+        75 │ + ··········disabled={!source.isCurrent()}
+        76 │ + ··········onClick={()·=>·{
+        77 │ + ············if·(source.isCurrent())
+        78 │ + ··············setDraft(source.C.getSnapshot().query.search);
+        79 │ + ··········}}
+        80 │ + ········>
+        81 │ + ··········Cancel·search·draft
+        82 │ + ········</button>
+        83 │ + ······</form>
+        84 │ + ······<p·role="status">
+        85 │ + ········{model.recovery.kind·===·"records"
+        86 │ + ··········?·(model.recovery.notice·??·"Current·records")
+        87 │ + ··········:·model.recovery.kind}
+        88 │ + ······</p>
+        89 │ + ······<button
+        90 │ + ········type="button"
+        91 │ + ········disabled={!source.isCurrent()·||·!!model.presentation?.busy}
+        92 │ + ········onClick={source.refresh}
+        93 │ + ······>
+        94 │ + ········Refresh·synthetic·records
+        95 │ + ······</button>
+        96 │ + ······<button
+        97 │ + ········type="button"
+        98 │ + ········disabled={!model.presentation?.canRetry}
+        99 │ + ········onClick={()·=>·{
+       100 │ + ··········try·{
+       101 │ + ············model.authority?.retry();
+       102 │ + ··········}·catch·{
+       103 │ + ············/*·Stale·retry·denied.·*/
+       104 │ + ··········}
+       105 │ + ········}}
+       106 │ + ······>
+       107 │ + ········Retry·current·request
+       108 │ + ······</button>
+       109 │ + ······{view·&&·facts·?·(
+       110 │ + ········<>
+       111 │ + ··········<p>
+       112 │ + ············<output·aria-label="Selected·count">
+       113 │ + ··············{facts.selectedIds.length}·selected;·{facts.loadedSelected.length}{"·"}
+       114 │ + ··············loaded
+       115 │ + ············</output>
+       116 │ + ··········</p>
+       117 │ + ··········<button
+       118 │ + ············type="button"
+       119 │ + ············disabled={!facts.canCancelSelection}
+       120 │ + ············onClick={()·=>·{
+       121 │ + ··············try·{
+       122 │ + ················model.authority?.cancelSelection();
+       123 │ + ··············}·catch·{
+       124 │ + ················/*·Ended·owner.·*/
+       125 │ + ··············}
+       126 │ + ············}}
+  129 more lines truncated
+  
+
+apps/example-start-facade/src/table/TablePage.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import { useLayoutEffect, useState, useSyncExternalStore } from "react";
+     2     │ - import·type·{·InventoryItem,·Transaction·}·from·"../../../examples/shared/records.js";
+         2 │ + import·type·{
+         3 │ + ··InventoryItem,
+         4 │ + ··Transaction,
+         5 │ + }·from·"../../../examples/shared/records.js";
+     3   6 │   import type { BootstrapSession } from "../application/bootstrap-session.js";
+     4   7 │   import type { Bootstrap, Dataset } from "../application/types.js";
+    ······ │ 
+     6   9 │   const transactionText = (row: Transaction) => row.description;
+     7  10 │   const inventoryText = (row: InventoryItem) => row.title;
+     8     │ - export·function·TablePage({·session,·receipt,·recheck,·away·}:·{
+     9     │ - ··readonly·session:·BootstrapSession;·readonly·receipt:·Bootstrap;
+    10     │ - ··readonly·recheck:·(selected:·Dataset)·=>·void;·readonly·away:·()·=>·void;
+        11 │ + export·function·TablePage({
+        12 │ + ··session,
+        13 │ + ··receipt,
+        14 │ + ··recheck,
+        15 │ + ··away,
+        16 │ + }:·{
+        17 │ + ··readonly·session:·BootstrapSession;
+        18 │ + ··readonly·receipt:·Bootstrap;
+        19 │ + ··readonly·recheck:·(selected:·Dataset)·=>·void;
+        20 │ + ··readonly·away:·()·=>·void;
+    11  21 │   }) {
+    12     │ - ··const·state·=·useSyncExternalStore(session.subscribe,·session.getSnapshot,·session.getServerSnapshot);
+    13     │ - ··const·[hidden,·setHidden]·=·useState(false),·[attachmentError,·setAttachmentError]·=·useState(false);
+        22 │ + ··const·state·=·useSyncExternalStore(
+        23 │ + ····session.subscribe,
+        24 │ + ····session.getSnapshot,
+        25 │ + ····session.getServerSnapshot,
+        26 │ + ··);
+        27 │ + ··const·[hidden,·setHidden]·=·useState(false),
+        28 │ + ····[attachmentError,·setAttachmentError]·=·useState(false);
+    14  29 │     useLayoutEffect(() => {
+    15     │ - ····try·{·const·detach·=·session.attach(receipt);·setAttachmentError(false);·return·detach;·}
+    16     │ - ····catch·{·setAttachmentError(true);·return·undefined;·}
+        30 │ + ····try·{
+        31 │ + ······const·detach·=·session.attach(receipt);
+        32 │ + ······setAttachmentError(false);
+        33 │ + ······return·detach;
+        34 │ + ····}·catch·{
+        35 │ + ······setAttachmentError(true);
+        36 │ + ······return·undefined;
+        37 │ + ····}
+    17  38 │     }, [session, receipt]);
+    18     │ - ··return·<main><h1>Headless·Start·facade</h1><p>Two·independent·tables·of·public·synthetic·inputs.·No·production·authentication,·persistence·or·dragging·is·implemented.</p>
+    19     │ - ····<fieldset><legend>Application·source·controls</legend><button·type="button"·onClick={()·=>·reche...
+    20     │ - ····<p·role="status"·aria-label="Application·source·status">{state.notice}</p>
+    21     │ - ····{attachmentError·&&·state.phase·!==·"retiring"·?·<p·role="alert">No·current·source·attachment.·Recheck·the·synthetic·source·explicitly.</p>·:·null}
+    22     │ - ····{state.receipt·?·<p><output·aria-label="Synthetic·canary">{state.receipt.canary}</output></p>·:·null}
+    23     │ - ····{hidden·?·<p>Table·UI·detached.·The·application·source·is·still·owned·by·this·router.</p>·:·stat...
+    24     │ - ··</main>;
+        39 │ + ··return·(
+        40 │ + ····<main>
+        41 │ + ······<h1>Headless·Start·facade</h1>
+        42 │ + ······<p>
+        43 │ + ········Two·independent·tables·of·public·synthetic·inputs.·No·production
+        44 │ + ········authentication,·persistence·or·dragging·is·implemented.
+        45 │ + ······</p>
+        46 │ + ······<fieldset>
+        47 │ + ········<legend>Application·source·controls</legend>
+        48 │ + ········<button·type="button"·onClick={()·=>·recheck("alpha")}>
+        49 │ + ··········Load·Alpha·synthetic·source
+        50 │ + ········</button>
+        51 │ + ········<button·type="button"·onClick={()·=>·recheck("beta")}>
+        52 │ + ··········Load·Beta·synthetic·source
+        53 │ + ········</button>
+        54 │ + ········<button·type="button"·onClick={()·=>·recheck(receipt.dataset)}>
+        55 │ + ··········Recheck·synthetic·source
+        56 │ + ········</button>
+        57 │ + ········<button
+        58 │ + ··········type="button"
+        59 │ + ··········onClick={()·=>·{
+        60 │ + ············session.retire(
+        61 │ + ··············"Local·application·source·revoked;·no·backend·cancellation·promise.",
+        62 │ + ············);
+        63 │ + ··········}}
+        64 │ + ········>
+        65 │ + ··········Revoke·local·source
+        66 │ + ········</button>
+        67 │ + ········<button·type="button"·onClick={()·=>·setHidden((value)·=>·!value)}>
+        68 │ + ··········{hidden·?·"Show·table·UI"·:·"Hide·table·UI"}
+        69 │ + ········</button>
+        70 │ + ········<button·type="button"·onClick={away}>
+        71 │ + ··········Leave·application·route
+        72 │ + ········</button>
+        73 │ + ········{state.phase·===·"retiring"·?·(
+        74 │ + ··········<button
+        75 │ + ············type="button"
+        76 │ + ············onClick={()·=>·{
+        77 │ + ··············session.retire();
+        78 │ + ············}}
+        79 │ + ··········>
+        80 │ + ············Retry·source·cleanup
+        81 │ + ··········</button>
+        82 │ + ········)·:·null}
+        83 │ + ······</fieldset>
+        84 │ + ······<p·role="status"·aria-label="Application·source·status">
+        85 │ + ········{state.notice}
+        86 │ + ······</p>
+        87 │ + ······{attachmentError·&&·state.phase·!==·"retiring"·?·(
+        88 │ + ········<p·role="alert">
+        89 │ + ··········No·current·source·attachment.·Recheck·the·synthetic·source·explicitly.
+        90 │ + ········</p>
+        91 │ + ······)·:·null}
+        92 │ + ······{state.receipt·?·(
+        93 │ + ········<p>
+        94 │ + ··········<output·aria-label="Synthetic·canary">{state.receipt.canary}</output>
+        95 │ + ········</p>
+        96 │ + ······)·:·null}
+        97 │ + ······{hidden·?·(
+        98 │ + ········<p>
+        99 │ + ··········Table·UI·detached.·The·application·source·is·still·owned·by·this
+       100 │ + ··········router.
+       101 │ + ········</p>
+       102 │ + ······)·:·state.sources·?·(
+       103 │ + ········<>
+       104 │ + ··········<HeadlessTable
+       105 │ + ············source={state.sources.transactions}
+       106 │ + ············title="Synthetic·transactions"
+       107 │ + ············rowHeader="description"
+       108 │ + ············rowText={transactionText}
+       109 │ + ··········/>
+       110 │ + ··········<HeadlessTable
+       111 │ + ············source={state.sources.inventory}
+       112 │ + ············title="Synthetic·inventory"
+       113 │ + ············rowHeader="title"
+       114 │ + ············rowText={inventoryText}
+       115 │ + ··········/>
+       116 │ + ········</>
+       117 │ + ······)·:·(
+       118 │ + ········<p>No·granted·table·view·is·mounted·yet.</p>
+       119 │ + ······)}
+       120 │ + ····</main>
+       121 │ + ··);
+    25 122 │   }
+    26 123 │   
+  
+
+apps/example-start-facade/tsconfig.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1  1 │   {
+    2  2 │     "extends": "../../tsconfig.base.json",
+    3    │ - ··"compilerOptions":·{·"noEmit":·true,·"module":·"ESNext",·"moduleResolution":·"Bundler",·"jsx":·"react-jsx",·"lib":·["ES2022",·"ES2023",·"ES2023.Intl",·"DOM",·"DOM.Iterable"],·"types":·["node",·"vite/client",·"react",·"react-dom"]·},
+       3 │ + ··"compilerOptions":·{
+       4 │ + ····"noEmit":·true,
+       5 │ + ····"module":·"ESNext",
+       6 │ + ····"moduleResolution":·"Bundler",
+       7 │ + ····"jsx":·"react-jsx",
+       8 │ + ····"lib":·["ES2022",·"ES2023",·"ES2023.Intl",·"DOM",·"DOM.Iterable"],
+       9 │ + ····"types":·["node",·"vite/client",·"react",·"react-dom"]
+      10 │ + ··},
+    4 11 │     "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
+    5 12 │   }
+  
+
+apps/example-start-facade/tsconfig.source-light.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   {
+     2  2 │     "extends": "./tsconfig.json",
+     3    │ - ··"compilerOptions":·{·"paths":·{
+     4    │ - ····"@tableweave/react":·["../../packages/react/src/index.ts"],
+     5    │ - ····"@tableweave/react/contracts":·["../../packages/react/src/contracts/index.ts"],
+     6    │ - ····"@tableweave/react/filters":·["../../packages/react/src/filters/index.ts"],
+     7    │ - ····"@tableweave/react/reordering":·["../../packages/react/src/reordering/index.ts"],
+     8    │ - ····"@tableweave/react/reordering-controller":·["../../packages/react/src/reordering-controller/index.ts"],
+     9    │ - ····"@tanstack/react-table":·["../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"],
+    10    │ - ····"@internationalized/date":·["../../packages/react/node_modules/@internationalized/date"]
+    11    │ - ····,"@tanstack/react-query":·["./node_modules/@tanstack/react-query"]
+    12    │ - ····,"@tanstack/react-router":·["./node_modules/@tanstack/react-router"]
+    13    │ - ····,"@tanstack/react-router-ssr-query":·["./node_modules/@tanstack/react-router-ssr-query"]
+    14    │ - ··}·},
+    15    │ - ··"include":·["src/application/*.ts",·"src/table/*.tsx",·"src/start.ts",·"vite.config.ts",·"../../tests/workbench/wp11-start-facade/sdk-contracts.ts"],
+    16    │ - ··"exclude":·["src/router.tsx",·"src/register.d.ts",·"src/routes",·"src/routeTree.gen.ts"]
+        3 │ + ··"compilerOptions":·{
+        4 │ + ····"paths":·{
+        5 │ + ······"@tableweave/react":·["../../packages/react/src/index.ts"],
+        6 │ + ······"@tableweave/react/contracts":·[
+        7 │ + ········"../../packages/react/src/contracts/index.ts"
+        8 │ + ······],
+        9 │ + ······"@tableweave/react/filters":·[
+       10 │ + ········"../../packages/react/src/filters/index.ts"
+       11 │ + ······],
+       12 │ + ······"@tableweave/react/reordering":·[
+       13 │ + ········"../../packages/react/src/reordering/index.ts"
+       14 │ + ······],
+       15 │ + ······"@tableweave/react/reordering-controller":·[
+       16 │ + ········"../../packages/react/src/reordering-controller/index.ts"
+       17 │ + ······],
+       18 │ + ······"@tanstack/react-table":·[
+       19 │ + ········"../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+       20 │ + ······],
+       21 │ + ······"@internationalized/date":·[
+       22 │ + ········"../../packages/react/node_modules/@internationalized/date"
+       23 │ + ······],
+       24 │ + ······"@tanstack/react-query":·["./node_modules/@tanstack/react-query"],
+       25 │ + ······"@tanstack/react-router":·["./node_modules/@tanstack/react-router"],
+       26 │ + ······"@tanstack/react-router-ssr-query":·[
+       27 │ + ········"./node_modules/@tanstack/react-router-ssr-query"
+       28 │ + ······]
+       29 │ + ····}
+       30 │ + ··},
+       31 │ + ··"include":·[
+       32 │ + ····"src/application/*.ts",
+       33 │ + ····"src/table/*.tsx",
+       34 │ + ····"src/start.ts",
+       35 │ + ····"vite.config.ts",
+       36 │ + ····"../../tests/workbench/wp11-start-facade/sdk-contracts.ts"
+       37 │ + ··],
+       38 │ + ··"exclude":·[
+       39 │ + ····"src/router.tsx",
+       40 │ + ····"src/register.d.ts",
+       41 │ + ····"src/routes",
+       42 │ + ····"src/routeTree.gen.ts"
+       43 │ + ··]
+    17 44 │   }
+    18 45 │   
+  
+
+apps/example-start-facade/vite.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     4  4 │   // Standard generation is enabled. Invoke plugins only in the FINAL phase.
+     5  5 │   const vendor = createRequire(new URL("./package.json", import.meta.url));
+     6    │ - const·publicEntries·=·["@tableweave/react",·"@tableweave/react/contracts",·"@tableweave/react/filters",·"@tableweave/react/criteria",·"@tableweave/react/reordering",·"@tableweave/react/reordering-controller"]·as·const;
+     7    │ - export·default·defineConfig({·plugins:·[tanstackStart(),·react()],·resolve:·{·alias:·[
+     8    │ - ··//·ESM·resolution·honors·actual·public·exports;·CJS·require.resolve·would·reject
+     9    │ - ··//·the·import-only·library.·Works·with·emitted·workspace·or·a·genuine·archive.
+    10    │ - ··...publicEntries.map((name)·=>·({·find:·new·RegExp(`^${name.replaceAll(".",·"\\.")}$`),·replacement:·fileURLToPath(import.meta.resolve(name))·})),
+    11    │ - ··{·find:·"react",·replacement:·dirname(vendor.resolve("react/package.json"))·},
+    12    │ - ··{·find:·"react-dom",·replacement:·dirname(vendor.resolve("react-dom/package.json"))·},
+    13    │ - ]·},·server:·{·host:·"127.0.0.1",·port:·6573,·strictPort:·true·},·preview:·{·host:·"127.0.0.1",·port:·6573,·strictPort:·true·}·});
+        6 │ + const·publicEntries·=·[
+        7 │ + ··"@tableweave/react",
+        8 │ + ··"@tableweave/react/contracts",
+        9 │ + ··"@tableweave/react/filters",
+       10 │ + ··"@tableweave/react/criteria",
+       11 │ + ··"@tableweave/react/reordering",
+       12 │ + ··"@tableweave/react/reordering-controller",
+       13 │ + ]·as·const;
+       14 │ + export·default·defineConfig({
+       15 │ + ··plugins:·[tanstackStart(),·react()],
+       16 │ + ··resolve:·{
+       17 │ + ····alias:·[
+       18 │ + ······//·ESM·resolution·honors·actual·public·exports;·CJS·require.resolve·would·reject
+       19 │ + ······//·the·import-only·library.·Works·with·emitted·workspace·or·a·genuine·archive.
+       20 │ + ······...publicEntries.map((name)·=>·({
+       21 │ + ········find:·new·RegExp(`^${name.replaceAll(".",·"\\.")}$`),
+       22 │ + ········replacement:·fileURLToPath(import.meta.resolve(name)),
+       23 │ + ······})),
+       24 │ + ······{
+       25 │ + ········find:·"react",
+       26 │ + ········replacement:·dirname(vendor.resolve("react/package.json")),
+       27 │ + ······},
+       28 │ + ······{
+       29 │ + ········find:·"react-dom",
+       30 │ + ········replacement:·dirname(vendor.resolve("react-dom/package.json")),
+       31 │ + ······},
+       32 │ + ····],
+       33 │ + ··},
+       34 │ + ··server:·{·host:·"127.0.0.1",·port:·6573,·strictPort:·true·},
+       35 │ + ··preview:·{·host:·"127.0.0.1",·port:·6573,·strictPort:·true·},
+       36 │ + });
+    14 37 │   import { createRequire } from "node:module";
+    15 38 │   import { dirname } from "node:path";
+  
+
+tests/workbench/wp11-start-facade/consumer.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3   3 │   import { createHash } from "node:crypto";
+     4   4 │   import { createRequire } from "node:module";
+     5     │ - import·{·access,·lstat,·mkdir,·readFile,·realpath,·writeFile·}·from·"node:fs/promises";
+         5 │ + import·{
+         6 │ + ··access,
+         7 │ + ··lstat,
+         8 │ + ··mkdir,
+         9 │ + ··readFile,
+        10 │ + ··realpath,
+        11 │ + ··writeFile,
+        12 │ + }·from·"node:fs/promises";
+     6  13 │   import { dirname, isAbsolute, resolve, sep } from "node:path";
+     7  14 │   import { fileURLToPath } from "node:url";
+    ······ │ 
+     9  16 │   const [mode, supplied, archive] = process.argv.slice(2);
+    10  17 │   assert(["prepare", "audit"].includes(mode));
+    11     │ - assert(supplied·&&·isAbsolute(supplied),·"Explicit·fresh·outside·target·required");
+    12     │ - const·target·=·resolve(supplied),·parent·=·await·realpath(dirname(target));
+    13     │ - const·exists·=·async·(path)·=>·{·try·{·await·lstat(path);·return·true;·}·catch·(error)·{·if·(error.code·===·"ENOENT")·return·false;·throw·error;·}·};
+        18 │ + assert(
+        19 │ + ··supplied·&&·isAbsolute(supplied),
+        20 │ + ··"Explicit·fresh·outside·target·required",
+        21 │ + );
+        22 │ + const·target·=·resolve(supplied),
+        23 │ + ··parent·=·await·realpath(dirname(target));
+        24 │ + const·exists·=·async·(path)·=>·{
+        25 │ + ··try·{
+        26 │ + ····await·lstat(path);
+        27 │ + ····return·true;
+        28 │ + ··}·catch·(error)·{
+        29 │ + ····if·(error.code·===·"ENOENT")·return·false;
+        30 │ + ····throw·error;
+        31 │ + ··}
+        32 │ + };
+    14  33 │   async function outsideAncestors(directory) {
+    15  34 │     let path = directory;
+    16  35 │     for (;;) {
+    17     │ - ····for·(const·marker·of·[".git",·"pnpm-workspace.yaml",·"pnpm-lock.yaml",·"lerna.json",·"yarn.lock",·"node_modules"])·assert(!await·exists(resolve(path,·marker)),·`Ancestor·workspace/worktree/dependency·boundary:·${path}/${marker}`);
+        36 │ + ····for·(const·marker·of·[
+        37 │ + ······".git",
+        38 │ + ······"pnpm-workspace.yaml",
+        39 │ + ······"pnpm-lock.yaml",
+        40 │ + ······"lerna.json",
+        41 │ + ······"yarn.lock",
+        42 │ + ······"node_modules",
+        43 │ + ····])
+        44 │ + ······assert(
+        45 │ + ········!(await·exists(resolve(path,·marker))),
+        46 │ + ········`Ancestor·workspace/worktree/dependency·boundary:·${path}/${marker}`,
+        47 │ + ······);
+    18  48 │       if (await exists(resolve(path, "package.json"))) {
+    19     │ - ······const·manifest·=·JSON.parse(await·readFile(resolve(path,·"package.json"),·"utf8"));
+    20     │ - ······assert(!manifest.workspaces·&&·!manifest.pnpm?.workspace,·`Ancestor·package·workspace:·${path}`);
+        49 │ + ······const·manifest·=·JSON.parse(
+        50 │ + ········await·readFile(resolve(path,·"package.json"),·"utf8"),
+        51 │ + ······);
+        52 │ + ······assert(
+        53 │ + ········!manifest.workspaces·&&·!manifest.pnpm?.workspace,
+        54 │ + ········`Ancestor·package·workspace:·${path}`,
+        55 │ + ······);
+    21  56 │       }
+    22     │ - ····const·next·=·dirname(path);·if·(path·===·next)·break;·path·=·next;
+        57 │ + ····const·next·=·dirname(path);
+        58 │ + ····if·(path·===·next)·break;
+        59 │ + ····path·=·next;
+    23  60 │     }
+    24  61 │   }
+    25     │ - assert.equal(resolve(parent,·target.slice(dirname(target).length·+·1)),·target,·"No·lexical/symlink·parent·redirection");
+        62 │ + assert.equal(
+        63 │ + ··resolve(parent,·target.slice(dirname(target).length·+·1)),
+        64 │ + ··target,
+        65 │ + ··"No·lexical/symlink·parent·redirection",
+        66 │ + );
+    26  67 │   await outsideAncestors(parent);
+    27  68 │   const below = (base, path) => path === base || path.startsWith(`${base}${sep}`);
+    28  69 │   assert(!below(await realpath(root), target));
+    29  70 │   if (mode === "prepare") {
+    30     │ - ··assert(!await·exists(target),·"Never·overwrite·any·existing·target/symlink");
+        71 │ + ··assert(
+        72 │ + ····!(await·exists(target)),
+        73 │ + ····"Never·overwrite·any·existing·target/symlink",
+        74 │ + ··);
+    31  75 │     assert(archive && isAbsolute(archive));
+    32  76 │     const bytes = await readFile(await realpath(archive));
+    33  77 │     await mkdir(target);
+    34     │ - ··const·before·=·JSON.parse(await·readFile(new·URL("./before.json",·import.meta.url),·"utf8"));
+        78 │ + ··const·before·=·JSON.parse(
+        79 │ + ····await·readFile(new·URL("./before.json",·import.meta.url),·"utf8"),
+        80 │ + ··);
+    35  81 │     const app = "apps/example-start-facade/";
+    36     │ - ··for·(const·path·of·[...before.leased.filter((path)·=>·path.startsWith(app)·&&·!path.endsWith("tsconfig.source-light.json")),·"tsconfig.base.json",·...["records.ts",·"schemas.ts",·"definitions.ts"].map((name)·=>·`apps/examples/shared/${name}`)])·{
+        82 │ + ··for·(const·path·of·[
+        83 │ + ····...before.leased.filter(
+        84 │ + ······(path)·=>
+        85 │ + ········path.startsWith(app)·&&·!path.endsWith("tsconfig.source-light.json"),
+        86 │ + ····),
+        87 │ + ····"tsconfig.base.json",
+        88 │ + ····...["records.ts",·"schemas.ts",·"definitions.ts"].map(
+        89 │ + ······(name)·=>·`apps/examples/shared/${name}`,
+        90 │ + ····),
+        91 │ + ··])·{
+    37  92 │       await mkdir(dirname(resolve(target, path)), { recursive: true });
+    38     │ - ····await·writeFile(resolve(target,·path),·await·readFile(resolve(root,·path)),·{·flag:·"wx"·});
+        93 │ + ····await·writeFile(
+        94 │ + ······resolve(target,·path),
+        95 │ + ······await·readFile(resolve(root,·path)),
+        96 │ + ······{·flag:·"wx"·},
+        97 │ + ····);
+    39  98 │     }
+    40     │ - ··const·manifest·=·JSON.parse(await·readFile(resolve(root,·`${app}package.json`),·"utf8"));
+    41     │ - ··manifest.dependencies["@tableweave/react"]·=·`file:${await·realpath(archive)}`;
+    42     │ - ··await·writeFile(resolve(target,·`${app}package.json`),·`${JSON.stringify(manifest,·null,·2)}\n`,·{·flag:·"wx"·});
+        99 │ + ··const·manifest·=·JSON.parse(
+       100 │ + ····await·readFile(resolve(root,·`${app}package.json`),·"utf8"),
+       101 │ + ··);
+       102 │ + ··manifest.dependencies["@tableweave/react"]·=
+       103 │ + ····`file:${await·realpath(archive)}`;
+       104 │ + ··await·writeFile(
+       105 │ + ····resolve(target,·`${app}package.json`),
+       106 │ + ····`${JSON.stringify(manifest,·null,·2)}\n`,
+       107 │ + ····{·flag:·"wx"·},
+       108 │ + ··);
+    43 109 │     // Root dependencies also serve the sibling plain fixture directory, without a
+    44 110 │     // workspace or a source alias. The nested app remains the actual Vite root.
+    45     │ - ··await·writeFile(resolve(target,·"package.json"),·`${JSON.stringify({·...manifest,·name:·"wp11-start-facade-archive-consumer"·},·null,·2)}\n`,·{·flag:·"wx"·});
+    46     │ - ...·await·writeFile(resolve(target,·"receipt.json"),·`${JSON.stringify({·status:·"Prepared·only;·not·in...
+    47     │ - ··console.log("Prepared·only·outside·every·detected·ancestor·workspace/worktree.·No·install/build/script/profile·change·executed.");
+       111 │ + ··await·writeFile(
+       112 │ + ····resolve(target,·"package.json"),
+       113 │ + ····`${JSON.stringify({·...manifest,·name:·"wp11-start-facade-archive-consumer"·},·null,·2)}\n`,
+       114 │ + ····{·flag:·"wx"·},
+       115 │ + ··);
+       116 │ + ··await·writeFile(
+       117 │ + ····resolve(target,·"receipt.json"),
+       118 │ + ····`${JSON.stringify({·status:·"Prepared·only;·not·installed/compatible/ordinary·runtime·proof",·archive:·{·sha256:·createHash("sha256").update(bytes).digest("hex")·},·profile:·"Main·must·explicitly·materialize·the·unchanged·required·Start·declaration·profile;·no·RAC·patch,·no·source·alias,·no·new·repair·is·applied·by·this·driver"·},·null,·2)}\n`,
+       119 │ + ····{·flag:·"wx"·},
+       120 │ + ··);
+       121 │ + ··console.log(
+       122 │ + ····"Prepared·only·outside·every·detected·ancestor·workspace/worktree.·No·install/build/script/profile·change·executed.",
+       123 │ + ··);
+    48 124 │   } else {
+    49 125 │     assert.equal(await realpath(target), target);
+    ······ │ 
+    51 127 │     const require = createRequire(resolve(app, "package.json"));
+    52 128 │     const compilerPath = await realpath(require.resolve("typescript"));
+    53     │ - ··assert(below(target,·compilerPath),·"Consumer·must·use·its·own·actual·compiler,·not·host·fallback");
+       129 │ + ··assert(
+       130 │ + ····below(target,·compilerPath),
+       131 │ + ····"Consumer·must·use·its·own·actual·compiler,·not·host·fallback",
+       132 │ + ··);
+    54 133 │     const ts = require(compilerPath);
+    55     │ - ··const·configPath·=·resolve(app,·"tsconfig.json"),·raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);
+  31 more lines truncated
+  
+
+tests/workbench/wp11-start-facade/final/browser.spec.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import { expect, test } from "@playwright/test";
+     2     │ - test("actual·SSR·serializes·isolated·Alpha/Beta·canaries,·with·no·DOM·table·grant",·async·({·browser,·request·})·=>·{
+     3     │ - ··const·[alpha,·beta]·=·await·Promise.all([request.get("/",·{·headers:·{·Cookie:·"wp11-facade-dataset=alpha"·}·}),·request.get("/",·{·headers:·{·Cookie:·"wp11-facade-dataset=beta"·}·})]);
+     4     │ - ··expect(alpha.ok()).toBe(true);·expect(beta.ok()).toBe(true);
+         2 │ + test("actual·SSR·serializes·isolated·Alpha/Beta·canaries,·with·no·DOM·table·grant",·async·({
+         3 │ + ··browser,
+         4 │ + ··request,
+         5 │ + })·=>·{
+         6 │ + ··const·[alpha,·beta]·=·await·Promise.all([
+         7 │ + ····request.get("/",·{·headers:·{·Cookie:·"wp11-facade-dataset=alpha"·}·}),
+         8 │ + ····request.get("/",·{·headers:·{·Cookie:·"wp11-facade-dataset=beta"·}·}),
+         9 │ + ··]);
+        10 │ + ··expect(alpha.ok()).toBe(true);
+        11 │ + ··expect(beta.ok()).toBe(true);
+     5  12 │     const [a, b] = await Promise.all([alpha.text(), beta.text()]);
+     6     │ - ··expect(a).toContain("public-canary:alpha:");·expect(a).not.toContain("public-canary:beta:");
+     7     │ - ··expect(b).toContain("public-canary:beta:");·expect(b).not.toContain("public-canary:alpha:");
+     8     │ - ··expect(a).not.toContain("WP11_START_FACADE_READER_SERVER_ONLY");·expect(b).not.toContain("WP11_START_FACADE_READER_SERVER_ONLY");
+        13 │ + ··expect(a).toContain("public-canary:alpha:");
+        14 │ + ··expect(a).not.toContain("public-canary:beta:");
+        15 │ + ··expect(b).toContain("public-canary:beta:");
+        16 │ + ··expect(b).not.toContain("public-canary:alpha:");
+        17 │ + ··expect(a).not.toContain("WP11_START_FACADE_READER_SERVER_ONLY");
+        18 │ + ··expect(b).not.toContain("WP11_START_FACADE_READER_SERVER_ONLY");
+     9  19 │     const noScripts = await browser.newContext({ javaScriptEnabled: false });
+    10     │ - ··try·{·const·page·=·await·noScripts.newPage();·await·page.goto("/");·await·expect(page.getByRole("table")).toHaveCount(0);·}·finally·{·await·noScripts.close();·}
+        20 │ + ··try·{
+        21 │ + ····const·page·=·await·noScripts.newPage();
+        22 │ + ····await·page.goto("/");
+        23 │ + ····await·expect(page.getByRole("table")).toHaveCount(0);
+        24 │ + ··}·finally·{
+        25 │ + ····await·noScripts.close();
+        26 │ + ··}
+    11  27 │   });
+    12     │ - test("fresh·hydration·has·no·new·RPC,·while·explicit·refresh·does",·async·({·page·})·=>·{
+    13     │ - ··const·rpc:·string[]·=·[];·page.on("request",·(request)·=>·{·if·(request.url().includes("/_serverFn/"))·rpc.push(request.method());·});
+        28 │ + test("fresh·hydration·has·no·new·RPC,·while·explicit·refresh·does",·async·({
+        29 │ + ··page,
+        30 │ + })·=>·{
+        31 │ + ··const·rpc:·string[]·=·[];
+        32 │ + ··page.on("request",·(request)·=>·{
+        33 │ + ····if·(request.url().includes("/_serverFn/"))·rpc.push(request.method());
+        34 │ + ··});
+    14  35 │     const response = await page.goto("/");
+    15     │ - ··await·expect(page.getByRole("rowheader",·{·name:·"Alpha·Transfer·note·01",·exact:·true·})).toBeVisible({·timeout:·30000·});
+    16     │ - ··await·expect(page.getByRole("rowheader",·{·name:·"Alpha·Desk·stand",·exact:·true·})).toBeVisible();
+        36 │ + ··await·expect(
+        37 │ + ····page.getByRole("rowheader",·{
+        38 │ + ······name:·"Alpha·Transfer·note·01",
+        39 │ + ······exact:·true,
+        40 │ + ····}),
+        41 │ + ··).toBeVisible({·timeout:·30000·});
+        42 │ + ··await·expect(
+        43 │ + ····page.getByRole("rowheader",·{·name:·"Alpha·Desk·stand",·exact:·true·}),
+        44 │ + ··).toBeVisible();
+    17  45 │     const date = response?.headers().date;
+    18     │ - ··expect(date,·"Actual·response·Date·required·to·establish·fresh-cache·precondition").toBeTruthy();
+    19     │ - ··expect(Date.now()·-·Date.parse(date·??·""),·"Cold·hydration·outside·freshness·window·is·not·duplicate-FRESH·proof").toBeLessThan(30000);
+        46 │ + ··expect(
+        47 │ + ····date,
+        48 │ + ····"Actual·response·Date·required·to·establish·fresh-cache·precondition",
+        49 │ + ··).toBeTruthy();
+        50 │ + ··expect(
+        51 │ + ····Date.now()·-·Date.parse(date·??·""),
+        52 │ + ····"Cold·hydration·outside·freshness·window·is·not·duplicate-FRESH·proof",
+        53 │ + ··).toBeLessThan(30000);
+    20  54 │     expect(rpc).toHaveLength(0);
+    21     │ - ··await·page.getByRole("region",·{·name:·"Synthetic·transactions",·exact:·true·}).getByRole("button",·{·name:·"Refresh·synthetic·records"·}).click();
+        55 │ + ··await·page
+        56 │ + ····.getByRole("region",·{·name:·"Synthetic·transactions",·exact:·true·})
+        57 │ + ····.getByRole("button",·{·name:·"Refresh·synthetic·records"·})
+        58 │ + ····.click();
+    22  59 │     await expect.poll(() => rpc.length).toBeGreaterThan(0);
+    23  60 │   });
+    24     │ - test("two·real·table·owners:·independent·query,·selection·and·UI-hide·lifetime",·async·({·page·})·=>·{
+        61 │ + test("two·real·table·owners:·independent·query,·selection·and·UI-hide·lifetime",·async·({
+        62 │ + ··page,
+        63 │ + })·=>·{
+    25  64 │     await page.goto("/");
+    26     │ - ··const·transactions·=·page.getByRole("region",·{·name:·"Synthetic·transactions",·exact:·true·});
+    27     │ - ··const·inventory·=·page.getByRole("region",·{·name:·"Synthetic·inventory",·exact:·true·});
+    28     │ - ··await·expect(transactions.getByRole("rowheader",·{·name:·"Alpha·Transfer·note·01",·exact:·true·})).toBeVisible({·timeout:·30000·});
+    29     │ - ··await·transactions.getByRole("checkbox",·{·name:·"Select·Alpha·Transfer·note·01",·exact:·true·}).check();
+    30     │ - ··await·expect(transactions.getByLabel("Selected·count")).toContainText("1·selected");
+    31     │ - ··await·page.getByRole("button",·{·name:·"Hide·table·UI",·exact:·true·}).click();
+        65 │ + ··const·transactions·=·page.getByRole("region",·{
+        66 │ + ····name:·"Synthetic·transactions",
+        67 │ + ····exact:·true,
+        68 │ + ··});
+        69 │ + ··const·inventory·=·page.getByRole("region",·{
+        70 │ + ····name:·"Synthetic·inventory",
+        71 │ + ····exact:·true,
+        72 │ + ··});
+        73 │ + ··await·expect(
+        74 │ + ····transactions.getByRole("rowheader",·{
+        75 │ + ······name:·"Alpha·Transfer·note·01",
+        76 │ + ······exact:·true,
+        77 │ + ····}),
+        78 │ + ··).toBeVisible({·timeout:·30000·});
+        79 │ + ··await·transactions
+        80 │ + ····.getByRole("checkbox",·{
+        81 │ + ······name:·"Select·Alpha·Transfer·note·01",
+        82 │ + ······exact:·true,
+        83 │ + ····})
+        84 │ + ····.check();
+        85 │ + ··await·expect(transactions.getByLabel("Selected·count")).toContainText(
+        86 │ + ····"1·selected",
+        87 │ + ··);
+        88 │ + ··await·page
+        89 │ + ····.getByRole("button",·{·name:·"Hide·table·UI",·exact:·true·})
+        90 │ + ····.click();
+    32  91 │     await expect(page.getByRole("table")).toHaveCount(0);
+    33     │ - ··await·page.getByRole("button",·{·name:·"Show·table·UI",·exact:·true·}).click();
+    34     │ - ··await·expect(transactions.getByLabel("Selected·count")).toContainText("1·selected");
+    35     │ - ··await·transactions.getByRole("textbox",·{·name:·"Search·records",·exact:·true·}).fill("Transfer·note·11");
+    36     │ - ··await·transactions.getByRole("button",·{·name:·"Apply·search",·exact:·true·}).click();
+    37     │ - ··await·expect(transactions.getByRole("rowheader",·{·name:·"Alpha·Transfer·note·11",·exact:·true·})).toBeVisible();
+    38     │ - ··await·expect(inventory.getByRole("rowheader",·{·name:·"Alpha·Desk·stand",·exact:·true·})).toBeVisible();
+    39     │ - ··await·page.getByRole("button",·{·name:·"Revoke·local·source",·exact:·true·}).click();
+        92 │ + ··await·page
+        93 │ + ····.getByRole("button",·{·name:·"Show·table·UI",·exact:·true·})
+        94 │ + ····.click();
+        95 │ + ··await·expect(transactions.getByLabel("Selected·count")).toContainText(
+        96 │ + ····"1·selected",
+        97 │ + ··);
+        98 │ + ··await·transactions
+        99 │ + ····.getByRole("textbox",·{·name:·"Search·records",·exact:·true·})
+       100 │ + ····.fill("Transfer·note·11");
+       101 │ + ··await·transactions
+       102 │ + ····.getByRole("button",·{·name:·"Apply·search",·exact:·true·})
+       103 │ + ····.click();
+       104 │ + ··await·expect(
+       105 │ + ····transactions.getByRole("rowheader",·{
+       106 │ + ······name:·"Alpha·Transfer·note·11",
+       107 │ + ······exact:·true,
+       108 │ + ····}),
+       109 │ + ··).toBeVisible();
+       110 │ + ··await·expect(
+       111 │ + ····inventory.getByRole("rowheader",·{·name:·"Alpha·Desk·stand",·exact:·true·}),
+       112 │ + ··).toBeVisible();
+       113 │ + ··await·page
+       114 │ + ····.getByRole("button",·{·name:·"Revoke·local·source",·exact:·true·})
+       115 │ + ····.click();
+    40 116 │     await expect(page.getByRole("table")).toHaveCount(0);
+    41 117 │     await expect(page.getByLabel("Synthetic canary")).toHaveCount(0);
+    42 118 │   });
+    43     │ - test("actual·source·transition/leave·requests·fresh·Beta·then·Alpha·ownership",·async·({·page·})·=>·{
+       119 │ + test("actual·source·transition/leave·requests·fresh·Beta·then·Alpha·ownership",·async·({
+       120 │ + ··page,
+       121 │ + })·=>·{
+  96 more lines truncated
+  
+
+tests/workbench/wp11-start-facade/final/contracts.test.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   import { QueryClient } from "@tanstack/react-query";
+     2  2 │   import { expect, it } from "vitest";
+     3    │ - import·{·bootstrap,·readInput·}·from·"../../../../apps/example-start-facade/src/application/codec.js";
+        3 │ + import·{
+        4 │ + ··bootstrap,
+        5 │ + ··readInput,
+        6 │ + }·from·"../../../../apps/example-start-facade/src/application/codec.js";
+     4  7 │   import { createBootstrapSession } from "../../../../apps/example-start-facade/src/application/bootstrap-session.js";
+     5    │ - import·{·SourceUnavailable,·type·ReaderPort·}·from·"../../../../apps/example-start-facade/src/application/types.js";
+     6    │ - const·noRead:·ReaderPort·=·{·bootstrap:·async·()·=>·{·throw·new·SourceUnavailable();·},·canary:·async·()·=>·{·throw·new·SourceUnavailable();·},·rows:·async·()·=>·{·throw·new·SourceUnavailable();·}·};
+        8 │ + import·{
+        9 │ + ··SourceUnavailable,
+       10 │ + ··type·ReaderPort,
+       11 │ + }·from·"../../../../apps/example-start-facade/src/application/types.js";
+       12 │ + const·noRead:·ReaderPort·=·{
+       13 │ + ··bootstrap:·async·()·=>·{
+       14 │ + ····throw·new·SourceUnavailable();
+       15 │ + ··},
+       16 │ + ··canary:·async·()·=>·{
+       17 │ + ····throw·new·SourceUnavailable();
+       18 │ + ··},
+       19 │ + ··rows:·async·()·=>·{
+       20 │ + ····throw·new·SourceUnavailable();
+       21 │ + ··},
+       22 │ + };
+     7 23 │   it("DTOs, scope/clock forgery and access flags do not provide a live hydration lease", () => {
+     8    │ - ··expect(()·=>·readInput({·version:·1,·domain:·"transactions",·scopeKey:·"forged",·hasAccess:·true·})).toThrow();
+     9    │ - ··expect(()·=>·bootstrap({·id:·"not-a-response",·hasAccess:·true,·transactions:·{},·inventory:·{}·})).toThrow();
+    10    │ - ··const·client·=·new·QueryClient(),·session·=·createBootstrapSession(client,·noRead,·"client");
+    11    │ - ··expect(()·=>·session.deserializeData({·kind:·"canary",·dataset:·"alpha",·bootstrapId:·"00000000-0000-0000-0000-000000000000",·value:·"public-canary:alpha:00000000-0000-0000-0000-000000000000"·})).toThrow();
+       24 │ + ··expect(()·=>
+       25 │ + ····readInput({
+       26 │ + ······version:·1,
+       27 │ + ······domain:·"transactions",
+       28 │ + ······scopeKey:·"forged",
+       29 │ + ······hasAccess:·true,
+       30 │ + ····}),
+       31 │ + ··).toThrow();
+       32 │ + ··expect(()·=>
+       33 │ + ····bootstrap({
+       34 │ + ······id:·"not-a-response",
+       35 │ + ······hasAccess:·true,
+       36 │ + ······transactions:·{},
+       37 │ + ······inventory:·{},
+       38 │ + ····}),
+       39 │ + ··).toThrow();
+       40 │ + ··const·client·=·new·QueryClient(),
+       41 │ + ····session·=·createBootstrapSession(client,·noRead,·"client");
+       42 │ + ··expect(()·=>
+       43 │ + ····session.deserializeData({
+       44 │ + ······kind:·"canary",
+       45 │ + ······dataset:·"alpha",
+       46 │ + ······bootstrapId:·"00000000-0000-0000-0000-000000000000",
+       47 │ + ······value:·"public-canary:alpha:00000000-0000-0000-0000-000000000000",
+       48 │ + ····}),
+       49 │ + ··).toThrow();
+    12 50 │     expect(client.getQueryCache().getAll()).toHaveLength(0);
+    13    │ - ··session.dispose();·client.clear();
+       51 │ + ··session.dispose();
+       52 │ + ··client.clear();
+    14 53 │   });
+    15 54 │   it("accessor DTOs are rejected without evaluating getters", () => {
+    16 55 │     let evaluated = false;
+    17    │ - ··const·value·=·Object.defineProperty({},·"id",·{·enumerable:·true,·get()·{·evaluated·=·true;·return·"unsafe";·}·});
+    18    │ - ··expect(()·=>·bootstrap(value)).toThrow();·expect(evaluated).toBe(false);
+       56 │ + ··const·value·=·Object.defineProperty({},·"id",·{
+       57 │ + ····enumerable:·true,
+       58 │ + ····get()·{
+       59 │ + ······evaluated·=·true;
+       60 │ + ······return·"unsafe";
+       61 │ + ····},
+       62 │ + ··});
+       63 │ + ··expect(()·=>·bootstrap(value)).toThrow();
+       64 │ + ··expect(evaluated).toBe(false);
+    19 65 │   });
+    20 66 │   it("preload rejection cannot adopt or retire an active application source", async () => {
+    21    │ - ··const·client·=·new·QueryClient(),·session·=·createBootstrapSession(client,·noRead,·"client");
+       67 │ + ··const·client·=·new·QueryClient(),
+       68 │ + ····session·=·createBootstrapSession(client,·noRead,·"client");
+    22 69 │     const before = session.getSnapshot();
+    23    │ - ··await·expect(session.load("alpha",·new·AbortController().signal,·true)).rejects.toThrow();
+    24    │ - ··expect(session.getSnapshot()).toBe(before);·session.dispose();·client.clear();
+       70 │ + ··await·expect(
+       71 │ + ····session.load("alpha",·new·AbortController().signal,·true),
+       72 │ + ··).rejects.toThrow();
+       73 │ + ··expect(session.getSnapshot()).toBe(before);
+       74 │ + ··session.dispose();
+       75 │ + ··client.clear();
+    25 76 │   });
+    26 77 │   
+  
+
+tests/workbench/wp11-start-facade/final/negative.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1    │ - import·type·{·Bootstrap,·ReadInput·}·from·"../../../../apps/example-start-facade/src/application/types.js";
+       1 │ + import·type·{
+       2 │ + ··Bootstrap,
+       3 │ + ··ReadInput,
+       4 │ + }·from·"../../../../apps/example-start-facade/src/application/types.js";
+    2  5 │   import type { TableSource } from "../../../../apps/example-start-facade/src/application/table-source.js";
+    3  6 │   import type { TransactionSchema } from "../../../../apps/examples/shared/schemas.js";
+  
+
+tests/workbench/wp11-start-facade/final/tsconfig.negative.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1   │ - {·"extends":·"../../../../apps/example-start-facade/tsconfig.source-light.json",·"include":·["./negative.ts"],·"exclude":·[]·}
+      1 │ + {
+      2 │ + ··"extends":·"../../../../apps/example-start-facade/tsconfig.source-light.json",
+      3 │ + ··"include":·["./negative.ts"],
+      4 │ + ··"exclude":·[]
+      5 │ + }
+    2 6 │   
+  
+
+tests/workbench/wp11-start-facade/inputs.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6   6 │   import ts from "typescript";
+     7   7 │   const root = fileURLToPath(new URL("../../../", import.meta.url));
+     8     │ - const·configPath·=·resolve(root,·"apps/example-start-facade/tsconfig.source-light.json");
+     9     │ - const·raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);·assert.equal(raw.error,·undefined);
+    10     │ - const·config·=·ts.parseJsonConfigFileContent(raw.config,·ts.sys,·dirname(configPath));·assert.equal(config.errors.length,·0);
+    11     │ - assert.equal(config.options.strict,·true);·assert.equal(config.options.skipLibCheck,·false);·assert.equal(config.options.exactOptionalPropertyTypes,·true);
+         8 │ + const·configPath·=·resolve(
+         9 │ + ··root,
+        10 │ + ··"apps/example-start-facade/tsconfig.source-light.json",
+        11 │ + );
+        12 │ + const·raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);
+        13 │ + assert.equal(raw.error,·undefined);
+        14 │ + const·config·=·ts.parseJsonConfigFileContent(
+        15 │ + ··raw.config,
+        16 │ + ··ts.sys,
+        17 │ + ··dirname(configPath),
+        18 │ + );
+        19 │ + assert.equal(config.errors.length,·0);
+        20 │ + assert.equal(config.options.strict,·true);
+        21 │ + assert.equal(config.options.skipLibCheck,·false);
+        22 │ + assert.equal(config.options.exactOptionalPropertyTypes,·true);
+    12  23 │   const program = ts.createProgram(config.fileNames, config.options);
+    13  24 │   const paths = new Set(program.getSourceFiles().map((file) => file.fileName));
+    14     │ - for·(const·path·of·paths)·assert(!/apps\/example-start\/|routeTree\.gen|src\/router\.tsx|src\/routes\/|src\/register\.d\.ts/.test(relative(root,·path)),·`Generated-dependent/old·router·in·SOURCE·lane:·${path}`);
+    15     │ - for·(const·name·of·["package.json",·"pnpm-lock.yaml",·"pnpm-workspace.yaml",·"tsconfig.base.json",·"...
+        25 │ + for·(const·path·of·paths)
+        26 │ + ··assert(
+        27 │ + ····!/apps\/example-start\/|routeTree\.gen|src\/router\.tsx|src\/routes\/|src\/register\.d\.ts/.test(
+        28 │ + ······relative(root,·path),
+        29 │ + ····),
+        30 │ + ····`Generated-dependent/old·router·in·SOURCE·lane:·${path}`,
+        31 │ + ··);
+        32 │ + for·(const·name·of·[
+        33 │ + ··"package.json",
+        34 │ + ··"pnpm-lock.yaml",
+        35 │ + ··"pnpm-workspace.yaml",
+        36 │ + ··"tsconfig.base.json",
+        37 │ + ··"biome.json",
+        38 │ + ··"apps/example-start-facade/package.json",
+        39 │ + ··"apps/example-start-facade/tsconfig.json",
+        40 │ + ··"apps/example-start-facade/tsconfig.source-light.json",
+        41 │ + ··"apps/example-start-facade/vite.config.ts",
+        42 │ + ··"node_modules/typescript/package.json",
+        43 │ + ··"node_modules/@biomejs/biome/package.json",
+        44 │ + ··"apps/example-start-facade/node_modules/@tanstack/react-start/src/plugin/vite.ts",
+        45 │ + ··"apps/example-start-facade/node_modules/@tanstack/router-core/src/load-client.ts",
+        46 │ + ··"apps/example-start-facade/node_modules/@tanstack/router-core/src/router.ts",
+        47 │ + ··"apps/example-start-facade/node_modules/@tanstack/query-core/src/hydration.ts",
+        48 │ + ··"apps/example-start-facade/node_modules/@tanstack/react-router-ssr-query/src/index.tsx",
+        49 │ + ])
+        50 │ + ··paths.add(resolve(root,·name));
+    16  51 │   const store = await readdir(resolve(root, "node_modules/.pnpm"));
+    17  52 │   for (const [encoded, version, files] of [
+    ······ │ 
+    19  54 │     ["@tanstack+start-client-core", "1.170.35", ["src/client/hydrateStart.ts"]],
+    20  55 │     ["@tanstack+start-server-core", "1.169.40", ["src/createStartHandler.ts"]],
+    21     │ - ··["@tanstack+start-plugin-core",·"1.171.50",·["src/schema.ts",·"src/planning.ts",·"src/vite/start-manifest-plugin/plugin.ts",·"src/start-manifest-plugin/manifestBuilder.ts"]],
+        56 │ + ··[
+        57 │ + ····"@tanstack+start-plugin-core",
+        58 │ + ····"1.171.50",
+        59 │ + ····[
+        60 │ + ······"src/schema.ts",
+        61 │ + ······"src/planning.ts",
+        62 │ + ······"src/vite/start-manifest-plugin/plugin.ts",
+        63 │ + ······"src/start-manifest-plugin/manifestBuilder.ts",
+        64 │ + ····],
+        65 │ + ··],
+    22  66 │   ]) {
+    23     │ - ··const·candidates·=·store.filter((name)·=>·name·===·`${encoded}@${version}`·||·name.startsWith(`${encoded}@${version}_`));
+        67 │ + ··const·candidates·=·store.filter(
+        68 │ + ····(name)·=>
+        69 │ + ······name·===·`${encoded}@${version}`·||
+        70 │ + ······name.startsWith(`${encoded}@${version}_`),
+        71 │ + ··);
+    24  72 │     assert.equal(candidates.length, 1, `Exact existing SDK closure ${encoded}`);
+    25     │ - ··for·(const·file·of·files)·paths.add(resolve(root,·`node_modules/.pnpm/${candidates[0]}/node_modules/${encoded.replace("+",·"/")}/${file}`));
+        73 │ + ··for·(const·file·of·files)
+        74 │ + ····paths.add(
+        75 │ + ······resolve(
+        76 │ + ········root,
+        77 │ + ········`node_modules/.pnpm/${candidates[0]}/node_modules/${encoded.replace("+",·"/")}/${file}`,
+        78 │ + ······),
+        79 │ + ····);
+    26  80 │   }
+    27     │ - const·records·=·Object.fromEntries(await·Promise.all([...paths].sort().map(async·(path)·=>·[relative(root,·path),·{·sha256:·createHash("sha256").update(await·readFile(path)).digest("hex"),·mode:·(await·stat(path)).mode·&·0o777·}])));
+    28     │ - const·record·=·{·status:·"Actual·handwritten·SOURCE/noEmit·program·+·SDK·source·receipts·ONLY;·generated·routes·NOT·typed;·no·module/framework·execution",·compiler:·ts.version,·programFiles:·program.getSourceFiles().length,·records·};
+    29     │ - const·target·=·process.argv[2];·assert(target?.startsWith("tests/workbench/wp11-start-facade/.artifacts/"));
+    30     │ - if·(process.argv[3]·===·"verify")·assert.deepEqual(record,·JSON.parse(await·readFile(resolve(root,·target),·"utf8")));
+    31     │ - else·{·const·s·=·await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728);·await·writeFile(resolve(root,·target),·`${JSON.stringify(record,·null,·2)}\n`,·{·flag:·"wx"·});·}
+    32     │ - console.log(`TS${ts.version}:·${record.programFiles}·actual·source/declaration·files;·${Object.keys(records).length}·unique·pinned·program/SDK/config·inputs.·Generated·assembly·explicitly·excluded.`);
+        81 │ + const·records·=·Object.fromEntries(
+        82 │ + ··await·Promise.all(
+        83 │ + ····[...paths].sort().map(async·(path)·=>·[
+        84 │ + ······relative(root,·path),
+        85 │ + ······{
+        86 │ + ········sha256:·createHash("sha256")
+        87 │ + ··········.update(await·readFile(path))
+        88 │ + ··········.digest("hex"),
+        89 │ + ········mode:·(await·stat(path)).mode·&·0o777,
+        90 │ + ······},
+        91 │ + ····]),
+        92 │ + ··),
+        93 │ + );
+        94 │ + const·record·=·{
+        95 │ + ··status:
+        96 │ + ····"Actual·handwritten·SOURCE/noEmit·program·+·SDK·source·receipts·ONLY;·generated·routes·NOT·typed;·no·module/framework·execution",
+        97 │ + ··compiler:·ts.version,
+        98 │ + ··programFiles:·program.getSourceFiles().length,
+        99 │ + ··records,
+       100 │ + };
+       101 │ + const·target·=·process.argv[2];
+       102 │ + assert(target?.startsWith("tests/workbench/wp11-start-facade/.artifacts/"));
+       103 │ + if·(process.argv[3]·===·"verify")
+       104 │ + ··assert.deepEqual(
+       105 │ + ····record,
+       106 │ + ····JSON.parse(await·readFile(resolve(root,·target),·"utf8")),
+       107 │ + ··);
+       108 │ + else·{
+       109 │ + ··const·s·=·await·statfs(root);
+       110 │ + ··assert(s.bavail·*·s.bsize·>=·134217728);
+       111 │ + ··await·writeFile(
+       112 │ + ····resolve(root,·target),
+       113 │ + ····`${JSON.stringify(record,·null,·2)}\n`,
+       114 │ + ····{·flag:·"wx"·},
+       115 │ + ··);
+       116 │ + }
+       117 │ + console.log(
+       118 │ + ··`TS${ts.version}:·${record.programFiles}·actual·source/declaration·files;·${Object.keys(records).length}·unique·pinned·program/SDK/config·inputs.·Generated·assembly·explicitly·excluded.`,
+       119 │ + );
+    33 120 │   
+  
+
+tests/workbench/wp11-start-facade/light.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3   3 │   import { mkdir, readdir, statfs, writeFile } from "node:fs/promises";
+     4   4 │   import { fileURLToPath } from "node:url";
+     5     │ - const·root·=·fileURLToPath(new·URL("../../../",·import.meta.url)),·own·=·"tests/workbench/wp11-start-facade/";
+     6     │ - const·label·=·process.argv[2];·assert(label·&&·/^[\w-]+$/.test(label));
+     7     │ - async·function·space()·{·const·s=await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728,·"Below·128MiB·free-space·floor;·no·cleanup·authorized");·}
+     8     │ - await·space();·await·mkdir(`${root}/${own}.artifacts/`,·{·recursive:·true·});
+     9     │ - const·directory·=·`${own}.artifacts/${label}/`;·await·mkdir(`${root}/${directory}`);
+         5 │ + const·root·=·fileURLToPath(new·URL("../../../",·import.meta.url)),
+         6 │ + ··own·=·"tests/workbench/wp11-start-facade/";
+         7 │ + const·label·=·process.argv[2];
+         8 │ + assert(label·&&·/^[\w-]+$/.test(label));
+         9 │ + async·function·space()·{
+        10 │ + ··const·s·=·await·statfs(root);
+        11 │ + ··assert(
+        12 │ + ····s.bavail·*·s.bsize·>=·134217728,
+        13 │ + ····"Below·128MiB·free-space·floor;·no·cleanup·authorized",
+        14 │ + ··);
+        15 │ + }
+        16 │ + await·space();
+        17 │ + await·mkdir(`${root}/${own}.artifacts/`,·{·recursive:·true·});
+        18 │ + const·directory·=·`${own}.artifacts/${label}/`;
+        19 │ + await·mkdir(`${root}/${directory}`);
+    10  20 │   async function files(path) {
+    11  21 │     const result = [];
+    12     │ - ··for·(const·entry·of·await·readdir(`${root}/${path}`,·{·withFileTypes:·true·}))·{
+    13     │ - ····if·(["node_modules",·".artifacts",·"before.json",·"handoff-hashes.json",·"preimages"].includes(entry.name))·continue;
+        22 │ + ··for·(const·entry·of·await·readdir(`${root}/${path}`,·{
+        23 │ + ····withFileTypes:·true,
+        24 │ + ··}))·{
+        25 │ + ····if·(
+        26 │ + ······[
+        27 │ + ········"node_modules",
+        28 │ + ········".artifacts",
+        29 │ + ········"before.json",
+        30 │ + ········"handoff-hashes.json",
+        31 │ + ········"preimages",
+        32 │ + ······].includes(entry.name)
+        33 │ + ····)
+        34 │ + ······continue;
+    14  35 │       const name = `${path}${entry.name}`;
+    15     │ - ····if·(entry.isDirectory())·result.push(...await·files(`${name}/`));
+    16     │ - ····else·if·(/\.(ts|tsx|mjs|json)$/.test(name)·&&·name·!==·"apps/example-start-facade/package.json")·result.push(name);
+        36 │ + ····if·(entry.isDirectory())·result.push(...(await·files(`${name}/`)));
+        37 │ + ····else·if·(
+        38 │ + ······/\.(ts|tsx|mjs|json)$/.test(name)·&&
+        39 │ + ······name·!==·"apps/example-start-facade/package.json"
+        40 │ + ····)
+        41 │ + ······result.push(name);
+    17  42 │     }
+    18  43 │     return result;
+    19  44 │   }
+    20     │ - const·supported·=·[...await·files("apps/example-start-facade/"),·...await·files(own)];
+        45 │ + const·supported·=·[
+        46 │ + ··...(await·files("apps/example-start-facade/")),
+        47 │ + ··...(await·files(own)),
+        48 │ + ];
+    21  49 │   const commands = [
+    22  50 │     ["inputs-before", [`${own}inputs.mjs`, `${directory}inputs.json`]],
+    23     │ - ··["positive",·["node_modules/typescript/bin/tsc",·"-p",·"apps/example-start-facade/tsconfig.source-light.json",·"--pretty",·"false"]],
+    24     │ - ··["scope",·[`${own}scope.mjs`]],·["static",·[`${own}static.mjs`]],
+    25     │ - ··...supported.filter((path)·=>·path.endsWith(".mjs")).map((path)·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+    26     │ - ··["biome",·["node_modules/@biomejs/biome/bin/biome",·"check",·"--assist-enabled=false",·...supported,·"--max-diagnostics=100"]],
+        51 │ + ··[
+        52 │ + ····"positive",
+        53 │ + ····[
+        54 │ + ······"node_modules/typescript/bin/tsc",
+        55 │ + ······"-p",
+        56 │ + ······"apps/example-start-facade/tsconfig.source-light.json",
+        57 │ + ······"--pretty",
+        58 │ + ······"false",
+        59 │ + ····],
+        60 │ + ··],
+        61 │ + ··["scope",·[`${own}scope.mjs`]],
+        62 │ + ··["static",·[`${own}static.mjs`]],
+        63 │ + ··...supported
+        64 │ + ····.filter((path)·=>·path.endsWith(".mjs"))
+        65 │ + ····.map((path)·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+        66 │ + ··[
+        67 │ + ····"biome",
+        68 │ + ····[
+        69 │ + ······"node_modules/@biomejs/biome/bin/biome",
+        70 │ + ······"check",
+        71 │ + ······"--assist-enabled=false",
+        72 │ + ······...supported,
+        73 │ + ······"--max-diagnostics=100",
+        74 │ + ····],
+        75 │ + ··],
+    27  76 │     ["inputs-after", [`${own}inputs.mjs`, `${directory}inputs.json`, "verify"]],
+    28  77 │   ];
+    ······ │ 
+    30  79 │   for (const [name, args] of commands) {
+    31  80 │     await space();
+    32     │ - ··const·result·=·spawnSync(process.execPath,·args,·{·cwd:·root,·encoding:·"utf8",·timeout:·300000·});
+    33     │ - ··await·space();·await·writeFile(`${root}/${directory}${name}.log`,·`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,·{·flag:·"wx"·});
+        81 │ + ··const·result·=·spawnSync(process.execPath,·args,·{
+        82 │ + ····cwd:·root,
+        83 │ + ····encoding:·"utf8",
+        84 │ + ····timeout:·300000,
+        85 │ + ··});
+        86 │ + ··await·space();
+        87 │ + ··await·writeFile(
+        88 │ + ····`${root}/${directory}${name}.log`,
+        89 │ + ····`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,
+        90 │ + ····{·flag:·"wx"·},
+        91 │ + ··);
+    34  92 │     results.push({ name, args, status: result.status, signal: result.signal });
+    35     │ - ··await·writeFile(`${root}/${directory}results.json`,·`${JSON.stringify(results,·null,·2)}\n`);
+    36     │ - ··assert.equal(result.status,·0,·`${name}:·preserved·raw·failure·at·${directory}${name}.log`);
+        93 │ + ··await·writeFile(
+        94 │ + ····`${root}/${directory}results.json`,
+        95 │ + ····`${JSON.stringify(results,·null,·2)}\n`,
+        96 │ + ··);
+        97 │ + ··assert.equal(
+        98 │ + ····result.status,
+        99 │ + ····0,
+       100 │ + ····`${name}:·preserved·raw·failure·at·${directory}${name}.log`,
+       101 │ + ··);
+    37 102 │   }
+    38     │ - console.log(`SOURCE·LIGHT·passed·${directory};·${supported.length}·supported·files;·whole·generated·assembly/framework/module/runtime/SSR/browser/negative/dual/packed·UNRUN.`);
+       103 │ + console.log(
+       104 │ + ··`SOURCE·LIGHT·passed·${directory};·${supported.length}·supported·files;·whole·generated·assembly/framework/module/runtime/SSR/browser/negative/dual/packed·UNRUN.`,
+       105 │ + );
+    39 106 │   
+  
+
+tests/workbench/wp11-start-facade/playwright.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   import { fileURLToPath } from "node:url";
+     2  2 │   import { defineConfig } from "@playwright/test";
+     3    │ - const·app·=·fileURLToPath(new·URL("../../../apps/example-start-facade/",·import.meta.url));
+        3 │ + const·app·=·fileURLToPath(
+        4 │ + ··new·URL("../../../apps/example-start-facade/",·import.meta.url),
+        5 │ + );
+     4  6 │   const production = process.env.WP11_START_PRODUCTION === "1";
+     5    │ - export·default·defineConfig({·testDir:·"./final",·testMatch:·"browser.spec.ts",·workers:·1,·retries:·0,
+     6    │ - ··outputDir:·`.artifacts/browser-${production·?·"production"·:·"development"}`,·reporter:·"list",
+     7    │ - ··use:·{·baseURL:·"http://127.0.0.1:6573",·browserName:·"chromium",·trace:·"retain-on-failure"·},
+     8    │ - ··webServer:·{·cwd:·app,·command:·production·?·"node·../../tests/workbench/wp11-start-facade/production-host.mjs"·:·"node·node_modules/vite/bin/vite.js·--host·127.0.0.1·--port·6573·--strictPort",·url:·"http://127.0.0.1:6573",·reuseExistingServer:·false,·timeout:·120000·},
+        7 │ + export·default·defineConfig({
+        8 │ + ··testDir:·"./final",
+        9 │ + ··testMatch:·"browser.spec.ts",
+       10 │ + ··workers:·1,
+       11 │ + ··retries:·0,
+       12 │ + ··outputDir:·`.artifacts/browser-${production·?·"production"·:·"development"}`,
+       13 │ + ··reporter:·"list",
+       14 │ + ··use:·{
+       15 │ + ····baseURL:·"http://127.0.0.1:6573",
+       16 │ + ····browserName:·"chromium",
+       17 │ + ····trace:·"retain-on-failure",
+       18 │ + ··},
+       19 │ + ··webServer:·{
+       20 │ + ····cwd:·app,
+       21 │ + ····command:·production
+       22 │ + ······?·"node·../../tests/workbench/wp11-start-facade/production-host.mjs"
+       23 │ + ······:·"node·node_modules/vite/bin/vite.js·--host·127.0.0.1·--port·6573·--strictPort",
+       24 │ + ····url:·"http://127.0.0.1:6573",
+       25 │ + ····reuseExistingServer:·false,
+       26 │ + ····timeout:·120000,
+       27 │ + ··},
+     9 28 │   });
+    10 29 │   
+  
+
+tests/workbench/wp11-start-facade/production-host.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5  5 │   import { fileURLToPath } from "node:url";
+     6  6 │   import entry from "../../../apps/example-start-facade/dist/server/server.js";
+     7    │ - const·assets·=·new·URL("../../../apps/example-start-facade/dist/client/",·import.meta.url);
+        7 │ + const·assets·=·new·URL(
+        8 │ + ··"../../../apps/example-start-facade/dist/client/",
+        9 │ + ··import.meta.url,
+       10 │ + );
+     8 11 │   const server = createServer(async (incoming, outgoing) => {
+     9 12 │     const controller = new AbortController();
+    10    │ - ··outgoing.once("close",·()·=>·{·if·(!outgoing.writableEnded)·controller.abort();·});
+       13 │ + ··outgoing.once("close",·()·=>·{
+       14 │ + ····if·(!outgoing.writableEnded)·controller.abort();
+       15 │ + ··});
+    11 16 │     const url = new URL(incoming.url ?? "/", "http://127.0.0.1:6573");
+    12 17 │     try {
+    13 18 │       const asset = url.pathname.replace(/^\/_build\//, "/");
+    14 19 │       if (/^\/assets\/[A-Za-z0-9_.-]+\.(?:js|css|map|woff2?)$/.test(asset)) {
+    15    │ - ······const·bytes·=·await·readFile(fileURLToPath(new·URL(asset.slice(1),·assets)));
+    16    │ - ······outgoing.writeHead(200,·{·"Content-Type":·asset.endsWith(".js")·?·"text/javascript"·:·asset.endsWith(".css")·?·"text/css"·:·"application/octet-stream"·});·outgoing.end(bytes);·return;
+       20 │ + ······const·bytes·=·await·readFile(
+       21 │ + ········fileURLToPath(new·URL(asset.slice(1),·assets)),
+       22 │ + ······);
+       23 │ + ······outgoing.writeHead(200,·{
+       24 │ + ········"Content-Type":·asset.endsWith(".js")
+       25 │ + ··········?·"text/javascript"
+       26 │ + ··········:·asset.endsWith(".css")
+       27 │ + ············?·"text/css"
+       28 │ + ············:·"application/octet-stream",
+       29 │ + ······});
+       30 │ + ······outgoing.end(bytes);
+       31 │ + ······return;
+    17 32 │       }
+    18 33 │       const headers = new Headers();
+    19    │ - ····for·(const·[name,·value]·of·Object.entries(incoming.headers))·{·if·(Array.isArray(value))·for·(const·item·of·value)·headers.append(name,·item);·else·if·(value·!==·undefined)·headers.set(name,·value);·}
+    20    │ - ····const·request·=·new·Request(url,·{·method:·incoming.method,·headers,·signal:·controller.signal,
+    21    │ - ······...(!["GET",·"HEAD"].includes(incoming.method·??·"GET")·?·{·body:·Readable.toWeb(incoming),·duplex:·"half"·}·:·{}),
+       34 │ + ····for·(const·[name,·value]·of·Object.entries(incoming.headers))·{
+       35 │ + ······if·(Array.isArray(value))
+       36 │ + ········for·(const·item·of·value)·headers.append(name,·item);
+       37 │ + ······else·if·(value·!==·undefined)·headers.set(name,·value);
+       38 │ + ····}
+       39 │ + ····const·request·=·new·Request(url,·{
+       40 │ + ······method:·incoming.method,
+       41 │ + ······headers,
+       42 │ + ······signal:·controller.signal,
+       43 │ + ······...(!["GET",·"HEAD"].includes(incoming.method·??·"GET")
+       44 │ + ········?·{·body:·Readable.toWeb(incoming),·duplex:·"half"·}
+       45 │ + ········:·{}),
+    22 46 │       });
+    23 47 │       const response = await entry.fetch(request);
+    24    │ - ····if·(controller.signal.aborted)·{·await·response.body?.cancel();·return;·}
+       48 │ + ····if·(controller.signal.aborted)·{
+       49 │ + ······await·response.body?.cancel();
+       50 │ + ······return;
+       51 │ + ····}
+    25 52 │       outgoing.writeHead(response.status, Object.fromEntries(response.headers));
+    26 53 │       if (!response.body) outgoing.end();
+    27    │ - ····else·{·const·body·=·Readable.fromWeb(response.body);·body.on("error",·()·=>·outgoing.destroy());·body.pipe(outgoing);·}
+    28    │ - ··}·catch·{·if·(!outgoing.destroyed·&&·!controller.signal.aborted)·{·if·(!outgoing.headersSent)·outgoing.writeHead(500,·{·"Cache-Control":·"private,·no-store"·});·outgoing.end("Synthetic·request·unavailable.");·}·}
+       54 │ + ····else·{
+       55 │ + ······const·body·=·Readable.fromWeb(response.body);
+       56 │ + ······body.on("error",·()·=>·outgoing.destroy());
+       57 │ + ······body.pipe(outgoing);
+       58 │ + ····}
+       59 │ + ··}·catch·{
+       60 │ + ····if·(!outgoing.destroyed·&&·!controller.signal.aborted)·{
+       61 │ + ······if·(!outgoing.headersSent)
+       62 │ + ········outgoing.writeHead(500,·{·"Cache-Control":·"private,·no-store"·});
+       63 │ + ······outgoing.end("Synthetic·request·unavailable.");
+       64 │ + ····}
+       65 │ + ··}
+    29 66 │   });
+    30 67 │   server.listen(6573, "127.0.0.1");
+  
+
+tests/workbench/wp11-start-facade/scope.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7   7 │   const own = "tests/workbench/wp11-start-facade/";
+     8   8 │   const app = "apps/example-start-facade/";
+     9     │ - const·names·=·["vite.config.ts",·"tsconfig.json",·"tsconfig.source-light.json",·"README.md",·".gitig...
+         9 │ + const·names·=·[
+        10 │ + ··"vite.config.ts",
+        11 │ + ··"tsconfig.json",
+        12 │ + ··"tsconfig.source-light.json",
+        13 │ + ··"README.md",
+        14 │ + ··".gitignore",
+        15 │ + ··"src/router.tsx",
+        16 │ + ··"src/start.ts",
+        17 │ + ··"src/register.d.ts",
+        18 │ + ··...["__root.tsx",·"index.tsx",·"away.tsx"].map(
+        19 │ + ····(name)·=>·`src/routes/${name}`,
+        20 │ + ··),
+        21 │ + ··...[
+        22 │ + ····"types.ts",
+        23 │ + ····"codec.ts",
+        24 │ + ····"query-options.ts",
+        25 │ + ····"bootstrap-session.ts",
+        26 │ + ····"table-source.ts",
+        27 │ + ····"functions.ts",
+        28 │ + ····"transport.ts",
+        29 │ + ····"reader.server.ts",
+        30 │ + ··].map((name)·=>·`src/application/${name}`),
+        31 │ + ··"src/table/HeadlessTable.tsx",
+        32 │ + ··"src/table/TablePage.tsx",
+        33 │ + ];
+    10  34 │   const leased = names.map((name) => app + name);
+    11  35 │   const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+    12     │ - const·canonicalBytes·=·await·readFile("/tmp/opencode/wp10-move-reason-integrated-source155.json");
+    13     │ - assert.equal(hash(canonicalBytes),·"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837");
+        36 │ + const·canonicalBytes·=·await·readFile(
+        37 │ + ··"/tmp/opencode/wp10-move-reason-integrated-source155.json",
+        38 │ + );
+        39 │ + assert.equal(
+        40 │ + ··hash(canonicalBytes),
+        41 │ + ··"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+        42 │ + );
+    14  43 │   const canonical = JSON.parse(canonicalBytes);
+    15  44 │   assert.equal(Object.keys(canonical).length, 155);
+    16     │ - async·function·measure(path)·{·return·{·sha256:·hash(await·readFile(resolve(root,·path))),·mode:·(await·stat(resolve(root,·path))).mode·&·0o777·};·}
+        45 │ + async·function·measure(path)·{
+        46 │ + ··return·{
+        47 │ + ····sha256:·hash(await·readFile(resolve(root,·path))),
+        48 │ + ····mode:·(await·stat(resolve(root,·path))).mode·&·0o777,
+        49 │ + ··};
+        50 │ + }
+    17  51 │   for (const [path, expected] of Object.entries(canonical)) {
+    18     │ - ··const·current·=·await·measure(path);·assert.equal(current.sha256,·expected.sha256,·path);
+        52 │ + ··const·current·=·await·measure(path);
+        53 │ + ··assert.equal(current.sha256,·expected.sha256,·path);
+    19  54 │     assert.equal(current.mode & 0o111 ? "100755" : "100644", expected.mode, path);
+    20  55 │   }
+    21     │ - assert.equal((await·measure("pnpm-lock.yaml")).sha256,·"190f5b3759b5071d440e17ed652eeb70dc5ffe927abf37daa02f9f6a89bdeea6");
+    22     │ - assert.equal((await·measure(`${app}package.json`)).sha256,·"730489283fbf1223427912c49e4028461a0dcb4dbe4295a35c268c19e8611d6b");
+        56 │ + assert.equal(
+        57 │ + ··(await·measure("pnpm-lock.yaml")).sha256,
+        58 │ + ··"190f5b3759b5071d440e17ed652eeb70dc5ffe927abf37daa02f9f6a89bdeea6",
+        59 │ + );
+        60 │ + assert.equal(
+        61 │ + ··(await·measure(`${app}package.json`)).sha256,
+        62 │ + ··"730489283fbf1223427912c49e4028461a0dcb4dbe4295a35c268c19e8611d6b",
+        63 │ + );
+    23  64 │   async function walk(directory) {
+    24  65 │     const result = [];
+    25  66 │     for (const entry of await readdir(directory, { withFileTypes: true })) {
+    26     │ - ····if·([".git",·".repo",·"node_modules"].includes(entry.name)·||·entry.name.startsWith(".env")·||·entry.name·===·".npmrc")·continue;
+    27     │ - ····const·path·=·resolve(directory,·entry.name),·rel·=·relative(root,·path);
+        67 │ + ····if·(
+        68 │ + ······[".git",·".repo",·"node_modules"].includes(entry.name)·||
+        69 │ + ······entry.name.startsWith(".env")·||
+        70 │ + ······entry.name·===·".npmrc"
+        71 │ + ····)
+        72 │ + ······continue;
+        73 │ + ····const·path·=·resolve(directory,·entry.name),
+        74 │ + ······rel·=·relative(root,·path);
+    28  75 │       if (`${rel}/` === own) continue;
+    29     │ - ····if·(entry.isDirectory())·result.push(...await·walk(path));
+        76 │ + ····if·(entry.isDirectory())·result.push(...(await·walk(path)));
+    30  77 │       else if (entry.isFile() && !leased.includes(rel)) result.push(rel);
+    31  78 │     }
+    32  79 │     return result;
+    33  80 │   }
+    34     │ - const·current·=·Object.fromEntries(await·Promise.all((await·walk(root)).sort().map(async·(path)·=>·[path,·await·measure(path)])));
+        81 │ + const·current·=·Object.fromEntries(
+        82 │ + ··await·Promise.all(
+        83 │ + ····(await·walk(root)).sort().map(async·(path)·=>·[path,·await·measure(path)]),
+        84 │ + ··),
+        85 │ + );
+    35  86 │   const target = new URL("./before.json", import.meta.url);
+    36  87 │   if (process.argv[2] === "before") {
+    37     │ - ··for·(const·path·of·leased)·await·assert.rejects(access(resolve(root,·path)),·{·code:·"ENOENT"·});
+    38     │ - ··await·writeFile(target,·`${JSON.stringify({·suppliedHead:·"f7ad033·(no·worker·Git·inspection)",·canonical155:·canonical,·canonicalSHA:·hash(canonicalBytes),·leased,·protectedInputs:·current·},·null,·2)}\n`,·{·flag:·"wx"·});
+    39     │ - ··console.log(`Before·edits:155·libraries,·protected·manifest/lock·and·${Object.keys(current).length}·ACTUAL·old·regular·files/modes·captured.·Absent·producer·raw·artifacts·are·not·invented.`);
+        88 │ + ··for·(const·path·of·leased)
+        89 │ + ····await·assert.rejects(access(resolve(root,·path)),·{·code:·"ENOENT"·});
+        90 │ + ··await·writeFile(
+        91 │ + ····target,
+        92 │ + ····`${JSON.stringify({·suppliedHead:·"f7ad033·(no·worker·Git·inspection)",·canonical155:·canonical,·canonicalSHA:·hash(canonicalBytes),·leased,·protectedInputs:·current·},·null,·2)}\n`,
+        93 │ + ····{·flag:·"wx"·},
+        94 │ + ··);
+        95 │ + ··console.log(
+        96 │ + ····`Before·edits:155·libraries,·protected·manifest/lock·and·${Object.keys(current).length}·ACTUAL·old·regular·files/modes·captured.·Absent·producer·raw·artifacts·are·not·invented.`,
+        97 │ + ··);
+    40  98 │   } else {
+    41     │ - ··const·before·=·JSON.parse(await·readFile(target,·"utf8"));·assert.deepEqual(before.leased,·leased);
+        99 │ + ··const·before·=·JSON.parse(await·readFile(target,·"utf8"));
+       100 │ + ··assert.deepEqual(before.leased,·leased);
+    42 101 │     assert.deepEqual(current, before.protectedInputs);
+    43     │ - ··console.log(`155·libraries·and·all·${Object.keys(current).length}·actual·old·regular·inputs/modes·unchanged,·including·all·present·A/B·seals/profile/G-04·and·main·manifest/lock.`);
+       102 │ + ··console.log(
+       103 │ + ····`155·libraries·and·all·${Object.keys(current).length}·actual·old·regular·inputs/modes·unchanged,·including·all·present·A/B·seals/profile/G-04·and·main·manifest/lock.`,
+       104 │ + ··);
+    44 105 │   }
+    45 106 │   
+  
+
+tests/workbench/wp11-start-facade/sdk-contracts.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1    │ - import·{·createRootRouteWithContext,·createRouter·}·from·"@tanstack/react-router";
+        1 │ + import·{
+        2 │ + ··createRootRouteWithContext,
+        3 │ + ··createRouter,
+        4 │ + }·from·"@tanstack/react-router";
+     2  5 │   import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
+     3  6 │   import type { QueryClient } from "@tanstack/react-query";
+    ····· │ 
+     5  8 │   import type { Bootstrap } from "../../../apps/example-start-facade/src/application/types.js";
+     6  9 │   /** SDK TYPE probe only, never invoked; does NOT replace generated route assembly. */
+     7    │ - export·function·sdkContract(queryClient:·QueryClient,·session:·BootstrapSession)·{
+     8    │ - ··const·route·=·createRootRouteWithContext<{·session:·BootstrapSession;·queryClient:·QueryClient·}>()({});
+     9    │ - ··const·router·=·createRouter({·routeTree:·route.addChildren([]),·context:·{·session,·queryClient·},
+    10    │ - ····dehydrate:·()·=>·session.serialize(),·hydrate:·(value:·{·bootstrap:·Bootstrap·|·null·})·=>·{·session.prepareHydration(value.bootstrap);·},
+       10 │ + export·function·sdkContract(
+       11 │ + ··queryClient:·QueryClient,
+       12 │ + ··session:·BootstrapSession,
+       13 │ + )·{
+       14 │ + ··const·route·=·createRootRouteWithContext<{
+       15 │ + ····session:·BootstrapSession;
+       16 │ + ····queryClient:·QueryClient;
+       17 │ + ··}>()({});
+       18 │ + ··const·router·=·createRouter({
+       19 │ + ····routeTree:·route.addChildren([]),
+       20 │ + ····context:·{·session,·queryClient·},
+       21 │ + ····dehydrate:·()·=>·session.serialize(),
+       22 │ + ····hydrate:·(value:·{·bootstrap:·Bootstrap·|·null·})·=>·{
+       23 │ + ······session.prepareHydration(value.bootstrap);
+       24 │ + ····},
+    11 25 │     });
+    12    │ - ··router.serverSsrLifecycle·=·{·...router.serverSsrLifecycle,·onServerSsrAttach:·[...router.serverSsrLifecycle?.onServerSsrAttach·??·[],·(ssr)·=>·ssr.onCleanup(()·=>·{·session.dispose();·})]·};
+    13    │ - ··setupRouterSsrQueryIntegration({·router,·queryClient,·hydrateOptions:·{·defaultOptions:·{·deserializeData:·session.deserializeData·}·}·});
+       26 │ + ··router.serverSsrLifecycle·=·{
+       27 │ + ····...router.serverSsrLifecycle,
+       28 │ + ····onServerSsrAttach:·[
+       29 │ + ······...(router.serverSsrLifecycle?.onServerSsrAttach·??·[]),
+       30 │ + ······(ssr)·=>
+       31 │ + ········ssr.onCleanup(()·=>·{
+       32 │ + ··········session.dispose();
+       33 │ + ········}),
+       34 │ + ····],
+       35 │ + ··};
+       36 │ + ··setupRouterSsrQueryIntegration({
+       37 │ + ····router,
+       38 │ + ····queryClient,
+       39 │ + ····hydrateOptions:·{
+       40 │ + ······defaultOptions:·{·deserializeData:·session.deserializeData·},
+       41 │ + ····},
+       42 │ + ··});
+    14 43 │     const hydrate = router.options.hydrate;
+    15    │ - ··router.update({·context:·{·session,·queryClient·},·hydrate:·async·(data)·=>·{·await·hydrate?.(data);·session.adoptHydration();·}·});
+    16    │ - ··return·router.subscribe("onBeforeNavigate",·(event)·=>·{·if·(event.pathChanged)·session.retire();·});
+       44 │ + ··router.update({
+       45 │ + ····context:·{·session,·queryClient·},
+       46 │ + ····hydrate:·async·(data)·=>·{
+       47 │ + ······await·hydrate?.(data);
+       48 │ + ······session.adoptHydration();
+       49 │ + ····},
+       50 │ + ··});
+       51 │ + ··return·router.subscribe("onBeforeNavigate",·(event)·=>·{
+       52 │ + ····if·(event.pathChanged)·session.retire();
+       53 │ + ··});
+    17 54 │   }
+    18 55 │   
+  
+
+tests/workbench/wp11-start-facade/static.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6   6 │   const root = fileURLToPath(new URL("../../../", import.meta.url));
+     7   7 │   const base = "apps/example-start-facade/";
+     8     │ - const·names·=·["bootstrap-session.ts",·"codec.ts",·"functions.ts",·"query-options.ts",·"reader.server.ts",·"table-source.ts",·"transport.ts",·"types.ts"];
+     9     │ - assert.deepEqual((await·readdir(resolve(root,·`${base}src/application`))).sort(),·names);
+         8 │ + const·names·=·[
+         9 │ + ··"bootstrap-session.ts",
+        10 │ + ··"codec.ts",
+        11 │ + ··"functions.ts",
+        12 │ + ··"query-options.ts",
+        13 │ + ··"reader.server.ts",
+        14 │ + ··"table-source.ts",
+        15 │ + ··"transport.ts",
+        16 │ + ··"types.ts",
+        17 │ + ];
+        18 │ + assert.deepEqual(
+        19 │ + ··(await·readdir(resolve(root,·`${base}src/application`))).sort(),
+        20 │ + ··names,
+        21 │ + );
+    10  22 │   async function files(directory) {
+    11  23 │     const result = [];
+    12     │ - ··for·(const·entry·of·await·readdir(resolve(root,·directory),·{·withFileTypes:·true·}))·{
+        24 │ + ··for·(const·entry·of·await·readdir(resolve(root,·directory),·{
+        25 │ + ····withFileTypes:·true,
+        26 │ + ··}))·{
+    13  27 │       if (entry.name === "node_modules") continue;
+    14  28 │       const path = `${directory}${entry.name}`;
+    15     │ - ····if·(entry.isDirectory())·result.push(...await·files(`${path}/`));·else·result.push(path);
+        29 │ + ····if·(entry.isDirectory())·result.push(...(await·files(`${path}/`)));
+        30 │ + ····else·result.push(path);
+    16  31 │     }
+    17  32 │     return result;
+    ······ │ 
+    19  34 │   const code = (await files(base)).filter((path) => /\.(ts|tsx)$/.test(path));
+    20  35 │   for (const path of code) {
+    21     │ - ··const·text·=·await·readFile(resolve(root,·path),·"utf8"),·file·=·ts.createSourceFile(path,·text,·ts.ScriptTarget.Latest,·true);
+        36 │ + ··const·text·=·await·readFile(resolve(root,·path),·"utf8"),
+        37 │ + ····file·=·ts.createSourceFile(path,·text,·ts.ScriptTarget.Latest,·true);
+    22  38 │     assert.equal(file.parseDiagnostics.length, 0, path);
+    23     │ - ··assert(!/as·unknown·as|\bas·any\b|@ts-ignore|@ts-expect-error|@heroui|@tableweave\/heroui|tailwind|\.css["']|storybook|TSS_ROUTES_MANIFEST|\.repo|localStorage|sessionStorage|\.admission\.begin\(/.test(text),·path);
+    24     │ - ··for·(const·node·of·file.statements)·if·(ts.isImportDeclaration(node))·{
+    25     │ - ····const·name·=·node.moduleSpecifier.text;
+    26     │ - ····assert(!name.includes("/example-start/")·&&·!name.includes("packages/")·&&·!name.includes("tests/"),·`${path}:·private/old·import·${name}`);
+    27     │ - ····if·(name.startsWith("@tableweave/"))·assert(["@tableweave/react",·"@tableweave/react/contracts",·"@tableweave/react/filters"].includes(name),·name);
+    28     │ - ··}
+        39 │ + ··assert(
+        40 │ + ····!/as·unknown·as|\bas·any\b|@ts-ignore|@ts-expect-error|@heroui|@tableweave\/heroui|tailwind|\.css["']|storybook|TSS_ROUTES_MANIFEST|\.repo|localStorage|sessionStorage|\.admission\.begin\(/.test(
+        41 │ + ······text,
+        42 │ + ····),
+        43 │ + ····path,
+        44 │ + ··);
+        45 │ + ··for·(const·node·of·file.statements)
+        46 │ + ····if·(ts.isImportDeclaration(node))·{
+        47 │ + ······const·name·=·node.moduleSpecifier.text;
+        48 │ + ······assert(
+        49 │ + ········!name.includes("/example-start/")·&&
+        50 │ + ··········!name.includes("packages/")·&&
+        51 │ + ··········!name.includes("tests/"),
+        52 │ + ········`${path}:·private/old·import·${name}`,
+        53 │ + ······);
+        54 │ + ······if·(name.startsWith("@tableweave/"))
+        55 │ + ········assert(
+        56 │ + ··········[
+        57 │ + ············"@tableweave/react",
+        58 │ + ············"@tableweave/react/contracts",
+        59 │ + ············"@tableweave/react/filters",
+        60 │ + ··········].includes(name),
+        61 │ + ··········name,
+        62 │ + ········);
+        63 │ + ····}
+    29  64 │   }
+    30     │ - await·assert.rejects(access(resolve(root,·`${base}src/routeTree.gen.ts`)),·{·code:·"ENOENT"·});
+    31     │ - const·configPath·=·resolve(root,·`${base}tsconfig.source-light.json`),·raw·=·ts.readConfigFile(configPath,·ts.sys.readFile),·config·=·ts.parseJsonConfigFileContent(raw.config,·ts.sys,·dirname(configPath));
+    32     │ - assert.equal(config.options.noEmit,·true);·assert.equal(config.options.skipLibCheck,·false);·assert.equal(config.options.strict,·true);·assert.equal(config.options.exactOptionalPropertyTypes,·true);
+    33     │ - assert(config.raw.exclude.includes("src/register.d.ts"));·assert(config.raw.exclude.includes("src/router.tsx"));
+    34     │ - const·runtime·=·JSON.parse(await·readFile(resolve(root,·`${base}tsconfig.json`),·"utf8"));·assert.equal(runtime.compilerOptions.paths,·undefined);
+    35     │ - const·vite·=·await·readFile(resolve(root,·`${base}vite.config.ts`),·"utf8");·assert(vite.includes("tanstackStart()")·&&·vite.includes("6573")·&&·!vite.includes("enableRouteGeneration"));
+        65 │ + await·assert.rejects(access(resolve(root,·`${base}src/routeTree.gen.ts`)),·{
+        66 │ + ··code:·"ENOENT",
+        67 │ + });
+        68 │ + const·configPath·=·resolve(root,·`${base}tsconfig.source-light.json`),
+        69 │ + ··raw·=·ts.readConfigFile(configPath,·ts.sys.readFile),
+        70 │ + ··config·=·ts.parseJsonConfigFileContent(
+        71 │ + ····raw.config,
+        72 │ + ····ts.sys,
+        73 │ + ····dirname(configPath),
+        74 │ + ··);
+        75 │ + assert.equal(config.options.noEmit,·true);
+        76 │ + assert.equal(config.options.skipLibCheck,·false);
+        77 │ + assert.equal(config.options.strict,·true);
+        78 │ + assert.equal(config.options.exactOptionalPropertyTypes,·true);
+        79 │ + assert(config.raw.exclude.includes("src/register.d.ts"));
+        80 │ + assert(config.raw.exclude.includes("src/router.tsx"));
+        81 │ + const·runtime·=·JSON.parse(
+        82 │ + ··await·readFile(resolve(root,·`${base}tsconfig.json`),·"utf8"),
+        83 │ + );
+        84 │ + assert.equal(runtime.compilerOptions.paths,·undefined);
+        85 │ + const·vite·=·await·readFile(resolve(root,·`${base}vite.config.ts`),·"utf8");
+        86 │ + assert(
+        87 │ + ··vite.includes("tanstackStart()")·&&
+        88 │ + ····vite.includes("6573")·&&
+        89 │ + ····!vite.includes("enableRouteGeneration"),
+        90 │ + );
+    36  91 │   const router = await readFile(resolve(root, `${base}src/router.tsx`), "utf8");
+    37     │ - assert.equal((router.match(/setupRouterSsrQueryIntegration\(/g)·??·[]).length,·1);
+    38     │ - assert(!router.includes("QueryClientProvider")·&&·!router.includes("hydrateRoot("));
+    39     │ - assert(router.indexOf("ssr.onCleanup")·<·router.indexOf("setupRouterSsrQueryIntegration({"));
+    40     │ - assert(router.includes("await·sdkHydrate?.(data)")·&&·router.indexOf("await·sdkHydrate?.(data)")·<·router.indexOf("session.adoptHydration()"));
+    41     │ - assert(router.includes("deserializeData:·session.deserializeData")·&&·router.includes("onBeforeNavigate")·&&·router.includes("pagehide"));
+    42     │ - const·source·=·await·readFile(resolve(root,·`${base}src/application/table-source.ts`),·"utf8");
+    43     │ - assert(!/removeQueries|queryClient|cachePrefix/.test(source));·assert(source.includes("createCriteriaPublication")·&&·source.includes("getControlsRequestBinding")·&&·source.includes("pending·!==·request"));
+    44     │ - const·session·=·await·readFile(resolve(root,·`${base}src/application/bootstrap-session.ts`),·"utf8");
+    45     │ - assert(session.includes("queryClient.query(")·===·false·&&·session.includes("client.query("));
+    46     │ - assert(session.includes("phase·=·\"retiring\"")·&&·session.includes("lease·=·null"));
+    47     │ - const·page·=·await·readFile(resolve(root,·`${base}src/table/TablePage.tsx`),·"utf8");
+        92 │ + assert.equal(
+        93 │ + ··(router.match(/setupRouterSsrQueryIntegration\(/g)·??·[]).length,
+        94 │ + ··1,
+        95 │ + );
+        96 │ + assert(
+        97 │ + ··!router.includes("QueryClientProvider")·&&·!router.includes("hydrateRoot("),
+        98 │ + );
+        99 │ + assert(
+       100 │ + ··router.indexOf("ssr.onCleanup")·<
+       101 │ + ····router.indexOf("setupRouterSsrQueryIntegration({"),
+       102 │ + );
+       103 │ + assert(
+       104 │ + ··router.includes("await·sdkHydrate?.(data)")·&&
+       105 │ + ····router.indexOf("await·sdkHydrate?.(data)")·<
+       106 │ + ······router.indexOf("session.adoptHydration()"),
+       107 │ + );
+       108 │ + assert(
+       109 │ + ··router.includes("deserializeData:·session.deserializeData")·&&
+       110 │ + ····router.includes("onBeforeNavigate")·&&
+       111 │ + ····router.includes("pagehide"),
+       112 │ + );
+       113 │ + const·source·=·await·readFile(
+       114 │ + ··resolve(root,·`${base}src/application/table-source.ts`),
+       115 │ + ··"utf8",
+       116 │ + );
+       117 │ + assert(!/removeQueries|queryClient|cachePrefix/.test(source));
+       118 │ + assert(
+       119 │ + ··source.includes("createCriteriaPublication")·&&
+       120 │ + ····source.includes("getControlsRequestBinding")·&&
+       121 │ + ····source.includes("pending·!==·request"),
+       122 │ + );
+       123 │ + const·session·=·await·readFile(
+       124 │ + ··resolve(root,·`${base}src/application/bootstrap-session.ts`),
+       125 │ + ··"utf8",
+       126 │ + );
+       127 │ + assert(
+       128 │ + ··session.includes("queryClient.query(")·===·false·&&
+  31 more lines truncated
+  
+
+tests/workbench/wp11-start-facade/vitest.config.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2  2 │   import { fileURLToPath } from "node:url";
+     3  3 │   import { defineConfig } from "vitest/config";
+     4    │ - const·path·=·(name)·=>·fileURLToPath(new·URL(`../../../${name}`,·import.meta.url));
+     5    │ - export·default·defineConfig({·resolve:·{·alias:·[
+     6    │ - ··{·find:·/^@tableweave\/react$/,·replacement:·path("packages/react/dist/index.js")·},
+     7    │ - ··...["contracts",·"filters",·"reordering",·"reordering-controller"].map((entry)·=>·({·find:·`@tableweave/react/${entry}`,·replacement:·path(`packages/react/dist/${entry}/index.js`)·})),
+     8    │ - ··{·find:·/^@tanstack\/react-query$/,·replacement:·path("apps/example-start-facade/node_modules/@tanstack/react-query")·},
+     9    │ - ]·},·cacheDir:·"tests/workbench/wp11-start-facade/.artifacts/vitest-cache",·test:·{·include:·["tests/workbench/wp11-start-facade/final/contracts.test.ts"],·environment:·"node"·}·});
+        4 │ + const·path·=·(name)·=>
+        5 │ + ··fileURLToPath(new·URL(`../../../${name}`,·import.meta.url));
+        6 │ + export·default·defineConfig({
+        7 │ + ··resolve:·{
+        8 │ + ····alias:·[
+        9 │ + ······{
+       10 │ + ········find:·/^@tableweave\/react$/,
+       11 │ + ········replacement:·path("packages/react/dist/index.js"),
+       12 │ + ······},
+       13 │ + ······...["contracts",·"filters",·"reordering",·"reordering-controller"].map(
+       14 │ + ········(entry)·=>·({
+       15 │ + ··········find:·`@tableweave/react/${entry}`,
+       16 │ + ··········replacement:·path(`packages/react/dist/${entry}/index.js`),
+       17 │ + ········}),
+       18 │ + ······),
+       19 │ + ······{
+       20 │ + ········find:·/^@tanstack\/react-query$/,
+       21 │ + ········replacement:·path(
+       22 │ + ··········"apps/example-start-facade/node_modules/@tanstack/react-query",
+       23 │ + ········),
+       24 │ + ······},
+       25 │ + ····],
+       26 │ + ··},
+       27 │ + ··cacheDir:·"tests/workbench/wp11-start-facade/.artifacts/vitest-cache",
+       28 │ + ··test:·{
+       29 │ + ····include:·["tests/workbench/wp11-start-facade/final/contracts.test.ts"],
+       30 │ + ····environment:·"node",
+       31 │ + ··},
+       32 │ + });
+    10 33 │   
+  
+
+Checked 32 files in 36ms. No fixes applied.
+Found 32 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+
