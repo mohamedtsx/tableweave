@@ -809,6 +809,25 @@ files stay exact and old001 stays RED. Library155, dependencies/private profiles
 source assertions remain fixed; no emitted/ordinary/runtime/packet/G-05 approval.
 All current workers are released; no additional command or HDD work follows from
 these passes. Pending storage choice remains unanswered, not inferred from resume.
+The user now explicitly chooses **Use HDD** in the successfully answered modal.
+Main records NEW-only `/mnt/data/Projects/tableweave-final-verification-<id>/`
+proof storage plus bounded layout implementation; existing work/evidence/cache
+locations remain untouched. No mount/move/cleanup/dependency change/publication
+authority. Main selects docs/planning/wp-13-hdd-storage-plan.md: one source writer
+owns four existing production MJS plus one new root-contract module, bounded
+protocol/README updates and NEW wp13-storage tests/evidence. All other helpers/
+library155/profiles/apps/manifests/lock/source/output identities stay fixed.
+Writer may author/source-check only; no HDD dirs/data/CLI/helper/test/build/install/
+pack execution. Main independently reviews before selecting small real guard tests,
+namespace/physical lease provisioning and actual packed phases. Old `/tmp` grammar
+and guard protections must remain intact; no generic root or automatic fallback.
+Main allocates independent read-only first-candidate setup preparation at external
+/tmp/opencode/final-headless-candidate-prep-001/PLAN.md. It may inspect frozen build/
+package/matrix/lock/tool/store metadata for fresh producer/two archives/headless
+ordinary inputs, but not the active five-module/README/protocol storage WIP or any
+HDD target. No commands/imports/installs/downloads/builds/Git/source changes. Actual
+new storage lease schema and revision remain pending the storage producer review;
+the report is not provisioning or phase approval.
 
 ## Current WP-10 implementation handoff
 

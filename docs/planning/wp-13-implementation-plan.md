@@ -131,3 +131,9 @@ lease; no full WP-13 acceptance or automatic final-phase execution is granted.
 Original tooling is preserved10f6a8a. Main selects the distinct
 [remaining family-runtime source lease](wp-13-runtime-plan.md) for review30n1;
 original137-file/1,179-input maps and all historical generations remain exact.
+
+After bounded final-phase source/browser/type checks, the user explicitly selects
+NEW-only HDD proof storage. The [fixed-layout lease](wp-13-hdd-storage-plan.md)
+allocates exactly five production modules plus protocol/docs/new tests; no existing
+work/evidence moves, mounts, cleanup or dependency changes. Actual HDD staging and
+packed phases remain gated by independent guard review and main phase selection.
