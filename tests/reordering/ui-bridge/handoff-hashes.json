@@ -1,0 +1,141 @@
+{
+  "status": "HELD-PROVISIONAL-UI-reentry-vs-source-observation-seam-blocker",
+  "suppliedBase": "6f157bf (no worker Git operation)",
+  "canonical150": "80ce38f6479ac13c80e925d519b9b6619921680513c15fdff0f0f4e4657bf8e7",
+  "sourceAggregate": "272ab0a16fea0ecba0447c86110135021c3775b4e14f0d2bb86ce4041a239e13",
+  "sourceThree": {
+    "packages/react/src/reordering-controller/admission.ts": {
+      "before": {
+        "mode": "100644",
+        "sha256": "33539213c112b5ccf99bf62cb515aeb759925281e3f42863bf97576b47e135ac"
+      },
+      "after": {
+        "sha256": "1164ea0743a77dcec7a6b8c7fe259a0ceb35927ea2114d922171de5cdd92068b",
+        "mode": 436
+      }
+    },
+    "packages/react/src/reordering-controller/index.ts": {
+      "before": {
+        "mode": "100644",
+        "sha256": "ad4fa0698d0319413c405aa8b368124fa1a69cb5bd83164ffba4c5aedf3c5026"
+      },
+      "after": {
+        "sha256": "1482f0f9adcc8506bc9b08cd8958ed219d24ec825c48852bf09e2df4e491e70d",
+        "mode": 436
+      }
+    },
+    "packages/react/src/reordering-controller/types.ts": {
+      "before": {
+        "mode": "100644",
+        "sha256": "2740c6a8aedc440479d8fd35105e0ac23c9817f7e5de8b82d5ead3c6ac7be4cf"
+      },
+      "after": {
+        "sha256": "6aae69ef00b68c07e0d82d85a2933e1558317277f691da99a2d5f31e8df556a7",
+        "mode": 436
+      }
+    }
+  },
+  "inputAggregate": "6503dae1514e186d67b1f3065d46b9d8fe50c28270c29d98e5c904e2852e6439",
+  "inputs": {
+    "tests/reordering/ui-bridge/BLOCKER.md": {
+      "sha256": "b17e612b3dcd08752dbab6c9f0ac1c465619e6621109b9ac1e918833421a4a0d",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/before.json": {
+      "sha256": "d2014a58725e6978b734a4d47f67946b3c95410635187908c475369df7183655",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/browser.html": {
+      "sha256": "bd1aae732a3391ba1a5b1465ddfabb726228967b140e897c1909f496bf6fa2ed",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/browser.spec.ts": {
+      "sha256": "2f258e6a37487ea1429f4c41cb0ae7eeb9dbd64bfa19087bbca3b238cf45879c",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/browser.tsx": {
+      "sha256": "bba55702fe35ba58171bc8a8d79cad276538bb0b609fe3353054891c898a820b",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/denial.test.ts": {
+      "sha256": "71735df3ea27f72a1b28efc43c682f0a2a41790f7c0c16297de76d6daf3f0333",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/harness.tsx": {
+      "sha256": "6d7f50d4a1465ddf04cc6e11a02bd45845b5e3d5cb6bee0ad77f4b7c24886d5c",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/light.mjs": {
+      "sha256": "e432604398992ff15f69b560bcf1ae2087e1f2a289f5615c60abe0f30c73fc2a",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/measure.mjs": {
+      "sha256": "d16313e0c52234bb41d108efc371fecf875d119f5a38fca1c68e15c9b0582b4e",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/negative/tsconfig.json": {
+      "sha256": "42404d4177863e1eeaf22aad632bacc4fc9f26d1df8cd7c65bba8c7c84cb7bbf",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/negative/types.ts": {
+      "sha256": "0986bd17647d2c05c963802d44f85588836514c3615239a4b9787ee6adbc7618",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/packed/consumer.ts": {
+      "sha256": "b790e2f2f12f93422539c05d7465dcb7e595472191cbe984b0e96d936327c342",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/packed/tsconfig.json": {
+      "sha256": "5299d1d8f9031673606590ff90231c1f4a0ccb11cab50da95f948983beecfd4a",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/playwright.config.ts": {
+      "sha256": "8d95a249a235ea3e0b7a9e80db851eac5ae150a0ad6343ff11447afab51fd82c",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/preimages/packages__react__src__reordering-controller__admission.ts.txt": {
+      "sha256": "33539213c112b5ccf99bf62cb515aeb759925281e3f42863bf97576b47e135ac",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/preimages/packages__react__src__reordering-controller__index.ts.txt": {
+      "sha256": "ad4fa0698d0319413c405aa8b368124fa1a69cb5bd83164ffba4c5aedf3c5026",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/preimages/packages__react__src__reordering-controller__types.ts.txt": {
+      "sha256": "2740c6a8aedc440479d8fd35105e0ac23c9817f7e5de8b82d5ead3c6ac7be4cf",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/probes.ts": {
+      "sha256": "611a5763f07c147ea6437964d5743f5d280c1295e262c5d69b74d5e3a9645e7d",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/scope.mjs": {
+      "sha256": "cc5cb197e187085591c2e9c3737e30af1d8292e90073b4eeb8001c2e887c0c8b",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/ssr.test.tsx": {
+      "sha256": "9e815e7576d132fe7d2f59cfb42c3af0c8fe27bf4d7d11e3da6624dd791617e3",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/static.mjs": {
+      "sha256": "3fc90aaf32f3b2ebda81a804b72e85f13754f1fec6f20d6504246c481a6b3a5d",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/tsconfig.json": {
+      "sha256": "e9711535c66b7ebdb43e0ce789c87cf06362acad23fef1f0f7783d7151e58ab4",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/types.ts": {
+      "sha256": "bf9f032c1f90e4ffce5310592b5894bb84f873755fc74742d1727e0e265af959",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/vite.config.mjs": {
+      "sha256": "a005d6bea0dc68b3d8778e5871dcbbe33b57626b56bbb907eabc494ddac629ab",
+      "mode": 436
+    },
+    "tests/reordering/ui-bridge/vitest.config.mjs": {
+      "sha256": "ea8922d47470a8b04dd2a1ac06ab12692d6d1e3599dd13620d1f79a8d16c5318",
+      "mode": 436
+    }
+  }
+}

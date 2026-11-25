@@ -92,10 +92,10 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Definition reorder capabilities | Preserved04941b2/intakeneb17ff9 | Positive combined source types; flags remain configuration, not authority |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
-| Admission/UI bridge | Report selected; shared three-source writer allocated | App-owned lease/retained producer, separate UI claim/exact-model joins/navigation receipts; other147 sources freeze |
+| Admission/UI bridge | HELD candidate handoff delivered; no source writer | UI-only fence changes can purge submitted pending during settlement; exact correction seam must be selected |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
-| Vendor lifetime preparation | Read-only worker; external wp10-vendor-lifetime report only | Inspect installed0.5.3 constructor/registration/cleanup APIs; no plugin/source activation |
+| Vendor lifetime preparation | External report delivered; worker released | Source-confirmed export/cleanup blockers; dependency remedy decision required, no adapter code |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
 proof, with inert failure on ended React ref callbacks plus bounded fresh-ticket
@@ -184,6 +184,38 @@ transport callback or artificial backend counters. The selected admission bridge
 remains for guarded row/shared interlock composition. Later neutral consumer code
 must use a closed columns-only proof branch, never fabricate an admission join or
 retrofit an unregistered C. No consumer source is activated by this clarification.
+Vendor lifetime report is delivered. Review21n1/n2 records React declared/runtime
+manager mismatch/eager default construction and incomplete DOM cleanup/quiescence.
+Main independently reads actual installed export/window-listener/timer code and
+registry latest tags0.5.3; no vendor runtime or leak measurement ran. Strict adapter
+activation stays blocked. Existing RAC patch authority is not extended to new DnD
+patches; main requests a genuine remedy decision while independent UI bridge work
+continues. No product behavior is waived or source-only evidence called G-02 proof.
+The dependency-remedy modal was interrupted; no patch/remedy selection was received.
+User asks whether dnd-kit was downloaded: main confirms installed only in the
+isolated adapter-inspection tree, not primary, with no vendor runtime or patch.
+No additional vendor-change permission is inferred from that question.
+
+UI bridge candidate is HELD, not ready: read-only source trace shows UI suspend/
+release advancing the shared observation fence during live-source settlement can
+reach original failObservation/purge and clear submitted pending. Its source3/25
+input seals and unskipped counterexamples remain preserved; no runtime reproduction
+exists. A read-only correction-contract pass is allocated externally only, including
+the distinction between already-submitted observation and pre-token begin revocation.
+No old helper/pure body is newly authorized for edits by this status update.
+Main now reads the held bridge API/source flow, matches25 candidate inputs/three
+source hashes/147 protected sources and passes one positive own TS6. New held
+source1509c7c0a8a… is captured; review22n1 records the real source/UI fence mismatch.
+Main preserves this candidate before the correction. No consumer/entry readiness,
+runtime reproduction or independent approval is claimed by that source inspection.
+
+User now selects **Inspect upstream alternatives** in the remedy modal. This
+authorizes read-only new-generation release/tag/commit/source investigation, not a
+dependency patch/fork or alternative installation. Main allocates an external
+upstream-alternatives report while independent UI/source-fence work continues.
+Reports must distinguish table-owned private cleanup from intentional module-global
+platform behavior, and source/API concerns from measured runtime violations; no
+requirement is waived and no unsupported full-quiescence claim is fabricated.
 
 ### Current ownership and next action
 

@@ -1848,3 +1848,42 @@ Session20 n1 structural replay: main's checker passes237 Markdown/853 local link
 all18 checker regressions pass. The original one-finding/three-regression failures
 remain in the earlier logs. Independent final review, semantic-source comparison,
 external URL and runtime acceptance are not claimed by this navigation correction.
+
+## WP-10 installed vendor contract — review session 21 (source-only)
+
+### n1 — React declarations and runtime manager exports disagree
+
+The vendor report traces React0.5.3's declared DragDropManager re-export versus its
+actual ESM/CJS export lists. Main independently reads installed ESM imports/exports:
+the manager is imported internally but not re-exported. The module also constructs
+a default manager at evaluation. A positive type program is not a runtime namespace/
+inert-import proof. No vendor module was executed. The proposed backend must not
+import a nonexistent value or claim speculative import is an inert constructor.
+
+### n2 — Public cleanup is not a complete native-work drain contract
+
+Main independently reads DOM0.5.3 patchWindow's unreturned touchmove listener and
+ScrollListener's timer, whose effect cleanup removes the scroll listener but does
+not cancel the timer. The report additionally traces discarded scroll-tracker
+disposal, queued keyboard/collision work, stop's asynchronous continuation and
+partial-allocation gaps. These are source/API observations, not a measured leak or
+runtime failure reproduction. A void destroy/stop return is not proof of quiescence.
+The latest registry tags still identify0.5.3. Preserve the static inspection seal;
+adapter activation is blocked pending an explicit dependency remedy. No vendor
+patch/requirement waiver, corrective runtime verification or independent closure
+is granted by this review note.
+
+## WP-10 UI bridge intake — review session 22 (provisional)
+
+### n1 — UI-only revocation can reach source-observation retirement
+
+The held candidate source trace shows release/suspend during readCurrent at settle
+advances the shared fence; original finally/error handling then purges an already
+submitted operation despite unchanged genuine source/metadata. Main reads the actual
+report/API/old observation flow and checks25 fixture/three source hashes/147 protected
+sources plus one positive TS6. This is not runtime reproduction or approval.
+Separate SRC observation and UI interaction cuts, without suppressing real source
+loss, retagging old command receipts or fabricating a backend outcome. Pre-token
+begin notification creates a separate orphan risk and requires explicit ordering
+disposition before implementation. Preserve the held candidate and old assertions;
+runtime/independent correction verification stays final and n1 remains open.

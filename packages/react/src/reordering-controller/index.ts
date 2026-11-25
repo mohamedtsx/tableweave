@@ -2,9 +2,17 @@
 
 export { createReorderController } from "./controller.js";
 export {
+  captureReorderNavigation,
+  claimReorderUI,
   getReorderAdmissionOwner,
+  joinReorderModel,
+  observeReorderUI,
+  releaseReorderUI,
   ReorderAdmissionError,
   requireReorderAdmission,
+  requireReorderModel,
+  requireReorderNavigation,
+  suspendReorderUI,
 } from "./admission.js";
 export type {
   ReorderAdmission,
@@ -16,4 +24,8 @@ export type {
   ReorderControllerOptions,
   ReorderControllerResult,
   ReorderInteraction,
+  ReorderModelJoin,
+  ReorderNavigationOrigin,
+  ReorderUIBinding,
+  ReorderUIMetadata,
 } from "./types.js";

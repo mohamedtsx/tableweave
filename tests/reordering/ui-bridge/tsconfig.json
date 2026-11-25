@@ -1,0 +1,18 @@
+{
+  "extends": "../native-lifetime/tsconfig.light.json",
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../admission/*.ts",
+    "../admission/*.tsx",
+    "../../../packages/react/src/reordering-controller/*.ts",
+    "../../../packages/heroui/src/**/*.ts",
+    "../../../packages/heroui/src/**/*.tsx"
+  ],
+  "exclude": [
+    "./negative/**",
+    "./packed/**",
+    "./.artifacts",
+    "../admission/negative/**"
+  ]
+}

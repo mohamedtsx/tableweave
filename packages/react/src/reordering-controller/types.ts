@@ -99,3 +99,27 @@ export interface ReorderControllerResult<
   readonly controller: TableController<S>;
   readonly admission: ReorderAdmission<S, T>;
 }
+
+declare const uiBindingBrand: unique symbol;
+/** Exclusive optional UI association, never application or renderer authority. */
+export interface ReorderUIBinding<S extends QuerySchema, T extends object> {
+  readonly [uiBindingBrand]: (schema: S, record: T) => readonly [S, T];
+}
+declare const modelJoinBrand: unique symbol;
+export interface ReorderModelJoin<S extends QuerySchema, T extends object> {
+  readonly [modelJoinBrand]: (schema: S, record: T) => readonly [S, T];
+}
+declare const navigationBrand: unique symbol;
+/** Metadata only; deliberately separate from the row interaction's ID slot. */
+export interface ReorderNavigationOrigin<
+  S extends QuerySchema,
+  T extends object,
+> {
+  readonly [navigationBrand]: (schema: S, record: T) => readonly [S, T];
+}
+export interface ReorderUIMetadata {
+  readonly version: object;
+  /** Physical association only, not a current source/action grant. */
+  readonly joined: boolean;
+  readonly pending: boolean;
+}

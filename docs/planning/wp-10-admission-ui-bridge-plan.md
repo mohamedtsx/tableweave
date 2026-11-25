@@ -143,3 +143,18 @@ unsupported offline/new-owner continuation, actual API and limited proof. Stop w
 an exact trace before any excluded factory/core/native/P/frame change. No fake
 permitting frames, automatic counters, skipped requirement, self-approval or packet
 delivery. Main reviews/hashes/commits actual handoff before client entry/consumers.
+
+## Held candidate handoff
+
+[Actual bridge candidate](../../tests/reordering/ui-bridge/README.md) adds the selected
+eight functions/four types, but is **HELD**, not activation-ready. Its
+[source-traced blocker](../../tests/reordering/ui-bridge/BLOCKER.md) shows UI-only
+release/suspend tripping the original observation fence during settlement and
+purging already-submitted pending despite a live source. No runtime reproduction
+or assertion waiver occurred. Main reads actual API wrappers/ownership and matches
+25 own inputs/three source hashes/147 protected sources, plus one positive own TS6.
+Candidate source150 map:
+9c7c0a8a0546506016d658d1cdefd15266ab8c94bbde465cfd9c2b4ea3a9692c.
+Original candidate source3 aggregate272ab0a1… and25-input6503dae1… remain distinct
+history. Preserve before allocating the original helper fence/notification seam;
+no native consumer/client entry is activated by the presence of exported names.

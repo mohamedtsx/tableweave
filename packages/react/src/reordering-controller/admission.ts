@@ -24,7 +24,10 @@ import type {
   RowMoveOperation,
   RowReorderFrame,
 } from "../reordering/types.js";
-import { assertTableController } from "../table/definition.js";
+import {
+  assertTableController,
+  assertTableDefinition,
+} from "../table/definition.js";
 import type { DataTableModel, TableDefinition } from "../table/types.js";
 import {
   getDataTableModelOwner,
@@ -38,6 +41,10 @@ import type {
   ReorderAdmissionSnapshot,
   ReorderApplicationMetadata,
   ReorderInteraction,
+  ReorderModelJoin,
+  ReorderNavigationOrigin,
+  ReorderUIBinding,
+  ReorderUIMetadata,
 } from "./types.js";
 
 export class ReorderAdmissionError extends Error {
@@ -128,6 +135,118 @@ interface Registration<S extends QuerySchema> {
 }
 const handles = new WeakMap<object, unknown>();
 const controllers = new WeakMap<object, object>();
+interface BridgeAccess {
+  claim(lease: object, owner: object): object;
+  join(binding: object, model: unknown, actor: object): object;
+  requireModel(join: object, model: unknown): void;
+  suspend(binding: object): void;
+  release(binding: object): void;
+  capture(join: object): object;
+  navigate(origin: object, join: object, model: unknown): void;
+}
+interface UIBindingRecord {
+  owner: BridgeAccess | null;
+  lease: object | null;
+  ui: object | null;
+  suspended: boolean;
+  metadata: ReorderUIMetadata;
+}
+interface ModelJoinRecord {
+  binding: object | null;
+  signature: readonly object[] | null;
+  actor: object | null;
+  revision: number;
+}
+interface NavigationRecord {
+  join: object | null;
+  lease: object | null;
+  readonly fence: number;
+  readonly revision: number;
+  metadata: ReorderApplicationMetadata | null;
+}
+const uiBindings = new WeakMap<object, UIBindingRecord>();
+const modelJoins = new WeakMap<object, ModelJoinRecord>();
+const navigationOrigins = new WeakMap<object, NavigationRecord>();
+const bridgeIdentities = new WeakMap<object, object>();
+function bridgeIdentity(value: object): object {
+  let identity = bridgeIdentities.get(value);
+  if (!identity) {
+    identity = Object.freeze({});
+    bridgeIdentities.set(value, identity);
+  }
+  return identity;
+}
+function bindingRecord(value: object): UIBindingRecord {
+  return uiBindings.get(value) ?? deny();
+}
+function joinOwner(value: object): BridgeAccess {
+  const record = modelJoins.get(value);
+  if (!record?.binding) return deny();
+  return bindingRecord(record.binding).owner ?? deny();
+}
+/** Explicit D is the sole schema/record anchor. No alleged private payload read. */
+export function claimReorderUI<S extends QuerySchema, T extends object>(
+  definition: TableDefinition<S, T>,
+  admission: ReorderAdmission<NoInfer<S>, NoInfer<T>>,
+  lease: ReorderAdmissionLease<NoInfer<S>, NoInfer<T>>,
+  uiOwner: object,
+): ReorderUIBinding<S, T> {
+  assertTableDefinition(definition);
+  const owner = getReorderAdmissionOwner(admission);
+  if (!owner || owner.definition !== definition) return deny();
+  requireReorderAdmission(admission, definition, owner.controller);
+  const record = handles.get(admission) as { bridge: BridgeAccess | null };
+  if (!record.bridge) return deny();
+  return record.bridge.claim(lease, uiOwner) as ReorderUIBinding<S, T>;
+}
+export function joinReorderModel<S extends QuerySchema, T extends object>(
+  binding: ReorderUIBinding<S, T>,
+  model: DataTableModel<NoInfer<S>, NoInfer<T>>,
+  actor: object,
+): ReorderModelJoin<S, T> {
+  const owner = bindingRecord(binding).owner ?? deny();
+  return owner.join(binding, model, actor) as ReorderModelJoin<S, T>;
+}
+export function requireReorderModel<S extends QuerySchema, T extends object>(
+  join: ReorderModelJoin<S, T>,
+  model: DataTableModel<NoInfer<S>, NoInfer<T>>,
+): void {
+  joinOwner(join).requireModel(join, model);
+}
+export function suspendReorderUI<S extends QuerySchema, T extends object>(
+  binding: ReorderUIBinding<S, T>,
+): void {
+  bindingRecord(binding).owner?.suspend(binding);
+}
+export function releaseReorderUI<S extends QuerySchema, T extends object>(
+  binding: ReorderUIBinding<S, T>,
+): void {
+  bindingRecord(binding).owner?.release(binding);
+}
+/** Stable metadata only, including an immutable last observation on ended bindings. */
+export function observeReorderUI<S extends QuerySchema, T extends object>(
+  binding: ReorderUIBinding<S, T>,
+): ReorderUIMetadata {
+  return bindingRecord(binding).metadata;
+}
+export function captureReorderNavigation<
+  S extends QuerySchema,
+  T extends object,
+>(join: ReorderModelJoin<S, T>): ReorderNavigationOrigin<S, T> {
+  return joinOwner(join).capture(join) as ReorderNavigationOrigin<S, T>;
+}
+export function requireReorderNavigation<
+  S extends QuerySchema,
+  T extends object,
+>(
+  origin: ReorderNavigationOrigin<S, T>,
+  join: ReorderModelJoin<NoInfer<S>, NoInfer<T>>,
+  model: DataTableModel<NoInfer<S>, NoInfer<T>>,
+): void {
+  const record = navigationOrigins.get(origin);
+  if (!record?.join || record.join !== join) deny();
+  joinOwner(join).navigate(origin, join, model);
+}
 export function getReorderAdmissionOwner<
   S extends QuerySchema,
   T extends object,
@@ -220,8 +339,18 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   const commandReceipts = new WeakMap<object, Receipt>();
   const proposalReceipts = new WeakMap<object, Receipt>();
   const listeners = new Set<() => void>();
-  const ownerRecord: { owner: ReorderAdmissionOwner<S, T> | null } = {
+  let uiBinding: object | null = null;
+  let uiRecord: UIBindingRecord | null = null;
+  let modelJoin: object | null = null;
+  let modelJoinRecord: ModelJoinRecord | null = null;
+  let navigationOrigin: object | null = null;
+  let navigationRecord: NavigationRecord | null = null;
+  const ownerRecord: {
+    owner: ReorderAdmissionOwner<S, T> | null;
+    bridge: BridgeAccess | null;
+  } = {
     owner: null,
+    bridge: null,
   };
   const interactionProof = new WeakMap<object, object>();
   const invoke = (fn: Fn | undefined, args: readonly unknown[]) => {
@@ -247,6 +376,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       return;
     }
     fence++;
+    bridgeFenceChanged();
     if (hadInteraction) update();
   };
   const checkAt = (expected: number, mounted = lease) => {
@@ -510,6 +640,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   const purge = () => {
     purging++;
     try {
+      retireUI();
       if (metadata)
         retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
       model = null;
@@ -540,6 +671,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         ownBegin.credited = fence;
       }
     }
+    touchUI();
     update();
     if (!working && !purging && !commandDepth) schedule();
   });
@@ -576,6 +708,335 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       schedule();
     }
   };
+  function clearNavigation(): void {
+    if (navigationRecord) {
+      navigationRecord.join = null;
+      navigationRecord.lease = null;
+      navigationRecord.metadata = null;
+    }
+    navigationOrigin = null;
+    navigationRecord = null;
+  }
+  function clearModelJoin(): void {
+    clearNavigation();
+    if (modelJoinRecord) {
+      modelJoinRecord.binding = null;
+      modelJoinRecord.signature = null;
+      modelJoinRecord.actor = null;
+    }
+    modelJoin = null;
+    modelJoinRecord = null;
+  }
+  function touchUI(): void {
+    if (!uiRecord) return;
+    uiRecord.metadata = Object.freeze({
+      version: Object.freeze({}),
+      joined: modelJoin !== null,
+      pending: coordinator.getSnapshot().pending !== null,
+    });
+    dirty = true;
+  }
+  function bridgeFenceChanged(): void {
+    clearNavigation();
+    touchUI();
+  }
+  function retireUI(): void {
+    clearModelJoin();
+    touchUI();
+    if (uiRecord) {
+      uiRecord.owner = null;
+      uiRecord.lease = null;
+      uiRecord.ui = null;
+      uiRecord.suspended = true;
+    }
+    uiBinding = null;
+    uiRecord = null;
+  }
+  function bridgeEntry<V>(action: () => V): V {
+    live();
+    if (working || notifying || commandDepth || purging) return deny();
+    working = true;
+    try {
+      return action();
+    } catch (error) {
+      observePromise(error);
+      return deny();
+    } finally {
+      working = false;
+      if (dirty) schedule();
+    }
+  }
+  function requireBinding(handle: object): UIBindingRecord {
+    const record = bindingRecord(handle);
+    if (
+      uiBinding !== handle ||
+      uiRecord !== record ||
+      record.owner !== ownerRecord.bridge ||
+      record.lease !== lease ||
+      !lease
+    )
+      return deny();
+    return record;
+  }
+  /** Only weak identity tokens escape this transient genuine-model inspection. */
+  function modelSignature(value: DataTableModel<S, T>): readonly object[] {
+    const source = value.sourceTarget,
+      tool = value.toolTarget,
+      view = value.view,
+      details = value.metadata;
+    const actualDefinition = controller
+      ? assertTableController(definition, controller)
+      : deny();
+    if (
+      !source ||
+      !tool ||
+      !view ||
+      !details ||
+      !value.frame ||
+      !value.authority ||
+      !controller ||
+      tool.owner !== source.owner ||
+      source.owner.controller !== controller ||
+      source.owner.definition !== actualDefinition ||
+      controller.getDefinition() !== source.owner.definition ||
+      source.owner.publication !== registration?.publication
+    )
+      return deny();
+    requireCriteriaSource(source.authority, source.owner);
+    requireCriteriaTool(tool.authority, source.owner);
+    return Object.freeze(
+      [
+        value,
+        definition,
+        definition.native,
+        definition.native.controllerDefinition,
+        source.owner.definition,
+        controller,
+        source.owner,
+        source.owner.publication,
+        source.authority,
+        tool.authority,
+        value.authority,
+        value.frame,
+        view.native,
+        view.state.query,
+        details.origin.context,
+      ].map(bridgeIdentity),
+    );
+  }
+  function requireJoin(handle: object, input: unknown): DataTableModel<S, T> {
+    const record = modelJoins.get(handle);
+    if (
+      !record ||
+      record !== modelJoinRecord ||
+      modelJoin !== handle ||
+      !record.binding ||
+      !record.signature ||
+      input !== model
+    )
+      return deny();
+    const binding = requireBinding(record.binding);
+    if (binding.suspended) return deny();
+    const expected = fence,
+      mounted = lease;
+    const value = checkModel(expected, mounted);
+    try {
+      const current = modelSignature(value);
+      if (
+        current.length !== record.signature.length ||
+        current.some((token, index) => token !== record.signature?.[index]) ||
+        record.revision !== value.view?.state.revision
+      )
+        return deny();
+      return value;
+    } finally {
+      checkAt(expected, mounted);
+      if (
+        model !== value ||
+        modelJoinRecord !== record ||
+        modelJoin !== handle ||
+        uiRecord !== binding ||
+        binding.suspended
+      )
+        deny();
+    }
+  }
+  const bridge: BridgeAccess = Object.freeze({
+    claim(token: object, owner: object) {
+      if (!lease || token !== lease) return deny();
+      if (!owner || typeof owner !== "object") return deny();
+      return bridgeEntry(() => {
+        const identity = bridgeIdentity(owner);
+        if (uiBinding && uiRecord) {
+          if (uiRecord.lease !== token || uiRecord.ui !== identity)
+            return deny();
+          return uiBinding;
+        }
+        const handle = Object.freeze({});
+        const record: UIBindingRecord = {
+          owner: bridge,
+          lease: token,
+          ui: identity,
+          suspended: false,
+          metadata: Object.freeze({
+            version: Object.freeze({}),
+            joined: false,
+            pending: coordinator.getSnapshot().pending !== null,
+          }),
+        };
+        uiBindings.set(handle, record);
+        uiBinding = handle;
+        uiRecord = record;
+        advanceFence();
+        return handle;
+      });
+    },
+    join(handle: object, input: unknown, actor: object) {
+      requireBinding(handle);
+      // Exact private current model before any alleged model/actor payload read.
+      if (input !== model || !model || !actor || typeof actor !== "object")
+        return deny();
+      return bridgeEntry(() => {
+        const binding = requireBinding(handle);
+        const expected = fence,
+          mounted = lease;
+        const value = checkModel(expected, mounted);
+        const signature = modelSignature(value);
+        checkAt(expected, mounted);
+        if (
+          input !== model ||
+          value !== model ||
+          requireBinding(handle) !== binding
+        )
+          return deny();
+        const actorIdentity = bridgeIdentity(actor);
+        if (
+          modelJoin &&
+          modelJoinRecord &&
+          !binding.suspended &&
+          modelJoinRecord.actor === actorIdentity &&
+          modelJoinRecord.signature?.length === signature.length &&
+          signature.every(
+            (token, index) => token === modelJoinRecord?.signature?.[index],
+          )
+        )
+          return modelJoin;
+        clearModelJoin();
+        advanceFence();
+        const joined = Object.freeze({});
+        modelJoinRecord = {
+          binding: handle,
+          signature,
+          actor: actorIdentity,
+          revision: value.view?.state.revision ?? deny(),
+        };
+        modelJoins.set(joined, modelJoinRecord);
+        modelJoin = joined;
+        binding.suspended = false;
+        touchUI();
+        return joined;
+      });
+    },
+    requireModel(handle: object, input: unknown) {
+      bridgeEntry(() => {
+        requireJoin(handle, input);
+      });
+    },
+    suspend(handle: object) {
+      const record = requireBinding(handle);
+      if (record.suspended) return;
+      clearModelJoin();
+      record.suspended = true;
+      advanceFence();
+      if (!purging && !commandDepth) schedule();
+    },
+    release(handle: object) {
+      requireBinding(handle);
+      // Pure private revocation: no app/P/C/source/coordinator mutation.
+      advanceFence();
+      retireUI();
+      if (!purging && !commandDepth) schedule();
+    },
+    capture(handle: object) {
+      const record = modelJoins.get(handle);
+      if (
+        disposed ||
+        working ||
+        notifying ||
+        commandDepth ||
+        purging ||
+        !record ||
+        record !== modelJoinRecord ||
+        modelJoin !== handle ||
+        !record.binding ||
+        !record.signature ||
+        !metadata ||
+        !model
+      )
+        return deny();
+      const binding = requireBinding(record.binding);
+      if (binding.suspended) return deny();
+      if (
+        navigationOrigin &&
+        navigationRecord?.join === handle &&
+        navigationRecord?.fence === fence
+      )
+        return navigationOrigin;
+      clearNavigation();
+      const origin = Object.freeze({});
+      navigationRecord = {
+        join: handle,
+        lease,
+        fence,
+        revision: record.revision,
+        metadata,
+      };
+      navigationOrigins.set(origin, navigationRecord);
+      navigationOrigin = origin;
+      return origin;
+    },
+    navigate(origin: object, joined: object, input: unknown) {
+      const receipt = navigationOrigins.get(origin);
+      if (
+        !receipt ||
+        receipt !== navigationRecord ||
+        origin !== navigationOrigin ||
+        receipt.join !== joined ||
+        receipt.lease !== lease ||
+        receipt.fence !== fence ||
+        !receipt.metadata ||
+        beginLatch ||
+        coordinator.getSnapshot().pending
+      )
+        return deny();
+      bridgeEntry(() => {
+        const value = requireJoin(joined, input);
+        const expected = fence,
+          mounted = lease;
+        const before = readMetadata(expected, mounted);
+        if (
+          !sameMetadata(receipt.metadata ?? deny(), before) ||
+          !metadata ||
+          !sameMetadata(before, metadata)
+        )
+          return deny();
+        value.authority?.require({ type: "navigate" });
+        requireJoin(joined, input);
+        const after = readMetadata(expected, mounted);
+        checkModel(expected, mounted);
+        if (
+          !sameMetadata(before, after) ||
+          navigationRecord !== receipt ||
+          modelJoin !== joined ||
+          model !== value ||
+          controller?.getSnapshot().revision !== receipt.revision ||
+          beginLatch ||
+          coordinator.getSnapshot().pending
+        )
+          return deny();
+      });
+    },
+  });
   const validateReceipt = (receipt: Receipt) => {
     live();
     if (!receipt.valid) return deny();
@@ -633,6 +1094,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       if (transition.queryChanged && metadata)
         retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
     }
+    clearModelJoin();
+    touchUI();
     model = null;
     interaction = null;
     update(true);
@@ -869,6 +1332,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         checkAt(expected, token);
         requireDataTableModel(value, definition);
         advanceFence();
+        clearModelJoin();
+        touchUI();
         model = value;
         metadata = current;
         identity = nextIdentity;
@@ -1028,6 +1493,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     ]),
   );
   const admission = Object.freeze(methods) as unknown as ReorderAdmission<S, T>;
+  ownerRecord.bridge = bridge;
   handles.set(admission, ownerRecord);
   return {
     admission,
