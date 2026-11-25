@@ -635,6 +635,18 @@ interpretation are preserved append-only, not source defects; no tests rerun.
 Review35 records bounded unit validation only. Live RSC/browser attribution and
 computed CSS/layout/focus/AT/visual proof remain open. Source-native/neutral-SSR
 independent worker remains active; no further command is selected by these passes.
+Source-native worker stops after command1: policy32/32 passes/exit0/empty stderr,
+but installed Vitest creates25 unselected node_modules/.vitest-cache files. The
+hook-neutral command never runs; its final-units output remains absent. Main
+verifies166 receipt entries/all2,766 original recorded identities/3 expected outputs/
+25 cache additions;155 canonical libraries and existing tool inputs are unchanged.
+Raw metadata/wrapper failures remain distinct from green test assertions. Review36n1
+records the actual output-scope defect; no cleanup, rerun or automatic cache waiver.
+Main inspects installed Vitest5.1.1 CLI/types/implementation and selects only the
+unrun hook command with explicit --fsModuleCachePath under its fresh allowed output.
+New independent receipts must fence all old caches and source; original failed
+write-boundary attempt remains unchanged. This continuation grants no wider tests,
+source/config edits/install/build/browser/profile or native-provisioning authority.
 
 ## Current WP-10 implementation handoff
 

@@ -150,3 +150,30 @@ SHA25683ac67f73442e7b78781e03df258d1ad80b5a5c5d7cbb6778b4f245fa3a652c4.
 Initial collector preflight/count-parser issues stay in original receipts; corrected
 interpretation is append-only from unchanged raw output, without a test rerun.
 Review35 keeps live RSC/browser and computed CSS/layout/AT boundaries open.
+
+## Third selection — actual stop and corrected continuation
+
+Command1 policy passes32/32/exit0, but creates25 unselected filesystem-module cache
+files in node_modules/.vitest-cache. The worker stops before command2. Main verifies
+166 receipt entries/all2,766 original identities and all28 actual outputs:3 expected,
+25 outside the selected roots. Review36n1 records a real write-boundary failure;
+the passing assertions do not turn it green. Existing source/installed bytes remain
+unchanged; new unexpected files are preserved untouched, not authorized retroactively.
+Raw receipt149c5417… remains at `/tmp/opencode/final-source-native-001/receipt-hashes.json`.
+
+Main reads installed Vitest5.1.1's CLI/schema/implementation: fsModuleCachePath is
+independent of Vite cacheDir. Source/configs are unchanged. ONLY the unrun command2
+is now selected, once, with its cache path explicitly inside the allowed NEW root:
+
+```sh
+NODE_DISABLE_COMPILE_CACHE=1 node node_modules/vitest/vitest.mjs run --configLoader native --config tests/table-facade/hook/vitest.config.mjs --fsModuleCachePath /tmp/opencode/tableweave-wp11-workbench/tests/table-facade/hook/.artifacts/final-units/fs-module-cache tests/table-facade/hook/model.test.ts
+```
+
+Independent worker writes external `/tmp/opencode/final-facade-ssr-001/**` and only
+the still-absent hook final-units reporter/cache root. Recheck absence before config
+load. Freeze every existing node_modules/.vitest-cache byte and all earlier outputs;
+any new/changed outside-root write stops execution. Keep180second host deadline/
+128MiB floor/one worker/retries0/source/tool before-after receipts. No policy rerun,
+deletion, extra CLI/helper/config or package/browser/native/build/install action.
+Successful continuation can verify corrected command confinement only; it cannot
+erase the first attempt's failure or prove real application/P/native/browser cleanup.

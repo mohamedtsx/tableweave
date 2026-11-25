@@ -10,6 +10,39 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 36 (native policy/write boundary)
+
+Independent command1 runs once: policy.test.ts passes32/32 in one file, exit0,
+empty stderr/no timeout/signal. Command2 neutral SSR is NOT RUN after its mandatory
+scope stop. Main reads raw JSON/stdout/status and verifies166 external receipt
+entries, all2,766 original before/after repository identities,3 expected reporter/
+cache outputs and25 unexpected installed-cache files. Current main-only REVIEW/
+TASKS/final-execution-plan documentation drift postdates the recorded before/after.
+Receipt /tmp/opencode/final-source-native-001/receipt-hashes.json SHA256
+149c54178802ca9510fc6b643d3df7e6d86c22fb322ea485ca63699813544528.
+
+### n1 — Execution selection omitted Vitest's separate filesystem-module cache
+
+Vitest5.1.1 writes25 new files under node_modules/.vitest-cache despite the selected
+Vite cacheDir. Installed CLI/API/type source confirms fsModuleCache defaults true
+and fsModuleCachePath independently defaults to that workspace directory. This is
+an actual harness/output-selection defect, not a failed library assertion. The
+worker stops correctly; unexpected cache bytes remain preserved, not authorized
+retroactively, removed or re-signed into old installed receipts.
+
+Main corrects only the NEXT unrun command's selection with the supported explicit
+--fsModuleCachePath nested inside its fresh allowed final-units root. No source/
+config/manifest changes or policy rerun are needed. Independent continuation must
+prove the old cache remains unchanged and all new writes are confined. The first
+run's write-boundary failure remains historical even if the next invocation passes.
+
+Collector metadata-print failure/wrapper scope assertion are retained separately
+from the green Vitest child. Main's intake initially compares stale current docs
+and later incorrectly assumes whole maps equal despite3 allowed additions; corrected
+read-only comparisons verify all original entries/actual additions. No test or
+collector execution is repeated to erase a failure. No native/library/browser/
+admission/retirement/gate approval follows from the32 policy assertions.
+
 ## Final verification — review session 35 (report/CSS unit slice)
 
 Independent selected R01 report rejection passes1/1 and R02 CSS text contracts5/5,
