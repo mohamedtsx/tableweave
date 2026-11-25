@@ -10,6 +10,37 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## WP-14 source intake — review session 32 (provisional)
+
+Main reads all24 source/config/driver/fixture/statistics files plus input/paint
+contracts and authored unit vectors. Own source TS6/static/seal/pin checks pass:
+31 source/metadata inputs1cd83de1… /117 raw artifacts68f1e557…;
+1,335 actual pinned inputs/1,301 program files,155 libraries/2,525 protected old
+inputs unchanged with only main TASKS drift. No generator/oracle/statistics/driver/
+helper/config/browser/runtime/paint/benchmark/consumer execution is included.
+
+### n1 — Explicit RAC profile maps are not checked for the required file closure
+
+candidate.mjs currently verifies whatever nonempty assets/after maps a selected
+receipt supplies, then checks only that its before entries appear in an ordinary
+installed receipt. It does not require the packaged profile ID/six assets/three
+specific runtime files, verify all canonical before/after hashes, or establish
+independent ordinary runtime bytes/inodes. A trusted main-selection hash is not a
+substitute for those conformance checks. Require actual inspected packaged profile
+closure, matching exact local RAC version/registration and canonical before/after
+runtime identities; retain ordinary/explicit-profile separation, never stage/patch
+anything automatically. This is source-derived, not an executed profile failure.
+
+### n2 — Cleanup waits have no deadline/debt transition
+
+driver.mjs waits directly for context.close, CDP trace completion and HTTP server
+close. A stalled cleanup can therefore prevent its advertised cleanup-debt receipt
+and phase failure from being recorded. Bound owned cleanup waits, attempt remaining
+safe cleanup independently, preserve primary error/debt and stop subsequent sampling.
+Do not kill ambient processes, delete files, pretend signal/timeout is successful
+cleanup or turn an unresolved browser into a green final report. Runtime reproduction/
+independent closure remains final; the current source is preserved before fixes.
+
 ## WP-13 family-runner intake — review session 31 (provisional)
 
 Main reads the five-body adapter/dispatch/staging delta, parent validator, standalone

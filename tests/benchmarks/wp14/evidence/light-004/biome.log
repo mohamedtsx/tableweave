@@ -1,0 +1,2743 @@
+tests/benchmarks/wp14/static.mjs:37:257 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    35 │ for (const path of (await files(own)).filter((path) => path.endsWith(".md"))) {
+    36 │   const markdown = await readFile(resolve(root, path), "utf8");
+  > 37 │   for (const match of markdown.matchAll(/\]\(([^)]+)\)/g)) { const target = match[1]; assert(!/^https?:/.test(target), "Own handoff should be portable local links only"); const full = resolve(root, path, "..", target.split("#")[0]); assert(full.startsWith(resolve(root, own) + "/")); await readFile(full); }
+       │                                                                                                                                                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^
+    38 │ }
+    39 │ console.log(`Static syntax/ownership/timing sites: ${sources.length} authored code files; client20+ID/server30+ID declarations. NOT generated record counts, runtime, checksum, paint or performance proof.`);
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    35 35 │   for (const path of (await files(own)).filter((path) => path.endsWith(".md"))) {
+    36 36 │     const markdown = await readFile(resolve(root, path), "utf8");
+    37    │ - ··for·(const·match·of·markdown.matchAll(/\]\(([^)]+)\)/g))·{·const·target·=·match[1];·assert(!/^https?:/.test(target),·"Own·handoff·should·be·portable·local·links·only");·const·full·=·resolve(root,·path,·"..",·target.split("#")[0]);·assert(full.startsWith(resolve(root,·own)·+·"/"));·await·readFile(full);·}
+       37 │ + ··for·(const·match·of·markdown.matchAll(/\]\(([^)]+)\)/g))·{·const·target·=·match[1];·assert(!/^https?:/.test(target),·"Own·handoff·should·be·portable·local·links·only");·const·full·=·resolve(root,·path,·"..",·target.split("#")[0]);·assert(full.startsWith(`${resolve(root,·own)}/`));·await·readFile(full);·}
+    38 38 │   }
+    39 39 │   console.log(`Static syntax/ownership/timing sites: ${sources.length} authored code files; client20+ID/server30+ID declarations. NOT generated record counts, runtime, checksum, paint or performance proof.`);
+  
+
+tests/benchmarks/wp14/seal.mjs:2:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    1 │ import assert from "node:assert/strict";
+  > 2 │ import { mkdir, readFile, writeFile } from "node:fs/promises";
+      │          ^^^^^
+    3 │ import { spawnSync } from "node:child_process";
+    4 │ import { resolve } from "node:path";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    2 │ import·{·mkdir,·readFile,·writeFile·}·from·"node:fs/promises";
+      │          -------                                              
+
+tests/benchmarks/wp14/Benchmark.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5   5 │   import { cellText, digest, type BenchClient } from "./fixture.js";
+     6   6 │   import type { Source } from "./source.js";
+     7     │ - export·function·Benchmark<S·extends·QuerySchema,·T·extends·BenchClient>({·source·}:·{·readonly·source:·Source<S,·T>·})·{
+     8     │ - ··useSyncExternalStore(source.subscribe,·source.getSnapshot,·source.getSnapshot);
+     9     │ - ··const·model·=·useDataTable(source.D,·source.options()),·host·=·useRef<HTMLDivElement>(null);
+    10     │ - ··const·collection·=·useMemo(()·=>·({·label:·"WP14·reference·table",·rowHeaderColumnId:·"recordLabel...
+         7 │ + export·function·Benchmark<S·extends·QuerySchema,·T·extends·BenchClient>({
+         8 │ + ··source,
+         9 │ + }:·{
+        10 │ + ··readonly·source:·Source<S,·T>;
+        11 │ + })·{
+        12 │ + ··useSyncExternalStore(
+        13 │ + ····source.subscribe,
+        14 │ + ····source.getSnapshot,
+        15 │ + ····source.getSnapshot,
+        16 │ + ··);
+        17 │ + ··const·model·=·useDataTable(source.D,·source.options()),
+        18 │ + ····host·=·useRef<HTMLDivElement>(null);
+        19 │ + ··const·collection·=·useMemo(
+        20 │ + ····()·=>·({
+        21 │ + ······label:·"WP14·reference·table",
+        22 │ + ······rowHeaderColumnId:·"recordLabel",
+        23 │ + ······rowTextValue:·(value:·NonNullable<typeof·model.view>["rows"][number])·=>
+        24 │ + ········value.id,
+        25 │ + ······columnTextValue:·(
+        26 │ + ········value:·NonNullable<typeof·model.view>["visibleColumns"][number],
+        27 │ + ······)·=>·value.id,
+        28 │ + ······cellTextValue:·(
+        29 │ + ········value:·ReturnType<
+        30 │ + ··········NonNullable<typeof·model.view>["rows"][number]["getVisibleCells"]
+        31 │ + ········>[number],
+        32 │ + ······)·=>·cellText(value.getValue()),
+        33 │ + ····}),
+        34 │ + ····[],
+        35 │ + ··);
+    11  36 │     useLayoutEffect(() => {
+    12     │ - ····const·element·=·host.current;·if·(!element)·return;
+        37 │ + ····const·element·=·host.current;
+        38 │ + ····if·(!element)·return;
+    13  39 │       let active = true;
+    14  40 │       function witness() {
+    ······ │ 
+    16  42 │         if (!active || !current || !source.timing.target) return null;
+    17  43 │         requireDataTableModel(model, source.D);
+    18     │ - ······const·state·=·source.C.getSnapshot(),·presentation·=·model.presentation;
+    19     │ - ······if·(!source.isCurrent()·||·model.phase·!==·"display"·||·model.state·!==·state·||·model.view?.s...
+        44 │ + ······const·state·=·source.C.getSnapshot(),
+        45 │ + ········presentation·=·model.presentation;
+        46 │ + ······if·(
+        47 │ + ········!source.isCurrent()·||
+        48 │ + ········model.phase·!==·"display"·||
+        49 │ + ········model.state·!==·state·||
+        50 │ + ········model.view?.state·!==·state·||
+        51 │ + ········!presentation?.displayed·||
+        52 │ + ········presentation.busy·||
+        53 │ + ········presentation.stale·||
+        54 │ + ········presentation.obsolete·||
+        55 │ + ········presentation.resourceObsolete·||
+        56 │ + ········presentation.blockedReason·!==·null·||
+        57 │ + ········presentation.displayed.queryIdentity·!==·state.queryIdentity·||
+        58 │ + ········presentation.displayed.pagination.pageSize·!==·100
+        59 │ + ······)
+        60 │ + ········return·null;
+    20  61 │         const binding = source.checkServer(presentation.displayed.request);
+    21     │ - ······const·table·=·current.querySelector("table"),·box·=·current.getBoundingClientRect();
+    22     │ - ······if·(!(table·instanceof·HTMLTableElement)·||·window.top·!==·window·||·document.visibilityState·!==·"visible"·||·box.width·<=·0·||·box.height·<=·0·||·box.bottom·<=·0·||·box.top·>=·innerHeight·||·getComputedStyle(current).display·===·"none"·||·getComputedStyle(current).visibility·!==·"visible")·return·null;
+        62 │ + ······const·table·=·current.querySelector("table"),
+        63 │ + ········box·=·current.getBoundingClientRect();
+        64 │ + ······if·(
+        65 │ + ········!(table·instanceof·HTMLTableElement)·||
+        66 │ + ········window.top·!==·window·||
+        67 │ + ········document.visibilityState·!==·"visible"·||
+        68 │ + ········box.width·<=·0·||
+        69 │ + ········box.height·<=·0·||
+        70 │ + ········box.bottom·<=·0·||
+        71 │ + ········box.top·>=·innerHeight·||
+        72 │ + ········getComputedStyle(current).display·===·"none"·||
+        73 │ + ········getComputedStyle(current).visibility·!==·"visible"
+        74 │ + ······)
+        75 │ + ········return·null;
+    23  76 │         const rows = [...table.querySelectorAll("tbody > tr")];
+    24     │ - ······if·(rows.length·!==·100·||·model.view.rows.length·!==·100·||·presentation.rows.length·!==·100)·return·null;
+    25     │ - ······const·headerNodes·=·[...table.querySelectorAll("thead·th")],·headers·=·headerNodes.map((node)·=>·node.textContent?.trim()·??·"");
+    26     │ - ······const·cells·=·rows.map((row)·=>·[...row.querySelectorAll("td,th")].map((cell)·=>·cell.textContent?.trim()·??·""));
+        77 │ + ······if·(
+        78 │ + ········rows.length·!==·100·||
+        79 │ + ········model.view.rows.length·!==·100·||
+        80 │ + ········presentation.rows.length·!==·100
+        81 │ + ······)
+        82 │ + ········return·null;
+        83 │ + ······const·headerNodes·=·[...table.querySelectorAll("thead·th")],
+        84 │ + ········headers·=·headerNodes.map((node)·=>·node.textContent?.trim()·??·"");
+        85 │ + ······const·cells·=·rows.map((row)·=>
+        86 │ + ········[...row.querySelectorAll("td,th")].map(
+        87 │ + ··········(cell)·=>·cell.textContent?.trim()·??·"",
+        88 │ + ········),
+        89 │ + ······);
+    27  90 │         if (cells.some((row) => row.length !== headers.length)) return null;
+    28  91 │         const ids = cells.map((row) => row[0] ?? "");
+    29     │ - ······if·(JSON.stringify(ids)·!==·JSON.stringify(model.view.rows.map((row)·=>·row.id))·||·JSON.stringify(headers)·!==·JSON.stringify(model.view.visibleColumns.map((column)·=>·column.id)))·return·null;
+        92 │ + ······if·(
+        93 │ + ········JSON.stringify(ids)·!==
+        94 │ + ··········JSON.stringify(model.view.rows.map((row)·=>·row.id))·||
+        95 │ + ········JSON.stringify(headers)·!==
+        96 │ + ··········JSON.stringify(model.view.visibleColumns.map((column)·=>·column.id))
+        97 │ + ······)
+        98 │ + ········return·null;
+    30  99 │         const expected = source.timing.target.oracle;
+    31     │ - ······if·(state.query.pagination.pageIndex·!==·expected.page·||·presentation.displayed.recordCount·!==·100·||·headers.length·!==·expected.headers.length)·return·null;
+    32     │ - ······if·(source.mode·!==·"server-unknown"·&&·(presentation.displayed.pageInfo.kind·!==·"known"·||·presentation.displayed.pageInfo.total·!==·expected.total))·return·null;
+    33     │ - ······if·(source.mode·===·"server-unknown"·&&·(presentation.displayed.pageInfo.kind·!==·"unknown"·||·presentation.displayed.pageInfo.hasNextPage·!==·expected.hasNextPage))·return·null;
+    34     │ - ······const·inputCount·=·source.mode·===·"client"·?·source.getSnapshot().records.length·:·source.resource.getSnapshot().snapshot?.records.length;
+       100 │ + ······if·(
+       101 │ + ········state.query.pagination.pageIndex·!==·expected.page·||
+       102 │ + ········presentation.displayed.recordCount·!==·100·||
+       103 │ + ········headers.length·!==·expected.headers.length
+       104 │ + ······)
+       105 │ + ········return·null;
+       106 │ + ······if·(
+       107 │ + ········source.mode·!==·"server-unknown"·&&
+       108 │ + ········(presentation.displayed.pageInfo.kind·!==·"known"·||
+       109 │ + ··········presentation.displayed.pageInfo.total·!==·expected.total)
+       110 │ + ······)
+       111 │ + ········return·null;
+       112 │ + ······if·(
+       113 │ + ········source.mode·===·"server-unknown"·&&
+       114 │ + ········(presentation.displayed.pageInfo.kind·!==·"unknown"·||
+       115 │ + ··········presentation.displayed.pageInfo.hasNextPage·!==·expected.hasNextPage)
+       116 │ + ······)
+       117 │ + ········return·null;
+       118 │ + ······const·inputCount·=
+       119 │ + ········source.mode·===·"client"
+       120 │ + ··········?·source.getSnapshot().records.length
+       121 │ + ··········:·source.resource.getSnapshot().snapshot?.records.length;
+    35 122 │         if (inputCount !== expected.inputCount) return null;
+    36     │ - ······return·{·state,·dom:·{·ids,·headers,·cells:·digest(JSON.stringify(cells)),·binding,·inputCount,·page:·state.query.pagination.pageIndex,·total:·presentation.displayed.pageInfo.kind·===·"known"·?·presentation.displayed.pageInfo.total·:·null,·hasNextPage:·presentation.displayed.pageInfo.kind·===·"unknown"·?·presentation.displayed.pageInfo.hasNextPage·:·null·}·};
+       123 │ + ······return·{
+       124 │ + ········state,
+       125 │ + ········dom:·{
+       126 │ + ··········ids,
+       127 │ + ··········headers,
+       128 │ + ··········cells:·digest(JSON.stringify(cells)),
+       129 │ + ··········binding,
+       130 │ + ··········inputCount,
+       131 │ + ··········page:·state.query.pagination.pageIndex,
+       132 │ + ··········total:
+       133 │ + ············presentation.displayed.pageInfo.kind·===·"known"
+       134 │ + ··············?·presentation.displayed.pageInfo.total
+       135 │ + ··············:·null,
+       136 │ + ··········hasNextPage:
+       137 │ + ············presentation.displayed.pageInfo.kind·===·"unknown"
+  65 more lines truncated
+  
+
+tests/benchmarks/wp14/candidate.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7   7 │   import { packageArchive } from "../../consumers/wp13/lib/archive.mjs";
+     8   8 │   export const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+     9     │ - export·function·demand(value,·code)·{·if·(!value)·throw·new·Error(code);·}
+    10     │ - export·function·object(value)·{·demand(value·&&·typeof·value·===·"object"·&&·!Array.isArray(value)·&...
+    11     │ - export·function·relative(value)·{·demand(typeof·value·===·"string"·&&·value.length·>·0·&&·!path.isAbsolute(value)·&&·!value.includes("\\")·&&·value.split("/").every((part)·=>·part·&&·part·!==·"."·&&·part·!==·".."·&&·part·!==·".repo"·&&·!part.startsWith(".env")),·"E_PATH");·return·value;·}
+    12     │ - export·function·directory(value)·{·demand(path.isAbsolute(value)·&&·path.resolve(value)·===·value·&&·fs.realpathSync(value)·===·value·&&·fs.lstatSync(value).isDirectory(),·"E_CANONICAL_ROOT");·let·next·=·value;·while·(next·!==·path.dirname(next))·{·demand(!fs.lstatSync(next).isSymbolicLink(),·"E_ROOT_LINK");·next·=·path.dirname(next);·}·return·value;·}
+    13     │ - export·function·read(root,·name)·{·directory(root);·relative(name);·const·file·=·path.join(root,·nam...
+    14     │ - export·function·json(root,·file)·{·return·object(JSON.parse(read(root,·file).toString("utf8")));·}
+    15     │ - export·function·record(root,·file)·{·const·bytes·=·read(root,·file),·info·=·fs.statSync(path.join(root,·file));·return·{·sha256:·hash(bytes),·size:·bytes.length,·mode:·info.mode·&·0o777·};·}
+    16     │ - export·function·verifyMap(root,·map)·{·object(map);·demand(Object.keys(map).length·>·0,·"E_EMPTY_MAP");·for·(const·[file,·wanted]·of·Object.entries(map))·demand(JSON.stringify(record(root,·file))·===·JSON.stringify({·sha256:·wanted.sha256,·size:·wanted.size,·mode:·wanted.mode·}),·"E_FROZEN_FILE_DRIFT");·}
+    17     │ - export·function·capacity(root)·{·const·s·=·fs.statfsSync(root);·demand(s.bavail*s.bsize·>=·134217728,·"E_CAPACITY_HOLD");·}
+    18     │ - export·function·write(root,·file,·bytes)·{·directory(root);·relative(file);·capacity(root);·const·parent·=·path.dirname(path.join(root,·file));·if·(!fs.existsSync(parent))·fs.mkdirSync(parent,·{·recursive:·true·});·directory(parent);·fs.writeFileSync(path.join(root,·file),·bytes,·{·flag:·"wx",·mode:·0o600·});·}
+    19     │ - export·function·put(root,·file,·value)·{·write(root,·file,·`${JSON.stringify(value,·null,·2)}\n`);·}
+    20     │ - function·selected(ref)·{·object(ref);·const·root·=·directory(path.dirname(ref.path)),·file·=·path.basename(ref.path),·bytes·=·read(root,·file);·demand(hash(bytes)·===·ref.sha256,·"E_SELECTION_HASH");·return·object(JSON.parse(bytes.toString("utf8")));·}
+         9 │ + export·function·demand(value,·code)·{
+        10 │ + ··if·(!value)·throw·new·Error(code);
+        11 │ + }
+        12 │ + export·function·object(value)·{
+        13 │ + ··demand(
+        14 │ + ····value·&&
+        15 │ + ······typeof·value·===·"object"·&&
+        16 │ + ······!Array.isArray(value)·&&
+        17 │ + ······Object.getPrototypeOf(value)·===·Object.prototype,
+        18 │ + ····"E_OBJECT",
+        19 │ + ··);
+        20 │ + ··for·(const·key·of·Reflect.ownKeys(value))
+        21 │ + ····demand(
+        22 │ + ······typeof·key·===·"string"·&&
+        23 │ + ········!["__proto__",·"constructor",·"prototype"].includes(key)·&&
+        24 │ + ········Object.hasOwn(Object.getOwnPropertyDescriptor(value,·key),·"value"),
+        25 │ + ······"E_OBJECT_KEY",
+        26 │ + ····);
+        27 │ + ··return·value;
+        28 │ + }
+        29 │ + export·function·relative(value)·{
+        30 │ + ··demand(
+        31 │ + ····typeof·value·===·"string"·&&
+        32 │ + ······value.length·>·0·&&
+        33 │ + ······!path.isAbsolute(value)·&&
+        34 │ + ······!value.includes("\\")·&&
+        35 │ + ······value
+        36 │ + ········.split("/")
+        37 │ + ········.every(
+        38 │ + ··········(part)·=>
+        39 │ + ············part·&&
+        40 │ + ············part·!==·"."·&&
+        41 │ + ············part·!==·".."·&&
+        42 │ + ············part·!==·".repo"·&&
+        43 │ + ············!part.startsWith(".env"),
+        44 │ + ········),
+        45 │ + ····"E_PATH",
+        46 │ + ··);
+        47 │ + ··return·value;
+        48 │ + }
+        49 │ + export·function·directory(value)·{
+        50 │ + ··demand(
+        51 │ + ····path.isAbsolute(value)·&&
+        52 │ + ······path.resolve(value)·===·value·&&
+        53 │ + ······fs.realpathSync(value)·===·value·&&
+        54 │ + ······fs.lstatSync(value).isDirectory(),
+        55 │ + ····"E_CANONICAL_ROOT",
+        56 │ + ··);
+        57 │ + ··let·next·=·value;
+        58 │ + ··while·(next·!==·path.dirname(next))·{
+        59 │ + ····demand(!fs.lstatSync(next).isSymbolicLink(),·"E_ROOT_LINK");
+        60 │ + ····next·=·path.dirname(next);
+        61 │ + ··}
+        62 │ + ··return·value;
+        63 │ + }
+        64 │ + export·function·read(root,·name)·{
+        65 │ + ··directory(root);
+        66 │ + ··relative(name);
+        67 │ + ··const·file·=·path.join(root,·name);
+        68 │ + ··directory(path.dirname(file));
+        69 │ + ··const·info·=·fs.lstatSync(file);
+        70 │ + ··demand(info.isFile()·&&·!info.isSymbolicLink(),·"E_REGULAR");
+        71 │ + ··const·fd·=·fs.openSync(file,·fs.constants.O_RDONLY·|·fs.constants.O_NOFOLLOW);
+        72 │ + ··try·{
+        73 │ + ····const·before·=·fs.fstatSync(fd);
+        74 │ + ····demand(
+        75 │ + ······before.ino·===·info.ino·&&·before.dev·===·info.dev,
+        76 │ + ······"E_REPLACED_FILE",
+        77 │ + ····);
+        78 │ + ····const·bytes·=·fs.readFileSync(fd),
+        79 │ + ······after·=·fs.fstatSync(fd);
+        80 │ + ····demand(
+        81 │ + ······before.size·===·bytes.length·&&·before.mtimeMs·===·after.mtimeMs,
+        82 │ + ······"E_FILE_CHANGED",
+        83 │ + ····);
+        84 │ + ····return·bytes;
+        85 │ + ··}·finally·{
+        86 │ + ····fs.closeSync(fd);
+        87 │ + ··}
+        88 │ + }
+        89 │ + export·function·json(root,·file)·{
+        90 │ + ··return·object(JSON.parse(read(root,·file).toString("utf8")));
+        91 │ + }
+        92 │ + export·function·record(root,·file)·{
+        93 │ + ··const·bytes·=·read(root,·file),
+        94 │ + ····info·=·fs.statSync(path.join(root,·file));
+        95 │ + ··return·{·sha256:·hash(bytes),·size:·bytes.length,·mode:·info.mode·&·0o777·};
+        96 │ + }
+        97 │ + export·function·verifyMap(root,·map)·{
+        98 │ + ··object(map);
+        99 │ + ··demand(Object.keys(map).length·>·0,·"E_EMPTY_MAP");
+       100 │ + ··for·(const·[file,·wanted]·of·Object.entries(map))
+       101 │ + ····demand(
+       102 │ + ······JSON.stringify(record(root,·file))·===
+       103 │ + ········JSON.stringify({
+       104 │ + ··········sha256:·wanted.sha256,
+       105 │ + ··········size:·wanted.size,
+       106 │ + ··········mode:·wanted.mode,
+       107 │ + ········}),
+       108 │ + ······"E_FROZEN_FILE_DRIFT",
+       109 │ + ····);
+       110 │ + }
+       111 │ + export·function·capacity(root)·{
+       112 │ + ··const·s·=·fs.statfsSync(root);
+       113 │ + ··demand(s.bavail·*·s.bsize·>=·134217728,·"E_CAPACITY_HOLD");
+       114 │ + }
+       115 │ + export·function·write(root,·file,·bytes)·{
+       116 │ + ··directory(root);
+       117 │ + ··relative(file);
+       118 │ + ··capacity(root);
+       119 │ + ··const·parent·=·path.dirname(path.join(root,·file));
+       120 │ + ··if·(!fs.existsSync(parent))·fs.mkdirSync(parent,·{·recursive:·true·});
+       121 │ + ··directory(parent);
+       122 │ + ··fs.writeFileSync(path.join(root,·file),·bytes,·{·flag:·"wx",·mode:·0o600·});
+       123 │ + }
+       124 │ + export·function·put(root,·file,·value)·{
+       125 │ + ··write(root,·file,·`${JSON.stringify(value,·null,·2)}\n`);
+       126 │ + }
+       127 │ + function·selected(ref)·{
+       128 │ + ··object(ref);
+       129 │ + ··const·root·=·directory(path.dirname(ref.path)),
+       130 │ + ····file·=·path.basename(ref.path),
+       131 │ + ····bytes·=·read(root,·file);
+       132 │ + ··demand(hash(bytes)·===·ref.sha256,·"E_SELECTION_HASH");
+       133 │ + ··return·object(JSON.parse(bytes.toString("utf8")));
+       134 │ + }
+    21 135 │   function inventory(root) {
+    22     │ - ··const·files·=·{},·links·=·{};
+    23     │ - ··function·visit(prefix)·{·for·(const·item·of·fs.readdirSync(path.join(root,·prefix),·{·withFileType...
+    24     │ - ··visit("node_modules");·return·{·files,·links·};
+       136 │ + ··const·files·=·{},
+       137 │ + ····links·=·{};
+       138 │ + ··function·visit(prefix)·{
+       139 │ + ····for·(const·item·of·fs.readdirSync(path.join(root,·prefix),·{
+       140 │ + ······withFileTypes:·true,
+       141 │ + ····}))·{
+  535 more lines truncated
+  
+
+tests/benchmarks/wp14/definition.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1  1 │   import { defineTable, type NativeColumnDef } from "@tableweave/react";
+    2    │ - import·{·CLIENT_KEYS,·SERVER_KEYS,·cellText,·type·BenchClient,·type·BenchServer·}·from·"./fixture.js";
+       2 │ + import·{
+       3 │ + ··CLIENT_KEYS,
+       4 │ + ··SERVER_KEYS,
+       5 │ + ··cellText,
+       6 │ + ··type·BenchClient,
+       7 │ + ··type·BenchServer,
+       8 │ + }·from·"./fixture.js";
+    3  9 │   import { clientSchema, serverSchema } from "./schema.js";
+    4    │ - const·clientColumns:·readonly·NativeColumnDef<BenchClient>[]·=·CLIENT_KEYS.map((key)·=>·({·id:·key,·header:·key,·accessorFn:·(value)·=>·value[key],·cell:·(context)·=>·cellText(context.getValue()),·meta:·{·rowHeader:·key·===·"recordLabel"·},·enableHiding:·key·!==·"recordLabel"·}));
+    5    │ - const·serverColumns:·readonly·NativeColumnDef<BenchServer>[]·=·SERVER_KEYS.map((key)·=>·({·id:·key,·header:·key,·accessorFn:·(value)·=>·value[key],·cell:·(context)·=>·cellText(context.getValue()),·meta:·{·rowHeader:·key·===·"recordLabel"·},·enableHiding:·key·!==·"recordLabel"·}));
+    6    │ - export·function·clientDefinition()·{·return·defineTable<BenchClient>()({·schema:·clientSchema,·columns:·clientColumns,·getRowId:·(value)·=>·value.id,·multiSort:·true,·selection:·"multiple",·details:·true,·tools:·{·builder:·"hidden",·search:·"toolbar",·columnChooser:·"hidden"·}·});·}
+    7    │ - export·function·serverDefinition()·{·return·defineTable<BenchServer>()({·schema:·serverSchema,·columns:·serverColumns,·getRowId:·(value)·=>·value.id,·multiSort:·true,·selection:·"multiple",·details:·true,·tools:·{·builder:·"hidden",·search:·"toolbar",·columnChooser:·"hidden"·}·});·}
+      10 │ + const·clientColumns:·readonly·NativeColumnDef<BenchClient>[]·=·CLIENT_KEYS.map(
+      11 │ + ··(key)·=>·({
+      12 │ + ····id:·key,
+      13 │ + ····header:·key,
+      14 │ + ····accessorFn:·(value)·=>·value[key],
+      15 │ + ····cell:·(context)·=>·cellText(context.getValue()),
+      16 │ + ····meta:·{·rowHeader:·key·===·"recordLabel"·},
+      17 │ + ····enableHiding:·key·!==·"recordLabel",
+      18 │ + ··}),
+      19 │ + );
+      20 │ + const·serverColumns:·readonly·NativeColumnDef<BenchServer>[]·=·SERVER_KEYS.map(
+      21 │ + ··(key)·=>·({
+      22 │ + ····id:·key,
+      23 │ + ····header:·key,
+      24 │ + ····accessorFn:·(value)·=>·value[key],
+      25 │ + ····cell:·(context)·=>·cellText(context.getValue()),
+      26 │ + ····meta:·{·rowHeader:·key·===·"recordLabel"·},
+      27 │ + ····enableHiding:·key·!==·"recordLabel",
+      28 │ + ··}),
+      29 │ + );
+      30 │ + export·function·clientDefinition()·{
+      31 │ + ··return·defineTable<BenchClient>()({
+      32 │ + ····schema:·clientSchema,
+      33 │ + ····columns:·clientColumns,
+      34 │ + ····getRowId:·(value)·=>·value.id,
+      35 │ + ····multiSort:·true,
+      36 │ + ····selection:·"multiple",
+      37 │ + ····details:·true,
+      38 │ + ····tools:·{·builder:·"hidden",·search:·"toolbar",·columnChooser:·"hidden"·},
+      39 │ + ··});
+      40 │ + }
+      41 │ + export·function·serverDefinition()·{
+      42 │ + ··return·defineTable<BenchServer>()({
+      43 │ + ····schema:·serverSchema,
+      44 │ + ····columns:·serverColumns,
+      45 │ + ····getRowId:·(value)·=>·value.id,
+      46 │ + ····multiSort:·true,
+      47 │ + ····selection:·"multiple",
+      48 │ + ····details:·true,
+      49 │ + ····tools:·{·builder:·"hidden",·search:·"toolbar",·columnChooser:·"hidden"·},
+      50 │ + ··});
+      51 │ + }
+    8 52 │   
+  
+
+tests/benchmarks/wp14/driver.mjs:163:130 lint/correctness/noUnsafeFinally ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unsafe usage of 'throw'.
+  
+    161 │     try { if (cdp) { await cdp.send("Tracing.end"); await completeTrace; } } catch { cleanup ??= "E_TRACE_CLEANUP"; }
+    162 │     try { await context?.close(); } catch { cleanup ??= "E_OWNED_BROWSER_CLEANUP"; }
+  > 163 │     if (cleanup) { put(run, `${output}/cleanup-debt.json`, { status: "CLOSED_WITH_CLEANUP_DEBT", code: cleanup }); if (!primary) throw new Error(cleanup); }
+        │                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+    164 │   }
+    165 │ }
+  
+  i 'throw' in 'finally' overwrites the control flow statements inside 'try' and 'catch'.
+  
+
+tests/benchmarks/wp14/driver.mjs:174:151 lint/correctness/noUnsafeFinally ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Unsafe usage of 'throw'.
+  
+    172 │   try { for (let index = 0; index < (validation ? 1 : 3); index++) { sessions.push(await session(ctx, run, built, index, validation)); demand(fixture(ctx) === built.protocol, "E_FIXTURE_CHANGED_DURING_SESSION"); } }
+    173 │   catch (error) { primary = error; put(run, `${mode}/failure.json`, { status: "FAILED_RAW_RETAINED", code: error instanceof Error ? error.message.slice(0, 100) : "E_FAILURE" }); throw error; }
+  > 174 │   finally { try { await close(); } catch { put(run, `${mode}/server-cleanup-debt.json`, { status: "CLOSED_WITH_SERVER_CLEANUP_DEBT" }); if (!primary) throw new Error("E_SERVER_CLEANUP_DEBT"); } }
+        │                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    175 │   ctx.revalidate(); verifyMap(ctx.root, built.files); demand(fixture(ctx) === built.protocol, "E_FIXTURE_CHANGED");
+    176 │   const files = {}; for (const value of sessions) { Object.assign(files, value.files); const rel = `${mode}/${value.id}/session.json`; files[rel] = record(run, rel); }
+  
+  i 'throw' in 'finally' overwrites the control flow statements inside 'try' and 'catch'.
+  
+
+tests/benchmarks/wp14/driver.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      6   6 │   import { fileURLToPath, pathToFileURL } from "node:url";
+      7   7 │   import { spawnSync } from "node:child_process";
+      8     │ - import·{·capacity,·demand,·directory,·hash,·json,·object,·put,·read,·record,·relative,·runner,·safeEnvironment,·selectCandidate,·verifyMap,·write·}·from·"./candidate.mjs";
+          8 │ + import·{
+          9 │ + ··capacity,
+         10 │ + ··demand,
+         11 │ + ··directory,
+         12 │ + ··hash,
+         13 │ + ··json,
+         14 │ + ··object,
+         15 │ + ··put,
+         16 │ + ··read,
+         17 │ + ··record,
+         18 │ + ··relative,
+         19 │ + ··runner,
+         20 │ + ··safeEnvironment,
+         21 │ + ··selectCandidate,
+         22 │ + ··verifyMap,
+         23 │ + ··write,
+         24 │ + }·from·"./candidate.mjs";
+      9  25 │   import { scenarioIds } from "./statistics.mjs";
+     10  26 │   const sourceRoot = path.dirname(fileURLToPath(import.meta.url));
+     11     │ - export·const·FILES·=·["README.md",·"fixture.ts",·"schema.ts",·"definition.ts",·"source.ts",·"scenari...
+     12     │ - const·FRONTEND·=·["fixture.ts",·"schema.ts",·"definition.ts",·"source.ts",·"scenarios.ts",·"timing.ts",·"Benchmark.tsx",·"main.tsx",·"index.html",·"styles.css",·"vite.config.ts"];
+         27 │ + export·const·FILES·=·[
+         28 │ + ··"README.md",
+         29 │ + ··"fixture.ts",
+         30 │ + ··"schema.ts",
+         31 │ + ··"definition.ts",
+         32 │ + ··"source.ts",
+         33 │ + ··"scenarios.ts",
+         34 │ + ··"timing.ts",
+         35 │ + ··"Benchmark.tsx",
+         36 │ + ··"main.tsx",
+         37 │ + ··"index.html",
+         38 │ + ··"styles.css",
+         39 │ + ··"vite.config.ts",
+         40 │ + ··"playwright.config.ts",
+         41 │ + ··"candidate.mjs",
+         42 │ + ··"driver.mjs",
+         43 │ + ··"statistics.mjs",
+         44 │ + ··"statistics.test.ts",
+         45 │ + ··"report.mjs",
+         46 │ + ··"tsconfig.source-light.json",
+         47 │ + ··"light.mjs",
+         48 │ + ··"static.mjs",
+         49 │ + ··"scope.mjs",
+         50 │ + ··"inputs.mjs",
+         51 │ + ··"seal.mjs",
+         52 │ + ];
+         53 │ + const·FRONTEND·=·[
+         54 │ + ··"fixture.ts",
+         55 │ + ··"schema.ts",
+         56 │ + ··"definition.ts",
+         57 │ + ··"source.ts",
+         58 │ + ··"scenarios.ts",
+         59 │ + ··"timing.ts",
+         60 │ + ··"Benchmark.tsx",
+         61 │ + ··"main.tsx",
+         62 │ + ··"index.html",
+         63 │ + ··"styles.css",
+         64 │ + ··"vite.config.ts",
+         65 │ + ];
+     13  66 │   const SCHEDULER = "committed-dom-double-raf-message-task-v1";
+     14     │ - function·tree(root)·{·const·result·=·{};·function·visit(prefix)·{·for·(const·item·of·fs.readdirSync(path.join(root,·prefix),·{·withFileTypes:·true·}))·{·const·file·=·prefix·?·`${prefix}/${item.name}`·:·item.name;·if·(item.isDirectory())·visit(file);·else·{·demand(item.isFile()·&&·!item.isSymbolicLink(),·"E_OUTPUT_LINK");·result[file]·=·record(root,·file);·}·}·}·visit("");·return·result;·}
+         67 │ + function·tree(root)·{
+         68 │ + ··const·result·=·{};
+         69 │ + ··function·visit(prefix)·{
+         70 │ + ····for·(const·item·of·fs.readdirSync(path.join(root,·prefix),·{
+         71 │ + ······withFileTypes:·true,
+         72 │ + ····}))·{
+         73 │ + ······const·file·=·prefix·?·`${prefix}/${item.name}`·:·item.name;
+         74 │ + ······if·(item.isDirectory())·visit(file);
+         75 │ + ······else·{
+         76 │ + ········demand(item.isFile()·&&·!item.isSymbolicLink(),·"E_OUTPUT_LINK");
+         77 │ + ········result[file]·=·record(root,·file);
+         78 │ + ······}
+         79 │ + ····}
+         80 │ + ··}
+         81 │ + ··visit("");
+         82 │ + ··return·result;
+         83 │ + }
+     15  84 │   function fixture(ctx) {
+     16     │ - ··demand(JSON.stringify(Object.keys(ctx.input.fixtureFiles).sort())·===·JSON.stringify([...FILES].sort()),·"E_EXACT_FIXTURE_INPUTS");
+         85 │ + ··demand(
+         86 │ + ····JSON.stringify(Object.keys(ctx.input.fixtureFiles).sort())·===
+         87 │ + ······JSON.stringify([...FILES].sort()),
+         88 │ + ····"E_EXACT_FIXTURE_INPUTS",
+         89 │ + ··);
+     17  90 │     verifyMap(sourceRoot, ctx.input.fixtureFiles);
+     18  91 │     const infrastructureRoot = directory(ctx.input.infrastructureRoot);
+     19     │ - ··demand(sourceRoot·===·path.join(infrastructureRoot,·"tests/benchmarks/wp14"),·"E_EXECUTING_TOOLING_ROOT");
+         92 │ + ··demand(
+         93 │ + ····sourceRoot·===·path.join(infrastructureRoot,·"tests/benchmarks/wp14"),
+         94 │ + ····"E_EXECUTING_TOOLING_ROOT",
+         95 │ + ··);
+     20  96 │     verifyMap(infrastructureRoot, ctx.input.infrastructureFiles);
+     21     │ - ··for·(const·file·of·["tests/consumers/wp13/lib/archive.mjs",·"tests/consumers/wp13/lib/receipts.mjs"])·demand(Object.hasOwn(ctx.input.infrastructureFiles,·file),·"E_INERT_HELPER_PIN");
+         97 │ + ··for·(const·file·of·[
+         98 │ + ····"tests/consumers/wp13/lib/archive.mjs",
+         99 │ + ····"tests/consumers/wp13/lib/receipts.mjs",
+        100 │ + ··])
+        101 │ + ····demand(
+        102 │ + ······Object.hasOwn(ctx.input.infrastructureFiles,·file),
+        103 │ + ······"E_INERT_HELPER_PIN",
+        104 │ + ····);
+     22 105 │     return hash(JSON.stringify(ctx.input.fixtureFiles));
+     23 106 │   }
+     24 107 │   function runIdentity(ctx, run) {
+     25     │ - ··directory(run);·demand(path.dirname(run)·===·"/tmp/opencode"·&&·path.basename(run)·===·`wp14-run-${ctx.selection.run}`,·"E_OWNED_RUN_ROOT");
+     26     │ - ··const·owner·=·json(run,·"owner.json");·demand(owner.run·===·ctx.selection.run·&&·owner.status·===·"wp14-exclusive-run"·&&·owner.materializationSHA256·===·ctx.selection.materialization.sha256·&&·owner.candidate·===·ctx.identity,·"E_RUN_OWNER");
+        108 │ + ··directory(run);
+        109 │ + ··demand(
+        110 │ + ····path.dirname(run)·===·"/tmp/opencode"·&&
+        111 │ + ······path.basename(run)·===·`wp14-run-${ctx.selection.run}`,
+        112 │ + ····"E_OWNED_RUN_ROOT",
+        113 │ + ··);
+        114 │ + ··const·owner·=·json(run,·"owner.json");
+        115 │ + ··demand(
+        116 │ + ····owner.run·===·ctx.selection.run·&&
+        117 │ + ······owner.status·===·"wp14-exclusive-run"·&&
+        118 │ + ······owner.materializationSHA256·===·ctx.selection.materialization.sha256·&&
+        119 │ + ······owner.candidate·===·ctx.identity,
+        120 │ + ····"E_RUN_OWNER",
+        121 │ + ··);
+     27 122 │     if (owner.selectionSHA256 !== ctx.selectionSHA256) {
+     28     │ - ····const·selected·=·ctx.selection.buildSelection;·demand(selected?.sha256·===·owner.selectionSHA256,·"E_ORIGINAL_BUILD_SELECTION");
+     29     │ - ····const·bytes·=·read(path.dirname(selected.path),·path.basename(selected.path));·demand(hash(bytes)·===·selected.sha256,·"E_BUILD_SELECTION_BYTES");
+     30     │ - ····const·before·=·object(JSON.parse(bytes.toString("utf8")));·demand(before.status·===·"main-reviewed-wp14-final-selection"·&&·before.owner·===·"main"·&&·before.run·===·ctx.selection.run·&&·before.materialization.sha256·===·ctx.selection.materialization.sha256,·"E_BUILD_SELECTION_LINK");
+        123 │ + ····const·selected·=·ctx.selection.buildSelection;
+        124 │ + ····demand(
+        125 │ + ······selected?.sha256·===·owner.selectionSHA256,
+        126 │ + ······"E_ORIGINAL_BUILD_SELECTION",
+        127 │ + ····);
+        128 │ + ····const·bytes·=·read(
+        129 │ + ······path.dirname(selected.path),
+        130 │ + ······path.basename(selected.path),
+        131 │ + ····);
+        132 │ + ····demand(hash(bytes)·===·selected.sha256,·"E_BUILD_SELECTION_BYTES");
+        133 │ + ····const·before·=·object(JSON.parse(bytes.toString("utf8")));
+        134 │ + ····demand(
+        135 │ + ······before.status·===·"main-reviewed-wp14-final-selection"·&&
+        136 │ + ········before.owner·===·"main"·&&
+        137 │ + ········before.run·===·ctx.selection.run·&&
+        138 │ + ········before.materialization.sha256·===·ctx.selection.materialization.sha256,
+        139 │ + ······"E_BUILD_SELECTION_LINK",
+        140 │ + ····);
+     31 141 │     }
+     32 142 │   }
+     33 143 │   export function actualBuild(ctx, run) {
+  661 more lines truncated
+  
+
+tests/benchmarks/wp14/fixture.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      3   3 │   export const GENERATOR = "xorshift32-row-v1";
+      4   4 │   export const CLOCK = Date.parse("2026-11-25T12:00:00Z");
+      5     │ - export·const·CLIENT_COUNT·=·10_000,·REMOTE_COUNT·=·1_000_000,·PAGE_SIZE·=·100;
+          5 │ + export·const·CLIENT_COUNT·=·10_000,
+          6 │ + ··REMOTE_COUNT·=·1_000_000,
+          7 │ + ··PAGE_SIZE·=·100;
+      6   8 │   export interface BenchClient {
+      7     │ - ··readonly·id:·string;·readonly·recordLabel:·string;·readonly·status:·"posted"·|·"draft";
+      8     │ - ··readonly·amount:·number;·readonly·quantity:·number;·readonly·unitPrice:·number;
+      9     │ - ··readonly·balance:·number·|·null;·readonly·score:·number;·readonly·occurredAt:·string;
+     10     │ - ··readonly·bookingDay:·string;·readonly·updatedAt:·string;·readonly·category:·"equipment"·|·"supplies";
+     11     │ - ··readonly·region:·"north"·|·"south";·readonly·currency:·"USD"·|·"EUR";
+     12     │ - ··readonly·reference:·string·|·null;·readonly·note:·string·|·null;·readonly·accountCode:·string;
+     13     │ - ··readonly·active:·boolean;·readonly·cleared:·boolean·|·null;·readonly·tags:·readonly·string[];
+          9 │ + ··readonly·id:·string;
+         10 │ + ··readonly·recordLabel:·string;
+         11 │ + ··readonly·status:·"posted"·|·"draft";
+         12 │ + ··readonly·amount:·number;
+         13 │ + ··readonly·quantity:·number;
+         14 │ + ··readonly·unitPrice:·number;
+         15 │ + ··readonly·balance:·number·|·null;
+         16 │ + ··readonly·score:·number;
+         17 │ + ··readonly·occurredAt:·string;
+         18 │ + ··readonly·bookingDay:·string;
+         19 │ + ··readonly·updatedAt:·string;
+         20 │ + ··readonly·category:·"equipment"·|·"supplies";
+         21 │ + ··readonly·region:·"north"·|·"south";
+         22 │ + ··readonly·currency:·"USD"·|·"EUR";
+         23 │ + ··readonly·reference:·string·|·null;
+         24 │ + ··readonly·note:·string·|·null;
+         25 │ + ··readonly·accountCode:·string;
+         26 │ + ··readonly·active:·boolean;
+         27 │ + ··readonly·cleared:·boolean·|·null;
+         28 │ + ··readonly·tags:·readonly·string[];
+     14  29 │     readonly locations: readonly string[];
+     15  30 │   }
+     16  31 │   export interface BenchServer extends BenchClient {
+     17     │ - ··readonly·tax:·number;·readonly·discount:·number;·readonly·weight:·number·|·null;
+     18     │ - ··readonly·leadDays:·number;·readonly·expiresOn:·string·|·null;·readonly·createdAt:·string;
+     19     │ - ··readonly·supplier:·string;·readonly·warehouse:·"a"·|·"b";·readonly·priority:·"normal"·|·"urgent";
+         32 │ + ··readonly·tax:·number;
+         33 │ + ··readonly·discount:·number;
+         34 │ + ··readonly·weight:·number·|·null;
+         35 │ + ··readonly·leadDays:·number;
+         36 │ + ··readonly·expiresOn:·string·|·null;
+         37 │ + ··readonly·createdAt:·string;
+         38 │ + ··readonly·supplier:·string;
+         39 │ + ··readonly·warehouse:·"a"·|·"b";
+         40 │ + ··readonly·priority:·"normal"·|·"urgent";
+     20  41 │     readonly batchRef: string | null;
+     21  42 │   }
+     22     │ - export·const·CLIENT_KEYS·=·["recordLabel",·"status",·"amount",·"quantity",·"unitPrice",·"balance",·"score",·"occurredAt",·"bookingDay",·"updatedAt",·"category",·"region",·"currency",·"reference",·"note",·"accountCode",·"active",·"cleared",·"tags",·"locations"]·as·const·satisfies·readonly·(keyof·BenchClient)[];
+     23     │ - export·const·SERVER_KEYS·=·[...CLIENT_KEYS,·"tax",·"discount",·"weight",·"leadDays",·"expiresOn",·"createdAt",·"supplier",·"warehouse",·"priority",·"batchRef"]·as·const·satisfies·readonly·(keyof·BenchServer)[];
+         43 │ + export·const·CLIENT_KEYS·=·[
+         44 │ + ··"recordLabel",
+         45 │ + ··"status",
+         46 │ + ··"amount",
+         47 │ + ··"quantity",
+         48 │ + ··"unitPrice",
+         49 │ + ··"balance",
+         50 │ + ··"score",
+         51 │ + ··"occurredAt",
+         52 │ + ··"bookingDay",
+         53 │ + ··"updatedAt",
+         54 │ + ··"category",
+         55 │ + ··"region",
+         56 │ + ··"currency",
+         57 │ + ··"reference",
+         58 │ + ··"note",
+         59 │ + ··"accountCode",
+         60 │ + ··"active",
+         61 │ + ··"cleared",
+         62 │ + ··"tags",
+         63 │ + ··"locations",
+         64 │ + ]·as·const·satisfies·readonly·(keyof·BenchClient)[];
+         65 │ + export·const·SERVER_KEYS·=·[
+         66 │ + ··...CLIENT_KEYS,
+         67 │ + ··"tax",
+         68 │ + ··"discount",
+         69 │ + ··"weight",
+         70 │ + ··"leadDays",
+         71 │ + ··"expiresOn",
+         72 │ + ··"createdAt",
+         73 │ + ··"supplier",
+         74 │ + ··"warehouse",
+         75 │ + ··"priority",
+         76 │ + ··"batchRef",
+         77 │ + ]·as·const·satisfies·readonly·(keyof·BenchServer)[];
+     24  78 │   export function row(ordinal: number): BenchServer {
+     25     │ - ··if·(!Number.isSafeInteger(ordinal)·||·ordinal·<·0·||·ordinal·>=·REMOTE_COUNT)·throw·new·Error("E_ORDINAL");
+         79 │ + ··if·(!Number.isSafeInteger(ordinal)·||·ordinal·<·0·||·ordinal·>=·REMOTE_COUNT)
+         80 │ + ····throw·new·Error("E_ORDINAL");
+     26  81 │     let state = (SEED ^ ordinal) >>> 0;
+     27     │ - ··const·random·=·()·=>·{·state·^=·state·<<·13;·state·^=·state·>>>·17;·state·^=·state·<<·5;·return·state·>>>·0;·};
+         82 │ + ··const·random·=·()·=>·{
+         83 │ + ····state·^=·state·<<·13;
+         84 │ + ····state·^=·state·>>>·17;
+         85 │ + ····state·^=·state·<<·5;
+         86 │ + ····return·state·>>>·0;
+         87 │ + ··};
+     28  88 │     const id = `wp14-${String(ordinal).padStart(6, "0")}`;
+     29     │ - ··const·amount·=·random()·%·10_000,·quantity·=·random()·%·100,·unitPrice·=·random()·%·1000;
+     30     │ - ··const·score·=·random()·%·100,·bookingDay·=·`2026-11-${String(1·+·random()·%·25).padStart(2,·"0")}`;
+     31     │ - ··const·occurredAt·=·`${bookingDay}T09:00:00Z`,·updatedAt·=·`${bookingDay}T11:00:00Z`;
+     32     │ - ··return·Object.freeze({·id,·recordLabel:·id,·status:·random()·%·3·?·"posted"·:·"draft",·amount,·quantity,·unitPrice,
+     33     │ - ····balance:·random()·%·5·?·amount·-·5000·:·null,·score,·occurredAt,·bookingDay,·updatedAt,
+     34     │ - ····category:·random()·%·2·?·"equipment"·:·"supplies",·region:·random()·%·2·?·"north"·:·"south",·currency:·random()·%·2·?·"USD"·:·"EUR",
+     35     │ - ····reference:·random()·%·4·?·`REF-${ordinal}`·:·null,·note:·random()·%·5·?·"public·local·synthetic"·:·null,
+     36     │ - ····accountCode:·`AC-${random()·%·12}`,·active:·random()·%·2·===·0,·cleared:·random()·%·4·?·random()·%·2·===·0·:·null,
+     37     │ - ····tags:·Object.freeze(random()·%·2·?·["local",·"review"]·:·[]),·locations:·Object.freeze(random()·%·2·?·["a"]·:·["b"]),
+     38     │ - ····tax:·random()·%·100,·discount:·random()·%·20,·weight:·random()·%·5·?·random()·%·1000·:·null,
+     39     │ - ····leadDays:·random()·%·30,·expiresOn:·random()·%·3·?·"2027-11-25"·:·null,·createdAt:·"2026-01-01T00:00:00Z",
+     40     │ - ····supplier:·`Supplier·${random()·%·40}`,·warehouse:·random()·%·2·?·"a"·:·"b",·priority:·random()·%·5·?·"normal"·:·"urgent",·batchRef:·random()·%·3·?·`B-${ordinal·%·50}`·:·null,
+         89 │ + ··const·amount·=·random()·%·10_000,
+         90 │ + ····quantity·=·random()·%·100,
+         91 │ + ····unitPrice·=·random()·%·1000;
+         92 │ + ··const·score·=·random()·%·100,
+         93 │ + ····bookingDay·=·`2026-11-${String(1·+·(random()·%·25)).padStart(2,·"0")}`;
+         94 │ + ··const·occurredAt·=·`${bookingDay}T09:00:00Z`,
+         95 │ + ····updatedAt·=·`${bookingDay}T11:00:00Z`;
+         96 │ + ··return·Object.freeze({
+         97 │ + ····id,
+         98 │ + ····recordLabel:·id,
+         99 │ + ····status:·random()·%·3·?·"posted"·:·"draft",
+        100 │ + ····amount,
+        101 │ + ····quantity,
+        102 │ + ····unitPrice,
+        103 │ + ····balance:·random()·%·5·?·amount·-·5000·:·null,
+        104 │ + ····score,
+        105 │ + ····occurredAt,
+        106 │ + ····bookingDay,
+        107 │ + ····updatedAt,
+        108 │ + ····category:·random()·%·2·?·"equipment"·:·"supplies",
+        109 │ + ····region:·random()·%·2·?·"north"·:·"south",
+        110 │ + ····currency:·random()·%·2·?·"USD"·:·"EUR",
+        111 │ + ····reference:·random()·%·4·?·`REF-${ordinal}`·:·null,
+        112 │ + ····note:·random()·%·5·?·"public·local·synthetic"·:·null,
+        113 │ + ····accountCode:·`AC-${random()·%·12}`,
+        114 │ + ····active:·random()·%·2·===·0,
+        115 │ + ····cleared:·random()·%·4·?·random()·%·2·===·0·:·null,
+        116 │ + ····tags:·Object.freeze(random()·%·2·?·["local",·"review"]·:·[]),
+        117 │ + ····locations:·Object.freeze(random()·%·2·?·["a"]·:·["b"]),
+        118 │ + ····tax:·random()·%·100,
+        119 │ + ····discount:·random()·%·20,
+        120 │ + ····weight:·random()·%·5·?·random()·%·1000·:·null,
+        121 │ + ····leadDays:·random()·%·30,
+        122 │ + ····expiresOn:·random()·%·3·?·"2027-11-25"·:·null,
+        123 │ + ····createdAt:·"2026-01-01T00:00:00Z",
+        124 │ + ····supplier:·`Supplier·${random()·%·40}`,
+        125 │ + ····warehouse:·random()·%·2·?·"a"·:·"b",
+  175 more lines truncated
+  
+
+tests/benchmarks/wp14/inputs.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7   7 │   import { root, own, files, measure, capacity } from "./scope.mjs";
+     8   8 │   export async function inputs(target, verify = false) {
+     9     │ - ··const·configPath·=·resolve(root,·`${own}tsconfig.source-light.json`),·raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);
+         9 │ + ··const·configPath·=·resolve(root,·`${own}tsconfig.source-light.json`),
+        10 │ + ····raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);
+    10  11 │     assert.equal(raw.error, undefined);
+    11     │ - ··const·config·=·ts.parseJsonConfigFileContent(raw.config,·ts.sys,·dirname(configPath));·assert.equal(config.errors.length,·0);
+    12     │ - ··assert.equal(ts.version,·"6.0.3");·assert.equal(config.options.noEmit,·true);·assert.equal(config.options.strict,·true);·assert.equal(config.options.skipLibCheck,·false);·assert.equal(config.options.exactOptionalPropertyTypes,·true);
+    13     │ - ··const·program·=·ts.createProgram(config.fileNames,·config.options),·paths·=·new·Set(program.getSourceFiles().map((file)·=>·relative(root,·file.fileName)));
+        12 │ + ··const·config·=·ts.parseJsonConfigFileContent(
+        13 │ + ····raw.config,
+        14 │ + ····ts.sys,
+        15 │ + ····dirname(configPath),
+        16 │ + ··);
+        17 │ + ··assert.equal(config.errors.length,·0);
+        18 │ + ··assert.equal(ts.version,·"6.0.3");
+        19 │ + ··assert.equal(config.options.noEmit,·true);
+        20 │ + ··assert.equal(config.options.strict,·true);
+        21 │ + ··assert.equal(config.options.skipLibCheck,·false);
+        22 │ + ··assert.equal(config.options.exactOptionalPropertyTypes,·true);
+        23 │ + ··const·program·=·ts.createProgram(config.fileNames,·config.options),
+        24 │ + ····paths·=·new·Set(
+        25 │ + ······program.getSourceFiles().map((file)·=>·relative(root,·file.fileName)),
+        26 │ + ····);
+    14  27 │     const programFiles = paths.size;
+    15     │ - ··for·(const·name·of·["package.json",·"pnpm-lock.yaml",·"pnpm-workspace.yaml",·"tsconfig.base.json",...
+    16     │ - ··const·vendor·=·createRequire(await·realpath(resolve(root,·"node_modules/@biomejs/biome/package.json")));·paths.add(relative(root,·vendor.resolve("@biomejs/cli-linux-x64/biome")));
+    17     │ - ··for·(const·path·of·await·files(own))·if·(!path.startsWith(`${own}evidence/`)·&&·/\.(ts|tsx|mjs|css|html|json)$/.test(path))·paths.add(path);
+    18     │ - ··for·(const·name·of·["archive",·"receipts",·"boundary",·"generation",·"installer",·"inspect",·"types"])·paths.add(`tests/consumers/wp13/lib/${name}.mjs`);
+        28 │ + ··for·(const·name·of·[
+        29 │ + ····"package.json",
+        30 │ + ····"pnpm-lock.yaml",
+        31 │ + ····"pnpm-workspace.yaml",
+        32 │ + ····"tsconfig.base.json",
+        33 │ + ····"biome.json",
+        34 │ + ····`${own}tsconfig.source-light.json`,
+        35 │ + ····"apps/storybook/package.json",
+        36 │ + ····"node_modules/typescript/package.json",
+        37 │ + ····"node_modules/typescript/bin/tsc",
+        38 │ + ····"node_modules/typescript/lib/_tsc.js",
+        39 │ + ····"node_modules/typescript/lib/typescript.js",
+        40 │ + ····"node_modules/@biomejs/biome/package.json",
+        41 │ + ····"node_modules/@biomejs/biome/bin/biome",
+        42 │ + ··])
+        43 │ + ····paths.add(name);
+        44 │ + ··const·vendor·=·createRequire(
+        45 │ + ····await·realpath(resolve(root,·"node_modules/@biomejs/biome/package.json")),
+        46 │ + ··);
+        47 │ + ··paths.add(relative(root,·vendor.resolve("@biomejs/cli-linux-x64/biome")));
+        48 │ + ··for·(const·path·of·await·files(own))
+        49 │ + ····if·(
+        50 │ + ······!path.startsWith(`${own}evidence/`)·&&
+        51 │ + ······/\.(ts|tsx|mjs|css|html|json)$/.test(path)
+        52 │ + ····)
+        53 │ + ······paths.add(path);
+        54 │ + ··for·(const·name·of·[
+        55 │ + ····"archive",
+        56 │ + ····"receipts",
+        57 │ + ····"boundary",
+        58 │ + ····"generation",
+        59 │ + ····"installer",
+        60 │ + ····"inspect",
+        61 │ + ····"types",
+        62 │ + ··])
+        63 │ + ····paths.add(`tests/consumers/wp13/lib/${name}.mjs`);
+    19  64 │     paths.add("tests/consumers/wp13/matrix.json");
+    20     │ - ··const·records·=·Object.fromEntries(await·Promise.all([...paths].sort().map(async·(path)·=>·[path,·await·measure(path)])));
+        65 │ + ··const·records·=·Object.fromEntries(
+        66 │ + ····await·Promise.all(
+        67 │ + ······[...paths].sort().map(async·(path)·=>·[path,·await·measure(path)]),
+        68 │ + ····),
+        69 │ + ··);
+    21  70 │     const firstPath = resolve(root, `${own}evidence/light-001/inputs.json`);
+    22     │ - ··if·(resolve(root,·target)·!==·firstPath)·{·const·first·=·JSON.parse(await·readFile(firstPath,·"utf8"));·for·(const·[path,·expected]·of·Object.entries(first.records))·if·(!path.startsWith(own))·assert.deepEqual(await·measure(path),·expected,·`First-observed·tool/declaration/source·drift·${path}`);·}
+    23     │ - ··const·receipt·=·{·status:·"source/noEmit·only,·MJS·inferred·unchecked;·no·generator/statistics/config/module·execution",·compiler:·ts.version,·programFiles,·records·};
+        71 │ + ··if·(resolve(root,·target)·!==·firstPath)·{
+        72 │ + ····const·first·=·JSON.parse(await·readFile(firstPath,·"utf8"));
+        73 │ + ····for·(const·[path,·expected]·of·Object.entries(first.records))
+        74 │ + ······if·(!path.startsWith(own))
+        75 │ + ········assert.deepEqual(
+        76 │ + ··········await·measure(path),
+        77 │ + ··········expected,
+        78 │ + ··········`First-observed·tool/declaration/source·drift·${path}`,
+        79 │ + ········);
+        80 │ + ··}
+        81 │ + ··const·receipt·=·{
+        82 │ + ····status:
+        83 │ + ······"source/noEmit·only,·MJS·inferred·unchecked;·no·generator/statistics/config/module·execution",
+        84 │ + ····compiler:·ts.version,
+        85 │ + ····programFiles,
+        86 │ + ····records,
+        87 │ + ··};
+    24  88 │     assert(target.startsWith(`${own}evidence/`));
+    25     │ - ··if·(verify)·assert.deepEqual(receipt,·JSON.parse(await·readFile(resolve(root,·target),·"utf8")));
+    26     │ - ··else·{·await·capacity();·await·writeFile(resolve(root,·target),·`${JSON.stringify(receipt,·null,·2)}\n`,·{·flag:·"wx"·});·}
+    27     │ - ··console.log(`${programFiles}·actual·source/declaration·program·files;·${paths.size}·pinned·compiler/tool/source/declaration·inputs;·no·runtime·proof.`);
+        89 │ + ··if·(verify)
+        90 │ + ····assert.deepEqual(
+        91 │ + ······receipt,
+        92 │ + ······JSON.parse(await·readFile(resolve(root,·target),·"utf8")),
+        93 │ + ····);
+        94 │ + ··else·{
+        95 │ + ····await·capacity();
+        96 │ + ····await·writeFile(
+        97 │ + ······resolve(root,·target),
+        98 │ + ······`${JSON.stringify(receipt,·null,·2)}\n`,
+        99 │ + ······{·flag:·"wx"·},
+       100 │ + ····);
+       101 │ + ··}
+       102 │ + ··console.log(
+       103 │ + ····`${programFiles}·actual·source/declaration·program·files;·${paths.size}·pinned·compiler/tool/source/declaration·inputs;·no·runtime·proof.`,
+       104 │ + ··);
+    28 105 │   }
+    29     │ - if·(process.argv[1]·&&·resolve(process.argv[1])·===·fileURLToPath(import.meta.url))·await·inputs(process.argv[2],·process.argv[3]·===·"verify");
+       106 │ + if·(
+       107 │ + ··process.argv[1]·&&
+       108 │ + ··resolve(process.argv[1])·===·fileURLToPath(import.meta.url)
+       109 │ + )
+       110 │ + ··await·inputs(process.argv[2],·process.argv[3]·===·"verify");
+    30 111 │   
+  
+
+tests/benchmarks/wp14/light.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6  6 │   import { root, own, files, capacity } from "./scope.mjs";
+     7  7 │   export async function light(label) {
+     8    │ - ··assert(/^[a-z0-9-]+$/.test(label));·await·capacity();
+     9    │ - ··const·directory·=·`${own}evidence/${label}/`;·await·mkdir(resolve(root,·directory));
+    10    │ - ··const·supported·=·(await·files(own)).filter((path)·=>·!path.startsWith(`${own}evidence/`)·&&·/\.(ts|tsx|mjs|json|css)$/.test(path));
+        8 │ + ··assert(/^[a-z0-9-]+$/.test(label));
+        9 │ + ··await·capacity();
+       10 │ + ··const·directory·=·`${own}evidence/${label}/`;
+       11 │ + ··await·mkdir(resolve(root,·directory));
+       12 │ + ··const·supported·=·(await·files(own)).filter(
+       13 │ + ····(path)·=>
+       14 │ + ······!path.startsWith(`${own}evidence/`)·&&
+       15 │ + ······/\.(ts|tsx|mjs|json|css)$/.test(path),
+       16 │ + ··);
+    11 17 │     const commands = [
+    12 18 │       ["pins-before", [`${own}inputs.mjs`, `${directory}inputs.json`]],
+    13    │ - ····["positive",·["node_modules/typescript/bin/tsc",·"-p",·`${own}tsconfig.source-light.json`,·"--pretty",·"false"]],
+       19 │ + ····[
+       20 │ + ······"positive",
+       21 │ + ······[
+       22 │ + ········"node_modules/typescript/bin/tsc",
+       23 │ + ········"-p",
+       24 │ + ········`${own}tsconfig.source-light.json`,
+       25 │ + ········"--pretty",
+       26 │ + ········"false",
+       27 │ + ······],
+       28 │ + ····],
+    14 29 │       ["scope", [`${own}scope.mjs`, "verify"]],
+    15    │ - ····...supported.filter((path)·=>·path.endsWith(".mjs")).map((path)·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+       30 │ + ····...supported
+       31 │ + ······.filter((path)·=>·path.endsWith(".mjs"))
+       32 │ + ······.map((path)·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+    16 33 │       ["static", [`${own}static.mjs`]],
+    17    │ - ····["biome",·["node_modules/@biomejs/biome/bin/biome",·"check",·"--assist-enabled=false",·...supported,·"--max-diagnostics=100"]],
+       34 │ + ····[
+       35 │ + ······"biome",
+       36 │ + ······[
+       37 │ + ········"node_modules/@biomejs/biome/bin/biome",
+       38 │ + ········"check",
+       39 │ + ········"--assist-enabled=false",
+       40 │ + ········...supported,
+       41 │ + ········"--max-diagnostics=100",
+       42 │ + ······],
+       43 │ + ····],
+    18 44 │       ["pins-after", [`${own}inputs.mjs`, `${directory}inputs.json`, "verify"]],
+    19 45 │     ];
+    20 46 │     const results = [];
+    21 47 │     for (const [name, args] of commands) {
+    22    │ - ····await·capacity();·const·result·=·spawnSync(process.execPath,·args,·{·cwd:·root,·encoding:·"utf8",·timeout:·300000·});
+    23    │ - ····await·capacity();·await·writeFile(resolve(root,·`${directory}${name}.log`),·`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,·{·flag:·"wx"·});
+    24    │ - ····results.push({·name,·args,·status:·result.status,·signal:·result.signal·});·await·writeFile(resolve(root,·`${directory}results.json`),·`${JSON.stringify(results,·null,·2)}\n`);
+    25    │ - ····assert.equal(result.status,·0,·`${name}·failure·preserved·at·${directory}${name}.log`);
+       48 │ + ····await·capacity();
+       49 │ + ····const·result·=·spawnSync(process.execPath,·args,·{
+       50 │ + ······cwd:·root,
+       51 │ + ······encoding:·"utf8",
+       52 │ + ······timeout:·300000,
+       53 │ + ····});
+       54 │ + ····await·capacity();
+       55 │ + ····await·writeFile(
+       56 │ + ······resolve(root,·`${directory}${name}.log`),
+       57 │ + ······`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,
+       58 │ + ······{·flag:·"wx"·},
+       59 │ + ····);
+       60 │ + ····results.push({·name,·args,·status:·result.status,·signal:·result.signal·});
+       61 │ + ····await·writeFile(
+       62 │ + ······resolve(root,·`${directory}results.json`),
+       63 │ + ······`${JSON.stringify(results,·null,·2)}\n`,
+       64 │ + ····);
+       65 │ + ····assert.equal(
+       66 │ + ······result.status,
+       67 │ + ······0,
+       68 │ + ······`${name}·failure·preserved·at·${directory}${name}.log`,
+       69 │ + ····);
+    26 70 │     }
+    27    │ - ··console.log(`Source·LIGHT·only·passed·${directory};·${supported.length}·files.·No·fixture/checksum/statistics/runtime/benchmark·execution.`);
+       71 │ + ··console.log(
+       72 │ + ····`Source·LIGHT·only·passed·${directory};·${supported.length}·files.·No·fixture/checksum/statistics/runtime/benchmark·execution.`,
+       73 │ + ··);
+    28 74 │   }
+    29    │ - if·(process.argv[1]·&&·resolve(process.argv[1])·===·fileURLToPath(import.meta.url))·await·light(process.argv[2]);
+       75 │ + if·(
+       76 │ + ··process.argv[1]·&&
+       77 │ + ··resolve(process.argv[1])·===·fileURLToPath(import.meta.url)
+       78 │ + )
+       79 │ + ··await·light(process.argv[2]);
+    30 80 │   
+  
+
+tests/benchmarks/wp14/main.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import { createRoot } from "react-dom/client";
+     2     │ - import·{·getQueryIdentity,·type·QuerySchema·}·from·"@tableweave/react/contracts";
+         2 │ + import·{
+         3 │ + ··getQueryIdentity,
+         4 │ + ··type·QuerySchema,
+         5 │ + }·from·"@tableweave/react/contracts";
+     3   6 │   import type { TableDefinition } from "@tableweave/react";
+     4   7 │   import { Benchmark } from "./Benchmark.js";
+     5   8 │   import { clientDefinition, serverDefinition } from "./definition.js";
+     6     │ - import·{·CLOCK,·clientRows,·digest,·oracle,·row,·type·BenchClient,·type·Oracle,·type·Plan·}·from·"./fixture.js";
+         9 │ + import·{
+        10 │ + ··CLOCK,
+        11 │ + ··clientRows,
+        12 │ + ··digest,
+        13 │ + ··oracle,
+        14 │ + ··row,
+        15 │ + ··type·BenchClient,
+        16 │ + ··type·Oracle,
+        17 │ + ··type·Plan,
+        18 │ + }·from·"./fixture.js";
+     7  19 │   import { plans, SCENARIOS, AUXILIARY, type Scenario } from "./scenarios.js";
+     8  20 │   import { clientSchema, serverSchema } from "./schema.js";
+    ······ │ 
+    11  23 │   import { createTiming, type Sample, type SampleContext } from "./timing.js";
+    12  24 │   import "./styles.css";
+    13     │ - const·container·=·document.getElementById("root");·if·(!container)·throw·new·Error("E_ROOT");
+        25 │ + const·container·=·document.getElementById("root");
+        26 │ + if·(!container)·throw·new·Error("E_ROOT");
+    14  27 │   const reactRoot = createRoot(container);
+    15  28 │   let clientInput: readonly BenchClient[] | null = null;
+    16  29 │   const compactOracles = new Map<string, Oracle>();
+    17     │ - interface·Active·{·prepare(direction:·0·|·1):·void;·ready():·boolean;·run(context:·SampleContext,·direction:·0·|·1):·void;·result():·Sample·|·null;·close():·boolean;·}
+        30 │ + interface·Active·{
+        31 │ + ··prepare(direction:·0·|·1):·void;
+        32 │ + ··ready():·boolean;
+        33 │ + ··run(context:·SampleContext,·direction:·0·|·1):·void;
+        34 │ + ··result():·Sample·|·null;
+        35 │ + ··close():·boolean;
+        36 │ + }
+    18  37 │   let active: Active | null = null;
+    19     │ - function·prepare<S·extends·QuerySchema>(schema:·S,·plan:·Plan,·server:·boolean)·{
+    20     │ - ··const·key·=·JSON.stringify({·plan,·server·});·let·expected·=·compactOracles.get(key);
+    21     │ - ··if·(!expected)·{·expected·=·oracle(plan,·server);·compactOracles.set(key,·expected);·}
+        38 │ + function·prepare<S·extends·QuerySchema>(
+        39 │ + ··schema:·S,
+        40 │ + ··plan:·Plan,
+        41 │ + ··server:·boolean,
+        42 │ + )·{
+        43 │ + ··const·key·=·JSON.stringify({·plan,·server·});
+        44 │ + ··let·expected·=·compactOracles.get(key);
+        45 │ + ··if·(!expected)·{
+        46 │ + ····expected·=·oracle(plan,·server);
+        47 │ + ····compactOracles.set(key,·expected);
+        48 │ + ··}
+    22  49 │     return { query: query(schema, plan), plan, oracle: expected };
+    23  50 │   }
+    24     │ - function·mount<S·extends·QuerySchema,·T·extends·BenchClient>(define:·()·=>·TableDefinition<S,·T>,·schema:·S,·input:·readonly·T[],·initial:·Prepared<S,·T>,·scenario:·Scenario,·context:·SampleContext,·prepareNext:·(plan:·Plan)·=>·Prepared<S,·T>):·Active·{
+        51 │ + function·mount<S·extends·QuerySchema,·T·extends·BenchClient>(
+        52 │ + ··define:·()·=>·TableDefinition<S,·T>,
+        53 │ + ··schema:·S,
+        54 │ + ··input:·readonly·T[],
+        55 │ + ··initial:·Prepared<S,·T>,
+        56 │ + ··scenario:·Scenario,
+        57 │ + ··context:·SampleContext,
+        58 │ + ··prepareNext:·(plan:·Plan)·=>·Prepared<S,·T>,
+        59 │ + ):·Active·{
+    25  60 │     const timing = createTiming();
+    26     │ - ··if·(scenario.kind·===·"initial")·timing.arm(context,·"initial",·initial.oracle,·getQueryIdentity(schema,·initial.query,·{·now:·CLOCK·}),·null);
+    27     │ - ··else·timing.reset(initial.oracle,·getQueryIdentity(schema,·initial.query,·{·now:·CLOCK·}));
+        61 │ + ··if·(scenario.kind·===·"initial")
+        62 │ + ····timing.arm(
+        63 │ + ······context,
+        64 │ + ······"initial",
+        65 │ + ······initial.oracle,
+        66 │ + ······getQueryIdentity(schema,·initial.query,·{·now:·CLOCK·}),
+        67 │ + ······null,
+        68 │ + ····);
+        69 │ + ··else
+        70 │ + ····timing.reset(
+        71 │ + ······initial.oracle,
+        72 │ + ······getQueryIdentity(schema,·initial.query,·{·now:·CLOCK·}),
+        73 │ + ····);
+    28  74 │     const D = define();
+    29  75 │     // Initial start above precedes the genuine C/P/source constructor and React mount.
+    30     │ - ··const·source·=·createSource(D,·scenario.mode,·input,·initial,·timing,·`${context.run}:${context.session}:${scenario.id}`);
+    31     │ - ··reactRoot.render(<Benchmark·key={`${context.session}:${scenario.id}:${context.phase}:${context.ordinal}`}·source={source}·/>);
+        76 │ + ··const·source·=·createSource(
+        77 │ + ····D,
+        78 │ + ····scenario.mode,
+        79 │ + ····input,
+        80 │ + ····initial,
+        81 │ + ····timing,
+        82 │ + ····`${context.run}:${context.session}:${scenario.id}`,
+        83 │ + ··);
+        84 │ + ··reactRoot.render(
+        85 │ + ····<Benchmark
+        86 │ + ······key={`${context.session}:${scenario.id}:${context.phase}:${context.ordinal}`}
+        87 │ + ······source={source}
+        88 │ + ····/>,
+        89 │ + ··);
+    32  90 │     return {
+    33  91 │       prepare(direction) {
+    34     │ - ······if·(scenario.kind·===·"initial")·throw·new·Error("E_INITIAL_REQUIRES_NEW_OWNER");
+        92 │ + ······if·(scenario.kind·===·"initial")
+        93 │ + ········throw·new·Error("E_INITIAL_REQUIRES_NEW_OWNER");
+    35  94 │         const before = prepareNext(plans(scenario.kind, direction).before);
+    36     │ - ······timing.reset(before.oracle,·getQueryIdentity(D.native.controllerDefinition.schema,·before.query,·{·now:·CLOCK·}));
+    37     │ - ······source.set(before);·source.set(before,·true);
+        95 │ + ······timing.reset(
+        96 │ + ········before.oracle,
+        97 │ + ········getQueryIdentity(D.native.controllerDefinition.schema,·before.query,·{
+        98 │ + ··········now:·CLOCK,
+        99 │ + ········}),
+       100 │ + ······);
+       101 │ + ······source.set(before);
+       102 │ + ······source.set(before,·true);
+    38 103 │       },
+    39 104 │       ready: () => timing.ready,
+    40 105 │       run(nextContext, direction) {
+    41     │ - ······if·(scenario.kind·===·"initial")·throw·new·Error("E_INITIAL_REQUIRES_NEW_OWNER");
+       106 │ + ······if·(scenario.kind·===·"initial")
+       107 │ + ········throw·new·Error("E_INITIAL_REQUIRES_NEW_OWNER");
+    42 108 │         if (!timing.ready) throw new Error("E_RESET_DOM_NOT_MATCHED");
+    43 109 │         const after = prepareNext(plans(scenario.kind, direction).after);
+    44 110 │         if (timing.pending) throw new Error("E_PREVIOUS_SAMPLE_PENDING");
+    45     │ - ······const·state·=·source.C.getSnapshot(),·identity·=·getQueryIdentity(D.native.controllerDefinition.schema,·after.query,·{·now:·CLOCK·});
+       111 │ + ······const·state·=·source.C.getSnapshot(),
+       112 │ + ········identity·=·getQueryIdentity(
+       113 │ + ··········D.native.controllerDefinition.schema,
+       114 │ + ··········after.query,
+       115 │ + ··········{·now:·CLOCK·},
+       116 │ + ········);
+    46 117 │         timing.arm(nextContext, scenario.kind, after.oracle, identity, state);
+    47 118 │         if (scenario.kind === "typing") source.prepareTyping(after);
+    48     │ - ······else·if·(source.set(after,·scenario.kind·===·"visibility").status·!==·"committed")·throw·new·Error("E_TIMED_NOOP");
+       119 │ + ······else·if·(
+       120 │ + ········source.set(after,·scenario.kind·===·"visibility").status·!==·"committed"
+       121 │ + ······)
+       122 │ + ········throw·new·Error("E_TIMED_NOOP");
+    49 123 │       },
+    50 124 │       result: () => timing.read(),
+    51     │ - ····close()·{·if·(!source.retire())·return·false;·reactRoot.render(null);·return·true;·},
+       125 │ + ····close()·{
+       126 │ + ······if·(!source.retire())·return·false;
+       127 │ + ······reactRoot.render(null);
+       128 │ + ······return·true;
+       129 │ + ····},
+    52 130 │     };
+    53 131 │   }
+    54 132 │   export interface Harness {
+    55     │ - ··oracles():·Readonly<Record<string,·{·readonly·digest:·string;·readonly·query:·string;·readonly·cells:·string;·readonly·ids:·readonly·string[];·readonly·headers:·readonly·string[];·readonly·page:·number;·readonly·total:·number;·readonly·hasNextPage:·boolean·}>>;
+  129 more lines truncated
+  
+
+tests/benchmarks/wp14/playwright.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    3  3 │   import type { Harness } from "./main.js";
+    4  4 │   export async function browserProbe(page: Page) {
+    5    │ - ··return·page.evaluate(()·=>·{·const·harness:·Harness·=·window.wp14;·return·{·ready:·harness.ready(),·result:·harness.read()·};·});
+       5 │ + ··return·page.evaluate(()·=>·{
+       6 │ + ····const·harness:·Harness·=·window.wp14;
+       7 │ + ····return·{·ready:·harness.ready(),·result:·harness.read()·};
+       8 │ + ··});
+    6  9 │   }
+    7    │ - export·default·defineConfig({·workers:·1,·retries:·0,·fullyParallel:·false,·use:·{·viewport:·{·width:·1440,·height:·900·},·baseURL:·"http://127.0.0.1:6576",·trace:·"off",·screenshot:·"off",·video:·"off"·}·});
+      10 │ + export·default·defineConfig({
+      11 │ + ··workers:·1,
+      12 │ + ··retries:·0,
+      13 │ + ··fullyParallel:·false,
+      14 │ + ··use:·{
+      15 │ + ····viewport:·{·width:·1440,·height:·900·},
+      16 │ + ····baseURL:·"http://127.0.0.1:6576",
+      17 │ + ····trace:·"off",
+      18 │ + ····screenshot:·"off",
+      19 │ + ····video:·"off",
+      20 │ + ··},
+      21 │ + });
+    8 22 │   
+  
+
+tests/benchmarks/wp14/report.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3   3 │   import { fileURLToPath } from "node:url";
+     4   4 │   import { gzipSync } from "node:zlib";
+     5     │ - import·{·demand,·json,·put,·record,·selectCandidate,·verifyMap·}·from·"./candidate.mjs";
+         5 │ + import·{
+         6 │ + ··demand,
+         7 │ + ··json,
+         8 │ + ··put,
+         9 │ + ··record,
+        10 │ + ··selectCandidate,
+        11 │ + ··verifyMap,
+        12 │ + }·from·"./candidate.mjs";
+     6  13 │   import { actualBuild, paintReview } from "./driver.mjs";
+     7  14 │   import { analyze } from "./statistics.mjs";
+     8  15 │   export function report(selection, run) {
+     9     │ - ··const·ctx·=·selectCandidate(selection,·"report"),·built·=·actualBuild(ctx,·run),·paintReviewSHA256·=·paintReview(ctx,·run,·built);
+        16 │ + ··const·ctx·=·selectCandidate(selection,·"report"),
+        17 │ + ····built·=·actualBuild(ctx,·run),
+        18 │ + ····paintReviewSHA256·=·paintReview(ctx,·run,·built);
+    10  19 │     const observations = json(run, "measurement/observations.json");
+    11     │ - ··demand(observations.status·===·"RAW_MEASUREMENT_NOT_SUMMARY_APPROVAL"·&&·observations.candidate·===·ctx.identity·&&·observations.protocol·===·built.protocol·&&·observations.runner·===·ctx.selection.runner.sha256·&&·observations.buildSHA256·===·record(run,·"build.json").sha256,·"E_MEASUREMENT_INPUTS");
+        20 │ + ··demand(
+        21 │ + ····observations.status·===·"RAW_MEASUREMENT_NOT_SUMMARY_APPROVAL"·&&
+        22 │ + ······observations.candidate·===·ctx.identity·&&
+        23 │ + ······observations.protocol·===·built.protocol·&&
+        24 │ + ······observations.runner·===·ctx.selection.runner.sha256·&&
+        25 │ + ······observations.buildSHA256·===·record(run,·"build.json").sha256,
+        26 │ + ····"E_MEASUREMENT_INPUTS",
+        27 │ + ··);
+    12  28 │     verifyMap(run, observations.files);
+    13  29 │     demand(observations.sessions.length === 3, "E_THREE_SESSIONS");
+    14     │ - ··const·oracles·=·json(run,·"validation/validation-0/oracles.json"),·samples·=·[];
+        30 │ + ··const·oracles·=·json(run,·"validation/validation-0/oracles.json"),
+        31 │ + ····samples·=·[];
+    15  32 │     for (const session of observations.sessions) {
+    16     │ - ····demand(session.oraclesSHA256·===·record(run,·"validation/validation-0/oracles.json").sha256,·"E_ORACLE_FREEZE");
+    17     │ - ····const·bytes·=·readSamples(run,·session.id);·samples.push(...bytes);
+    18     │ - ····demand(session.observed.platform·===·"linux"·&&·session.observed.arch·===·"x64"·&&·typeof·session.observed.affinity·===·"string"·&&·session.actualArguments.includes("--disable-extensions"),·"E_OBSERVED_ENVIRONMENT");
+        33 │ + ····demand(
+        34 │ + ······session.oraclesSHA256·===
+        35 │ + ········record(run,·"validation/validation-0/oracles.json").sha256,
+        36 │ + ······"E_ORACLE_FREEZE",
+        37 │ + ····);
+        38 │ + ····const·bytes·=·readSamples(run,·session.id);
+        39 │ + ····samples.push(...bytes);
+        40 │ + ····demand(
+        41 │ + ······session.observed.platform·===·"linux"·&&
+        42 │ + ········session.observed.arch·===·"x64"·&&
+        43 │ + ········typeof·session.observed.affinity·===·"string"·&&
+        44 │ + ········session.actualArguments.includes("--disable-extensions"),
+        45 │ + ······"E_OBSERVED_ENVIRONMENT",
+        46 │ + ····);
+    19  47 │     }
+    20     │ - ··const·expected·=·{·run:·ctx.selection.run,·candidate:·ctx.identity,·runner:·observations.runner,·protocol:·built.protocol,·scheduler:·observations.scheduler,·sessions:·observations.sessions,·oracles·};
+        48 │ + ··const·expected·=·{
+        49 │ + ····run:·ctx.selection.run,
+        50 │ + ····candidate:·ctx.identity,
+        51 │ + ····runner:·observations.runner,
+        52 │ + ····protocol:·built.protocol,
+        53 │ + ····scheduler:·observations.scheduler,
+        54 │ + ····sessions:·observations.sessions,
+        55 │ + ····oracles,
+        56 │ + ··};
+    21  57 │     const result = analyze(samples, expected);
+    22  58 │     const bundle = bundleFacts(ctx, built);
+    23     │ - ··ctx.revalidate();·verifyMap(ctx.root,·built.files);·verifyMap(run,·observations.files);·paintReview(ctx,·run,·built);
+    24     │ - ··put(run,·"report.json",·{·...result,·source:·{·candidate:·ctx.input.candidate,·revision:·ctx.input...
+    25     │ - ··if·(result.failures.length)·throw·new·Error("E_REFERENCE_BUDGET_FAILURE_RETAINED");
+        59 │ + ··ctx.revalidate();
+        60 │ + ··verifyMap(ctx.root,·built.files);
+        61 │ + ··verifyMap(run,·observations.files);
+        62 │ + ··paintReview(ctx,·run,·built);
+        63 │ + ··put(run,·"report.json",·{
+        64 │ + ····...result,
+        65 │ + ····source:·{
+        66 │ + ······candidate:·ctx.input.candidate,
+        67 │ + ······revision:·ctx.input.sourceRevision,
+        68 │ + ······dirty:·ctx.input.dirtyState,
+        69 │ + ······lockSHA256:·ctx.input.files["pnpm-lock.yaml"].sha256,
+        70 │ + ······archives:·ctx.archivePair,
+        71 │ + ······profile:·ctx.input.profile,
+        72 │ + ····},
+        73 │ + ····observationsSHA256:·record(run,·"measurement/observations.json").sha256,
+        74 │ + ····paintReviewSHA256,
+        75 │ + ····workloadScope:
+        76 │ + ······"21·budgeted·scenarios·plus3·separately·reported·typing·scenarios;·default·lightweight·styled·renderer",
+        77 │ + ····bundle,
+        78 │ + ····notMeasured:·{
+        79 │ + ······drag:·"BLOCKED",
+        80 │ + ······startup:·null,
+        81 │ + ······network:·null,
+        82 │ + ······backend:·null,
+        83 │ + ······ssr:·null,
+        84 │ + ······mobile:·null,
+        85 │ + ······customChartsEditors:·null,
+        86 │ + ······reason:·"not·this·frontend·reference·workload;·no·zero-valued·substitute",
+        87 │ + ····},
+        88 │ + ····releaseApproval:·null,
+        89 │ + ··});
+        90 │ + ··if·(result.failures.length)
+        91 │ + ····throw·new·Error("E_REFERENCE_BUDGET_FAILURE_RETAINED");
+    26  92 │   }
+    27  93 │   function bundleFacts(ctx, built) {
+    28     │ - ··const·chunks·=·json(ctx.root,·"wp14-bundle.json").chunks,·renderedModuleLengths·=·{·own:·0,·peers:·0,·harness:·0,·bundler:·0·};
+    29     │ - ··for·(const·chunk·of·Object.values(chunks))·for·(const·[id,·value]·of·Object.entries(chunk.modules·??·{}))·{
+    30     │ - ····demand(Number.isSafeInteger(value.renderedLength)·&&·value.renderedLength·>=·0,·"E_MODULE_LENGTH");
+    31     │ - ····const·group·=·id.startsWith("\0")·?·"bundler"·:·/\/node_modules\/@tableweave\/(react|heroui)\//.test(id)·?·"own"·:·id.startsWith(`${ctx.root}/wp14-source/`)·?·"harness"·:·"peers";
+    32     │ - ····renderedModuleLengths[group]·+=·value.renderedLength;
+    33     │ - ··}
+    34     │ - ··const·outputs·=·{};·for·(const·file·of·Object.keys(built.files))·if·(/^wp14-dist\/.*\.(js|css)$/.test(file))·{·const·bytes·=·read(ctx.root,·file);·outputs[file]·=·{·bytes:·bytes.length,·gzipBytes:·gzipSync(bytes).length,·sha256:·record(ctx.root,·file).sha256·};·}
+    35     │ - ··return·{·graph:·built.graph,·archives:·ctx.archivePair,·outputs,·renderedModuleLengths,·attribution:·"Rollup·rendered·module·lengths,·NOT·independently·gzippable·ownership;·complete·chunk/CSS·raw·and·gzip·bytes·separate",·numericBudget:·null,·optional:·{·status:·"BLOCKED_UNMEASURED",·bytes:·null·}·};
+        94 │ + ··const·chunks·=·json(ctx.root,·"wp14-bundle.json").chunks,
+        95 │ + ····renderedModuleLengths·=·{·own:·0,·peers:·0,·harness:·0,·bundler:·0·};
+        96 │ + ··for·(const·chunk·of·Object.values(chunks))
+        97 │ + ····for·(const·[id,·value]·of·Object.entries(chunk.modules·??·{}))·{
+        98 │ + ······demand(
+        99 │ + ········Number.isSafeInteger(value.renderedLength)·&&·value.renderedLength·>=·0,
+       100 │ + ········"E_MODULE_LENGTH",
+       101 │ + ······);
+       102 │ + ······const·group·=·id.startsWith("\0")
+       103 │ + ········?·"bundler"
+       104 │ + ········:·/\/node_modules\/@tableweave\/(react|heroui)\//.test(id)
+       105 │ + ··········?·"own"
+       106 │ + ··········:·id.startsWith(`${ctx.root}/wp14-source/`)
+       107 │ + ············?·"harness"
+       108 │ + ············:·"peers";
+       109 │ + ······renderedModuleLengths[group]·+=·value.renderedLength;
+       110 │ + ····}
+       111 │ + ··const·outputs·=·{};
+       112 │ + ··for·(const·file·of·Object.keys(built.files))
+       113 │ + ····if·(/^wp14-dist\/.*\.(js|css)$/.test(file))·{
+       114 │ + ······const·bytes·=·read(ctx.root,·file);
+       115 │ + ······outputs[file]·=·{
+       116 │ + ········bytes:·bytes.length,
+       117 │ + ········gzipBytes:·gzipSync(bytes).length,
+       118 │ + ········sha256:·record(ctx.root,·file).sha256,
+       119 │ + ······};
+       120 │ + ····}
+       121 │ + ··return·{
+       122 │ + ····graph:·built.graph,
+       123 │ + ····archives:·ctx.archivePair,
+       124 │ + ····outputs,
+       125 │ + ····renderedModuleLengths,
+       126 │ + ····attribution:
+       127 │ + ······"Rollup·rendered·module·lengths,·NOT·independently·gzippable·ownership;·complete·chunk/CSS·raw·and·gzip·bytes·separate",
+       128 │ + ····numericBudget:·null,
+       129 │ + ····optional:·{·status:·"BLOCKED_UNMEASURED",·bytes:·null·},
+       130 │ + ··};
+    36 131 │   }
+    37     │ - function·readSamples(run,·id)·{·const·value·=·JSON.parse(readText(run,·`measurement/${id}/samples.json`));·demand(Array.isArray(value),·"E_RAW_SAMPLES");·return·value;·}
+       132 │ + function·readSamples(run,·id)·{
+  22 more lines truncated
+  
+
+tests/benchmarks/wp14/scenarios.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2  2 │   export const MODES = ["client", "server-known", "server-unknown"] as const;
+     3  3 │   export type Mode = (typeof MODES)[number];
+     4    │ - export·const·KINDS·=·["initial",·"all",·"any",·"join",·"sort",·"page",·"visibility"]·as·const;
+        4 │ + export·const·KINDS·=·[
+        5 │ + ··"initial",
+        6 │ + ··"all",
+        7 │ + ··"any",
+        8 │ + ··"join",
+        9 │ + ··"sort",
+       10 │ + ··"page",
+       11 │ + ··"visibility",
+       12 │ + ]·as·const;
+     5 13 │   export type Kind = (typeof KINDS)[number] | "typing";
+     6    │ - export·interface·Scenario·{·readonly·id:·string;·readonly·mode:·Mode;·readonly·kind:·Kind;·}
+     7    │ - export·const·SCENARIOS:·readonly·Scenario[]·=·MODES.flatMap((mode)·=>·KINDS.map((kind)·=>·Object.freeze({·id:·`${mode}:${kind}`,·mode,·kind·})));
+     8    │ - export·const·AUXILIARY:·readonly·Scenario[]·=·MODES.map((mode)·=>·({·id:·`${mode}:typing`,·mode,·kind:·"typing"·}));
+       14 │ + export·interface·Scenario·{
+       15 │ + ··readonly·id:·string;
+       16 │ + ··readonly·mode:·Mode;
+       17 │ + ··readonly·kind:·Kind;
+       18 │ + }
+       19 │ + export·const·SCENARIOS:·readonly·Scenario[]·=·MODES.flatMap((mode)·=>
+       20 │ + ··KINDS.map((kind)·=>·Object.freeze({·id:·`${mode}:${kind}`,·mode,·kind·})),
+       21 │ + );
+       22 │ + export·const·AUXILIARY:·readonly·Scenario[]·=·MODES.map((mode)·=>·({
+       23 │ + ··id:·`${mode}:typing`,
+       24 │ + ··mode,
+       25 │ + ··kind:·"typing",
+       26 │ + }));
+     9 27 │   export const DISTRIBUTION = [34, 33, 33] as const;
+    10    │ - export·function·plans(kind:·Kind,·direction:·0·|·1):·{·readonly·before:·Plan;·readonly·after:·Plan·}·{
+    11    │ - ··let·a:·Plan·=·BASE,·b:·Plan·=·BASE;
+    12    │ - ··if·(kind·===·"all"·||·kind·===·"any")·{·a·=·{·...BASE,·rules:·true,·join:·kind·===·"all"·?·"and"·:·"or"·};·b·=·{·...a,·variant:·1·};·}
+    13    │ - ··if·(kind·===·"join")·{·a·=·{·...BASE,·rules:·true·};·b·=·{·...a,·join:·"or"·};·}
+    14    │ - ··if·(kind·===·"sort")·{·a·=·{·...BASE,·sort:·"asc"·};·b·=·{·...BASE,·sort:·"desc"·};·}
+       28 │ + export·function·plans(
+       29 │ + ··kind:·Kind,
+       30 │ + ··direction:·0·|·1,
+       31 │ + ):·{·readonly·before:·Plan;·readonly·after:·Plan·}·{
+       32 │ + ··let·a:·Plan·=·BASE,
+       33 │ + ····b:·Plan·=·BASE;
+       34 │ + ··if·(kind·===·"all"·||·kind·===·"any")·{
+       35 │ + ····a·=·{·...BASE,·rules:·true,·join:·kind·===·"all"·?·"and"·:·"or"·};
+       36 │ + ····b·=·{·...a,·variant:·1·};
+       37 │ + ··}
+       38 │ + ··if·(kind·===·"join")·{
+       39 │ + ····a·=·{·...BASE,·rules:·true·};
+       40 │ + ····b·=·{·...a,·join:·"or"·};
+       41 │ + ··}
+       42 │ + ··if·(kind·===·"sort")·{
+       43 │ + ····a·=·{·...BASE,·sort:·"asc"·};
+       44 │ + ····b·=·{·...BASE,·sort:·"desc"·};
+       45 │ + ··}
+    15 46 │     if (kind === "page") b = { ...BASE, page: 1 };
+    16 47 │     if (kind === "visibility") b = { ...BASE, hidden: true };
+    17    │ - ··if·(kind·===·"typing")·{·a·=·{·...BASE,·search:·"wp14-000"·};·b·=·{·...BASE,·search:·"wp14-001"·};·}
+       48 │ + ··if·(kind·===·"typing")·{
+       49 │ + ····a·=·{·...BASE,·search:·"wp14-000"·};
+       50 │ + ····b·=·{·...BASE,·search:·"wp14-001"·};
+       51 │ + ··}
+    18 52 │     return direction === 0 ? { before: a, after: b } : { before: b, after: a };
+    19 53 │   }
+  
+
+tests/benchmarks/wp14/schema.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1     │ - import·{·defineQuerySchema,·createQuery,·normalizeQuery,·type·QuerySchema,·type·RuleFor·}·from·"@tableweave/react/contracts";
+         1 │ + import·{
+         2 │ + ··defineQuerySchema,
+         3 │ + ··createQuery,
+         4 │ + ··normalizeQuery,
+         5 │ + ··type·QuerySchema,
+         6 │ + ··type·RuleFor,
+         7 │ + }·from·"@tableweave/react/contracts";
+     2   8 │   import type { Plan } from "./fixture.js";
+     3   9 │   const fields = {
+     4     │ - ··recordLabel:·{·type:·"text",·owner:·"search",·sort:·true·},·status:·{·type:·"enum",·owner:·"builder",·values:·["posted",·"draft"]·},
+     5     │ - ··amount:·{·type:·"number",·owner:·"builder",·sort:·true·},·quantity:·{·type:·"number",·owner:·"builder"·},·unitPrice:·{·type:·"number",·owner:·"builder"·},
+     6     │ - ··balance:·{·type:·"number",·owner:·"builder",·nullable:·true·},·score:·{·type:·"number",·owner:·"builder"·},·occurredAt:·{·type:·"datetime",·owner:·"builder"·},
+     7     │ - ··bookingDay:·{·type:·"date",·owner:·"builder"·},·updatedAt:·{·type:·"datetime",·owner:·"builder"·},·category:·{·type:·"enum",·owner:·"builder",·values:·["equipment",·"supplies"]·},
+     8     │ - ··region:·{·type:·"enum",·owner:·"builder",·values:·["north",·"south"]·},·currency:·{·type:·"enum",·owner:·"builder",·values:·["USD",·"EUR"]·},
+     9     │ - ··reference:·{·type:·"text",·owner:·"builder",·nullable:·true·},·note:·{·type:·"text",·owner:·"builder",·nullable:·true·},·accountCode:·{·type:·"text",·owner:·"builder"·},
+    10     │ - ··active:·{·type:·"boolean",·owner:·"builder"·},·cleared:·{·type:·"boolean",·owner:·"builder",·nullable:·true·},
+    11     │ - ··tags:·{·type:·"set",·owner:·"builder",·values:·["local",·"review"]·},·locations:·{·type:·"set",·owner:·"builder",·values:·["a",·"b"]·},
+        10 │ + ··recordLabel:·{·type:·"text",·owner:·"search",·sort:·true·},
+        11 │ + ··status:·{·type:·"enum",·owner:·"builder",·values:·["posted",·"draft"]·},
+        12 │ + ··amount:·{·type:·"number",·owner:·"builder",·sort:·true·},
+        13 │ + ··quantity:·{·type:·"number",·owner:·"builder"·},
+        14 │ + ··unitPrice:·{·type:·"number",·owner:·"builder"·},
+        15 │ + ··balance:·{·type:·"number",·owner:·"builder",·nullable:·true·},
+        16 │ + ··score:·{·type:·"number",·owner:·"builder"·},
+        17 │ + ··occurredAt:·{·type:·"datetime",·owner:·"builder"·},
+        18 │ + ··bookingDay:·{·type:·"date",·owner:·"builder"·},
+        19 │ + ··updatedAt:·{·type:·"datetime",·owner:·"builder"·},
+        20 │ + ··category:·{
+        21 │ + ····type:·"enum",
+        22 │ + ····owner:·"builder",
+        23 │ + ····values:·["equipment",·"supplies"],
+        24 │ + ··},
+        25 │ + ··region:·{·type:·"enum",·owner:·"builder",·values:·["north",·"south"]·},
+        26 │ + ··currency:·{·type:·"enum",·owner:·"builder",·values:·["USD",·"EUR"]·},
+        27 │ + ··reference:·{·type:·"text",·owner:·"builder",·nullable:·true·},
+        28 │ + ··note:·{·type:·"text",·owner:·"builder",·nullable:·true·},
+        29 │ + ··accountCode:·{·type:·"text",·owner:·"builder"·},
+        30 │ + ··active:·{·type:·"boolean",·owner:·"builder"·},
+        31 │ + ··cleared:·{·type:·"boolean",·owner:·"builder",·nullable:·true·},
+        32 │ + ··tags:·{·type:·"set",·owner:·"builder",·values:·["local",·"review"]·},
+        33 │ + ··locations:·{·type:·"set",·owner:·"builder",·values:·["a",·"b"]·},
+    12  34 │   } as const;
+    13     │ - const·policy·=·{·version:·1,·pagination:·{·defaultSize:·100,·sizes:·[100]·},·sorting:·{·multi:·true·},·search:·{·debounceMs:·300·}·}·as·const;
+    14     │ - export·const·clientSchema·=·defineQuerySchema({·...policy,·id:·"wp14-client-reference",·fields·});
+    15     │ - export·const·serverSchema·=·defineQuerySchema({·...policy,·id:·"wp14-server-reference",·fields:·{·...fields,
+    16     │ - ··tax:·{·type:·"number",·owner:·"builder"·},·discount:·{·type:·"number",·owner:·"builder"·},·weight:·{·type:·"number",·owner:·"builder",·nullable:·true·},·leadDays:·{·type:·"number",·owner:·"builder"·},
+    17     │ - ··expiresOn:·{·type:·"date",·owner:·"builder",·nullable:·true·},·createdAt:·{·type:·"datetime",·owner:·"builder"·},·supplier:·{·type:·"text",·owner:·"builder"·},
+    18     │ - ··warehouse:·{·type:·"enum",·owner:·"builder",·values:·["a",·"b"]·},·priority:·{·type:·"enum",·owner:·"builder",·values:·["normal",·"urgent"]·},·batchRef:·{·type:·"text",·owner:·"builder",·nullable:·true·},
+    19     │ - }·});
+        35 │ + const·policy·=·{
+        36 │ + ··version:·1,
+        37 │ + ··pagination:·{·defaultSize:·100,·sizes:·[100]·},
+        38 │ + ··sorting:·{·multi:·true·},
+        39 │ + ··search:·{·debounceMs:·300·},
+        40 │ + }·as·const;
+        41 │ + export·const·clientSchema·=·defineQuerySchema({
+        42 │ + ··...policy,
+        43 │ + ··id:·"wp14-client-reference",
+        44 │ + ··fields,
+        45 │ + });
+        46 │ + export·const·serverSchema·=·defineQuerySchema({
+        47 │ + ··...policy,
+        48 │ + ··id:·"wp14-server-reference",
+        49 │ + ··fields:·{
+        50 │ + ····...fields,
+        51 │ + ····tax:·{·type:·"number",·owner:·"builder"·},
+        52 │ + ····discount:·{·type:·"number",·owner:·"builder"·},
+        53 │ + ····weight:·{·type:·"number",·owner:·"builder",·nullable:·true·},
+        54 │ + ····leadDays:·{·type:·"number",·owner:·"builder"·},
+        55 │ + ····expiresOn:·{·type:·"date",·owner:·"builder",·nullable:·true·},
+        56 │ + ····createdAt:·{·type:·"datetime",·owner:·"builder"·},
+        57 │ + ····supplier:·{·type:·"text",·owner:·"builder"·},
+        58 │ + ····warehouse:·{·type:·"enum",·owner:·"builder",·values:·["a",·"b"]·},
+        59 │ + ····priority:·{·type:·"enum",·owner:·"builder",·values:·["normal",·"urgent"]·},
+        60 │ + ····batchRef:·{·type:·"text",·owner:·"builder",·nullable:·true·},
+        61 │ + ··},
+        62 │ + });
+    20  63 │   export function query<S extends QuerySchema>(schema: S, plan: Plan) {
+    21  64 │     const rules: readonly RuleFor<typeof clientSchema>[] = [
+    22     │ - ····{·id:·"amount-rule",·field:·"amount",·operator:·"number.gte",·value:·plan.variant·?·2000·:·1000·},
+    23     │ - ····{·id:·"quantity-rule",·field:·"quantity",·operator:·"number.lt",·value:·90·},
+    24     │ - ····{·id:·"category-rule",·field:·"category",·operator:·"enum.is",·value:·"equipment"·},
+    25     │ - ····{·id:·"note-rule",·field:·"note",·operator:·"text.contains",·value:·"local"·},
+    26     │ - ····{·id:·"day-rule",·field:·"bookingDay",·operator:·"date.onOrAfter",·value:·{·kind:·"day",·value:·"2026-11-05"·}·},
+        65 │ + ····{
+        66 │ + ······id:·"amount-rule",
+        67 │ + ······field:·"amount",
+        68 │ + ······operator:·"number.gte",
+        69 │ + ······value:·plan.variant·?·2000·:·1000,
+        70 │ + ····},
+        71 │ + ····{
+        72 │ + ······id:·"quantity-rule",
+        73 │ + ······field:·"quantity",
+        74 │ + ······operator:·"number.lt",
+        75 │ + ······value:·90,
+        76 │ + ····},
+        77 │ + ····{
+        78 │ + ······id:·"category-rule",
+        79 │ + ······field:·"category",
+        80 │ + ······operator:·"enum.is",
+        81 │ + ······value:·"equipment",
+        82 │ + ····},
+        83 │ + ····{
+        84 │ + ······id:·"note-rule",
+        85 │ + ······field:·"note",
+        86 │ + ······operator:·"text.contains",
+        87 │ + ······value:·"local",
+        88 │ + ····},
+        89 │ + ····{
+        90 │ + ······id:·"day-rule",
+        91 │ + ······field:·"bookingDay",
+        92 │ + ······operator:·"date.onOrAfter",
+        93 │ + ······value:·{·kind:·"day",·value:·"2026-11-05"·},
+        94 │ + ····},
+    27  95 │     ];
+    28     │ - ··const·base·=·createQuery(schema,·{·locale:·"en-US",·timeZone:·"UTC",·pagination:·{·pageIndex:·plan.page,·pageSize:·100·}·});
+    29     │ - ··return·normalizeQuery(schema,·{·...base,·search:·plan.search,·builder:·{·join:·plan.join,·rules:·plan.rules·?·rules·:·[]·},·sorting:·plan.sort·===·"none"·?·[]·:·[{·id:·"amount",·desc:·plan.sort·===·"desc"·},·{·id:·"recordLabel",·desc:·false·}]·});
+        96 │ + ··const·base·=·createQuery(schema,·{
+        97 │ + ····locale:·"en-US",
+        98 │ + ····timeZone:·"UTC",
+        99 │ + ····pagination:·{·pageIndex:·plan.page,·pageSize:·100·},
+       100 │ + ··});
+       101 │ + ··return·normalizeQuery(schema,·{
+       102 │ + ····...base,
+       103 │ + ····search:·plan.search,
+       104 │ + ····builder:·{·join:·plan.join,·rules:·plan.rules·?·rules·:·[]·},
+       105 │ + ····sorting:
+       106 │ + ······plan.sort·===·"none"
+       107 │ + ········?·[]
+       108 │ + ········:·[
+       109 │ + ············{·id:·"amount",·desc:·plan.sort·===·"desc"·},
+       110 │ + ············{·id:·"recordLabel",·desc:·false·},
+       111 │ + ··········],
+       112 │ + ··});
+    30 113 │   }
+    31 114 │   
+  
+
+tests/benchmarks/wp14/scope.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import assert from "node:assert/strict";
+     2   2 │   import { createHash } from "node:crypto";
+     3     │ - import·{·mkdir,·readFile,·readdir,·stat,·statfs,·writeFile·}·from·"node:fs/promises";
+         3 │ + import·{
+         4 │ + ··mkdir,
+         5 │ + ··readFile,
+         6 │ + ··readdir,
+         7 │ + ··stat,
+         8 │ + ··statfs,
+         9 │ + ··writeFile,
+        10 │ + }·from·"node:fs/promises";
+     4  11 │   import { relative, resolve } from "node:path";
+     5  12 │   import { fileURLToPath } from "node:url";
+    ······ │ 
+     7  14 │   export const own = "tests/benchmarks/wp14/";
+     8  15 │   export const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+     9     │ - export·async·function·capacity()·{·const·s·=·await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728,·"Below128MiB:·stop;·no·cleanup·authority");·}
+    10     │ - export·async·function·measure(path)·{·const·bytes·=·await·readFile(resolve(root,·path)),·s·=·await·stat(resolve(root,·path));·return·{·sha256:·sha(bytes),·mode:·s.mode·&·0o777,·size:·bytes.length·};·}
+        16 │ + export·async·function·capacity()·{
+        17 │ + ··const·s·=·await·statfs(root);
+        18 │ + ··assert(
+        19 │ + ····s.bavail·*·s.bsize·>=·134217728,
+        20 │ + ····"Below128MiB:·stop;·no·cleanup·authority",
+        21 │ + ··);
+        22 │ + }
+        23 │ + export·async·function·measure(path)·{
+        24 │ + ··const·bytes·=·await·readFile(resolve(root,·path)),
+        25 │ + ····s·=·await·stat(resolve(root,·path));
+        26 │ + ··return·{·sha256:·sha(bytes),·mode:·s.mode·&·0o777,·size:·bytes.length·};
+        27 │ + }
+    11  28 │   export async function files(directory, excludeOwn = false) {
+    12  29 │     const result = [];
+    13     │ - ··for·(const·entry·of·await·readdir(resolve(root,·directory),·{·withFileTypes:·true·}))·{
+    14     │ - ····if·([".git",·"node_modules",·".repo",·".npmrc"].includes(entry.name)·||·entry.name.startsWith(".env"))·continue;
+        30 │ + ··for·(const·entry·of·await·readdir(resolve(root,·directory),·{
+        31 │ + ····withFileTypes:·true,
+        32 │ + ··}))·{
+        33 │ + ····if·(
+        34 │ + ······[".git",·"node_modules",·".repo",·".npmrc"].includes(entry.name)·||
+        35 │ + ······entry.name.startsWith(".env")
+        36 │ + ····)
+        37 │ + ······continue;
+    15  38 │       const path = relative(root, resolve(root, directory, entry.name));
+    16  39 │       if (excludeOwn && `${path}/` === own) continue;
+    17     │ - ····if·(entry.isDirectory())·result.push(...await·files(path,·excludeOwn));·else·if·(entry.isFile())·result.push(path);
+        40 │ + ····if·(entry.isDirectory())·result.push(...(await·files(path,·excludeOwn)));
+        41 │ + ····else·if·(entry.isFile())·result.push(path);
+    18  42 │     }
+    19  43 │     return result.sort();
+    20  44 │   }
+    21  45 │   export async function scope(capture = false) {
+    22     │ - ··const·canonical·=·await·readFile("/tmp/opencode/wp10-move-reason-integrated-source155.json");
+    23     │ - ··assert.equal(sha(canonical),·"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837");
+    24     │ - ··const·source155·=·JSON.parse(canonical);·assert.equal(Object.keys(source155).length,·155);
+    25     │ - ··for·(const·[path,·expected]·of·Object.entries(source155))·{·const·value·=·await·measure(path);·assert.equal(value.sha256,·expected.sha256,·path);·assert.equal(value.mode·&·0o111·?·"100755"·:·"100644",·expected.mode,·path);·}
+    26     │ - ··const·current·=·Object.fromEntries(await·Promise.all((await·files(".",·true)).map(async·(path)·=>·[path,·await·measure(path)])));
+        46 │ + ··const·canonical·=·await·readFile(
+        47 │ + ····"/tmp/opencode/wp10-move-reason-integrated-source155.json",
+        48 │ + ··);
+        49 │ + ··assert.equal(
+        50 │ + ····sha(canonical),
+        51 │ + ····"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+        52 │ + ··);
+        53 │ + ··const·source155·=·JSON.parse(canonical);
+        54 │ + ··assert.equal(Object.keys(source155).length,·155);
+        55 │ + ··for·(const·[path,·expected]·of·Object.entries(source155))·{
+        56 │ + ····const·value·=·await·measure(path);
+        57 │ + ····assert.equal(value.sha256,·expected.sha256,·path);
+        58 │ + ····assert.equal(value.mode·&·0o111·?·"100755"·:·"100644",·expected.mode,·path);
+        59 │ + ··}
+        60 │ + ··const·current·=·Object.fromEntries(
+        61 │ + ····await·Promise.all(
+        62 │ + ······(await·files(".",·true)).map(async·(path)·=>·[path,·await·measure(path)]),
+        63 │ + ····),
+        64 │ + ··);
+    27  65 │     const beforePath = resolve(root, `${own}evidence/before.json`);
+    28  66 │     if (capture) {
+    29     │ - ····await·capacity();·await·mkdir(resolve(root,·`${own}evidence`),·{·recursive:·true·});
+    30     │ - ····await·writeFile(resolve(root,·`${own}evidence/source155.json`),·canonical,·{·flag:·"wx"·});
+    31     │ - ····await·writeFile(beforePath,·`${JSON.stringify({·suppliedHead:·"25fdfde·(main-reported;·no·worker·Git)",·canonical155:·sha(canonical),·files:·current·},·null,·2)}\n`,·{·flag:·"wx"·});
+    32     │ - ····console.log(`BEFORE·${Object.keys(current).length}·old·regular·inputs/modes·and155·canonical·source·bodies·captured;·credentials/dependencies/Git/reference·excluded.`);
+        67 │ + ····await·capacity();
+        68 │ + ····await·mkdir(resolve(root,·`${own}evidence`),·{·recursive:·true·});
+        69 │ + ····await·writeFile(resolve(root,·`${own}evidence/source155.json`),·canonical,·{
+        70 │ + ······flag:·"wx",
+        71 │ + ····});
+        72 │ + ····await·writeFile(
+        73 │ + ······beforePath,
+        74 │ + ······`${JSON.stringify({·suppliedHead:·"25fdfde·(main-reported;·no·worker·Git)",·canonical155:·sha(canonical),·files:·current·},·null,·2)}\n`,
+        75 │ + ······{·flag:·"wx"·},
+        76 │ + ····);
+        77 │ + ····console.log(
+        78 │ + ······`BEFORE·${Object.keys(current).length}·old·regular·inputs/modes·and155·canonical·source·bodies·captured;·credentials/dependencies/Git/reference·excluded.`,
+        79 │ + ····);
+    33  80 │     } else {
+    34     │ - ····const·before·=·JSON.parse(await·readFile(beforePath,·"utf8")),·drift·=·[];
+    35     │ - ····for·(const·path·of·new·Set([...Object.keys(before.files),·...Object.keys(current)]))·{
+    36     │ - ······if·(JSON.stringify(before.files[path])·===·JSON.stringify(current[path]))·continue;
+    37     │ - ······assert(["TASKS.md",·"REVIEW.md",·"README.md"].includes(path)·||·path.startsWith("docs/"),·`FROZEN·input·drift:·${path}`);·drift.push(path);
+        81 │ + ····const·before·=·JSON.parse(await·readFile(beforePath,·"utf8")),
+        82 │ + ······drift·=·[];
+        83 │ + ····for·(const·path·of·new·Set([
+        84 │ + ······...Object.keys(before.files),
+        85 │ + ······...Object.keys(current),
+        86 │ + ····]))·{
+        87 │ + ······if·(JSON.stringify(before.files[path])·===·JSON.stringify(current[path]))
+        88 │ + ········continue;
+        89 │ + ······assert(
+        90 │ + ········["TASKS.md",·"REVIEW.md",·"README.md"].includes(path)·||
+        91 │ + ··········path.startsWith("docs/"),
+        92 │ + ········`FROZEN·input·drift:·${path}`,
+        93 │ + ······);
+        94 │ + ······drift.push(path);
+    38  95 │       }
+    39     │ - ····assert.equal(sha(await·readFile(resolve(root,·`${own}evidence/source155.json`))),·before.canonical155);
+    40     │ - ····console.log(JSON.stringify({·frozenOldInputs:·Object.keys(before.files).length,·libraries:·155,·allowedMainBookkeepingDrift:·drift,·status:·"source/mode·scope·only,·NOT·runtime"·}));
+        96 │ + ····assert.equal(
+        97 │ + ······sha(await·readFile(resolve(root,·`${own}evidence/source155.json`))),
+        98 │ + ······before.canonical155,
+        99 │ + ····);
+       100 │ + ····console.log(
+       101 │ + ······JSON.stringify({
+       102 │ + ········frozenOldInputs:·Object.keys(before.files).length,
+       103 │ + ········libraries:·155,
+       104 │ + ········allowedMainBookkeepingDrift:·drift,
+       105 │ + ········status:·"source/mode·scope·only,·NOT·runtime",
+       106 │ + ······}),
+       107 │ + ····);
+    41 108 │     }
+    42 109 │   }
+    43     │ - if·(process.argv[1]·&&·resolve(process.argv[1])·===·fileURLToPath(import.meta.url))·{·assert(["capture",·"verify"].includes(process.argv[2]));·await·scope(process.argv[2]·===·"capture");·}
+       110 │ + if·(
+       111 │ + ··process.argv[1]·&&
+       112 │ + ··resolve(process.argv[1])·===·fileURLToPath(import.meta.url)
+       113 │ + )·{
+       114 │ + ··assert(["capture",·"verify"].includes(process.argv[2]));
+       115 │ + ··await·scope(process.argv[2]·===·"capture");
+       116 │ + }
+    44 117 │   
+  
+
+tests/benchmarks/wp14/seal.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7  7 │   export async function seal(capture = false) {
+     8  8 │     await scope();
+     9    │ - ··const·target·=·`${own}evidence/handoff-hashes.json`,·delta·=·`${own}evidence/source.delta.patch`;
+    10    │ - ··const·all·=·(await·files(own)).filter((path)·=>·path·!==·target·&&·path·!==·delta);
+    11    │ - ··const·source·=·all.filter((path)·=>·!/\/evidence\/(?:light|format)-/.test(path));
+        9 │ + ··const·target·=·`${own}evidence/handoff-hashes.json`,
+       10 │ + ····delta·=·`${own}evidence/source.delta.patch`;
+       11 │ + ··const·all·=·(await·files(own)).filter(
+       12 │ + ····(path)·=>·path·!==·target·&&·path·!==·delta,
+       13 │ + ··);
+       14 │ + ··const·source·=·all.filter(
+       15 │ + ····(path)·=>·!/\/evidence\/(?:light|format)-/.test(path),
+       16 │ + ··);
+    12 17 │     if (capture) {
+    13    │ - ····await·capacity();·let·patch·=·"";
+    14    │ - ····for·(const·path·of·source)·{·const·result·=·spawnSync("diff",·["-u",·"--label",·"/dev/null",·"--label",·`after/${path}`,·"/dev/null",·resolve(root,·path)],·{·encoding:·"utf8",·maxBuffer:·4·*·1024·*·1024·});·assert.equal(result.status,·1,·path);·patch·+=·result.stdout;·}
+       18 │ + ····await·capacity();
+       19 │ + ····let·patch·=·"";
+       20 │ + ····for·(const·path·of·source)·{
+       21 │ + ······const·result·=·spawnSync(
+       22 │ + ········"diff",
+       23 │ + ········[
+       24 │ + ··········"-u",
+       25 │ + ··········"--label",
+       26 │ + ··········"/dev/null",
+       27 │ + ··········"--label",
+       28 │ + ··········`after/${path}`,
+       29 │ + ··········"/dev/null",
+       30 │ + ··········resolve(root,·path),
+       31 │ + ········],
+       32 │ + ········{·encoding:·"utf8",·maxBuffer:·4·*·1024·*·1024·},
+       33 │ + ······);
+       34 │ + ······assert.equal(result.status,·1,·path);
+       35 │ + ······patch·+=·result.stdout;
+       36 │ + ····}
+    15 37 │       await writeFile(resolve(root, delta), patch, { flag: "wx" });
+    16 38 │     }
+    17    │ - ··const·inputs·=·Object.fromEntries(await·Promise.all([...source,·delta].sort().map(async·(path)·=>·[path,·await·measure(path)])));
+    18    │ - ··const·artifacts·=·Object.fromEntries(await·Promise.all(all.filter((path)·=>·!source.includes(path)).sort().map(async·(path)·=>·[path,·await·measure(path)])));
+    19    │ - ··const·before·=·JSON.parse(await·readFile(resolve(root,·`${own}evidence/before.json`),·"utf8"));
+    20    │ - ··const·value·=·{·status:·"PROVISIONAL·SOURCE·ONLY;·all·generator/oracle/statistics/config/runtime/paint/benchmark·execution·UNRUN;·runner/candidate·HOLD",·suppliedHead:·before.suppliedHead,·protectedOldInputs:·Object.keys(before.files).length,·canonical155:·before.canonical155,·inputAggregate:·sha(JSON.stringify(inputs)),·artifactAggregate:·sha(JSON.stringify(artifacts)),·inputs,·artifacts·};
+    21    │ - ··if·(capture)·await·writeFile(resolve(root,·target),·`${JSON.stringify(value,·null,·2)}\n`,·{·flag:·"wx"·});
+    22    │ - ··else·assert.deepEqual(value,·JSON.parse(await·readFile(resolve(root,·target),·"utf8")));
+    23    │ - ··console.log(`${Object.keys(inputs).length}·source/metadata·inputs·${value.inputAggregate};·${Object.keys(artifacts).length}·raw·artifacts·${value.artifactAggregate};155·libraries/${value.protectedOldInputs}·protected·old·regular·files/modes,·main·bookkeeping·drift·separately·disclosed.`);
+       39 │ + ··const·inputs·=·Object.fromEntries(
+       40 │ + ····await·Promise.all(
+       41 │ + ······[...source,·delta]
+       42 │ + ········.sort()
+       43 │ + ········.map(async·(path)·=>·[path,·await·measure(path)]),
+       44 │ + ····),
+       45 │ + ··);
+       46 │ + ··const·artifacts·=·Object.fromEntries(
+       47 │ + ····await·Promise.all(
+       48 │ + ······all
+       49 │ + ········.filter((path)·=>·!source.includes(path))
+       50 │ + ········.sort()
+       51 │ + ········.map(async·(path)·=>·[path,·await·measure(path)]),
+       52 │ + ····),
+       53 │ + ··);
+       54 │ + ··const·before·=·JSON.parse(
+       55 │ + ····await·readFile(resolve(root,·`${own}evidence/before.json`),·"utf8"),
+       56 │ + ··);
+       57 │ + ··const·value·=·{
+       58 │ + ····status:
+       59 │ + ······"PROVISIONAL·SOURCE·ONLY;·all·generator/oracle/statistics/config/runtime/paint/benchmark·execution·UNRUN;·runner/candidate·HOLD",
+       60 │ + ····suppliedHead:·before.suppliedHead,
+       61 │ + ····protectedOldInputs:·Object.keys(before.files).length,
+       62 │ + ····canonical155:·before.canonical155,
+       63 │ + ····inputAggregate:·sha(JSON.stringify(inputs)),
+       64 │ + ····artifactAggregate:·sha(JSON.stringify(artifacts)),
+       65 │ + ····inputs,
+       66 │ + ····artifacts,
+       67 │ + ··};
+       68 │ + ··if·(capture)
+       69 │ + ····await·writeFile(
+       70 │ + ······resolve(root,·target),
+       71 │ + ······`${JSON.stringify(value,·null,·2)}\n`,
+       72 │ + ······{·flag:·"wx"·},
+       73 │ + ····);
+       74 │ + ··else
+       75 │ + ····assert.deepEqual(
+       76 │ + ······value,
+       77 │ + ······JSON.parse(await·readFile(resolve(root,·target),·"utf8")),
+       78 │ + ····);
+       79 │ + ··console.log(
+       80 │ + ····`${Object.keys(inputs).length}·source/metadata·inputs·${value.inputAggregate};·${Object.keys(artifacts).length}·raw·artifacts·${value.artifactAggregate};155·libraries/${value.protectedOldInputs}·protected·old·regular·files/modes,·main·bookkeeping·drift·separately·disclosed.`,
+       81 │ + ··);
+    24 82 │   }
+    25    │ - if·(process.argv[1]·&&·resolve(process.argv[1])·===·fileURLToPath(import.meta.url))·{·assert(["capture",·"verify"].includes(process.argv[2]));·await·seal(process.argv[2]·===·"capture");·}
+       83 │ + if·(
+       84 │ + ··process.argv[1]·&&
+       85 │ + ··resolve(process.argv[1])·===·fileURLToPath(import.meta.url)
+       86 │ + )·{
+       87 │ + ··assert(["capture",·"verify"].includes(process.argv[2]));
+       88 │ + ··await·seal(process.argv[2]·===·"capture");
+       89 │ + }
+    26 90 │   
+  
+
+tests/benchmarks/wp14/source.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1     │ - import·{·beginControlsRequest,·createCriteriaPublication,·createResourceAdapter,·getControlsRequestBinding,·type·DataTableOptions,·type·ResourceRequest,·type·TableDefinition·}·from·"@tableweave/react";
+     2     │ - import·{·getQueryIdentity,·type·QueryFor,·type·QuerySchema·}·from·"@tableweave/react/contracts";
+     3     │ - import·{·CLOCK,·digest,·type·BenchClient,·type·Oracle,·type·Plan·}·from·"./fixture.js";
+         1 │ + import·{
+         2 │ + ··beginControlsRequest,
+         3 │ + ··createCriteriaPublication,
+         4 │ + ··createResourceAdapter,
+         5 │ + ··getControlsRequestBinding,
+         6 │ + ··type·DataTableOptions,
+         7 │ + ··type·ResourceRequest,
+         8 │ + ··type·TableDefinition,
+         9 │ + }·from·"@tableweave/react";
+        10 │ + import·{
+        11 │ + ··getQueryIdentity,
+        12 │ + ··type·QueryFor,
+        13 │ + ··type·QuerySchema,
+        14 │ + }·from·"@tableweave/react/contracts";
+        15 │ + import·{
+        16 │ + ··CLOCK,
+        17 │ + ··digest,
+        18 │ + ··type·BenchClient,
+        19 │ + ··type·Oracle,
+        20 │ + ··type·Plan,
+        21 │ + }·from·"./fixture.js";
+     4  22 │   import { query } from "./schema.js";
+     5  23 │   import type { Mode } from "./scenarios.js";
+     6  24 │   import type { Timing } from "./timing.js";
+     7     │ - export·interface·Prepared<S·extends·QuerySchema,·T·extends·BenchClient>·{·readonly·query:·QueryFor<S>;·readonly·plan:·Plan;·readonly·oracle:·Oracle;·readonly·reply:·readonly·T[];·}
+        25 │ + export·interface·Prepared<S·extends·QuerySchema,·T·extends·BenchClient>·{
+        26 │ + ··readonly·query:·QueryFor<S>;
+        27 │ + ··readonly·plan:·Plan;
+        28 │ + ··readonly·oracle:·Oracle;
+        29 │ + ··readonly·reply:·readonly·T[];
+        30 │ + }
+     8  31 │   /** Genuine synthetic app owner. UI borrowing never ends it. */
+     9     │ - export·function·createSource<S·extends·QuerySchema,·T·extends·BenchClient>(D:·TableDefinition<S,·T>,·mode:·Mode,·input:·readonly·T[],·initial:·Prepared<S,·T>,·timing:·Timing,·scope:·string)·{
+    10     │ - ··const·context·=·Object.freeze({·definitionKey:·D.native.controllerDefinition.schema.id,·scopeKey:·scope,·access:·true·});
+    11     │ - ··let·records:·readonly·T[]·=·[],·live·=·false,·disposed·=·false,·queued:·Prepared<S,·T>·|·null·=·null;
+    12     │ - ··let·accepted:·ResourceRequest<QueryFor<S>>·|·null·=·null,·serial·=·0,·version·=·0;
+    13     │ - ··const·drafts·=·new·Set<()·=>·void>(),·listeners·=·new·Set<()·=>·void>();
+        32 │ + export·function·createSource<S·extends·QuerySchema,·T·extends·BenchClient>(
+        33 │ + ··D:·TableDefinition<S,·T>,
+        34 │ + ··mode:·Mode,
+        35 │ + ··input:·readonly·T[],
+        36 │ + ··initial:·Prepared<S,·T>,
+        37 │ + ··timing:·Timing,
+        38 │ + ··scope:·string,
+        39 │ + )·{
+        40 │ + ··const·context·=·Object.freeze({
+        41 │ + ····definitionKey:·D.native.controllerDefinition.schema.id,
+        42 │ + ····scopeKey:·scope,
+        43 │ + ····access:·true,
+        44 │ + ··});
+        45 │ + ··let·records:·readonly·T[]·=·[],
+        46 │ + ····live·=·false,
+        47 │ + ····disposed·=·false,
+        48 │ + ····queued:·Prepared<S,·T>·|·null·=·null;
+        49 │ + ··let·accepted:·ResourceRequest<QueryFor<S>>·|·null·=·null,
+        50 │ + ····serial·=·0,
+        51 │ + ····version·=·0;
+        52 │ + ··const·drafts·=·new·Set<()·=>·void>(),
+        53 │ + ····listeners·=·new·Set<()·=>·void>();
+    14  54 │     const resource = createResourceAdapter<T, QueryFor<S>>(context);
+    15     │ - ··const·C·=·D.createController({·initial:·{·query:·initial.query·},·now:·()·=>·CLOCK,
+    16     │ - ····validateCommand(command)·{·if·(!live·&&·command.type·!==·"selection.cancel"·&&·!(command.type·===·"details.change"·&&·typeof·command.update·===·"object"·&&·command.update.rowId·===·null))·throw·new·Error("E_SOURCE_CLOSED");·},
+        55 │ + ··const·C·=·D.createController({
+        56 │ + ····initial:·{·query:·initial.query·},
+        57 │ + ····now:·()·=>·CLOCK,
+        58 │ + ····validateCommand(command)·{
+        59 │ + ······if·(
+        60 │ + ········!live·&&
+        61 │ + ········command.type·!==·"selection.cancel"·&&
+        62 │ + ········!(
+        63 │ + ··········command.type·===·"details.change"·&&
+        64 │ + ··········typeof·command.update·===·"object"·&&
+        65 │ + ··········command.update.rowId·===·null
+        66 │ + ········)
+        67 │ + ······)
+        68 │ + ········throw·new·Error("E_SOURCE_CLOSED");
+        69 │ + ····},
+    17  70 │     });
+    18     │ - ··let·snapshot·=·Object.freeze({·records,·view:·resource.getSnapshot(),·version·});
+    19     │ - ··const·publish·=·()·=>·{·snapshot·=·Object.freeze({·records,·view:·resource.getSnapshot(),·version:·++version·});·for·(const·notify·of·listeners)·notify();·};
+        71 │ + ··let·snapshot·=·Object.freeze({
+        72 │ + ····records,
+        73 │ + ····view:·resource.getSnapshot(),
+        74 │ + ····version,
+        75 │ + ··});
+        76 │ + ··const·publish·=·()·=>·{
+        77 │ + ····snapshot·=·Object.freeze({
+        78 │ + ······records,
+        79 │ + ······view:·resource.getSnapshot(),
+        80 │ + ······version:·++version,
+        81 │ + ····});
+        82 │ + ····for·(const·notify·of·listeners)·notify();
+        83 │ + ··};
+    20  84 │     function deliver() {
+    21  85 │       if (mode === "client") return;
+    22     │ - ····const·next·=·queued,·state·=·C.getSnapshot();
+    23     │ - ····if·(!live·||·!next·||·getQueryIdentity(D.native.controllerDefinition.schema,·next.query,·{·now:·CLOCK·})·!==·state.queryIdentity·||·state.evaluatedAt·!==·CLOCK·||·next.plan.page·!==·state.query.pagination.pageIndex·||·next.reply.length·!==·100)·throw·new·Error("E_PREPARED_REPLY_MISMATCH");
+    24     │ - ····const·started·=·beginControlsRequest(D.native,·C,·resource,·{·...context,·queryKey:·state.queryIdentity,·requestKey:·`wp14-read-${++serial}`,·extent:·{·kind:·"page",·...state.query.pagination·}·});
+    25     │ - ····if·(!started·||·started.request·!==·resource.getSnapshot().request·||·started.request.evaluatedAt·!==·CLOCK)·throw·new·Error("E_REQUEST_BEGIN");
+    26     │ - ····const·previous·=·accepted;·accepted·=·started.request;
+    27     │ - ····if·(!resource.succeed(started.request,·{·source:·"fresh",·records:·next.reply,·page:·mode·===·"server-known"·?·{·kind:·"known",·total:·next.oracle.total·}·:·{·kind:·"unknown",·hasNextPage:·next.oracle.hasNextPage·},·emptyKind:·"filtered",·receivedAt:·"2026-11-25T12:00:00Z"·}))·{·accepted·=·previous;·throw·new·Error("E_REQUEST_NOT_ACCEPTED");·}
+        86 │ + ····const·next·=·queued,
+        87 │ + ······state·=·C.getSnapshot();
+        88 │ + ····if·(
+        89 │ + ······!live·||
+        90 │ + ······!next·||
+        91 │ + ······getQueryIdentity(D.native.controllerDefinition.schema,·next.query,·{
+        92 │ + ········now:·CLOCK,
+        93 │ + ······})·!==·state.queryIdentity·||
+        94 │ + ······state.evaluatedAt·!==·CLOCK·||
+        95 │ + ······next.plan.page·!==·state.query.pagination.pageIndex·||
+        96 │ + ······next.reply.length·!==·100
+        97 │ + ····)
+        98 │ + ······throw·new·Error("E_PREPARED_REPLY_MISMATCH");
+        99 │ + ····const·started·=·beginControlsRequest(D.native,·C,·resource,·{
+       100 │ + ······...context,
+       101 │ + ······queryKey:·state.queryIdentity,
+       102 │ + ······requestKey:·`wp14-read-${++serial}`,
+       103 │ + ······extent:·{·kind:·"page",·...state.query.pagination·},
+       104 │ + ····});
+       105 │ + ····if·(
+       106 │ + ······!started·||
+       107 │ + ······started.request·!==·resource.getSnapshot().request·||
+       108 │ + ······started.request.evaluatedAt·!==·CLOCK
+       109 │ + ····)
+       110 │ + ······throw·new·Error("E_REQUEST_BEGIN");
+       111 │ + ····const·previous·=·accepted;
+       112 │ + ····accepted·=·started.request;
+       113 │ + ····if·(
+       114 │ + ······!resource.succeed(started.request,·{
+       115 │ + ········source:·"fresh",
+       116 │ + ········records:·next.reply,
+       117 │ + ········page:
+       118 │ + ··········mode·===·"server-known"
+       119 │ + ············?·{·kind:·"known",·total:·next.oracle.total·}
+       120 │ + ············:·{·kind:·"unknown",·hasNextPage:·next.oracle.hasNextPage·},
+       121 │ + ········emptyKind:·"filtered",
+       122 │ + ········receivedAt:·"2026-11-25T12:00:00Z",
+       123 │ + ······})
+       124 │ + ····)·{
+       125 │ + ······accepted·=·previous;
+       126 │ + ······throw·new·Error("E_REQUEST_NOT_ACCEPTED");
+       127 │ + ····}
+    28 128 │       queued = null;
+    29 129 │     }
+    ······ │ 
+    33 133 │     const stopController = C.subscribe(() => {
+    34 134 │       if (!live) return;
+  228 more lines truncated
+  
+
+tests/benchmarks/wp14/static.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     4   4 │   import ts from "typescript";
+     5   5 │   import { root, own, files } from "./scope.mjs";
+     6     │ - const·sources·=·(await·files(own)).filter((file)·=>·!file.startsWith(`${own}evidence/`)·&&·/\.(ts|tsx|mjs)$/.test(file));
+         6 │ + const·sources·=·(await·files(own)).filter(
+         7 │ + ··(file)·=>·!file.startsWith(`${own}evidence/`)·&&·/\.(ts|tsx|mjs)$/.test(file),
+         8 │ + );
+     7   9 │   for (const path of sources) {
+     8     │ - ··const·text·=·await·readFile(resolve(root,·path),·"utf8"),·file·=·ts.createSourceFile(path,·text,·ts.ScriptTarget.Latest,·true,·path.endsWith(".tsx")·?·ts.ScriptKind.TSX·:·path.endsWith(".ts")·?·ts.ScriptKind.TS·:·ts.ScriptKind.JS);
+        10 │ + ··const·text·=·await·readFile(resolve(root,·path),·"utf8"),
+        11 │ + ····file·=·ts.createSourceFile(
+        12 │ + ······path,
+        13 │ + ······text,
+        14 │ + ······ts.ScriptTarget.Latest,
+        15 │ + ······true,
+        16 │ + ······path.endsWith(".tsx")
+        17 │ + ········?·ts.ScriptKind.TSX
+        18 │ + ········:·path.endsWith(".ts")
+        19 │ + ··········?·ts.ScriptKind.TS
+        20 │ + ··········:·ts.ScriptKind.JS,
+        21 │ + ····);
+     9  22 │     assert.equal(file.parseDiagnostics.length, 0, path);
+    10     │ - ··if·(/\.tsx?$/.test(path))·assert(!/as·unknown·as|\bas·any\b|@ts-ignore|@ts-expect-error|\b(?:it|test)\.(?:skip|only|todo)\b/.test(text),·path);
+    11     │ - ··for·(const·node·of·file.statements)·if·(ts.isImportDeclaration(node))·{·const·name·=·node.moduleSpecifier.text;·assert(!name.startsWith("@dnd")·&&·name·!==·"@tableweave/heroui/sortable",·path);·}
+        23 │ + ··if·(/\.tsx?$/.test(path))
+        24 │ + ····assert(
+        25 │ + ······!/as·unknown·as|\bas·any\b|@ts-ignore|@ts-expect-error|\b(?:it|test)\.(?:skip|only|todo)\b/.test(
+        26 │ + ········text,
+        27 │ + ······),
+        28 │ + ······path,
+        29 │ + ····);
+        30 │ + ··for·(const·node·of·file.statements)
+        31 │ + ····if·(ts.isImportDeclaration(node))·{
+        32 │ + ······const·name·=·node.moduleSpecifier.text;
+        33 │ + ······assert(
+        34 │ + ········!name.startsWith("@dnd")·&&·name·!==·"@tableweave/heroui/sortable",
+        35 │ + ········path,
+        36 │ + ······);
+        37 │ + ····}
+    12  38 │     if (/\/(candidate|statistics)\.mjs$/.test(path)) {
+    13     │ - ····for·(const·statement·of·file.statements)·assert(!ts.isExpressionStatement(statement)·&&·!ts.isIfStatement(statement),·`${path}:·helper·import·action`);
+        39 │ + ····for·(const·statement·of·file.statements)
+        40 │ + ······assert(
+        41 │ + ········!ts.isExpressionStatement(statement)·&&·!ts.isIfStatement(statement),
+        42 │ + ········`${path}:·helper·import·action`,
+        43 │ + ······);
+    14  44 │     }
+    15     │ - ··if·(/\/(driver|report)\.mjs$/.test(path))·assert(text.includes("fileURLToPath(import.meta.url)"),·path);
+        45 │ + ··if·(/\/(driver|report)\.mjs$/.test(path))
+        46 │ + ····assert(text.includes("fileURLToPath(import.meta.url)"),·path);
+    16  47 │   }
+    17  48 │   const read = async (name) => readFile(resolve(root, own, name), "utf8");
+    18     │ - const·source·=·await·read("source.ts"),·timing·=·await·read("timing.ts"),·view·=·await·read("Benchmark.tsx"),·driver·=·await·read("driver.mjs"),·config·=·await·read("vite.config.ts");
+    19     │ - const·main·=·await·read("main.tsx");·assert(main.indexOf("timing.arm(context")·<·main.indexOf("const·D·=·define()"));·assert(main.includes("<Benchmark·key="));·assert(main.includes("E_RESET_DOM_NOT_MATCHED"));
+    20     │ - const·driverAst·=·ts.createSourceFile("driver.mjs",·driver,·ts.ScriptTarget.Latest,·true,·ts.ScriptKind.JS);·let·allowlist;
+    21     │ - for·(const·statement·of·driverAst.statements)·if·(ts.isVariableStatement(statement))·for·(const·decl...
+        49 │ + const·source·=·await·read("source.ts"),
+        50 │ + ··timing·=·await·read("timing.ts"),
+        51 │ + ··view·=·await·read("Benchmark.tsx"),
+        52 │ + ··driver·=·await·read("driver.mjs"),
+        53 │ + ··config·=·await·read("vite.config.ts");
+        54 │ + const·main·=·await·read("main.tsx");
+        55 │ + assert(main.indexOf("timing.arm(context")·<·main.indexOf("const·D·=·define()"));
+        56 │ + assert(main.includes("<Benchmark·key="));
+        57 │ + assert(main.includes("E_RESET_DOM_NOT_MATCHED"));
+        58 │ + const·driverAst·=·ts.createSourceFile(
+        59 │ + ··"driver.mjs",
+        60 │ + ··driver,
+        61 │ + ··ts.ScriptTarget.Latest,
+        62 │ + ··true,
+        63 │ + ··ts.ScriptKind.JS,
+        64 │ + );
+        65 │ + let·allowlist;
+        66 │ + for·(const·statement·of·driverAst.statements)
+        67 │ + ··if·(ts.isVariableStatement(statement))
+        68 │ + ····for·(const·declaration·of·statement.declarationList.declarations)
+        69 │ + ······if·(
+        70 │ + ········ts.isIdentifier(declaration.name)·&&
+        71 │ + ········declaration.name.text·===·"FILES"·&&
+        72 │ + ········declaration.initializer·&&
+        73 │ + ········ts.isArrayLiteralExpression(declaration.initializer)
+        74 │ + ······)
+        75 │ + ········allowlist·=·declaration.initializer.elements.map((element)·=>·{
+        76 │ + ··········assert(ts.isStringLiteral(element));
+        77 │ + ··········return·element.text;
+        78 │ + ········});
+    22  79 │   assert.equal(allowlist.length, 24);
+    23     │ - assert.deepEqual((await·files(own)).filter((path)·=>·!path.startsWith(`${own}evidence/`)).map((path)·=>·path.slice(own.length)).sort(),·[...allowlist].sort());
+    24     │ - assert(source.indexOf("timing.observe(state)")·<·source.indexOf("if·(state.queryIdentity·!==·observedQuery)"));
+    25     │ - assert(source.includes("P.complete(begun.ticket)")·&&·source.indexOf("records·=·mode·===")·>·source.indexOf("P.complete(begun.ticket)"));
+    26     │ - assert(source.includes("resource.succeed(started.request")·&&·source.includes("getControlsRequestBinding")·&&·source.includes("P.dispose().status·!==·\"disposed\""));
+    27     │ - assert(view.includes("requireDataTableModel(model,·source.D)")·&&·view.includes("model.view.rows")·&&·view.includes("presentation.displayed.queryIdentity")·&&·view.includes("tbody·>·tr")·&&·view.includes("dom"));
+    28     │ - assert(timing.includes("performance.now()")·&&·timing.includes("requestAnimationFrame")·&&·timing.includes("MessageChannel")·&&·timing.includes("assertCurrent()"));
+    29     │ - assert(driver.includes("paintReview(ctx,·run,·built)")·&&·driver.includes("Tracing.dataCollected")·&&·driver.includes("Screenshot")·&&·driver.includes("[34,·33,·33]")·&&·driver.includes("[\"warmup\",·10]"));
+    30     │ - assert(config.includes("6576")·&&·!config.includes("alias:")·&&·config.includes("emptyOutDir:·false"));
+    31     │ - const·fixture·=·ts.createSourceFile("fixture.ts",·await·read("fixture.ts"),·ts.ScriptTarget.Latest,·true);
+        80 │ + assert.deepEqual(
+        81 │ + ··(await·files(own))
+        82 │ + ····.filter((path)·=>·!path.startsWith(`${own}evidence/`))
+        83 │ + ····.map((path)·=>·path.slice(own.length))
+        84 │ + ····.sort(),
+        85 │ + ··[...allowlist].sort(),
+        86 │ + );
+        87 │ + assert(
+        88 │ + ··source.indexOf("timing.observe(state)")·<
+        89 │ + ····source.indexOf("if·(state.queryIdentity·!==·observedQuery)"),
+        90 │ + );
+        91 │ + assert(
+        92 │ + ··source.includes("P.complete(begun.ticket)")·&&
+        93 │ + ····source.indexOf("records·=·mode·===")·>
+        94 │ + ······source.indexOf("P.complete(begun.ticket)"),
+        95 │ + );
+        96 │ + assert(
+        97 │ + ··source.includes("resource.succeed(started.request")·&&
+        98 │ + ····source.includes("getControlsRequestBinding")·&&
+        99 │ + ····source.includes('P.dispose().status·!==·"disposed"'),
+       100 │ + );
+       101 │ + assert(
+       102 │ + ··view.includes("requireDataTableModel(model,·source.D)")·&&
+       103 │ + ····view.includes("model.view.rows")·&&
+       104 │ + ····view.includes("presentation.displayed.queryIdentity")·&&
+       105 │ + ····view.includes("tbody·>·tr")·&&
+       106 │ + ····view.includes("dom"),
+       107 │ + );
+       108 │ + assert(
+       109 │ + ··timing.includes("performance.now()")·&&
+       110 │ + ····timing.includes("requestAnimationFrame")·&&
+       111 │ + ····timing.includes("MessageChannel")·&&
+       112 │ + ····timing.includes("assertCurrent()"),
+       113 │ + );
+       114 │ + assert(
+       115 │ + ··driver.includes("paintReview(ctx,·run,·built)")·&&
+       116 │ + ····driver.includes("Tracing.dataCollected")·&&
+       117 │ + ····driver.includes("Screenshot")·&&
+       118 │ + ····driver.includes("[34,·33,·33]")·&&
+       119 │ + ····driver.includes('["warmup",·10]'),
+       120 │ + );
+       121 │ + assert(
+       122 │ + ··config.includes("6576")·&&
+       123 │ + ····!config.includes("alias:")·&&
+       124 │ + ····config.includes("emptyOutDir:·false"),
+       125 │ + );
+       126 │ + const·fixture·=·ts.createSourceFile(
+       127 │ + ··"fixture.ts",
+       128 │ + ··await·read("fixture.ts"),
+       129 │ + ··ts.ScriptTarget.Latest,
+       130 │ + ··true,
+       131 │ + );
+    32 132 │   let client, server;
+    33     │ - for·(const·node·of·fixture.statements)·if·(ts.isInterfaceDeclaration(node))·{·if·(node.name.text·===·"BenchClient")·client·=·node;·if·(node.name.text·===·"BenchServer")·server·=·node;·}
+    34     │ - assert.equal(client.members.length,·21);·assert.equal(server.members.length,·10);
+  26 more lines truncated
+  
+
+tests/benchmarks/wp14/statistics.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   /** Pure FINAL-only statistics. MJS unchecked by source LIGHT; never auto-runs. */
+     2   2 │   const modes = ["client", "server-known", "server-unknown"];
+     3     │ - const·kinds·=·["initial",·"all",·"any",·"join",·"sort",·"page",·"visibility",·"typing"];
+     4     │ - export·const·scenarioIds·=·modes.flatMap((mode)·=>·kinds.map((kind)·=>·`${mode}:${kind}`));
+     5     │ - export·function·requireValue(value,·code)·{·if·(!value)·throw·new·Error(code);·}
+         3 │ + const·kinds·=·[
+         4 │ + ··"initial",
+         5 │ + ··"all",
+         6 │ + ··"any",
+         7 │ + ··"join",
+         8 │ + ··"sort",
+         9 │ + ··"page",
+        10 │ + ··"visibility",
+        11 │ + ··"typing",
+        12 │ + ];
+        13 │ + export·const·scenarioIds·=·modes.flatMap((mode)·=>
+        14 │ + ··kinds.map((kind)·=>·`${mode}:${kind}`),
+        15 │ + );
+        16 │ + export·function·requireValue(value,·code)·{
+        17 │ + ··if·(!value)·throw·new·Error(code);
+        18 │ + }
+     6  19 │   const finite = (value) => typeof value === "number" && Number.isFinite(value);
+     7  20 │   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+     8     │ - export·function·nearest(values,·percentile)·{·requireValue(values.length·>·0·&&·values.every((value)·=>·finite(value)·&&·value·>=·0)·&&·finite(percentile)·&&·percentile·>·0·&&·percentile·<=·1,·"E_PERCENTILE_INPUT");·const·sorted·=·[...values].sort((a,·b)·=>·a·-·b);·return·sorted[Math.ceil(sorted.length·*·percentile)·-·1];·}
+     9     │ - function·stats(values)·{·const·mean·=·values.reduce((a,·b)·=>·a·+·b,·0)·/·values.length;·return·{·n:·values.length,·p50:·nearest(values,·0.5),·p95:·nearest(values,·0.95),·max:·Math.max(...values),·variance:·values.reduce((sum,·value)·=>·sum·+·(value·-·mean)·**·2,·0)·/·values.length·};·}
+        21 │ + export·function·nearest(values,·percentile)·{
+        22 │ + ··requireValue(
+        23 │ + ····values.length·>·0·&&
+        24 │ + ······values.every((value)·=>·finite(value)·&&·value·>=·0)·&&
+        25 │ + ······finite(percentile)·&&
+        26 │ + ······percentile·>·0·&&
+        27 │ + ······percentile·<=·1,
+        28 │ + ····"E_PERCENTILE_INPUT",
+        29 │ + ··);
+        30 │ + ··const·sorted·=·[...values].sort((a,·b)·=>·a·-·b);
+        31 │ + ··return·sorted[Math.ceil(sorted.length·*·percentile)·-·1];
+        32 │ + }
+        33 │ + function·stats(values)·{
+        34 │ + ··const·mean·=·values.reduce((a,·b)·=>·a·+·b,·0)·/·values.length;
+        35 │ + ··return·{
+        36 │ + ····n:·values.length,
+        37 │ + ····p50:·nearest(values,·0.5),
+        38 │ + ····p95:·nearest(values,·0.95),
+        39 │ + ····max:·Math.max(...values),
+        40 │ + ····variance:
+        41 │ + ······values.reduce((sum,·value)·=>·sum·+·(value·-·mean)·**·2,·0)·/
+        42 │ + ······values.length,
+        43 │ + ··};
+        44 │ + }
+    10  45 │   export function validateSample(value, expected) {
+    11     │ - ··requireValue(value·&&·typeof·value·===·"object"·&&·!Array.isArray(value),·"E_SAMPLE_OBJECT");
+    12     │ - ··const·fields·=·["run",·"session",·"scenario",·"phase",·"ordinal",·"sessionIndex",·"candidate",·"ru...
+    13     │ - ··requireValue(Object.keys(value).length·===·fields.length·&&·fields.every((key)·=>·Object.hasOwn(value,·key)),·"E_SAMPLE_FIELDS");
+    14     │ - ··for·(const·field·of·["run",·"candidate",·"runner",·"protocol",·"scheduler"])·requireValue(value[field]·===·expected[field],·"E_SAMPLE_INPUT_MISMATCH");
+    15     │ - ··for·(const·field·of·["candidate",·"runner",·"protocol"])·requireValue(typeof·value[field]·===·"string"·&&·/^[a-f0-9]{64}$/.test(value[field]),·"E_INPUT_DIGEST");
+    16     │ - ··requireValue(scenarioIds.includes(value.scenario)·&&·value.kind·===·value.scenario.split(":")[1],·"E_SCENARIO");
+    17     │ - ··requireValue(Number.isSafeInteger(value.sessionIndex)·&&·value.sessionIndex·>=·0·&&·value.sessionIndex·<=·2·&&·value.session·===·expected.sessions[value.sessionIndex]?.id,·"E_SESSION");
+    18     │ - ··requireValue(["warmup",·"measured"].includes(value.phase)·&&·Number.isSafeInteger(value.ordinal)·&&·value.ordinal·>=·0·&&·value.ordinal·<·(value.phase·===·"warmup"·?·10·:·[34,·33,·33][value.sessionIndex]),·"E_SAMPLE_DISTRIBUTION");
+    19     │ - ··requireValue(value.id·===·`${value.session}:${value.scenario}:${value.phase}:${value.ordinal}`,·"E_SAMPLE_ID");
+    20     │ - ··requireValue(finite(value.timeOrigin)·&&·value.timeOrigin·>·0·&&·value.timeOrigin·===·expected.sessions[value.sessionIndex].timeOrigin,·"E_CLOCK_ORIGIN");
+    21     │ - ··requireValue([value.action,·value.witness,·value.endpoint].every(finite)·&&·value.action·>=·0·&&·value.witness·>·value.action·&&·value.endpoint·>·value.witness,·"E_MARK_ORDER");
+    22     │ - ··requireValue(Number.isSafeInteger(value.revision)·&&·value.revision·>=·0·&&·/^[a-f0-9]{8}$/.test(value.query)·&&·value.query·===·value.expectedQuery·&&·/^[a-f0-9]{8}$/.test(value.oracle),·"E_ACCEPTED_IDENTITY");
+    23     │ - ··if·(value.kind·===·"initial")·requireValue(value.commit·===·null·&&·value.previousRevision·===·null·&&·value.previousQuery·===·null,·"E_INITIAL_BOUNDARY");
+    24     │ - ··else·{·requireValue(finite(value.commit)·&&·value.commit·>=·value.action·&&·value.commit·<·value.w...
+        46 │ + ··requireValue(
+        47 │ + ····value·&&·typeof·value·===·"object"·&&·!Array.isArray(value),
+        48 │ + ····"E_SAMPLE_OBJECT",
+        49 │ + ··);
+        50 │ + ··const·fields·=·[
+        51 │ + ····"run",
+        52 │ + ····"session",
+        53 │ + ····"scenario",
+        54 │ + ····"phase",
+        55 │ + ····"ordinal",
+        56 │ + ····"sessionIndex",
+        57 │ + ····"candidate",
+        58 │ + ····"runner",
+        59 │ + ····"protocol",
+        60 │ + ····"kind",
+        61 │ + ····"id",
+        62 │ + ····"action",
+        63 │ + ····"commit",
+        64 │ + ····"witness",
+        65 │ + ····"endpoint",
+        66 │ + ····"timeOrigin",
+        67 │ + ····"revision",
+        68 │ + ····"query",
+        69 │ + ····"oracle",
+        70 │ + ····"rowCount",
+        71 │ + ····"columnCount",
+        72 │ + ····"inputCount",
+        73 │ + ····"page",
+        74 │ + ····"cells",
+        75 │ + ····"expectedCells",
+        76 │ + ····"ids",
+        77 │ + ····"expectedIds",
+        78 │ + ····"headers",
+        79 │ + ····"expectedHeaders",
+        80 │ + ····"previousRevision",
+        81 │ + ····"previousQuery",
+        82 │ + ····"expectedQuery",
+        83 │ + ····"firstKey",
+        84 │ + ····"lastKey",
+        85 │ + ····"seed",
+        86 │ + ····"generator",
+        87 │ + ····"semanticClock",
+        88 │ + ····"scheduler",
+        89 │ + ····"binding",
+        90 │ + ····"total",
+        91 │ + ····"hasNextPage",
+        92 │ + ····"exclusions",
+        93 │ + ··];
+        94 │ + ··requireValue(
+        95 │ + ····Object.keys(value).length·===·fields.length·&&
+        96 │ + ······fields.every((key)·=>·Object.hasOwn(value,·key)),
+        97 │ + ····"E_SAMPLE_FIELDS",
+        98 │ + ··);
+        99 │ + ··for·(const·field·of·["run",·"candidate",·"runner",·"protocol",·"scheduler"])
+       100 │ + ····requireValue(value[field]·===·expected[field],·"E_SAMPLE_INPUT_MISMATCH");
+       101 │ + ··for·(const·field·of·["candidate",·"runner",·"protocol"])
+       102 │ + ····requireValue(
+       103 │ + ······typeof·value[field]·===·"string"·&&·/^[a-f0-9]{64}$/.test(value[field]),
+       104 │ + ······"E_INPUT_DIGEST",
+       105 │ + ····);
+       106 │ + ··requireValue(
+       107 │ + ····scenarioIds.includes(value.scenario)·&&
+       108 │ + ······value.kind·===·value.scenario.split(":")[1],
+       109 │ + ····"E_SCENARIO",
+       110 │ + ··);
+       111 │ + ··requireValue(
+       112 │ + ····Number.isSafeInteger(value.sessionIndex)·&&
+       113 │ + ······value.sessionIndex·>=·0·&&
+       114 │ + ······value.sessionIndex·<=·2·&&
+       115 │ + ······value.session·===·expected.sessions[value.sessionIndex]?.id,
+       116 │ + ····"E_SESSION",
+       117 │ + ··);
+       118 │ + ··requireValue(
+       119 │ + ····["warmup",·"measured"].includes(value.phase)·&&
+       120 │ + ······Number.isSafeInteger(value.ordinal)·&&
+       121 │ + ······value.ordinal·>=·0·&&
+       122 │ + ······value.ordinal·<
+       123 │ + ········(value.phase·===·"warmup"·?·10·:·[34,·33,·33][value.sessionIndex]),
+       124 │ + ····"E_SAMPLE_DISTRIBUTION",
+       125 │ + ··);
+       126 │ + ··requireValue(
+       127 │ + ····value.id·===
+       128 │ + ······`${value.session}:${value.scenario}:${value.phase}:${value.ordinal}`,
+       129 │ + ····"E_SAMPLE_ID",
+       130 │ + ··);
+       131 │ + ··requireValue(
+  333 more lines truncated
+  
+
+tests/benchmarks/wp14/statistics.test.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2   2 │   import assert from "node:assert/strict";
+     3   3 │   import { it } from "node:test";
+     4     │ - import·{·analyze,·nearest,·scenarioIds,·validateSample·}·from·"./statistics.mjs";
+         4 │ + import·{
+         5 │ + ··analyze,
+         6 │ + ··nearest,
+         7 │ + ··scenarioIds,
+         8 │ + ··validateSample,
+         9 │ + }·from·"./statistics.mjs";
+     5  10 │   import type { Sample } from "./timing.js";
+     6  11 │   function synthetic() {
+     7     │ - ··const·run·=·"unit-synthetic-never-observed",·candidate·=·"a".repeat(64),·runner·=·"b".repeat(64),·protocol·=·"c".repeat(64),·scheduler·=·"committed-dom-double-raf-message-task-v1";
+     8     │ - ··const·ids·=·Array.from({·length:·100·},·(_,·index)·=>·`wp14-${String(index).padStart(6,·"0")}`);
+     9     │ - ··const·sessions·=·[0,·1,·2].map((index)·=>·({·id:·`measurement-${index}`,·pid:·100·+·index,·timeOrigin:·1_000_000·+·index,·observation:·runner,·scopes:·Object.fromEntries(scenarioIds.map((id:·string)·=>·[id,·"abcd1234"]))·}));
+    10     │ - ··const·oracles:·Record<string,·{·digest:·string;·query:·string;·cells:·string;·ids:·string[];·headers:·string[];·page:·number;·total:·number;·hasNextPage:·boolean·}>·=·{};
+        12 │ + ··const·run·=·"unit-synthetic-never-observed",
+        13 │ + ····candidate·=·"a".repeat(64),
+        14 │ + ····runner·=·"b".repeat(64),
+        15 │ + ····protocol·=·"c".repeat(64),
+        16 │ + ····scheduler·=·"committed-dom-double-raf-message-task-v1";
+        17 │ + ··const·ids·=·Array.from(
+        18 │ + ····{·length:·100·},
+        19 │ + ····(_,·index)·=>·`wp14-${String(index).padStart(6,·"0")}`,
+        20 │ + ··);
+        21 │ + ··const·sessions·=·[0,·1,·2].map((index)·=>·({
+        22 │ + ····id:·`measurement-${index}`,
+        23 │ + ····pid:·100·+·index,
+        24 │ + ····timeOrigin:·1_000_000·+·index,
+        25 │ + ····observation:·runner,
+        26 │ + ····scopes:·Object.fromEntries(
+        27 │ + ······scenarioIds.map((id:·string)·=>·[id,·"abcd1234"]),
+        28 │ + ····),
+        29 │ + ··}));
+        30 │ + ··const·oracles:·Record<
+        31 │ + ····string,
+        32 │ + ····{
+        33 │ + ······digest:·string;
+        34 │ + ······query:·string;
+        35 │ + ······cells:·string;
+        36 │ + ······ids:·string[];
+        37 │ + ······headers:·string[];
+        38 │ + ······page:·number;
+        39 │ + ······total:·number;
+        40 │ + ······hasNextPage:·boolean;
+        41 │ + ····}
+        42 │ + ··>·=·{};
+    11  43 │     const samples: Sample[] = [];
+    12  44 │     for (const [index, session] of sessions.entries()) {
+    13  45 │       let cursor = 1;
+    14  46 │       for (const scenario of scenarioIds) {
+    15     │ - ······const·server·=·scenario.startsWith("server-"),·kind·=·scenario.split(":")[1];
+    16     │ - ······if·(typeof·kind·!==·"string"·||·!["initial",·"all",·"any",·"join",·"sort",·"page",·"visibility",·"typing"].includes(kind))·throw·new·Error("E_UNIT_KIND");
+    17     │ - ······for·(const·phase·of·["warmup",·"measured"]·as·const)·for·(let·ordinal·=·0;·ordinal·<·(phase·===·"warmup"·?·10·:·index·===·0·?·34·:·33);·ordinal++)·{
+    18     │ - ········const·headers·=·["reference",·...Array.from({·length:·(server·?·30·:·20)·-·1·},·(_,·item)·=>·`field${item}`)],·key·=·`${scenario}:${phase}:${ordinal·%·2}`;
+    19     │ - ········oracles[key]·=·{·digest:·"1234abcd",·query:·"11223344",·cells:·"aabbccdd",·ids,·headers,·page:·0,·total:·1000,·hasNextPage:·true·};
+    20     │ - ········const·typedKind·=·kind·===·"initial"·?·"initial"·:·kind·===·"all"·?·"all"·:·kind·===·"any"·?·"any"·:·kind·===·"join"·?·"join"·:·kind·===·"sort"·?·"sort"·:·kind·===·"page"·?·"page"·:·kind·===·"visibility"·?·"visibility"·:·"typing";
+    21     │ - ········const·value:·Sample·=·{·run,·candidate,·runner,·protocol,·scheduler,·session:·session.id,·sessionIndex:·index·===·0·?·0·:·index·===·1·?·1·:·2,·scenario,·phase,·ordinal,·kind:·typedKind,·id:·`${session.id}:${scenario}:${phase}:${ordinal}`,·action:·cursor,·commit:·kind·===·"initial"·?·null·:·kind·===·"typing"·?·cursor·+·302·:·cursor·+·1,·witness:·cursor·+·310,·endpoint:·cursor·+·320,
+    22     │ - ··········timeOrigin:·session.timeOrigin,·revision:·1,·previousRevision:·kind·===·"initial"·?·null·:...
+    23     │ - ··········firstKey:·kind·===·"typing"·?·cursor·+·1·:·null,·lastKey:·kind·===·"typing"·?·cursor·+·2·:·null,·seed:·0x57503134,·generator:·"xorshift32-row-v1",·semanticClock:·1795608000000,
+    24     │ - ··········binding:·server·?·{·definition:·"wp14-server-reference",·scope:·"abcd1234",·query:·"11223344",·generation:·1,·request:·"wp14-read-1",·evaluatedAt:·1795608000000,·page:·0,·size:·100·}·:·null,
+    25     │ - ··········total:·scenario.startsWith("server-unknown")·?·null·:·1000,·hasNextPage:·scenario.startsWith("server-unknown")·?·true·:·null,
+    26     │ - ··········exclusions:·{·network:·null,·backend:·null,·startup:·null,·ssr:·null,·customRenderer:·null,·reason:·"UNIT·SYNTHETIC·NUMERIC·VECTOR·NOT·MEASURED",·debounceMs:·kind·===·"typing"·?·300·:·null·},
+    27     │ - ········};
+    28     │ - ········samples.push(value);·cursor·+=·500;
+    29     │ - ······}
+        47 │ + ······const·server·=·scenario.startsWith("server-"),
+        48 │ + ········kind·=·scenario.split(":")[1];
+        49 │ + ······if·(
+        50 │ + ········typeof·kind·!==·"string"·||
+        51 │ + ········![
+        52 │ + ··········"initial",
+        53 │ + ··········"all",
+        54 │ + ··········"any",
+        55 │ + ··········"join",
+        56 │ + ··········"sort",
+        57 │ + ··········"page",
+        58 │ + ··········"visibility",
+        59 │ + ··········"typing",
+        60 │ + ········].includes(kind)
+        61 │ + ······)
+        62 │ + ········throw·new·Error("E_UNIT_KIND");
+        63 │ + ······for·(const·phase·of·["warmup",·"measured"]·as·const)
+        64 │ + ········for·(
+        65 │ + ··········let·ordinal·=·0;
+        66 │ + ··········ordinal·<·(phase·===·"warmup"·?·10·:·index·===·0·?·34·:·33);
+        67 │ + ··········ordinal++
+        68 │ + ········)·{
+        69 │ + ··········const·headers·=·[
+        70 │ + ··············"reference",
+        71 │ + ··············...Array.from(
+        72 │ + ················{·length:·(server·?·30·:·20)·-·1·},
+        73 │ + ················(_,·item)·=>·`field${item}`,
+        74 │ + ··············),
+        75 │ + ············],
+        76 │ + ············key·=·`${scenario}:${phase}:${ordinal·%·2}`;
+        77 │ + ··········oracles[key]·=·{
+        78 │ + ············digest:·"1234abcd",
+        79 │ + ············query:·"11223344",
+        80 │ + ············cells:·"aabbccdd",
+        81 │ + ············ids,
+        82 │ + ············headers,
+        83 │ + ············page:·0,
+        84 │ + ············total:·1000,
+        85 │ + ············hasNextPage:·true,
+        86 │ + ··········};
+        87 │ + ··········const·typedKind·=
+        88 │ + ············kind·===·"initial"
+        89 │ + ··············?·"initial"
+        90 │ + ··············:·kind·===·"all"
+        91 │ + ················?·"all"
+        92 │ + ················:·kind·===·"any"
+        93 │ + ··················?·"any"
+        94 │ + ··················:·kind·===·"join"
+        95 │ + ····················?·"join"
+        96 │ + ····················:·kind·===·"sort"
+        97 │ + ······················?·"sort"
+        98 │ + ······················:·kind·===·"page"
+        99 │ + ························?·"page"
+       100 │ + ························:·kind·===·"visibility"
+       101 │ + ··························?·"visibility"
+       102 │ + ··························:·"typing";
+       103 │ + ··········const·value:·Sample·=·{
+       104 │ + ············run,
+       105 │ + ············candidate,
+       106 │ + ············runner,
+       107 │ + ············protocol,
+       108 │ + ············scheduler,
+       109 │ + ············session:·session.id,
+       110 │ + ············sessionIndex:·index·===·0·?·0·:·index·===·1·?·1·:·2,
+       111 │ + ············scenario,
+       112 │ + ············phase,
+       113 │ + ············ordinal,
+       114 │ + ············kind:·typedKind,
+       115 │ + ············id:·`${session.id}:${scenario}:${phase}:${ordinal}`,
+       116 │ + ············action:·cursor,
+       117 │ + ············commit:
+       118 │ + ··············kind·===·"initial"
+       119 │ + ················?·null
+       120 │ + ················:·kind·===·"typing"
+       121 │ + ··················?·cursor·+·302
+       122 │ + ··················:·cursor·+·1,
+       123 │ + ············witness:·cursor·+·310,
+       124 │ + ············endpoint:·cursor·+·320,
+       125 │ + ············timeOrigin:·session.timeOrigin,
+       126 │ + ············revision:·1,
+       127 │ + ············previousRevision:·kind·===·"initial"·?·null·:·0,
+       128 │ + ············query:·"11223344",
+       129 │ + ············expectedQuery:·"11223344",
+       130 │ + ············previousQuery:
+       131 │ + ··············kind·===·"initial"
+  165 more lines truncated
+  
+
+tests/benchmarks/wp14/styles.css format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5  5 │   @source "./*.tsx";
+     6  6 │   @source "../node_modules/@tableweave/heroui/dist/**/*.js";
+     7    │ - html·{·color-scheme:·light;·}
+     8    │ - body·{·margin:·16px;·}
+     9    │ - .wp14-table·{·width:·100%;·max-width:·1408px;·overflow:·auto;·}
+    10    │ - .wp14-table·table·{·min-width:·max-content;·}
+    11    │ - .wp14-table·th,·.wp14-table·td·{·min-width:·8rem;·white-space:·nowrap;·}
+        7 │ + html·{
+        8 │ + ··color-scheme:·light;
+        9 │ + }
+       10 │ + body·{
+       11 │ + ··margin:·16px;
+       12 │ + }
+       13 │ + .wp14-table·{
+       14 │ + ··width:·100%;
+       15 │ + ··max-width:·1408px;
+       16 │ + ··overflow:·auto;
+       17 │ + }
+       18 │ + .wp14-table·table·{
+       19 │ + ··min-width:·max-content;
+       20 │ + }
+       21 │ + .wp14-table·th,
+       22 │ + .wp14-table·td·{
+       23 │ + ··min-width:·8rem;
+       24 │ + ··white-space:·nowrap;
+       25 │ + }
+    12 26 │   
+  
+
+tests/benchmarks/wp14/timing.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2   2 │   import type { Kind } from "./scenarios.js";
+     3   3 │   export const SCHEDULER = "committed-dom-double-raf-message-task-v1";
+     4     │ - export·interface·SampleContext·{·readonly·run:·string;·readonly·session:·string;·readonly·scenario:·string;·readonly·phase:·"warmup"·|·"measured"·|·"validation";·readonly·ordinal:·number;·readonly·sessionIndex:·0·|·1·|·2;·readonly·candidate:·string;·readonly·runner:·string;·readonly·protocol:·string;·}
+         4 │ + export·interface·SampleContext·{
+         5 │ + ··readonly·run:·string;
+         6 │ + ··readonly·session:·string;
+         7 │ + ··readonly·scenario:·string;
+         8 │ + ··readonly·phase:·"warmup"·|·"measured"·|·"validation";
+         9 │ + ··readonly·ordinal:·number;
+        10 │ + ··readonly·sessionIndex:·0·|·1·|·2;
+        11 │ + ··readonly·candidate:·string;
+        12 │ + ··readonly·runner:·string;
+        13 │ + ··readonly·protocol:·string;
+        14 │ + }
+     5  15 │   export interface Sample extends SampleContext {
+     6     │ - ··readonly·kind:·Kind;·readonly·id:·string;·readonly·action:·number;·readonly·commit:·number·|·null;·readonly·witness:·number;·readonly·endpoint:·number;
+     7     │ - ··readonly·timeOrigin:·number;·readonly·revision:·number;·readonly·query:·string;·readonly·oracle:·string;
+     8     │ - ··readonly·rowCount:·number;·readonly·columnCount:·number;·readonly·inputCount:·number;·readonly·page:·number;
+     9     │ - ··readonly·cells:·string;·readonly·expectedCells:·string;·readonly·ids:·readonly·string[];·readonly·expectedIds:·readonly·string[];
+    10     │ - ··readonly·headers:·readonly·string[];·readonly·expectedHeaders:·readonly·string[];·readonly·previousRevision:·number·|·null;
+    11     │ - ··readonly·previousQuery:·string·|·null;·readonly·expectedQuery:·string;·readonly·firstKey:·number·|·null;·readonly·lastKey:·number·|·null;
+    12     │ - ··readonly·seed:·number;·readonly·generator:·string;·readonly·semanticClock:·number;·readonly·scheduler:·string;
+        16 │ + ··readonly·kind:·Kind;
+        17 │ + ··readonly·id:·string;
+        18 │ + ··readonly·action:·number;
+        19 │ + ··readonly·commit:·number·|·null;
+        20 │ + ··readonly·witness:·number;
+        21 │ + ··readonly·endpoint:·number;
+        22 │ + ··readonly·timeOrigin:·number;
+        23 │ + ··readonly·revision:·number;
+        24 │ + ··readonly·query:·string;
+        25 │ + ··readonly·oracle:·string;
+        26 │ + ··readonly·rowCount:·number;
+        27 │ + ··readonly·columnCount:·number;
+        28 │ + ··readonly·inputCount:·number;
+        29 │ + ··readonly·page:·number;
+        30 │ + ··readonly·cells:·string;
+        31 │ + ··readonly·expectedCells:·string;
+        32 │ + ··readonly·ids:·readonly·string[];
+        33 │ + ··readonly·expectedIds:·readonly·string[];
+        34 │ + ··readonly·headers:·readonly·string[];
+        35 │ + ··readonly·expectedHeaders:·readonly·string[];
+        36 │ + ··readonly·previousRevision:·number·|·null;
+        37 │ + ··readonly·previousQuery:·string·|·null;
+        38 │ + ··readonly·expectedQuery:·string;
+        39 │ + ··readonly·firstKey:·number·|·null;
+        40 │ + ··readonly·lastKey:·number·|·null;
+        41 │ + ··readonly·seed:·number;
+        42 │ + ··readonly·generator:·string;
+        43 │ + ··readonly·semanticClock:·number;
+        44 │ + ··readonly·scheduler:·string;
+    13  45 │     readonly binding: Binding | null;
+    14     │ - ··readonly·total:·number·|·null;·readonly·hasNextPage:·boolean·|·null;
+    15     │ - ··readonly·exclusions:·{·readonly·network:·null;·readonly·backend:·null;·readonly·startup:·null;·readonly·ssr:·null;·readonly·customRenderer:·null;·readonly·reason:·string;·readonly·debounceMs:·300·|·null·};
+        46 │ + ··readonly·total:·number·|·null;
+        47 │ + ··readonly·hasNextPage:·boolean·|·null;
+        48 │ + ··readonly·exclusions:·{
+        49 │ + ····readonly·network:·null;
+        50 │ + ····readonly·backend:·null;
+        51 │ + ····readonly·startup:·null;
+        52 │ + ····readonly·ssr:·null;
+        53 │ + ····readonly·customRenderer:·null;
+        54 │ + ····readonly·reason:·string;
+        55 │ + ····readonly·debounceMs:·300·|·null;
+        56 │ + ··};
+    16  57 │   }
+    17     │ - export·interface·Binding·{·readonly·definition:·string;·readonly·scope:·string;·readonly·query:·string;·readonly·generation:·number;·readonly·request:·string;·readonly·evaluatedAt:·number·|·undefined;·readonly·page:·number;·readonly·size:·number;·}
+    18     │ - interface·Pending·{·readonly·context:·SampleContext;·readonly·kind:·Kind;·readonly·action:·number;·readonly·oracle:·Oracle;·readonly·expectedQuery:·string;·readonly·previousRevision:·number·|·null;·readonly·previousQuery:·string·|·null;·commit:·number·|·null;·revision:·number·|·null;·firstKey:·number·|·null;·lastKey:·number·|·null;·resolving:·boolean;·}
+        58 │ + export·interface·Binding·{
+        59 │ + ··readonly·definition:·string;
+        60 │ + ··readonly·scope:·string;
+        61 │ + ··readonly·query:·string;
+        62 │ + ··readonly·generation:·number;
+        63 │ + ··readonly·request:·string;
+        64 │ + ··readonly·evaluatedAt:·number·|·undefined;
+        65 │ + ··readonly·page:·number;
+        66 │ + ··readonly·size:·number;
+        67 │ + }
+        68 │ + interface·Pending·{
+        69 │ + ··readonly·context:·SampleContext;
+        70 │ + ··readonly·kind:·Kind;
+        71 │ + ··readonly·action:·number;
+        72 │ + ··readonly·oracle:·Oracle;
+        73 │ + ··readonly·expectedQuery:·string;
+        74 │ + ··readonly·previousRevision:·number·|·null;
+        75 │ + ··readonly·previousQuery:·string·|·null;
+        76 │ + ··commit:·number·|·null;
+        77 │ + ··revision:·number·|·null;
+        78 │ + ··firstKey:·number·|·null;
+        79 │ + ··lastKey:·number·|·null;
+        80 │ + ··resolving:·boolean;
+        81 │ + }
+    19  82 │   export function createTiming() {
+    20     │ - ··let·pending:·Pending·|·null·=·null,·result:·Sample·|·null·=·null,·failure:·string·|·null·=·null;
+    21     │ - ··let·resetTarget:·{·readonly·oracle:·Oracle;·readonly·expectedQuery:·string·}·|·null·=·null,·ready·=·false;
+    22     │ - ··function·arm(context:·SampleContext,·kind:·Kind,·oracle:·Oracle,·expectedQuery:·string,·before:·{·revision:·number;·queryIdentity:·string·}·|·null)·{
+        83 │ + ··let·pending:·Pending·|·null·=·null,
+        84 │ + ····result:·Sample·|·null·=·null,
+        85 │ + ····failure:·string·|·null·=·null;
+        86 │ + ··let·resetTarget:·{
+        87 │ + ······readonly·oracle:·Oracle;
+        88 │ + ······readonly·expectedQuery:·string;
+        89 │ + ····}·|·null·=·null,
+        90 │ + ····ready·=·false;
+        91 │ + ··function·arm(
+        92 │ + ····context:·SampleContext,
+        93 │ + ····kind:·Kind,
+        94 │ + ····oracle:·Oracle,
+        95 │ + ····expectedQuery:·string,
+        96 │ + ····before:·{·revision:·number;·queryIdentity:·string·}·|·null,
+        97 │ + ··)·{
+    23  98 │       if (pending) throw new Error("E_SAMPLE_OVERLAP");
+    24     │ - ····result·=·null;·failure·=·null;·resetTarget·=·null;·ready·=·false;
+    25     │ - ····pending·=·{·context,·kind,·oracle,·expectedQuery,·action:·performance.now(),·previousRevision:·before?.revision·??·null,·previousQuery:·before?.queryIdentity·??·null,·commit:·null,·revision:·null,·firstKey:·null,·lastKey:·null,·resolving:·false·};
+    26     │ - ····performance.mark(`wp14:${context.session}:${context.scenario}:${context.phase}:${context.ordinal}:action`);
+        99 │ + ····result·=·null;
+       100 │ + ····failure·=·null;
+       101 │ + ····resetTarget·=·null;
+       102 │ + ····ready·=·false;
+       103 │ + ····pending·=·{
+       104 │ + ······context,
+       105 │ + ······kind,
+       106 │ + ······oracle,
+       107 │ + ······expectedQuery,
+       108 │ + ······action:·performance.now(),
+       109 │ + ······previousRevision:·before?.revision·??·null,
+       110 │ + ······previousQuery:·before?.queryIdentity·??·null,
+       111 │ + ······commit:·null,
+       112 │ + ······revision:·null,
+       113 │ + ······firstKey:·null,
+       114 │ + ······lastKey:·null,
+       115 │ + ······resolving:·false,
+       116 │ + ····};
+       117 │ + ····performance.mark(
+       118 │ + ······`wp14:${context.session}:${context.scenario}:${context.phase}:${context.ordinal}:action`,
+       119 │ + ····);
+    27 120 │     }
+    28 121 │     return {
+    29 122 │       arm,
+    30     │ - ····reset(oracle:·Oracle,·expectedQuery:·string)·{·if·(pending)·throw·new·Error("E_SAMPLE_OVERLAP");·resetTarget·=·{·oracle,·expectedQuery·};·ready·=·false;·result·=·null;·failure·=·null;·},
+    31     │ - ····get·target()·{·return·pending·??·resetTarget;·},
+    32     │ - ····get·ready()·{·return·ready;·},
+    33     │ - ····resetMatched(state:·{·queryIdentity:·string·},·dom:·{·ids:·readonly·string[];·headers:·readonly·string[];·cells:·string·})·{·const·p·=·resetTarget;·if·(p·&&·state.queryIdentity·===·p.expectedQuery·&&·JSON.stringify(dom.ids)·===·JSON.stringify(p.oracle.ids)·&&·JSON.stringify(dom.headers)·===·JSON.stringify(p.oracle.headers)·&&·dom.cells·===·p.oracle.cells)·ready·=·true;·},
+    34     │ - ····observe(state:·{·readonly·revision:·number;·readonly·queryIdentity:·string·})·{
+    35     │ - ······const·p·=·pending;·if·(!p·||·p.kind·===·"initial")·return;
+    36     │ - ······if·(p.commit·!==·null·||·state.revision·===·p.previousRevision)·{·failure·=·"E_MULTIPLE_OR_NOOP_COMMIT";·return;·}
+    37     │ - ······p.commit·=·performance.now();·p.revision·=·state.revision;
+    38     │ - ······if·(p.expectedQuery·!==·state.queryIdentity·||·(p.kind·!==·"visibility"·&&·p.previousQuery·===·state.queryIdentity))·failure·=·"E_COMMIT_IDENTITY";
+    39     │ - ······performance.mark(`wp14:${p.context.session}:${p.context.scenario}:${p.context.phase}:${p.context.ordinal}:commit`);
+       123 │ + ····reset(oracle:·Oracle,·expectedQuery:·string)·{
+  190 more lines truncated
+  
+
+tests/benchmarks/wp14/tsconfig.source-light.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2  2 │     "extends": "../../../tsconfig.base.json",
+     3  3 │     "compilerOptions": {
+     4    │ - ····"noEmit":·true,·"incremental":·false,·"module":·"ESNext",·"moduleResolution":·"Bundler",·"jsx":·"react-jsx",·"allowJs":·true,·"checkJs":·false,
+     5    │ - ····"lib":·["ESNext",·"DOM",·"DOM.Iterable"],·"types":·["node",·"vite/client",·"react",·"react-dom"],
+        4 │ + ····"noEmit":·true,
+        5 │ + ····"incremental":·false,
+        6 │ + ····"module":·"ESNext",
+        7 │ + ····"moduleResolution":·"Bundler",
+        8 │ + ····"jsx":·"react-jsx",
+        9 │ + ····"allowJs":·true,
+       10 │ + ····"checkJs":·false,
+       11 │ + ····"lib":·["ESNext",·"DOM",·"DOM.Iterable"],
+       12 │ + ····"types":·["node",·"vite/client",·"react",·"react-dom"],
+     6 13 │       "paths": {
+     7 14 │         "@tableweave/react": ["../../../packages/react/src/index.ts"],
+     8    │ - ······"@tableweave/react/contracts":·["../../../packages/react/src/contracts/index.ts"],
+     9    │ - ······"@tableweave/react/filters":·["../../../packages/react/src/filters/index.ts"],
+    10    │ - ······"@tableweave/react/reordering":·["../../../packages/react/src/reordering/index.ts"],
+    11    │ - ······"@tableweave/react/reordering-controller":·["../../../packages/react/src/reordering-controller/index.ts"],
+       15 │ + ······"@tableweave/react/contracts":·[
+       16 │ + ········"../../../packages/react/src/contracts/index.ts"
+       17 │ + ······],
+       18 │ + ······"@tableweave/react/filters":·[
+       19 │ + ········"../../../packages/react/src/filters/index.ts"
+       20 │ + ······],
+       21 │ + ······"@tableweave/react/reordering":·[
+       22 │ + ········"../../../packages/react/src/reordering/index.ts"
+       23 │ + ······],
+       24 │ + ······"@tableweave/react/reordering-controller":·[
+       25 │ + ········"../../../packages/react/src/reordering-controller/index.ts"
+       26 │ + ······],
+    12 27 │         "@tableweave/heroui": ["../../../packages/heroui/src/index.ts"],
+    13    │ - ······"@tanstack/react-table":·["../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"],
+    14    │ - ······"@internationalized/date":·["../../../packages/react/node_modules/@internationalized/date"],
+    15    │ - ······"@heroui/react/*":·["../../../apps/storybook/node_modules/@heroui/react/dist/components/*/index.d.ts"],
+    16    │ - ······"react-aria-components/I18nProvider":·["../../../apps/storybook/node_modules/react-aria-components/dist/types/exports/I18nProvider.d.ts"],
+    17    │ - ······"@vitejs/plugin-react":·["../../../apps/storybook/node_modules/@vitejs/plugin-react/dist/index.d.ts"],
+    18    │ - ······"@tailwindcss/vite":·["../../../apps/storybook/node_modules/@tailwindcss/vite/dist/index.d.mts"]
+       28 │ + ······"@tanstack/react-table":·[
+       29 │ + ········"../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+       30 │ + ······],
+       31 │ + ······"@internationalized/date":·[
+       32 │ + ········"../../../packages/react/node_modules/@internationalized/date"
+       33 │ + ······],
+       34 │ + ······"@heroui/react/*":·[
+       35 │ + ········"../../../apps/storybook/node_modules/@heroui/react/dist/components/*/index.d.ts"
+       36 │ + ······],
+       37 │ + ······"react-aria-components/I18nProvider":·[
+       38 │ + ········"../../../apps/storybook/node_modules/react-aria-components/dist/types/exports/I18nProvider.d.ts"
+       39 │ + ······],
+       40 │ + ······"@vitejs/plugin-react":·[
+       41 │ + ········"../../../apps/storybook/node_modules/@vitejs/plugin-react/dist/index.d.ts"
+       42 │ + ······],
+       43 │ + ······"@tailwindcss/vite":·[
+       44 │ + ········"../../../apps/storybook/node_modules/@tailwindcss/vite/dist/index.d.mts"
+       45 │ + ······]
+    19 46 │       }
+    20 47 │     },
+    21    │ - ··"include":·["./*.ts",·"./*.tsx"],·"exclude":·["evidence",·"node_modules"]
+       48 │ + ··"include":·["./*.ts",·"./*.tsx"],
+       49 │ + ··"exclude":·["evidence",·"node_modules"]
+    22 50 │   }
+    23 51 │   
+  
+
+tests/benchmarks/wp14/vite.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6  6 │   import { fileURLToPath } from "node:url";
+     7  7 │   const root = dirname(fileURLToPath(import.meta.url));
+     8    │ - export·default·defineConfig({·root,·plugins:·[react(),·tailwind(),·{
+     9    │ - ··name:·"wp14-actual-bundle-graph",
+    10    │ - ··generateBundle(_options,·bundle)·{
+    11    │ - ····const·target·=·resolve(root,·"../wp14-bundle.json");·if·(existsSync(target))·throw·new·Error("E_BUNDLE_RECEIPT_EXISTS");
+    12    │ - ····const·chunks·=·Object.fromEntries(Object.entries(bundle).map(([key,·entry])·=>·[key,·entry.type·===·"chunk"·?·{·type:·entry.type,·modules:·Object.fromEntries(Object.entries(entry.modules).map(([id,·value])·=>·[id,·{·renderedLength:·value.renderedLength,·originalLength:·value.originalLength·}])),·imports:·entry.imports,·dynamicImports:·entry.dynamicImports·}·:·{·type:·entry.type·}]));
+    13    │ - ····writeFileSync(target,·`${JSON.stringify({·status:·"actual-rollup-module-observations-not-performance-proof",·chunks·},·null,·2)}\n`,·{·flag:·"wx"·});
+    14    │ - ··},
+    15    │ - }],·build:·{·outDir:·"../wp14-dist",·emptyOutDir:·false,·sourcemap:·false,·manifest:·true·},·server:·{·host:·"127.0.0.1",·port:·6576,·strictPort:·true·},·preview:·{·host:·"127.0.0.1",·port:·6576,·strictPort:·true·}·});
+        8 │ + export·default·defineConfig({
+        9 │ + ··root,
+       10 │ + ··plugins:·[
+       11 │ + ····react(),
+       12 │ + ····tailwind(),
+       13 │ + ····{
+       14 │ + ······name:·"wp14-actual-bundle-graph",
+       15 │ + ······generateBundle(_options,·bundle)·{
+       16 │ + ········const·target·=·resolve(root,·"../wp14-bundle.json");
+       17 │ + ········if·(existsSync(target))·throw·new·Error("E_BUNDLE_RECEIPT_EXISTS");
+       18 │ + ········const·chunks·=·Object.fromEntries(
+       19 │ + ··········Object.entries(bundle).map(([key,·entry])·=>·[
+       20 │ + ············key,
+       21 │ + ············entry.type·===·"chunk"
+       22 │ + ··············?·{
+       23 │ + ··················type:·entry.type,
+       24 │ + ··················modules:·Object.fromEntries(
+       25 │ + ····················Object.entries(entry.modules).map(([id,·value])·=>·[
+       26 │ + ······················id,
+       27 │ + ······················{
+       28 │ + ························renderedLength:·value.renderedLength,
+       29 │ + ························originalLength:·value.originalLength,
+       30 │ + ······················},
+       31 │ + ····················]),
+       32 │ + ··················),
+       33 │ + ··················imports:·entry.imports,
+       34 │ + ··················dynamicImports:·entry.dynamicImports,
+       35 │ + ················}
+       36 │ + ··············:·{·type:·entry.type·},
+       37 │ + ··········]),
+       38 │ + ········);
+       39 │ + ········writeFileSync(
+       40 │ + ··········target,
+       41 │ + ··········`${JSON.stringify({·status:·"actual-rollup-module-observations-not-performance-proof",·chunks·},·null,·2)}\n`,
+       42 │ + ··········{·flag:·"wx"·},
+       43 │ + ········);
+       44 │ + ······},
+       45 │ + ····},
+       46 │ + ··],
+       47 │ + ··build:·{
+       48 │ + ····outDir:·"../wp14-dist",
+       49 │ + ····emptyOutDir:·false,
+       50 │ + ····sourcemap:·false,
+       51 │ + ····manifest:·true,
+       52 │ + ··},
+       53 │ + ··server:·{·host:·"127.0.0.1",·port:·6576,·strictPort:·true·},
+       54 │ + ··preview:·{·host:·"127.0.0.1",·port:·6576,·strictPort:·true·},
+       55 │ + });
+    16 56 │   
+  
+
+Checked 22 files in 36ms. No fixes applied.
+Found 24 errors.
+Found 1 warning.
+Found 1 info.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

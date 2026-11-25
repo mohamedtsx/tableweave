@@ -508,6 +508,14 @@ benchmark WIP was read by that worker; no checks/registry/account/consumer opera
 ran. The new-only documentation lease remains unselected until WP-14 source intake.
 Real consumer/runner/manual/publication inputs stay deferred or unverified; no
 synthetic fixture, source proof or readiness document can pass AC-29/stable gates.
+WP-14 writer releases the source handoff. Main reads all24 executable/config/fixture/
+driver/statistics files and input/paint protocols; own strict source TS6/static/
+31-input seal1cd83de1…/117-artifact seal68f1e557…/1,335-pin verification passes.
+All155 libraries/2,525 protected old files match; only main TASKS drift disclosed.
+No generator/oracle/checksum/statistics/helper/config/driver/browser/paint/benchmark
+or consumer runs. Review32n1/n2 record incomplete explicit-profile conformance and
+unbounded cleanup waits. Preserve this baseline, then allocate only candidate.mjs/
+driver.mjs and new correction receipts; do not re-sign the old31/117/1,335 maps.
 
 ## Current WP-10 implementation handoff
 

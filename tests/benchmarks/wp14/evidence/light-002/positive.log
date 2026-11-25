@@ -1,0 +1,2 @@
+tests/benchmarks/wp14/statistics.test.ts(35,228): error TS7053: Element implicitly has an 'any' type because expression of type '"client:all"' can't be used to index type '{}'.
+  Property 'client:all' does not exist on type '{}'.

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Main-reviewed external WP14 runner attestation; NOT an approval issued by this worker",
+  "type": "object",
+  "required": [
+    "status",
+    "reviewer",
+    "run",
+    "protocol",
+    "os",
+    "vcpus",
+    "ramBytes",
+    "viewport",
+    "imageSHA256",
+    "cpuModel",
+    "cpuAffinity",
+    "cpuQuota",
+    "osReleaseSHA256",
+    "extensions",
+    "competingJobs",
+    "allowedProcesses",
+    "reservation",
+    "browser"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "status": { "const": "main-reviewed-dedicated-runner-attestation" },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "run": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,63}$" },
+    "protocol": { "$ref": "#/$defs/sha" },
+    "os": { "const": "ubuntu-24.04-x64" },
+    "vcpus": { "const": 4 },
+    "ramBytes": { "const": 8589934592 },
+    "viewport": {
+      "type": "object",
+      "required": ["width", "height"],
+      "additionalProperties": false,
+      "properties": { "width": { "const": 1440 }, "height": { "const": 900 } }
+    },
+    "imageSHA256": { "$ref": "#/$defs/sha" },
+    "cpuModel": { "type": "string", "minLength": 1 },
+    "cpuAffinity": { "type": "string", "minLength": 1 },
+    "cpuQuota": { "type": "string", "minLength": 1 },
+    "osReleaseSHA256": { "$ref": "#/$defs/sha" },
+    "extensions": { "const": "none" },
+    "competingJobs": { "const": "none" },
+    "allowedProcesses": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "reservation": { "$ref": "#/$defs/receipt" },
+    "browser": {
+      "type": "object",
+      "required": [
+        "executable",
+        "sha256",
+        "version",
+        "engineVersion",
+        "flags",
+        "launchArgumentsSHA256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "executable": { "type": "string", "pattern": "^node_modules/" },
+        "sha256": { "$ref": "#/$defs/sha" },
+        "version": { "type": "string", "minLength": 1 },
+        "engineVersion": { "type": "string", "minLength": 1 },
+        "flags": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "contains": { "const": "--disable-extensions" },
+          "items": {
+            "enum": [
+              "--disable-extensions",
+              "--no-first-run",
+              "--disable-background-networking"
+            ]
+          }
+        },
+        "launchArgumentsSHA256": { "$ref": "#/$defs/sha" }
+      }
+    }
+  },
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "receipt": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "pattern": "^/" },
+        "sha256": { "$ref": "#/$defs/sha" }
+      }
+    }
+  }
+}

@@ -128,3 +128,13 @@ first failures. Author statistics/report adversaries/public timing probes withou
 executing them. Check capacity before writes; stop below128MiB. No full record
 dumps/whole-tree copies. Main reviews/replays before preservation; no author approval
 of WP-14/performance G-05/hardware/paint/native/CI/manual/consumer/stable-v1 gates.
+
+## Provisional source intake
+
+Main reads the [actual handoff](../../tests/benchmarks/wp14/README.md), all24
+source files, input/paint protocols and unit vectors. Own strict source TS6/static/
+scope/seal/pin checks pass31 source/metadata inputs1cd83de1…/117 artifacts68f1e557…,
+1,335 pins/1,301 program files,155 libraries/2,525 old inputs. Generator/oracles/
+checksums/statistics/driver/browser/paint/benchmark remain unexecuted, not validated
+data or performance facts. Review32n1/n2 assign separate profile-closure/cleanup
+corrections; preserve original maps/raw failures before changing those bodies.

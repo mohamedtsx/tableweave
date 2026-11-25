@@ -1,0 +1,20 @@
+packages/heroui/src/pagination/Pagination.tsx(21,39): error TS2307: Cannot find module '@tableweave/react/reordering-controller' or its corresponding type declarations.
+packages/heroui/src/table/native-resource-lifetime.ts(18,42): error TS2307: Cannot find module '@tableweave/react/reordering-controller' or its corresponding type declarations.
+packages/heroui/src/table/renderer-commit.ts(35,8): error TS2307: Cannot find module '@tableweave/react/reordering' or its corresponding type declarations.
+packages/heroui/src/table/renderer-commit.ts(42,8): error TS2307: Cannot find module '@tableweave/react/reordering-controller' or its corresponding type declarations.
+packages/heroui/src/table/reordering-binding.ts(11,35): error TS2307: Cannot find module '@tableweave/react/reordering' or its corresponding type declarations.
+packages/heroui/src/table/reordering-binding.ts(28,8): error TS2307: Cannot find module '@tableweave/react/reordering-controller' or its corresponding type declarations.
+packages/heroui/src/table/reordering-types.ts(5,8): error TS2307: Cannot find module '@tableweave/react/reordering-controller' or its corresponding type declarations.
+packages/heroui/src/table/reordering-types.ts(6,39): error TS2307: Cannot find module '@tableweave/react/reordering' or its corresponding type declarations.
+tests/benchmarks/wp14/main.tsx(11,8): error TS2882: Cannot find module or type declarations for side-effect import of './styles.css'.
+tests/benchmarks/wp14/schema.ts(26,5): error TS2322: Type '{ id: string; field: "bookingDay"; operator: "date.onOrAfter"; value: string; }' is not assignable to type 'RuleFor<QuerySchema<{ readonly id: "wp14-client-reference"; readonly fields: { readonly recordLabel: { readonly type: "text"; readonly owner: "search"; readonly sort: true; }; readonly status: { readonly type: "enum"; readonly owner: "builder"; readonly values: readonly [...]; }; ... 17 more ...; readonly locations:...'.
+  Types of property 'value' are incompatible.
+    Type 'string' is not assignable to type 'DateValueFor<{ readonly type: "date"; readonly owner: "builder"; }>'.
+tests/benchmarks/wp14/schema.ts(28,129): error TS2353: Object literal may only specify known properties, and 'now' does not exist in type 'ParseOptions'.
+tests/benchmarks/wp14/schema.ts(29,252): error TS2353: Object literal may only specify known properties, and 'now' does not exist in type 'ParseOptions'.
+tests/benchmarks/wp14/timing.ts(55,9): error TS2322: Type 'Readonly<{ kind: Kind; id: `${string}:${string}:validation:${number}` | `${string}:${string}:warmup:${number}` | `${string}:${string}:measured:${number}`; action: number; commit: number | null; witness: number; endpoint: number; timeOrigin: number; ... 31 more ...; protocol: string; }>' is not assignable to type 'Sample'.
+  The types of 'exclusions.debounceMs' are incompatible between these types.
+    Type 'number | null' is not assignable to type '300 | null'.
+      Type 'number' is not assignable to type '300'.
+tests/benchmarks/wp14/vite.config.ts(2,19): error TS2307: Cannot find module '@vitejs/plugin-react' or its corresponding type declarations.
+tests/benchmarks/wp14/vite.config.ts(3,22): error TS2307: Cannot find module '@tailwindcss/vite' or its corresponding type declarations.
