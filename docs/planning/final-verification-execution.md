@@ -557,3 +557,16 @@ receipts only in NEW /tmp/opencode/final-hdd-correction-units-001/**. Capacity f
 declared relocation/current1199 pins/source/cache maps before/after. No production
 or installed-cache writes. Main reviews actual failure/pass before closing only
 bounded unit obligations or selecting the separate real filesystem guard phase.
+
+### Eighth selection — actual independent result
+
+28/28 synthetic extracted-body units pass once/exit0/empty stderr/no timeout/signal/
+skips/cancellations. Main verifies20 sealed entries/four exact preservation maps and
+all28 result lines plus actual spec summary fields. Receipt
+/tmp/opencode/final-hdd-correction-units-001/receipt-hashes.json SHA256
+71c72ec897d5a01cb6372b4f3f3e0795321eb6daf9fd9288efb9472ce0ee43b5.
+Original results.json stays parser-RED with seven TAP-field errors; append-only
+count interpretation20fdd20a… is independently matched to raw/status/result hashes.
+No rerun/collector or assertion edit. Review47 satisfies only extracted-control/
+ordering unit obligations; real filesystem/CLI/runtime/archive/ordinary/G-05 proof
+stays open. Actual HDD fixture setup remains unselected pending main script review.

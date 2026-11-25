@@ -890,6 +890,15 @@ reviews it and actual unit results before separately selecting HDD fixture setup
 Synthetic guard controls/placeholder producer manifest/.git never certify a real
 checkout, toolchain, archive/install/profile or application grant. No old-work
 move/cleanup/parent permission change or tool acquisition is in this preparation.
+Selection8 independently passes28/28 synthetic extracted-body units once/exit0/
+empty stderr/no timeout/signal/no skips. Main verifies20 sealed entries/four exact
+preservation maps/current1,199 pins/285 correction entries/canonical155 and raw spec
+counts. Review47 satisfies only review45n1's extracted-control and n3's ordering
+unit obligations. Original collector results.json stays parser-RED (expected TAP,
+actual spec); appended interpretation counts raw spec without rerun or overwrite.
+Receipt71c72ec8… at final-hdd-correction-units-001. No real FS/runtime confinement
+or G-05/packet approval follows. Unit worker is released; inert fixture preparer
+remains active. Main must review its actual script before any HDD fixture selection.
 
 ## Current WP-10 implementation handoff
 

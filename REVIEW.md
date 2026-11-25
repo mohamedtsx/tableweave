@@ -10,6 +10,30 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 47 (independent correction synthetic units)
+
+The selected extracted-body command runs once/exit0/empty stderr/no timeout/signal:
+28 tests/pass28/fail0/cancelled0/skipped0/todo0. Main independently verifies20 sealed
+receipt entries/four byte-identical source/pin/seal/cache maps and actual spec output
+with28 passing result lines. Source/library155/current1,199 pins/285 correction
+entries stay fixed. Receipt /tmp/opencode/final-hdd-correction-units-001/receipt-hashes.json
+SHA25671c72ec897d5a01cb6372b4f3f3e0795321eb6daf9fd9288efb9472ce0ee43b5.
+
+Review45n1's extracted-control unit obligation and n3's ordering UNIT portion are
+satisfied. Actual source bodies run through supplied synthetic callbacks, not whole
+module imports, actual issued contexts/inodes, child execution or disk result
+receipts. Real filesystem/runtime confinement stays OPEN; no G-05/packet approval.
+
+### n1 — External collector assumed TAP, actual output is spec
+
+Original results.json remains parser-RED with seven missing-TAP-field errors; the
+command itself succeeded with actual spec counts. Append-only count interpretation
+20fdd20a50b07fed18e2914e5561400d01908525977e341ba73085c978653d88 links original
+raw/status/result bytes and correctly counts the spec output. Main confirms it
+without changing the collector/original result or rerunning tests. No repository
+source defect or test assertion change; future new collectors must handle actual
+format. All original failed evidence remains. No HDD writes/helper/CLI/FS mode.
+
 ## Final verification — review session 46 (HDD correction source intake)
 
 Main independently verifies285 current sealed files SHA256
