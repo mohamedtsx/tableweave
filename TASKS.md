@@ -94,7 +94,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Neutral consumer implementation | Isolated lease newly selected fromdda8166 | Common refs/functional column controls/row-pending pager; row begin/onSubmit held for C1b |
-| C1a interaction cut | Handoff delivered; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; preservation pending, C1b still open |
+| C1a interaction cut | Preserved03b96c6; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; C1b/runtime/independent closure still open |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
 | Admission client discovery | Preserveddda8166 | Actual12-runtime/13-type producer entry source checks pass; emitted/installed/packed proof final; C1a additive export is a new stage |
@@ -388,6 +388,17 @@ b755341e946ba27883403d21f9aca8b325cab162224745ddcdf063313d035992;
 source2 aggregate3aa2521f… / own22-input e7715a6e… do not replace B2/dda seals.
 Main preserves before C1b allocation. No actual renderer/ref retirement wiring,
 row submit, runtime/corrective/independent review22n2 closure or G-02 follows.
+C1a is preserved03b96c6. Main selects the fixed C1b integration direction in its
+owning plan, but allocates no code until the neutral producer's actual binding/
+capture APIs are handed off. It must revoke cuts synchronously before source/
+config/native pre-token callbacks, prepare exact original notification before begin,
+and deliver a started token without an intervening reentrant veto. N keeps opaque
+keys only; prepared private callback references clear before observers. No raw port
+escape, new generic policy, post-token cancellation or actual C1b readiness is implied.
+C1a intake navigation passes248 Markdown/874 links and source/doc whitespace; no
+runtime proof follows. Its actual browser runner owns6565, also initially chosen by
+the neutral allocation; final execution must serialize them or explicitly revise
+the later current fixture, not overwrite the sealed C1a producer.
 
 ### Current ownership and next action
 

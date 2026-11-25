@@ -70,6 +70,13 @@ neutral/adapter handoffs must add their actual commands once present in the comb
 tree, not copied proposed names. TypeScript6 and5.9, source and ordinary emitted
 declarations, annotated and removal checks remain separate required boundaries.
 
+C1a's actual authored runner owns port6565; its commands are in the
+[released handoff](../../tests/reordering/interaction-cut/README.md#actual-light-immutable-new-delta-deferred-work).
+The neutral allocation also initially names6565. Final execution must serialize
+those suites, or deliberately allocate a new neutral port under a separate current
+fixture revision before concurrent runs. Do not rewrite the sealed C1a producer
+just to hide a port collision or call unrun authoring a browser pass.
+
 ## Mandatory current behavioral boundaries
 
 - **Genuine admission and controller:** real D-created C identity; exact captured

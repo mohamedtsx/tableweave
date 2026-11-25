@@ -81,3 +81,48 @@ approved. C1b still must wire genuine renderer/core/N retirement and prepare the
 exact notification before token creation. Its lease waits for the neutral binding/
 capture APIs to be handed off, not guessed from worker WIP. No row activation or
 review22n2 closure follows from main's lightweight source intake.
+
+## C1b selected integration direction — no code lease yet
+
+Use C1a's exact release token, not another pure engine or an app-supplied checker.
+The next owner must work against the **actual handed-off** neutral binding/capture
+APIs. No neutral WIP is read or assumed ready by this selection.
+
+- Add one finite renderer/native action cut per actual cell. N keeps only opaque
+  interaction/action keys and exact native slot/generation identity, not callbacks,
+  records/model/view/configuration or accepted order. An exact release of a current
+  slot revokes the associated cut; late old attachment cleanup cannot reach B.
+- Extend only the existing fixed renderer-native installation. Pure action
+  invalidation must run before callbackful admit/capture/update/replacement work,
+  metadata clearing and native cleanup. Same-frame B may preserve geometry refs but
+  still retires A's action cut. Old invalid leases must not retire a new mount. No
+  new public cell keys, generic CommitAdapter policy, participant or app disposer.
+- The pure invalidation path calls C1a's metadata-only revoker and clears any
+  separately owned prepared notification references **before** observers. It cannot
+  read source/native properties, schedule, invoke an app port or grant new permission.
+  A no-op same-identity presentation refresh must not be used as an implicit regrant.
+- A closed renderer-only prepared notification issuer captures the exact callback/
+  original receiver under original role/argument fences. Bind the action cut before
+  the last callbackful preflight so any reentrant renderer/native replacement revokes
+  it. Finish current source/model/join/member/N-seal and original before-port checks
+  before begin. Prepared records are finite, transient and physically cleared after
+  use/retirement; no raw callable is exposed as a bypass.
+- Begin runs its actual row admission/eligibility callbacks under that exact cut.
+  C1a denies a cut retired during those callbacks before pending creation. Once begin
+  returns started, invoke the already-captured exact notification immediately with
+  the exact operation. Only fixed local metadata and a captured invocation primitive
+  may occur between return and entry: no getter, current-source check, lookup capable
+  of reentry, await or post-token permission veto.
+- Original after-port fences still run after notification and govern only remaining
+  UI effects. A throw/rejected return is observed safely without fabricating backend
+  refusal/ack, undo or resubmission. If the callback itself changes UI/source, do not
+  retag A or infer the submitted request never happened. App transport/notice/source
+  lifetime and real owner-loss semantics remain unchanged.
+
+The lease must stop if original port isolation cannot be completed before creation
+or an external callback remains between creation and notification; select a genuine
+prepared-operation protocol rather than an unsafe raw callback. Actual renderer
+A→B, failed B capture, metadata/native getter reentry, slot release, stale cleanup,
+post-notification UI/source changes, original receivers and no orphan/duplicate
+operation require unskipped real integration fixtures and final execution. This
+direction alone implements nothing and closes no numbered finding.
