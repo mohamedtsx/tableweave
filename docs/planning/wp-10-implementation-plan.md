@@ -67,6 +67,11 @@ in an isolated tree with row submission held, and the independent primary
 [release-only C1a interaction cut](wp-10-pretoken-cut-plan.md). Their write paths and
 baselines are isolated; renderer/native C1b integration waits for their actual
 handoffs. No producer name is guessed by the neutral worker.
+After actual C1a and held neutral intake, main selects the
+[N1/C1b renderer/native integration](wp-10-pretoken-renderer-plan.md): fix neutral
+retirement/source-wait/coercion gaps and close exact pre-token notification under
+one primary owner. The headless/pure protocol stays fixed; optional vendor-resource/
+geometry integration remains a separate later source lease.
 
 ## Stage1 ownership and outcome
 

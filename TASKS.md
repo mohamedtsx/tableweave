@@ -93,7 +93,8 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
-| Neutral consumer implementation | Handoff delivered; held for source-found lifecycle corrections | Source16/90-input/139-protected-source/1,520-old-input and positive TS6 intake passes; preserve before N1/C1b corrections |
+| Neutral consumer implementation | Preserved10a417a/intake2241b09; held correction baseline | Main integrated155-source/50 Git-present sealed inputs and positive TS6 pass; N1/C1b fixes source-found lifecycle gaps before row activation |
+| N1/C1b renderer/native integration | Primary exclusive writer active | Correct review22n4/n5/n6 and actual row pre-token notification;155-source319505b8… baseline; headless/pure/vendor frozen |
 | C1a interaction cut | Preserved03b96c6; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; C1b/runtime/independent closure still open |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
@@ -428,6 +429,23 @@ not approval. Headless C1a03b96c6 must remain unchanged when combined; N1/C1b ow
 the actual native/renderer correction afterward. Vendor v3 edit is independently
 materialized, matches the held v2 postimage, and changes no installed package or
 prior edit copy. Its writer is active within the final selected16-path/600-line scope.
+Neutral2241b09 is intaken only as held source. Main verifies all155 combined source
+bytes at319505b8… and passes its actual positive TS6 program with C1a present;
+50 Git-present seal inputs match,40 raw/local inputs remain in the isolated producer.
+Main now selects docs/planning/wp-10-pretoken-renderer-plan.md for one primary N1/
+C1b writer, using actual handed-off APIs. No headless/pure/vendor change is leased.
+The source lease fixes retirement/physical clearing/source-only/coercion gaps and
+implements genuine N/core action cuts/prepared exact notification before row actions.
+Strict new fixture port6566 is assigned. Runtime/independent review findings stay
+open, and no actual row-submit readiness is claimed by this allocation.
+Both implementation owners are active in disjoint targets: primary N1/C1b uses
+the actual combined155-source baseline, while the isolated final vendor writer uses
+only edit-v3/new asset/new fixtures. The required free-function type projection
+does not widen the vendor declaration envelope, and no installed/primary dependency
+or old patch/producer seal changes. Main retains docs/Git/integration ownership.
+Allocation navigation replay passes250 Markdown/878 links and scoped document
+whitespace. It checks no semantic-source, live worker behavior, runtime or independent
+approval; the earlier18 checker regression pass is not a new execution here.
 
 ### Current ownership and next action
 

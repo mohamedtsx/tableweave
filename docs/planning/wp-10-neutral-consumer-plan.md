@@ -113,3 +113,9 @@ checks. The candidate is **held**, despite positive types. Main may intake it on
 as a preserved correction baseline, keeping C1a's separate headless hashes intact.
 The next N1/C1b lease must correct these boundaries and close prepared notification
 using actual APIs; no existing seal or unskipped original assertion is re-signed.
+
+The [actual neutral handoff](../../tests/reordering/neutral-consumer/README.md) is
+now in primary as held2241b09. The selected
+[N1/C1b source integration](wp-10-pretoken-renderer-plan.md) consumes these actual
+APIs, not the earlier proposal. Original scope/source maps remain producer history;
+the combined C1a/neutral155 map is a distinct correction baseline.
