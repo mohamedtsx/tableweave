@@ -33,6 +33,7 @@ import {
   issueNativeLeaf,
   issueNativeLeafHandle,
   issueNativeRow,
+  issueNativeRowHandle,
   issueNativeScope,
   nativeHandleRef,
   nativeLeafRef,
@@ -43,12 +44,16 @@ import {
   type NativeHandleTicket,
   type NativeLeafTicket,
   type NativeRowTicket,
+  type NativeScopeTicket,
 } from "./native-resource-lifetime.js";
 import {
   requireTableRendererMember,
   requireTableRendererTarget,
   TableRendererCommitError,
   tableRendererBoundary,
+  submitRendererRowMove,
+  captureRendererRowNotification,
+  type RendererRowSubmission,
 } from "./renderer-commit.js";
 import type {
   CapturedTableReordering,
@@ -56,9 +61,13 @@ import type {
   ReorderingSnapshot,
   TableReorderingBinding,
   TableReorderingNavigation,
+  RendererRowNotification,
 } from "./reordering-types.js";
 import type { TableRendererTarget } from "./types.js";
-import { englishReorderingMessages } from "./reordering-messages.js";
+import {
+  englishReorderingMessages,
+  arabicReorderingMessages,
+} from "./reordering-messages.js";
 import type { PaginationProps } from "../pagination/types.js";
 
 const identities = new WeakMap<object, object>();
@@ -75,6 +84,10 @@ const owners = new WeakMap<object, object>();
 const bindings = new WeakMap<object, unknown>();
 const collections = new WeakMap<object, unknown>();
 const presentations = new WeakMap<object, unknown>();
+const presentationMetadata = new WeakMap<
+  object,
+  Pick<CollectionPresentation, "binding" | "messages">
+>();
 const navigation = new WeakMap<object, unknown>();
 const activeCells = new WeakMap<object, object>();
 const rowChoices = new WeakMap<
@@ -87,7 +100,7 @@ interface Config<S extends QuerySchema, T extends object> {
     admission: ReorderAdmission<S, T>;
     lease: ReorderAdmissionLease<S, T>;
     handleColumnId: string;
-    notification: unknown;
+    notification: RendererRowNotification<S, T> | null;
     ui: ReorderUIBinding<S, T>;
   } | null;
   binding: TableReorderingBinding<S, T> | null;
@@ -103,14 +116,25 @@ interface Binding<S extends QuerySchema, T extends object> {
   collection: CollectionReorderingBinding | null;
 }
 interface Collection<S extends QuerySchema, T extends object> {
+  ended: boolean;
   presentation: CollectionPresentation | null;
   readonly messages: typeof englishReorderingMessages;
   readonly binding: TableReorderingBinding<S, T>;
-  readonly columns: object;
-  readonly rows: object;
-  readonly scope: ReturnType<typeof nativeScopeRef<S, T>>;
-  readonly rowRefs: ReadonlyMap<string, ReturnType<typeof nativeRowRef<S, T>>>;
-  readonly leaves: ReadonlyMap<
+  columns: object | null;
+  rows: object | null;
+  scope: ReturnType<typeof nativeScopeRef<S, T>> | null;
+  scopeTicket: NativeScopeTicket<S, T> | null;
+  handleColumnId: string | null;
+  readonly rowHandles: Map<
+    string,
+    {
+      row: NativeRowTicket<S, T>;
+      handle: NativeHandleTicket<S, T>;
+      ref: ReturnType<typeof nativeHandleRef<S, T>>;
+    }
+  >;
+  readonly rowRefs: Map<string, ReturnType<typeof nativeRowRef<S, T>>>;
+  readonly leaves: Map<
     string,
     {
       leaf: NativeLeafTicket<S, T>;
@@ -141,7 +165,7 @@ function known<V>(map: WeakMap<object, unknown>, value: unknown): V {
   if (!value || typeof value !== "object") return deny();
   return (map.get(value) as V | undefined) ?? deny();
 }
-function changed<S extends QuerySchema, T extends object>(
+function setSnapshot<S extends QuerySchema, T extends object>(
   record: Binding<S, T>,
   values: Partial<Omit<ReorderingSnapshot, "version">>,
 ) {
@@ -151,12 +175,19 @@ function changed<S extends QuerySchema, T extends object>(
         record.snapshot[key as keyof ReorderingSnapshot] === value,
     )
   )
-    return;
+    return false;
   record.snapshot = Object.freeze({
     ...record.snapshot,
     ...values,
     version: Object.freeze({}),
   });
+  return true;
+}
+function changed<S extends QuerySchema, T extends object>(
+  record: Binding<S, T>,
+  values: Partial<Omit<ReorderingSnapshot, "version">>,
+) {
+  if (!setSnapshot(record, values)) return;
   for (const listener of [...record.listeners]) {
     if (!record.listeners.has(listener)) continue;
     try {
@@ -166,13 +197,32 @@ function changed<S extends QuerySchema, T extends object>(
     }
   }
 }
-/** Capture-time only. Original private notification is wrapped and never exposed/called. */
+/** Pure owned-buffer clearing. Old presentations retain metadata only, never B routes. */
+function clearCollection<S extends QuerySchema, T extends object>(
+  binding: Binding<S, T>,
+): void {
+  const token = binding.collection;
+  binding.collection = null;
+  if (!token) return;
+  const record = known<Collection<S, T>>(collections, token);
+  record.ended = true;
+  record.rowRefs.clear();
+  record.rowHandles.clear();
+  record.leaves.clear();
+  record.columns = null;
+  record.rows = null;
+  record.scope = null;
+  record.scopeTicket = null;
+  record.handleColumnId = null;
+  if (record.presentation) presentations.delete(record.presentation);
+  record.presentation = null;
+}
+/** Capture-time only. Notification is an opaque R port, never a callable wrapper. */
 export function captureTableReordering<S extends QuerySchema, T extends object>(
   raw: unknown,
   model: DataTableModel<S, T>,
   owner: object,
   capture: CommitMetadata,
-  wrapNotification: (value: unknown, receiver: object) => unknown,
   selectionId?: unknown,
 ): CapturedTableReordering<S, T> {
   const object = (value: unknown): object => {
@@ -256,20 +306,37 @@ export function captureTableReordering<S extends QuerySchema, T extends object>(
     if (typeof notification !== "function") deny();
     const ui = claimReorderUI(actual.definition, admission, lease, owner);
     try {
-      // B2's actor argument is an association tag, not renderer authority. Use
-      // this private capture tag only to authenticate the exact helper-committed
-      // model/P/source BEFORE any private locale capture, then suspend it. This
-      // proof is never returned, rendered or used for events/navigation. The
-      // genuine registered renderer actor gets its separate join after commit.
-      const preflight = joinReorderModel(ui, model, owner);
-      requireReorderModel(preflight, model);
+      // Source configuration is not display readiness. The genuine D/C/lease
+      // and renderer source are authenticated here without a fake actor/frame.
+      // A ready input still proves the exact app-committed model/P association
+      // before private renderer props. This inert association is immediately
+      // suspended, never used as a renderer/event actor. No unavailable native
+      // methods or synthetic display are consulted for source-only/state inputs.
+      const facts = model.presentation;
+      if (
+        view &&
+        model.frame &&
+        facts &&
+        !facts.busy &&
+        !facts.stale &&
+        !facts.obsolete &&
+        !facts.resourceObsolete &&
+        facts.blockedReason === null
+      ) {
+        const preflight = joinReorderModel(ui, model, owner);
+        requireReorderModel(preflight, model);
+      }
       suspendReorderUI(ui);
       rows = {
         admission,
         lease,
         handleColumnId,
         ui,
-        notification: wrapNotification(notification, value),
+        notification: captureRendererRowNotification<S, T>(
+          owner,
+          notification,
+          value,
+        ),
       };
     } catch (error) {
       releaseReorderUI(ui);
@@ -299,19 +366,22 @@ export function retireTableReordering(owner: object): void {
   record.rows = null;
   record.binding = null;
   if (rows) rows.notification = null;
-  try {
-    if (rows) releaseReorderUI(rows.ui);
-  } finally {
-    if (prior) {
-      const binding = known<Binding<QuerySchema, object>>(bindings, prior);
-      if (activeCells.get(binding.target.cell) === prior)
-        activeCells.delete(binding.target.cell);
-      binding.join = null;
-      binding.collection = null;
-      changed(binding, { ready: false, pending: false, rowConfigured: false });
-      binding.listeners.clear();
-    }
+  if (prior) {
+    const binding = known<Binding<QuerySchema, object>>(bindings, prior);
+    if (activeCells.get(binding.target.cell) === prior)
+      activeCells.delete(binding.target.cell);
+    binding.join = null;
+    clearCollection(binding);
+    setSnapshot(binding, {
+      ready: false,
+      pending: false,
+      rowConfigured: false,
+    });
+    binding.listeners.clear();
   }
+  // Headless release queues metadata delivery; all owned buffers are already
+  // empty even if that existing fixed scheduling boundary is instrumented.
+  if (rows) releaseReorderUI(rows.ui);
 }
 export function publishTableReordering<S extends QuerySchema, T extends object>(
   target: TableRendererTarget<S, T>,
@@ -350,11 +420,12 @@ export function publishTableReordering<S extends QuerySchema, T extends object>(
   }
   const modelToken = identity(current.model);
   if (record.model !== modelToken) {
-    record.collection = null;
+    clearCollection(record);
     record.model = modelToken;
     changed(record, { ready: false, refPass: Object.freeze({}) });
   }
   if (config.rows) {
+    const priorJoin = record.join;
     try {
       record.join = joinReorderModel(
         config.rows.ui,
@@ -368,6 +439,8 @@ export function publishTableReordering<S extends QuerySchema, T extends object>(
       record.join = null;
       changed(record, { ready: false });
     }
+    if (record.join && record.join !== priorJoin)
+      changed(record, { ready: false, refPass: Object.freeze({}) });
     const metadata = observeReorderUI(config.rows.ui);
     changed(record, { pending: metadata.pending });
   }
@@ -438,8 +511,12 @@ export function subscribeReordering<S extends QuerySchema, T extends object>(
   const record = known<Binding<S, T>>(bindings, binding);
   if (record.config.ended) return () => {};
   record.listeners.add(listener);
+  // This is the existing genuine post-clear publisher, not an inline purge
+  // observer or a new participant/policy. It also wakes retained wait widgets.
+  const stop = record.target.cell.subscribe(listener);
   return () => {
     record.listeners.delete(listener);
+    stop();
   };
 }
 export function suspendTableReordering<S extends QuerySchema, T extends object>(
@@ -449,6 +526,7 @@ export function suspendTableReordering<S extends QuerySchema, T extends object>(
   if (record.config.ended) return;
   if (record.config.rows) suspendReorderUI(record.config.rows.ui);
   record.join = null;
+  clearCollection(record);
   changed(record, { ready: false });
 }
 /** Registration layout only. Incomplete never schedules another render. */
@@ -464,7 +542,7 @@ export function sealTableReordering<S extends QuerySchema, T extends object>(
   if (!record.collection) return;
   const status = sealNativeRefs(record.target);
   if (status === "refresh-refs") {
-    record.collection = null;
+    clearCollection(record);
     changed(record, { ready: false, refPass: Object.freeze({}) });
   } else changed(record, { ready: status === "ready" });
 }
@@ -477,7 +555,7 @@ export function subscribeRowReordering<S extends QuerySchema, T extends object>(
     ? record.config.rows.admission.subscribe(listener)
     : () => {};
 }
-/** Must run before app text/cell/message callbacks. Row handles remain intentionally absent. */
+/** Must run before app text/cell/message callbacks; this preflight issues no refs. */
 export function prepareTableReordering<S extends QuerySchema, T extends object>(
   binding: TableReorderingBinding<S, T>,
 ): void {
@@ -562,24 +640,58 @@ export function projectTableReordering<S extends QuerySchema, T extends object>(
   for (const group of view.headerGroups)
     for (const header of group.headers) visit(header);
   const rowRefs = new Map<string, ReturnType<typeof nativeRowRef<S, T>>>();
+  const rowHandles = new Map<
+    string,
+    {
+      row: NativeRowTicket<S, T>;
+      handle: NativeHandleTicket<S, T>;
+      ref: ReturnType<typeof nativeHandleRef<S, T>>;
+    }
+  >();
   for (const row of view.rows) {
     const ticket: NativeRowTicket<S, T> = issueNativeRow(record.target, row);
     rowRefs.set(row.id, nativeRowRef(ticket));
+    if (record.config.rows) {
+      const cells = tableRendererBoundary(record.target, () =>
+        row.getVisibleCells(),
+      );
+      for (const cell of cells) {
+        requireTableRendererMember(record.target, "cell", cell);
+        if (cell.column.id !== record.config.rows.handleColumnId) continue;
+        const handle = issueNativeRowHandle(record.target, ticket, cell);
+        rowHandles.set(row.id, {
+          row: ticket,
+          handle,
+          ref: nativeHandleRef(handle),
+        });
+      }
+      if (!rowHandles.has(row.id)) deny();
+    }
   }
   const token = Object.freeze({}) as CollectionReorderingBinding;
+  const language = current.ports.locale?.locale;
+  const defaults =
+    language === "ar" || language?.startsWith("ar-")
+      ? arabicReorderingMessages
+      : englishReorderingMessages;
   collections.set(token, {
+    ended: false,
     presentation: null,
     binding,
     messages: Object.freeze({
-      ...englishReorderingMessages,
+      ...defaults,
       ...current.ports.messages.reordering,
     }),
     columns: identity(columns),
     rows: identity(rows),
     scope: nativeScopeRef(scope),
+    scopeTicket: scope,
+    handleColumnId: record.config.rows?.handleColumnId ?? null,
+    rowHandles,
     rowRefs,
     leaves,
   } satisfies Collection<S, T>);
+  clearCollection(record);
   record.collection = token;
   return token;
 }
@@ -589,6 +701,7 @@ export function requireCollectionReordering(
   rows: unknown,
 ) {
   const record = known<Collection<QuerySchema, object>>(collections, input);
+  if (record.ended) deny();
   if (
     known<Binding<QuerySchema, object>>(bindings, record.binding).collection !==
     input
@@ -608,9 +721,13 @@ export function requireCollectionReordering(
     record.presentation = Object.freeze({
       binding: record.binding,
       messages: record.messages,
-      scope: record.scope,
+      scope: record.scope ?? deny(),
     });
     presentations.set(record.presentation, record);
+    presentationMetadata.set(
+      record.presentation,
+      Object.freeze({ binding: record.binding, messages: record.messages }),
+    );
   }
   return record.presentation;
 }
@@ -618,11 +735,30 @@ export function requireCollectionReordering(
 export function collectionReorderingPresentation(
   value: unknown,
 ): CollectionPresentation {
-  known<Collection<QuerySchema, object>>(presentations, value);
+  known<Pick<CollectionPresentation, "binding" | "messages">>(
+    presentationMetadata,
+    value,
+  );
   return value as CollectionPresentation;
 }
+/** Metadata-only route check before a widget consumes any private props. */
+export function hasCollectionReordering(
+  presentation: CollectionPresentation,
+): boolean {
+  collectionReorderingPresentation(presentation);
+  const record = presentations.get(presentation) as
+    | Collection<QuerySchema, object>
+    | undefined;
+  return !!record && !record.ended;
+}
 export function captureCollectionReordering(input: object, token: unknown) {
-  known<Collection<QuerySchema, object>>(collections, token);
+  const record = known<Collection<QuerySchema, object>>(collections, token);
+  if (
+    record.ended ||
+    known<Binding<QuerySchema, object>>(bindings, record.binding).collection !==
+      token
+  )
+    deny();
   const own = (key: string) => {
     const descriptor = Object.getOwnPropertyDescriptor(input, key);
     if (!descriptor || !Object.hasOwn(descriptor, "value")) deny();
@@ -659,10 +795,11 @@ export function leafCollectionRefs(
   presentation: ReturnType<typeof requireCollectionReordering>,
   id: string,
 ) {
-  const record = known<Collection<QuerySchema, object>>(
-    presentations,
-    presentation,
-  );
+  collectionReorderingPresentation(presentation);
+  const record = presentations.get(presentation) as
+    | Collection<QuerySchema, object>
+    | undefined;
+  if (!record || record.ended) return null;
   const leaf = record.leaves.get(id);
   return leaf ? Object.freeze({ ref: leaf.ref, handle: leaf.handleRef }) : null;
 }
@@ -670,10 +807,139 @@ export function collectionRowRef(
   presentation: ReturnType<typeof requireCollectionReordering>,
   id: string,
 ) {
-  return known<Collection<QuerySchema, object>>(
-    presentations,
-    presentation,
-  ).rowRefs.get(id);
+  collectionReorderingPresentation(presentation);
+  const record = presentations.get(presentation) as
+    | Collection<QuerySchema, object>
+    | undefined;
+  return record?.ended === false ? record.rowRefs.get(id) : undefined;
+}
+export function rowCollectionRefs(
+  presentation: ReturnType<typeof requireCollectionReordering>,
+  id: string,
+) {
+  collectionReorderingPresentation(presentation);
+  const record = presentations.get(presentation) as
+    | Collection<QuerySchema, object>
+    | undefined;
+  if (!record || record.ended || record.handleColumnId === null) return null;
+  const row = record.rowHandles.get(id);
+  return row
+    ? Object.freeze({ handle: row.ref, columnId: record.handleColumnId })
+    : null;
+}
+export interface RowMoveFacts {
+  readonly allowed: boolean;
+  readonly reason: "unavailable" | "pending" | "boundary" | "restricted";
+}
+export function rowMoveFacts(
+  presentation: ReturnType<typeof requireCollectionReordering>,
+  id: string,
+  direction: -1 | 1,
+): RowMoveFacts {
+  try {
+    requireCurrentCollection(presentation);
+    const record = known<Collection<QuerySchema, object>>(
+      presentations,
+      presentation,
+    );
+    const binding = known<Binding<QuerySchema, object>>(
+      bindings,
+      record.binding,
+    );
+    const current = requireTableReordering(record.binding),
+      rows = current.model.view?.rows ?? deny();
+    if (!binding.config.rows || !binding.snapshot.ready)
+      return { allowed: false, reason: "unavailable" };
+    const tickets = record.rowHandles.get(id);
+    if (
+      !record.scopeTicket ||
+      !tickets ||
+      nativeRefStatus(record.scopeTicket) !== "sealed" ||
+      nativeRefStatus(tickets.row) !== "sealed" ||
+      nativeRefStatus(tickets.handle) !== "sealed"
+    )
+      return { allowed: false, reason: "unavailable" };
+    if (observeReorderUI(binding.config.rows.ui).pending)
+      return { allowed: false, reason: "pending" };
+    if (!current.model.presentation?.canReorder)
+      return { allowed: false, reason: "restricted" };
+    const index = rows.findIndex((row) => {
+      requireTableRendererMember(binding.target, "row", row);
+      return row.id === id;
+    });
+    return index >= 0 &&
+      index + direction >= 0 &&
+      index + direction < rows.length
+      ? { allowed: true, reason: "boundary" }
+      : { allowed: false, reason: "boundary" };
+  } catch {
+    return { allowed: false, reason: "unavailable" };
+  }
+}
+/** One genuine current-page intent. No DOM indices, record/order backup or row clone. */
+export function submitTableRowMove(
+  presentation: ReturnType<typeof requireCollectionReordering>,
+  id: string,
+  direction: -1 | 1,
+): RendererRowSubmission | null {
+  try {
+    if (typeof id !== "string" || (direction !== -1 && direction !== 1))
+      return null;
+    requireCurrentCollection(presentation);
+    const record = known<Collection<QuerySchema, object>>(
+      presentations,
+      presentation,
+    );
+    const binding = known<Binding<QuerySchema, object>>(
+      bindings,
+      record.binding,
+    );
+    const current = requireTableReordering(record.binding),
+      config = binding.config.rows ?? deny();
+    const tickets = record.rowHandles.get(id) ?? deny(),
+      scope = record.scopeTicket ?? deny();
+    if (
+      !config.notification ||
+      !rowMoveFacts(presentation, id, direction).allowed
+    )
+      return null;
+    const rows = current.model.view?.rows ?? deny(),
+      ids: string[] = [];
+    for (const row of rows) {
+      requireTableRendererMember(binding.target, "row", row);
+      ids.push(row.id);
+    }
+    const index = ids.indexOf(id),
+      destination = index + direction;
+    if (index < 0 || destination < 0 || destination >= ids.length) return null;
+    const remaining = ids.filter((key) => key !== id);
+    const placement = {
+      movedId: id,
+      beforeId: remaining[destination] ?? null,
+      afterId: remaining[destination - 1] ?? null,
+    };
+    const nativeRow = rows[index] ?? deny();
+    const memberIds = [id, placement.beforeId, placement.afterId].filter(
+      (value): value is string => value !== null,
+    );
+    tableRendererBoundary(binding.target, () =>
+      current.model.authority?.require({ type: "reorder", ids: memberIds }),
+    );
+    requireCurrentCollection(presentation);
+    return submitRendererRowMove(
+      binding.target,
+      config.notification,
+      config.admission,
+      config.lease,
+      placement,
+      scope,
+      tickets.row,
+      tickets.handle,
+      nativeRow,
+    );
+  } catch {
+    return null;
+  }
 }
 export function requireCurrentCollection(
   presentation: ReturnType<typeof requireCollectionReordering>,
@@ -935,13 +1201,16 @@ export function navigateTable<S extends QuerySchema, T extends object>(
   let { pageIndex, pageSize } = state.query.pagination;
   if (intent === "size") {
     pageSize = Number(value);
+    requireTableNavigation(token, authority);
     pageIndex = 0;
     if (
       !D.native.controllerDefinition.schema.pagination.sizes.includes(pageSize)
     )
       deny();
-  } else if (intent === "index") pageIndex = Number(value);
-  else if (intent === "previous") {
+  } else if (intent === "index") {
+    pageIndex = Number(value);
+    requireTableNavigation(token, authority);
+  } else if (intent === "previous") {
     if (!facts.canPreviousPage) deny();
     pageIndex--;
   } else {

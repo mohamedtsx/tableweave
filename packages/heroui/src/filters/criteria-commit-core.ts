@@ -539,6 +539,7 @@ function createCore<
     opaqueProps: unknown,
   ): Actor {
     if (!validLease(lease)) return deny();
+    native?.revokeAction(); // Exact valid lease, before admit/capture/source callbacks.
     if (native && nativeClearing) {
       operation = {};
       native.revoke();
@@ -782,6 +783,7 @@ function createCore<
       !current
     )
       deny();
+    native?.revokeAction(); // A normal same-frame metadata update retires A's action.
     if (busy || notifying || (native && nativeClearing)) {
       operation = {};
       native?.revoke();
@@ -994,6 +996,7 @@ function createCore<
     disconnect(lease: Lease) {
       if (!object(lease) || !leases.has(lease)) return deny();
       if (mount !== lease) return;
+      native?.revokeAction();
       if (native && nativeClearing) {
         operation = {};
         native.revoke();

@@ -20,12 +20,17 @@ import {
   captureCollectionReordering,
   captureReorderingProp,
   collectionRowRef,
+  rowCollectionRefs,
   leafCollectionRefs,
   reorderingSnapshot,
   type requireCollectionReordering,
 } from "./reordering-binding.js";
 import type { CollectionReorderingBinding } from "./reordering-types.js";
-import { ColumnMoveControls, ReorderingNotice } from "./reordering-controls.js";
+import {
+  ColumnMoveControls,
+  RowMoveControls,
+  ReorderingNotice,
+} from "./reordering-controls.js";
 
 export interface CollectionRow {
   readonly id: string;
@@ -200,12 +205,13 @@ function ControlledCollectionContent({
             id={column.id}
             label={column.textValue}
             messages={reordering.messages}
-            isOpen={openMenu === column.id}
+            isOpen={openMenu === `column:${column.id}`}
             onOpenChange={(open) =>
               setMenu((current) =>
                 open
-                  ? { owner: reordering, id: column.id }
-                  : current?.owner === reordering && current.id === column.id
+                  ? { owner: reordering, id: `column:${column.id}` }
+                  : current?.owner === reordering &&
+                      current.id === `column:${column.id}`
                     ? null
                     : current,
               )
@@ -288,13 +294,37 @@ function ControlledCollectionContent({
       );
     const cell = row.cells[column.id];
     if (!cell) throw new Error(messages.missingCell);
+    const rowMove = reordering ? rowCollectionRefs(reordering, row.id) : null;
+    const handle = rowMove?.columnId === column.id;
     return (
       <Table.Cell
         key={column.id}
         id={JSON.stringify([row.id, column.id])}
         textValue={cell.textValue}
         data-column-id={column.id}
+        {...(handle
+          ? { focusMode: "child" as const, allowsArrowNavigation: true }
+          : {})}
       >
+        {handle && reordering ? (
+          <RowMoveControls
+            collection={reordering}
+            id={row.id}
+            label={row.textValue}
+            messages={reordering.messages}
+            isOpen={openMenu === `row:${row.id}`}
+            onOpenChange={(open) =>
+              setMenu((current) =>
+                open
+                  ? { owner: reordering, id: `row:${row.id}` }
+                  : current?.owner === reordering &&
+                      current.id === `row:${row.id}`
+                    ? null
+                    : current,
+              )
+            }
+          />
+        ) : null}
         {cell.content}
       </Table.Cell>
     );

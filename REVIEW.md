@@ -2029,3 +2029,14 @@ continuing those reads, not only the final dispatch gate. Add that exact retaine
 origin check without recapturing a fresh origin, changing omitted WP-08 behavior or
 spending a blocked clamp. No backend mutation/runtime failure is claimed; n6 remains
 open for source correction and final independent verification.
+
+N1/C1b main source intake for n2/n4/n5/n6: the complete eight-body delta now connects
+actual renderer/core/N retirement to the C1a interaction bit, captures the original
+notification before begin, and transfers a started operation without a new port
+lookup. Pure lower-map clearing, source-only config and both post-Number cuts are
+authored. Main matches101 sealed local inputs/all155 source hashes/137 protected
+bodies/1,889 old nonleased inputs, passes own positive TS6/static checks, and verifies
+1,270 pinned compiler/inspection inputs. This is provisional preservation, not
+executed failure/correction proof or independent closure. All four findings remain
+open for the final integrated matrix, including no-orphan/receiver/debt/P2/source-
+wait/cached-ref/permutation tests. Old neutral assertions/seals remain unchanged.

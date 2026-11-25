@@ -12,7 +12,10 @@ import {
   inspectRendererNativeLifetime,
   type NativeLifetimeReady,
   TableRendererCommitError,
+  revokeRendererRowPreparation,
+  requireRendererRowPreparation,
 } from "./renderer-commit.js";
+import { revokeReorderInteraction } from "@tableweave/react/reordering-controller";
 import type { TableRendererTarget } from "./types.js";
 
 declare const stampBrand: unique symbol;
@@ -27,6 +30,7 @@ export interface NativeCoreLink {
   ): Readonly<{ mount: object; actor: object }>;
 }
 export interface NativeLifetimeHooks {
+  revokeAction(): undefined;
   revoke(): undefined;
   reconcile(): "kept" | "retired" | "blocked";
 }
@@ -69,6 +73,28 @@ interface State {
   readonly cell: object;
   readonly link: NativeCoreLink;
   generation: Generation | null;
+  action: NativeRowAction | null;
+}
+interface NativeRowAction {
+  readonly key: object;
+  interaction: object | null;
+  readonly generation: Generation;
+  readonly scope: Slot;
+  readonly row: Slot;
+  readonly handle: Slot;
+  readonly actor: object;
+  readonly stamp: NativeCoreStamp;
+}
+const actionStates = new WeakMap<object, State>();
+/** Pure fixed revocation; deliberately no inspection/source/DOM/scheduler work. */
+function revokeAction(state: State): undefined {
+  const action = state.action;
+  state.action = null;
+  if (!action) return undefined;
+  actionStates.delete(action.key);
+  revokeReorderInteraction(action.interaction);
+  revokeRendererRowPreparation(action.key);
+  return undefined;
 }
 interface Generation {
   state: State | null;
@@ -117,6 +143,8 @@ function ticketRecord(value: unknown): Ticket {
   return (object(value) ? tickets.get(value) : undefined) ?? deny();
 }
 function endSlot(slot: Slot, refresh: boolean): void {
+  const state = slot.generation?.state;
+  if (state?.action?.generation === slot.generation) revokeAction(state);
   if (slot.attachment) {
     const record = attachments.get(slot.attachment);
     if (record) {
@@ -140,6 +168,7 @@ function endSlot(slot: Slot, refresh: boolean): void {
   if (slot.generation) slot.generation.sealed = false;
 }
 function retire(state: State): undefined {
+  revokeAction(state);
   const generation = state.generation;
   state.generation = null;
   if (!generation) return undefined;
@@ -243,12 +272,122 @@ export function installRendererNativeLifetime(
 ): NativeLifetimeHooks {
   const link = claimRendererNativeInstall(cell, seed);
   if (!link || states.has(cell)) deny();
-  const state: State = { cell, link, generation: null };
+  const state: State = { cell, link, generation: null, action: null };
   states.set(cell, state);
   return Object.freeze({
+    revokeAction: () => revokeAction(state),
     revoke: () => retire(state),
     reconcile: () => reconcile(state),
   });
+}
+/** Actual registered cell/slot metadata first, then callbackful source inspection. */
+export function bindNativeRowAction<S extends QuerySchema, T extends object>(
+  target: TableRendererTarget<S, T>,
+  scopeTicket: NativeScopeTicket<S, T>,
+  rowTicket: NativeRowTicket<S, T>,
+  handleTicket: NativeHandleTicket<S, T>,
+  key: object,
+): void {
+  const genuine = captureNativeResourceTarget<S, T>(target);
+  const state = states.get(genuine.cell) ?? deny();
+  requireRendererRowPreparation(key, null, genuine.actor);
+  const scope = ticketRecord(scopeTicket).slot ?? deny();
+  const row = ticketRecord(rowTicket).slot ?? deny();
+  const handle = ticketRecord(handleTicket).slot ?? deny();
+  const generation = state.generation ?? deny();
+  if (
+    scope.kind !== "scope" ||
+    row.kind !== "row" ||
+    handle.kind !== "handle" ||
+    handle.parent !== row ||
+    scope.generation !== generation ||
+    row.generation !== generation ||
+    handle.generation !== generation ||
+    generation.state !== state ||
+    !generation.sealed
+  )
+    deny();
+  revokeAction(state);
+  const stamp = state.link.capture();
+  const action: NativeRowAction = {
+    key,
+    interaction: null,
+    generation,
+    scope,
+    row,
+    handle,
+    actor: genuine.actor,
+    stamp,
+  };
+  state.action = action;
+  actionStates.set(key, state);
+  try {
+    requireNativeRowAction(key);
+  } catch (error) {
+    releaseNativeRowAction(key);
+    throw error;
+  }
+}
+/** Pure completion of the same reservation; a retired capture cannot adopt B. */
+export function attachNativeRowInteraction(
+  key: object,
+  interaction: object,
+): void {
+  const state = actionStates.get(key),
+    action = state?.action;
+  if (!action || action.key !== key || action.interaction !== null) deny();
+  requireRendererRowPreparation(key, interaction, action.actor);
+  action.interaction = interaction;
+}
+/** Fixed genuine preflight, including physical ancestry/seal; not a cached grant. */
+export function requireNativeRowAction(key: unknown): void {
+  const state = object(key) ? actionStates.get(key) : undefined;
+  const action = state?.action;
+  if (!state || !action || action.key !== key) deny();
+  requireRendererRowPreparation(key, action.interaction, action.actor);
+  const before = state.link.require(action.stamp, "idle");
+  if (
+    before.actor !== action.actor ||
+    state.generation !== action.generation ||
+    !action.generation.sealed
+  )
+    deny();
+  freshSlot(action.scope);
+  freshSlot(action.row);
+  freshSlot(action.handle);
+  const table = nodeOf(action.scope),
+    dom = action.generation.realm;
+  if (!table || !dom) deny();
+  for (const slot of [action.scope, action.row, action.handle]) {
+    if (
+      !slot.attachment ||
+      attachments.get(slot.attachment)?.phase !== "sealed"
+    )
+      deny();
+    const node = nodeOf(slot);
+    if (!node) deny();
+    admitNode(dom, slot, node);
+    if (!belongs(dom, slot, node, table)) {
+      endSlot(slot, true);
+      deny();
+    }
+    state.link.require(action.stamp, "idle");
+  }
+  if (
+    state.action !== action ||
+    state.generation !== action.generation ||
+    !action.generation.sealed
+  )
+    deny();
+  state.link.require(action.stamp, "idle");
+  requireRendererRowPreparation(key, action.interaction, action.actor);
+}
+/** Exact-key release. Old/fake keys cannot retire B or touch source/native ports. */
+export function releaseNativeRowAction(key: unknown): undefined {
+  const state = object(key) ? actionStates.get(key) : undefined;
+  if (state?.action && state.action.key === key) return revokeAction(state);
+  revokeRendererRowPreparation(key);
+  return undefined;
 }
 function acquisition<S extends QuerySchema, T extends object>(
   target: TableRendererTarget<S, T>,
@@ -300,6 +439,7 @@ function issue<S extends QuerySchema, T extends object, K extends Kind>(
       item.parent === parent,
   );
   if (!slot) {
+    if (generation.state) revokeAction(generation.state);
     slot = {
       generation,
       kind,
@@ -317,6 +457,7 @@ function issue<S extends QuerySchema, T extends object, K extends Kind>(
   }
   if (slot.cell !== cell || slot.columnId !== columnId) deny();
   if (!slot.ticket) {
+    if (generation.state) revokeAction(generation.state);
     generation.sealed = false;
     slot.ticket = Object.freeze({});
     slot.needsFreshTicket = false;
@@ -570,6 +711,7 @@ function ref<S extends QuerySchema, T extends object, K extends Kind>(
     try {
       const slot = ticketRecord(value).slot;
       if (!slot) return; // Ended React callbacks are inert, never commit exceptions.
+      if (slot.generation?.state) revokeAction(slot.generation.state);
       const current = freshSlot(slot);
       const dom = current.generation.realm ?? realm();
       admitNode(dom, slot, node);

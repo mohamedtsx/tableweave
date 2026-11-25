@@ -3,6 +3,7 @@ import {
   type CriteriaOrigin,
   type CriteriaSourceMetadata,
   type DataTableModel,
+  type NativeRow,
   getControlsAuthorityOwner,
   getCriteriaSourceOwner,
   getCriteriaToolOwner,
@@ -27,6 +28,27 @@ import {
   captureTableReordering,
   retireTableReordering,
 } from "./reordering-binding.js";
+import type { RendererRowNotification } from "./reordering-types.js";
+import type {
+  RowMoveBeginResult,
+  RowMovePlacement,
+} from "@tableweave/react/reordering";
+import {
+  requireReorderAdmission,
+  revokeReorderInteraction,
+  type ReorderAdmission,
+  type ReorderAdmissionLease,
+  type ReorderInteraction,
+} from "@tableweave/react/reordering-controller";
+import {
+  attachNativeRowInteraction,
+  bindNativeRowAction,
+  releaseNativeRowAction,
+  requireNativeRowAction,
+  type NativeScopeTicket,
+  type NativeRowTicket,
+  type NativeHandleTicket,
+} from "./native-resource-lifetime.js";
 import type {
   DataTableStateMessages,
   TableRendererActor,
@@ -54,6 +76,131 @@ interface Binding<S extends QuerySchema, T extends object> {
 }
 type Role = "source" | "display" | "retry" | "selection" | "columns";
 type Callable = (...args: never[]) => unknown;
+interface RowNotificationRecord {
+  capture: RendererCapture<QuerySchema, object> | null;
+  fn: Callable | null;
+  receiver: object | null;
+  admission: object | null;
+  actor: object | null;
+  prepared: object | null;
+}
+interface RowPreparation {
+  port: object | null;
+  interaction: object | null;
+  actor: object | null;
+  fn: Callable | null;
+  receiver: object | null;
+  active: boolean;
+}
+export interface RendererRowSubmission {
+  readonly result: RowMoveBeginResult;
+  readonly notified: boolean;
+  readonly uncertain: boolean;
+  /** Post-notification presentation fence only, never an intent undo. */
+  readonly ui: boolean;
+}
+const rowNotifications = new WeakMap<object, RowNotificationRecord>();
+const rowNotificationOwners = new WeakMap<object, object>();
+const rowPreparations = new WeakMap<object, RowPreparation>();
+// Exists only during the real closed adapter's capture stack. No caller factory
+// or registration method can supply a callback/receiver policy to the binding.
+const rowCaptureOwners = new WeakMap<
+  object,
+  RendererCapture<QuerySchema, object>
+>();
+export function captureRendererRowNotification<
+  S extends QuerySchema,
+  T extends object,
+>(
+  owner: unknown,
+  value: unknown,
+  receiver: object,
+): RendererRowNotification<S, T> {
+  const capture =
+    owner && typeof owner === "object"
+      ? rowCaptureOwners.get(owner)
+      : undefined;
+  if (!capture) deny();
+  return (capture as unknown as RendererCapture<S, T>).rowNotification(
+    value,
+    receiver,
+  );
+}
+/** Fixed metadata clearing only: no source/native/observer/scheduler access. */
+export function revokeRendererRowPreparation(key: unknown): undefined {
+  const record =
+    key && typeof key === "object" ? rowPreparations.get(key) : undefined;
+  if (!record) return undefined;
+  if (record.port) {
+    const port = rowNotifications.get(record.port);
+    if (port && port.prepared === key) port.prepared = null;
+  }
+  record.active = false;
+  record.port = null;
+  record.interaction = null;
+  record.actor = null;
+  record.fn = null;
+  record.receiver = null;
+  return undefined;
+}
+/** N authenticates opaque preparation metadata, never a callback or policy. */
+export function requireRendererRowPreparation(
+  key: unknown,
+  interaction: unknown,
+  actor: unknown,
+): void {
+  const record =
+    key && typeof key === "object" ? rowPreparations.get(key) : undefined;
+  if (
+    !record?.active ||
+    record.interaction !== interaction ||
+    record.actor !== actor
+  )
+    deny();
+}
+function retireRowNotification(owner: object): void {
+  rowCaptureOwners.delete(owner);
+  const key = rowNotificationOwners.get(owner);
+  rowNotificationOwners.delete(owner);
+  if (!key) return;
+  const record = rowNotifications.get(key);
+  if (!record) return;
+  if (record.prepared) revokeRendererRowPreparation(record.prepared);
+  record.capture = null;
+  record.fn = null;
+  record.receiver = null;
+  record.admission = null;
+  record.actor = null;
+  record.prepared = null;
+}
+export function submitRendererRowMove<S extends QuerySchema, T extends object>(
+  target: TableRendererTarget<S, T>,
+  port: RendererRowNotification<S, T>,
+  admission: ReorderAdmission<S, T>,
+  lease: ReorderAdmissionLease<S, T>,
+  placement: RowMovePlacement,
+  scope: NativeScopeTicket<S, T>,
+  row: NativeRowTicket<S, T>,
+  handle: NativeHandleTicket<S, T>,
+  nativeRow: NativeRow<T>,
+): RendererRowSubmission {
+  const record =
+    port && typeof port === "object" ? rowNotifications.get(port) : undefined;
+  if (!record?.capture) deny();
+  // Only an actually issued port reaches typed schema/row adaptation.
+  return (record.capture as unknown as RendererCapture<S, T>).submitRow(
+    port,
+    record,
+    target,
+    admission,
+    lease,
+    placement,
+    scope,
+    row,
+    handle,
+    nativeRow,
+  );
+}
 export type TableRendererMemberKind = "row" | "column" | "header" | "cell";
 
 function member<S extends QuerySchema, T extends object>(
@@ -195,6 +342,12 @@ const columnMessages = {
 } as const;
 const schemas = {
   reordering: {
+    row: "text",
+    up: "text",
+    down: "text",
+    rowSubmitted: "text",
+    rowUncertain: "text",
+    rowBoundary: "text",
     column: "text",
     before: "text",
     after: "text",
@@ -288,6 +441,132 @@ class RendererCapture<S extends QuerySchema, T extends object> {
   flag(value: unknown): boolean {
     if (typeof value !== "boolean") return deny();
     return value;
+  }
+  rowNotification(
+    value: unknown,
+    receiver: object,
+  ): RendererRowNotification<S, T> {
+    if (typeof value !== "function") deny();
+    const admission = this.cache.data(receiver, "admission");
+    const port = Object.freeze({}) as RendererRowNotification<S, T>;
+    rowNotifications.set(port, {
+      capture: this as unknown as RendererCapture<QuerySchema, object>,
+      fn: value as Callable,
+      receiver,
+      admission: admission as object,
+      actor: null,
+      prepared: null,
+    });
+    rowNotificationOwners.set(this.reorderOwner, port);
+    return port;
+  }
+  submitRow(
+    port: object,
+    record: RowNotificationRecord,
+    target: TableRendererTarget<S, T>,
+    admission: ReorderAdmission<S, T>,
+    lease: ReorderAdmissionLease<S, T>,
+    placement: RowMovePlacement,
+    scope: NativeScopeTicket<S, T>,
+    row: NativeRowTicket<S, T>,
+    handle: NativeHandleTicket<S, T>,
+    nativeRow: NativeRow<T>,
+  ): RendererRowSubmission {
+    const committed = requireTableRendererTarget(target);
+    const actor = committed.actor;
+    if (
+      record.actor !== actor ||
+      record.admission !== admission ||
+      !record.fn ||
+      !record.receiver
+    )
+      deny();
+    const owner = getDataTableModelOwner(committed.model) ?? deny();
+    requireReorderAdmission(admission, owner.definition, owner.controller);
+    const begin = admission.begin,
+      apply = Reflect.apply,
+      promiseThen = Promise.prototype.then;
+    const fn = record.fn,
+      receiver = record.receiver;
+    if (record.prepared) releaseNativeRowAction(record.prepared);
+    const key = Object.freeze({});
+    const prepared: RowPreparation = {
+      port,
+      interaction: null,
+      actor,
+      fn,
+      receiver,
+      active: true,
+    };
+    rowPreparations.set(key, prepared);
+    record.prepared = key;
+    let notified = false,
+      uncertain = false,
+      ui = false;
+    let result: RowMoveBeginResult | null = null;
+    let interaction: ReorderInteraction<S, T> | null = null;
+    try {
+      // The exact physical cut is installed before the last callbackful native,
+      // argument and original before-port checks. No regrant/read-latest retry.
+      bindNativeRowAction(target, scope, row, handle, key);
+      interaction = admission.capture(lease);
+      // Only exact private metadata is read here. No refresh/regrant if capture
+      // reentered a normal update, failed replacement or physical ref release.
+      requireRendererRowPreparation(key, null, actor);
+      prepared.interaction = interaction;
+      attachNativeRowInteraction(key, interaction);
+      this.check();
+      const before = this.role("display");
+      if (before.model !== committed.model) deny();
+      const finish = () => {
+        this.check();
+        if (this.role("display").model !== before.model) deny();
+        this.check();
+      };
+      member(before, "row", nativeRow, finish);
+      requireNativeRowAction(key);
+      finish();
+      requireRendererRowPreparation(key, interaction, actor);
+      // Callback-free transfer segment. The actual C1a begin has no app window
+      // after pending creation; do not insert a source/key/permission read here.
+      result = apply(begin, admission, [
+        interaction,
+        placement,
+      ]) as RowMoveBeginResult;
+      if (result.status === "started") {
+        prepared.fn = null;
+        prepared.receiver = null;
+        notified = true;
+        let returned: unknown;
+        try {
+          returned = apply(fn, receiver, [result.operation]);
+        } catch {
+          uncertain = true;
+        }
+        // Owned ordinary Promise observation is after delivery, never another
+        // permission/settlement request. Never read an arbitrary .then getter.
+        if (returned !== null && typeof returned === "object") {
+          try {
+            apply(promiseThen, returned, [() => undefined, () => undefined]);
+          } catch {
+            /* Exotic/modified thenables remain application-owned. */
+          }
+        }
+      }
+      // These checks govern UI effects only. They cannot undo transferred intent.
+      try {
+        finish();
+        member(before, "row", nativeRow, finish);
+        ui = true;
+      } catch {
+        ui = false;
+      }
+      return { result, notified, uncertain, ui };
+    } finally {
+      releaseNativeRowAction(key);
+      if (interaction) revokeReorderInteraction(interaction);
+      revokeRendererRowPreparation(key);
+    }
   }
   opaque(value: unknown): object {
     if (!value || typeof value !== "object") return deny();
@@ -503,8 +782,18 @@ class RendererCapture<S extends QuerySchema, T extends object> {
     const result: Record<string, unknown> = Object.create(null);
     for (const [key, kind] of Object.entries(schema)) {
       const present = this.cache.has(source, key);
-      if (!present && !complete) continue;
-      const input = this.data(source, key, !complete);
+      const optionalRow =
+        name === "reordering" &&
+        [
+          "row",
+          "up",
+          "down",
+          "rowSubmitted",
+          "rowUncertain",
+          "rowBoundary",
+        ].includes(key);
+      if (!present && (!complete || optionalRow)) continue;
+      const input = this.data(source, key, !complete || optionalRow);
       result[key] =
         kind === "text"
           ? this.text(input)
@@ -568,8 +857,6 @@ class RendererCapture<S extends QuerySchema, T extends object> {
         this.binding.model,
         this.reorderOwner,
         this.cache,
-        (value, receiver) =>
-          this.callback(value, receiver, "onSubmit", "display", "event"),
         selectionId,
       );
     }
@@ -1471,15 +1758,33 @@ export function createTableRendererAdapter<
         return deny();
     },
     capture(admission, input, _metadata, check, pin) {
+      retireRowNotification(reorderOwner);
       retireTableReordering(reorderOwner);
       if (pin && pin.mode !== admission.target.metadata.mode) return deny();
-      const ports = new RendererCapture(
+      const capture = new RendererCapture(
         check,
         role,
         admission.target,
         reorderOwner,
-      ).capture(input);
-      return { ports, stamp: undefined, mode: admission.target.metadata.mode };
+      );
+      rowCaptureOwners.set(
+        reorderOwner,
+        capture as unknown as RendererCapture<QuerySchema, object>,
+      );
+      try {
+        const ports = capture.capture(input);
+        return {
+          ports,
+          stamp: undefined,
+          mode: admission.target.metadata.mode,
+        };
+      } finally {
+        if (
+          rowCaptureOwners.get(reorderOwner) ===
+          (capture as unknown as RendererCapture<QuerySchema, object>)
+        )
+          rowCaptureOwners.delete(reorderOwner);
+      }
     },
     activate(target) {
       current = target;
@@ -1488,6 +1793,7 @@ export function createTableRendererAdapter<
     },
     clearMetadata() {
       try {
+        retireRowNotification(reorderOwner);
         retireTableReordering(reorderOwner);
       } finally {
         current = null;
@@ -1502,6 +1808,11 @@ export function createTableRendererAdapter<
         return deny();
     },
     committed(actor, ports, origin) {
+      const port = rowNotificationOwners.get(reorderOwner);
+      if (port) {
+        const notification = rowNotifications.get(port);
+        if (notification) notification.actor = actor;
+      }
       const data = current ?? deny();
       return Object.freeze({
         actor,

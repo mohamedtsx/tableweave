@@ -94,7 +94,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Neutral consumer implementation | Preserved10a417a/intake2241b09; held correction baseline | Main integrated155-source/50 Git-present sealed inputs and positive TS6 pass; N1/C1b fixes source-found lifecycle gaps before row activation |
-| N1/C1b renderer/native integration | Primary exclusive writer active | Correct review22n4/n5/n6 and actual row pre-token notification;155-source319505b8… baseline; headless/pure/vendor frozen |
+| N1/C1b renderer/native integration | Handoff delivered; writer released | Main full delta/101-input/155-source/pinned-input/positive TS6/static intake passes; provisional preservation pending, runtime/independent findings open |
 | C1a interaction cut | Preserved03b96c6; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; C1b/runtime/independent closure still open |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
@@ -466,6 +466,21 @@ drag scope remains incomplete rather than waived, skipped or approved by this ch
 User-block documentation replay passes250 Markdown/879 links and scoped whitespace.
 This establishes only navigation/bookkeeping, not semantic-source equivalence,
 native safety, live row behavior, G-02 or independent approval.
+N1/C1b handoff is delivered. Main reads the full eight-source delta and all actual
+notification/cut/row/retirement changes; matches101 sealed local inputs/all155 source
+hashes/137 protected bodies/1,889 old nonleased inputs and1,270 pinned compiler/
+inspection inputs, and passes own positive TS6/static checks. New combined source
+map `/tmp/opencode/wp10-n1-c1b-integrated-source155.json` has digest
+d11ce2be74e922c30ea48ecf9caf2a23dbb5d49f4a943a827a184651ff5fa2cf;
+handoff seal140b211c… is separate from all producer history. Main preserves the
+actual functional row/column/pager source provisionally, without runtime/corrective/
+independent review22n2/n4/n5/n6 closure or G-02 approval. Drag remains user-blocked.
+
+Main also allocates read-only WP-11 preparation at
+`/tmp/opencode/wp11-workbench-inventory/REPORT.md`, restricted to actual app/story/
+export seams and a bounded next lease. No WP-11 source, dependency, server, runtime,
+packed consumer or publication work is allocated by that report. This advances
+independent preparation without pretending blocked WP-10 drag is complete.
 
 ### Current ownership and next action
 

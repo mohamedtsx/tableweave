@@ -105,3 +105,22 @@ dual/emitted/ordinary/packed/CI/independent suites. Preserve old failures/maps a
 new exact preimages/source delta; no automatic profile rebaseline. Main inspects
 actual code/hash/light handoff before source readiness. Runtime/corrective/independent
 closure of review22n2/n4/n5/n6 and full WP-10/G-02 remain final obligations.
+
+## Provisional N1/C1b handoff intake
+
+The [actual source handoff](../../tests/reordering/pretoken-renderer/README.md)
+changes eight of the eighteen leased bodies, with no added production module.
+Main reads the complete delta, matches all155 current source hashes/101 sealed
+local inputs/137 unleased bodies and1,889 old nonleased regular inputs, passes its
+actual positive TS6 program/static checks, and verifies1,270 pinned compiler/
+inspection inputs. Source155 digestd11ce2be… and seal140b211c… are new stage
+identities, not replacements of the neutral/B2/C1a/entry producer seals.
+
+Source now implements fixed core/N action revocation, privately prepared original
+notification and immediate exact token delivery, pure lower-map retirement,
+source-only configuration, post-coercion receipts and functional row menus.
+Original three-line core delta preserves scheduler/debt/tool/details bodies.
+Main's source inspection is not runtime reproduction, independent correction
+verification or closure of review22n2/n4/n5/n6. The handoff's authored and missing
+matrix remains owed in the selected final phase. Drag stays user-blocked; no vendor
+patch, dependency, manager, geometry or G-02 acceptance is introduced.
