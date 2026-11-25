@@ -124,3 +124,8 @@ Main's source inspection is not runtime reproduction, independent correction
 verification or closure of review22n2/n4/n5/n6. The handoff's authored and missing
 matrix remains owed in the selected final phase. Drag stays user-blocked; no vendor
 patch, dependency, manager, geometry or G-02 acceptance is introduced.
+
+The later [move-reason correction](../../tests/reordering/move-reason/README.md)
+removes only the inherited hidden boundary-description prop, keeping the sealed
+N1/C1b producer intact as history. Its own exact-delta/154-source/syntax/positive
+TS6/scoped Biome checks pass; generated ARIA/browser/manual AT still remain final.

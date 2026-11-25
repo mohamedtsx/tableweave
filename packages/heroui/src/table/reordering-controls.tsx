@@ -295,9 +295,7 @@ function ColumnMoveContent({
         </Dropdown.Popover>
       </Dropdown>
       {!before || !after ? (
-        <span id={`${generated}-reason`} hidden={!disabled}>
-          {reason}
-        </span>
+        <span id={`${generated}-reason`}>{reason}</span>
       ) : null}
       <span ref={status} tabIndex={-1} role="status" aria-live="polite">
         {notice}

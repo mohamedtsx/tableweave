@@ -94,7 +94,7 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
 | Neutral consumer implementation | Preserved10a417a/intake2241b09; held correction baseline | Main integrated155-source/50 Git-present sealed inputs and positive TS6 pass; N1/C1b fixes source-found lifecycle gaps before row activation |
-| N1/C1b renderer/native integration | Handoff delivered; writer released | Main full delta/101-input/155-source/pinned-input/positive TS6/static intake passes; provisional preservation pending, runtime/independent findings open |
+| N1/C1b renderer/native integration | Preservedb3cc5a7; writer released | Main full delta/101-input/155-source/pinned-input/positive TS6/static intake passes; runtime/independent findings remain open |
 | C1a interaction cut | Preserved03b96c6; writer released | Main complete diff/22-input/148-source/1,638-old-input scope and own positive TS6 intake passes; C1b/runtime/independent closure still open |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
@@ -481,6 +481,29 @@ Main also allocates read-only WP-11 preparation at
 export seams and a bounded next lease. No WP-11 source, dependency, server, runtime,
 packed consumer or publication work is allocated by that report. This advances
 independent preparation without pretending blocked WP-10 drag is complete.
+N1/C1b is preservedb3cc5a7. Main notices a separate source-level reason-description
+gap in the inherited menu: a disabled boundary item references a reason span that
+is hidden whenever the opposite direction remains available. Main allocates only
+the exact reason-span visibility correction in table/reordering-controls.tsx plus
+new tests/reordering/move-reason/**. All other154 source bodies and the just-sealed
+N1/C1b fixtures remain unchanged. Own positive source compile/static/scope/format
+checks are allowed; actual browser/AT verification stays final. This is not drag work.
+The one-span correction passes exact b3cc5a7 delta/154 protected source hashes,
+syntax/positive TS6/full scoped Biome after retaining the initial formatter/lint
+failure. New source155 map is `/tmp/opencode/wp10-move-reason-integrated-source155.json`,
+digestbdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837;
+original N1/C1b seals remain unchanged. Generated ARIA/browser/manual AT and
+independent review22n7 verification remain final, not passed here.
+The doc checker itself passes252 Markdown/894 links, but its regression harness
+fails3/18 because setUp copies explicit linked files, not linked directory entries.
+New N1/C1b directory links are valid in the real tree but absent in that temporary
+checkout. Main allocates only scripts/test_check_docs.py's linked-directory setup
+and a missing-directory regression, plus owner bookkeeping; no producer README or
+seal rewrite, generated-tree copy or relaxed checker rule. Failed logs remain saved.
+The harness replay passes all19 probes, including missing-directory rejection;
+real-tree documentation passes252 Markdown/894 links and whitespace. Original
+three failed probes and initial span-helper formatting failure remain preserved.
+No runtime, accessibility, semantic-source or independent acceptance follows.
 
 ### Current ownership and next action
 

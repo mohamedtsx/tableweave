@@ -2040,3 +2040,34 @@ bodies/1,889 old nonleased inputs, passes own positive TS6/static checks, and ve
 executed failure/correction proof or independent closure. All four findings remain
 open for the final integrated matrix, including no-orphan/receiver/debt/P2/source-
 wait/cached-ref/permutation tests. Old neutral assertions/seals remain unchanged.
+
+### n7 — Disabled direction description is hidden when its sibling can move
+
+Main reads the shared row/column menu: each disabled direction references the reason
+span, but hidden={!disabled} hides it when the trigger itself still has one available
+direction. Correct the exact span without changing action authority, native refs,
+transports or menu state. This is a source-level accessibility gap; actual generated
+ARIA, browser and assistive-technology behavior still require final verification.
+Original neutral/N1 assertions and seals stay unchanged; no runtime closure is claimed.
+
+Main's one-span correction and formatter-only collapse pass the exact b3cc5a7 delta,
+154 protected source hashes, syntax, positive TS6 and full scoped Biome. The first
+new-helper format/lint failure is retained separately. This verifies the authored
+source correction, not actual accessibility or independent closure of n7.
+
+## Documentation harness — review session 23
+
+### n1 — Temporary documentation checkout loses valid directory link entries
+
+Main's structural checker passes252 Markdown/894 links. The18-probe harness fails
+three workspace tests because its setup copies explicitly linked non-Markdown files
+but omits directory entries. N1/C1b's preimages/ and light-009/ links exist in the
+actual tree, not that temporary checkout. Preserve the failed log; add only the
+explicit linked directory itself and a missing-directory regression. Do not copy
+generated trees wholesale, change the checker to accept missing directories or edit
+the sealed handoff README to conceal the mismatch. This concerns tooling only.
+
+Main's corrected setup and new missing-directory test pass all19 documentation
+regressions. The real-tree checker also passes252 Markdown/894 links. The original
+three failed probes remain in the prior log. This verifies the narrow harness
+correction, not semantic-source equivalence or runtime/independent acceptance.
