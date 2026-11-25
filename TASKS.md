@@ -5,7 +5,7 @@
 ## Current WP-11 provisional continuation
 
 Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on
-feat/wp-14-performance above provisional WP-13 head25fdfde, WP-12 head8c39a4f
+feat/wp-15-integrated above provisional WP-14 head587d140, WP-13 head25fdfde, WP-12 head8c39a4f
 and WP-11-only headfb69232.
 Original feat/wp-11-workbench
 preservese0463d3, including the reviewed provisional WP-12 producer. This separates
@@ -39,8 +39,8 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
 | WP-13 archive tooling | Provisional source frozen25fdfde; writer released | Main source/light intake passes; actual build/pack/install/runtime/independent proof final |
-| WP-14 benchmark source | Originalf60df08 and guard correction under main preservation; writer released | Main source/light/seal/pin intake passes; actual runner/profile/paint/measurements/independent proof deferred |
-| WP-15 eligible protocols | Preserved isolatedcb4de1c/bd2cec0; writer released | Isolated documentation checks pass; intake after WP-14 scope release; actual consumer/release gates unverified/deferred |
+| WP-14 benchmark source | Provisional source frozen587d140; writer released | Final phase selects independent unit validators only; actual runner/profile/paint/measurements still deferred |
+| WP-15 eligible protocols | Isolatedcb4de1c/bd2cec0 transported0bc3877/c837b32 | Main integrated docs/byte checks selected; actual consumer/release gates unverified/deferred |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -572,6 +572,28 @@ documentation passes293 Markdown/1,092 links/all19 checker probes and whitespace
 This confirms the bounded source/documentation handoff only; MJS implementations
 remain unchecked/unexecuted and no runtime/deadline/profile/performance evidence
 is manufactured. Preserve the WP-14 source boundary before separate WP-15 intake.
+WP-14 correction is preserved587d140. Main creates feat/wp-15-integrated there and
+transports the original isolated WP-15 documents/navigation as0bc3877/c837b32;
+the original producer refs remain intact. Eligible source handoffs are preserved;
+user-selected one final verification-and-fix phase begins with the exact selection
+docs/planning/final-verification-execution.md. Independent worker may run only the
+two small WP-14 statistics/guards unit files, writing external receipts; main owns
+integrated docs/exact bytes. No source corrections/fixture generators/browser/
+framework/build/pack/install/benchmark/consumer/CI/full-suite action is activated.
+Observed current Node24.22.0/SSD3.4GiB/HDD870GiB do not grant relocation or native
+provisioning authority. Drag/runner/consumer/manual/publication blocks stay binding.
+Main allocates a separate read-only remaining-lanes map at external
+/tmp/opencode/final-remaining-lanes-001/PLAN.md for WP-09–WP-13 actual commands,
+source/output/installed prerequisites, historical generation guards, local native/
+capacity/ports and smallest safe next selection. No execution or source edits are
+allowed in that planning scope, and active independent WP-14 unit work is excluded.
+Main's actual integrated documentation replay passes296 Markdown/1,135 links/19
+regression probes and whitespace. Direct current-byte checks match both original
+WP-15 protocols, all17 correction inputs/69 artifacts,1,356 current pins and155
+library files. The intentional contributor/changelog/docs integration is disclosed;
+no obsolete whole-tree scope guard is changed/re-signed to call that drift a pass.
+These cumulative documentation/byte results do not retroactively certify isolated
+packets or unit/runtime/CI/performance/real-consumer outcomes.
 
 ## Current WP-10 implementation handoff
 

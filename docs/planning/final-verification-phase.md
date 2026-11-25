@@ -51,3 +51,8 @@ The [WP-11 inventory](wp-11-deferred-verification.md) separately tracks actual
 catalog/example/framework source producers, interrupted handoffs and the real
 generated-route/current-archive/browser/manual prerequisites. It grants no early
 framework/runtime execution or approval of blocked WP-10/G-02.
+
+Eligible source handoffs are now preserved through WP-14/eligible WP-15 docs. The
+[first exact execution selection](final-verification-execution.md) starts the final
+phase with two small independent WP-14 unit groups only; no other deferred lane is
+implicitly activated by that selection.

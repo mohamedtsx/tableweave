@@ -100,3 +100,10 @@ The isolated correction is preservedbd2cec0. Main verifies unchanged original
 protocol/library hashes and passes291 Markdown/1,123 links/19 checker regressions/
 whitespace in that tree. Stack intake remains pending the active WP-14 writer's
 release; real consumer/benchmark/rights/runtime/publication acceptance stays open.
+After WP-14 scope release/preservation587d140, main transports the two original
+commits to feat/wp-15-integrated as0bc3877/c837b32. Integrated documentation passes
+296 Markdown/1,135 links/19 regressions/whitespace; both original protocol hashes,
+17/69 guard-seal entries,1,356 current pins and155 library hashes match directly.
+Original scope maps remain unchanged history with intended documentation drift.
+The [final-phase selection](final-verification-execution.md) is separate from these
+documentation facts and does not grant real-consumer or stable/publication approval.

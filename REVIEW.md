@@ -37,6 +37,11 @@ original document hashes and155 library bodies remain unchanged. Isolated actual
 checks pass291 Markdown/1,123 links/19 regression probes/current whitespace. This
 verifies the documentation corrections at that tree; no AC-29/WP-15/stable/runtime/
 consumer/publication approval or borrowed current-candidate result is granted.
+Main transports the preserved commits as0bc3877/c837b32 after WP-14 scope release.
+Integrated documentation passes296 Markdown/1,135 links/all19 regression probes/
+whitespace; both protocol originals and155 library byte identities still match.
+n1/n2's documentation corrections are verified at that cumulative source frame;
+external/consumer/runtime/rights/stable gates remain open.
 
 ## WP-14 source intake — review session 32 (provisional)
 
