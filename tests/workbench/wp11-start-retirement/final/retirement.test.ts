@@ -143,7 +143,14 @@ it("retains exact old partition after public receipt is null, attempts second do
     ).rejects.toBeInstanceOf(SourceEnded);
     expect(() => session.attach(boot)).toThrow(SourceEnded);
     expect(() => session.prepareHydration(boot)).toThrow(SourceEnded);
-    expect(() => session.adoptHydration()).toThrow(SourceEnded);
+    const closedBeforeAdoption = session.getSnapshot();
+    expect(session.adoptHydration()).toBeUndefined();
+    expect(session.getSnapshot()).toBe(closedBeforeAdoption);
+    expect(closedBeforeAdoption).toMatchObject({
+      phase: "retiring",
+      receipt: null,
+      sources: null,
+    });
     expect(() => session.deserializeData(cached)).toThrow(SourceEnded);
     expect(reader.bootstrapCalls).toBe(calls);
     expect(

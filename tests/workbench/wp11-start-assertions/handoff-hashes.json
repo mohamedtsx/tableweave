@@ -1,0 +1,24 @@
+{
+  "status": "fixture-only-source-checks-runtime-cases-unrun",
+  "beforeCommit": "70c95ac",
+  "productionChanged": false,
+  "inputs": {
+    "tests/workbench/wp11-start-retirement/final/synthetic-reader.ts": {
+      "sha256": "6ef2aa8f3a8792a440f1b1a774ad372e9b71e3ecad4024c8dd166198a60a92b6",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/final/retirement.test.ts": {
+      "sha256": "e0b8711e330373916bc2cb1bb17a7500f43a8128321fdc548160afe2618ea11c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-assertions/README.md": {
+      "sha256": "58944d58b10f0092ce9c71aa7a696b37a460e97d3ae53348015c56c450fe5dd5",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-assertions/check-source.mjs": {
+      "sha256": "c5d97927291a00e4a4b8aa6484e80b06a2313f3b06777f6fa4e51d336dd8130d",
+      "mode": 436
+    }
+  },
+  "aggregate": "07d178bb5082a7ae842296351c4054d8a6a01c32dfd301984167ac024f8a73e0"
+}
