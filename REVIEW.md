@@ -2322,3 +2322,8 @@ No automatic clamp or unavailable regrant/pause authority is fabricated. Runtime
 registration must verify fresh output paths before starting final configs/servers;
 the current run-label regex alone is not a directory-freshness receipt. All required
 manual/browser/device/AT/G-02/consumer/performance/independent gates remain open.
+Separate packet transport preserves e0463d3 and intakes it as676e6bc above WP-11
+fb69232. Main resolves only TASKS chronology, then passes cumulative source seal/
+static/positive TS6; all155 library bodies and1,311 old pins match. The one disclosed
+old-pin change is the additive Start importer, not a rebaselined producer. No runtime
+or independent closure follows from source transport.

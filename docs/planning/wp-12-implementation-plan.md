@@ -128,3 +128,16 @@ not fabricated epochs/authority or inferred whole-facade acceptance. Final runti
 registration must enforce fresh output identities before invoking config/server/
 engine commands; a run-label shape check alone is not evidence preservation. No
 root command is silently registered or historical guard removed by source intake.
+
+## Separate packet transport
+
+Producere0463d3 is preserved on the original workbench. Main first freezes WP-11-only
+source atfb69232, then transports the WP-12 producer as676e6bc on feat/wp-12-integrated.
+Only coordinator TASKS chronology required conflict resolution; all source/seal/raw
+artifacts remain byte-identical. The WP-11 branch includes no WP-12 fixture.
+
+Main rechecks the21-input/89-artifact source seal/static guard and strict positive
+TS6 on the cumulative branch. All155 library hashes and1,311 old compiler/inspection
+pins remain unchanged. The sole old-pin drift is the reviewed additive Start
+importer in pnpm-lock.yaml; the old1,312 map remains historical, not re-signed as a
+new current map. Browser/manual/review27n1/runtime/independent proof stays UNRUN.

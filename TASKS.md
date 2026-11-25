@@ -4,8 +4,8 @@
 
 ## Current WP-11 provisional continuation
 
-Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on the
-packet-specific feat/wp-11-source-handoff from0c5847c. Original feat/wp-11-workbench
+Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on
+feat/wp-12-integrated above the frozen WP-11-only headfb69232. Original feat/wp-11-workbench
 preservese0463d3, including the reviewed provisional WP-12 producer. This separates
 packet source for later unmerged PRs without rewriting/removing any producer commit.
 The original base is frozen WP-10d6a53f6 (source155bdfabded…). The user chooses **Keep drag
@@ -35,7 +35,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
-| WP-12 integrated fixture | Provisional producer preservede0463d3; transport onto separate packet branch | Main source/light intake passes; browser/manual/independent final |
+| WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -370,6 +370,19 @@ that packet boundary; no WP-12 fixture is included. Main freezes this provisiona
 WP-11 source head before making a separate WP-12 branch and transporting preserved
 producere0463d3. Neither packet is accepted by these checks, and no push/PR/merge,
 generation/build/SSR/browser/manual/packed/performance/consumer execution occurs.
+WP-11-only source is frozenfb69232. Main creates feat/wp-12-integrated from it and
+transports e0463d3 as676e6bc. Only TASKS chronology conflicts; main preserves both
+producer/source histories and the newer Start intake status. No implementation,
+seal, raw result or unknown user file is dropped. Original feat/wp-11-workbench
+still preservese0463d3, and feat/wp-11-source-handoff staysfb69232 for its own PR.
+On the cumulative WP-12 branch, source seal/static and strict TS6 pass. All155
+library hashes match;1,311 historical WP-12 pins match, with only the expected
+pnpm-lock.yaml Start-importer drift. The old1,312 map is not re-signed or called
+unchanged. No browser/manual/independent/whole-packet approval or publication.
+The stacked WP-12 source boundary passes280 Markdown/964 links/19 checker probes
+and current whitespace. Main freezes its provisional source head before opening
+the next additive WP-13 authoring branch. WP-11fb69232 and original producere0463d3
+remain separate preserved refs; exact-head CI/PRs still await the final phase.
 
 ## Current WP-10 implementation handoff
 
