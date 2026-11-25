@@ -31,7 +31,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
 | Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
-| Mounted Start facade | Original preserved3929614; one isolated retirement-correction writer active | Main source/light intake passes; primary intake waits for correction and active primary fixture scope |
+| Mounted Start facade | Original3929614/correction70c95ac/fixture follow-up3ce59e2 preserved; writer released | Main source/light intake passes; primary stack intake waits for WP-12 scope release; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | One primary writer active under the new-only plan | Frozen Stage A/B/library inputs; six integrated flows/manual workbook authored only; runtime/manual final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
@@ -303,6 +303,39 @@ WP-12 or Start-correction WIP, mutate files or execute build/pack/install/import
 runtime/consumer tests. Return a bounded current-archive tooling lease that keeps
 historical producer/output maps and ordinary/private-profile lanes distinct.
 This is preparation only; no WP-13 source owner or acceptance is activated yet.
+Start retirement correction handoff is delivered. Main reads the one-parent delta
+and seven authored cases; own seal/static/scope checks pass14 inputs26e2e62d…/28
+artifacts445aedf1…,155 library sources/1,844 protected old inputs. Primary intake
+still waits for the active WP-12 scope. Main also identifies two unrun-fixture defects:
+invalid UUID-shaped synthetic response ids and an adoption-throws assertion contrary
+to the actual safe no-op contract. Preserve the sealed correction, then allocate
+only those two fixture files and new assertion receipts; no production-source,
+codec, protocol/permission or runtime-phase change is needed.
+Main's own retirement source positive TS6 and803 pinned-input verification pass;
+the correction is preserved isolated70c95ac. A distinct main-only fixture follow-up
+now owns exactly final/synthetic-reader.ts/final/retirement.test.ts in that stage
+and NEW tests/workbench/wp11-start-assertions/**. Production parent/codec/child/router,
+155 libraries and all original14/28/803 map/log bytes stay fixed. Correct response
+UUID shape and assert no new adoption/unchanged closed state rather than an
+unrequired exception. No unit/framework/SSR/browser/runtime execution is allowed.
+The main two-fixture follow-up now passes its exact70c95ac delta/static guard,
+syntax/full scoped Biome and strict source TS6. Parent/codec/all155 libraries/other
+12 retirement inputs/28 raw artifacts remain unchanged; the first formatter-only
+failure is retained. Corrected cases remain UNRUN, not verified runtime closure.
+
+WP-13 read-only report is delivered at its allocated path (20,326 bytes). Main reads
+the actual current export inventories, fresh isolated candidate/output/archive
+protocol, historical root-guard conflicts and ordinary/RAC/Start-SDK profile split.
+No tooling lease is activated before WP-12 source intake. Root commands/CURRENT
+generation/old180-versus199 characterization are not modified or rebaselined, and
+no build/pack/preparation/install/runtime/consumer/publication execution occurs.
+The Start fixture-only follow-up is preserved isolated3ce59e2 with its own four-input
+seal07d178bb…; hashes/modes and sealed scoped Biome match. Full isolated stack is
+f7ad033 →3929614 →70c95ac →3ce59e2. Main will intake it only after the active WP-12
+writer releases its captured primary scope. Existing producer maps/failed logs stay
+exact; review28 runtime/independent findings remain open. The last full primary
+documentation replay remains271 Markdown/934 links/19 probes, not a new check of
+active fixture WIP or later allocation metadata. Own metadata whitespace passes.
 
 ## Current WP-10 implementation handoff
 

@@ -2271,3 +2271,39 @@ debt until all owned cache removals really complete; attempt independent cleanup
 without falsely reporting success or forcing a grant. Callback failures must keep
 the app closed/retryable. Preserve the original producer and author a distinct
 correction. This trace is not an executed failure or independent closure.
+
+Main reads the retirement correction parent diff and all seven new authored cases.
+Own seal/static/scope checks match14 correction inputs26e2e62d…/28 raw artifacts
+445aedf1…,155 library bodies and1,844 other old regular inputs; pin/positive replay
+is being completed separately. Closed snapshot now precedes child callbacks and
+exact partition/canary debt survives independent removal attempts/final verification.
+No runtime/independent n1/n2 closure is granted.
+
+### n3 — Synthetic bootstrap IDs are rejected before retirement assertions
+
+final/synthetic-reader.ts constructs `retirement-synthetic-${serial}` while the
+unchanged production codec requires a36-character hexadecimal/hyphen UUID shape.
+Every positive loaded-source case would fail during real bootstrap validation,
+before exercising the target retirement boundary. Preserve the sealed correction,
+then change only this test transport to deterministic valid UUID-shaped response
+identities. Do not weaken the codec, bypass actual session/P initialization or
+pretend a source compilation executed these tests. This is static source evidence.
+
+### n4 — Missing-receipt adoption is a safe no-op, not an exception contract
+
+The debt test expects adoptHydration to throw after receipt was cleared; the public
+implementation intentionally returns when no receipt exists. The requirement is no
+new grant/adoption while debt remains, not a mandated throw. Preserve that assertion
+as producer history, then assert the actual return and unchanged closed snapshot/
+phase/source identity. Do not change production behavior merely to satisfy the
+overconstrained authored assertion. No runtime failure/correction is executed yet.
+Main's distinct fixture-only follow-up passes exact70c95ac two-body/static scope,
+syntax/full scoped Biome and strict source TS6. Deterministic valid UUID response
+shape and unchanged closed-state/no-op assertions are authored; all production
+parent/codec,155 libraries and other12 correction inputs/28 artifacts stay fixed.
+The first formatting failure is retained. No fixture body is executed, and original
+14-input/803-input maps keep their two disclosed test-body drifts as history.
+Fixture-only correction is preserved3ce59e2 with separate four-input seal07d178bb…,
+hashes/modes/scoped Biome verified. The original parent/source correction70c95ac
+and prior producer3929614 remain distinct. No final test, generated route, cache
+observer failure/correction replay, independent review or G-04 claim has run.

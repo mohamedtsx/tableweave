@@ -70,3 +70,25 @@ cache/evidence deletion, new native permission or worktree changes. Return a bou
 sealed source handoff or exact unsupported public seam. Main independently reviews
 the delta and LIGHT evidence before primary intake; no review28 closure by author.
 Drag/G-02 remains user-blocked and full WP-11 acceptance incomplete.
+
+## Preserved correction and main-owned fixture follow-up
+
+Main inspects the parent diff/seven new cases and passes own source TS6/static/
+scope/seal/803-input checks. Correction is preserved isolated70c95ac, with14
+inputs26e2e62d… and28 artifacts445aedf1…; original source3929614 stays exact.
+No runtime/independent review28n1/n2 closure is granted.
+
+Main subsequently owns only final/synthetic-reader.ts and final/retirement.test.ts
+inside tests/workbench/wp11-start-retirement, plus NEW
+tests/workbench/wp11-start-assertions/**. Review28n3/n4 correct invalid synthetic
+UUID response values and an overconstrained adoption-throws assertion. Production
+parent/codec/child/router source, manifests/lock, old maps/logs/READMEs and all155
+library bodies stay fixed. Preserve70c95ac's fixture preimages and disclose the
+two new test-body drifts; do not re-sign that stage's14-input or803-input maps.
+Strict source TS6/static/syntax/full scoped Biome only; all test bodies stay UNRUN.
+
+The fixture-only follow-up is preserved isolated3ce59e2; its four-input identity
+07d178bb… is distinct from70c95ac's original14-input map. Main's exact delta/
+production-source/static/syntax/strict source TS6/full scoped Biome checks pass.
+The first formatter-only failure is retained. Primary stack intake is pending the
+active WP-12 writer's release, not blocked on invented source/runtime approval.
