@@ -111,3 +111,27 @@ headless ordinary proof, one bounded phase at a time. No new dependency versions
 automatic native downloads, full CI bypass, public-generation approval or package
 publication follows. HDD capacity is not a passed proof. Dedicated performance
 runner/real consumer/manual/rights remain separate; **drag/G-02 stays blocked**.
+
+## Read-only first-candidate/tool preparation
+
+The external final-headless-candidate-prep-001/PLAN.md identifies a concrete input
+hold: targeted local paths contain @pnpm/linux-x6410.13.1's native ELF, not the
+complete pnpm JS package required by the unchanged owned-toolchain contract. Do
+not manufacture a pnpm manifest/stub, borrow the global executable or relax that
+guard. Actual new namespace/lease/tool staging remains after independent review.
+
+Main reads public registry metadata only at
+<https://registry.npmjs.org/pnpm/10.13.1>. It declares name/version pnpm10.13.1,
+bin/pnpm.cjs, tarball <https://registry.npmjs.org/pnpm/-/pnpm-10.13.1.tgz>, unpacked
+size17,668,810bytes/fileCount1111 and expected SRI
+`sha512-N+vxpcejDV+r4MXfRO6NpMllygxa89urKMOhaBtwolYhjQXIHJwNz3Z+9rhVHrW5YAQrntQwDFkkIzY3fgHPrQ==`.
+This is an acquisition candidate/declared metadata, NOT downloaded archive bytes,
+validated signatures, member closure, installed tool or runtime-version evidence.
+No package scripts/artifact are executed or project dependencies changed.
+
+After guard review, main must separately select any exact artifact acquisition,
+integrity/regular-member/path/license inspection and complete owned package/launcher/
+Node maps inside the new proof namespace. Nothing auto-downloads or falls back if
+inputs are missing. Fresh producer deps, standalone headless lock drafting/frozen
+install, archive/current-public-generation/consumer/native evidence remain distinct
+future selections; no current run/receipt/lock is invented by this planning note.

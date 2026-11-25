@@ -828,6 +828,14 @@ ordinary inputs, but not the active five-module/README/protocol storage WIP or a
 HDD target. No commands/imports/installs/downloads/builds/Git/source changes. Actual
 new storage lease schema and revision remain pending the storage producer review;
 the report is not provisioning or phase approval.
+First-candidate planner releases its bounded report: exact producer/headless recipe/
+lock sequence, with complete owned pnpm JS package missing from targeted local
+locations (native @pnpm/linux-x6410.13.1 is not that package). Main reads public
+pnpm10.13.1 registry metadata only; it provides a fixed tarball/SRI acquisition
+candidate, not downloaded bytes/verified tool/runtime proof. No tarball/download/
+install/HDD write or tool-contract relaxation occurs. The source writer remains
+bounded to storage code, while actual acquisition/namespace/tool/producer/lock
+materialization awaits independent guard review and separate main phase selection.
 
 ## Current WP-10 implementation handoff
 
