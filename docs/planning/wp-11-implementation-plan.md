@@ -132,6 +132,12 @@ selection/sort/clamp/hidden/group boundaries, detail/dirty/focus/access-loss/sou
 wait/transport permutations, ordinary archives, mounted frameworks/manual/browser
 and drag/G-02. Main preserves the source before Stage B consumes its actual APIs.
 
+After Stage A preservation, main selects [Stage B](wp-11-examples-plan.md) in
+primary and the [isolated exact Next plan](wp-11-next-install-plan.md). Each consumes
+shared APIs read-only; new framework manifests/lock are isolated/main-owned, not
+concurrent changes to the example worker's frozen baseline. Mounted Start remains
+a separate unmet integration rather than a recipe renamed as an SSR application.
+
 ## Allowed checks, stop and next handoff
 
 Run only own positive TS6/noEmit/source-alias compilation, syntax/static exact public

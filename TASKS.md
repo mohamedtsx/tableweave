@@ -23,6 +23,20 @@ LIGHT now means positive source noEmit/static/scope/full scoped format only.
 Browser/SSR/negative/dual/emitted/packed/manual/performance/consumer/independent/CI
 checks stay final, not waived or claimed. No pushes, PRs, merges or publications.
 
+### TASK-019 ownership and next handoffs
+
+| Slice | Current owner/state | Next action |
+| --- | --- | --- |
+| Shared synthetic facade catalog | Preservedc9c36cb; main source/light intake complete | Final plays/matrix/ordinary proof remain unrun; do not rewrite Stage A seals |
+| Vite/headless/recipes/Start recipe | One primary worker active under the Stage B plan | Return actual new API/scope/seal/light handoff; existing shared/library inputs frozen |
+| Next App Router example | One isolated source worker active from47e20df | Protect main-owned exact manifest/lock; return source/light handoff before primary intake |
+| Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
+| Mounted Start facade | Not yet allocated | Use actual Stage B recipe handoff before a bounded real mount/dependency lease |
+
+No worker owns Git/docs/manifests/public exports or the other writer's worktree.
+Main is the integration/review owner. Ready-to-review source remains provisional;
+no WP-11 completion or delegated/runtime/independent approval follows from LIGHT.
+
 Stage A's writer is released; actual handoff is under main source intake.
 Main's fresh tree install reuses367 packages with zero downloads. Main re-references
 the approved Figma appearance read-only (scene5:159); no Figma edit, redesigned
@@ -72,6 +86,40 @@ result follows. Source-lifecycle and exact per-scene gaps remain as authored in
 apps/storybook/src/workbench/scenes.md; drag/G-02 stays user-blocked.
 Main preserves this actual API/source baseline before activating Stage B. No Next
 installation or mounted-framework/consumer claim is implied by catalog source.
+Stage A is preservedc9c36cb. Main intakes only02a2479's seven original sealed
+historical files as9ce41bd after the writer releases:155 library bytes unchanged,
+all seven original hashes match. Current real-tree docs now pass256 Markdown/903
+links and19 regression probes; initial missing-target failures remain preserved.
+That corrects evidence portability, not runtime/story/framework readiness.
+
+Main selects docs/planning/wp-11-examples-plan.md for Stage B's new Vite/headless/
+recipes/unmounted Start paths in primary, keeping all Stage A/shared155 bodies
+frozen. Main also selects docs/planning/wp-11-next-install-plan.md for one exact
+new app-only dependency/implementation envelope in a separate worktree from9ce41bd.
+Only main may resolve/materialize that additive lock; no primary lock drift, vendor
+patches, Next/Start execution or dependency work is allocated to the example writer.
+Both remain provisional; mounted Start and full framework/packed/manual/final proof
+are not skipped or satisfied by compile-only recipes.
+Stage B's sole primary writer is now active on its new example/recipe paths only.
+Main creates the isolated Next tree from9ce41bd and writes only its selected exact
+new app manifest before lock-only resolution. No old importer/profile/resolution
+may drift; main will review the actual delta before any frozen materialization.
+No Next source writer, server/framework invocation or primary dependency change is
+active yet. The new app's scripts disable telemetry; they are not executed here.
+Isolated Next lock review is additive: all5 old importers/468 package blocks/468
+snapshots/settings/profile preserved; one app importer plus44 package/snapshot pairs,
+541 lock lines and no removals. Own scanner indentation/root-key coverage corrections
+are retained; the corrected complete review is `/tmp/opencode/wp11-next-additive-lock-review-complete.json`.
+Frozen ignore-scripts install passes382 packages (375 reused/seven downloaded).
+Main inspects package/type-entry identities only; no Next/native module or framework
+executes. Manifest/lock stage is preserved isolated47e20df, digests55ed9a4e…/6cc5f56f… .
+The exact isolated source lease may now activate with those inputs fixed. No primary
+manifest/lock, old source/profile or active Stage B input is changed by this work.
+The isolated Next source writer is active under its selected exact lease; no
+manifest/lock ownership is delegated. Main's allocation documentation passes258
+Markdown/905 links and scoped whitespace. The prior19 checker-regression pass is
+not a new run, and none of these checks establishes story/runtime/framework/SSR/
+packed/independent acceptance. Next materialization stays isolated until handoff.
 
 ## Current WP-10 implementation handoff
 
@@ -1555,8 +1603,8 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-015 | WP-07 filter tools/async choices | done | PR #7 final46df932 open/unmerged; remote checks pass | Bounded delegated delivery; no personal/external-gate acceptance |
 | TASK-016 | WP-08 table controls | done | PR #8 finalfadb9a8 open/unmerged; both remote workflows pass | Delegated private-profile delivery; no personal/stable acceptance |
 | TASK-017 | WP-09 details/localization/responsive shell | in progress | Details/plain criteria producers approved; facade/adoption held | Exact later WP-08 handoff, unpaged/live-context contracts |
-| TASK-018 | WP-10 optional sortable | in progress | Pure stage1 approved; adapter/ref/interlock stages held | Actual controls stamps and browser G-02 proof remain |
-| TASK-019 | WP-11 examples/docs/workbench | planned | Assigned after feature handoffs | WP-06–WP-10 |
+| TASK-018 | WP-10 optional sortable | blocked | Manual/source handoff preservedd6a53f6; user blocks drag | Full G-02/runtime/independent acceptance unmet, not waived by downstream work |
+| TASK-019 | WP-11 examples/docs/workbench | in progress | Main intake; Stage B primary and isolated Next source writers active | Preserved sharedc9c36cb/manual WP-10 source; drag and final evidence remain incomplete |
 | TASK-020 | WP-12 integrated browser/manual accessibility | planned | Verification owner assigned after WP-11 | Manual/support-matrix evidence cannot be fabricated |
 | TASK-021 | WP-13 packed compatibility/release tooling | planned | Package owner assigned after WP-11 | No publication rights inferred |
 | TASK-022 | WP-14 reproducible performance | planned | Benchmark owner assigned after WP-11/13 | Approved runner/workload required; no invented timings |
