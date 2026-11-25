@@ -93,11 +93,14 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
 | Native/handle/pager consumers | Inactive; actual producers now integrated | Select app-owned lease/UI detach and navigation-origin bridge before source allocation |
 | Neutral consumer contract | Report delivered; worker released | Exact config/ref/ordinary-C column/pager lease ready after corrected producer; row submit additionally needs closed pre-token renderer/native cut |
+| Neutral consumer implementation | Isolated lease newly selected fromdda8166 | Common refs/functional column controls/row-pending pager; row begin/onSubmit held for C1b |
+| C1a interaction cut | Primary two-source lease newly selected | Pure release-only exact-token revoke plus ACT pre-token checks; no styled/neutral or pure coordinator changes |
 | Admission/UI bridge | Held candidate preservedccede5c | Old25-input/source3 seals intact; corrected readiness/consumer activation pending |
 | Source/UI cut correction | Preserved8ba59fd; writer released | Main diff/source150/23-input/scope/positive TS6 intake passes; runtime/independent approval deferred |
-| Admission client discovery | Main additive manifest/own-fixture lease active | Actual12 runtime/13 types; all150 production bodies freeze at source15039adeb5d…; row cut/consumer still separate |
+| Admission client discovery | Preserveddda8166 | Actual12-runtime/13-type producer entry source checks pass; emitted/installed/packed proof final; C1a additive export is a new stage |
 | Optional adapter | Inactive | Actual UI bridge/neutral consumers and closed vendor-resource contract must precede adapter code |
 | Optional dependency inspection | Preserved isolated9a5f598 | Six inputs/150 old sources/1468 old tracked files checked;71 additive lock lines, intake waits for bridge |
+| DOM native-read repair spike | Isolated writer active from9a5f598 | User-authorized exact0.5.3 DOM-only repair;16 vendor paths/500 added ESM-line cap, no algorithm/package widening or primary intake |
 | Vendor lifetime/upstream preparation | Final contract delivered; worker released | STOP minimal adapter: native observer/keyboard geometry reads precede adapter fences; explicit remedy authority required |
 
 Main selects the report's refs-only lifecycle, exact core installation and renderer
@@ -315,6 +318,42 @@ config/static helper bytes; no producer/public-output seal is rewritten.
 Final sealed-entry Biome passes6 files; documentation passes243 Markdown/867 links
 and whitespace passes. These are source/navigation checks, not runtime/installed or
 independent approval.
+Client discovery is preserveddda8166. The external patch plan arrives; main selects
+the exact isolated lease in docs/planning/wp-10-dnd-native-read-patch-plan.md, with
+the16-path compiled-artifact envelope and500-added-ESM-line stop cap. Main will
+create a new tree from9a and perform only its necessary frozen ignore-scripts install/
+edit-copy materialization. Worker owns the new asset/own fixtures/edit copy only;
+all old source/fixture/manifests stay frozen. No broader fork, native issuer/adapter,
+primary dependency intake or runtime proof is authorized by that allocation.
+Main additionally selects docs/planning/wp-10-neutral-consumer-plan.md for one
+isolated consumer owner fromdda8166, and docs/planning/wp-10-pretoken-cut-plan.md for
+the released B2 owner in primary. C1a adds only exact interaction revocation and
+pre-token cuts; C1b styled/core/N integration is not yet allocated. Neutral code uses
+actual B2 APIs and can implement columns/pager but must not call begin/onSubmit or
+present a dead row control. Separate trees preserve each scope baseline and avoid
+concurrent writes to shared renderer/manifest/source files. Main owns installs/Git/
+docs/integration; all exhaustive/runtime/independent proof remains final.
+Main materializes the patch tree at9a with a frozen ignore-scripts install (374
+reused, zero downloads), then pnpm patch's edit copy only. All32 edit-copy vendor
+files match the preserved inspection bytes; complete preimage map digest is
+774ce46da343b18273618b2a4ee3c604299f2ce4d6463cdd749a1359b0919f09.
+No patch registration/lock update or vendor execution ran. The isolated bounded
+patch writer is now active on its asset/own fixtures/16-path edit copy only.
+Main also creates the neutral tree fromdda8166 and completes its frozen existing-
+dependency ignore-scripts install. Its sole consumer writer is active. Primary C1a
+owns only admission/index plus its new interaction-cut fixtures. Neither reads or
+retags the other's unaccepted WIP. No row-terminal/adapter activation or skipped
+final evidence is inferred from these parallel implementation allocations.
+
+Main references approved appearance-only Figma scene5:159 read-only via the official
+server; no Figma edit/visual acceptance occurs. HeroUI MCP guide/component listing
+fails to fetch, while the official v3 Storybook index is reachable. Neutral authoring
+must use matching installed3.2.8 scoped declarations/source as the API fallback, not
+guess v2/current-site signatures. Real UI/browser/manual evidence remains final.
+Latest allocation documentation passes246 Markdown/870 links and18 checker
+regressions plus scoped whitespace. Neutral install reuses367 packages with zero
+downloads; no new dependency is added there. Checks do not establish source/UI,
+adapter, semantic-source, runtime, consumer or independent acceptance.
 
 ### Current ownership and next action
 

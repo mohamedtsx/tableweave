@@ -214,3 +214,10 @@ is necessary but insufficient, so it is not allocated as code. No additional gen
 upstream search is needed. Main must obtain explicit remedy authority or keep drag
 blocked; the independent UI/source correction and future neutral controls remain
 separate. Existing RAC patch authorization does not cover this dependency.
+
+The user subsequently authorizes the scoped private/prerelease patch spike. Main
+selects the [isolated bounded repair plan](wp-10-dnd-native-read-patch-plan.md), not
+the earlier stopped minimal adapter lease. Exact one-package/16-path envelope,
+runtime-diff cap, preserved inspection baseline, no-algorithm-change and LIGHT-only
+rules apply. Broad fork, adapter/native issuer implementation, primary dependency
+intake and independent/runtime approval remain outside that allocation.

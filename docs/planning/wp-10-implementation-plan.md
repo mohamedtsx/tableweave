@@ -62,6 +62,11 @@ row activation. Do not extend the active source lease or invent a public API now
 Common refs/column/pager authoring need not implement a fake row transport to proceed.
 The [selected handoff constraints](wp-10-ui-source-fences-plan.md#explicit-admission-notification-order-disposition)
 remain binding; source types/light checks do not establish atomic callback delivery.
+Main now allocates [vendor-free neutral consumers](wp-10-neutral-consumer-plan.md)
+in an isolated tree with row submission held, and the independent primary
+[release-only C1a interaction cut](wp-10-pretoken-cut-plan.md). Their write paths and
+baselines are isolated; renderer/native C1b integration waits for their actual
+handoffs. No producer name is guessed by the neutral worker.
 
 ## Stage1 ownership and outcome
 
