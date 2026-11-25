@@ -16,8 +16,11 @@ WP-05's plain resource adapter/hook has delegated scoped G-03 approval as well.
 WP-09 now has provisional `defineTable`/`useDataTable`/`DataTable` and details source
 composition, explicit source exports and CSS wiring. Historical dist is not rebuilt;
 runtime/visual/SSR/packed and independent acceptance remain deferred. See the
-[qualified source boundary](docs/engineering/wp-09-private-composition.md). Nothing
-is published; [TASKS.md](TASKS.md) owns current acceptance/review status.
+[qualified source boundary](docs/engineering/wp-09-private-composition.md).
+WP-10 also has provisional [manual reorder controls](docs/engineering/wp-10-private-reordering.md)
+and guarded row notification/pager source. Drag support remains user-blocked;
+no sortable adapter or G-02 acceptance is claimed. Nothing is published;
+[TASKS.md](TASKS.md) owns current acceptance/review status.
 
 ## Start here
 

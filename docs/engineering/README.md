@@ -18,6 +18,7 @@ take precedence over implementation shortcuts.
 | Filter helper/tools candidate | [WP-07 tools boundary](wp-07-tools.md) | §§4–6/9, TASK-015 |
 | Private controls producer candidate | [WP-08 controls boundary](wp-08-controls.md) | §§7–10, TASK-016 |
 | Private details candidate | [WP-09 details boundary](wp-09-details.md) | §§9/14, TASK-017 |
+| Private manual reorder/control source; drag blocked | [WP-10 source boundary](wp-10-private-reordering.md) | §10, TASK-018; provisional, not G-02 |
 | Isolated WP-09 source prerequisites | [Scoped handoff evidence](../evidence/wp-09-prerequisites-2026-11-24.md) | TASK-017; not full runtime/facade acceptance |
 | Controlled groups, transitions, query/operators/TanStack | [State and query](state-and-query.md) | §§5–6 |
 | Start/Query/SSR/backend ports | [Integrations](integrations.md) | §7 |

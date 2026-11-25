@@ -504,6 +504,25 @@ The harness replay passes all19 probes, including missing-directory rejection;
 real-tree documentation passes252 Markdown/894 links and whitespace. Original
 three failed probes and initial span-helper formatting failure remain preserved.
 No runtime, accessibility, semantic-source or independent acceptance follows.
+The source correction is preserved91175a7 after N1/C1bb3cc5a7. Main confirms primary
+root/styled manifests, lock and workspace patch config remain byte-identical to
+WP-09; no @dnd-kit imports/dependencies exist in primary source/package files and
+the optional sortable entry is still empty. This is static exclusion, not an emitted
+bundle/runtime import test. No further vendor work is allocated.
+Main records the actual private source owner in docs/engineering/wp-10-private-reordering.md
+and prepares `/tmp/opencode/wp10-draft-pr-body.md` externally. No push/PR/CI run
+occurs; the exact draft head/body must be refreshed at final publication. WP-10
+source is ready only for provisional downstream examples, not approval or completion.
+The WP-11 read-only inventory is delivered at its allocated path. It identifies20
+authored focused stories but no full-facade story, actual Storybook9.1.21 test exports,
+emitted-dist versus new LIGHT/public-source aliases, public typed composition seams
+and two sequential source leases. No Next dependency/app exists. Main selects
+shared synthetic fixtures/full-facade stories first, not a fake all-scenes alias or
+an alteration of sealed WP-06/07/08 examples. Named config export aliases are not
+needed; public props indexed types preserve source use without new package exports.
+WP-10 remains explicitly incomplete at drag/G-02 while eligible WP-11 implementation
+continues provisionally under the user's final-phase timing. Full PR/CI publication
+remains deferred and every packet PR must remain unmerged.
 
 ### Current ownership and next action
 
