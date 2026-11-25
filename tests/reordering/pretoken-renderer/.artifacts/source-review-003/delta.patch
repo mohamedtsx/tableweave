@@ -1,0 +1,1677 @@
+--- before/packages/heroui/src/filters/criteria-commit-core.ts
++++ packages/heroui/src/filters/criteria-commit-core.ts
+@@ -539,6 +539,7 @@
+     opaqueProps: unknown,
+   ): Actor {
+     if (!validLease(lease)) return deny();
++    native?.revokeAction(); // Exact valid lease, before admit/capture/source callbacks.
+     if (native && nativeClearing) {
+       operation = {};
+       native.revoke();
+@@ -782,6 +783,7 @@
+       !current
+     )
+       deny();
++    native?.revokeAction(); // A normal same-frame metadata update retires A's action.
+     if (busy || notifying || (native && nativeClearing)) {
+       operation = {};
+       native?.revoke();
+@@ -994,6 +996,7 @@
+     disconnect(lease: Lease) {
+       if (!object(lease) || !leases.has(lease)) return deny();
+       if (mount !== lease) return;
++      native?.revokeAction();
+       if (native && nativeClearing) {
+         operation = {};
+         native.revoke();
+--- before/packages/heroui/src/table/controlled-collection.tsx
++++ packages/heroui/src/table/controlled-collection.tsx
+@@ -20,12 +20,17 @@
+   captureCollectionReordering,
+   captureReorderingProp,
+   collectionRowRef,
++  rowCollectionRefs,
+   leafCollectionRefs,
+   reorderingSnapshot,
+   type requireCollectionReordering,
+ } from "./reordering-binding.js";
+ import type { CollectionReorderingBinding } from "./reordering-types.js";
+-import { ColumnMoveControls, ReorderingNotice } from "./reordering-controls.js";
++import {
++  ColumnMoveControls,
++  RowMoveControls,
++  ReorderingNotice,
++} from "./reordering-controls.js";
+ 
+ export interface CollectionRow {
+   readonly id: string;
+@@ -200,12 +205,13 @@
+             id={column.id}
+             label={column.textValue}
+             messages={reordering.messages}
+-            isOpen={openMenu === column.id}
++            isOpen={openMenu === `column:${column.id}`}
+             onOpenChange={(open) =>
+               setMenu((current) =>
+                 open
+-                  ? { owner: reordering, id: column.id }
+-                  : current?.owner === reordering && current.id === column.id
++                  ? { owner: reordering, id: `column:${column.id}` }
++                  : current?.owner === reordering &&
++                      current.id === `column:${column.id}`
+                     ? null
+                     : current,
+               )
+@@ -288,13 +294,37 @@
+       );
+     const cell = row.cells[column.id];
+     if (!cell) throw new Error(messages.missingCell);
++    const rowMove = reordering ? rowCollectionRefs(reordering, row.id) : null;
++    const handle = rowMove?.columnId === column.id;
+     return (
+       <Table.Cell
+         key={column.id}
+         id={JSON.stringify([row.id, column.id])}
+         textValue={cell.textValue}
+         data-column-id={column.id}
++        {...(handle
++          ? { focusMode: "child" as const, allowsArrowNavigation: true }
++          : {})}
+       >
++        {handle && reordering ? (
++          <RowMoveControls
++            collection={reordering}
++            id={row.id}
++            label={row.textValue}
++            messages={reordering.messages}
++            isOpen={openMenu === `row:${row.id}`}
++            onOpenChange={(open) =>
++              setMenu((current) =>
++                open
++                  ? { owner: reordering, id: `row:${row.id}` }
++                  : current?.owner === reordering &&
++                      current.id === `row:${row.id}`
++                    ? null
++                    : current,
++              )
++            }
++          />
++        ) : null}
+         {cell.content}
+       </Table.Cell>
+     );
+--- before/packages/heroui/src/table/native-resource-lifetime.ts
++++ packages/heroui/src/table/native-resource-lifetime.ts
+@@ -12,7 +12,10 @@
+   inspectRendererNativeLifetime,
+   type NativeLifetimeReady,
+   TableRendererCommitError,
++  revokeRendererRowPreparation,
++  requireRendererRowPreparation,
+ } from "./renderer-commit.js";
++import { revokeReorderInteraction } from "@tableweave/react/reordering-controller";
+ import type { TableRendererTarget } from "./types.js";
+ 
+ declare const stampBrand: unique symbol;
+@@ -27,6 +30,7 @@
+   ): Readonly<{ mount: object; actor: object }>;
+ }
+ export interface NativeLifetimeHooks {
++  revokeAction(): undefined;
+   revoke(): undefined;
+   reconcile(): "kept" | "retired" | "blocked";
+ }
+@@ -69,6 +73,28 @@
+   readonly cell: object;
+   readonly link: NativeCoreLink;
+   generation: Generation | null;
++  action: NativeRowAction | null;
++}
++interface NativeRowAction {
++  readonly key: object;
++  interaction: object | null;
++  readonly generation: Generation;
++  readonly scope: Slot;
++  readonly row: Slot;
++  readonly handle: Slot;
++  readonly actor: object;
++  readonly stamp: NativeCoreStamp;
++}
++const actionStates = new WeakMap<object, State>();
++/** Pure fixed revocation; deliberately no inspection/source/DOM/scheduler work. */
++function revokeAction(state: State): undefined {
++  const action = state.action;
++  state.action = null;
++  if (!action) return undefined;
++  actionStates.delete(action.key);
++  revokeReorderInteraction(action.interaction);
++  revokeRendererRowPreparation(action.key);
++  return undefined;
+ }
+ interface Generation {
+   state: State | null;
+@@ -117,6 +143,8 @@
+   return (object(value) ? tickets.get(value) : undefined) ?? deny();
+ }
+ function endSlot(slot: Slot, refresh: boolean): void {
++  const state = slot.generation?.state;
++  if (state?.action?.generation === slot.generation) revokeAction(state);
+   if (slot.attachment) {
+     const record = attachments.get(slot.attachment);
+     if (record) {
+@@ -140,6 +168,7 @@
+   if (slot.generation) slot.generation.sealed = false;
+ }
+ function retire(state: State): undefined {
++  revokeAction(state);
+   const generation = state.generation;
+   state.generation = null;
+   if (!generation) return undefined;
+@@ -243,12 +272,122 @@
+ ): NativeLifetimeHooks {
+   const link = claimRendererNativeInstall(cell, seed);
+   if (!link || states.has(cell)) deny();
+-  const state: State = { cell, link, generation: null };
++  const state: State = { cell, link, generation: null, action: null };
+   states.set(cell, state);
+   return Object.freeze({
++    revokeAction: () => revokeAction(state),
+     revoke: () => retire(state),
+     reconcile: () => reconcile(state),
+   });
++}
++/** Actual registered cell/slot metadata first, then callbackful source inspection. */
++export function bindNativeRowAction<S extends QuerySchema, T extends object>(
++  target: TableRendererTarget<S, T>,
++  scopeTicket: NativeScopeTicket<S, T>,
++  rowTicket: NativeRowTicket<S, T>,
++  handleTicket: NativeHandleTicket<S, T>,
++  key: object,
++): void {
++  const genuine = captureNativeResourceTarget<S, T>(target);
++  const state = states.get(genuine.cell) ?? deny();
++  requireRendererRowPreparation(key, null, genuine.actor);
++  const scope = ticketRecord(scopeTicket).slot ?? deny();
++  const row = ticketRecord(rowTicket).slot ?? deny();
++  const handle = ticketRecord(handleTicket).slot ?? deny();
++  const generation = state.generation ?? deny();
++  if (
++    scope.kind !== "scope" ||
++    row.kind !== "row" ||
++    handle.kind !== "handle" ||
++    handle.parent !== row ||
++    scope.generation !== generation ||
++    row.generation !== generation ||
++    handle.generation !== generation ||
++    generation.state !== state ||
++    !generation.sealed
++  )
++    deny();
++  revokeAction(state);
++  const stamp = state.link.capture();
++  const action: NativeRowAction = {
++    key,
++    interaction: null,
++    generation,
++    scope,
++    row,
++    handle,
++    actor: genuine.actor,
++    stamp,
++  };
++  state.action = action;
++  actionStates.set(key, state);
++  try {
++    requireNativeRowAction(key);
++  } catch (error) {
++    releaseNativeRowAction(key);
++    throw error;
++  }
++}
++/** Pure completion of the same reservation; a retired capture cannot adopt B. */
++export function attachNativeRowInteraction(
++  key: object,
++  interaction: object,
++): void {
++  const state = actionStates.get(key),
++    action = state?.action;
++  if (!action || action.key !== key || action.interaction !== null) deny();
++  requireRendererRowPreparation(key, interaction, action.actor);
++  action.interaction = interaction;
++}
++/** Fixed genuine preflight, including physical ancestry/seal; not a cached grant. */
++export function requireNativeRowAction(key: unknown): void {
++  const state = object(key) ? actionStates.get(key) : undefined;
++  const action = state?.action;
++  if (!state || !action || action.key !== key) deny();
++  requireRendererRowPreparation(key, action.interaction, action.actor);
++  const before = state.link.require(action.stamp, "idle");
++  if (
++    before.actor !== action.actor ||
++    state.generation !== action.generation ||
++    !action.generation.sealed
++  )
++    deny();
++  freshSlot(action.scope);
++  freshSlot(action.row);
++  freshSlot(action.handle);
++  const table = nodeOf(action.scope),
++    dom = action.generation.realm;
++  if (!table || !dom) deny();
++  for (const slot of [action.scope, action.row, action.handle]) {
++    if (
++      !slot.attachment ||
++      attachments.get(slot.attachment)?.phase !== "sealed"
++    )
++      deny();
++    const node = nodeOf(slot);
++    if (!node) deny();
++    admitNode(dom, slot, node);
++    if (!belongs(dom, slot, node, table)) {
++      endSlot(slot, true);
++      deny();
++    }
++    state.link.require(action.stamp, "idle");
++  }
++  if (
++    state.action !== action ||
++    state.generation !== action.generation ||
++    !action.generation.sealed
++  )
++    deny();
++  state.link.require(action.stamp, "idle");
++  requireRendererRowPreparation(key, action.interaction, action.actor);
++}
++/** Exact-key release. Old/fake keys cannot retire B or touch source/native ports. */
++export function releaseNativeRowAction(key: unknown): undefined {
++  const state = object(key) ? actionStates.get(key) : undefined;
++  if (state?.action && state.action.key === key) return revokeAction(state);
++  revokeRendererRowPreparation(key);
++  return undefined;
+ }
+ function acquisition<S extends QuerySchema, T extends object>(
+   target: TableRendererTarget<S, T>,
+@@ -300,6 +439,7 @@
+       item.parent === parent,
+   );
+   if (!slot) {
++    if (generation.state) revokeAction(generation.state);
+     slot = {
+       generation,
+       kind,
+@@ -317,6 +457,7 @@
+   }
+   if (slot.cell !== cell || slot.columnId !== columnId) deny();
+   if (!slot.ticket) {
++    if (generation.state) revokeAction(generation.state);
+     generation.sealed = false;
+     slot.ticket = Object.freeze({});
+     slot.needsFreshTicket = false;
+@@ -570,6 +711,7 @@
+     try {
+       const slot = ticketRecord(value).slot;
+       if (!slot) return; // Ended React callbacks are inert, never commit exceptions.
++      if (slot.generation?.state) revokeAction(slot.generation.state);
+       const current = freshSlot(slot);
+       const dom = current.generation.realm ?? realm();
+       admitNode(dom, slot, node);
+--- before/packages/heroui/src/table/renderer-commit.ts
++++ packages/heroui/src/table/renderer-commit.ts
+@@ -3,6 +3,7 @@
+   type CriteriaOrigin,
+   type CriteriaSourceMetadata,
+   type DataTableModel,
++  type NativeRow,
+   getControlsAuthorityOwner,
+   getCriteriaSourceOwner,
+   getCriteriaToolOwner,
+@@ -27,6 +28,27 @@
+   captureTableReordering,
+   retireTableReordering,
+ } from "./reordering-binding.js";
++import type { RendererRowNotification } from "./reordering-types.js";
++import type {
++  RowMoveBeginResult,
++  RowMovePlacement,
++} from "@tableweave/react/reordering";
++import {
++  requireReorderAdmission,
++  revokeReorderInteraction,
++  type ReorderAdmission,
++  type ReorderAdmissionLease,
++  type ReorderInteraction,
++} from "@tableweave/react/reordering-controller";
++import {
++  attachNativeRowInteraction,
++  bindNativeRowAction,
++  releaseNativeRowAction,
++  requireNativeRowAction,
++  type NativeScopeTicket,
++  type NativeRowTicket,
++  type NativeHandleTicket,
++} from "./native-resource-lifetime.js";
+ import type {
+   DataTableStateMessages,
+   TableRendererActor,
+@@ -54,6 +76,131 @@
+ }
+ type Role = "source" | "display" | "retry" | "selection" | "columns";
+ type Callable = (...args: never[]) => unknown;
++interface RowNotificationRecord {
++  capture: RendererCapture<QuerySchema, object> | null;
++  fn: Callable | null;
++  receiver: object | null;
++  admission: object | null;
++  actor: object | null;
++  prepared: object | null;
++}
++interface RowPreparation {
++  port: object | null;
++  interaction: object | null;
++  actor: object | null;
++  fn: Callable | null;
++  receiver: object | null;
++  active: boolean;
++}
++export interface RendererRowSubmission {
++  readonly result: RowMoveBeginResult;
++  readonly notified: boolean;
++  readonly uncertain: boolean;
++  /** Post-notification presentation fence only, never an intent undo. */
++  readonly ui: boolean;
++}
++const rowNotifications = new WeakMap<object, RowNotificationRecord>();
++const rowNotificationOwners = new WeakMap<object, object>();
++const rowPreparations = new WeakMap<object, RowPreparation>();
++// Exists only during the real closed adapter's capture stack. No caller factory
++// or registration method can supply a callback/receiver policy to the binding.
++const rowCaptureOwners = new WeakMap<
++  object,
++  RendererCapture<QuerySchema, object>
++>();
++export function captureRendererRowNotification<
++  S extends QuerySchema,
++  T extends object,
++>(
++  owner: unknown,
++  value: unknown,
++  receiver: object,
++): RendererRowNotification<S, T> {
++  const capture =
++    owner && typeof owner === "object"
++      ? rowCaptureOwners.get(owner)
++      : undefined;
++  if (!capture) deny();
++  return (capture as unknown as RendererCapture<S, T>).rowNotification(
++    value,
++    receiver,
++  );
++}
++/** Fixed metadata clearing only: no source/native/observer/scheduler access. */
++export function revokeRendererRowPreparation(key: unknown): undefined {
++  const record =
++    key && typeof key === "object" ? rowPreparations.get(key) : undefined;
++  if (!record) return undefined;
++  if (record.port) {
++    const port = rowNotifications.get(record.port);
++    if (port && port.prepared === key) port.prepared = null;
++  }
++  record.active = false;
++  record.port = null;
++  record.interaction = null;
++  record.actor = null;
++  record.fn = null;
++  record.receiver = null;
++  return undefined;
++}
++/** N authenticates opaque preparation metadata, never a callback or policy. */
++export function requireRendererRowPreparation(
++  key: unknown,
++  interaction: unknown,
++  actor: unknown,
++): void {
++  const record =
++    key && typeof key === "object" ? rowPreparations.get(key) : undefined;
++  if (
++    !record?.active ||
++    record.interaction !== interaction ||
++    record.actor !== actor
++  )
++    deny();
++}
++function retireRowNotification(owner: object): void {
++  rowCaptureOwners.delete(owner);
++  const key = rowNotificationOwners.get(owner);
++  rowNotificationOwners.delete(owner);
++  if (!key) return;
++  const record = rowNotifications.get(key);
++  if (!record) return;
++  if (record.prepared) revokeRendererRowPreparation(record.prepared);
++  record.capture = null;
++  record.fn = null;
++  record.receiver = null;
++  record.admission = null;
++  record.actor = null;
++  record.prepared = null;
++}
++export function submitRendererRowMove<S extends QuerySchema, T extends object>(
++  target: TableRendererTarget<S, T>,
++  port: RendererRowNotification<S, T>,
++  admission: ReorderAdmission<S, T>,
++  lease: ReorderAdmissionLease<S, T>,
++  placement: RowMovePlacement,
++  scope: NativeScopeTicket<S, T>,
++  row: NativeRowTicket<S, T>,
++  handle: NativeHandleTicket<S, T>,
++  nativeRow: NativeRow<T>,
++): RendererRowSubmission {
++  const record =
++    port && typeof port === "object" ? rowNotifications.get(port) : undefined;
++  if (!record?.capture) deny();
++  // Only an actually issued port reaches typed schema/row adaptation.
++  return (record.capture as unknown as RendererCapture<S, T>).submitRow(
++    port,
++    record,
++    target,
++    admission,
++    lease,
++    placement,
++    scope,
++    row,
++    handle,
++    nativeRow,
++  );
++}
+ export type TableRendererMemberKind = "row" | "column" | "header" | "cell";
+ 
+ function member<S extends QuerySchema, T extends object>(
+@@ -195,6 +342,12 @@
+ } as const;
+ const schemas = {
+   reordering: {
++    row: "text",
++    up: "text",
++    down: "text",
++    rowSubmitted: "text",
++    rowUncertain: "text",
++    rowBoundary: "text",
+     column: "text",
+     before: "text",
+     after: "text",
+@@ -288,6 +441,132 @@
+   flag(value: unknown): boolean {
+     if (typeof value !== "boolean") return deny();
+     return value;
++  }
++  rowNotification(
++    value: unknown,
++    receiver: object,
++  ): RendererRowNotification<S, T> {
++    if (typeof value !== "function") deny();
++    const admission = this.cache.data(receiver, "admission");
++    const port = Object.freeze({}) as RendererRowNotification<S, T>;
++    rowNotifications.set(port, {
++      capture: this as unknown as RendererCapture<QuerySchema, object>,
++      fn: value as Callable,
++      receiver,
++      admission: admission as object,
++      actor: null,
++      prepared: null,
++    });
++    rowNotificationOwners.set(this.reorderOwner, port);
++    return port;
++  }
++  submitRow(
++    port: object,
++    record: RowNotificationRecord,
++    target: TableRendererTarget<S, T>,
++    admission: ReorderAdmission<S, T>,
++    lease: ReorderAdmissionLease<S, T>,
++    placement: RowMovePlacement,
++    scope: NativeScopeTicket<S, T>,
++    row: NativeRowTicket<S, T>,
++    handle: NativeHandleTicket<S, T>,
++    nativeRow: NativeRow<T>,
++  ): RendererRowSubmission {
++    const committed = requireTableRendererTarget(target);
++    const actor = committed.actor;
++    if (
++      record.actor !== actor ||
++      record.admission !== admission ||
++      !record.fn ||
++      !record.receiver
++    )
++      deny();
++    const owner = getDataTableModelOwner(committed.model) ?? deny();
++    requireReorderAdmission(admission, owner.definition, owner.controller);
++    const begin = admission.begin,
++      apply = Reflect.apply,
++      promiseThen = Promise.prototype.then;
++    const fn = record.fn,
++      receiver = record.receiver;
++    if (record.prepared) releaseNativeRowAction(record.prepared);
++    const key = Object.freeze({});
++    const prepared: RowPreparation = {
++      port,
++      interaction: null,
++      actor,
++      fn,
++      receiver,
++      active: true,
++    };
++    rowPreparations.set(key, prepared);
++    record.prepared = key;
++    let notified = false,
++      uncertain = false,
++      ui = false;
++    let result: RowMoveBeginResult | null = null;
++    let interaction: ReorderInteraction<S, T> | null = null;
++    try {
++      // The exact physical cut is installed before the last callbackful native,
++      // argument and original before-port checks. No regrant/read-latest retry.
++      bindNativeRowAction(target, scope, row, handle, key);
++      interaction = admission.capture(lease);
++      // Only exact private metadata is read here. No refresh/regrant if capture
++      // reentered a normal update, failed replacement or physical ref release.
++      requireRendererRowPreparation(key, null, actor);
++      prepared.interaction = interaction;
++      attachNativeRowInteraction(key, interaction);
++      this.check();
++      const before = this.role("display");
++      if (before.model !== committed.model) deny();
++      const finish = () => {
++        this.check();
++        if (this.role("display").model !== before.model) deny();
++        this.check();
++      };
++      member(before, "row", nativeRow, finish);
++      requireNativeRowAction(key);
++      finish();
++      requireRendererRowPreparation(key, interaction, actor);
++      // Callback-free transfer segment. The actual C1a begin has no app window
++      // after pending creation; do not insert a source/key/permission read here.
++      result = apply(begin, admission, [
++        interaction,
++        placement,
++      ]) as RowMoveBeginResult;
++      if (result.status === "started") {
++        prepared.fn = null;
++        prepared.receiver = null;
++        notified = true;
++        let returned: unknown;
++        try {
++          returned = apply(fn, receiver, [result.operation]);
++        } catch {
++          uncertain = true;
++        }
++        // Owned ordinary Promise observation is after delivery, never another
++        // permission/settlement request. Never read an arbitrary .then getter.
++        if (returned !== null && typeof returned === "object") {
++          try {
++            apply(promiseThen, returned, [() => undefined, () => undefined]);
++          } catch {
++            /* Exotic/modified thenables remain application-owned. */
++          }
++        }
++      }
++      // These checks govern UI effects only. They cannot undo transferred intent.
++      try {
++        finish();
++        member(before, "row", nativeRow, finish);
++        ui = true;
++      } catch {
++        ui = false;
++      }
++      return { result, notified, uncertain, ui };
++    } finally {
++      releaseNativeRowAction(key);
++      if (interaction) revokeReorderInteraction(interaction);
++      revokeRendererRowPreparation(key);
++    }
+   }
+   opaque(value: unknown): object {
+     if (!value || typeof value !== "object") return deny();
+@@ -503,8 +782,18 @@
+     const result: Record<string, unknown> = Object.create(null);
+     for (const [key, kind] of Object.entries(schema)) {
+       const present = this.cache.has(source, key);
+-      if (!present && !complete) continue;
+-      const input = this.data(source, key, !complete);
++      const optionalRow =
++        name === "reordering" &&
++        [
++          "row",
++          "up",
++          "down",
++          "rowSubmitted",
++          "rowUncertain",
++          "rowBoundary",
++        ].includes(key);
++      if (!present && (!complete || optionalRow)) continue;
++      const input = this.data(source, key, !complete || optionalRow);
+       result[key] =
+         kind === "text"
+           ? this.text(input)
+@@ -568,8 +857,6 @@
+         this.binding.model,
+         this.reorderOwner,
+         this.cache,
+-        (value, receiver) =>
+-          this.callback(value, receiver, "onSubmit", "display", "event"),
+         selectionId,
+       );
+     }
+@@ -1471,15 +1758,33 @@
+         return deny();
+     },
+     capture(admission, input, _metadata, check, pin) {
++      retireRowNotification(reorderOwner);
+       retireTableReordering(reorderOwner);
+       if (pin && pin.mode !== admission.target.metadata.mode) return deny();
+-      const ports = new RendererCapture(
++      const capture = new RendererCapture(
+         check,
+         role,
+         admission.target,
+         reorderOwner,
+-      ).capture(input);
+-      return { ports, stamp: undefined, mode: admission.target.metadata.mode };
++      );
++      rowCaptureOwners.set(
++        reorderOwner,
++        capture as unknown as RendererCapture<QuerySchema, object>,
++      );
++      try {
++        const ports = capture.capture(input);
++        return {
++          ports,
++          stamp: undefined,
++          mode: admission.target.metadata.mode,
++        };
++      } finally {
++        if (
++          rowCaptureOwners.get(reorderOwner) ===
++          (capture as unknown as RendererCapture<QuerySchema, object>)
++        )
++          rowCaptureOwners.delete(reorderOwner);
++      }
+     },
+     activate(target) {
+       current = target;
+@@ -1488,6 +1793,7 @@
+     },
+     clearMetadata() {
+       try {
++        retireRowNotification(reorderOwner);
+         retireTableReordering(reorderOwner);
+       } finally {
+         current = null;
+@@ -1502,6 +1808,11 @@
+         return deny();
+     },
+     committed(actor, ports, origin) {
++      const port = rowNotificationOwners.get(reorderOwner);
++      if (port) {
++        const notification = rowNotifications.get(port);
++        if (notification) notification.actor = actor;
++      }
+       const data = current ?? deny();
+       return Object.freeze({
+         actor,
+--- before/packages/heroui/src/table/reordering-binding.ts
++++ packages/heroui/src/table/reordering-binding.ts
+@@ -33,6 +33,7 @@
+   issueNativeLeaf,
+   issueNativeLeafHandle,
+   issueNativeRow,
++  issueNativeRowHandle,
+   issueNativeScope,
+   nativeHandleRef,
+   nativeLeafRef,
+@@ -43,12 +44,16 @@
+   type NativeHandleTicket,
+   type NativeLeafTicket,
+   type NativeRowTicket,
++  type NativeScopeTicket,
+ } from "./native-resource-lifetime.js";
+ import {
+   requireTableRendererMember,
+   requireTableRendererTarget,
+   TableRendererCommitError,
+   tableRendererBoundary,
++  submitRendererRowMove,
++  captureRendererRowNotification,
++  type RendererRowSubmission,
+ } from "./renderer-commit.js";
+ import type {
+   CapturedTableReordering,
+@@ -56,9 +61,13 @@
+   ReorderingSnapshot,
+   TableReorderingBinding,
+   TableReorderingNavigation,
++  RendererRowNotification,
+ } from "./reordering-types.js";
+ import type { TableRendererTarget } from "./types.js";
+-import { englishReorderingMessages } from "./reordering-messages.js";
++import {
++  englishReorderingMessages,
++  arabicReorderingMessages,
++} from "./reordering-messages.js";
+ import type { PaginationProps } from "../pagination/types.js";
+ 
+ const identities = new WeakMap<object, object>();
+@@ -75,6 +84,10 @@
+ const bindings = new WeakMap<object, unknown>();
+ const collections = new WeakMap<object, unknown>();
+ const presentations = new WeakMap<object, unknown>();
++const presentationMetadata = new WeakMap<
++  object,
++  Pick<CollectionPresentation, "binding" | "messages">
++>();
+ const navigation = new WeakMap<object, unknown>();
+ const activeCells = new WeakMap<object, object>();
+ const rowChoices = new WeakMap<
+@@ -87,7 +100,7 @@
+     admission: ReorderAdmission<S, T>;
+     lease: ReorderAdmissionLease<S, T>;
+     handleColumnId: string;
+-    notification: unknown;
++    notification: RendererRowNotification<S, T> | null;
+     ui: ReorderUIBinding<S, T>;
+   } | null;
+   binding: TableReorderingBinding<S, T> | null;
+@@ -103,14 +116,25 @@
+   collection: CollectionReorderingBinding | null;
+ }
+ interface Collection<S extends QuerySchema, T extends object> {
++  ended: boolean;
+   presentation: CollectionPresentation | null;
+   readonly messages: typeof englishReorderingMessages;
+   readonly binding: TableReorderingBinding<S, T>;
+-  readonly columns: object;
+-  readonly rows: object;
+-  readonly scope: ReturnType<typeof nativeScopeRef<S, T>>;
+-  readonly rowRefs: ReadonlyMap<string, ReturnType<typeof nativeRowRef<S, T>>>;
+-  readonly leaves: ReadonlyMap<
++  columns: object | null;
++  rows: object | null;
++  scope: ReturnType<typeof nativeScopeRef<S, T>> | null;
++  scopeTicket: NativeScopeTicket<S, T> | null;
++  handleColumnId: string | null;
++  readonly rowHandles: Map<
++    string,
++    {
++      row: NativeRowTicket<S, T>;
++      handle: NativeHandleTicket<S, T>;
++      ref: ReturnType<typeof nativeHandleRef<S, T>>;
++    }
++  >;
++  readonly rowRefs: Map<string, ReturnType<typeof nativeRowRef<S, T>>>;
++  readonly leaves: Map<
+     string,
+     {
+       leaf: NativeLeafTicket<S, T>;
+@@ -141,7 +165,7 @@
+   if (!value || typeof value !== "object") return deny();
+   return (map.get(value) as V | undefined) ?? deny();
+ }
+-function changed<S extends QuerySchema, T extends object>(
++function setSnapshot<S extends QuerySchema, T extends object>(
+   record: Binding<S, T>,
+   values: Partial<Omit<ReorderingSnapshot, "version">>,
+ ) {
+@@ -151,12 +175,19 @@
+         record.snapshot[key as keyof ReorderingSnapshot] === value,
+     )
+   )
+-    return;
++    return false;
+   record.snapshot = Object.freeze({
+     ...record.snapshot,
+     ...values,
+     version: Object.freeze({}),
+   });
++  return true;
++}
++function changed<S extends QuerySchema, T extends object>(
++  record: Binding<S, T>,
++  values: Partial<Omit<ReorderingSnapshot, "version">>,
++) {
++  if (!setSnapshot(record, values)) return;
+   for (const listener of [...record.listeners]) {
+     if (!record.listeners.has(listener)) continue;
+     try {
+@@ -166,13 +197,32 @@
+     }
+   }
+ }
+-/** Capture-time only. Original private notification is wrapped and never exposed/called. */
++/** Pure owned-buffer clearing. Old presentations retain metadata only, never B routes. */
++function clearCollection<S extends QuerySchema, T extends object>(
++  binding: Binding<S, T>,
++): void {
++  const token = binding.collection;
++  binding.collection = null;
++  if (!token) return;
++  const record = known<Collection<S, T>>(collections, token);
++  record.ended = true;
++  record.rowRefs.clear();
++  record.rowHandles.clear();
++  record.leaves.clear();
++  record.columns = null;
++  record.rows = null;
++  record.scope = null;
++  record.scopeTicket = null;
++  record.handleColumnId = null;
++  if (record.presentation) presentations.delete(record.presentation);
++  record.presentation = null;
++}
++/** Capture-time only. Notification is an opaque R port, never a callable wrapper. */
+ export function captureTableReordering<S extends QuerySchema, T extends object>(
+   raw: unknown,
+   model: DataTableModel<S, T>,
+   owner: object,
+   capture: CommitMetadata,
+-  wrapNotification: (value: unknown, receiver: object) => unknown,
+   selectionId?: unknown,
+ ): CapturedTableReordering<S, T> {
+   const object = (value: unknown): object => {
+@@ -256,20 +306,37 @@
+     if (typeof notification !== "function") deny();
+     const ui = claimReorderUI(actual.definition, admission, lease, owner);
+     try {
+-      // B2's actor argument is an association tag, not renderer authority. Use
+-      // this private capture tag only to authenticate the exact helper-committed
+-      // model/P/source BEFORE any private locale capture, then suspend it. This
+-      // proof is never returned, rendered or used for events/navigation. The
+-      // genuine registered renderer actor gets its separate join after commit.
+-      const preflight = joinReorderModel(ui, model, owner);
+-      requireReorderModel(preflight, model);
++      // Source configuration is not display readiness. The genuine D/C/lease
++      // and renderer source are authenticated here without a fake actor/frame.
++      // A ready input still proves the exact app-committed model/P association
++      // before private renderer props. This inert association is immediately
++      // suspended, never used as a renderer/event actor. No unavailable native
++      // methods or synthetic display are consulted for source-only/state inputs.
++      const facts = model.presentation;
++      if (
++        view &&
++        model.frame &&
++        facts &&
++        !facts.busy &&
++        !facts.stale &&
++        !facts.obsolete &&
++        !facts.resourceObsolete &&
++        facts.blockedReason === null
++      ) {
++        const preflight = joinReorderModel(ui, model, owner);
++        requireReorderModel(preflight, model);
++      }
+       suspendReorderUI(ui);
+       rows = {
+         admission,
+         lease,
+         handleColumnId,
+         ui,
+-        notification: wrapNotification(notification, value),
++        notification: captureRendererRowNotification<S, T>(
++          owner,
++          notification,
++          value,
++        ),
+       };
+     } catch (error) {
+       releaseReorderUI(ui);
+@@ -299,19 +366,22 @@
+   record.rows = null;
+   record.binding = null;
+   if (rows) rows.notification = null;
+-  try {
+-    if (rows) releaseReorderUI(rows.ui);
+-  } finally {
+-    if (prior) {
+-      const binding = known<Binding<QuerySchema, object>>(bindings, prior);
+-      if (activeCells.get(binding.target.cell) === prior)
+-        activeCells.delete(binding.target.cell);
+-      binding.join = null;
+-      binding.collection = null;
+-      changed(binding, { ready: false, pending: false, rowConfigured: false });
+-      binding.listeners.clear();
+-    }
+-  }
++  if (prior) {
++    const binding = known<Binding<QuerySchema, object>>(bindings, prior);
++    if (activeCells.get(binding.target.cell) === prior)
++      activeCells.delete(binding.target.cell);
++    binding.join = null;
++    clearCollection(binding);
++    setSnapshot(binding, {
++      ready: false,
++      pending: false,
++      rowConfigured: false,
++    });
++    binding.listeners.clear();
++  }
++  // Headless release queues metadata delivery; all owned buffers are already
++  // empty even if that existing fixed scheduling boundary is instrumented.
++  if (rows) releaseReorderUI(rows.ui);
+ }
+ export function publishTableReordering<S extends QuerySchema, T extends object>(
+   target: TableRendererTarget<S, T>,
+@@ -350,11 +420,12 @@
+   }
+   const modelToken = identity(current.model);
+   if (record.model !== modelToken) {
+-    record.collection = null;
++    clearCollection(record);
+     record.model = modelToken;
+     changed(record, { ready: false, refPass: Object.freeze({}) });
+   }
+   if (config.rows) {
++    const priorJoin = record.join;
+     try {
+       record.join = joinReorderModel(
+         config.rows.ui,
+@@ -368,6 +439,8 @@
+       record.join = null;
+       changed(record, { ready: false });
+     }
++    if (record.join && record.join !== priorJoin)
++      changed(record, { ready: false, refPass: Object.freeze({}) });
+     const metadata = observeReorderUI(config.rows.ui);
+     changed(record, { pending: metadata.pending });
+   }
+@@ -438,8 +511,12 @@
+   const record = known<Binding<S, T>>(bindings, binding);
+   if (record.config.ended) return () => {};
+   record.listeners.add(listener);
++  // This is the existing genuine post-clear publisher, not an inline purge
++  // observer or a new participant/policy. It also wakes retained wait widgets.
++  const stop = record.target.cell.subscribe(listener);
+   return () => {
+     record.listeners.delete(listener);
++    stop();
+   };
+ }
+ export function suspendTableReordering<S extends QuerySchema, T extends object>(
+@@ -449,6 +526,7 @@
+   if (record.config.ended) return;
+   if (record.config.rows) suspendReorderUI(record.config.rows.ui);
+   record.join = null;
++  clearCollection(record);
+   changed(record, { ready: false });
+ }
+ /** Registration layout only. Incomplete never schedules another render. */
+@@ -464,7 +542,7 @@
+   if (!record.collection) return;
+   const status = sealNativeRefs(record.target);
+   if (status === "refresh-refs") {
+-    record.collection = null;
++    clearCollection(record);
+     changed(record, { ready: false, refPass: Object.freeze({}) });
+   } else changed(record, { ready: status === "ready" });
+ }
+@@ -477,7 +555,7 @@
+     ? record.config.rows.admission.subscribe(listener)
+     : () => {};
+ }
+-/** Must run before app text/cell/message callbacks. Row handles remain intentionally absent. */
++/** Must run before app text/cell/message callbacks; this preflight issues no refs. */
+ export function prepareTableReordering<S extends QuerySchema, T extends object>(
+   binding: TableReorderingBinding<S, T>,
+ ): void {
+@@ -562,24 +640,58 @@
+   for (const group of view.headerGroups)
+     for (const header of group.headers) visit(header);
+   const rowRefs = new Map<string, ReturnType<typeof nativeRowRef<S, T>>>();
++  const rowHandles = new Map<
++    string,
++    {
++      row: NativeRowTicket<S, T>;
++      handle: NativeHandleTicket<S, T>;
++      ref: ReturnType<typeof nativeHandleRef<S, T>>;
++    }
++  >();
+   for (const row of view.rows) {
+     const ticket: NativeRowTicket<S, T> = issueNativeRow(record.target, row);
+     rowRefs.set(row.id, nativeRowRef(ticket));
++    if (record.config.rows) {
++      const cells = tableRendererBoundary(record.target, () =>
++        row.getVisibleCells(),
++      );
++      for (const cell of cells) {
++        requireTableRendererMember(record.target, "cell", cell);
++        if (cell.column.id !== record.config.rows.handleColumnId) continue;
++        const handle = issueNativeRowHandle(record.target, ticket, cell);
++        rowHandles.set(row.id, {
++          row: ticket,
++          handle,
++          ref: nativeHandleRef(handle),
++        });
++      }
++      if (!rowHandles.has(row.id)) deny();
++    }
+   }
+   const token = Object.freeze({}) as CollectionReorderingBinding;
++  const language = current.ports.locale?.locale;
++  const defaults =
++    language === "ar" || language?.startsWith("ar-")
++      ? arabicReorderingMessages
++      : englishReorderingMessages;
+   collections.set(token, {
++    ended: false,
+     presentation: null,
+     binding,
+     messages: Object.freeze({
+-      ...englishReorderingMessages,
++      ...defaults,
+       ...current.ports.messages.reordering,
+     }),
+     columns: identity(columns),
+     rows: identity(rows),
+     scope: nativeScopeRef(scope),
++    scopeTicket: scope,
++    handleColumnId: record.config.rows?.handleColumnId ?? null,
++    rowHandles,
+     rowRefs,
+     leaves,
+   } satisfies Collection<S, T>);
++  clearCollection(record);
+   record.collection = token;
+   return token;
+ }
+@@ -589,6 +701,7 @@
+   rows: unknown,
+ ) {
+   const record = known<Collection<QuerySchema, object>>(collections, input);
++  if (record.ended) deny();
+   if (
+     known<Binding<QuerySchema, object>>(bindings, record.binding).collection !==
+     input
+@@ -608,9 +721,13 @@
+     record.presentation = Object.freeze({
+       binding: record.binding,
+       messages: record.messages,
+-      scope: record.scope,
++      scope: record.scope ?? deny(),
+     });
+     presentations.set(record.presentation, record);
++    presentationMetadata.set(
++      record.presentation,
++      Object.freeze({ binding: record.binding, messages: record.messages }),
++    );
+   }
+   return record.presentation;
+ }
+@@ -618,11 +735,30 @@
+ export function collectionReorderingPresentation(
+   value: unknown,
+ ): CollectionPresentation {
+-  known<Collection<QuerySchema, object>>(presentations, value);
++  known<Pick<CollectionPresentation, "binding" | "messages">>(
++    presentationMetadata,
++    value,
++  );
+   return value as CollectionPresentation;
+ }
++/** Metadata-only route check before a widget consumes any private props. */
++export function hasCollectionReordering(
++  presentation: CollectionPresentation,
++): boolean {
++  collectionReorderingPresentation(presentation);
++  const record = presentations.get(presentation) as
++    | Collection<QuerySchema, object>
++    | undefined;
++  return !!record && !record.ended;
++}
+ export function captureCollectionReordering(input: object, token: unknown) {
+-  known<Collection<QuerySchema, object>>(collections, token);
++  const record = known<Collection<QuerySchema, object>>(collections, token);
++  if (
++    record.ended ||
++    known<Binding<QuerySchema, object>>(bindings, record.binding).collection !==
++      token
++  )
++    deny();
+   const own = (key: string) => {
+     const descriptor = Object.getOwnPropertyDescriptor(input, key);
+     if (!descriptor || !Object.hasOwn(descriptor, "value")) deny();
+@@ -659,10 +795,11 @@
+   presentation: ReturnType<typeof requireCollectionReordering>,
+   id: string,
+ ) {
+-  const record = known<Collection<QuerySchema, object>>(
+-    presentations,
+-    presentation,
+-  );
++  collectionReorderingPresentation(presentation);
++  const record = presentations.get(presentation) as
++    | Collection<QuerySchema, object>
++    | undefined;
++  if (!record || record.ended) return null;
+   const leaf = record.leaves.get(id);
+   return leaf ? Object.freeze({ ref: leaf.ref, handle: leaf.handleRef }) : null;
+ }
+@@ -670,10 +807,139 @@
+   presentation: ReturnType<typeof requireCollectionReordering>,
+   id: string,
+ ) {
+-  return known<Collection<QuerySchema, object>>(
+-    presentations,
+-    presentation,
+-  ).rowRefs.get(id);
++  collectionReorderingPresentation(presentation);
++  const record = presentations.get(presentation) as
++    | Collection<QuerySchema, object>
++    | undefined;
++  return record?.ended === false ? record.rowRefs.get(id) : undefined;
++}
++export function rowCollectionRefs(
++  presentation: ReturnType<typeof requireCollectionReordering>,
++  id: string,
++) {
++  collectionReorderingPresentation(presentation);
++  const record = presentations.get(presentation) as
++    | Collection<QuerySchema, object>
++    | undefined;
++  if (!record || record.ended || record.handleColumnId === null) return null;
++  const row = record.rowHandles.get(id);
++  return row
++    ? Object.freeze({ handle: row.ref, columnId: record.handleColumnId })
++    : null;
++}
++export interface RowMoveFacts {
++  readonly allowed: boolean;
++  readonly reason: "unavailable" | "pending" | "boundary" | "restricted";
++}
++export function rowMoveFacts(
++  presentation: ReturnType<typeof requireCollectionReordering>,
++  id: string,
++  direction: -1 | 1,
++): RowMoveFacts {
++  try {
++    requireCurrentCollection(presentation);
++    const record = known<Collection<QuerySchema, object>>(
++      presentations,
++      presentation,
++    );
++    const binding = known<Binding<QuerySchema, object>>(
++      bindings,
++      record.binding,
++    );
++    const current = requireTableReordering(record.binding),
++      rows = current.model.view?.rows ?? deny();
++    if (!binding.config.rows || !binding.snapshot.ready)
++      return { allowed: false, reason: "unavailable" };
++    const tickets = record.rowHandles.get(id);
++    if (
++      !record.scopeTicket ||
++      !tickets ||
++      nativeRefStatus(record.scopeTicket) !== "sealed" ||
++      nativeRefStatus(tickets.row) !== "sealed" ||
++      nativeRefStatus(tickets.handle) !== "sealed"
++    )
++      return { allowed: false, reason: "unavailable" };
++    if (observeReorderUI(binding.config.rows.ui).pending)
++      return { allowed: false, reason: "pending" };
++    if (!current.model.presentation?.canReorder)
++      return { allowed: false, reason: "restricted" };
++    const index = rows.findIndex((row) => {
++      requireTableRendererMember(binding.target, "row", row);
++      return row.id === id;
++    });
++    return index >= 0 &&
++      index + direction >= 0 &&
++      index + direction < rows.length
++      ? { allowed: true, reason: "boundary" }
++      : { allowed: false, reason: "boundary" };
++  } catch {
++    return { allowed: false, reason: "unavailable" };
++  }
++}
++/** One genuine current-page intent. No DOM indices, record/order backup or row clone. */
++export function submitTableRowMove(
++  presentation: ReturnType<typeof requireCollectionReordering>,
++  id: string,
++  direction: -1 | 1,
++): RendererRowSubmission | null {
++  try {
++    if (typeof id !== "string" || (direction !== -1 && direction !== 1))
++      return null;
++    requireCurrentCollection(presentation);
++    const record = known<Collection<QuerySchema, object>>(
++      presentations,
++      presentation,
++    );
++    const binding = known<Binding<QuerySchema, object>>(
++      bindings,
++      record.binding,
++    );
++    const current = requireTableReordering(record.binding),
++      config = binding.config.rows ?? deny();
++    const tickets = record.rowHandles.get(id) ?? deny(),
++      scope = record.scopeTicket ?? deny();
++    if (
++      !config.notification ||
++      !rowMoveFacts(presentation, id, direction).allowed
++    )
++      return null;
++    const rows = current.model.view?.rows ?? deny(),
++      ids: string[] = [];
++    for (const row of rows) {
++      requireTableRendererMember(binding.target, "row", row);
++      ids.push(row.id);
++    }
++    const index = ids.indexOf(id),
++      destination = index + direction;
++    if (index < 0 || destination < 0 || destination >= ids.length) return null;
++    const remaining = ids.filter((key) => key !== id);
++    const placement = {
++      movedId: id,
++      beforeId: remaining[destination] ?? null,
++      afterId: remaining[destination - 1] ?? null,
++    };
++    const nativeRow = rows[index] ?? deny();
++    const memberIds = [id, placement.beforeId, placement.afterId].filter(
++      (value): value is string => value !== null,
++    );
++    tableRendererBoundary(binding.target, () =>
++      current.model.authority?.require({ type: "reorder", ids: memberIds }),
++    );
++    requireCurrentCollection(presentation);
++    return submitRendererRowMove(
++      binding.target,
++      config.notification,
++      config.admission,
++      config.lease,
++      placement,
++      scope,
++      tickets.row,
++      tickets.handle,
++      nativeRow,
++    );
++  } catch {
++    return null;
++  }
+ }
+ export function requireCurrentCollection(
+   presentation: ReturnType<typeof requireCollectionReordering>,
+@@ -935,13 +1201,16 @@
+   let { pageIndex, pageSize } = state.query.pagination;
+   if (intent === "size") {
+     pageSize = Number(value);
++    requireTableNavigation(token, authority);
+     pageIndex = 0;
+     if (
+       !D.native.controllerDefinition.schema.pagination.sizes.includes(pageSize)
+     )
+       deny();
+-  } else if (intent === "index") pageIndex = Number(value);
+-  else if (intent === "previous") {
++  } else if (intent === "index") {
++    pageIndex = Number(value);
++    requireTableNavigation(token, authority);
++  } else if (intent === "previous") {
+     if (!facts.canPreviousPage) deny();
+     pageIndex--;
+   } else {
+--- before/packages/heroui/src/table/reordering-controls.tsx
++++ packages/heroui/src/table/reordering-controls.tsx
+@@ -12,7 +12,11 @@
+ import {
+   columnMove,
+   collectionReorderingPresentation,
++  hasCollectionReordering,
+   leafCollectionRefs,
++  rowCollectionRefs,
++  rowMoveFacts,
++  submitTableRowMove,
+   reorderingSnapshot,
+   type requireCollectionReordering,
+   requireCurrentCollection,
+@@ -20,6 +24,7 @@
+ } from "./reordering-binding.js";
+ import type { ReorderingMessages } from "./reordering-types.js";
+ import type { RefCallback } from "react";
++import { englishReorderingMessages } from "./reordering-messages.js";
+ 
+ interface ColumnMoveProps {
+   readonly collection: ReturnType<typeof requireCollectionReordering>;
+@@ -32,8 +37,10 @@
+ /** Issuance before other props. No application ref callback is accepted. */
+ export function ColumnMoveControls(props: ColumnMoveProps) {
+   const collection = collectionReorderingPresentation(props.collection);
++  if (!hasCollectionReordering(collection))
++    return <span>{collection.messages.unavailable}</span>;
+   const refs = leafCollectionRefs(collection, props.id);
+-  if (!refs) return null;
++  if (!refs) return <span>{collection.messages.unavailable}</span>;
+   return (
+     <ColumnMoveContent
+       collection={collection}
+@@ -43,10 +50,30 @@
+       isOpen={props.isOpen}
+       onOpenChange={props.onOpenChange}
+       handle={refs.handle}
++      axis="column"
+     />
+   );
+ }
+-/** Leaf-only controls; no row terminal callback or drag behavior in this packet. */
++export function RowMoveControls(props: ColumnMoveProps) {
++  const collection = collectionReorderingPresentation(props.collection);
++  if (!hasCollectionReordering(collection))
++    return <span>{collection.messages.unavailable}</span>;
++  const refs = rowCollectionRefs(collection, props.id);
++  if (!refs) return <span>{collection.messages.unavailable}</span>;
++  return (
++    <ColumnMoveContent
++      collection={collection}
++      id={props.id}
++      label={props.label}
++      messages={props.messages}
++      isOpen={props.isOpen}
++      onOpenChange={props.onOpenChange}
++      handle={refs.handle}
++      axis="row"
++    />
++  );
++}
++/** Both axes use genuine issued refs; only row actions enter the R pre-token cut. */
+ function ColumnMoveContent({
+   collection,
+   id,
+@@ -55,13 +82,16 @@
+   messages,
+   isOpen,
+   onOpenChange,
++  axis,
+ }: ColumnMoveProps & {
+   readonly handle: RefCallback<HTMLButtonElement>;
++  readonly axis: "row" | "column";
+ }) {
+   const generated = useId(),
+     [notice, setNotice] = useState("");
+   const button = useRef<HTMLButtonElement | null>(null),
+     restore = useRef(false);
++  const status = useRef<HTMLSpanElement | null>(null);
+   const ref = useCallback<RefCallback<HTMLButtonElement>>(
+     (node) => {
+       const cleanup = handle(node);
+@@ -79,27 +109,80 @@
+     () => reorderingSnapshot(collection.binding),
+     () => reorderingSnapshot(collection.binding),
+   );
+-  const before = columnMove(collection.binding, id, -1, false);
+-  const after = columnMove(collection.binding, id, 1, false);
++  const rowBefore = axis === "row" ? rowMoveFacts(collection, id, -1) : null;
++  const rowAfter = axis === "row" ? rowMoveFacts(collection, id, 1) : null;
++  const before = rowBefore
++    ? rowBefore.allowed
++    : columnMove(collection.binding, id, -1, false);
++  const after = rowAfter
++    ? rowAfter.allowed
++    : columnMove(collection.binding, id, 1, false);
++  const pending = snapshot.pending || rowBefore?.reason === "pending";
++  const title =
++    axis === "row"
++      ? (messages.row ?? englishReorderingMessages.row ?? "Move row")
++      : messages.column;
++  const beforeLabel =
++    axis === "row"
++      ? (messages.up ?? englishReorderingMessages.up ?? "Move up")
++      : messages.before;
++  const afterLabel =
++    axis === "row"
++      ? (messages.down ?? englishReorderingMessages.down ?? "Move down")
++      : messages.after;
+   const disabled = !before && !after;
+-  const reason = snapshot.pending
++  const reason = pending
+     ? messages.pending
+-    : !snapshot.ready
++    : !snapshot.ready || rowBefore?.reason === "unavailable"
+       ? messages.unavailable
+-      : messages.boundary;
++      : rowBefore?.reason === "restricted"
++        ? messages.rowUnavailable
++        : axis === "row"
++          ? (messages.rowBoundary ??
++            englishReorderingMessages.rowBoundary ??
++            messages.rowUnavailable)
++          : messages.boundary;
++  useLayoutEffect(() => {
++    // The collection's exact-owner close is metadata only. Consume open intent
++    // on a wait/pending transition so it cannot reopen when permission returns.
++    if (isOpen && (!snapshot.ready || pending)) onOpenChange(false);
++  }, [isOpen, snapshot.ready, pending, onOpenChange]);
+   useLayoutEffect(() => {
+     if (!restore.current || !snapshot.ready) return;
+     try {
+       requireCurrentCollection(collection);
+-      const node = button.current;
+-      if (!node?.isConnected || !(before || after)) return;
++      const row = axis === "row" ? rowMoveFacts(collection, id, -1) : null;
++      if (
++        row &&
++        !row.allowed &&
++        row.reason !== "pending" &&
++        !rowMoveFacts(collection, id, 1).allowed
++      )
++        return;
++      if (
++        !row &&
++        !columnMove(collection.binding, id, -1, false) &&
++        !columnMove(collection.binding, id, 1, false)
++      )
++        return;
++      const node = axis === "row" && pending ? status.current : button.current;
++      if (
++        !node?.isConnected ||
++        (!(before || after) &&
++          !(axis === "row" && rowBefore?.reason === "pending"))
++      )
++        return;
+       const document = node.ownerDocument;
+       if (
+         document.activeElement !== document.body &&
+-        document.activeElement !== node
+-      )
++        document.activeElement !== node &&
++        document.activeElement !== button.current &&
++        document.activeElement !== status.current
++      ) {
++        restore.current = false;
+         return;
+-      restore.current = false;
++      }
++      restore.current = axis === "row" && pending;
+       node.focus();
+       requireCurrentCollection(collection);
+     } catch {
+@@ -112,7 +195,46 @@
+     } catch {
+       return;
+     }
++    const freshRow = axis === "row" ? rowMoveFacts(collection, id, -1) : null;
++    if (
++      freshRow &&
++      !freshRow.allowed &&
++      freshRow.reason !== "pending" &&
++      !rowMoveFacts(collection, id, 1).allowed
++    )
++      return;
++    if (
++      !freshRow &&
++      !columnMove(collection.binding, id, -1, false) &&
++      !columnMove(collection.binding, id, 1, false)
++    )
++      return;
+     restore.current = false;
++    if (axis === "row") {
++      const submission = submitTableRowMove(collection, id, direction);
++      if (!submission?.ui) return;
++      try {
++        requireCurrentCollection(collection);
++        restore.current = submission.notified;
++        setNotice(
++          submission.notified
++            ? submission.uncertain
++              ? (messages.rowUncertain ??
++                englishReorderingMessages.rowUncertain ??
++                messages.unavailable)
++              : (messages.rowSubmitted ??
++                englishReorderingMessages.rowSubmitted ??
++                messages.submitted)
++            : submission.result.status === "blocked" &&
++                submission.result.reason === "pending"
++              ? messages.pending
++              : messages.rowUnavailable,
++        );
++      } catch {
++        /* Transferred intent remains application-owned; old UI stays inert. */
++      }
++      return;
++    }
+     const submitted = columnMove(collection.binding, id, direction, true);
+     // Result is submission bookkeeping, never a backend persistence success.
+     try {
+@@ -126,7 +248,7 @@
+   return (
+     <>
+       <Dropdown
+-        isOpen={isOpen && snapshot.ready && !snapshot.pending}
++        isOpen={isOpen && snapshot.ready && !pending}
+         onOpenChange={(open) => {
+           try {
+             requireCurrentCollection(collection);
+@@ -142,32 +264,32 @@
+           variant="tertiary"
+           size="sm"
+           isDisabled={disabled}
+-          aria-label={`${messages.column}: ${label}`}
++          aria-label={`${title}: ${label}`}
+           {...(disabled ? { "aria-describedby": `${generated}-reason` } : {})}
+         >
+-          {messages.column}
++          {title}
+         </Button>
+         <Dropdown.Popover placement="bottom end" shouldSkipAnimation>
+-          <Dropdown.Menu aria-label={`${messages.column}: ${label}`}>
++          <Dropdown.Menu aria-label={`${title}: ${label}`}>
+             <Dropdown.Item
+               id="before"
+-              textValue={messages.before}
++              textValue={beforeLabel}
+               isDisabled={!before}
+               {...(!before
+                 ? { "aria-describedby": `${generated}-reason` }
+                 : {})}
+               onAction={() => move(-1)}
+             >
+-              {messages.before}
++              {beforeLabel}
+             </Dropdown.Item>
+             <Dropdown.Item
+               id="after"
+-              textValue={messages.after}
++              textValue={afterLabel}
+               isDisabled={!after}
+               {...(!after ? { "aria-describedby": `${generated}-reason` } : {})}
+               onAction={() => move(1)}
+             >
+-              {messages.after}
++              {afterLabel}
+             </Dropdown.Item>
+           </Dropdown.Menu>
+         </Dropdown.Popover>
+@@ -177,7 +299,7 @@
+           {reason}
+         </span>
+       ) : null}
+-      <span role="status" aria-live="polite">
++      <span ref={status} tabIndex={-1} role="status" aria-live="polite">
+         {notice}
+       </span>
+     </>
+@@ -194,7 +316,7 @@
+     () => reorderingSnapshot(collection.binding),
+     () => reorderingSnapshot(collection.binding),
+   );
+-  return snapshot.rowConfigured ? (
++  return snapshot.rowConfigured && (!snapshot.ready || snapshot.pending) ? (
+     <p role="status">
+       {snapshot.pending
+         ? collection.messages.pending
+--- before/packages/heroui/src/table/reordering-messages.ts
++++ packages/heroui/src/table/reordering-messages.ts
+@@ -2,22 +2,37 @@
+ export const englishReorderingMessages: Readonly<ReorderingMessages> =
+   Object.freeze({
+     column: "Move column",
++    row: "Move row",
++    up: "Move up",
++    down: "Move down",
++    rowSubmitted: "Row move submitted.",
++    rowUncertain:
++      "The row move status is uncertain. Await application reconciliation.",
++    rowBoundary: "No row can be moved in this direction.",
+     before: "Move before",
+     after: "Move after",
+     unavailable: "Reordering is unavailable.",
+     pending: "A row move is awaiting resolution.",
+     boundary: "No column can be moved in this direction.",
+     submitted: "Column order change submitted.",
+-    rowUnavailable: "Row movement is unavailable.",
++    rowUnavailable:
++      "Row moves require current eligible rows in manual order, with no active sorting or filtering.",
+   });
+ export const arabicReorderingMessages: Readonly<ReorderingMessages> =
+   Object.freeze({
+     column: "نقل العمود",
++    row: "نقل الصف",
++    up: "نقل لأعلى",
++    down: "نقل لأسفل",
++    rowSubmitted: "تم إرسال طلب نقل الصف.",
++    rowUncertain: "حالة نقل الصف غير مؤكدة. بانتظار التسوية من التطبيق.",
++    rowBoundary: "لا يمكن نقل صف في هذا الاتجاه.",
+     before: "نقل قبل",
+     after: "نقل بعد",
+     unavailable: "إعادة الترتيب غير متاحة.",
+     pending: "طلب نقل صف بانتظار التسوية.",
+     boundary: "لا يمكن نقل عمود في هذا الاتجاه.",
+     submitted: "تم إرسال تغيير ترتيب الأعمدة.",
+-    rowUnavailable: "نقل الصفوف غير متاح.",
++    rowUnavailable:
++      "يتطلب نقل الصفوف بيانات حالية مؤهلة بترتيب يدوي، دون فرز أو تصفية نشطة.",
+   });
+--- before/packages/heroui/src/table/reordering-types.ts
++++ packages/heroui/src/table/reordering-types.ts
+@@ -21,6 +21,14 @@
+ declare const binding: unique symbol;
+ declare const collection: unique symbol;
+ declare const navigation: unique symbol;
++declare const rowNotification: unique symbol;
++/** Opaque renderer-captured notification, never a callable application port. */
++export interface RendererRowNotification<
++  S extends QuerySchema,
++  T extends object,
++> {
++  readonly [rowNotification]: (schema: S, row: T) => readonly [S, T];
++}
+ export interface CapturedTableReordering<
+   S extends QuerySchema,
+   T extends object,
+@@ -43,6 +51,12 @@
+   readonly [navigation]: (schema: S, row: T) => readonly [S, T];
+ }
+ export interface ReorderingMessages {
++  readonly row?: string;
++  readonly up?: string;
++  readonly down?: string;
++  readonly rowSubmitted?: string;
++  readonly rowUncertain?: string;
++  readonly rowBoundary?: string;
+   readonly column: string;
+   readonly before: string;
+   readonly after: string;
