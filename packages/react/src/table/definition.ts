@@ -14,6 +14,7 @@ import type { NativeControllerOptions } from "../tanstack/types.js";
 import {
   type DefineTableInput,
   type TableDefinition,
+  type TableReorderCapabilities,
   type TableToolPlacement,
   tableDefinitionType,
 } from "./types.js";
@@ -77,6 +78,7 @@ const inputKeys = [
   "multiSort",
   "evaluation",
   "tools",
+  "reordering",
   "defaultColumns",
 ];
 const toolKeys = ["builder", "search", "columnChooser", "tabs", "date"];
@@ -115,6 +117,30 @@ function resolveTools(
     columnChooser: captured.columnChooser ?? "hidden",
     tabs: captured.tabs ?? "hidden",
     date: captured.date ?? "hidden",
+  });
+}
+
+function resolveReordering(
+  input: Partial<TableReorderCapabilities>,
+): Readonly<TableReorderCapabilities> {
+  const keys = ["rows", "columns"] as const;
+  const captured = captureData(input, keys);
+  for (const key of keys) {
+    if (!Object.hasOwn(captured, key)) {
+      let inherited: boolean;
+      try {
+        inherited = Reflect.has(input, key);
+      } catch {
+        return invalid();
+      }
+      if (inherited) invalid();
+      continue;
+    }
+    if (typeof captured[key] !== "boolean") invalid();
+  }
+  return Object.freeze({
+    rows: captured.rows ?? false,
+    columns: captured.columns ?? false,
   });
 }
 
@@ -162,6 +188,12 @@ export function defineTable<T extends object>() {
         (field) => field.owner === "builder",
       ),
     );
+    if (
+      Object.hasOwn(captured, "reordering") &&
+      (captured.reordering === undefined || captured.reordering === null)
+    )
+      invalid();
+    const reordering = resolveReordering(captured.reordering ?? {});
     const defaults = columnState(
       native.controllerDefinition,
       Object.hasOwn(captured, "defaultColumns") ? captured.defaultColumns : {},
@@ -173,6 +205,7 @@ export function defineTable<T extends object>() {
       ],
       native,
       tools,
+      reordering,
       createController(
         this: TableDefinition<S, T>,
         options: NativeControllerOptions<S>,

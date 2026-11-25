@@ -43,9 +43,16 @@ export interface TableToolPlacement {
   readonly date?: "external" | "hidden";
 }
 
+/** Feature configuration only; current authority and explicit UI remain separate. */
+export interface TableReorderCapabilities {
+  readonly rows: boolean;
+  readonly columns: boolean;
+}
+
 export interface DefineTableInput<S extends QuerySchema, T extends object>
   extends NativeDefinitionInput<S, T> {
   readonly tools?: TableToolPlacement;
+  readonly reordering?: Partial<TableReorderCapabilities>;
   readonly defaultColumns?: Partial<ColumnState>;
 }
 
@@ -53,6 +60,7 @@ export interface TableDefinition<S extends QuerySchema, T extends object> {
   readonly [tableDefinitionType]: (schema: S, record: T) => readonly [S, T];
   readonly native: NativeDefinition<S, T>;
   readonly tools: Readonly<Required<TableToolPlacement>>;
+  readonly reordering: Readonly<TableReorderCapabilities>;
   readonly createController: (
     this: TableDefinition<S, T>,
     options: NativeControllerOptions<S>,
