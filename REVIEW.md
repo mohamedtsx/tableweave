@@ -2184,3 +2184,19 @@ Before any final consumer preparation/installation, apply a reviewed outside-tar
 guard and separate strict ordinary lock/materialization confinement. Do not infer
 that review25n2's distinct corrected runner fixes this separate file. No ordinary
 Next archive/runtime claim is made.
+
+N1/n2 source correction recovery completes under its existing isolated lease.
+Main reads the one-body delta/README and11 corrected authored cases, matches44
+new sealed inputs/3,322 pins,155 library bodies/79 unchanged original seal bodies
+and1,692 protected old inputs; own static/scope/positive TS6 checks pass. New44
+sealed inputs remain a distinct producer, not a rewritten original
+map; the original timer-based assertions have an explicit superseded-semantics
+disposition. Runtime/React/Next/debt/independent closure remains final. Recovery
+notes are retrospective observations, not reconstructed contemporaneous ENOSPC logs
+or evidence of a verified user cleanup.
+The correction is preserved6616fa3 after own positive TS6 completes. Broad staged
+whitespace flags the preserved62-line ENOSPC receipt's last line; it is kept verbatim.
+Scoped current-source whitespace passes with immutable receipts/raw artifacts
+excluded. This is a documented evidence-byte exception, not formatter or source
+lint acceptance with errors hidden. Main intakes dependencies/original/correction
+as separate commits; n1/n2 runtime and independent verification stay open.

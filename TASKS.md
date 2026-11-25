@@ -222,6 +222,24 @@ independent preparation, not WP-11 completion or WP-12 acceptance.
 Recovery/inventory documentation passes265 Markdown/926 links and all19 checker
 regressions, with scoped whitespace clean. This does not rerun completed source
 implementation/checks or promote the interrupted Next/Start handoffs to acceptance.
+Next connection recovery is delivered sealed. Main reads the completed README,
+preimage/diff, actual owner code and all11 authored corrected cases; own static/
+scope/44-input seal verification and3,322 pinned-input verification pass. Seal
+eddded53… and pin8187ea5b… are new correction identities; original80-input map
+391ded6f… remains unchanged with exactly its one disclosed source-body drift.
+All155 library sources/79 other original seal bodies/1,692 old protected inputs
+match. Own current positive TS6 replay passes; the source itself is unchanged.
+No runtime/independent review26n1/n2 closure or primary Next intake is claimed yet.
+ENOSPC/restart notes preserve the partial README and actual failed pin-capture
+disposition; free capacity was observed after restart, not attributed to a verified
+user cleanup. No deletion was performed by main or the recovery writer.
+Next correction is preserved isolated6616fa3 after main source/pin/seal/static/
+positive TS6 intake. The exact ENOSPC partial README contains historical trailing
+whitespace; a broad staged whitespace check reports it. Scoped current-code check
+passes with only that immutable receipt/raw artifacts excluded, not rewritten.
+Main now intakes the isolated manifest47e20df, original source35780bf and correction
+6616fa3 in order, keeping the original producer and corrective evidence separate.
+No Next framework/runtime, current archive or independent approval is implied.
 
 ## Current WP-10 implementation handoff
 
