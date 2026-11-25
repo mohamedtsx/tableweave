@@ -273,6 +273,10 @@ authoring is provisional; build/pack/install/type-negative/runtime proof stays f
 
 ## WP-14 Reproducible performance acceptance
 
+The [source-authoring plan](wp-14-implementation-plan.md) fixes workload/timing/
+sample/report obligations. Dedicated runner and actual measurement remain deferred;
+authored instrumentation cannot pass performance acceptance.
+
 - **Role/dependencies:** performance reviewer; integrated WP-11/WP-13.
 - **Read:** [fixed protocol](../engineering/performance.md), AC-28.
 - **Paths:** `tests/benchmarks`, deterministic fixtures, sanitized raw samples/

@@ -5,7 +5,8 @@
 ## Current WP-11 provisional continuation
 
 Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on
-feat/wp-13-archives above provisional WP-12 head8c39a4f and WP-11-only headfb69232.
+feat/wp-14-performance above provisional WP-13 head25fdfde, WP-12 head8c39a4f
+and WP-11-only headfb69232.
 Original feat/wp-11-workbench
 preservese0463d3, including the reviewed provisional WP-12 producer. This separates
 packet source for later unmerged PRs without rewriting/removing any producer commit.
@@ -481,6 +482,22 @@ probes and whitespace. Main freezes this provisional WP-13 source boundary befor
 selecting the WP-14 source-only benchmark lease. That is not actual package/runtime,
 helper/test, family build/HTTP/SSR/browser, ordinary/profile install, negative/dual,
 CI/independent or G-05 acceptance; historical generationfc01 stays unchanged.
+Main preserves the source correction25fdfde and creates the separate
+feat/wp-14-performance branch. It selects docs/planning/wp-14-implementation-plan.md
+for one new-only benchmark source owner after actual WP-13 source intake. Explicit
+main engineering choices:100 measured samples per scenario over34/33/33 fresh
+sessions; ten warmups each; dual query action/observed-commit-to-validated-paint
+p95≤200ms and initial all-samples maximum≤1000ms. These are conservative reported
+engineering envelopes, not new universal product/drag budgets. Runner/image/browser/
+candidate/profile/paint validation remains user-deferred/unselected; source
+authoring cannot replace dedicated-hardware proof or authorize execution.
+Main also allocates independent read-only WP-15 preparation at
+`/tmp/opencode/wp15-readiness-boundary/PLAN.md`, inspecting only preserved public
+source/gate/license/release/CI contracts and current plans, not active benchmark WIP.
+It may propose eligible readiness-document paths and a sanitized real-consumer
+acceptance protocol, but cannot select/mutate a consumer, resolve deferred runner/
+publication inputs, call an external account/registry, change source or run checks.
+No WP-15 implementation or acceptance is activated by this preparation report.
 
 ## Current WP-10 implementation handoff
 
@@ -1968,7 +1985,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-019 | WP-11 examples/docs/workbench | in progress | Main intake; Stage B primary and isolated Next source writers active | Preserved sharedc9c36cb/manual WP-10 source; drag and final evidence remain incomplete |
 | TASK-020 | WP-12 integrated browser/manual accessibility | in progress | Provisional new-only fixture/workbook source authoring after WP-11 static intakes | Browser/manual/independent acceptance remains final; G-02 and unfinished framework proof are not waived |
 | TASK-021 | WP-13 packed compatibility/release tooling | in progress | One new-only additive source-tooling owner after WP-12 static intake | Actual archive/install/type-negative/runtime/independent proof final; no publication rights |
-| TASK-022 | WP-14 reproducible performance | planned | Benchmark owner assigned after WP-11/13 | Approved runner/workload required; no invented timings |
+| TASK-022 | WP-14 reproducible performance | in progress | One new-only source fixture/timing/report owner after provisional WP-13 intake | Dedicated runner/paint/candidate/profile/execution deferred; no measurements claimed |
 | TASK-023 | WP-15 real consumer/stable readiness | planned | Integration reviewer assigned when inputs exist | Separate actual target/access/write inputs and WP-12–14 evidence required |
 
 ## TASK-001 — Documentation foundation
