@@ -104,3 +104,20 @@ The original source is preserved isolated3929614 after main's actual source/ligh
 intake. Main then selects the bounded [parent retirement correction](wp-11-start-retirement-plan.md)
 for review28n1/n2. Original producer maps/results remain exact; no current runtime/
 generated typing/independent approval or primary source intake is implied.
+
+## Current provisional packet intake
+
+Main's WP-11-only branch intakes the selected stack asf78205e/4ee8053/10483b2/99b660c,
+separate from the preserved WP-12 producere0463d3. The
+[original app README](../../apps/example-start-facade/README.md) and
+[source handoff](../../tests/workbench/wp11-start-facade/README.md) are snapshots;
+the [retirement correction](../../tests/workbench/wp11-start-retirement/README.md)
+and [fixture-only follow-up](../../tests/workbench/wp11-start-assertions/README.md)
+own the two later deltas. Original maps/raw failures are unchanged, not re-signed.
+
+Main compares all155 library bodies, current4-input follow-up,12 other retirement
+inputs/28 artifacts and38 other original inputs/69 artifacts. Combined locke1e5c158…
+adds only the Start importer to all6 previous importer/package/snapshot/settings
+blocks. Frozen ignore-scripts primary materialization passes without framework
+invocation. Current source-only TS6 replay passes; generation/whole-app
+typing/HTTP/SSR/browser/ordinary/independent approval is not implied by these facts.

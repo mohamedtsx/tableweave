@@ -182,15 +182,19 @@ pnpm exec tsc -p apps/storybook/src/workbench/tsconfig.light.json --pretty false
 pnpm exec tsc -p apps/storybook/tsconfig.examples-light.json --pretty false
 pnpm exec tsc -p apps/example-start/tsconfig.wp11-light.json --pretty false
 pnpm exec tsc -p tests/workbench/wp11-next-connection/tsconfig.light.json --pretty false
+pnpm exec tsc -p tests/workbench/wp11-start-retirement/tsconfig.source-light.json --pretty false
 ```
 
 These use explicit public-entry source aliases, not published/packed declarations.
 Do not substitute them for framework/consumer checks or run a deferred fixture's
 install/build commands as part of LIGHT. The [Next source correction](tests/workbench/wp11-next-connection/README.md)
 is now intaken provisionally; it supersedes the original sealed README's timing-based
-cleanup description. Actual Next build/RSC/hydration remains unrun. Mounted Start
-source is still isolated/pending; drag/G-02 remains user-blocked and full WP-11
-remains incomplete.
+cleanup description. Actual Next build/RSC/hydration remains unrun. The
+[standard-route Start source](docs/planning/wp-11-start-facade-plan.md#current-provisional-packet-intake)
+is also intaken, with corrected parent retirement and test values. Its checked source
+program deliberately excludes generated-dependent router assembly; actual generation,
+whole-app typing and mounted SSR/hydration remain unrun. Drag/G-02 remains user-blocked
+and full WP-11 remains incomplete.
 
 ## Authority and licensing
 

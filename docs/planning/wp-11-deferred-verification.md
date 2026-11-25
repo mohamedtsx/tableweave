@@ -13,7 +13,7 @@ is incomplete, not waived by downstream authoring or manual move menus.
 | Styled/headless Vite and recipes | 5e72c95; [Stage B handoff](../../tests/workbench/wp11-examples/README.md) | Both positive source programs pass; actual Vite graphs/SSR/browser/archives unrun |
 | Deferred ordinary driver hardening | 39363f4; [five-input correction](../../tests/workbench/wp11-consumer-boundary/README.md) | Static/syntax/format only; four filesystem adversaries and install/typecheck lane unrun |
 | Next App Router | Intaken8720f7c/17a1439/16500a0; original80-input seal391ded6f… plus recovered44-input seal `eddded53…` | Main isolated/primary positive source intake passes; retained lifecycle/RSC/SSR/framework/ordinary runtime unrun |
-| Mounted headless Start | Isolatedf7ad033 dependencies/3929614 source/70c95ac retirement correction; [source lease](wp-11-start-facade-plan.md) | Main source/light intake passes; two unrun fixture assertions corrected separately; primary intake waits for active WP-12 scope; generation/whole-app/runtime unrun |
+| Mounted headless Start | Packet intakef78205e/4ee8053/10483b2/99b660c; [source lease](wp-11-start-facade-plan.md) | Isolated/cumulative source/light intake passes; generation/whole-app/runtime unrun |
 
 All155 library bodies remain source155bdfabded… at the preserved baseline.
 Per-producer old-input/source/compiler/artifact maps are historical identities,

@@ -4,8 +4,11 @@
 
 ## Current WP-11 provisional continuation
 
-Main's primary is `/tmp/opencode/tableweave-wp11-workbench` on feat/wp-11-workbench,
-created from frozen WP-10d6a53f6 (source155bdfabded…). The user chooses **Keep drag
+Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on the
+packet-specific feat/wp-11-source-handoff from0c5847c. Original feat/wp-11-workbench
+preservese0463d3, including the reviewed provisional WP-12 producer. This separates
+packet source for later unmerged PRs without rewriting/removing any producer commit.
+The original base is frozen WP-10d6a53f6 (source155bdfabded…). The user chooses **Keep drag
 blocked**: no vendor repair/research/patch registration/adapter activation. Full
 WP-10/G-02 remains incomplete; manual menus are not a scope waiver. The earlier
 WP-10 chronology below remains exact producer history, not an active writer lease.
@@ -31,8 +34,8 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
 | Next App Router example | Intaken8720f7c/17a1439/16500a0; connection writer released | Main isolated/primary positive source intake passes; retained/SSR/runtime/ordinary/independent gates unrun |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
-| Mounted Start facade | Original3929614/correction70c95ac/fixture follow-up3ce59e2 preserved; writer released | Main source/light intake passes; primary stack intake waits for WP-12 scope release; generated/whole-app/runtime gates unrun |
-| WP-12 integrated fixture | One primary writer active under the new-only plan | Frozen Stage A/B/library inputs; six integrated flows/manual workbook authored only; runtime/manual final |
+| Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
+| WP-12 integrated fixture | Provisional producer preservede0463d3; writer released | Main source/light intake passes; separate packet branch next; browser/manual/independent final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -336,6 +339,28 @@ writer releases its captured primary scope. Existing producer maps/failed logs s
 exact; review28 runtime/independent findings remain open. The last full primary
 documentation replay remains271 Markdown/934 links/19 probes, not a new check of
 active fixture WIP or later allocation metadata. Own metadata whitespace passes.
+The original workbench preservese0463d3: main reads WP-12 application/events/all
+I1–I6 cases/config/styles/workbook and passes own strict source TS6/static/scope/
+21-input/89-artifact/1,312-pin checks plus276 Markdown/955 links/19 doc probes.
+No browser/manual case runs. The writer is released; this producer will transport
+onto a separate WP-12 branch after the WP-11 source boundary is preserved.
+
+Main creates the WP-11-only source branch from0c5847c, then intakes the held Start
+stack f7ad033/3929614/70c95ac/3ce59e2 asf78205e/4ee8053/10483b2/99b660c. No WP-12
+fixture is tracked in this WP-11 branch. The lock retains all6 prior importers and
+all package/snapshot/settings blocks; only the new Start importer is added, combined
+locke1e5c158… . Main matches38 original Start inputs/69 artifacts,12 retirement
+inputs/28 artifacts,all4 fixture-followup inputs and155 library hashes. Old isolated
+scope/compiler maps are history, not automatically rebased onto cumulative metadata.
+The primary frozen ignore-scripts materialization is already up to date with no
+download/new closure; actual source-only TS6 replay passes. No generation/whole-app
+typing/framework or runtime proof follows.
+WP-11-only source branch now passes277 Markdown/945 links and all19 checker probes,
+with current whitespace clean. Source/evidence/receipt navigation is current for
+that packet boundary; no WP-12 fixture is included. Main freezes this provisional
+WP-11 source head before making a separate WP-12 branch and transporting preserved
+producere0463d3. Neither packet is accepted by these checks, and no push/PR/merge,
+generation/build/SSR/browser/manual/packed/performance/consumer execution occurs.
 
 ## Current WP-10 implementation handoff
 

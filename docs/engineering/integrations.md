@@ -21,6 +21,23 @@ failures/fixes, exact versions/hashes and limits. This is not a full styled tabl
 production auth/database/backend translator, Next/device/AT/performance/real-consumer
 or release proof. All PRs remain unmerged for personal maintainer review.
 
+## Provisional WP-11 facade consumers
+
+WP-11's [public examples](../../README.md#provisional-wp-11-examples) add source-only
+styled/headless Vite pages and real Next/standard-file-route Start app wiring.
+These use the actual private facade, not the old bounded native runtime. The
+[Start source intake](../planning/wp-11-start-facade-plan.md#current-provisional-packet-intake)
+distinguishes request/router-owned Query cache from retained child table sources;
+its original retirement/fixture maps and two corrections stay separate. The
+[Next connection correction](../../tests/workbench/wp11-next-connection/README.md)
+removes terminal-disposal timing heuristics without minting a new source grant.
+
+Actual generated Start routing/whole-app typing, framework builds/HTTP/SSR/hydration,
+RSC/runtime graphs, consumer installs and independent acceptance remain unrun.
+Source-alias positive compiles and in-memory protocols do not inherit WP-06's G-04
+approval or establish production authorization. The WP-11 final inventory owns the
+[exact remaining proof](../planning/wp-11-deferred-verification.md).
+
 ## State before data
 
 Create accepted query state before the request, then adapt the result into a
