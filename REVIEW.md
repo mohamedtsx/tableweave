@@ -2133,3 +2133,11 @@ importers. Before any final install phase, harden/test the allowed external targ
 boundary and explicit pnpm isolation; do not rely solely on a single checkout-prefix
 check or call the current driver ordinary-consumer proof. No driver install or other
 workspace mutation has run. App-source intake does not approve this deferred runner.
+
+Main authors the bounded n2 correction after preserving5e72c95: approved direct-child
+targets, no existing Git/symlink/parent workspace, exact standalone configuration,
+explicit ignore-workspace on both install passes and local toolkit/compiler realpath
+checks. Static original-driver/other-input/155-library comparison, syntax and full
+scoped Biome pass; the first new-helper format/lint failure is retained. Four filesystem
+adversaries remain authored and UNRUN. This is not executed/independent closure or
+ordinary archive compatibility; no consumer preparation/driver/install was invoked.

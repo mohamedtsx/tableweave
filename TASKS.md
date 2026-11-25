@@ -28,7 +28,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Slice | Current owner/state | Next action |
 | --- | --- | --- |
 | Shared synthetic facade catalog | Preservedc9c36cb; main source/light intake complete | Final plays/matrix/ordinary proof remain unrun; do not rewrite Stage A seals |
-| Vite/headless/recipes/Start recipe | Handoff delivered; writer released | Main API/source/seal/positive-program intake passes; preserve before further consumers |
+| Vite/headless/recipes/Start recipe | Preserved5e72c95; writer released | Main API/source/seal/two-positive-program intake passes; runtime and mounted Start remain unproved |
 | Next App Router example | One isolated source worker active from47e20df | Protect main-owned exact manifest/lock; return source/light handoff before primary intake |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Not yet allocated | Use actual Stage B recipe handoff before a bounded real mount/dependency lease |
@@ -130,6 +130,29 @@ Start remains explicitly UNMOUNTED: current initial P retirement deletes a names
 if a client owner is constructed after hydration. A real mounted integration needs
 explicit request/router lifetime and cache adoption/retirement ordering first; no
 initial-only certificate, owner serialization or duplicate-fetch workaround is allowed.
+Stage B is preserved5e72c95. Main allocates one read-only mounted-Start contract
+report at `/tmp/opencode/wp11-start-mount-boundary/PLAN.md`, using actual preserved
+recipe and frozen Start/Query APIs, not active Next or any new source. It must select
+real router/request/source ownership and hydration/adoption order or name the exact
+unsupported seam before code/install. This is not a mounted-app lease or acceptance.
+
+Main separately allocates a narrow correction for review25n2: only the deferred
+archive driver plus new tests/workbench/wp11-consumer-boundary/**. Preserve original
+Stage B source/seal as history; harden a fixed approved external target and explicit
+pnpm workspace isolation before future installs. Author adversaries but run only
+static/syntax/format checks now; no consumer install, driver/runtime or unit execution.
+The n2 runner correction is authored: fixed approved external direct-child targets,
+exact empty-workspace/strict config, explicit ignore-workspace install passes and
+local compiler/toolkit realpath checks. Main static/155-source/other Stage B input
+comparison, syntax and full scoped Biome pass; first own format/lint failure remains
+preserved. Four filesystem adversaries remain UNRUN. No target is prepared, no
+consumer driver/helper/unit/install executes, and runtime/independent n2 closure
+or ordinary archive compatibility is not claimed.
+The correction's own five-input seal038ef382… matches hashes/modes, including the
+new driver hash and unchanged original-driver preimage anchored at5e72c95. Full
+scoped Biome passes5 supported files and documentation263 Markdown/910 links;
+the initial formatting/lint log remains preserved. The Next source handoff is also
+delivered in its isolated tree and queued for main review, not automatically intaken.
 
 ## Current WP-10 implementation handoff
 

@@ -3,8 +3,13 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { mkdir, readFile, realpath, writeFile } from "node:fs/promises";
-import { dirname, isAbsolute, resolve } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  consumerNpmrc,
+  consumerWorkspace,
+  requireConsumerTarget,
+} from "../../wp11-consumer-boundary/boundary.mjs";
 const root = fileURLToPath(new URL("../../../../", import.meta.url));
 const [mode, directory, reactArchive, styledArchive] = process.argv.slice(2);
 assert(
@@ -29,16 +34,16 @@ const archives = await Promise.all(
       .digest("hex"),
   })),
 );
-const location = resolve(directory);
-const checkout = await realpath(root);
-const outside = (path) => path !== checkout && !path.startsWith(`${checkout}/`);
-assert(
-  outside(location) && outside(await realpath(dirname(location))),
-  "No lexical or symlink path back into the workspace",
+const location = await requireConsumerTarget(
+  directory,
+  mode === "prepare" ? "prepare" : "install",
 );
-if (mode !== "prepare") assert(outside(await realpath(location)));
 if (mode === "prepare") {
   await mkdir(location);
+  await writeFile(resolve(location, "pnpm-workspace.yaml"), consumerWorkspace, {
+    flag: "wx",
+  });
+  await writeFile(resolve(location, ".npmrc"), consumerNpmrc, { flag: "wx" });
   const headless = JSON.parse(
     await readFile(resolve(root, "packages/react/package.json"), "utf8"),
   );
@@ -89,11 +94,11 @@ if (mode === "prepare") {
       await readFile(resolve(location, "archive-inputs.json"), "utf8"),
     ),
   );
-  for (const [name, args] of [
-    ["install", ["install", "--ignore-scripts"]],
-    ["typecheck", ["exec", "tsc", "-p", "tsconfig.json", "--pretty", "false"]],
-  ]) {
-    const result = spawnSync("pnpm", args, { cwd: location, encoding: "utf8" });
+  async function run(name, command, args) {
+    const result = spawnSync(command, args, {
+      cwd: location,
+      encoding: "utf8",
+    });
     await writeFile(
       resolve(location, `${name}.log`),
       `${result.stdout ?? ""}${result.stderr ?? ""}`,
@@ -101,11 +106,39 @@ if (mode === "prepare") {
     );
     await writeFile(
       resolve(location, `${name}.result.json`),
-      `${JSON.stringify({ args, status: result.status }, null, 2)}\n`,
+      `${JSON.stringify({ command, args, status: result.status }, null, 2)}\n`,
       { flag: "wx" },
     );
     assert.equal(result.status, 0, `${name}: raw failure preserved`);
   }
+  await run("install", "pnpm", [
+    "install",
+    "--ignore-workspace",
+    "--ignore-scripts",
+    "--no-frozen-lockfile",
+  ]);
+  await requireConsumerTarget(location, "install");
+  await run("install-frozen", "pnpm", [
+    "install",
+    "--ignore-workspace",
+    "--ignore-scripts",
+    "--frozen-lockfile",
+  ]);
+  for (const name of ["@tableweave/react", "@tableweave/heroui"]) {
+    const installed = await realpath(resolve(location, "node_modules", name));
+    assert(installed.startsWith(`${location}/node_modules/`), name);
+  }
+  const compiler = await realpath(
+    resolve(location, "node_modules/typescript/bin/tsc"),
+  );
+  assert(compiler.startsWith(`${location}/node_modules/`));
+  await run("typecheck", process.execPath, [
+    compiler,
+    "-p",
+    "tsconfig.json",
+    "--pretty",
+    "false",
+  ]);
   console.log(
     "Archive declarations only. NOT ordinary runtime/grouped/SSR/drag/browser proof; no private clone profile was applied.",
   );

@@ -92,3 +92,10 @@ namespace; same-owner preload ordering does not solve cross-realm cache adoption
 Actual Start mounting must select a truthful request/router lifetime and adoption/
 retirement order before code. Do not bypass initial P retirement, serialize an owner,
 rerun a fresh reader and call it hydration, or rename this recipe as mounted proof.
+
+Stage B is preserved5e72c95. The subsequent
+[consumer-boundary source correction](../../tests/workbench/wp11-consumer-boundary/README.md)
+changes only its deferred driver and new helper/fixtures. Its fixed approved parent,
+standalone configuration/explicit ignore-workspace installs and local compiler/
+package resolution checks do not execute or approve a consumer. Original Stage B
+seal/profile is retained; current correction has its own static/syntax/format lane.
