@@ -161,3 +161,14 @@ no command, network or accepted-state mutation. Existing core/native producers a
 their acceptance semantics remain unchanged. Callback ordering, reentry, source/
 lease purity, stale proposal and cleanup enforcement are unverified implementation
 obligations; no runtime/G-02 or independent approval is granted by this selection.
+
+## WP-10 ADR-08 unpaged extent compatibility selection
+
+Held admissione9d1721 exposes a mismatch between canonical dormant pageSize and
+the genuine unsliced collection. Main selects [explicit stamp extent](../planning/wp-10-unpaged-extent-plan.md)
+instead of slicing/inflating query metadata or excluding required unpaged moves.
+Page remains the omission/default with historical output shape; complete is explicit,
+bounded and part of origin/authoritative acknowledgement equality. Application
+integer epochs/revisions, exact tokens and backend authorization remain separate.
+Original pure/held source seals and failures remain intact; correction runtime/
+independent verification and whole-packet G-02 approval remain deferred.

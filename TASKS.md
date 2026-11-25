@@ -86,7 +86,8 @@ unchangedfc01/RAC limits and final/manual/external obligations without approval.
 
 | Scope | Owner and boundary | Next step |
 | --- | --- | --- |
-| Guarded C/admission helper | Held handoff delivered; writer released | Main matches29 inputs/all145 old sources + positive TS6; preserve before unpaged correction |
+| Guarded C/admission helper | Held producer preservede9d1721 | Original maps/11-row requirement remain unchanged; source readiness waits for extent correction |
+| Unpaged extent correction | Shared three-source writer newly allocated | Explicit stamp extent + origin/ack equality, genuine disabled-policy derivation; other146 sources freeze |
 | Closed native-ref lifetime | Isolated worker from848c94b; core/renderer + one new private module/own fixtures | Refs-only tickets/purge/release/refresh; protect other143 sources |
 | Definition reorder capabilities | Preserved isolated04941b2; two P1 files/own fixtures | Positive TS6/format/scope pass; intake waits for active handoffs |
 | Pure entry | Preserved848c94b | Runtime/dual/emitted/ordinary/packed proof deferred |
@@ -116,6 +117,16 @@ one positive own source TS6 program. New149-source mapc49ff0b5… is preserved. 
 requires explicit stamp extent/origin/ack semantics, not slicing or page-size
 inflation; old source seal/blocker and unexecuted requirement fixture remain intact.
 Native consumer activation stays held. Main preserves before the bounded correction.
+Held producer is now committede9d1721. Main selects optional stamp extent (page
+omission/complete explicit), retaining canonical query page fields and all existing
+budgets/token/source-version/ack constraints. The three-source correction is active
+against149-source mapc49ff0b5…; no isolated source intakes until handoff. Original
+pure/entry/admission seals are not rebaselined. Runtime/independent review19n1 closure
+remains final, and native/handle/pager consumer activation stays held.
+Main records a focused WP-10 deferred verification inventory: historical pure/entry/
+held-helper gates are not automatically rebased onto intentional extent changes.
+Known commands/ports and missing diagnostics/current/ordinary/native/adapter lanes
+remain explicit. This records no new test execution or independent approval.
 
 ### Current ownership and next action
 

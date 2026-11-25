@@ -24,6 +24,12 @@ native/handle/pager integration require separate actual handoffs and code leases
 Main separately owns the isolated [definition capability metadata](wp-10-definition-capabilities-plan.md)
 addition. It creates no action grant/coordinator; both actual flags and genuine
 current renderer/admission proofs are required by later integration.
+The held admission handoffe9d1721 exposes the unpaged cardinality mismatch. Main
+selects the bounded [explicit extent correction](wp-10-unpaged-extent-plan.md);
+original pure/held seals and runtime requirements stay unchanged historical evidence.
+The [deferred verification inventory](wp-10-deferred-verification.md) records actual
+commands, historical/current lanes and missing runtime/consumer/input obligations.
+It neither activates those checks now nor grants whole-packet approval.
 
 ## Stage1 ownership and outcome
 

@@ -48,6 +48,13 @@ The [explicit pure entry](../planning/wp-10-core-entry-plan.md) adds source disc
 not an installed/packed/native adapter/G-02 proof. Ref/command-origin/navigation and
 new-generation adapter contracts still require separate actual allocations.
 
+The [selected unpaged correction](../planning/wp-10-unpaged-extent-plan.md) adds an
+explicit complete extent to stamp provenance while preserving canonical dormant
+query page fields. Omitted/page extent retains its page cardinality bound; complete
+uses all actual unsliced rows within existing budgets. Extent participates in
+origin/ack matching, not just rendering. This is allocated, not yet an implemented/
+runtime-verified pure producer revision; original Stage1 approval stays historical.
+
 Eligibility: manual order, no active sort or effective filter, stable IDs, fresh
 records, current-page scope, eligible row and no conflicting pending move.
 Neutral All tab is not a filter. No cross-page moves. Apply identical restrictions
