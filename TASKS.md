@@ -666,6 +666,26 @@ the command once after inspecting import side effects; no source/config edits,
 build/install/native/browser/framework or broader suite action. All old caches/
 reports/receipts stay fixed; exact selected config/report provenance stays separate
 from the root full-suite/emitted/archive/CI obligations.
+Independent core-source worker releases external final-core-source-001/README.md:
+all13 selected files/235 assertions pass once, exit0/empty stderr/no timeout/signal/
+cleanup debt. Contracts155/controller56/native24, no earlier selected tests repeated.
+Main verifies65 receipt entries/all2,813 original current identities/73 confined new
+outputs/5 directories and unchanged old25 caches/72 outputs/317 receipts/1,876 tools/
+55,218 nested installed metadata entries. Main corrects its initial top-level count
+interpretation from the existing schema, without recollecting/rerunning tests.
+Receipt e143e488…; review38 finds no concrete defect within this bounded source
+scope. Canonical155 and historical output/provenance identities stay unchanged;
+review36 remains RED and review37's raw wrapper diagnostic remains exact.
+No resource/emitted/packed/browser/framework/hydration/CI/performance/gate approval.
+Main inspects and selects the catalog's one neutral SSR file and corrected Next
+connection/server source cases through two NEW external cache/report wrappers in
+/tmp/opencode/final-workbench-source-001/**. Wrappers retain exact stock source
+aliases/include/environment/plugin semantics and override only output/root/worker/
+retry/report instrumentation. No repository source/config writes; old Next client
+disposal cases stay superseded, not silently run/relabelled. Existing public GET
+handler is invoked directly with synthetic Request/Response, never via HTTP/Next.
+Independent runs are once/sequential/180seconds/cache-confined. Actual frameworks/
+RSC/browser/retained scheduling/hydration/archives/profiles remain unselected.
 
 ## Current WP-10 implementation handoff
 

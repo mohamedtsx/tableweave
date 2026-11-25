@@ -10,6 +10,28 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 38 (contracts/controller/native source batch)
+
+Independent command runs once:13 files/235 assertions pass, exit0/empty stderr/no
+timeout/signal/cleanup debt. Main reads raw JSON/status/review and verifies65
+receipt entries,2,813 original current repository identities,73 confined outputs,
+unchanged25 old cache files/72 outputs/317 receipts/1,876 tool pins and55,218
+installed metadata entries. The latter count is nested under entries; main's first
+intake count check uses top-level keys and fails before correct schema inspection.
+Corrected read-only interpretation verifies the unchanged maps; no tests rerun.
+Receipt /tmp/opencode/final-core-source-001/receipt-hashes.json SHA256
+e143e48806196977e823994edd1c011ede872d51c9ef4808d98fe7ccf9568f30.
+
+No concrete defect is found within this source-unit review. Actual contracts155,
+controller56/native24 assertions cover declared operator/date/ownership/atomic
+state/native-model behaviors with synthetic data and installed TanStack, not backend
+authorization, emitted/archive types, real network/lifecycle/browser/hydration or
+performance. Config filters exclude resource/foundation/UI and all earlier selected
+files. Five new directories/73 files remain exclusively in final-core-001; old
+source/config/evidence/cache bytes stay fixed. Review36 stays RED; review37 raw
+wrapper failure and necessary-parent disposition remain preserved. No packet,
+current-public-generation, CI, gate or stable approval follows from these units.
+
 ## Final verification — review session 37 (neutral SSR continuation)
 
 Hook model.test.ts runs once with the selected fsModuleCachePath:4/4 pass in one

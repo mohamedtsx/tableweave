@@ -226,3 +226,50 @@ records are selected only for these13 files. Stop if import inspection requires
 library dist or an unselected process/filesystem/server helper. Host deadline
 240seconds with cleanup/delivery headroom;128MiB floor, zero test retries. Preserve
 any actual failure once; main assigns corrections/replays, never suppresses it.
+
+## Fourth selection — actual results
+
+Once-only command:13 files/235 tests pass (contracts155/controller56/native24),
+exit0/empty stderr/no timeout/signal/cleanup debt. Main verifies65 external receipt
+entries/2,813 original identities/73 confined new files/five directories and unchanged
+old25 cache files/72 outputs/317 receipts/1,876 tool pins/55,218 installed metadata
+entries. Receipt `/tmp/opencode/final-core-source-001/receipt-hashes.json`, SHA256
+e143e48806196977e823994edd1c011ede872d51c9ef4808d98fe7ccf9568f30.
+Review38 records bounded source validation, no defect or correction/replay needed.
+Source/installed vendor behavior is not emitted/archive/browser/framework/backend/
+hydration/performance/CI proof. Earlier write-boundary failures remain preserved.
+
+## Fifth selection — catalog neutral SSR and Next source connection cases
+
+Main reads both exact configs and all three test bodies. One independent worker
+may run catalog ssr.test.tsx, then the corrected Next connection.test.tsx plus its
+existing server.test.ts. The obsolete original Next client.test.tsx is excluded.
+Each config runs once/sequentially through a NEW external wrapper:
+
+- Import tests/workbench/wp11-catalog/vitest.config.mjs unchanged.
+- Import tests/workbench/wp11-next-connection/vitest.config.mjs unchanged (which
+  imports its preserved source-only baseline).
+
+Wrappers under NEW `/tmp/opencode/final-workbench-source-001/` preserve every
+baseline resolve/plugin/environment/include setting. They set only canonical
+primary root, distinct output/cache paths, maxWorkers1/fileParallelism:false/retry0/
+forbidOnly:true/watch:false/coverage disabled, default+JSON reporters. Vite cacheDir,
+test.fsModuleCachePath and test.outputFile.json must all be inside their own fresh
+catalog/next outputs directory. No source/fixture/stock config edit or alias repair.
+
+Execute each once with installed Node24.22.0 and Vitest5.1.1:
+`NODE_DISABLE_COMPILE_CACHE=1 node node_modules/vitest/vitest.mjs run --configLoader native --config ABS_WRAPPER`.
+Exact wrapper bytes/imports/config overrides/argv are pinned before execution.
+Worker may create only that external receipt/wrapper/output subtree, no repository
+files, old caches/reports/dependencies or source. Record actual source/vendor/tool
+resolution before/after and reject any outside-root writes, with128MiB floor/
+180second own-child deadline plus delivery headroom/zero retries.
+
+Actual source invocation of the public synthetic GET handler with built-in Request/
+Response, in-memory source connection callbacks and React renderToString is selected;
+no real HTTP listener/request, Next compiler/router/RSC transport, React browser
+mount/Activity, generated app, archive/install/profile or network action. Imports
+of shared reordering definitions remain inert: no adapter/drag activation/repair.
+No test deletion/suppression/retry/fix is allowed by this lease. A resolution/native/
+vendor/API failure is real evidence to preserve, not permission to install or alias
+around it. Main reviews failures before any correction or further command.
