@@ -1,0 +1,12 @@
+{
+  "extends": "../wp13/tsconfig.light.json",
+  "compilerOptions": { "noEmit": true, "incremental": false },
+  "files": [
+    "../wp13/fixtures/headless.ts",
+    "../wp13/fixtures/styled.tsx",
+    "../wp13/fixtures/reordering-controller.ts",
+    "fixtures/playwright-positive.ts"
+  ],
+  "include": [],
+  "exclude": ["evidence", "fixtures", "node_modules"]
+}

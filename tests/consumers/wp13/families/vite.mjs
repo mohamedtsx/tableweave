@@ -7,12 +7,12 @@ import {
   familyManifest,
   record,
   tree,
-  json,
   verifyMap,
 } from "../lib/receipts.mjs";
 import { installed, usesStyled, nativeInputs } from "../lib/installer.mjs";
 import { execute } from "../lib/generation.mjs";
 import { wholeAppTypes } from "../lib/types.mjs";
+import { runFamily } from "../lib/runtime.mjs";
 
 export function stage(ctx) {
   const styled = usesStyled(ctx.family),
@@ -77,8 +77,17 @@ export function build(ctx) {
     "E_EMPTY_VITE_FAMILY_BUILD",
   );
   record(ctx.run, `family-build-${ctx.key}.json`, {
+    candidate: ctx.request.candidate,
+    key: ctx.key,
+    profile: ctx.profile,
+    outputRoots: ["wp13-family-build"],
     status: "actual-vite-build-only",
-    output,
+    output: Object.fromEntries(
+      Object.entries(output).map(([file, value]) => [
+        `wp13-family-build/${file}`,
+        value,
+      ]),
+    ),
     typeInputs,
     browser: "UNRUN",
     port: 6575,
@@ -87,9 +96,5 @@ export function build(ctx) {
   return { status: "actual-build-only" };
 }
 export function runtime(ctx) {
-  installed(ctx);
-  json(ctx.run, `family-build-${ctx.key}.json`);
-  throw new Error(
-    "E_HOLD_VITE_6575_REAL_DOM_STYLE_FOCUS_BROWSER_RUNNER_AND_NATIVE_AUTHORITY_REQUIRED",
-  );
+  return runFamily(ctx);
 }

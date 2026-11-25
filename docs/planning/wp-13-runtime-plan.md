@@ -88,3 +88,13 @@ consumer/negative/dual/CI/manual/performance execution, relocation, cleanup or n
 provisioning now. Check capacity before writes; stop below128MiB. Drive recovery
 does not authorize moving project files. Main reviews/replays before preservation/
 final selection. WP-14 source may follow a reviewed seam, not a fake runtime pass.
+
+## Provisional runner source intake
+
+The [actual follow-up](../../tests/consumers/wp13-runtime/README.md) now authors
+guarded real server/browser paths instead of unconditional holds. Main reads the
+five existing deltas/three new sources and passes own static/source TS6/exact100-file
+seal and1,282-input pin checks. MJS remains untyped and every process/helper/server/
+browser/HTTP/framework/consumer/adversary execution stays final and UNRUN.
+Review31n1 separately narrows error attribution before source handoff completion;
+runtime/independent review30n1 closure is not implied by an authored call path.

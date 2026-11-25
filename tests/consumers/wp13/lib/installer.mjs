@@ -205,6 +205,16 @@ export function prepare(ctx, familyStage) {
     `import * as headless from "@tableweave/react";\nexport {headless};\n${usesStyled(ctx.family) ? 'import * as styled from "@tableweave/heroui";\nimport "./styles.css";\nexport {styled};\n' : ""}`;
   files["wp13-owner.json"] =
     `${JSON.stringify({ protocol: "wp13-current-archives-v1", run: ctx.runId, key: ctx.key }, null, 2)}\n`;
+  if (["next", "start", "vite-headless", "vite-styled"].includes(ctx.family)) {
+    for (const [source, destination] of [
+      ["family-runtime.mjs", "wp13-family-runtime.mjs"],
+      ["start-host.mjs", "wp13-start-host.mjs"],
+    ])
+      files[destination] = regular(
+        ctx.producer,
+        `tests/consumers/wp13/fixtures/${source}`,
+      );
+  }
   const familyFiles = familyStage ? familyStage(ctx) : {};
   for (const [file, bytes] of Object.entries(familyFiles)) {
     demand(!Object.hasOwn(files, file), "E_STAGE_COLLISION");
@@ -270,6 +280,58 @@ export function prepared(ctx) {
       withFileTypes: true,
     })) {
       const file = prefix ? `${prefix}/${item.name}` : item.name;
+      if (!prefix && item.name === "wp13-runtime") {
+        demand(
+          item.isDirectory() && !item.isSymbolicLink(),
+          "E_RUNTIME_OUTPUT_LINK",
+        );
+        const attempt = json(target, "wp13-runtime/attempt.json");
+        const approvedAttempt = receipt(ctx, `runtime-attempt-${ctx.key}.json`);
+        demand(
+          attempt.key === ctx.key &&
+            attempt.run === ctx.runId &&
+            attempt.candidate === ctx.request.candidate &&
+            attempt.attempt === approvedAttempt.attempt &&
+            approvedAttempt.status === "main-reviewed-fresh-runtime-attempt",
+          "E_RUNTIME_OUTPUT_OWNER",
+        );
+        for (const value of fs.readdirSync(path.join(target, "wp13-runtime"), {
+          withFileTypes: true,
+        })) {
+          demand(
+            [
+              "attempt.json",
+              "report.json",
+              "server.stdout.log",
+              "server.stderr.log",
+              "tmp",
+            ].includes(value.name) &&
+              !value.isSymbolicLink() &&
+              (value.name === "tmp" ? value.isDirectory() : value.isFile()),
+            "E_RUNTIME_UNSELECTED_OUTPUT",
+          );
+        }
+        if (ctx.phase !== "family-runtime") {
+          const result = receipt(ctx, `runtime-result-${ctx.key}.json`);
+          demand(
+            result.status === "observed-runtime-smoke-only" &&
+              result.candidate === ctx.request.candidate &&
+              result.key === ctx.key &&
+              result.profile === ctx.profile,
+            "E_RUNTIME_RESULT_BINDING",
+          );
+          verifyMap(target, result.files);
+          demand(
+            JSON.stringify(
+              Object.keys(tree(path.join(target, "wp13-runtime")))
+                .map((file) => `wp13-runtime/${file}`)
+                .sort(),
+            ) === JSON.stringify(Object.keys(result.files).sort()),
+            "E_RUNTIME_OUTPUT_SET_DRIFT",
+          );
+        }
+        continue;
+      }
       if (
         !prefix &&
         [

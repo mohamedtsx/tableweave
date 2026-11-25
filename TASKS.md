@@ -454,6 +454,14 @@ library bodies, apps/manifests/lock/profiles/outputs are frozen. Author actual f
 family runners instead of unconditional holds, retaining real main/native/lock/
 profile/capacity prerequisites. No runtime/helper/CLI/browser/build/install execution
 is activated. WP-14 source selection stays after reviewed WP-13 runtime source seam.
+WP-13 runtime writer releases its bounded source handoff. Main reads all changed/new
+runtime sources and adversaries, then passes own source TS6/static/100-file exact
+seal/1,282-pin checks. New seal6f65c028… /pin37d877e1… match; old2,425 files/997
+installed inputs,155 libraries and original137/1,179 maps remain protected with five
+disclosed body changes. No production helper/CLI/server/browser/consumer executes.
+Review31n1 finds the API-only RSC negative's global browser-error time window can
+misclassify unrelated page errors. Preserve this exact producer before one-file
+runner correction; original source/attempts/seals must not be rewritten to fit it.
 
 ## Current WP-10 implementation handoff
 

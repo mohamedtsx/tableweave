@@ -10,6 +10,27 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## WP-13 family-runner intake — review session 31 (provisional)
+
+Main reads the five-body adapter/dispatch/staging delta, parent validator, standalone
+runner/host, positive probe and authored process/report adversaries. Own strict
+positive TS6/static/100-file exact seal/1,282-input pin checks pass;1,244 program
+files,2,425 old files/997 inspected installed files,155 libraries and original
+137-file/1,179-input map bytes remain protected with five disclosed body drifts.
+New seal6f65c028… /pin37d877e1… are distinct; no production helper, CLI, process,
+server/browser, HTTP/SSR, framework, archive/consumer or adversary test runs.
+
+### n1 — API-only RSC negative must not excuse unrelated live-page errors
+
+The standalone runner toggles negativeWindow around context.request.get of the
+callback-prop route, then treats broad Server Components/Function messages from
+any live browser page during that interval as intentional. This request uses the
+API client, not a browser page: its intended rejection belongs to the narrow fresh
+server diagnostic. An unrelated live-page error must stay unexpected regardless
+of timing. Preserve this producer, then remove the global browser-error exemption;
+retain genuineRsc's strict server-log recognition and unrelated500 rejection.
+Source-derived finding only; runtime reproduction/independent closure remains final.
+
 ## WP-13 source intake — review session 30 (provisional)
 
 Main reads the CLI/protocol/matrix, all seven production helpers, three family

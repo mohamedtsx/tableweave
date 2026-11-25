@@ -1,0 +1,55 @@
+tests/consumers/wp13/fixtures/family-runtime.mjs:519:26 lint/performance/useDomNodeTextContent  FIXABLE  ━━━━━━━━━━
+
+  ! innerText is not recommended for reading DOM node text.
+  
+    517 │         await expect(first.getByText(/Accepted query page: 2\./)).toBeVisible();
+    518 │         const primaryPage = Number(
+  > 519 │             (await first.innerText()).match(
+        │                          ^^^^^^^^^
+    520 │               /Accepted query page: (\d+)\./,
+    521 │             )?.[1],
+  
+  i innerText depends on rendered layout and CSS, so it can be slower and produce different results from the DOM tree's text content.
+  
+  i Use textContent when you want the node's text without rendered-text behavior.
+  
+  i Unsafe fix: Use textContent instead.
+  
+    517 517 │           await expect(first.getByText(/Accepted query page: 2\./)).toBeVisible();
+    518 518 │           const primaryPage = Number(
+    519     │ - ············(await·first.innerText()).match(
+        519 │ + ············(await·first.textContent()).match(
+    520 520 │                 /Accepted query page: (\d+)\./,
+    521 521 │               )?.[1],
+  
+
+tests/consumers/wp13/fixtures/family-runtime.mjs:524:27 lint/performance/useDomNodeTextContent  FIXABLE  ━━━━━━━━━━
+
+  ! innerText is not recommended for reading DOM node text.
+  
+    522 │           ),
+    523 │           comparisonPage = Number(
+  > 524 │             (await second.innerText()).match(
+        │                           ^^^^^^^^^
+    525 │               /Accepted query page: (\d+)\./,
+    526 │             )?.[1],
+  
+  i innerText depends on rendered layout and CSS, so it can be slower and produce different results from the DOM tree's text content.
+  
+  i Use textContent when you want the node's text without rendered-text behavior.
+  
+  i Unsafe fix: Use textContent instead.
+  
+    522 522 │             ),
+    523 523 │             comparisonPage = Number(
+    524     │ - ············(await·second.innerText()).match(
+        524 │ + ············(await·second.textContent()).match(
+    525 525 │                 /Accepted query page: (\d+)\./,
+    526 526 │               )?.[1],
+  
+
+Skipped 2 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 17 files in 77ms. Fixed 17 files.
+Found 2 warnings.

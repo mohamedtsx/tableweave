@@ -166,6 +166,15 @@ export function execute(ctx, task, options = {}) {
         ctx.family === "next"
           ? [local(cwd, "node_modules/next/dist/bin/next"), "build"]
           : [local(cwd, "node_modules/vite/bin/vite.js"), "build"];
+    } else if (task === "family-runtime") {
+      demand(
+        ctx.phase === "family-runtime" &&
+          ["next", "start", "vite-headless", "vite-styled"].includes(
+            ctx.family,
+          ),
+        "E_RUNTIME_COMMAND_PHASE",
+      );
+      args = [path.join(cwd, "wp13-family-runtime.mjs")];
     } else if (task === "family-types") {
       demand(
         ctx.phase === "family-build" &&
@@ -201,7 +210,10 @@ export function execute(ctx, task, options = {}) {
   );
   const result = spawnSync(executable, args, {
     cwd,
-    env: safeEnvironment(ctx),
+    env: {
+      ...safeEnvironment(ctx),
+      ...(task === "family-runtime" ? { WP13_RUNTIME_FINAL: "1" } : {}),
+    },
     shell: false,
     encoding: "utf8",
     timeout: 480000,

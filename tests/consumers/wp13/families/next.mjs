@@ -5,7 +5,6 @@ import {
   familyInput,
   familyConfig,
   familyManifest,
-  json,
   record,
   tree,
   regular,
@@ -14,6 +13,7 @@ import {
 } from "../lib/receipts.mjs";
 import { installed, nativeInputs } from "../lib/installer.mjs";
 import { execute } from "../lib/generation.mjs";
+import { runFamily } from "../lib/runtime.mjs";
 
 const app = [
   "postcss.config.mjs",
@@ -75,7 +75,7 @@ export function build(ctx) {
   );
   execute(ctx, "family-build");
   const output = {};
-  for (const directory of [".next/static", ".next/server"])
+  for (const directory of [".next"])
     Object.assign(
       output,
       Object.fromEntries(
@@ -97,6 +97,10 @@ export function build(ctx) {
   verifyMap(state.target, state.installed.inputs);
   verifyMap(state.target, native);
   record(ctx.run, `family-build-${ctx.key}.json`, {
+    candidate: ctx.request.candidate,
+    key: ctx.key,
+    profile: ctx.profile,
+    outputRoots: [".next"],
     status: "real-next-build-only-not-hydration",
     output,
     generatedInputs: {
@@ -112,9 +116,5 @@ export function build(ctx) {
   return { status: "actual-build-only" };
 }
 export function runtime(ctx) {
-  installed(ctx);
-  json(ctx.run, `family-build-${ctx.key}.json`);
-  throw new Error(
-    "E_HOLD_NEXT_6575_REAL_HTTP_FLIGHT_BROWSER_RUNNER_AND_NATIVE_AUTHORITY_REQUIRED",
-  );
+  return runFamily(ctx);
 }
