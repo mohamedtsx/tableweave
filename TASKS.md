@@ -11,9 +11,9 @@ WP-10/G-02 remains incomplete; manual menus are not a scope waiver. The earlier
 WP-10 chronology below remains exact producer history, not an active writer lease.
 
 Under the user's one final verification-and-fix timing, main selects the bounded
-WP-11 plan at docs/planning/wp-11-implementation-plan.md. Stage A alone is allocated:
-new shared synthetic records/public composition and full-facade Storybook catalog,
-with155 library bodies/all old examples/stories/tests/profile/manifests frozen.
+WP-11 plan at docs/planning/wp-11-implementation-plan.md. Stage A is preserved;
+Stage B examples and isolated Next source have separate bounded allocations,
+with155 library bodies and each producer's existing source/profile inputs frozen.
 Main owns source intake/Git/docs/dependencies/public exports; no worker install,
 runtime or publication authority. Only a necessary frozen existing-dependency
 ignore-scripts install ran in the fresh tree. Stage B, actual Next/Start variants,
@@ -28,7 +28,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Slice | Current owner/state | Next action |
 | --- | --- | --- |
 | Shared synthetic facade catalog | Preservedc9c36cb; main source/light intake complete | Final plays/matrix/ordinary proof remain unrun; do not rewrite Stage A seals |
-| Vite/headless/recipes/Start recipe | One primary worker active under the Stage B plan | Return actual new API/scope/seal/light handoff; existing shared/library inputs frozen |
+| Vite/headless/recipes/Start recipe | Handoff delivered; writer released | Main API/source/seal/positive-program intake passes; preserve before further consumers |
 | Next App Router example | One isolated source worker active from47e20df | Protect main-owned exact manifest/lock; return source/light handoff before primary intake |
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Not yet allocated | Use actual Stage B recipe handoff before a bounded real mount/dependency lease |
@@ -120,6 +120,16 @@ manifest/lock ownership is delegated. Main's allocation documentation passes258
 Markdown/905 links and scoped whitespace. The prior19 checker-regression pass is
 not a new run, and none of these checks establishes story/runtime/framework/SSR/
 packed/independent acceptance. Next materialization stays isolated until handoff.
+Stage B delivers18 new application/config/doc files and its own evidence subtree,
+with no old file edits. Main reads all styled/headless/recipe/Start/config sources
+and the authored consumer driver; own two positive TS6 programs/static/scope/seal
+checks pass. All155 libraries/Stage A/1,644 old protected inputs remain unchanged;
+37 new inputs5cd65b6c… /66 local artifactsf926e22e… and1,378 pinned inputs match.
+This is provisional preservation, not Vite/Start/browser/SSR/ordinary/packed proof.
+Start remains explicitly UNMOUNTED: current initial P retirement deletes a namespace
+if a client owner is constructed after hydration. A real mounted integration needs
+explicit request/router lifetime and cache adoption/retirement ordering first; no
+initial-only certificate, owner serialization or duplicate-fetch workaround is allowed.
 
 ## Current WP-10 implementation handoff
 

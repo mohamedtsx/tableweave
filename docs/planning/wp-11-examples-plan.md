@@ -72,3 +72,23 @@ recipe. Stop on a frozen public-lifecycle/dependency seam; do not repair Stage A
 library code under this lease. Main inspects the actual new APIs before intake.
 Next, mounted Start, drag/G-02, missing scene/manual/consumer/performance/publication
 gates and full WP-11 remain incomplete. No package acceptance follows from LIGHT.
+
+## Provisional Stage B intake
+
+The [actual handoff](../../tests/workbench/wp11-examples/README.md),
+[Vite entries](../../apps/examples/vite/README.md),
+[wired recipes](../../apps/examples/recipes/README.md) and
+[unmounted Start recipe](../../apps/example-start/src/recipes/wp11/README.md)
+name their real public APIs and execution limits. Main reads every new application/
+config/recipe source and the deferred consumer driver; own Vite-side and Start-side
+positive TS6 programs, static/scope checks and seal verification pass. All155 library
+bodies/Stage A/1,644 old protected inputs remain unchanged. New37-input aggregate
+5cd65b6c… /66 local-artifact aggregatef926e22e… and1,378 pinned compiler/inspection
+inputs are this stage's identities, not updates to old producer seals.
+
+The runtime graphs, browser/SSR assertions and ordinary archive driver are unrun.
+In particular, constructing the current Start recipe after hydration retires its
+namespace; same-owner preload ordering does not solve cross-realm cache adoption.
+Actual Start mounting must select a truthful request/router lifetime and adoption/
+retirement order before code. Do not bypass initial P retirement, serialize an owner,
+rerun a fresh reader and call it hydration, or rename this recipe as mounted proof.

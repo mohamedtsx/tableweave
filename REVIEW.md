@@ -2105,3 +2105,31 @@ run nor independently approve33 CSF-defined plays. The handoff explicitly keeps 
 missing operator/option/selection/clamp/detail/source-wait/transport permutations,
 manual/ordinary/packed/framework/AT and blocked drag gates open. Preserve this
 source before dependent authoring; no review22 runtime correction is closed here.
+
+## WP-11 Stage B source intake — review session 25 (provisional)
+
+Main reads all18 new application/config/doc paths and authored archive-driver source.
+Own Vite and Start positive TS6 programs/static/scope/seal checks pass for37 new
+inputs/66 preserved local artifacts,155 unchanged library bodies/Stage A and1,644
+old protected non-bookkeeping inputs, with1,378 pinned compiler/inspection inputs.
+No runtime, SSR, emitted graph or archive installation is executed or approved.
+
+### n1 — Same-owner Start preload recipe does not establish hydration adoption
+
+The current recipe honestly requires construction before same-owner preload. Its
+initial P retirement calls clear/removeQueries; reconstructing a separate client
+owner after Query hydration would discard the fresh namespace and can reread.
+Actual route/provider/request lifetime and cross-realm adoption are not in the Stage B
+lease. Keep that mounting seam open for the next plan; do not skip real retirement,
+serialize C/P/authority or count duplicated fresh reading as hydration success.
+This is a source trace and integration constraint, not a runtime reproduction.
+
+### n2 — Future archive driver needs a complete outside-workspace guard
+
+The unrun declaration driver checks lexical/symlink return into the current checkout
+and requires a new directory. It does not reject a new child inside another linked
+worktree/workspace, where pnpm can discover an ancestor workspace and touch its
+importers. Before any final install phase, harden/test the allowed external target
+boundary and explicit pnpm isolation; do not rely solely on a single checkout-prefix
+check or call the current driver ordinary-consumer proof. No driver install or other
+workspace mutation has run. App-source intake does not approve this deferred runner.

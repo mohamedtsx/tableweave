@@ -1,0 +1,5 @@
+{
+  "extends": "../../../../apps/storybook/tsconfig.examples-light.json",
+  "include": ["./types.ts"],
+  "exclude": []
+}
