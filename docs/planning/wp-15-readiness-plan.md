@@ -84,3 +84,19 @@ checks if useful; new-only docs may initially be unreachable until main links th
 Preserve that real failure rather than editing frozen routers or weakening checks.
 Main adds navigation and performs actual full documentation/regression/whitespace
 checks after intake. No absent current validation row may be populated as a pass.
+
+## Main-owned documentation correction after source review
+
+Main preserves the original two files ascb4de1c after own semantic/hash/scope review.
+Review33n1/n2 allocate main-only isolated edits to docs/operations/releasing.md,
+docs/README.md, CONTRIBUTING.md and CHANGELOG.md. Add real navigation and reconcile
+blanket documentation-only/no-workspace/no-implemented-export statements with actual
+private source. Keep no-release/no-stable/no-name-rights/no-publication boundaries.
+No source/manifest/lock/license/contact/CI/policy-requirement change is allowed.
+The two new protocols retain their datedf60df08 metadata snapshot; actual current
+progress stays in main TASKS. Run genuine full Python structural/regression and
+whitespace checks after linking, preserving the original unreachable failure.
+The isolated correction is preservedbd2cec0. Main verifies unchanged original
+protocol/library hashes and passes291 Markdown/1,123 links/19 checker regressions/
+whitespace in that tree. Stack intake remains pending the active WP-14 writer's
+release; real consumer/benchmark/rights/runtime/publication acceptance stays open.

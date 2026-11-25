@@ -10,6 +10,34 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## WP-15 protocol intake — review session 33 (documentation only)
+
+Main reads both218-line documents and their actual external receipt procedure.
+Independent hashes/modes/sizes match7eb7a4c3…/a4fbc8ba…;2,525 old files and155
+library bodies stay unchanged in the isolated source handoff. Forms clearly state
+NO OBSERVATIONS and retain real-consumer/publication/runner/manual/drag blocks.
+
+### n1 — New-only protocols need existing-entrypoint navigation
+
+The isolated structural checker fails solely on two unreachable new documents.
+Main must link them through current operations/documentation owners after preserving
+the original producer. Do not edit the checker or treat32 valid targets as a full
+green navigation result. Runtime/external gates are unrelated and stay unverified.
+
+### n2 — Contributor/changelog text still denies the implemented private workspace
+
+CONTRIBUTING calls this documentation-only/no workspace and CHANGELOG calls all APIs
+unimplemented proposals. Actual private manifests/source contradict those blanket
+claims. Correct only stage/command/unreleased wording with explicit private and
+provisional limits, retaining no-release/no-name-reservation/no-publishing claims.
+Do not invent legal rights/contacts/versions/acceptance or alter manifests/CI.
+Main preserves the original protocol paircb4de1c, then links them through operations/
+the router and corrects only contributor/changelog private-stage wording. Both
+original document hashes and155 library bodies remain unchanged. Isolated actual
+checks pass291 Markdown/1,123 links/19 regression probes/current whitespace. This
+verifies the documentation corrections at that tree; no AC-29/WP-15/stable/runtime/
+consumer/publication approval or borrowed current-candidate result is granted.
+
 ## WP-14 source intake — review session 32 (provisional)
 
 Main reads all24 source/config/driver/fixture/statistics files plus input/paint

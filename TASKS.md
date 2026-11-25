@@ -40,7 +40,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
 | WP-13 archive tooling | Provisional source frozen25fdfde; writer released | Main source/light intake passes; actual build/pack/install/runtime/independent proof final |
 | WP-14 benchmark source | Original preservedf60df08; bounded guard-correction writer active | Source/light intake passes; candidate/runner/paint/measurements deferred; no execution |
-| WP-15 eligible protocols | Isolated new-only documentation writer allocated | Two protocols only; real target/release gates remain separately deferred/unverified |
+| WP-15 eligible protocols | Preserved isolatedcb4de1c/bd2cec0; writer released | Isolated documentation checks pass; intake after WP-14 scope release; actual consumer/release gates unverified/deferred |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -538,6 +538,26 @@ links and19 checker probes; current main metadata whitespace passes. That result
 predates active guard-correction/isolated protocol WIP and is not a new whole-tree
 check or an observed benchmark. Primary remains the WP-14 packet; isolated WP-15
 documents will be reviewed/preserved separately before later stack intake.
+WP-15 writer releases exactly two protocols (218 lines) in its isolated tree. Main
+reads both full documents and external receipts, independently matches their
+0664/size/hash identities7eb7a4c3…/a4fbc8ba… and replays the protected2,525-file/
+155-library scope check without old-file drift. The writer's actual documentation
+check has exactly two unreachable-entrypoint findings; all32 local targets exist.
+No runtime/external acceptance is claimed. Main preserves the original two docs,
+then owns isolated navigation and a bounded correction to stale CONTRIBUTING/
+CHANGELOG stage claims; no licensing/channel/manifest/CI or runtime change.
+Original WP-15 two-document source is preserved isolatedcb4de1c. Main's bounded
+four-file navigation/contributor/changelog correction keeps those two original
+document bytes and155 library hashes unchanged. The isolated full checker now
+passes291 Markdown/1,123 links and all19 regression probes; whitespace passes.
+Original two-unreachable failure stays in external handoff receipts. No real-target,
+legal/registry/channel, runtime/manual/performance/CI or release acceptance follows.
+Preserve this correction separately; primary intake waits for the active WP-14
+guard writer's scope release so its captured old inputs remain exact.
+WP-15 main documentation correction is preserved isolatedbd2cec0. The primary
+runtime/library/source and dependency profiles are unaffected. Main retains the
+two commits for later exact-stack intake rather than mutating the active benchmark
+baseline or claiming the isolated doc pass covers primary WIP.
 
 ## Current WP-10 implementation handoff
 
