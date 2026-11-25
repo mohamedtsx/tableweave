@@ -296,6 +296,13 @@ client fixture/manual workbook owner. It consumes frozen shared Stage A/B APIs;
 the isolated Start one-parent-file correction cannot collide with those paths.
 Only source/light authoring is allowed. No WP-11 completion, earlier runtime phase,
 manual result, G-02 waiver or WP-12–WP-15 skip follows from this provisional handoff.
+Main allocates independent read-only WP-13 preparation at
+`/tmp/opencode/wp13-current-archives/PLAN.md`, limited to preserved manifests,
+build/export/output/profile/consumer harness contracts. It may not inspect active
+WP-12 or Start-correction WIP, mutate files or execute build/pack/install/import/
+runtime/consumer tests. Return a bounded current-archive tooling lease that keeps
+historical producer/output maps and ordinary/private-profile lanes distinct.
+This is preparation only; no WP-13 source owner or acceptance is activated yet.
 
 ## Current WP-10 implementation handoff
 
