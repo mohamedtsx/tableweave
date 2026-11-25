@@ -61,3 +61,15 @@ Git/install/build/config/network operations. Exclude active WP-14 unit work enti
 Return exact commands/dependencies/output paths/ports/capacity/native constraints,
 expected unchanged historical-generation failures and the smallest safe next lane.
 This is a command-scope map, not execution approval or an acceptance report.
+
+## First selection — actual unit results
+
+The independent worker executes both commands once: statistics6/6 and guards10/10
+pass, exit0, zero failures/skips/cancellations/todos and empty stderr. Main reads
+raw outputs/statuses/review and independently verifies28 external receipt entries
+and210 protected source/config identities, with identical before/after maps.
+Receipt: `/tmp/opencode/final-wp14-unit-001/receipt-hashes.json`, SHA256
+2fbcebb20c0dbbf05924372f7e805083ae065057935e7d738416f5f3f2779f05.
+No test rerun/source correction is needed. Review34 records the bounded independent
+unit slice; broader review32n1/n2 compatibility/native/cleanup/paint/performance
+obligations remain OPEN. No other test or operation is activated by these results.

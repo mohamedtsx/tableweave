@@ -10,6 +10,25 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 34 (WP-14 unit slice)
+
+Independent reviewer runs each selected command once against the preserved source:
+`node --test tests/benchmarks/wp14/statistics.test.ts` passes6/6 and
+`node --test tests/benchmarks/wp14-guards/guards.test.ts` passes10/10, both exit0,
+zero failures/cancellations/skips/todos and empty stderr. Main reads both actual
+outputs/statuses/review and verifies28 receipt hashes/modes/sizes plus all210
+protected current source/config identities and byte-identical before/after maps.
+External receipt `/tmp/opencode/final-wp14-unit-001/receipt-hashes.json` SHA256
+2fbcebb20c0dbbf05924372f7e805083ae065057935e7d738416f5f3f2779f05.
+No rerun or source modification was needed; no concrete defect is found within
+this selected numeric/rejection/deferred-handle unit and independent source review.
+
+The unit slice of review32n1/n2 is verified; both broader findings stay OPEN.
+Genuine ordinary/private install/receipt/filesystem compatibility, native/P cleanup,
+real browser/CDP/HTTP termination, paint validation, hardware and measurements remain
+UNRUN. Synthetic handles/numeric timings are not performance observations. No
+WP-14/G-05/stable or other-packet approval follows. Drag remains user-blocked.
+
 ## WP-15 protocol intake — review session 33 (documentation only)
 
 Main reads both218-line documents and their actual external receipt procedure.

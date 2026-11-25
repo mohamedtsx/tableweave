@@ -594,6 +594,17 @@ library files. The intentional contributor/changelog/docs integration is disclos
 no obsolete whole-tree scope guard is changed/re-signed to call that drift a pass.
 These cumulative documentation/byte results do not retroactively certify isolated
 packets or unit/runtime/CI/performance/real-consumer outcomes.
+Final unit worker releases external /tmp/opencode/final-wp14-unit-001/README.md.
+It runs each selected command once: WP-14 statistics6/6 and guards10/10 pass,
+both exit0/no failures/skips/cancellations/todos/empty stderr. Main reads the raw
+outputs/statuses/review and matches28 receipt entries/all210 protected current
+identities with byte-identical before/after maps, without rerunning. Receipt SHA256
+2fbcebb20c0dbbf05924372f7e805083ae065057935e7d738416f5f3f2779f05.
+Review34 records no concrete defect in that bounded unit/source-review scope.
+Review32n1/n2 unit slices are verified but broader runtime/independent closure stays
+OPEN. Real installed ordinary/private profiles, native/P purge, browser/CDP/HTTP,
+paint/hardware/performance and all other packet checks are not proved by these units.
+Remaining-lane planner stays active read-only; no new command is selected yet.
 
 ## Current WP-10 implementation handoff
 
