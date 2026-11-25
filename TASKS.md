@@ -5,7 +5,8 @@
 ## Current WP-11 provisional continuation
 
 Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on
-feat/wp-12-integrated above the frozen WP-11-only headfb69232. Original feat/wp-11-workbench
+feat/wp-13-archives above provisional WP-12 head8c39a4f and WP-11-only headfb69232.
+Original feat/wp-11-workbench
 preservese0463d3, including the reviewed provisional WP-12 producer. This separates
 packet source for later unmerged PRs without rewriting/removing any producer commit.
 The original base is frozen WP-10d6a53f6 (source155bdfabded…). The user chooses **Keep drag
@@ -36,6 +37,7 @@ checks stay final, not waived or claimed. No pushes, PRs, merges or publications
 | Historical evidence portability | Original02a2479 intaken9ce41bd | Keep original sealed bytes and historical limits; corrected current docs replay recorded |
 | Mounted Start facade | Intakenf78205e/4ee8053/10483b2/99b660c; writer released | Isolated and cumulative source/light intake passes; generated/whole-app/runtime gates unrun |
 | WP-12 integrated fixture | Producer e0463d3 intaken676e6bc above WP-11fb69232 | Main original/stacked source/light intake passes; browser/manual/independent final |
+| WP-13 archive tooling | One new-only primary source writer allocated | Exact plan under docs/planning; all actual build/pack/install/negative/dual/runtime work final |
 
 No worker owns Git/docs/manifests/public exports or the other writer's worktree.
 Main is the integration/review owner. Ready-to-review source remains provisional;
@@ -383,6 +385,24 @@ The stacked WP-12 source boundary passes280 Markdown/964 links/19 checker probes
 and current whitespace. Main freezes its provisional source head before opening
 the next additive WP-13 authoring branch. WP-11fb69232 and original producere0463d3
 remain separate preserved refs; exact-head CI/PRs still await the final phase.
+Main selects docs/planning/wp-13-implementation-plan.md on the new additive branch
+from8c39a4f. One writer owns only NEW tests/consumers/wp13/** at its explicit paths;
+main retains docs/Git/manifests/root registration. Actual libraries/manifests/lock/
+profiles/CURRENT generation and all older fixtures/seals stay frozen. Author inert
+current-candidate/archive/consumer tooling and real public positive/negative/family
+fixtures, not a new registered generation. Only positive source TS6/static/syntax/
+scope/full scoped Biome/pins/seals now; every build/pack/prepare/install/test-runtime/
+negative/dual/browser/SSR/consumer/CI/manual/performance operation remains final.
+Start corrected source may be read after its real intake; generated whole-app proof
+is still unrun. No ordinary lane silently receives RAC/SDK/private patches.
+Main separately allocates read-only WP-14 preparation at
+`/tmp/opencode/wp14-reference-protocol/PLAN.md`, limited to canonical performance/
+acceptance contracts and preserved public fixture APIs. No active WP-13 source may
+be inspected, and no benchmark/session/provisioning/install/browser/runtime runs.
+Return one source-authoring lease with deterministic workloads, validated timing/
+aggregation obligations and an explicit dedicated-runner hold; missing runner
+inputs do not become fabricated numbers or shared-host acceptance. No WP-14 source
+lease is activated by this planning allocation.
 
 ## Current WP-10 implementation handoff
 
@@ -1869,7 +1889,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-018 | WP-10 optional sortable | blocked | Manual/source handoff preservedd6a53f6; user blocks drag | Full G-02/runtime/independent acceptance unmet, not waived by downstream work |
 | TASK-019 | WP-11 examples/docs/workbench | in progress | Main intake; Stage B primary and isolated Next source writers active | Preserved sharedc9c36cb/manual WP-10 source; drag and final evidence remain incomplete |
 | TASK-020 | WP-12 integrated browser/manual accessibility | in progress | Provisional new-only fixture/workbook source authoring after WP-11 static intakes | Browser/manual/independent acceptance remains final; G-02 and unfinished framework proof are not waived |
-| TASK-021 | WP-13 packed compatibility/release tooling | planned | Package owner assigned after WP-11 | No publication rights inferred |
+| TASK-021 | WP-13 packed compatibility/release tooling | in progress | One new-only additive source-tooling owner after WP-12 static intake | Actual archive/install/type-negative/runtime/independent proof final; no publication rights |
 | TASK-022 | WP-14 reproducible performance | planned | Benchmark owner assigned after WP-11/13 | Approved runner/workload required; no invented timings |
 | TASK-023 | WP-15 real consumer/stable readiness | planned | Integration reviewer assigned when inputs exist | Separate actual target/access/write inputs and WP-12–14 evidence required |
 

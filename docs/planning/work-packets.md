@@ -253,6 +253,10 @@ in the user's final phase; blocked WP-10/G-02 and unfinished framework proof sta
 
 ## WP-13 Packed compatibility and release tooling
 
+The [additive current-archive source plan](wp-13-implementation-plan.md) preserves
+historical generations and separates ordinary/private-profile installs. Source
+authoring is provisional; build/pack/install/type-negative/runtime proof stays final.
+
 - **Role/dependencies:** package worker; integrated WP-11; early harness allowed
   after WP-04 with explicit scope. Exclusive manifests/lockfile ownership.
 - **Read:** architecture/stack, [releasing](../operations/releasing.md), AC-26.
