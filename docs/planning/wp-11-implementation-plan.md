@@ -115,6 +115,23 @@ excluded from its evidence; no repository write or other WIP inspection is repor
 No source readiness, SSR/App Router build, installation or acceptance follows from
 the report. No further vendor/drag work is reopened.
 
+## Stage A provisional intake
+
+The [actual handoff](../../tests/workbench/wp11-catalog/README.md) and
+[CSF scene map](../../apps/storybook/src/workbench/scenes.md) now record33 authored
+stories over three synthetic domains. Main reads the complete eight shared modules,
+Workbench/five story modules and the exact additive CSS scanner. Own positive TS6,
+scope/static checks and seal verification pass:34 new inputsdd6b8cf5… /83 preserved
+local artifactse56a2635…, all155 library bodies and1,518 old non-bookkeeping inputs
+unchanged, plus1,434 pinned compiler/inspection inputs matched. No library export,
+manifest, dependency or source-profile repair was needed.
+
+This is a provisional source baseline, not execution or independent acceptance.
+The exact per-scene gaps in the map stay open: custom/inverse/operator/option races,
+selection/sort/clamp/hidden/group boundaries, detail/dirty/focus/access-loss/source
+wait/transport permutations, ordinary archives, mounted frameworks/manual/browser
+and drag/G-02. Main preserves the source before Stage B consumes its actual APIs.
+
 ## Allowed checks, stop and next handoff
 
 Run only own positive TS6/noEmit/source-alias compilation, syntax/static exact public

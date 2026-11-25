@@ -23,7 +23,7 @@ LIGHT now means positive source noEmit/static/scope/full scoped format only.
 Browser/SSR/negative/dual/emitted/packed/manual/performance/consumer/independent/CI
 checks stay final, not waived or claimed. No pushes, PRs, merges or publications.
 
-Stage A's sole writer is active on the selected new example/catalog paths only.
+Stage A's writer is released; actual handoff is under main source intake.
 Main's fresh tree install reuses367 packages with zero downloads. Main re-references
 the approved Figma appearance read-only (scene5:159); no Figma edit, redesigned
 system or new visual approval. Existing library/source/root-export/profile bytes
@@ -62,6 +62,16 @@ compatibility. Actual shared-lifecycle/server-client graph intake still precedes
 Next materialization. No manifests/lock/framework files are changed. The reported
 accidental leased stylesheet read is excluded from evidence; no worker writes or
 other catalog WIP inspection are reported. Drag remains user-blocked.
+Stage A delivers three synthetic domains and33 authored CSF stories. Main reads
+all eight shared modules/Workbench/five story modules/scenario map and the exact
+scanner delta; own positive TS6/scope/static/seal checks pass. All155 library bodies/
+1,518 old non-bookkeeping inputs are unchanged,34 new inputs aggregate dd6b8cf5…
+and83 preserved local artifacts aggregate e56a2635… match, and1,434 pinned compiler/
+inspection inputs match. No runtime/index/story play/browser/SSR/packed/independent
+result follows. Source-lifecycle and exact per-scene gaps remain as authored in
+apps/storybook/src/workbench/scenes.md; drag/G-02 stays user-blocked.
+Main preserves this actual API/source baseline before activating Stage B. No Next
+installation or mounted-framework/consumer claim is implied by catalog source.
 
 ## Current WP-10 implementation handoff
 

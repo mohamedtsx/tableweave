@@ -2093,3 +2093,15 @@ The exact new WP-11 plan7a0f316 combined with original evidence02a2479 is checke
 the separate caf60d2 tree:254 Markdown/901 links and19 probes pass. The active
 writer tree's missing-evidence failure is not called corrected before actual intake.
 No historical result is rewritten or promoted to current runtime proof by this replay.
+
+## WP-11 Stage A source intake — review session 24 (provisional)
+
+Main reads the complete shared-owner/resource/option/detail/reorder composition,
+five story modules/Workbench and scene map. Positive TS6, static/scope and immutable
+seal checks pass for34 new inputs/83 preserved local artifacts,155 unchanged library
+bodies,1,518 old protected non-bookkeeping inputs and1,434 pinned compiler/inspection
+inputs. The sole old-file delta is the declared CSS scanner. These checks neither
+run nor independently approve33 CSF-defined plays. The handoff explicitly keeps its
+missing operator/option/selection/clamp/detail/source-wait/transport permutations,
+manual/ordinary/packed/framework/AT and blocked drag gates open. Preserve this
+source before dependent authoring; no review22 runtime correction is closed here.

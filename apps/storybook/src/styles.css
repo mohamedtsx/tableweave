@@ -5,3 +5,5 @@
 @import "@tableweave/heroui/styles.css";
 
 @source "./";
+
+@source "../../examples/shared";
