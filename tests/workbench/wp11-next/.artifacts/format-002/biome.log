@@ -1,0 +1,26 @@
+apps/example-next/app/ClientDataTableBoundary.tsx:59:9 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━
+
+  × The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    57 │       </header>
+    58 │       <div
+  > 59 │         role="group"
+       │         ^^^^^^^^^^^^
+    60 │         className="my-5 flex flex-wrap items-center gap-2"
+    61 │         aria-label="Example source controls"
+  
+  i For examples and more information, see WAI-ARIA Roles
+  
+  i Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+Checked 38 files in 163ms. Fixed 5 files.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

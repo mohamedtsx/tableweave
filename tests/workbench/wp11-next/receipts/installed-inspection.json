@@ -1,0 +1,46 @@
+{
+  "next": {
+    "version": "16.4.6",
+    "license": "MIT",
+    "manifestSHA256": "ed29e68845a44d4cd30518dd0df0554fcf6f6ada99b81f4e8798d26dc6964f82"
+  },
+  "@tailwindcss/postcss": {
+    "version": "4.3.5",
+    "license": "MIT",
+    "manifestSHA256": "25b37d15d103391954216411949c65a80b7ba530aeec288c1936a443d5dfb601"
+  },
+  "react": {
+    "version": "19.3.1",
+    "license": "MIT",
+    "manifestSHA256": "9cc9c3de5441a2eea7f41f52f3f2a15a4fc51f90c0b72741f0d7638643a85e67"
+  },
+  "react-dom": {
+    "version": "19.3.1",
+    "license": "MIT",
+    "manifestSHA256": "89d54f11575c9b0f7819962d9d72a31970dfb4d103f07e8b1d1b37e6d1fc3258"
+  },
+  "@heroui/react": {
+    "version": "3.2.8",
+    "license": "Apache-2.0",
+    "manifestSHA256": "0f059c95288bc9b539ceb20563b660fd37da3c60c0353e6d55f8b088d3d341fd"
+  },
+  "@tableweave/react": {
+    "version": "0.0.0-wp01.0",
+    "license": "UNLICENSED",
+    "manifestSHA256": "92b255bbbe1479e93240e7f8b419b5ec884ecc31c188b2110c35c4d3924f1cab"
+  },
+  "next/index.d.ts": {
+    "sha256": "d3b315763d91265d6b0e7e7fa93cfdb8a80ce7cdd2d9f55ba0f37a22db00bdb8",
+    "bytes": 708
+  },
+  "next/types.d.ts": {
+    "sha256": "3dc14e1ab45e497e5d5e4295271d54ff689aeae00b4277979fdd10fa563540ae",
+    "bytes": 68
+  },
+  "@tailwindcss/postcss/dist/index.d.mts": {
+    "sha256": "8469a7cdc540652ed45f9e1f1116bb5f9f21eaae242efcbf4603d0126a28f976",
+    "bytes": 572
+  },
+  "appManifestSHA256": "55ed9a4ee4a560846548a94c9ef223c01627ac3ad649f338c0b9f19d5224ce42",
+  "lockSHA256": "6cc5f56f8377ce15d85576ca2d2f9b487925cf423899002dbff51db05ef1c688"
+}

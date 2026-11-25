@@ -1,0 +1,322 @@
+{
+  "apps/example-next/.gitignore": {
+    "mode": 436,
+    "sha256": "57a35eb8500e9de1d2f59bb1fde8a5be85878809a060619de91f2cc053163f2d"
+  },
+  "apps/example-next/app/ClientDataTableBoundary.tsx": {
+    "mode": 436,
+    "sha256": "db5a3c87115c3e1337598fa954fcd96a8a58c49505977d81876c863d26844fd6"
+  },
+  "apps/example-next/app/globals.css": {
+    "mode": 436,
+    "sha256": "7f57f750226da8fb03eae373603aa53b5d70706b3a48f26ea81eb2389ea4191b"
+  },
+  "apps/example-next/app/headless/route.ts": {
+    "mode": 436,
+    "sha256": "1a0f127e78728c1c0ae2a3eea4cebb7a8dccc86de9b92d9dbbbe90458202c1a3"
+  },
+  "apps/example-next/app/layout.tsx": {
+    "mode": 436,
+    "sha256": "6804ef609488e2e9d0bd443bbd653f6fd09b420f9d3d3ad806f481a1ef55fc98"
+  },
+  "apps/example-next/app/page.tsx": {
+    "mode": 436,
+    "sha256": "49768e72c8a3ee3806d74353f8ef623afdc2bbaf0b7ba6d4d98a1b359c1cdc3c"
+  },
+  "apps/example-next/lib/client-owner.ts": {
+    "mode": 436,
+    "sha256": "e51c17e76868198df1ff0fd9b35fb906515a6235bb15bb900ba37998067f371e"
+  },
+  "apps/example-next/lib/payload.ts": {
+    "mode": 436,
+    "sha256": "3171c778d0cadd06718e2ec65f06af2c07913f77cfab94beb941a7b112fbf3a1"
+  },
+  "apps/example-next/lib/server-contract.ts": {
+    "mode": 436,
+    "sha256": "cefe16d2d1e3cda8aa95a147c2b63e9798b99b29f404c79440f1e49c10fa1bc9"
+  },
+  "apps/example-next/next-env.d.ts": {
+    "mode": 436,
+    "sha256": "a3ebe231b19ad47bd85d024ca9aecf628aa84d37455a59f00decaa24c782810c"
+  },
+  "apps/example-next/next.config.mjs": {
+    "mode": 436,
+    "sha256": "3331a955466f590e912a0d10d2305a145fbb6e9d8d49371cf56cd9f6ee65ae1b"
+  },
+  "apps/example-next/postcss.config.mjs": {
+    "mode": 436,
+    "sha256": "f5dd22825f571ad7ef733f1527e933637b32d162189d8334ea7cdd9e190c2be4"
+  },
+  "apps/example-next/README.md": {
+    "mode": 436,
+    "sha256": "5c56975114b4c8a8857fca250b30590116472072c36a63e3bc7d31073359a013"
+  },
+  "apps/example-next/styles.d.ts": {
+    "mode": 436,
+    "sha256": "35d26ea66c86da9701e4f4b467913481ffeae910761cea34c775c5dacb7f8eaa"
+  },
+  "apps/example-next/tsconfig.json": {
+    "mode": 436,
+    "sha256": "34c14a9eb050747ad7b6944ff1c3d67eff5d45507d877673a6262a87cde980c6"
+  },
+  "apps/example-next/tsconfig.light.json": {
+    "mode": 436,
+    "sha256": "ccfdc53a10c1d6f64f25d2d84c4fb34b874a9672c0dc4e4cc3443102c142db81"
+  },
+  "tests/workbench/wp11-next/.artifacts/biome-001/biome.log": {
+    "mode": 436,
+    "sha256": "5fd6cf67b682df83c3a7433aa8ff01f1b2db2dada06a0bbb67d3c6c73e3b6635"
+  },
+  "tests/workbench/wp11-next/.artifacts/biome-002/biome.log": {
+    "mode": 436,
+    "sha256": "a13dbc7841782e8dd22a4a10317517342438b137a3723a94edf6f7be5a6df92b"
+  },
+  "tests/workbench/wp11-next/.artifacts/format-001/biome.log": {
+    "mode": 436,
+    "sha256": "9952c53fcfa81efe73f218a3ce5bb93726fba4e35da38f3724d06b8833f7becb"
+  },
+  "tests/workbench/wp11-next/.artifacts/format-002/biome.log": {
+    "mode": 436,
+    "sha256": "e8e14da6dd845964bd285dcbe52b9bc1eb575c7b7e3997a7ca1ecbb79b0dbb96"
+  },
+  "tests/workbench/wp11-next/.artifacts/format-003/biome.log": {
+    "mode": 436,
+    "sha256": "65e2848d500beec7392a3775b45d07fc7eccf6e861769331ce89b71c7654adc1"
+  },
+  "tests/workbench/wp11-next/.artifacts/format-004/biome.log": {
+    "mode": 436,
+    "sha256": "c08f2fe2b2d4da489672d414d00a149c10b0fc205508aecc1e8448c59bd1d150"
+  },
+  "tests/workbench/wp11-next/.artifacts/installed-006/installed.json": {
+    "mode": 436,
+    "sha256": "1cadea6c933c41b2baa65eed50a9013bc269731b27a72a32378107eee60af72e"
+  },
+  "tests/workbench/wp11-next/.artifacts/installed-006/new-closure.json": {
+    "mode": 436,
+    "sha256": "aa9e168e0485f432bb038b790f6628cddc3d49a21789453b7a88be81f6b61712"
+  },
+  "tests/workbench/wp11-next/.artifacts/installed-007/installed.json": {
+    "mode": 436,
+    "sha256": "1cadea6c933c41b2baa65eed50a9013bc269731b27a72a32378107eee60af72e"
+  },
+  "tests/workbench/wp11-next/.artifacts/installed-007/new-closure.json": {
+    "mode": 436,
+    "sha256": "aa9e168e0485f432bb038b790f6628cddc3d49a21789453b7a88be81f6b61712"
+  },
+  "tests/workbench/wp11-next/.artifacts/installed-008/installed.json": {
+    "mode": 436,
+    "sha256": "1cadea6c933c41b2baa65eed50a9013bc269731b27a72a32378107eee60af72e"
+  },
+  "tests/workbench/wp11-next/.artifacts/installed-008/new-closure.json": {
+    "mode": 436,
+    "sha256": "aa9e168e0485f432bb038b790f6628cddc3d49a21789453b7a88be81f6b61712"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-001/positive.log": {
+    "mode": 436,
+    "sha256": "cb8e18ace41cd3aa7d10e31e8eafde55314c130899f81d558523cbc51aff906e"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-002/positive.log": {
+    "mode": 436,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-003/positive.log": {
+    "mode": 436,
+    "sha256": "02b0d02f2530fe3c80b392c656601eb87487dbd3ece6e35573ffcd125fae3313"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-004/positive.log": {
+    "mode": 436,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-005/positive.log": {
+    "mode": 436,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-006/installed.log": {
+    "mode": 436,
+    "sha256": "c68b9de23d15e47395dc9c7079f4f839a4502681392df114a1fcba221130742f"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-006/positive.log": {
+    "mode": 436,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-006/scope.log": {
+    "mode": 436,
+    "sha256": "a161d267bca120b60a5349f28c19e17ab556edae0bc59fcd27c72f1434cdfc6b"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-006/static.log": {
+    "mode": 436,
+    "sha256": "09d4803c7209ae1e8d60ae20da1d74d06417bac4b3ad7ebd59230d66e09a83de"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-007/installed.log": {
+    "mode": 436,
+    "sha256": "c68b9de23d15e47395dc9c7079f4f839a4502681392df114a1fcba221130742f"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-007/positive.log": {
+    "mode": 436,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-007/scope.log": {
+    "mode": 436,
+    "sha256": "a161d267bca120b60a5349f28c19e17ab556edae0bc59fcd27c72f1434cdfc6b"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-007/static.log": {
+    "mode": 436,
+    "sha256": "09d4803c7209ae1e8d60ae20da1d74d06417bac4b3ad7ebd59230d66e09a83de"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-008/installed.log": {
+    "mode": 436,
+    "sha256": "c68b9de23d15e47395dc9c7079f4f839a4502681392df114a1fcba221130742f"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-008/positive.log": {
+    "mode": 436,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-008/scope.log": {
+    "mode": 436,
+    "sha256": "a161d267bca120b60a5349f28c19e17ab556edae0bc59fcd27c72f1434cdfc6b"
+  },
+  "tests/workbench/wp11-next/.artifacts/light-008/static.log": {
+    "mode": 436,
+    "sha256": "09d4803c7209ae1e8d60ae20da1d74d06417bac4b3ad7ebd59230d66e09a83de"
+  },
+  "tests/workbench/wp11-next/.artifacts/positive-inputs-001/inputs.json": {
+    "mode": 436,
+    "sha256": "74f5065d1ca42b8d7ef99e18a21579bd974ab7ed5c3a922c00be364e8c14aa55"
+  },
+  "tests/workbench/wp11-next/.artifacts/positive-inputs-001/list-files.log": {
+    "mode": 436,
+    "sha256": "e1c136f7bb47ca241ef5e540de221e39b66734967d4a782dceb95c55889613c4"
+  },
+  "tests/workbench/wp11-next/.artifacts/positive-inputs-001/summary.json": {
+    "mode": 436,
+    "sha256": "6113c908a2084fffe2068d103b55d1996bff38ae6d28e6d5b20ac8f8782812ae"
+  },
+  "tests/workbench/wp11-next/before.json": {
+    "mode": 436,
+    "sha256": "c28d35186efd4ffe82e14f200fd0eb36de1106fb128f4c05a47b4f4691de794f"
+  },
+  "tests/workbench/wp11-next/browser.spec.ts": {
+    "mode": 436,
+    "sha256": "d7debeed012076f899936151eb8fc33a5f2479d15f50775e2c8ab7f03e947030"
+  },
+  "tests/workbench/wp11-next/capture-inputs.mjs": {
+    "mode": 436,
+    "sha256": "cac4ab8da5ac1f87ec6f41ae65b902856a53a9641dd839ccb1309d1acfc3e2c9"
+  },
+  "tests/workbench/wp11-next/check-handoff.mjs": {
+    "mode": 436,
+    "sha256": "dddd5e3e8b8b73f77c273be87e3c64105c1446aca1ef0c9305f759303c305c34"
+  },
+  "tests/workbench/wp11-next/check-inputs.mjs": {
+    "mode": 436,
+    "sha256": "3623d8522786030d8b44de63b458d456594e114e5673ff3a81abb2a18596d165"
+  },
+  "tests/workbench/wp11-next/checks.mjs": {
+    "mode": 436,
+    "sha256": "1ae272dbc139c20fbeae990a8d52997808fe73a9632a43a26636c9f040ad9cb5"
+  },
+  "tests/workbench/wp11-next/client.test.tsx": {
+    "mode": 436,
+    "sha256": "332b79c2197a47fb159bd9a24fa0321a702cd3d3fb88e80612f647b37c99f909"
+  },
+  "tests/workbench/wp11-next/format.mjs": {
+    "mode": 436,
+    "sha256": "8dde5dadfea5984a445da034a9e8f78aad7deb62100e0822e3f080a6502972bc"
+  },
+  "tests/workbench/wp11-next/installed.mjs": {
+    "mode": 436,
+    "sha256": "ca53910e5022a797a566015aa10bab1e9aa3e835189e2edb59d9842c41fdfdde"
+  },
+  "tests/workbench/wp11-next/light.mjs": {
+    "mode": 436,
+    "sha256": "ab47627e5af6f79c843afed438bfd204dae1478ac1b4286f51472d3e216c6dfc"
+  },
+  "tests/workbench/wp11-next/negative/NonSerializablePage.tsx": {
+    "mode": 436,
+    "sha256": "8ddd46d283515f5370fc9b5b8ca3bd636e20e1c9aa96e08207471dbc1adbe359"
+  },
+  "tests/workbench/wp11-next/negative/payload.ts": {
+    "mode": 436,
+    "sha256": "0932781773b042b15cb60e8b24d4ab7d8659c31c3e5623ce536fff34a9a23045"
+  },
+  "tests/workbench/wp11-next/negative/tsconfig.json": {
+    "mode": 436,
+    "sha256": "5b59107835a45ed47e307e213ed827fbed5e7aa0e054168246771d76f87d514a"
+  },
+  "tests/workbench/wp11-next/packed/negative.spec.ts": {
+    "mode": 436,
+    "sha256": "e799bbd0bd51a5320901c160247201746765cd3361a7c951efeec2b1f4217df4"
+  },
+  "tests/workbench/wp11-next/packed/next.config.mjs": {
+    "mode": 436,
+    "sha256": "67bc616a8b7b40d11eb1c9efc8683adbfc4f635785643fbfa718b79cc31e8cad"
+  },
+  "tests/workbench/wp11-next/packed/ordinary.spec.ts": {
+    "mode": 436,
+    "sha256": "6c1b0ce3e6ea5bd10a538f8e331b83f861fca5eb15ec8fcd4fd13c66f11c811b"
+  },
+  "tests/workbench/wp11-next/packed/playwright.config.ts": {
+    "mode": 436,
+    "sha256": "970bf4092ec556e0d975bd0bd308772ef104e45aefd611e0c443f571da308b8d"
+  },
+  "tests/workbench/wp11-next/packed/prepare.mjs": {
+    "mode": 436,
+    "sha256": "67738274e81993a018e52473421215f0ee6e7ee1a8eb6be9b69f9b7e218d1b83"
+  },
+  "tests/workbench/wp11-next/playwright.config.ts": {
+    "mode": 436,
+    "sha256": "fc7e1b5af98903d916af3e9ac994a2b947d28d0629266d8ac88c76923880e2ac"
+  },
+  "tests/workbench/wp11-next/README.md": {
+    "mode": 436,
+    "sha256": "8d6203d61e92ecb884d70123976a4d93006c53c4804025a21756ed7911e25f85"
+  },
+  "tests/workbench/wp11-next/receipts/frozen-install.log": {
+    "mode": 436,
+    "sha256": "9a1ee96df6c360e245b5abe39bfc0daec58f30da6fa717027d8693a4bcd7ee7b"
+  },
+  "tests/workbench/wp11-next/receipts/install-plan.md": {
+    "mode": 436,
+    "sha256": "c409a4e786be13173fbfba1b064166985f1569813e15295e9218c028e5bbdb3a"
+  },
+  "tests/workbench/wp11-next/receipts/installed-inspection.json": {
+    "mode": 436,
+    "sha256": "560699b04ee1c59a3a610c72d9e4298e03f4820c84ba8dd21e0d376d109d533d"
+  },
+  "tests/workbench/wp11-next/receipts/lock-review.json": {
+    "mode": 436,
+    "sha256": "482b49f1f45310c257e79375ea445bf2a3e524fa53126787074e42d9c88c0cb1"
+  },
+  "tests/workbench/wp11-next/scope.mjs": {
+    "mode": 436,
+    "sha256": "8f28e2a995e53adb78c6580d559d13ff273886eb80f65270042a9f88e76ff642"
+  },
+  "tests/workbench/wp11-next/seal.mjs": {
+    "mode": 436,
+    "sha256": "6679532547c7d12b43c7674f69d43689942a2eef82df5bc14afbf9d32e4f82a2"
+  },
+  "tests/workbench/wp11-next/server.test.ts": {
+    "mode": 436,
+    "sha256": "468c7d1a74ce0ba545a177f365b7c71780b7cbac3b17dabd4e7921a869e0d499"
+  },
+  "tests/workbench/wp11-next/source155-after.json": {
+    "mode": 436,
+    "sha256": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837"
+  },
+  "tests/workbench/wp11-next/source155-before.json": {
+    "mode": 436,
+    "sha256": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837"
+  },
+  "tests/workbench/wp11-next/static.mjs": {
+    "mode": 436,
+    "sha256": "25906608c5f20b459a9a4f4bc953f62d862298049d318e923ea53f12fa177d37"
+  },
+  "tests/workbench/wp11-next/types.ts": {
+    "mode": 436,
+    "sha256": "49a48f18c1db435de228bf81cbc3757dcb49f9ee17a644554e1e164cf25ef196"
+  },
+  "tests/workbench/wp11-next/vitest.config.mjs": {
+    "mode": 436,
+    "sha256": "9f42b4488adc83c581fe6a57aa6157842ecac6f4ad9f95c3d8a2b34f084fce31"
+  }
+}

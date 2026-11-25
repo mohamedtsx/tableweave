@@ -1,0 +1,7 @@
+{
+  "inputs": 1728,
+  "sha256": "74f5065d1ca42b8d7ef99e18a21579bd974ab7ed5c3a922c00be364e8c14aa55",
+  "typescript": "6.0.3",
+  "node": "v24.22.0",
+  "kind": "positive compiler inputs and explicit declaration/manifest/own-source inspection; no module/runtime proof"
+}

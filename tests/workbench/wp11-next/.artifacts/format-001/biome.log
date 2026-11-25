@@ -1,0 +1,54 @@
+tests/workbench/wp11-next/static.mjs:88:48 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    86 │     if (specifier.startsWith(".")) {
+    87 │       let resolved = path.normalize(path.join(path.dirname(file), specifier));
+  > 88 │       if (resolved.endsWith(".js")) resolved = resolved.slice(0, -3) + ".ts";
+       │                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    89 │       assert(fs.existsSync(resolved), `Missing static graph edge ${resolved}`);
+    90 │       walk(resolved);
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+     86  86 │       if (specifier.startsWith(".")) {
+     87  87 │         let resolved = path.normalize(path.join(path.dirname(file), specifier));
+     88     │ - ······if·(resolved.endsWith(".js"))·resolved·=·resolved.slice(0,·-3)·+·".ts";
+         88 │ + ······if·(resolved.endsWith(".js"))·resolved·=·`${resolved.slice(0,·-3)}.ts`;
+     89  89 │         assert(fs.existsSync(resolved), `Missing static graph edge ${resolved}`);
+     90  90 │         walk(resolved);
+  
+
+apps/example-next/app/ClientDataTableBoundary.tsx:58:7 lint/a11y/useAriaPropsSupportedByRole ━━━━━━━━━━
+
+  × The ARIA attribute 'aria-label' is not supported by this element.
+  
+    56 │         </a>
+    57 │       </header>
+  > 58 │       <div
+       │       ^^^^
+  > 59 │         className="my-5 flex flex-wrap items-center gap-2"
+  > 60 │         aria-label="Example source controls"
+  > 61 │       >
+       │       ^
+    62 │         <Button
+    63 │           variant="secondary"
+  
+  i Assistive technologies may ignore an ARIA attribute that the role of the element does not support, or report incorrect information to the user.
+  
+  i Remove the attribute, or use a role that supports it.
+  
+
+Skipped 1 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 34 files in 35ms. Fixed 29 files.
+Found 1 error.
+Found 1 info.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

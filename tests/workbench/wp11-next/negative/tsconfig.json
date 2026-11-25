@@ -1,0 +1,5 @@
+{
+  "extends": "../../../../apps/example-next/tsconfig.light.json",
+  "include": ["./payload.ts"],
+  "exclude": []
+}
