@@ -431,6 +431,21 @@ what freed SSD capacity. The interrupted relocation modal had no answer/authorit
 no relocation is needed for the remaining small source checks. Resume only the
 unfinished WP-13 format/LIGHT/pin/seal steps under the existing lease and capacity
 floor. No completed source work/rebaseline or runtime/build/install is repeated.
+WP-13 recovery writer releases a sealed provisional source handoff. Main reads the
+CLI/protocol/matrix, all seven helpers/three family adapters, fixtures/adversaries/
+evidence procedures and passes own source TS6/static/1,179-pin/137 exact-file-set
+seal checks. Original sealca6706bd… and pined301613… match; all2,286 old inputs,
+canonical155/14 initial installed inputs match with only main TASKS drift. MJS
+remains untyped and no production helper/CLI/test/build/install/consumer executes.
+Review30n1 records the explicit family-runtime implementation holds; this producer
+is preservable, not complete WP-13 delivery or package G-05 acceptance. Main will
+preserve it before assigning remaining runtime-runner source authoring, without
+turning the final execution gate into permission to skip required fixture source.
+Main's integrated documentation replay passes282 Markdown/1,017 links and19
+checker regressions; current whitespace passes. Preserve the original WP-13
+source/evidence before the next exact source lease; current full runtime, helpers,
+tar parsing, filesystem adversaries, archive installs and independent results stay
+unrun. The source handoff cannot approve a new public output generation.
 
 ## Current WP-10 implementation handoff
 

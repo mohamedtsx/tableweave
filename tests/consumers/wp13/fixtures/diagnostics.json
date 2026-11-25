@@ -1,0 +1,48 @@
+{
+  "status": "authored-unverified",
+  "meaning": "Offsets are authored expectations, not executed negative proof. Main reviews this ledger digest. Actual final mismatch stays red; never accept unrelated unresolved dependencies or infer expectations from arbitrary failure output.",
+  "cases": [
+    {
+      "id": "absent-use-tableweave",
+      "kind": "semantic",
+      "fixture": "headless.ts",
+      "code": "import { useTableweave } from \"@tableweave/react\"; export { useTableweave };",
+      "diagnostics": [{ "code": 2305, "line": 1, "column": 10 }]
+    },
+    {
+      "id": "number-operand",
+      "kind": "semantic",
+      "fixture": "headless.ts",
+      "code": "export const invalidNumber: Rule = { id: \"bad\", field: \"amount\", operator: \"number.eq\", value: \"wrong\" };",
+      "diagnostics": [{ "code": 2322, "line": 1, "column": 14 }]
+    },
+    {
+      "id": "record-field",
+      "kind": "semantic",
+      "fixture": "headless.ts",
+      "code": "export function invalidField(row: Row) { return row.missing; }",
+      "diagnostics": [{ "code": 2339, "line": 1, "column": 51 }]
+    },
+    {
+      "id": "private-export",
+      "kind": "private-path",
+      "fixture": "headless.ts",
+      "code": "import { createQuery as privateQuery } from \"@tableweave/react/src/contracts/index.js\"; export { privateQuery };",
+      "diagnostics": [{ "code": 2307, "line": 1, "column": 44 }]
+    },
+    {
+      "id": "missing-facade-model",
+      "kind": "semantic",
+      "fixture": "styled.tsx",
+      "code": "export const invalidStyled: DataTableProps<typeof schema, Row> = {};",
+      "diagnostics": [{ "code": 2741, "line": 1, "column": 14 }]
+    },
+    {
+      "id": "helper-ui-type",
+      "kind": "semantic",
+      "fixture": "reordering-controller.ts",
+      "code": "export const invalidUI: ReorderUIMetadata = { version: {}, joined: \"yes\", pending: false };",
+      "diagnostics": [{ "code": 2322, "line": 1, "column": 57 }]
+    }
+  ]
+}

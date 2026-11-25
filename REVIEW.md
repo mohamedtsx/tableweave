@@ -10,6 +10,28 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## WP-13 source intake — review session 30 (provisional)
+
+Main reads the CLI/protocol/matrix, all seven production helpers, three family
+adapters, positive/negative fixtures, filesystem adversaries and evidence procedures.
+Own static/positive TS6 and pin/seal checks pass:137 exact current files with modes/
+sizes/hashes,1,179 pinned inputs/1,128 program files,2,286 prior regular inputs,
+canonical155 and14 initial installed inputs unchanged except main TASKS bookkeeping.
+Current source sealca6706bd… /pined301613… remain separate from all historical
+producer/generation identities. MJS is untyped; no helper/CLI/runtime/unit/install/
+build/pack/framework/consumer/negative/dual invocation is included in these results.
+
+### n1 — Family-runtime phases are explicit holds, not delivered runtime runners
+
+All three adapters unconditionally throw E_HOLD from runtime. That is honest fail-
+closed behavior, but the required Vite/Next/Start ordinary-archive observation lane
+is not authored here yet. A source handoff can be preserved provisionally; complete
+WP-13 implementation/AC-26/27 cannot be inferred from family staging/build source.
+Keep these original bytes/seal, then separately allocate actual bounded family
+HTTP/browser/Flight/stream runners using current public example protocols. Authoring
+can proceed without running them; all native/capacity/lock/profile/browser/execution
+selection remains a final prerequisite. No hold or missing runner counts as a pass.
+
 ## WP-01 — review session 1
 
 **Closed:** the maintainer ended this review and accepted TASK-003 / WP-01 on

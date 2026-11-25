@@ -1,0 +1,42 @@
+{
+  "id": "rac-runtime",
+  "profileId": "rac-1.22.1-table-clone-v1",
+  "status": "explicit-private-candidate-unrun",
+  "selector": "react-aria-components@1.22.1",
+  "archivePrefix": "package/compat/rac-table-clone/",
+  "assets": [
+    "runtime.patch",
+    "profile.json",
+    "verify.mjs",
+    "README.md",
+    "NOTICE-RAC",
+    "LICENSE-APACHE-2.0"
+  ],
+  "companions": {
+    "runtime.patch": "f3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35",
+    "verify.mjs": "edb10823e1abc6801905641c8a90fce59a72f4eb5dc2fca0250899ccb556c95b",
+    "README.md": "bd2c78e6ef2168f7f62c8f2a42cdb703a67a08107c89af1551a5a2da02dc8671",
+    "NOTICE-RAC": "f8a0dd6c0c050362918b561b015b11e9d95412e655e5af263e5c88134d68dfdb",
+    "LICENSE-APACHE-2.0": "7dfe6526888bac51759c99f9a51262ba2711a8c12a067f2181609dd9a4066b84"
+  },
+  "runtimeFiles": [
+    {
+      "path": "dist/private/Table.js",
+      "before": "93ef6ab34eb5da85006dc7615e76d2e52eb506114cb0a8a71d0a0f13f7f5152d",
+      "after": "4cbd2a4ba6e9a7e74082c497f3ec0c596c2048fb7d5f30c6e64176374091eacd"
+    },
+    {
+      "path": "dist/private/Table.mjs",
+      "before": "aa49fcfc87cc494b97c6e77eb79e79b9dec6d13de9a0090ae249ee7683d32623",
+      "after": "22edf3fc5423744d2682beadddac018332431bb3e9ebb33c8335d12c776035b6"
+    },
+    {
+      "path": "dist/private/Table.cjs",
+      "before": "ba44d79b191776374c4fdf998a38e8af4dd323665f3191627dca37f7400aa4cf",
+      "after": "dc263287e3d9b966416c47818f3adbb7d6d058ce24ffde6b90b183dacbb28ead"
+    }
+  ],
+  "registration": "main manually stages six bytes from the actual inspected archive and exact reviewed frozen workspace config before install; NEVER automatic",
+  "declarations": "do not stack root declaration patch under the same selector; ordinary declarations remain independent",
+  "independence": "separate consumer/store, package-import-method=copy; verify ordinary before bytes still unchanged"
+}

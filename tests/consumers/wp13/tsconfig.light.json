@@ -1,0 +1,49 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "incremental": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["node", "react", "react-dom"],
+    "paths": {
+      "@tableweave/react": ["../../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../../packages/react/src/filters/index.ts"
+      ],
+      "@tableweave/react/criteria": [
+        "../../../packages/react/src/criteria/index.ts"
+      ],
+      "@tableweave/react/reordering": [
+        "../../../packages/react/src/reordering/index.ts"
+      ],
+      "@tableweave/react/reordering-controller": [
+        "../../../packages/react/src/reordering-controller/index.ts"
+      ],
+      "@tableweave/heroui": ["../../../packages/heroui/src/index.ts"],
+      "@heroui/react/*": [
+        "../../../apps/example-next/node_modules/@heroui/react/dist/components/*/index.d.ts"
+      ],
+      "@tanstack/react-table": [
+        "../../../apps/example-next/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ],
+      "@internationalized/date": [
+        "../../../apps/example-next/node_modules/@internationalized/date"
+      ],
+      "react-aria-components/I18nProvider": [
+        "../../../apps/example-next/node_modules/react-aria-components/dist/types/exports/I18nProvider.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "fixtures/headless.ts",
+    "fixtures/styled.tsx",
+    "fixtures/reordering-controller.ts"
+  ],
+  "exclude": ["evidence", "node_modules"]
+}

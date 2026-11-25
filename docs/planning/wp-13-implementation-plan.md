@@ -113,3 +113,18 @@ syntax/positive TS6/full-format/seal evidence plus final-only commands/holds for
 provisional handoff. Main reviews/replays before preservation; no self-approval,
 stable/MIT-rightsholder invention, publication/deployment/merge. WP-14 fixed-runner
 and WP-15 real-consumer inputs remain separate/user-deferred.
+
+## Provisional source intake and remaining implementation
+
+The [actual driver handoff](../../tests/consumers/wp13/README.md) is sealed as137
+filesca6706bd…; main independently reads all helpers/family adapters and passes
+strict positive source TS6/static/exact-file-set/hash/mode/size/seal and1,179-input
+pin verification. All2,286 prior files,155 libraries/14 initially inspected installed
+inputs match with only coordinator TASKS drift. Pins describe their actual later
+capture time, not a retroactive whole-installed-tree baseline. No MJS semantic,
+unit/CLI/helper/config/runtime/build/archive/install/consumer proof follows.
+
+Review30n1 identifies the three runtime methods as unconditional explicit holds.
+This avoids fabricated passes but leaves required ordinary-family runner source
+unfinished. Preserve this bounded producer before a distinct remaining-authoring
+lease; no full WP-13 acceptance or automatic final-phase execution is granted.
