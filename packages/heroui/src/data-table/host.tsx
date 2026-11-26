@@ -427,7 +427,6 @@ const Surface = memo(
           .join(" ")}
         dir={ports.locale?.direction}
       >
-        {ports.reordering ? <TableReorderingHost target={target} /> : null}
         <div
           className="tw-data-table"
           hidden={status !== "ready"}
@@ -435,6 +434,7 @@ const Surface = memo(
         >
           <CommittedShell host={host} target={target} />
         </div>
+        {ports.reordering ? <TableReorderingHost target={target} /> : null}
         <DataTableState target={target} />
         {accessory ? (
           <RecordDetails

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grouped columns integration fixture</title>
+    <link rel="stylesheet" href="/apps/storybook/src/styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import { mountGroupedDataTable } from "./fixtures.tsx";
+      const root = document.getElementById("root");
+      if (!root) throw new Error("Fixture root missing");
+      const fixture = mountGroupedDataTable(root, {
+        deferred: new URLSearchParams(location.search).has("deferred"),
+      });
+      window.addEventListener("pagehide", () => fixture.dispose(), { once: true });
+    </script>
+  </body>
+</html>
