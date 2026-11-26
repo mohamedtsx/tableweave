@@ -15,7 +15,16 @@
       "@tableweave/react/filters": [
         "../../packages/react/dist/filters/index.d.ts"
       ],
+      "@tableweave/react/reordering": [
+        "../../packages/react/dist/reordering/index.d.ts"
+      ],
+      "@tableweave/react/reordering-controller": [
+        "../../packages/react/dist/reordering-controller/index.d.ts"
+      ],
       "@tableweave/heroui": ["../../packages/heroui/dist/index.d.ts"],
+      "@heroui/react/button": [
+        "./node_modules/@heroui/react/dist/components/button/index.d.ts"
+      ],
       "react-aria-components/I18nProvider": [
         "./node_modules/react-aria-components/dist/types/exports/I18nProvider.d.ts"
       ]
