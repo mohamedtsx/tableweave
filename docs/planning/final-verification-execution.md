@@ -7,6 +7,13 @@ before actual exact-candidate results and independent review.
 
 ## Source frame and first commands
 
+**Current continuation:** the user's subsequent **make it ready** selects the
+[development Storybook lane](storybook-readiness-plan.md), recorded in TASKS and
+review54. It reuses already installed pinned development dependencies, not a new
+frozen-producer installation. The historical source frame/selections below remain
+exact history. Current dirty app/config/harness fixes and new actual build/browser
+results must not be represented as clean source52d165f, ordinary archives or CI.
+
 Primary feat/wp-15-integrated contains WP-14 originalf60df08/correction587d140 and
 WP-15 transported0bc3877/c837b32 (original isolatedcb4de1c/bd2cec0). Library155,
 manifests/lock/profiles/CURRENTfc01 and all historical maps remain unchanged.

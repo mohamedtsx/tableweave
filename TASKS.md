@@ -2,6 +2,590 @@
 
 ## Live summary — later entries supersede earlier chronology
 
+## Current priority — make Storybook demo-ready
+
+### Resume checkpoint — latest state
+
+- User now authorizes **focused commits and a PR targeting develop**. This supersedes
+  the earlier Git-publication hold only; no merge, deployment, npm publication,
+  dependency installation, drag activation or readiness waiver is authorized.
+  Main owns staging/commits/push/PR. Preserve existing packet branches/PRs and all
+  failed evidence. The integration branch includes153 commits beyond origin/develop
+  before these focused commits, so the requested PR is cumulative and remains draft.
+- Query-safe producer source delta is independently approved through review003,
+  with strict source noEmit/Biome passes. Runtime and application consumer are NOT
+  accepted/implemented as a combined flow. Grouped source-browser001 is0/5 after a
+  harness CommonJS startup failure, not a measured column-behavior result.
+- User-requested dev preview remains live on6006 using emission005. It does not
+  include newer admission/grouped source. HTTP200/index53 entries are confirmed,
+  not53 passing stories. Current commits/PR preserve these limitations.
+- Pre-commit recheck: strict source noEmit passes; docs structure302 Markdown/
+  1,196 links and checker19/19 pass; diff whitespace passes. Scoped Biome33 files
+  initially flags only new Storybook node:fs/node:module import ordering; main
+  corrects that ordering without a runtime/config-behavior change. The grouped
+  host's pre-existing import-order finding remains outside that scoped full check.
+  Corrected scoped Biome replay passes all33 selected files. Main selects9 focused
+  commits: criteria/controller provenance, resource metadata/context reuse, emitted
+  Storybook config, interactive examples, owner diagnostic, query-safe producer/
+  fixtures/contract, grouped host/fixtures, catalog harness, and current handoff docs.
+  No new emission or runtime acceptance is inferred from this Git handoff.
+- Full frozen build008 catalog inventory: **43/63 PASS,20 FAIL**. All53 story IDs
+  exist. Last selected safety suite: **335/338 PASS,3 attributed original failures**;
+  not a green full suite. JSX/role/recovery/play fixes await a new current build.
+- Subsequent app-only build009 verifies all3 details stories, all5 unchanged
+  viewport checks and owner diagnostic; build010's light/dark/RTL/details-keyboard
+  axe checks all4 pass. Focused owner-contract tests3/3 pass. These use frozen
+  emission005, not the active admission/grouped source; no combined pass inferred.
+- User explicitly chose **full query-safe manual flow**. Revised F1–F4 contract is
+  independently approved; implementation/runtime are not. Producer owns only
+  reordering-controller admission/types and new query-safe fixture/spec. App consumer
+  waits for producer intake. Pure Stage1, renderer/native/vendor stay unchanged.
+- Certificate-interrupted producer/owner-diagnostic workers had made no source
+  edits. User says resume; same leases retried once without TLS bypass. The owner
+  diagnostic lease owns only shared/schemas.ts helper plus new focused test.
+- Grouped-column disabled readiness has a separate read-only diagnostic owner;
+  no column renderer/native correction is authorized yet. Config/recovery writers
+  are released; their source-only handoffs do not establish runtime readiness.
+- Main owns test configs/registration, exact source frames, execution, docs and Git.
+  Keep drag blocked; no install, patch registration, frozen-producer bootstrap,
+  publication, deployment, merge, old-work cleanup or evidence rebaseline.
+
+Chronology below retains exact attempts, failures, selections and receipt identities.
+
+The user explicitly says **make it ready** after the catalog-readiness status.
+Main prioritizes docs/planning/storybook-readiness-plan.md: actual emitted library
+build + Storybook build/index/plays/browser review and bounded fixes, keeping drag
+blocked. Existing exact primary development dependencies are present, so NO new
+install/patch application is needed for this lane. The interrupted frozen-install
+modal remains unanswered; cand001's verified genuine producer stays uninstalled/
+unchanged. Existing private development-profile results are NOT ordinary/packed proof.
+Main may create only new cand001 run/storybook-ready home/output/evidence paths and
+currently absent primary react/heroui dist; cache/native/browser inputs must be
+inspected before execution and no downloads/fallbacks occur. Read-only preparation
+helper only; concrete failures precede source writer allocation. No deploy/publish.
+First selected emission uses the unchanged strict package recipes directly with
+owned Node: actual installed TS6 bin/tsc for react, then Heroui, then existing
+copy-styles.mjs. This avoids unnecessary deletion and pnpm workspace-cache writes.
+Both primary dist roots are absent before this attempt; new actual outputs only.
+Fresh private cand001/run/storybook-ready/home and library-build-001 raw receipts
+are allocated on HDD. No frozen producer install/new patch/route/framework action.
+First development emission passes all3 commands once,298 emitted files and complete
+CSS closure; source/current1,199 installed pins unchanged. Receiptab7cb19d… at
+cand001/run/storybook-ready/library-build-001. This is current development emission,
+not a re-signed historicalfc01 generation or ordinary/fresh-producer proof.
+Read-only helper identifies supported installed CACHE_DIR/Playwright transform-cache
+redirection and pinned native/Chromium payloads. Main selects actual existing
+Storybook build to new build-001/static with HDD CACHE_DIR, plus actual app noEmit
+typecheck to separate typecheck-001. No config aliases/vendor/dependency change.
+Actual first build fails unresolved public @heroui/react/button from the off-app
+shared detail module. Actual app typecheck reports that import, two missing emitted
+reordering mappings and two generic P/authority assignments. Both raw failures and
+298 library outputs remain preserved. Main selects exactly3 source corrections:
+app-vendor public Button resolution, emitted declaration mappings retaining all
+old targets, and explicit createCriteriaPublication<S> in shared owner (erased type
+annotation, no casts/lifetime/authority rewrite). Three preimages in correction-001.
+No vendor/library/dependency/exports or compiler strictness change. Replay only
+actual build/typecheck to NEW002 outputs/cache roots after scoped format checking.
+Typecheck002 passes. Build002 is preserved RED: Storybook's config loader resolves
+Button to its declaration file, and esbuild attempts to execute that .d.ts. Main
+updates only .storybook/main.ts runtime aliases to derive public ESM targets from
+the installed package export metadata (including I18nProvider's public wildcard),
+not TypeScript declaration-path resolution; add matching emitted reordering JS
+entries for the shared callers. No externals, source aliases, vendor changes or
+error suppression. Replay build/typecheck003 with new output/cache after formatting.
+Typecheck003 passes; build003 preserves a react-docgen Babel traversal stack overflow
+in emitted non-component reordering-binding.js. This catalog has no Docs addon and
+uses story args, so main disables only optional automatic reactDocgen through its
+supported config option; all actual app/package typechecks and story assertions stay
+enabled. No vendor/renderer/source-contract change. Build/typecheck004 are selected
+with fresh outputs/cache; old three failed build receipts remain exact.
+One source worker may author only new tests/workbench/wp11-storybook-ready/** for
+real static-catalog browser coverage (reuse old33+5 assertions unchanged, add20legacy
+stories/all actual play completion, live CDP version and focused responsive/a11y
+checks). No process/build/test/Git/dependency or old-source edits by that writer.
+Build004 passes and actual generated index contains53 stories/33 WP-11 entries;
+typecheck004 passes with original strict options. Both retain unchanged source/
+1,199 pins/native payloads/298 emitted files. Receipts508425ac… and3e56feee… live
+in the new HDD build/typecheck004 roots; all failed001–003 remain untouched.
+Main selects one real Chromium default-story visual diagnostic on loopback6570,
+with own temporary static server/exact pinned existing headless1255, then the new
+authored complete-catalog harness after review. No download/source-runtime alias/
+ordinary/fresh-producer or full-library acceptance follows from a static build.
+Default Chromium diagnostic passes real DOM marker, zero page/console/network
+errors,1440px overflow check; actual browser/CDP is159.0.8154.6. Source-only harness
+review completed; main selects browser-001 against build004, all63 registered cases
+with max-failures3 for first diagnostics. Unreached cases remain UNRUN. Browser/
+server outputs only new HDD run/cache paths; no install or library changes.
+Browser001: actual index+default PASS,3 failures,58 not run. Configured and builder
+stories remain Preparing with an unconnected source notice; field-ownership play
+asserts visibility while Aria's mounted collection is still hidden. Main selects
+only async visible-state waiting for that actual option, retaining owner exclusions.
+One worker owns only Workbench.tsx investigation/minimal application-lifetime fix
+and optional new owner regression test; no library/vendor/manifest/source-contract
+edits or runtime by worker. All browser001 traces/diagnostics remain immutable.
+Main separately selects browser002 against unchanged build004 for the20 legacy
+stories only (grep "legacy render", max-failures3). This isolates existing focused
+catalog behavior while the configured-source issue is investigated. No retries,
+acceptance skips, config changes or dependency actions; unselected cases stay UNRUN.
+Browser002 passes all20 legacy stories, including14 authored plays and6 render-only
+scenes with real DOM checks; zero captured page/console/HTTP/request errors. This
+does not cover configured WP-11 stories. Main selects bounded real static-server
+protocol proof (GET/HEAD/index, method/traversal/missing rejection, exact-port bind
+failure and own-process cleanup), new server-protocol-001 receipts only.
+Static server passes13 actual protocol/bind/cleanup checks. Read-only owner trace
+review finds configured source eventually connects and storyFinished succeeds;
+no Workbench/library lifetime change is justified. Main selects isolated diagnostic
+002 for fully-configured and builder-all-any with timestamped real DOM/framework
+observations (30s diagnostic window, no reclassification of original10s failure).
+Diagnostic002 observes real configured story success at17.9s, with a17s main-thread
+observation gap; builder changes All then Any but incurs further10–18s gaps. No
+page/console errors or permanent connection stall is established. Independent
+three-file build correction review approves scoped config/erased generic changes,
+not catalog readiness. Main selects one actual Chromium CPU diagnostic of the
+unchanged build004 fully-configured startup to NEW diagnostic003: real profiler
+samples only, no benchmark/G-02 result, no timeout-only acceptance workaround.
+Workbench writer lease is released with no changes: real factory owners/lifetimes
+remain intact. A single read-only helper now diagnoses the library validation call
+path from CPU samples/source and proposes a bounded correction; no library source
+writer/runtime authority is allocated yet. Independent three-file build reviewer
+is released after scoped approval, not whole-catalog approval.
+Scoped formatting10 files and diff whitespace pass. First current docs check finds
+the new harness README unreachable;4/19 checker probes fail from that same missing
+navigation link. Main adds the readiness-plan link, preserving checker requirements
+and runs no runtime fallback. Affected documentation checks are selected for replay.
+Corrected docs structural check passes301 Markdown/1192 local links; all19 checker
+regression probes pass. The earlier unreachable-link failure remains recorded above.
+No runtime/library closure is implied by documentation or formatting passes.
+CPU call-path review identifies repeated parsing of exact factory-owned immutable
+metadata, not a loop or lifetime defect. Main selects the explicit two-path library
+correction in storybook-readiness-plan.md: criteria.ts only plus NEW publication-
+metadata regression tests. Reuse provenance/shape only; preserve every live reader,
+controller callback/order/receiver and scope/access/epoch/definition guard. No raw/
+proxy/frozen-object trust, membership/permission cache or guard suppression. One
+writer, source-only; other154 library bodies/manifests/exports/vendor stay unchanged.
+Actual tests/re-emission/browser replay remain main's separately selected phases.
+Main prepares (does not yet execute) an external source-unit config inheriting the
+existing renderer-commit aliases/guards and selecting complete authority/publication/
+frame/frame-react/commit/renderer-commit/collection suites. Only cache/reports go to
+new HDD units-NNN; automatic JSX matches the already corrected TSX pipeline. Two
+existing frame-fixture contract/resource mappings remain explicit source-unit
+aliases; the inherited guard rejects every other dist load. This is never ordinary/
+emitted proof and imports no old scope script as a CLI. Runtime waits for handoff.
+All298 first-emission files are now byte/mode-preserving NEW HDD copies (1,594,459
+bytes), originals retained; receipt4747b3b5… at library-emission-preimage-001.
+The historical1199-pin set includes criteria.ts: after the bounded correction it
+must report exactly that intentional source deviation, not pretend1199 unchanged
+or modify/re-sign old input maps. New replay collectors must bind the independently
+reviewed exact correction hash and require the remaining1198 pins/other154 library
+bodies unchanged. Historical producer/seals/genuine52d165f clone stay untouched.
+Writer hands off criteria.ts d0460c25… and10 authored metadata safety cases
+e80b9eb7…; source-only TS/Biome pass,154 other library bodies unchanged. Main's
+two-path source review accepts exact provenance/immutable-shape reuse and retained
+live checks, not runtime/speed acceptance. Main selects units001 using the prepared
+external source-unit config, one worker/retries0,300s deadline, raw outputs on HDD.
+Independent reviewer may read only the immutable two-path correction/P provenance
+and new exact candidate frame; no runtime/source changes by reviewer yet.
+Units001 preserves RED:251 tests pass (including10 new metadata cases and56 existing
+authority cases),1 legacy AST-characterization test fails on an unchanged native
+reordering spread, and6 suites fail to load due omitted emitted reordering/React
+JSX-runtime resolution in the NEW external config. No permission failure or module
+cycle failure is reported. Main adds only actual public source reordering and
+declaring-app JSX-runtime mappings in that external config, retaining the dist-load
+guard and every legacy assertion. Units002 selected; all001 failures remain exact.
+Units002 loads all20 suites:277/280 tests pass,3 fail (two existing criteria-cell
+cases and the unchanged native AST characterization). All10 new authority cases
+and56 old authority cases pass; no tests skipped. To attribute, main selects a
+separate baseline001 source-unit run with ONLY the exact preserved original
+criteria.ts body supplied by a checked Vite load hook. Every other source, test,
+guard, callback and config stays identical. This is explicit original-body baseline
+attribution, not current-candidate/consumer proof, a permission mock or a retry.
+Primary source is not reverted; failures and original body remain untouched.
+Baseline001 reproduces the exact same277/280 pass/3 failures with original criteria
+body. No new failed test/suite is attributable to the metadata correction; all old
+failures remain OPEN, not waived or marked passed. Independent two-file source
+review approves live-check/descriptor/callback preservation; no speed/runtime/catalog
+approval yet. Main binds the candidate-frame digest00449bc0… in the new collector.
+Main now selects strict emission002 (old298 outputs already preserved), real app
+build005 and typecheck005 against the new explicit primary source correction.
+No other154 library source, lock, vendor, producer clone or historical maps change.
+Strict emission002 passes3 commands/298 files/CSS closure; build005 passes53-story
+index and typecheck005 passes. Receipts5c44ee8e…/398bfb0c…/727b2a66… bind the new
+exact source frame,1198 unchanged old pins/154 other sources/8 native payloads.
+Baseline attribution compares all280 per-file ordinal/name/status entries (names
+alone repeat for parameterized cases); matches277PASS/3FAIL exactly, no rerun.
+Main selects diagnostic004 actual configured startup profile against build005,
+then browser003 all63 cases/max-failures3 using original10s completion assertions.
+No timeout increase, rule disabling, story skip or baseline reclassification.
+Diagnostic004 observes configured story success4.945s (previous17.9s); CPU sample
+duration5.16s (previous18.68s), not a benchmark/latency-gate result. Browser003 passes
+7 cases, fails3,53 unrun: builder's multi-transition play exceeds10s; AsyncOptions
+cannot find Retry options; selected-across-pages initial remote view exceeds the
+window. No timeout waiver. Main selects remote CPU diagnostic005 on frozen build005
+and one read-only remaining-cost planner. A separate worker may fix ONLY the actual
+async-options app scenario in Workbench.tsx/shared options.ts plus NEW focused
+regression tests; no public/library/manifest/vendor/guard changes or worker runtime.
+Remote diagnostic005 is preserved RED: screenshot exceeds30s before its collector
+saves the CPU profile. No product pass or root cause follows from that failed
+collection. Main selects diagnostic006 CPU-only collection, saving observations/
+profile without a screenshot dependency. This corrects only the external diagnostic
+collector; no runtime/source retry fallback or story-timeout acceptance change.
+Async-options source diagnosis finds a real duplicate numeric-source lease in
+Workbench; remove only the competing app connect/cleanup and retain builder's
+exclusive lifetime. Workbench733570e7…; options/story assertions unchanged. Source
+TS/format/lint pass; pre-existing import-order check fails, pending main cleanup.
+Remote diagnostic006 captures81.41s CPU with19.01s descriptor self cost/6.86s
+CriteriaCapture.descriptor self cost. Main selects the second bounded allocation
+in storybook-readiness-plan.md: two disjoint source writers for neutral genuine-C
+method references and exact-owned server metadata parsing. No Criteria→TanStack/
+React import, permission/membership cache, callback suppression, record inspection,
+raw-input shortcut, generic captureSource change or timeout waiver. Runtime remains
+main-selected after exact source review; all old baselines/producer/seals preserved.
+Main reviews the one-block option-lifetime correction and organizes only named
+imports in the now-owned Workbench file; module import order and runtime code stay
+the same. New harness appearance cases now require both native table element AND
+the actual interactive grid role/name observed in real configured DOM, rather than
+incorrectly expecting a noninteractive table role. No axe rule/test suppression.
+Controller-method writer hands off3 source paths/13 new safety cases, source-only
+TS/Biome pass, runtime unrun. Main verifies the reported original store SHA089206a4…
+against the actual task-start source map: exact match. The earlier7eb… shorthand was
+a Git revision, not a conflicting store content hash; no source drift is implied.
+One independent reviewer may inspect only this immutable correction, neutral import
+graph, public-export exclusion and the separate option/harness corrections while
+the server-metadata writer finishes; no runtime/source writes by reviewer.
+All298 emission002 files also have a new byte/mode-preserving HDD evidence copy
+(1,595,382 bytes, receipt153b0974…), original current outputs retained until replay.
+Both source writers are released. Main reviews server metadata's minimal private
+inspectOwned delta and unchanged scalar/descriptor comparisons, raw parser and
+reader/controller/operation fences;19 authored safety cases remain runtime-unrun.
+Independent controller/option review approves its scoped source corrections; main
+now selects NEW combined frame002 with exactly3 old source deviations,1 new neutral
+module,152 unchanged original bodies (156 total),1196 unchanged historical pins,
+and all3 new regression files. No old frame/seal/producer changes. Units003 across
+the complete selected suites is authorized only after that exact frame is bound;
+one independent reviewer may inspect the immutable server correction concurrently.
+Combined units003 executes312 tests:309PASS/3FAIL/no pending; all32 added method/
+owned-resource cases pass, with the same3 pre-existing failures as prior280 baseline.
+Main selects strict emission003 (expected300 outputs for one new internal module),
+actual Storybook build006/index and app typecheck006 against frameb9c6c8cb…;
+all named source/app/harness/old-pin/native identities must remain exact.
+Emission003 passes all3 commands/300 outputs/CSS closure; build006 indexes53 actual
+stories and typecheck006 passes. Receipts5dbce513…/69412108…/5dafd8c5… retain exact
+combined frame/source/pin/native identities. Independent B source review approves
+its lexical closed-metadata proof and retained fences; no speed/catalog approval.
+Main selects browser004 all63 cases against build006, max-failures3, unchanged10s
+completion assertions, retries0/workers1 and new HDD outputs/cache only.
+Browser004:8PASS/3FAIL/52 unrun. Actual AsyncOptions now passes Retry/numeric0,
+closing its concrete runtime defect. Builder/selection whole-play completion still
+exceeds10s; remote initial remains slow. No timeout waiver or catalog pass claimed.
+Main selects the third explicit ownership-only hot-path allocation in the readiness
+plan: frame client checks only for exact P-origin context; server source.check only
+for actual fresh registered-adapter metadata; raw/unknown paths keep every fence.
+Separate example-owner writer supplies that genuine immutable context for client
+source only, preserving expected/app context and P-first actual revocation. Both
+writers source-only; main runtime waits for exact handoff/review/new frame003.
+Both third-allocation writers hand off source-only passing checks (16 appended
+frame cases and6 example-context cases). Main review catches an example availability
+regression before runtime: original source.context encoded access:live, so a saved
+origin context cannot be supplied when live=false. Main selects a minimal correction
+to use captured context ONLY while live, retaining the original denied context on
+disconnect/revoke; new authored tests must verify denial and reconnect restoration.
+No old test is weakened and no runtime pass is claimed for the rejected preflight.
+Corrected owner226d2d53…/six cases93e7bb32… preserve access:live denial when inactive
+and exact captured-context identity only while live. Source-only TS/Biome pass;
+all writers released. Main binds NEW frame003 SHA2094d625… (same3 old source
+deviations/1 new module/152 unchanged originals/1196 unchanged pins),35 owned-
+resource cases and6 example-context cases. Original19 resource cases are an exact
+byte prefix. Main selects units004 including the new context test, then strict
+emission004/build007/typecheck007 only after actual unit attribution. Independent
+source review may examine the final frame/app corrections; no reviewer runtime yet.
+All300 emission003 files have new preserved HDD copies, receiptcdd5d3f3…;
+no original output or historical source/evidence is removed or re-signed.
+Units004:331/334 pass,3 same pre-existing failures/no pending. All312 previous
+per-file ordinal/name/status entries match, and22 new frame/context cases pass,
+including inactive source denial and reconnect/P-first revoke. This is not a green
+whole suite; baseline failures stay OPEN. Main selects emission004/build007/
+typecheck007 using exact frame003, then browser005 all63/max-failures3, original
+completion windows/no story skip. No source writer active or dependency action.
+Emission004/build007/typecheck007 pass (300 outputs/53 stories); receiptsa9ddeb38…/
+ce7b9b18…/5b069070…. Third source review approves exact ownership and inactive denial.
+Browser005:12PASS/3FAIL/48 unrun. Builder All/Any and selection lifetime now pass
+unchanged windows; configured story2.6s. Remaining failures: remote selected-pages
+still stalls, sort play cannot find its action, and manual reorder fixture is
+unavailable. Main selects CPU-only remote diagnostic007 against frozen build007;
+local sort-action diagnosis and read-only manual fixture diagnosis only. Drag
+adapter/vendor stays blocked; no fabricated row-admission/lease/ack or timeout change.
+Sort diagnosis: this definition exposes direct native header sorting and no sorting
+popover. The first header click already sorts ascending, so waiting for a nonexistent
+menu action is incorrect. Main updates only that authored play to use real header
+click plus held Shift-click via userEvent.setup, retaining first accepted-sort and
+strengthening final exact two-sort/priority assertions. No renderer/API behavior,
+sorting ownership or old browser-driver assertion is changed. Replay pending.
+Remote diagnostic007 captures41.20s sampled activity (initial source-connected
+rows13.898s); descriptor/data self traversal remains dominant despite fresh fences
+being cheaper. Main selects private immutable-resource SHAPE caching only in the
+two closed factory paths; never permission/decision/reader/binding-result caching.
+Manual diagnosis proves source admission commits after child renderer join, which
+permanently fails the host. Main selects exact-model+lease staging after real
+commitModel, above optional UI, in Workbench/shared reordering only. No drag work,
+fake readiness/ack or changed uncertainty/callback/lifetime semantics. Two disjoint
+source writers, source-only; main owns source intake and actual replay.
+Manual writer stops before edits: strict model+lease staging cannot also preserve
+filtered/sorted display under the current raw-page fences and retired-query epoch
+policy. No fake model/permission or automatic replacement scope is introduced.
+That writer is released; manual source unchanged. Main asks the user to select
+full query-safe publication/display work, plain-flow-only scope, or continued block.
+The disjoint owned-metadata shape writer may finish its already authorized source
+correction while that decision is pending; no manual decision is inferred.
+User explicitly selects **Full query-safe flow (Recommended)** in the modal.
+Authorize broader admission/blocked-display/query publication work, preserving real
+leases, pending uncertainty, callback correlation, C/P identity and drag block.
+Main first allocates a read-only source/API design review for exact app/library
+paths, policy and failure cases before a new implementation lease. No automatic
+latest-state regrant, record rollback or fake acknowledgement follows from consent.
+Owned resource-shape writer has handed off4 appended cases/source-only TS/Biome
+pass; runtime/speed remain unproved. Main may independently intake/replay this safe
+disjoint performance correction while the query-safe publication design is reviewed.
+Main intakes private resource shape cache (framebafe3126…/39 cases e4113dfc…):
+four new cases keep live query/P/scope/clear decisions fresh while reusing only
+immutable parsed fields. Main binds NEW frame004 d3ae576c… with exact prior source
+controls plus actual header-sort play; manual files remain unchanged. Units005 is
+selected now (expected338 cases/no skips), then strict emission005/build008/
+typecheck008 and browser006 only after safety attribution. Collector003 source is
+preserved under collector-source-003, receipt2c678e3a…; explicit frame-aware guard
+keeps old frame003 immutable. No monkeypatched source/file reader or runtime alias.
+Units005:335/338 pass,3 same attributed failures; all334 prior per-file ordinal/
+name/status entries unchanged,4 new cache cases pass. Independent shape review
+approves only closed immutable parsing, not speed/readiness. Emission005 passes300
+outputs/CSS; build008 passes53 stories and typecheck008 passes. Receiptsbbba0d28…/
+9c1520a9…/81031515… preserve frame004/pin/native/source controls. Main selects
+browser006 against build008, all63/max-failures3/original windows/retries0/workers1.
+Manual query-safe implementation remains design-gated, not hidden or skipped.
+Browser006 remains RED:12PASS/3FAIL/48 unrun. Actual header-sort play now passes;
+client All/Any completion fluctuates beyond10s, remote page still slow, manual
+scene remains the known admission-order failure. One independent shape review
+does not establish a speedup; none claimed. Main selects browser007 full63 WITHOUT
+early max-fail stop to inventory all remaining failures, preserving every assertion,
+original windows/workers1/retries0 and a fresh output/cache root. This does not
+reclassify006 or waive the stalled scenes. Manual design review remains active.
+While frozen browser007 runs, main selects a separate Node-only public criteria
+entry probe against actual emission005: enforce no React/ReactDOM/TanStack/native
+module loads, observe the criteria/publication import cycle and inert unknown-
+authority lookup. New entry-probe-001 only, no server/renderer/profile or fake
+application grant. This is import closure proof, not SSR/RSC/ordinary consumption.
+Independent query-safe design review rejects the initial plan on4 contract gaps;
+no implementation has started. Main writes the explicit F1–F4 revision at
+docs/planning/storybook-query-safe-manual-plan.md: fixed live issuance witness,
+callback-free issued-debt transfer/all pending gates, authority-only global version,
+and fresh genuine observation facts with per-callback input fences. Pure Stage1,
+renderer/native/vendor stay unchanged. Final revision review precedes any library
+writer allocation. Entry-probe001 is RED collector resolution: require.resolve uses
+the wrong CJS condition for an import-only public subpath; no library failure or
+module load occurred. Select a fresh ESM-owned-package-context probe002, preserving
+001 rather than changing exports or falling back to a private file import.
+Entry-probe002 passes actual ESM bare public criteria import:4 modules, no React/
+ReactDOM/TanStack/native/resource/presentation loads,0 unknown-proxy traps. Import
+cycle/helper closure is real emitted Node proof only, not SSR/ordinary consumption.
+Full browser007 inventories ALL63:43PASS/20FAIL, no unrun. Concrete groups: shared
+details React-not-defined; narrow play wrong table-versus-grid role (also causes5
+viewport failures); grouped pointer-events timing; duplicate Retry match; owner-
+conflict expected diagnostic mismatch; remote/no-results/pagination latency; manual
+admission-order failure; appearance precheck's ambiguous two native table elements.
+Main owns JSX config and appearance precheck correction. One source-only worker may
+own Configurations.stories.tsx grouped/narrow/conflict plays (retain main's sorting
+fix); a separate worker may own Recovery.stories.tsx genuine Retry ambiguity only.
+No dropped scenario assertion, timeout change, source grant or accessibility waiver.
+Independent query-safe contract review002 approves the revised F1–F4 contract.
+Main explicitly accepts the private admission type's new reconcileRetired method
+under that contract and allocates ONE producer writer: admission.ts/types.ts and
+new tests/reordering/query-safe/{fixtures.tsx,query-safe.spec.ts} only. Source-only
+checks; pure Stage1/renderer/native/criteria-frame/manifests/vendor stay untouched.
+Application implementation waits for exact producer source/API review. New actual
+test configs/registration/runs remain main-owned; no claims from authored fixtures.
+Main confirms build008's shared details output contains unbound React.createElement
+while shared TSX has no nearby app tsconfig. Storybook Vite now explicitly selects
+automatic JSX, matching existing catalog config without adding globals/imports or
+weakening compiler checks. Appearance precheck selects actual named grid and proves
+its native TABLE tag, excluding ambiguity with RAC's hidden collection table.
+No axe rule is disabled. These source corrections await fresh build/browser replay.
+With browser007/server closed, main selects remote CPU diagnostic008 against the
+immutable build008/static artifact only; current admission source WIP is NOT its
+runtime. Bind static files/executable hashes before/after and use new008 output/
+cache. Source-only workers run no browser/server/profiler. Diagnostic cannot count
+as current query-safe source proof, an accepted benchmark or a retry waiver.
+Configuration play writer fixes Narrow's actual named grid/TABLE assertion and
+adds honest enabled/visible plus stronger partition/order checks for Grouped;
+its controls really were disabled, so underlying readiness remains open. Sorting
+is byte-identical; owner-conflict assertion correctly remains strong. Recovery
+writer scopes Retry to the actual failed-refresh notice and adds pending/retained
+row assertions; source-only checks pass, runtime pending. Main allocates only
+schemas.ts ownerConflictDiagnostic plus a new focused example test: preserve the
+invalid fixture, first prove its otherwise-identical tabs-owned positive control,
+then classify genuine schema.invalid for that isolated owner difference. No library
+error semantic change, invented issue.field or weakened expected diagnostic.
+Resume after transport certificate failures: main verifies both interrupted workers
+created only external preimages. No admission/types/schema edits or new query-safe/
+owner-conflict tests exist; no runtime began. Preserve those preimages and earlier
+source fixes. User says resume; retry the same bounded source leases once with TLS
+verification unchanged. No dependency install, certificate bypass, drag change or
+new scope follows. Main continues independent integration while workers resume.
+Owner diagnostic resumes successfully without certificate workaround; main reviews
+the helper-only controlled-difference proof and3 genuine contract tests. Exact strong
+UI message is unchanged; schemas04346083…/testa8622662…. Writer released, source-only
+checks pass. Main selects owner-unit001 with ONLY the public contracts/filters
+source entries and this new test. Enforce a load guard against admission/table/
+presentation/React imports, bind all contracts/filters inputs and the two authored
+paths before/after, and put every cache/report on new HDD paths. This focused unit
+proof is independent of the active admission producer and not whole-suite/runtime
+catalog approval. Current docs structural check passes302 Markdown/1194 local links.
+Owner-unit001 stays RED with0 executed tests: real public filters entry also imports
+its plain criteria dependencies, correctly rejected by the overly narrow new load
+guard. Main selects owner-unit002, adding ONLY exact criteria/publication/neutral-
+method helper files to the monitored allowlist. Admission/table/presentation/React
+loads remain forbidden; no private import alias, assertion or source change.
+Owner-unit002 passes all3 actual tests with unchanged monitored inputs. Main selects
+app-only build009/typecheck009 to verify disjoint JSX/role/Retry/diagnostic fixes
+using EXACT emission005 (300 public files) while the admission writer is active.
+This is frozen-development-library app proof, NOT current query-safe/ordinary/
+producer acceptance. Monitor actual app/runtime/dependency/native inputs; the two
+active admission source files are not imported and are explicitly excluded. No
+source-runtime alias, new API consumer or mixed library emission. Fresh HDD HOME/
+TMP/XDG/cache/output; later complete current-candidate build remains mandatory.
+App-only build009 indexes53 stories and typecheck009 passes over unchanged frozen
+300-file emission005; receiptsb003210a…/3a433ac1…. No current admission proof follows.
+Main selects browser008's affected15 cases only: three detail stories, Narrow plus
+all5 original viewport checks, OwnerConflict, refresh Retry, light/dark/RTL axe and
+details keyboard/axe. Unselected manual/latency cases remain open; no full-catalog
+pass inferred. Original windows/assertions/retries0/workers1; new output/cache only.
+Browser008:11/15 PASS. All3 details stories, Narrow, all5 ORIGINAL viewport overflow
+checks, OwnerConflict and dark axe pass. JSX/global/role/diagnostic defects are
+actually corrected in this frozen-library app scope. Refresh Retry now reaches its
+genuine action but still exceeds10s. Light/RTL and details keyboard interactions
+reach axe, exposing3 color-contrast failures; no rule/contrast waiver is permitted.
+Main selects semantic foreground for only the warning paragraph and Refresh detail
+button, preserving variants, sizes, all callbacks and theme tokens. HeroUI3.2.8
+reference/types and actual contrast nodes are reviewed; no vendor/style-token patch.
+Grouped diagnosis separately proves the sealer precedes its sibling native refs.
+Allocate only data-table/host.tsx ordering plus NEW grouped integration fixture/spec:
+move the unchanged sealer AFTER collection subtree, outside held memo. No manual
+ready flag, native registry/release callbacks, permission/membership guard change or
+drag activation. Real grouped/late/Strict/ref/source-loss regression remains required.
+Contrast correction changes only two existing text classes (shared details73be2af3…,
+Workbench18ab6fef…); full scoped Biome2 files passes. No opacity/theme/variant/action
+or library/vendor changes. Reference screenshot read-only session succeeds but its
+asset again returns202/empty; no image/visual approval, edit or further retry.
+Main selects app-only build010/typecheck010 and browser009's4 appearance/details
+axe cases over exact unchanged emission005. Explicitly exclude the active grouped
+host source in addition to the two admission source files; none is a runtime input
+to that frozen public emission. Current group/query-safe proof remains separate.
+App collector009 recipe is preserved (7bf929b0…); fresh outputs/inputs stay bound.
+Build010/typecheck010 pass with unchanged frozen emission005; receipts0264f4f8…/
+2f8247bc…. Browser009 passes ALL4 light/dark/Arabic RTL/details-keyboard axe cases,
+zero captured errors, no exclusions. Actual screenshots reviewed: text contrast is
+fixed; desktop normal-tools grouping and footer spacing/unlabeled zero still need
+visual/source review before demo-ready approval. No Figma/reference/taste or full
+WCAG/manual-AT acceptance is inferred. New host styling work is not allocated while
+the grouped sealer writer owns that file; source/query-safe producer remains active.
+Grouped sealer writer now releases its lease: exact one-line JSX relocation
+host5f1f0b4a… plus5 authored genuine columns-only regression cases. Main verifies the
+diff and real C/P/input retirement fixture; runtime is UNRUN. Original host import-
+order assist finding is preserved (full Biome RED), while format/lint/new-file checks
+pass; no broad import/module-order rewrite. Independent grouped source review is
+selected before runtime registration. Query-safe admission producer remains active;
+app consumer still waits. README now distinguishes actual run counts and frozen-
+emission app proof instead of its superseded author-only UNRUN heading.
+Admission worker's retry ends with ConnectionRefused. Stop that failed lease—no
+retry/bypass loop. Main finds a substantial unreviewed draft: admission/types and
+two new query-safe fixture/spec files, with source-only logs but no final handoff or
+runtime. Preserve exact draft bytes before takeover. Main review catches an initial-
+only retirement certificate in the NEW fixture; replace it with actual input/access
+clearing on every P retirement and correct teardown order before any positive run.
+Production draft/API still needs independent source review and actual regressions;
+application consumer remains unallocated. Drag and pure Stage1 remain blocked/unchanged.
+Main preserves four interrupted draft files at /tmp/opencode/storybook-query-safe-
+main-intake-001 and corrects only the new fixture/spec: real input/access retirement
+on EVERY P transition, acquisition after actual initial settlement, P-before-
+admission teardown, explicit disposal result and owned inert HTML route. Production
+draft99756b16…/types547438eb… remains unchanged for independent implementation review.
+Full scoped Biome4 files passes after correction. Main selects a fresh source-only
+noEmit check and independent admission/grouped source review before consumer work.
+Main source-only noEmit passes the corrected four query-safe files; independent
+implementation review is active, no source writers remain. Main prepares inert
+query-safe/grouped HTML entries, exact source-only Vite aliases, confined HDD caches
+and a zero-retry pinned-browser config. No fixture is evaluated by preparation;
+actual source-browser001 waits for source review and a new exact candidate frame.
+Main registration also adds same-origin/error diagnostics for BOTH new source specs
+and explicit fixture cleanup; no old assertion changes. The new query fixture's
+invalidated row observations are null/unavailable, not an invented empty page.
+These are later test-registration deltas relative to the source-review request;
+production99756b16…/types547438eb… and grouped host5f1f0b4a… remain frozen. No test
+approval may be inferred for changed fixture hashes without reviewing those deltas.
+Independent producer review001 rejects3 P2 production recovery/replacement gaps
+plus fixture publication completion. Grouped host's one-line source relocation is
+separately approved. Main selects bounded R1/R3/T1 fixes; R2 requires an explicit
+application readmission obligation because unchanged Stage1 poisons failed epochs.
+The new plan amendment proposes NEGATIVE readmissionRequired metadata and a fresh
+app-publication epoch after genuine domain/input proof, never a private epoch bump,
+query toggle, C/P regrant, sourceVersion/ack or ended-debt unlock. Independent
+amendment review precedes that API change. No producer/consumer acceptance or run yet.
+Independent readmission review001 approves the exact R2 amendment contract only.
+Main selects its bounded admission/types implementation plus genuine recovery
+adversaries. R1/R3/T1 corrections are authored, not yet verified. A first config
+noEmit fails on a missing source Heroui alias and optional env-label narrowing;
+JS config syntax passes. Preserve that failed config receipt; correct only those
+registration errors, then rerun fresh source checks before independent intake.
+Corrected source-check002 passes strict noEmit for admission/query-safe/grouped
+fixtures and config, scoped Biome9 files and Vite JS syntax. Source-only receipt
+binds every selected fixture/config and both production files; no module/browser
+was evaluated. Independent implementation review002 is active on that exact frozen
+producer. Main prepares a NEW six-deviation candidate guard and pinned-browser
+collector; historical frame004,1,199-pin map, producer and all failures stay exact.
+The added recovery cases cover preflight, inside-pure and actual busy-source denial,
+same-epoch unready rejection, explicit same-query publication, retained uncertainty
+and a second eligible begin. These remain authored/UNRUN until source intake.
+Main's collector preparation parses3 new Python files without executing their
+modules; new candidate capture/execution has not occurred. Current documentation
+structure passes302 Markdown/1,195 local links and checker regression19/19 passes.
+The candidate/runner will distinguish6 explicit original library deviations plus
+1 unchanged added internal source, not reuse frame004's3-deviation assertion.
+Existing emission005 remains untouched; source-browser proof is separate from
+later emitted/full-catalog proof. Exact next step: disposition review002, then bind
+the new frame and run selected genuine source fixtures/affected unit suites.
+Review002 withholds source approval for two P2 gaps: early recovery discharge on
+failed newer commit and pure's same-stamp/different-page retirement escaping the
+admission floor. R1/R3/T1 are separately corrected in source, not runtime-proved.
+Main preserves all four review002-rejected preimages and selects sticky successful-
+commit-only discharge plus the existing exact core pending-page invariant at the
+callback-fenced port exit (no order mirror or Stage1 change), with genuine late-
+candidate/unversioned-input adversaries. Source/browser/consumer intake stays gated.
+Source-check003 passes strict noEmit and scoped Biome after those corrections;
+independent producer review003 is active. The query-safe producer remains unaccepted.
+Main separately selects the already source-approved grouped-host lane: bind NEW
+frame005 to all6 current source deviations, then source-browser001 selects ONLY
+the5 grouped-data-table cases. It does not mount/test the active query-safe producer;
+query-safe runtime still waits for review003. Use existing pinned Chromium, fresh
+HDD driver/run/cache, port6570, zero retries and unchanged10s assertions. No emission,
+catalog, drag, install, frozen-producer or backend/publication acceptance follows.
+Grouped source-browser001 records0/5 PASS: every case fails startup on unoptimized
+CommonJS use-sync-external-store/shim named export; column behavior is NOT measured.
+All source/emission/frame guards remain exact. Immediate bind probe reports false;
+later ss confirms no listener on6570, so no other process is killed or claimed leaked.
+Preserve all001 outputs. Correct only Vite dependency prebundling and clarify the
+port probe before a fresh selected run; no vendor/dependency repair is authorized.
+Independent review003 now approves the bounded producer source delta R2a/R2b for
+main's separately selected runtime intake, not app/catalog/runtime acceptance.
+User requests a running preview link. Main selects a persistent development server
+on6006 using the existing emitted005 packages (no root build/re-emission/install).
+New private HDD preview001 home/cache/logs only; latest admission/grouped source
+is not included in that preview's package emission. Keep all failed runs and drag
+blocked. Query-safe runtime and app consumer remain the next engineering phase.
+User-requested preview001 is RUNNING at http://127.0.0.1:6006 on the current
+feat/wp-15-integrated working directory. Real HTTP200 and index53 stories verified;
+opened the manager in the browser. Existing emission005 is used; no rebuild/install
+or claimed newer admission/grouped behavior. PID/log/ready receipts are in new HDD
+storybook-ready/preview-001. Leave this user-requested server running. Read-only
+latency diagnosis also returns a further owned-envelope parsing-cache proposal;
+not allocated/implemented or a latency pass. Keep its later work separate.
+
 ## Current final verification continuation
 
 Main's directory is `/tmp/opencode/tableweave-wp11-workbench`, currently on
@@ -983,6 +1567,23 @@ frozen producer-bootstrap planning to final-hdd-producer-review-001. No Git/tool
 install/test/network or data writes outside that new report root by its reviewer.
 Actual online frozen install/existing producer patch application remains unselected
 pending explicit user authorization and reviewed scope; no new drag patch allowed.
+Independent checkout review passes with27-entry receiptb935ef06…; main verifies
+that seal/nine monitoring maps/lock identity. Review53 records3,078 Git blobs/index
+entries/canonical155/30 tooling files and pack checksums, with producer0700 enclosing
+.git0775 disclosed. Bootstrap proposal is7 importers/512 packages+snapshots/4 existing
+opaque producer patches and only integrity-based registry resolutions. No commands/
+HDD writes/install by reviewer; producer still has no dependencies/dist.
+Main now requests explicit permission for registry downloads and the four existing
+producer patch applications in a fresh copied HDD store, scripts/hooks/retries off,
+no new versions/manifest/lock/profile registrations/drag activation. Pending answer
+grants nothing; transport gate review and exact phase selection must precede install.
+The frozen-install ask modal is interrupted with NO recorded answer. The user's
+subsequent Storybook-readiness question is a status request, not installation or
+patch/download consent. No bootstrap setup/install/build/server is selected.
+Current catalog has33 new authored stories across transactions/customers/inventory
+plus20 unchanged focused stories; source/type and bounded neutral-SSR evidence do
+not establish the actual built Storybook index/plays/visual/browser/a11y matrix.
+Per-scene gaps remain in apps/storybook/src/workbench/scenes.md; drag stays blocked.
 
 ## Current WP-10 implementation handoff
 

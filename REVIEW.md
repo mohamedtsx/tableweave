@@ -10,6 +10,229 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Final verification — review session 57 (provisional Git review handoff)
+
+The user authorizes focused commits and a PR targeting develop, not merge or release.
+The integration branch already contains153 commits beyond origin/develop before
+this handoff; the new PR is cumulative and draft, preserving existing packet PRs.
+
+Source review003 approves the bounded query-safe admission correction after review001
+and002 rejected recovery/retirement gaps. New explicit readmission metadata remains
+a negative APP-publication obligation, never permission or backend completion. The
+application consumer is still unallocated; genuine query-safe runtime is UNRUN.
+The grouped host's sibling relocation is separately source-approved. Its five new
+browser cases all fail startup on a test-harness CommonJS dependency export, before
+column behavior is measured; do not call them passes or remove their error checks.
+
+Frame0059e728d29… records6 changed original library files,149 unchanged originals,
+one added internal file/156 sources and1,193 unchanged historical pins. Old maps,
+receipts and the genuine detached producer stay untouched. No current source-emitted
+combined proof is inferred from frozen emission005/build010's app-only results.
+
+Recorded safety units remain335/338 with3 original OPEN failures. Full browser007
+remains43/63 with20 failures; later focused app checks do not replace that inventory.
+Build010's4 light/dark/RTL/details keyboard+axe cases pass, without exclusions.
+Strict producer/fixture noEmit and scoped formatting pass; docs structure/checker
+regressions pass. Actual remote CPU sampling still shows slow forward progress,
+not a benchmark pass; further metadata-envelope caching is only a proposal.
+
+Preview001 is user-requested and remains running on127.0.0.1:6006 over emission005;
+HTTP200 and53 index entries are verified, not all story plays. Drag/G-02, current
+query-safe app flow, consolidated catalog, ordinary/packed/framework/SSR/CI, manual
+AT/device, benchmarks and production/release acceptance remain open or deferred.
+
+## Final verification — review session 56 (actual hot-path and catalog continuation)
+
+### Bounded source corrections and actual safety evidence
+
+Independent controller, server-metadata, source-check and resource-shape reviews
+approve their exact bounded source changes, not library or catalog acceptance.
+Current primary has three changed original library bodies (criteria, store, frame),
+one neutral internal controller-method module:156 source files,152 original bodies
+unchanged. New frame004 d3ae576c… explicitly binds those deviations and1196 unchanged
+historical pins; old155 maps/1199-pin seal and genuine52d165f producer are untouched.
+Immutable factory metadata/method references are reused; every current domain,
+reader, binding and application callback remains live. Cache stores shape, not a
+permission, inspect result, retry decision, source version or authoritative outcome.
+
+Units005 executes338 cases:335PASS/3FAIL/no pending. Four newly appended shape
+cases pass; all334 previous file/ordinal/name/status entries are identical. Earlier
+units003's32 and units004's22 new cases passed too. The same original three
+criteria-cell/native-characterization failures remain OPEN, not waived. Every new
+baseline appendix is an addition, not an old receipt rewrite.
+
+### n1 — Source availability preflight corrected before execution
+
+Main rejects the first example-context proposal because it removed original
+source.context access:live denial during disconnect/revoke. Corrected owner226d2d53…
+uses the exact captured P-origin context only while live and preserves the original
+denied context otherwise. Six actual owner cases now pass, including retained P
+authority versus unavailable UI source, reconnect identity and P-first revocation.
+The rejected source-only proposal is retained; no runtime pass was assigned to it.
+
+### n2 — Actual async and sort defects closed within browser scope
+
+Browser004/005/006 verify genuine option Retry and numeric ID0 after removal of the
+competing application connection. Browser006 verifies sorting using direct native
+header click/held Shift-click; the former authored play incorrectly expected a
+popover not configured by this definition. Its final exact two-sort assertion is
+stronger; renderer and accepted-query behavior are unchanged. Drag-blocked passes.
+
+### n3 — OPEN: render latency/completion and remaining catalog coverage
+
+Client fully-configured falls from observed17.9s to2.6s in browser005; All/Any and
+selection-lifetime pass there but All/Any exceeds10s again in006. Remote CPU007
+records41.20s sampled activity, first connected rows13.898s; no performance gate or
+catalog pass. Shape-corrected strict emission005/build008/typecheck008 pass (300
+files/CSS closure/53 index stories), but browser006 remains12PASS/3FAIL/48 unrun.
+No timeouts, data counts, retry policies or assertions were weakened. Full browser007
+inventory is selected without early max-fail stop; results are not yet recorded.
+
+### n4 — OPEN: full query-safe manual publication and uncertain operations
+
+The manual driver commits its model after child renderer join and rejects sorted/
+filtered displays before admission. The attempted app-only staging lease stopped
+without edits rather than hiding query regressions. User explicitly selects full
+query-safe flow. A proposed admission-level retained-token negative ledger and
+separate retired-query reconciliation API are under independent contract review;
+implementation is gated. Normal blocked display, real source publication, latest
+input, one unresolved operation and actual authoritative token correlation must
+survive query changes and optional UI teardown. No latest-state regrant, fake ack,
+vendor/drag activation, install or full G-02 approval follows from this selection.
+
+Full63 render/play/viewport/axe/keyboard inventory and visual review remain open.
+Ordinary/fresh-producer/SSR/framework/manual/benchmark/CI/publication remain separate.
+
+## Final verification — review session 55 (metadata correction and remaining runtime blockers)
+
+### n1 — Scoped immutable metadata parsing correction approved
+
+Independent source review /tmp/opencode/storybook-validation-review-001/README.md
+approves criteria.ts d0460c25… and10 new hostile/lifecycle metadata cases. Every live
+reader/controller callback and current-domain comparison remains. Exact immutable
+factory provenance reuses shape only, not permission. Candidate frame00449bc0…
+binds exactly one changed historical input and1198 unchanged pins/154 other sources.
+Strict emission002/build005/typecheck005 pass;53 actual stories remain indexed.
+Configured story succeeds4.945s versus17.9s before the correction; these single
+diagnostics are not performance gates. First field-ownership correction passes the
+unchanged public-DOM browser assertion in browser003. Review54n2's broad rendering
+cost remains open, not resolved by a fourfold local improvement.
+
+### n2 — OPEN: original-body unit baseline reproduces three existing failures
+
+Units002 executes280 tests:277PASS/3FAIL, no pending/skipped. Exact original criteria
+body baseline001 (a checked, explicitly labeled source-load substitution, NOT a
+reverted primary or current-candidate proof) reproduces the same280 file/ordinal/
+name/status entries. Two criteria-cell failures and one historical native-subtree
+characterization remain OPEN; no current whole-suite green claim. All10 new and56
+existing authority cases pass in both runs. Unit001's six resolution-load failures
+remain preserved; adding genuine source reordering and JSX-runtime mappings only
+to the new external config permits the complete loaded suite in002.
+
+### n3 — Pending replay: competing option-source connection
+
+Browser003 has7PASS/3FAIL/53 not run. AsyncOptions opens a real unavailable editor,
+not an absent popup. Trace/source review establishes the app and builder competing
+for one exclusive numeric-source connection. Main accepts the one-block Workbench
+correction removing only the app's duplicate lease, retaining builder ownership,
+string-source connection and actual request callbacks/assertions. Source-only
+checks pass; actual corrected runtime remains unrun. Main's named-import ordering
+cleanup changes no module order or runtime behavior.
+
+### n4 — OPEN: severe remote-story metadata amplification
+
+Diagnostic005's screenshot timeout prevents saving its CPU profile; retain RED.
+Corrected CPU-only diagnostic006 records81.41s sampled activity in an incomplete
+remote story; first observed source-connected rows arrive at49.385s. Descriptor
+self cost19.01s and CriteriaCapture.descriptor6.86s establish the server metadata
+path as a further blocker. No timeout, record-count or callback waiver is accepted.
+Two disjoint bounded source corrections are allocated in the readiness plan:
+neutral genuine-C method references (no Criteria→React/TanStack import) and exact
+owned resource metadata inspection with all external/operation/binding fences.
+New primary source counts/deviations require a new exact frame, never an old seal
+rewrite. No approval or runtime result exists for these active writers yet.
+
+Whole Storybook responsiveness/theme/RTL/axe/keyboard/visual proof and the wider
+packet/ordinary/framework/manual/benchmark/CI/publication gates remain unfinished.
+Drag stays blocked; no install, new vendor patch, old-work move or deployment.
+
+## Final verification — review session 54 (Storybook build and actual browser intake)
+
+User priority: make the development Storybook ready. Primary HEAD7eb1543 plus
+explicit dirty app/config/harness/docs corrections; NOT the genuine producer52d165f
+or exact clean CI head. Existing private development dependencies only: no install,
+new patch, vendor/library edit or ordinary-consumer acceptance. Keep drag blocked.
+
+### n1 — Scoped build/type corrections independently reviewed
+
+Actual strict package emission passes3 commands/298 files with complete CSS closure.
+Original build001–003 and typecheck001 failures remain retained. Corrections use
+app-owned public ESM Button/I18nProvider and real emitted reordering targets, preserve
+strict type options, state the shared factory's erased schema generic, and disable
+optional auto-docgen that recurses through non-component emitted helpers. No Docs
+addon exists; no type/runtime assertion is disabled. Independent source/receipt
+review /tmp/opencode/storybook-build-review-001/README.md approves only these3 paths.
+Build004 and typecheck004 pass; actual static index is53 stories/33 WP-11 entries.
+Receipts508425ac…/3e56feee… retain unchanged1199 pins/native8/emitted298/source maps.
+
+### n2 — OPEN: configured startup is too expensive for the actual browser gate
+
+Browser001 executes index/default PASS,3 failures/58 not run. Configured/builder
+initial contexts show preparing; read-only trace review and fresh diagnostic002
+establish eventual real source connection, rows and configured storyFinished success
+at17.9s. No owner lifetime correction is justified. CPU diagnostic003 attributes
+16.77s of18.68s sampled startup to the native-collection chunk, dominated by repeated
+criteria metadata validation (9.34s self in own-data descriptor reads). This is a
+concrete runtime blocker, not permission to increase timeouts and call it ready.
+Read-only library call-path diagnosis is selected; no library edit yet authorized.
+
+### n3 — Pending replay: field-option visibility timing
+
+Field-ownership play observes Aria's collection before the animated popover becomes
+visible. Main changes only the actual option visibility assertion to waitFor,
+retaining the same option and exclusive-owner assertions. Corrected build/browser
+replay is not yet run. Workbench.tsx and all155 library bodies remain unchanged.
+
+### Bounded passes and remaining scope
+
+Browser002 passes all20 legacy stories (14 authored plays/6 render-only DOM cases)
+with zero captured page/console/request/HTTP errors. Existing actual Chromium1255
+reports159.0.8154.6 via browser.version/CDP; no downloads/fallback. Static server
+passes13 actual GET/HEAD/index/rejection/bind/cleanup cases and releases6570.
+New63-case harness retains the original33+5 assertions and adds legacy/index/axe/
+keyboard checks, but whole catalog, responsiveness, theme/RTL/axe/keyboard/visual
+readiness remain incomplete. No frozen-producer/packed/SSR/manual-AT/benchmark/
+full-packet/publication approval follows. All outputs are new cand001 run paths.
+
+## Final verification — review session 53 (independent checkout and bootstrap plan)
+
+Main verifies27 new sealed review entries/nine unchanged monitoring maps and frozen
+lock identity. Receipt /tmp/opencode/final-hdd-producer-review-001/receipt-hashes.json
+SHA256b935ef065c2e2dbd16d27e77192e901cd37466c85e1d7934c5407e1c197dd5d4.
+Independent review checks51 clone receipts, all3,078 Git blobs/0664 files, canonical155,
+30 tooling entries, real detached HEAD, DIRC v2 index3,078 entries and pack/index/
+reverse-index checksums (one pack/4,809 objects). No Git/Node/pnpm/helper commands or
+HDD writes by reviewer. Scoped genuine checkout obligation passes, not G-05/build.
+
+Producer root0700 encloses Git-created .git/internal0775 and tracked/HEAD/index0664
+under selected umask0002; do not describe .git as0700 or silently chmod it. Only
+main's later primary ref/index bookkeeping differs since cloning; current before/
+after review controls stay fixed. No primary-clean or later exact-CI-HEAD claim.
+
+Actual frozen lock v9 has7 importers/512 packages/512 snapshots/4 existing opaque
+private patches;512 SHA512-only resolutions, no explicit nonregistry URL/Git/file
+overrides and7 internal workspace links. Lock SHA256
+e1e5c1586d570d054092b6babc6e5ba3d3fec32efc9f37e4ec4f7a9a3d05cde1.
+Plan uses owned pnpm, frozen whole workspace, scripts/pnpmfile/retries/audit/update
+off and a new private copied store/home. Existing patch hashes/source settings stay
+fixed; separate RAC runtime.patch/drag activation/ordinary inheritance not selected.
+
+This is a PROPOSAL, not installation permission. Main asks the user explicitly for
+locked registry data and materialization of the four existing producer-only patches.
+Transport allowlisting/logging must be reviewed in a separately selected phase;
+environment variables alone are not enforcement. No bootstrap directory/installation,
+dependency/source/lock/profile change or approved compiler/lease receipt exists yet.
+
 ## Final verification — review session 52 (genuine detached producer intake)
 
 Main's seven selected Git commands run once/exit0/no timeout/signal. Real clone

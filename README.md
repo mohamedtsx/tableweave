@@ -108,8 +108,8 @@ is enabled by these local commands.
 | `pnpm pack:start` | Actual-tarball Start strict install/types/build/dev+production HTTP/browser proof; no workspace aliases |
 | `pnpm test:filter-tools` | Candidate helper/option-source/date vectors; UI/packet acceptance remains separate |
 | `pnpm pack:check` | Inspect tarballs; unpatched types/imports/bundles and43 tool cases, plus separate explicit-profile38 control/19 real-composition/10 focus production cases |
-| `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
-| `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
+| `pnpm storybook` | Local synthetic catalog at `http://127.0.0.1:6006`; telemetry disabled |
+| `pnpm storybook:build` | Build the static catalog; no deployment or interaction-test claim |
 | `pnpm test:browser` | Baseline/native/resource, actual tools, source controls, emitted composition and built Storybook; build first |
 | `pnpm test:controls:source` | Six serialized source control/renderer scopes; actual vendor dependencies and one source factory registry |
 | `pnpm test:controls:public` | Retained38 controls/four plays plus real19 composition/four plays/ten focus cases; frozen outputs and distinct named evidence runs |
