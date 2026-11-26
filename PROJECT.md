@@ -20,7 +20,10 @@ domain-driven design, nor that a specification proves a working feature.
   hook fixtures/checks exist; WP-04 native/collection producer has scoped delegated
   agent G-01 approval, not personal maintainer acceptance.
   WP-05 adds plain resource generation/retention/lifecycle APIs with scoped
-  delegated G-03 approval; framework SSR and full UI remain separate. No full
+  delegated G-03 approval. WP-06 adds actual packed Start/Query streaming SSR,
+  hydration and request/grant isolation with scoped delegated G-04 approval;
+  [integration evidence](docs/evidence/wp-06-start-2026-11-24.md) records exact
+  pinned/synthetic limits. Other frameworks and full UI remain separate. No full
   table facade, published package, Figma system, benchmark or real-consumer
   integration. The [WP-03](docs/engineering/wp-03-controller.md),
   [WP-04](docs/engineering/wp-04-native.md) and [resource](docs/engineering/resources.md)

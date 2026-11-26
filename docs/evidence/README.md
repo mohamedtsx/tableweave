@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-06 actual Start proof — 2026-11-24](wp-06-start-2026-11-24.md):
+  independent isolation corrections, strict declaration/install confinement and
+  completed actual source/tarball HTTP SSR/hydration; scoped delegated G-04 only.
+
 - [WP-05 private resource producer — 2026-11-24](wp-05-resource-2026-11-24.md):
   independently corrected Suspense lifetime, deterministic races and isolated full
   plus combined native/resource public packed/browser workflow evidence; not

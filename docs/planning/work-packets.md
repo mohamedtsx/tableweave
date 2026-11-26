@@ -125,6 +125,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-06 Primary Start and Query SSR integration
 
+- **Execution plan:** [WP-06 bounded plan](wp-06-implementation-plan.md); TASKS
+  records delegated authority, producer handoffs, exact installs and G-04 review.
+
 - **Role/dependencies:** integration worker; WP-04/WP-05.
 - **Read:** [integration contract](../engineering/integrations.md), security,
   [G-04](../engineering/feasibility.md#g-04-ssr-and-hydration), AC-22–AC-24.

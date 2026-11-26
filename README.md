@@ -91,7 +91,7 @@ is enabled by these local commands.
 | --- | --- |
 | `pnpm install:check` | Fresh manifest-only workspace install with the frozen lockfile; may reuse dependency cache |
 | `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
-| `pnpm typecheck` | Build, then check Storybook/harness sources with strict TypeScript 6 |
+| `pnpm typecheck` | Build packages and Start's generated router, then strict Storybook/harness/app TypeScript 6 |
 | `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
 | `pnpm test` | Emitted-boundary guards, contracts/operators, controller/native models and resource race/lifecycle tests; browser behavior is separate |
 | `pnpm test:contracts` | Build plus schema/operator/date/identity and synthetic translator vectors |
@@ -99,6 +99,8 @@ is enabled by these local commands.
 | `pnpm test:native` | Build plus v9 definition/carrier/client/manual/native transition tests; not G-01 by itself |
 | `pnpm test:resource` | Build plus tagged resource generations/retention/precedence/permission/lifecycle tests; not framework SSR |
 | `pnpm pack:check` | Inspect tarballs; isolated headless/styled installs, TS 5.9/6 declaration checks, Node import guards and Vite bundles |
+| `pnpm test:start` | Actual Start build, dev/production HTTP+Chromium SSR/hydration fixtures and server-only bundle markers |
+| `pnpm pack:start` | Actual-tarball Start strict install/types/build/dev+production HTTP/browser proof; no workspace aliases |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
 | `pnpm test:browser` | Chromium vendor/controller smoke, native (6011), grouped collection (6009) and resource lifecycle (6415) fixtures; build packages/Storybook first |
@@ -124,9 +126,12 @@ WP-04's [recorded compatibility repair](docs/engineering/wp-04-native.md#vendor-
 uses an exact declaration-only RAC patch and HeroUI-only Bundler build resolution;
 public tarball declarations must still pass unpatched strict NodeNext consumers.
 
-This smoke is not G-01/full G-05, a full vendor-barrel declaration pass, SSR,
-Next/Start integration, complete browser/manual accessibility, performance or
-real-consumer acceptance. Final UI still needs reference-informed design review.
+The vendor smoke alone is not G-01/full G-05, a full vendor-barrel declaration pass,
+SSR, complete browser/manual accessibility, performance or real-consumer acceptance.
+WP-06 separately has [bounded delegated G-04 proof](docs/evidence/wp-06-start-2026-11-24.md)
+from actual source/tarball Start, not from that story. Next integration and final
+UI/reference-informed design, device/AT/performance/real-consumer/release gates
+remain separate; no PR merge is authorized.
 
 ## Authority and licensing
 

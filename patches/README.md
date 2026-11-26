@@ -21,3 +21,20 @@ The root pnpm patch does **not** propagate through Tableweave tarballs. Public
 declarations must compile in unpatched NodeNext TS5.9/6 consumers; direct raw
 HeroUI/RAC imports retain their upstream limitations. Package builds use Bundler
 resolution without relaxing exact optional checks or skipLibCheck:false.
+
+## Start Vite declaration repairs
+
+The two exact TanStack patches retain runtime bytes and genuine source types:
+server-core1.169.40 restores its omitted algorithm union; plugin-core1.171.50
+references the public Router Vite entry for the same CodeSplittingOptions type.
+The root extension also declares Standard Schema1.1.0/cookie-es3.1.1 on server-core,
+where its declarations import them. These are app-only Start compatibility needs,
+not Tableweave library dependencies. See the
+[WP-06 disposition](../docs/planning/wp-06-implementation-plan.md#strict-vite-declaration-repair-disposition--2026-11-24).
+TanStack upstream material is **Copyright (c) 2021-present Tanner Linsley**, under
+the accompanying [MIT license](LICENSE-TANSTACK-MIT). Exact modifications are
+identified in these patch notes/diffs; no runtime file is modified. This is not
+a complete release legal audit. The standalone Start harness carries only these
+app-required patches/extension explicitly; no root repair propagates through a
+Tableweave tarball automatically. Removal requires a reviewed stable replacement
+passing strict app/config, frozen install and actual HTTP/browser/tarball checks.
