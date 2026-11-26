@@ -88,6 +88,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-04 TanStack and HeroUI collection feasibility
 
+- **Execution plan:** [WP-04 bounded plan](wp-04-implementation-plan.md); TASKS
+  records current delegated authority, worker paths, review and gate disposition.
+
 - **Role/dependencies:** native bridge + UI worker; WP-02/WP-03.
 - **Read:** [rendering](../engineering/rendering.md), composite predicate contract,
   [G-01](../engineering/feasibility.md#g-01-native-processing-and-collection-bridge).

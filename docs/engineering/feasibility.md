@@ -1,8 +1,11 @@
 # Feasibility and readiness
 
-Source: HLD §14. G-01–G-05 are **unexecuted engineering acceptance activities**,
+Source: HLD §14. G-01–G-05 are **engineering acceptance activities**,
 not unresolved product scope. Architecture is reviewable; API/dependency freezing
 waits for proof. Current task status belongs only in [TASKS](../../TASKS.md).
+WP-04 now records [scoped executed G-01 evidence](../evidence/wp-04-native-2026-11-24.md)
+and delegated technical approval; no later gate or personal maintainer review
+follows automatically from that result.
 
 ## G-01 Native processing and collection bridge
 

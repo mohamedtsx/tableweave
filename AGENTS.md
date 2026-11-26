@@ -2,9 +2,11 @@
 
 Tableweave is a planned React table toolkit: TanStack behavior, a headless package
 and an optional HeroUI renderer. This repository has accepted private WP-01/WP-02
-foundation/schema/operator APIs and an accepted WP-03 controller/hook producer, **not an
-implemented table library**. README owns actual commands; TASKS owns acceptance/
-review status. Native bridge, resource/table facades and styled UI remain proposed.
+foundation/schema/operator APIs and an accepted WP-03 controller/hook producer.
+WP-04 native/minimal collection code has scoped delegated agent G-01 approval,
+**not a complete table library or personal maintainer acceptance**. README owns
+actual commands; TASKS owns acceptance/review status. Resource/table facades and
+full styled UI remain separate packets.
 
 ## Load only what the task needs
 

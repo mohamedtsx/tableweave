@@ -44,3 +44,29 @@ primitive, not a second store. The [implemented protocol](../engineering/wp-03-c
 records reentrancy/error/time/definition trade-offs. The maintainer accepted WP-03
 after session 1 n1–n2 corrections. No native bridge, UI, resource or G-gate
 acceptance follows, and dependent execution remains separately authorized.
+
+## WP-04 ADR-07 compatibility disposition
+
+**2026-11-24; delegated agent engineering decision, verification pending.**
+TASK-012's actual grouped collection probe preserves HeroUI/Aria ownership but
+exposes current stable upstream declaration defects. Downgrading, nightlies,
+skipLibCheck, disabling exact optional checks, broad declaration shims and
+reimplementing HeroUI are rejected as wider or weaker alternatives.
+
+The [bounded repair plan](../planning/wp-04-implementation-plan.md#compatibility-repair-disposition--2026-11-24)
+selects an exact declaration-only RAC 1.22.1 pnpm patch and HeroUI-only Bundler
+build resolution. Authoritative Aria property definitions remain; runtime source
+and product requirements do not change. Direct Aria renderer peers are explicit.
+Independent unpatched NodeNext public tarball consumers must still pass TS5.9/6.
+This supports Tableweave's isolated public declarations, **not** a claim that raw
+HeroUI/RAC imports support every strict NodeNext setting. Remove the patch when a
+matching stable upstream release passes the same strict/property/runtime/packed
+checks; review that version change and regenerate the lockfile deliberately.
+
+WP-04 n1 additionally requires commit-safe candidate native models instead of a
+render-mutated persistent native handle. ADR-03/04 remain one coordinator/one
+TanStack engine; exact core9.3.1 public store bindings are a declared runtime
+dependency matching React Table9.3.1, not an undeclared transitive import. The
+[correction plan](../planning/wp-04-implementation-plan.md#native-commit-boundary-correction--2026-11-24)
+and suspended-render/native-action/browser evidence must demonstrate the boundary
+before approval. No extra application store, filtering engine or scope waiver.

@@ -1,4 +1,4 @@
 "use client";
 
-// No DataTable or other feature facade before its implementation packet.
-export {};
+export type { NativeCollectionProps } from "./table/native-collection.js";
+export { NativeCollection } from "./table/native-collection.js";

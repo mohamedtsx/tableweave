@@ -10,6 +10,12 @@ Roles are responsibilities, not named staff or concurrent agents already running
 One person/agent may hold several; review critical boundaries separately when
 possible. Maintainer/product decisions cannot be impersonated by an agent.
 
+When the maintainer explicitly delegates packet engineering approval, record
+**agent-approved under delegated authority** and the reviewer/evidence/scope.
+This is not personal maintainer review, a product-policy waiver or permission to
+fake external/manual gates. A no-merge instruction remains binding even after
+agent approval; later human PR review is separate.
+
 | Role | Owns | Does not decide alone |
 | --- | --- | --- |
 | Maintainer/product owner | Product changes, review disposition, execution/publication authorization | Unmeasured technical acceptance |

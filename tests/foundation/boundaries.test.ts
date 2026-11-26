@@ -42,14 +42,19 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
     expect(Object.keys(exports).sort()).toEqual(
       [
         "ControllerError",
+        "NativeBridgeError",
+        "createNativeColumnHelper",
+        "createNativeController",
         "createTableController",
         "createTableState",
         "defineController",
+        "defineNativeTable",
         "reduceTableState",
         "replaceTableDefinition",
         "useTableweaveQuery",
         "useTableweaveSelector",
         "useTableweaveState",
+        "useNativeTable",
       ].sort(),
     );
     for (const name of ["react", "heroui"]) {
@@ -98,7 +103,11 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
       expect(manifest.private).toBe(true);
       expect(manifest.dependencies).toEqual(
         manifest === headless
-          ? { "@internationalized/date": "3.12.4", valibot: "1.5.0" }
+          ? {
+              "@internationalized/date": "3.12.4",
+              "@tanstack/table-core": "9.3.1",
+              valibot: "1.5.0",
+            }
           : undefined,
       );
       expect(manifest.type).toBe("module");
@@ -127,5 +136,25 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
     await expect(inspectGraph(join(dir, "entry.js"), dir)).rejects.toThrow(
       "Escaped package",
     );
+  });
+
+  it("follows emitted declaration paths and inline import types", async () => {
+    const parent =
+      process.env.TABLEWEAVE_TMPDIR ??
+      (process.env.CI ? tmpdir() : "/tmp/opencode");
+    const dir = await mkdtemp(join(parent, "tableweave-declarations-"));
+    await writeFile(
+      join(dir, "index.d.ts"),
+      'export type { Leak } from "./leaf.js";',
+    );
+    await writeFile(
+      join(dir, "leaf.d.ts"),
+      'export type Leak = import("@heroui/react/table").TableProps;',
+    );
+    const graph = await inspectGraph(join(dir, "index.d.ts"), dir);
+    expect(graph.files).toHaveLength(2);
+    expect(forbiddenImports(graph, ["@heroui/react"])).toEqual([
+      "@heroui/react/table",
+    ]);
   });
 });

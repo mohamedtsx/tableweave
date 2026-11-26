@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-04 native/collection candidate — 2026-11-24](wp-04-native-2026-11-24.md):
+  corrected actual native/grouped collection G-01 proof, independent review and
+  strict public packed/browser checks; not broader framework/device/release gates.
+
 - [WP-03 private coordinator — 2026-11-23](wp-03-controller-2026-11-23.md):
   pure controller, controlled transactions, packed types/runtime and React hook
   fixture evidence; no native/resource/framework SSR or release acceptance.

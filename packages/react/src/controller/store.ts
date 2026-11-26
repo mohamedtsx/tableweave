@@ -10,6 +10,7 @@ import type {
   StateProposal,
   StateTransition,
   TableController,
+  TableState,
 } from "./types.js";
 import {
   createTableState,
@@ -24,7 +25,8 @@ function createController<S extends QuerySchema>(
   input: ControllerDefinitionInput<S>,
   options: ControllerOptions<S>,
 ): TableController<S> {
-  const { registry, now, onRequest, onCommit, onQueryChange } = options;
+  const { registry, now, validateState, onRequest, onCommit, onQueryChange } =
+    options;
   const controlled = new Set(options.controlled ?? []);
   const groups: readonly StateGroup[] = [
     "query",
@@ -37,6 +39,7 @@ function createController<S extends QuerySchema>(
     controlled.size !== (options.controlled?.length ?? 0) ||
     (controlled.size && typeof onRequest !== "function") ||
     typeof now !== "function" ||
+    (validateState !== undefined && typeof validateState !== "function") ||
     (onCommit !== undefined && typeof onCommit !== "function") ||
     (onQueryChange !== undefined && typeof onQueryChange !== "function")
   )
@@ -59,7 +62,23 @@ function createController<S extends QuerySchema>(
     now: value,
     ...(registry ? { registry } : {}),
   });
+  const validate = (candidate: TableState<S>) => {
+    const result: unknown = validateState?.(candidate);
+    if (result !== undefined) {
+      // A void callback can be assigned an async function in TypeScript. Such
+      // validation cannot authorize a synchronous transition; observe rejection
+      // without logging raw application errors or deferring accepted intent.
+      if (
+        result !== null &&
+        (typeof result === "object" || typeof result === "function") &&
+        "then" in result
+      )
+        void Promise.resolve(result).catch(() => undefined);
+      stateFail("state.invalid");
+    }
+  };
   let state = createTableState(definition, options.initial, context(clock()));
+  validate(state);
   const serverState = state;
   const listeners = new Set<{ notify: () => void }>();
   let pending: StateProposal<S> | null = null;
@@ -123,6 +142,7 @@ function createController<S extends QuerySchema>(
           context(isQueryCommand(command.type) ? clock() : state.evaluatedAt),
         );
         if (transition.state === state) return { status: "noop" };
+        validate(transition.state);
         if (transition.changedGroups.some((group) => controlled.has(group))) {
           pending = freeze({
             id: ++sequence,
@@ -176,6 +196,7 @@ function createController<S extends QuerySchema>(
             state: { ...transition.state, selection },
           });
         }
+        validate(transition.state);
         return commit(transition);
       }),
     reject: (proposal) =>

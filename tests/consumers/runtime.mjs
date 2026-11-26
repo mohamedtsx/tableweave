@@ -174,9 +174,13 @@ await assert.rejects(import("@tableweave/react/src/contracts/index.js"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED",
 });
 if (process.argv.includes("--styled")) {
-  for (const entry of ["@tableweave/heroui", "@tableweave/heroui/sortable"]) {
-    assert.deepEqual(Object.keys(await import(entry)), []);
-  }
+  const styled = await import("@tableweave/heroui");
+  assert.deepEqual(Object.keys(styled), ["NativeCollection"]);
+  assert.equal(typeof styled.NativeCollection, "function");
+  assert.deepEqual(
+    Object.keys(await import("@tableweave/heroui/sortable")),
+    [],
+  );
   await assert.rejects(import("@tableweave/heroui/dist/sortable/index.js"), {
     code: "ERR_PACKAGE_PATH_NOT_EXPORTED",
   });

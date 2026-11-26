@@ -8,6 +8,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+from urllib.parse import unquote, urlsplit
 
 import check_docs
 
@@ -54,7 +55,23 @@ class WorkspaceTests(unittest.TestCase):
         for path in check_docs.markdown_files(check_docs.ROOT):
             target = self.root / path.relative_to(check_docs.ROOT)
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(path.read_text(encoding="utf-8"), encoding="utf-8")
+            text = path.read_text(encoding="utf-8")
+            target.write_text(text, encoding="utf-8")
+            # Preserve real linked license/config targets, not only Markdown.
+            # Never copy external/escaping paths or generated trees wholesale.
+            for link, _ in check_docs.extract_links(text):
+                parsed = urlsplit(link)
+                if parsed.scheme or parsed.netloc or not parsed.path:
+                    continue
+                linked = (path.parent / unquote(parsed.path)).resolve()
+                if (
+                    linked.is_relative_to(check_docs.ROOT.resolve())
+                    and linked.is_file()
+                    and linked.suffix.lower() != ".md"
+                ):
+                    destination = self.root / linked.relative_to(check_docs.ROOT.resolve())
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_bytes(linked.read_bytes())
 
     def append(self, name, content):
         path = self.root / name
@@ -82,6 +99,15 @@ class WorkspaceTests(unittest.TestCase):
     def test_missing_fragment_fails(self):
         self.append("README.md", "\n[Broken](PROJECT.md#nonexistent-heading)\n")
         self.assert_failure("missing heading: PROJECT.md#nonexistent-heading")
+
+    def test_local_non_markdown_targets_are_checked(self):
+        target = self.root / "LICENSE-fixture"
+        target.write_text("Synthetic license fixture\n", encoding="utf-8")
+        self.append("README.md", "\n[License](LICENSE-fixture)\n")
+        result, output = self.run_check()
+        self.assertEqual(result, 0, output)
+        target.unlink()
+        self.assert_failure("missing target: LICENSE-fixture")
 
     def test_unreachable_document_fails(self):
         (self.root / "orphan.md").write_text("# Orphan\n", encoding="utf-8")

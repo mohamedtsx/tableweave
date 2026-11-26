@@ -1,0 +1,14 @@
+diff --git a/dist/types/src/Group.d.ts b/dist/types/src/Group.d.ts
+--- a/dist/types/src/Group.d.ts
++++ b/dist/types/src/Group.d.ts
+@@ -37,1 +37,2 @@
+-export interface GroupProps extends AriaLabelingProps, Omit<HTMLAttributes<HTMLElement>, 'children' | 'className' | 'style' | 'render' | 'role' | 'slot'>, DOMProps, HoverProps, RenderProps<GroupRenderProps>, SlotProps {
++// Tableweave compatibility modification: retain authoritative Aria keys under exactOptionalPropertyTypes.
++export interface GroupProps extends AriaLabelingProps, Omit<HTMLAttributes<HTMLElement>, keyof AriaLabelingProps | keyof DOMProps | 'children' | 'className' | 'style' | 'render' | 'role' | 'slot'>, DOMProps, HoverProps, RenderProps<GroupRenderProps>, SlotProps {
+diff --git a/dist/types/src/OverlayArrow.d.ts b/dist/types/src/OverlayArrow.d.ts
+--- a/dist/types/src/OverlayArrow.d.ts
++++ b/dist/types/src/OverlayArrow.d.ts
+@@ -9,1 +9,2 @@
+-export interface OverlayArrowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'style' | 'render' | 'children'>, RenderProps<OverlayArrowRenderProps>, DOMProps {
++// Tableweave compatibility modification: retain authoritative Aria DOM keys under exactOptionalPropertyTypes.
++export interface OverlayArrowProps extends Omit<HTMLAttributes<HTMLDivElement>, keyof DOMProps | 'className' | 'style' | 'render' | 'children'>, RenderProps<OverlayArrowRenderProps>, DOMProps {
