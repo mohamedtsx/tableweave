@@ -68,7 +68,9 @@ export function createDemoRuntime(
     scopeKey: bootstrap.scopeKey,
     definitionKey: bootstrap.definitionKey,
   };
-  if (!authorization.canSeed(grant)) throw new AuthorizationLostError();
+  // A returned bootstrap can become obsolete while React is suspended. This is
+  // not a backend denial and must allocate/seed nothing, nor crash the route.
+  if (!authorization.canSeed(grant)) return null;
   const nativeDefinition = definitions.get(bootstrap.definitionKey);
   if (!nativeDefinition) throw new Error("Unknown application definition.");
   const context = {
@@ -299,6 +301,14 @@ export function createDemoRuntime(
   };
   const resource: ResourceAdapter<RecordRow, DemoQuery> = {
     ...raw,
+    subscribe(listener) {
+      const disconnectResource = raw.subscribe(listener);
+      const disconnectAuthorization = authorization.subscribe(listener);
+      return () => {
+        disconnectResource();
+        disconnectAuthorization();
+      };
+    },
     getSnapshot: () => guarded(raw.getSnapshot()),
     getServerSnapshot: () =>
       guarded(serverView ?? raw.getServerSnapshot(), true),
@@ -380,3 +390,4 @@ export function createDemoRuntime(
     correctionCount: () => correctionCount,
   };
 }
+export type DemoRuntime = NonNullable<ReturnType<typeof createDemoRuntime>>;

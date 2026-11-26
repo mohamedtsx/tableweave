@@ -6,6 +6,101 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 
 ## Current handoff
 
+- **Latest review correction:** user authorizes fixing issues and previously requests
+  ordered merges into develop. #3–#5 have actually merged; PR #6 is retargeted to
+  develop but held for its confirmed superseded-candidate exception at9eb71e1.
+  Superseding earlier no-merge/source-handoff status only for explicit current work,
+  main selects app authorization/runtime/session/lifecycle correction plus focused
+  owner/React/browser regression coverage. Keep grant checks fail-closed, preserve
+  old committed owner until a valid replacement commits and keep real denial
+  terminal. No stale grant acceptance, error waiver, install/vendor/drag/deployment.
+  One source-only writer owns those bounded app/test paths; main owns test config,
+  actual execution, docs, Git/PR and dependency integration. Existing worktree was
+  clean at9eb71e1. Historical approval/evidence below remains historical, not proof
+  of this newly confirmed race. Next: authored correction, independent source review,
+  then exact source/browser/packed feasibility selection using inspected tools.
+  Source author hands off5 app/test paths, with original browser cases unchanged,
+  explicit obsolete commit/construction outcomes and exact committed-session
+  retention. Runtime remains UNRUN. Independent source review is active. Main
+  registers the7 new owner/negative-construction units in root Vitest with real
+  Query runtime resolution from the declaring Start app, not a new dependency.
+  Independent correction review001 gives bounded source approval, not runtime.
+  App strict noEmit passes; focused unit strict noEmit passes after the NEW external
+  unit program uses Node/React types instead of a relative Vite browser-ambient
+  entry. Source-check001 retains that failed config and3 actual Biome findings.
+  Main corrects appended-test formatting and makes the layout dependency a real
+  owner-version check before atomic commit (negative stale-render guard, no grant
+  substitute or lint waiver). This small post-review source delta needs review.
+  Main selects a fresh strict source/Biome replay, then actual7-case focused units
+  using the real declaring-app Query runtime and existing emitted WP-06 library.
+  Use an external config with Vite's supported runner loader and private HDD
+  cache/results only. No new install, package rebuild, old output overwrite,
+  browser or packed acceptance is selected by this focused unit phase.
+  Actual focused units001 PASS7/7,0 failures/pending, unchanged source. Source-check003
+  passes original app strict noEmit, focused unit strict noEmit and scoped Biome6
+  files, and independently verifies the original browser spec's exact byte prefix.
+  Independent delta review002 retains bounded source approval. Main now selects the
+  new held-GET case in a fresh byte-exact HDD source app/test fixture on6580, with
+  existing declaring-app dependencies and actual unchanged WP06 library emission.
+  Fresh cache/.tanstack/generated routes/results only; no install or original output
+  overwrite. This is actual source Start verification, NOT packed/production proof.
+  Actual held-GET browser001 reaches the retained-Alpha assertions but FAILS the
+  unchanged zero-error check on duplicate sibling React keys. Inputs/emission remain
+  exact and6580 closes. Preserve001. Main prefixes candidate/session role keys to
+  keep those distinct lifetimes uniquely keyed, then selects fresh source checks
+  and browser002 with the same regression/assertions before any runtime approval.
+  Browser002 removes the key warnings and reaches actual new Beta/alternate grant,
+  but FAILS the unchanged old-cache assertion: the retiring Query observer can
+  recreate an empty Alpha partition before unmount. Preserve002. Main adds only
+  RowsObserver cleanup after useQuery subscription cleanup, gated by fresh actual
+  !canSeed for that exact old grant, to remove its retired partition. Live/current
+  StrictMode cleanup keeps cache/freshness; no grant or backend outcome is altered.
+  Strict app noEmit passes after this change; browser003 replays the same case.
+  Actual isolated source Start browser003 PASSES the complete new held-GET case,
+  with unchanged input/emission hashes, zero asserted page/console errors and6580
+  cleanup. Both failed001/002 remain. Main now selects browser004 with all28
+  original+new source-development cases, unchanged assertions/deadlines/retries,
+  and independent review of the role-key/exact retired-observer cleanup delta.
+  Production, actual packed installation reuse verification and corrected-head CI
+  remain separate unrun gates; the original PR thread stays unresolved until then.
+  Browser004 PASSES all28 source-development cases, including actual concurrent
+  HTTP SSR, hydration/read dedup, scope/definition/denial/ABA/reconnect and the new
+  supersession scenario. Source/copy/emission hashes stay exact and6580 closes.
+  Known intentional-abort server diagnostics remain in stderr; do not claim globally
+  silent server output. Independent final session-delta review003 retains bounded
+  source approval. Main selects fresh production browser005: actual Start build,
+  generated routes, strict app types and all28 unchanged cases in a NEW source-copy
+  fixture using existing dependencies/emission. No old output rebuild or install.
+  Production browser005 passes actual build/generated-route strict types and28/28
+  scenarios, with unchanged source/copy/emission and6580 cleanup. Main's read-only
+  packed-intake001 verifies archive57ce1739… and ALL68 dist files match both installed
+  historical packed-8SEt6a and current WP06 emission. Select fresh browser006 over
+  that existing tarball dependency installation, corrected exact app/test copy,
+  actual production build/types and28 scenarios. No new install/archive, historical
+  consumer mutation or fresh-isolated dependency-install claim; enforce hashes.
+  Packed-reuse browser006 passes build/types but fails test discovery because main
+  mixed the root Playwright instance with the packed installation's instance.
+  Preserve006; no application result follows. Select browser007 using the actual
+  packed declaring-app Playwright CLI and a plain config object, no import alias,
+  with identical app/tests and assertions. All installed/archive hashes stay exact.
+  Packed-reuse production browser007 PASSES build, strict types and28/28 cases;
+  archive/installed dist/lock/source/copy/emission hashes unchanged and6580 closes.
+  Select matching existing-packed development browser008 and whole root unit suite
+  using actual unchanged emitted libraries (no rebuild/install), plus TS5.9 strict
+  app/unit replay. Root lint/docs and corrected-source commit/CI follow separately.
+  All root units PASS296/296,18 files, zero pending/retries; whole-root Biome163
+  files and strict TS5.9 app/unit checks pass. Production snapshots005/007 also pass
+  TS5.9/client chunk exclusion. Existing-packed development008 times out actual
+  HTTP readiness despite Vite startup; preserve it as UNRUN app scenarios. Main
+  selects009 using the same declaring packed Vite CLI as its framework plugins,
+  not the source workspace's second Vite instance. No timeout/test/app change.
+  Existing-packed development009 PASSES28/28 with exact input/install/archive/lock/
+  emission hashes and6580 cleanup. Together with007, both modes are verified over
+  that genuine historical tarball installation without an install. Main selects
+  one focused correction commit containing only these three app modules, appended
+  browser test, new owner units, registration and factual TASKS/evidence. Push it
+  to the existing #6 branch for corrected-head CI; keep its thread unresolved and
+  all merges blocked until current CI and final exact-head review permit them.
 - **2026-11-23:** TASK-002 review and authorization are complete. The maintainer
   ended the review and explicitly accepted WP-01; TASK-003 is **done**.
 - **Current owner instruction:** execute WP-04 through WP-15 in dependency order:
