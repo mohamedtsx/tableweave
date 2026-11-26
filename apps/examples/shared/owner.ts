@@ -1,6 +1,7 @@
 import {
   createCriteriaPublication,
   type DataTableOptions,
+  getCriteriaAuthorityOrigin,
   type NativeControllerOptions,
   type StateProposal,
   type TableCommand,
@@ -132,7 +133,7 @@ export function createExampleOwner<S extends QuerySchema, T extends object>(
     }
     refreshSnapshot();
   }
-  const P = createCriteriaPublication({
+  const P = createCriteriaPublication<S>({
     controller: C,
     definition: C.getDefinition(),
     retirement: {
@@ -175,6 +176,9 @@ export function createExampleOwner<S extends QuerySchema, T extends object>(
     context: current.expected,
     epoch: current.epoch,
   });
+  const origin = getCriteriaAuthorityOrigin(authority);
+  if (!origin) throw new Error("Application criteria origin unavailable");
+  const sourceContext = origin.context;
   // This owner has one publication domain. A terminal loss never mints a new
   // origin from latest state; a future real grant needs a new app owner.
   const criteria = () => authority;
@@ -234,7 +238,11 @@ export function createExampleOwner<S extends QuerySchema, T extends object>(
               view: remote.resource.getSnapshot(),
               bindings: remote.bindings(),
             }
-          : { mode: "client", context: { ...context, access: live }, records },
+          : {
+              mode: "client",
+              context: live ? sourceContext : { ...context, access: live },
+              records,
+            },
       };
     },
     dispatch(command: TableCommand<S>) {

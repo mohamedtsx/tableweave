@@ -371,6 +371,65 @@ function mutation<S extends QuerySchema, T extends RowData, Result>(
   }
 }
 
+interface OwnedMetadataField {
+  readonly descriptor: PropertyDescriptor | undefined;
+  data: Readonly<{ value: unknown; absent: boolean }> | undefined;
+}
+
+/** Private immutable-shape cursor, acquired only after exact resource provenance.
+ * Weak keys retain no old-view inventory. Never stores decisions, proofs or grants. */
+class OwnedResourceMetadataCapture extends CriteriaCapture {
+  private readonly ownedFields = new WeakMap<
+    object,
+    Map<PropertyKey, OwnedMetadataField>
+  >();
+  private readonly contexts = new WeakMap<object, ResourceContext>();
+  constructor() {
+    super(() => undefined);
+  }
+  private field(value: unknown, key: PropertyKey): OwnedMetadataField {
+    if (!object(value)) return deny();
+    let fields = this.ownedFields.get(value);
+    if (!fields) {
+      fields = new Map();
+      this.ownedFields.set(value, fields);
+    }
+    const cached = fields.get(key);
+    if (cached) return cached;
+    const descriptor = super.descriptor(value, key);
+    const field: OwnedMetadataField = {
+      // This is the intrinsic's fresh descriptor copy, not its input or value.
+      descriptor:
+        descriptor === undefined ? undefined : Object.freeze(descriptor),
+      data: undefined,
+    };
+    fields.set(key, field);
+    return field;
+  }
+  override descriptor(value: unknown, key: PropertyKey) {
+    return this.field(value, key).descriptor;
+  }
+  override data(value: unknown, key: PropertyKey, optional = false): unknown {
+    const field = this.field(value, key);
+    if (field.data) {
+      if (field.data.absent && !optional) return deny();
+      return field.data.value;
+    }
+    // Cold reads keep the original own-data/accessor/optional validation.
+    const captured = super.data(value, key, optional);
+    field.data = Object.freeze({ value: captured, absent: !field.descriptor });
+    return captured;
+  }
+  override context(value: unknown): ResourceContext {
+    if (!object(value)) return super.context(value);
+    const cached = this.contexts.get(value);
+    if (cached) return cached;
+    const captured = super.context(value);
+    this.contexts.set(value, captured);
+    return captured;
+  }
+}
+
 /** Metadata-only admission. No records/page/count traversal, model or query compiler. */
 function captureMetadata<S extends QuerySchema, T extends RowData>(
   owner: State<S, T>,
@@ -397,10 +456,13 @@ function captureMetadata<S extends QuerySchema, T extends RowData>(
       contextRef,
       read() {
         base();
-        if (
-          !sameContext(new CriteriaCapture(base).context(contextRef), expected)
-        )
-          return deny();
+        // Only the exact registered P-origin context is an immutable owned value.
+        // Every caller copy/proxy/context keeps its guarded descriptor capture.
+        const currentContext =
+          contextRef === origin.context
+            ? origin.context
+            : new CriteriaCapture(base).context(contextRef);
+        if (!sameContext(currentContext, expected)) return deny();
         base();
         return { metadata: Object.freeze({ origin, mode }), source: null };
       },
@@ -419,6 +481,7 @@ function captureMetadata<S extends QuerySchema, T extends RowData>(
     QueryFor<S>
   >["getSnapshot"];
   const port = resource as ResourceAdapter<T, QueryFor<S>>;
+  const ownedMetadata = new OwnedResourceMetadataCapture();
   function proof(value: unknown): ControlsRequestBinding<S> {
     if (
       !object(value) ||
@@ -492,7 +555,15 @@ function captureMetadata<S extends QuerySchema, T extends RowData>(
   }
   let knownRequest: ControlsRequestBinding<S> | null = null;
   let knownSnapshot: ControlsRequestBinding<S> | null = null;
-  function inspect(view: unknown, current: CriteriaCapture, initial: boolean) {
+  function inspectOwned(view: ResourceView<T, QueryFor<S>>, initial: boolean) {
+    // Only readView() results from the exact frozen adapter admitted above enter
+    // here. Its context/request/snapshot/extent/error envelopes are factory-owned
+    // and immutable; record elements are never inspected. Their descriptors
+    // cannot invoke app code, unlike raw source/configuration capture. Keep every
+    // live reader/controller boundary and entry/exit/operation fence outside this
+    // pure metadata traversal. Only immutable shape is reused; every decision
+    // and live fence below still runs on each read.
+    const current = ownedMetadata;
     if (
       !sameContext(current.context(current.data(view, "context")), expected) ||
       current.data(view, "active") !== true ||
@@ -594,7 +665,7 @@ function captureMetadata<S extends QuerySchema, T extends RowData>(
   }
   const actual = readView(base);
   if (suppliedView !== actual) return deny();
-  const admitted = inspect(actual, capture, true);
+  const admitted = inspectOwned(actual, true);
   knownRequest = admitted.requestBinding;
   knownSnapshot = admitted.snapshotBinding;
   return {
@@ -609,8 +680,7 @@ function captureMetadata<S extends QuerySchema, T extends RowData>(
         return undefined;
       };
       const view = readView(check),
-        current = new CriteriaCapture(check),
-        value = inspect(view, current, false);
+        value = inspectOwned(view, false);
       check();
       knownRequest = value.requestBinding;
       knownSnapshot = value.snapshotBinding;
@@ -674,6 +744,7 @@ function captureSource<S extends QuerySchema, T extends RowData>(
   raw: unknown,
   rawNative: unknown,
   expected: ResourceContext,
+  ownedOriginContext: ResourceContext,
   base: CriteriaCheck,
 ): Source<S, T> {
   const mode = capture.data(raw, "mode"),
@@ -704,10 +775,13 @@ function captureSource<S extends QuerySchema, T extends RowData>(
       resource: null,
       check() {
         base();
-        if (
-          !sameContext(new CriteriaCapture(base).context(contextRef), expected)
-        )
-          return deny();
+        // The sole caller supplies its authenticated binding.origin.context,
+        // never a mutable sourceCell/prepared value or a caller trust flag.
+        const currentContext =
+          contextRef === ownedOriginContext
+            ? ownedOriginContext
+            : new CriteriaCapture(base).context(contextRef);
+        if (!sameContext(currentContext, expected)) return deny();
         base();
         return undefined;
       },
@@ -715,6 +789,10 @@ function captureSource<S extends QuerySchema, T extends RowData>(
   }
   const resource = capture.data(raw, "resource");
   if (!object(resource)) return deny();
+  const ownedResource = hasResourceAdapterIdentity(resource);
+  const ownedMetadata = ownedResource
+    ? new OwnedResourceMetadataCapture()
+    : null;
   const view = capture.data(raw, "view");
   if (!object(view)) return deny();
   const bindingsInput = capture.data(raw, "bindings"),
@@ -907,7 +985,10 @@ function captureSource<S extends QuerySchema, T extends RowData>(
     resource: port,
     check(strict) {
       const fresh = read(),
-        current = new CriteriaCapture(base);
+        // Only an exact frozen adapter's captured reader returns private owned
+        // immutable metadata. Unknown/copied/proxied resources retain every
+        // descriptor fence, including post-trap revocation checks.
+        current = ownedMetadata ?? new CriteriaCapture(base);
       if (
         !sameContext(
           current.context(current.data(fresh, "context")),
@@ -1149,6 +1230,7 @@ export function createCriteriaFrames<S extends QuerySchema, T extends RowData>(
             capture.data(input, "source"),
             capture.data(input, "nativeInput"),
             expected,
+            origin.context,
             base,
           );
           source.check(true);
