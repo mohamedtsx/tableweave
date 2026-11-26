@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,6 +19,11 @@ if (
 const cache = join(own, `source-browser-${label}-cache`);
 const vendor = createRequire(join(root, "apps/storybook/package.json"));
 const native = createRequire(join(root, "packages/react/package.json"));
+const aria = createRequire(vendor.resolve("react-aria/package.json"));
+const commonJS = [
+  "use-sync-external-store/shim/index.js",
+  "use-sync-external-store/shim/with-selector",
+];
 function publicRuntime(packageName, entry) {
   if (!/^[A-Za-z][A-Za-z0-9-]*$/.test(entry))
     throw new Error("Public component entry must be a single segment");
@@ -35,8 +40,36 @@ function publicRuntime(packageName, entry) {
     !/\.m?js$/.test(target)
   )
     throw new Error("Missing pinned public ESM runtime");
-  return fileURLToPath(new URL(target.replaceAll("*", entry), manifest));
+  return realpathSync(
+    fileURLToPath(new URL(target.replaceAll("*", entry), manifest)),
+  );
 }
+const publicPeerEntries = [
+  ...[
+    "button",
+    "button-group",
+    "calendar",
+    "checkbox",
+    "date-field",
+    "date-picker",
+    "date-range-picker",
+    "drawer",
+    "dropdown",
+    "input",
+    "label",
+    "list-box",
+    "pagination",
+    "popover",
+    "range-calendar",
+    "search-field",
+    "select",
+    "table",
+    "tabs",
+    "textfield",
+    "time-field",
+  ].map((entry) => ["@heroui/react", entry]),
+  ["react-aria-components", "I18nProvider"],
+];
 export default {
   root,
   cacheDir: join(cache, "vite"),
@@ -46,15 +79,6 @@ export default {
     {
       name: "selected-public-peer-runtime",
       enforce: "pre",
-      resolveId(id) {
-        if (id.startsWith("@heroui/react/"))
-          return publicRuntime(
-            "@heroui/react",
-            id.slice("@heroui/react/".length),
-          );
-        if (id === "react-aria-components/I18nProvider")
-          return publicRuntime("react-aria-components", "I18nProvider");
-      },
       load(id) {
         if (/\/packages\/(react|heroui)\/dist\//.test(id))
           throw new Error(
@@ -66,6 +90,18 @@ export default {
   resolve: {
     dedupe: ["react", "react-dom"],
     alias: [
+      // Standard aliases preserve Vite's optimized-dependency lookup. A custom
+      // resolveId returning raw peer files would duplicate collection contexts.
+      ...publicPeerEntries.map(([packageName, entry]) => ({
+        find: new RegExp(`^${packageName}/${entry}$`),
+        replacement: publicRuntime(packageName, entry),
+      })),
+      // These transitive public CJS entries need Vite's real prebundle, not raw
+      // browser ESM loading. Resolve from their actual declaring peer dependency.
+      ...commonJS.map((entry) => ({
+        find: new RegExp(`^${entry.replaceAll(".", "\\.")}$`),
+        replacement: aria.resolve(entry),
+      })),
       {
         find: /^@tableweave\/heroui\/styles\.css$/,
         replacement: join(root, "packages/heroui/src/styles.css"),
@@ -103,6 +139,7 @@ export default {
     ],
   },
   optimizeDeps: {
+    include: commonJS,
     entries: [
       "tests/reordering/query-safe/browser.html",
       "tests/reordering/grouped-data-table/browser.html",

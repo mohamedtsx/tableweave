@@ -10,6 +10,73 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Bug corrections — review session 59 (verified #6, grouped render pending)
+
+The user authorizes fixing the confirmed bugs. Storybook preview001 is stopped
+at the user's separate request;6006 is free. Failed attempts, producer seals and
+packet ancestry remain intact; no drag/vendor/dependency/bootstrap work is opened.
+
+### n1 — PR #6 corrected; exact-head CI remains mandatory
+
+Independent source reviews001–003 approve safe obsolete construction/acceptance,
+retained committed-session lifetime, distinct React role keys and exact retired
+Query observer cleanup. Main's genuine held-GET race first catches duplicate keys,
+then recreated Alpha cache; both failed runs remain. The corrected whole suites
+pass **28 source development +28 source production +28 existing-tarball development
++28 existing-tarball production** cases with unchanged assertions and no retries.
+Existing installation reuse is not a fresh frozen install or new confinement proof.
+
+All root WP06 units pass **296/296**; strict TS6/5.9, whole-root Biome and production
+client-chunk exclusion pass. Old289 units and original authorization browser bytes
+are preserved. Known intentional-cancellation server diagnostics remain documented.
+The exact source/test/config aggregate is0c68dc0b…; main binds all six input hashes
+to pushed correction096732693d2aa82a4fef2615429be9a4049587da on the original #6 branch.
+Canonical correction evidence is appended in that branch, not substituted into
+the primary branch's older inherited source. Corrected-head CI runs45872185841 and
+45872174306 both SUCCEED. The push watcher's API interruption is retained separately
+from GitHub's successful job result. Main resolves the verified original finding
+and merges #6 to develop as821dfa27343a745ff887438758860eb44e3857a3, verifying both
+parents and exact tested-tree equalityb88fb398… . #7–#8 are not merged. Main integrates
+the fix into #7 by ordinary merge; its only conflict is test discovery, resolved by
+retaining both filter-tools entries and the new Start regression. Updated combined
+checks/CI remain mandatory before later merges.
+
+The corrected #7 head ise2eb1ae (parents46df932/0967326), now based on develop;
+local437/437 units, strict Start TS6/5.9, root Biome245 and docs/checker pass. #8
+head3fe3e00 (parentsfadb9a8/e2eb1ae) preserves all source-factory/control/tool
+registrations and both ledgers; local659/659 units, strict Start TS6/5.9, root
+Biome428 and docs/checker pass. Only config/ledger conflicts occur; all five app/
+test bodies match verified0967326. Both heads are pushed for new complete CI;
+neither old successful check set is treated as verification of these changed trees.
+
+### n2 — Source harness repaired; real grouped token rejection attributed
+
+Source-browser001 preserves the raw CommonJS-shim failure.002 fixes that but exposes
+raw/optimized React Aria context duplication. Standard canonical public aliases
+replace the resolver hook that bypassed Vite optimization.003 removes all page/
+console/network errors, but all five original grid assertions still fail: the
+table is absent, not merely hidden. No column-movement success is claimed.
+
+Read-only source diagnosis identifies non-idempotent projection inside a StrictMode
+memo calculation. Main's actual CDP diagnostic002 observes all four capture calls
+with `ended=true/current=false`, zero native tables, no diagnostic/page/network
+errors and successful cleanup. This is attribution only, not an unpaused behavior
+or performance pass. Diagnostic001's pre-spawn empty-cache failure remains intact.
+Independent projection review001 HOLDS final002: rejecting a distinct replacement
+can leave the prior action receipt live. No new runtime executes that held draft.
+Source-only iteration002 requests the existing native lifetime's pure physical
+action cut, unavailable through collection cleanup alone. Main explicitly extends
+the lease by that one owned native-resource-lifetime file, release-only to its
+existing revoker. Ticket issuance, geometry/refs, core/admission/Stage1 and public
+API remain excluded. Append-only genuine pretoken regressions cover rejected and
+caught reentrant replacement, exact replay and newer-action survival. Independent
+review, strict checks and full five-case unpaused replay remain mandatory.
+
+Draft #9 still has its separate483 lint errors,335/338 safety units,43/63 catalog
+result, query-safe application integration and other recorded runtime gaps.
+None of the bounded WP06 checks proves the newer integrated library or production
+readiness. No personal approval, installation, deployment or publication is claimed.
+
 ## Merge review — review session 58 (ordered develop integration)
 
 The user explicitly authorizes review and sequential merging of the open PRs into

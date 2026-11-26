@@ -6,6 +6,155 @@
 
 ### Resume checkpoint — latest state
 
+- User asks to close the Storybook background task. Main verifies preview001's
+  exact recorded PID2345926/command/process-group identity, sends SIGTERM only to
+  that group and confirms6006 has no listener. Preview001 is now STOPPED; its logs,
+  outputs and receipts remain. The separately authorized bug-fix work continues.
+- User now explicitly authorizes **fixing bugs/issues** from the review. Main selects
+  the confirmed PR #6 superseded-authorization exception first, then the independent
+  source-browser harness startup/port probe. Preserve all failed runs, grant guards,
+  original producer commits and the user's preview. Existing dependencies only;
+  no new install, vendor repair, drag activation, release or check waiver.
+  One source-only writer may use the clean existing /tmp/opencode/tableweave-wp06
+  worktree at9eb71e1 for bounded app authority/runtime/session/lifecycle changes and
+  focused owner/browser regressions. Main owns configs, execution, docs, Git/PR and
+  integration into later branches. No merge resumes until corrected checks/review.
+  The #6 source author is active only in the older WP-06 worktree. Main separately
+  corrects the primary source-browser config to prebundle two actual installed
+  public CommonJS shim entries from their declaring react-aria dependency, with no
+  dependency/vendor change. Resolve/syntax/Biome checks pass. The runner now uses
+  SO_REUSEADDR bind plus refused TCP-connect evidence so TIME_WAIT is not mislabeled
+  a lingering listener. Preserve both original config/runner preimages and browser001.
+  Main selects NEW frame006 and grouped-only source-browser002 (all5 original
+  assertions, zero retries) before further query-safe/combined/runtime claims.
+  WP-06 author now releases its5 frozen source/test files; independent review is
+  active. Main adds only old-worktree Vitest registration/public Query resolution.
+  No WP-06 runtime is selected before that review. The independent primary grouped
+  browser002 lane proceeds on its new exact frame; Storybook6006 stays stopped.
+  Source-browser002 fixes the raw CommonJS export failure and confirms6570 cleanup,
+  but ALL5 grouped cases now fail on a React Aria SelectValue context exception.
+  Retain002; actual column behavior remains unmeasured. Trace shows a raw private
+  Select module alongside optimized peer entries; main investigates dependency
+  identity/prebundling, not a vendor patch or error waiver. No other source changed
+  during that run. PR #6 source review is approved boundedly; strict app+unit types
+  pass, with a separately recorded small main hook-version/format correction.
+  WP-06 source-check003 and independent delta review002 pass; actual focused units001
+  PASS7/7 with unchanged source and no pending cases. Main selects its actual Start
+  held-GET regression on6580 from a new exact source-copy fixture using existing
+  dependencies/emission, not a new install or packed claim. Storybook stays stopped.
+  WP06 browser001 preserves a real duplicate-sibling-key failure before its zero-
+  error assertion; retained Alpha state assertions succeed but no whole-case pass.
+  Main separates candidate/session key namespaces and rechecks with fresh002.
+  The primary grouped-context diagnosis confirms the custom resolveId bypassed
+  Vite's optimized lookup, duplicating HiddenContext. Main replaces only that hook
+  with standard exact public aliases/canonical targets; load guards, CJS mappings,
+  fixtures and assertions remain. Fresh frame007/source-browser003 is selected.
+  Grouped source-browser003 removes ALL startup page/console/network errors, but
+  all5 original grid-visible assertions still fail; actual tools/footer show a
+  genuine24-record page while the table remains hidden. Read-only hidden-host
+  diagnosis is active; do not force readiness or weaken refs/authority/assertions.
+  WP06 browser002 fixes key warnings but finds retired Alpha cache-key recreation;
+  main corrects exact obsolete observer cleanup and selects unchanged browser003.
+  WP06 isolated-source browser003 now PASSES the real held-GET regression after
+  those bounded fixes. All source/copy/emission guards stay exact and6580 closes.
+  Main selects all28 source-development scenarios in fresh browser004 plus final
+  delta review. No production/packed/CI/merge readiness follows from that one pass.
+  WP06 browser004 PASSES all28 original+new development integration cases with
+  exact input/emission guards and port cleanup. Known server AbortError diagnostics
+  are preserved, not called clean stderr. Independent session-delta review003 passes;
+  main selects a fresh actual production build/typecheck/all28-case browser005.
+  Grouped token attribution is source-supported but awaits main CDP scalar observation
+  before any renderer projection source allocation; no guard weakening is selected.
+  WP06 production browser005 PASSES build, generated-route strict typecheck and
+  all28 unchanged scenarios; inputs/emission stay exact and6580 closes. Historical
+  actual tarball57ce1739…/installed package match all68 current WP06 dist files;
+  this read-only intake is not a new installation or corrected-app packed run.
+  Main selects a fresh corrected-app replay using that existing tarball dependency
+  installation, without modifying it. Main also selects the authored CDP diagnostic
+  on6570 using reserved source-browser004 cache and frame007; observe only actual
+  ended/current booleans, with no source/guard changes or behavior-pass claim.
+  Diagnostic001 fails its pre-spawn empty-cache guard because main put private HOME
+  directories in that cache. Preserve the failure; no browser/server started.
+  Select new diagnostic002/source-browser005 cache with environment directories
+  outside that empty cache. Frame007/source/emission remain unchanged.
+  Actual diagnostic002 correlates all4 captures: ended=true/current=false, no
+  page/console/network/diagnostic errors, zero native tables, and owned cleanup.
+  This attributes the rejection only, not behavior/performance. Main allocates a
+  source-only correction lease for native-collection.tsx/reordering-binding.ts and
+  focused new regressions: make exact repeated projection idempotent under Strict
+  memo evaluation without retaining obsolete views or weakening capture/ref grants.
+  Main keeps configs/execution/docs/Git; native producers, Stage1, vendor and drag
+  remain outside that lease. Review and full5 grouped replay are mandatory.
+  WP06 actual existing-tarball production replay007 passes build/types and28/28
+  cases; historical installation/archive/lock and current sources/emission stay
+  exact. Failed006 mixed-Playwright discovery is preserved. Select packed-reuse
+  development008, all root units, TS5.9 and lint/docs before corrected #6 commit.
+  WP06 whole root units PASS296/296; root Biome163 files, strict TS5.9 app/unit and
+  source/packed production snapshot TS5.9/client-chunk checks pass. Packed dev008
+  has no test result: HTTP readiness times out after startup with mixed Vite tool
+  roots. Preserve008;009 selects actual declaring packed Vite CLI, unchanged120s
+  readiness deadline. Canonical WP06 evidence is appended in that older worktree;
+  no corrected #6 commit, push, CI result or merge has occurred yet.
+  Actual existing-packed development009 PASSES28/28 after the CLI correction;
+  all guards and port cleanup pass. Main now commits/pushes only the verified
+  WP06 correction/tests/registration/evidence on its original branch for #6 CI.
+  No thread resolution or #6–#8 merge is selected before corrected-head checks.
+  WP06 correction is committed/pushed on its original branch as096732693d2aa82a4fef2615429be9a4049587da.
+  It contains exactly8 selected app/test/config/evidence paths; no producer history
+  rewrite. The verified six-file source/config aggregate remains0c68dc0b… . Actual
+  corrected-head CI is pending; main publishes factual PR evidence without resolving
+  the original finding or merging dependencies.
+  Corrected #6 actual push/PR workflows45872174306/45872185841 both SUCCEED at
+  0967326. The push watcher exit1 is a GitHub API connection interruption; a fresh
+  run/job query confirms pnpm check SUCCESS, not a failed CI waiver. Exact-head
+  review receipt binds all6 verified inputs and the8-path delta. Main selects final
+  thread resolution and one guarded #6 merge only if the current merge tree equals
+  tested0967326, preceding #5 is actually merged and all current checks stay green.
+  The primary two-file grouped projection author releases its frozen final002
+  source; independent source review is active. No new grouped runtime claim yet.
+  #6 is actually merged into develop as821dfa27343a745ff887438758860eb44e3857a3;
+  ordinary merge parents and exact tested treeb88fb398… are verified. Original
+  supersession thread is resolved with evidence. Main selects #7 integration in
+  its clean existing wp07-stacked worktree: ordinary merge of0967326, preserve all
+  packet history and meaningful Vitest registrations, inspect any conflicts, then
+  combined-source review/local checks and push for new CI before a #7 merge.
+  #8 waits for the corrected #7 tree; no blind cascade or old-green-check reuse.
+  Grouped projection review001 HOLDS final002 on a P2: distinct replacement
+  rejection can leave the prior issued action receipt current. No new source runtime
+  was run. Return the same two-file lease for fail-closed replacement retirement
+  before callbackful inspection, preserving exact replay and any reentrant newer
+  collection. Extend the genuine pretoken renderer fixture/spec append-only for
+  rejected replacement, caught reentrant attempt, exact replay and newer-token
+  survival. Existing tests/assertions/seals stay intact; no producer/registry lease.
+  #7 integration e2eb1ae6b7a8cf4372721ff783b2ae13781b7a41 is committed/pushed with
+  parents46df932/0967326, only discovery conflict resolved by union. Local437/437
+  units, root Biome245, strict app TS6/5.9 and docs/checker pass. PR #7 retargets to
+  develop after actual #6 merge; current full CI is required before its merge.
+  Main selects #8 integration of this now-corrected #7 head in its clean existing
+  wp08-stacked worktree, preserving controls/tool test entries and packet ancestry.
+  Neither #7 nor #8 merges before successful exact-head checks and tested-tree proof.
+  #8 combined intake PASS659/659 units (37 files), Biome428, strict Start TS6/5.9,
+  docs121/634 and checker18. Preserve all source-factory aliases/controls/tool
+  registrations; conflicts are only config/ledger. Main prepares the two-parent
+  integration commit and new CI, still blocked from merge until #7 actually lands.
+  Grouped correction iteration002 makes NO source/test changes: the required pure
+  physical row-action cut is private to native-resource-lifetime.ts. Main now
+  explicitly extends that source-only lease to this ONE additional owned file,
+  only a release-only bridge to the existing fixed revokeAction path before
+  callbackful replacement inspection. No new permitting registry, public API,
+  ticket issuance/ref/geometry/core/admission/Stage1 change is authorized. Stale
+  cleanup must not revoke a newer action; genuine refs/geometry stay untouched.
+  Keep append-only pretoken rejection/reentry/replay/newer-token tests and require
+  independent review before runtime. No vendor/native dependency repair is opened.
+  #8 integration3fe3e00cb63c8f6d4b2f08efd8c6d7b5b7a58804 is committed/pushed with
+  parentsfadb9a8/e2eb1ae; all5 app/test bodies match0967326. Only config/ledger
+  conflicts are resolved, preserving controls/tool/source-factory registrations.
+  Current full CI gates both #7 e2eb1ae and #8 3fe3e00; #8 retains its stacked base
+  until #7 actually merges. No new packet approval or CI success is inferred.
+  Main selects a focused primary harness/status commit containing ONLY the corrected
+  source-browser Vite config and TASKS/REVIEW. Its actual003 startup has zero errors;
+  five grid failures and the grouped held source remain explicit, unstaged and
+  unapproved. No renderer/pretoken draft enters this commit or gains runtime proof.
 - Latest user request authorizes **reviewing open PRs and merging eligible PRs one
   by one into develop**. This supersedes the earlier no-merge restriction for this
   ordered Git operation only. Keep drag/install/deployment/release restrictions;
