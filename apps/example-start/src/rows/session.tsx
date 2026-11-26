@@ -1,11 +1,17 @@
 import { useNativeTable, useTableweaveResource } from "@tableweave/react";
 import { type QueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { useEffect, useLayoutEffect, useState } from "react";
-import type { AuthorizationSession } from "./authorization-session";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import { type AuthorizationSession, rowsPrefix } from "./authorization-session";
 import type { RuntimeInspection } from "./inspection";
 import { rowsOptions } from "./options";
-import { createDemoRuntime } from "./runtime";
+import { createDemoRuntime, type DemoRuntime } from "./runtime";
 import type {
   AuthorizationIdentity,
   AuthorizedBootstrap,
@@ -20,13 +26,94 @@ interface SessionProps {
   /** Acceptance fixture can suspend a speculative render, never commit writes. */
   readonly beforeCommit?: () => void;
 }
-export function AuthorizationBoundary(props: SessionProps) {
-  return (
-    <DemoSession
-      key={`${props.bootstrap.definitionKey}|${props.bootstrap.scopeKey}|${props.bootstrap.authorizationId}`}
-      {...props}
-    />
+interface SessionModel {
+  readonly props: SessionProps;
+  readonly runtime: DemoRuntime;
+}
+function sessionKey({ bootstrap }: SessionProps) {
+  return `${bootstrap.definitionKey}|${bootstrap.scopeKey}|${bootstrap.authorizationId}`;
+}
+function createSessionModel(props: SessionProps): SessionModel | null {
+  const runtime = createDemoRuntime(
+    props.bootstrap,
+    props.queryClient,
+    props.authorization,
   );
+  return runtime ? { props, runtime } : null;
+}
+export function AuthorizationBoundary(props: SessionProps) {
+  const { authorization } = props;
+  const version = useSyncExternalStore(
+    authorization.subscribe,
+    authorization.getSnapshot,
+    authorization.getServerSnapshot,
+  );
+  // The initial model alone may render before commit for SSR/first hydration.
+  // Replacements never enter the visible session until atomic owner acceptance.
+  const [retained, setRetained] = useState(() => createSessionModel(props));
+  const accept = useCallback((model: SessionModel) => {
+    setRetained((previous) => (previous === model ? previous : model));
+  }, []);
+  const visible =
+    retained &&
+    (authorization.isCurrent(retained.runtime.authority) ||
+      (!authorization.hasCurrent() &&
+        authorization.canSeed(retained.runtime.authority.identity)))
+      ? retained
+      : null;
+  return (
+    <>
+      <AuthorizationCandidate
+        key={`candidate:${sessionKey(props)}`}
+        props={props}
+        retained={retained}
+        version={version}
+        accept={accept}
+      />
+      {visible && (
+        <DemoSession
+          key={`session:${sessionKey(visible.props)}`}
+          {...visible.props}
+          runtime={visible.runtime}
+        />
+      )}
+    </>
+  );
+}
+
+function AuthorizationCandidate({
+  props,
+  retained,
+  version,
+  accept,
+}: {
+  readonly props: SessionProps;
+  readonly retained: SessionModel | null;
+  readonly version: number;
+  readonly accept: (model: SessionModel) => void;
+}) {
+  const { authorization } = props;
+  const [model] = useState(() =>
+    retained && sessionKey(retained.props) === sessionKey(props)
+      ? retained
+      : createSessionModel(props),
+  );
+  useLayoutEffect(() => {
+    // A version-triggered render is not a reservation through layout. Discard
+    // that observation if the owner changed; commit still rechecks the grant.
+    if (!model || authorization.getSnapshot() !== version) return;
+    const outcome = authorization.commit(model.runtime.authority);
+    // Replacement candidates never mount session hooks or connect a source.
+    // Drop obsolete models without cache/resource cleanup. The owner alone
+    // retires committed lifetimes, so an old candidate cannot dispose one twice.
+    if (outcome === "obsolete") return;
+    accept(model);
+  }, [authorization, model, version, accept]);
+  // No conditional hooks in the actual session. An obsolete bootstrap never
+  // reaches its table/resource/Query hooks, nor a formerly pending Suspense gate.
+  if (model && authorization.canSeed(model.runtime.authority.identity))
+    props.beforeCommit?.();
+  return null;
 }
 
 function DemoSession({
@@ -34,20 +121,14 @@ function DemoSession({
   canary,
   queryClient,
   authorization,
-  beforeCommit,
-}: SessionProps) {
+  runtime,
+}: SessionProps & { readonly runtime: DemoRuntime }) {
   const router = useRouter();
-  const [runtime] = useState(() =>
-    createDemoRuntime(bootstrap, queryClient, authorization),
-  );
   const resource = useTableweaveResource(runtime.resource, {
     definitionKey: bootstrap.definitionKey,
     scopeKey: bootstrap.scopeKey,
     access: true,
   });
-  useLayoutEffect(() => {
-    authorization.commit(runtime.authority);
-  }, [authorization, runtime]);
   const snapshot = resource.snapshot;
   const table = useNativeTable(runtime.definition, runtime.controller, {
     mode: "server",
@@ -115,13 +196,14 @@ function DemoSession({
       ? displayedPage.pageIndex * displayedPage.pageSize +
         snapshot.records.length
       : 0;
-  beforeCommit?.();
   return (
     <main>
       {resource.context.access && (
         <RowsObserver
           input={runtime.observerInput(table.state.query)}
           grant={runtime.authority.identity}
+          authorization={authorization}
+          queryClient={queryClient}
         />
       )}
       <h1>Synthetic Start + Query integration</h1>
@@ -356,14 +438,31 @@ function DemoSession({
 function RowsObserver({
   input,
   grant,
+  authorization,
+  queryClient,
 }: {
   readonly input: ReadInput;
   readonly grant: AuthorizationIdentity;
+  readonly authorization: AuthorizationSession;
+  readonly queryClient: QueryClient;
 }) {
   useQuery({
     ...rowsOptions(input, grant),
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
+  useEffect(
+    () => () => {
+      // Removing an observed Query during owner retirement may let that old
+      // observer recreate its empty partition before React unmounts it. Once
+      // useQuery has unsubscribed, finish cleanup for ONLY this retired grant.
+      // StrictMode/current-owner cleanup must retain the genuine fresh cache.
+      if (!authorization.canSeed(grant)) {
+        void queryClient.cancelQueries({ queryKey: rowsPrefix(grant) });
+        queryClient.removeQueries({ queryKey: rowsPrefix(grant) });
+      }
+    },
+    [authorization, grant, queryClient],
+  );
   return null;
 }
