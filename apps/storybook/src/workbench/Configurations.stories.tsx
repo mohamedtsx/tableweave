@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import {
-  checkedPlay,
   ControlledWorkbench,
+  checkedPlay,
   GroupedWorkbench,
   IndependentWorkbench,
   MinimalWorkbench,
@@ -131,31 +131,31 @@ export const SelectionLifetime: Story = {
 export const Sorting: Story = {
   play: async ({ canvasElement }) =>
     checkedPlay(canvasElement, async () => {
-      const canvas = within(canvasElement),
-        body = within(canvasElement.ownerDocument.body);
+      const canvas = within(canvasElement);
+      const user = userEvent.setup({ document: canvasElement.ownerDocument });
       await canvas.findByRole("rowheader", { name: "Transfer note 01" });
-      await userEvent.click(
+      // Native header buttons sort directly; this configuration has no sort menu.
+      await user.click(
         canvas.getByRole("button", { name: /^Sort Description,/ }),
       );
-      await userEvent.click(
-        await body.findByRole("button", { name: "Ascending: Description" }),
-      );
-      await userEvent.keyboard("{Escape}");
       await controls(canvasElement);
       await waitFor(async () =>
         expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
           '"sorting":[{"desc":false,"id":"description"}]',
         ),
       );
-      await userEvent.click(
-        canvas.getByRole("button", { name: /^Sort Amount,/ }),
-      );
-      await userEvent.click(
-        await body.findByRole("button", { name: "Add descending: Amount" }),
-      );
-      await userEvent.keyboard("{Escape}");
-      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
-        '"desc":true,"id":"amount"',
+      await user.keyboard("{Shift>}");
+      await user.click(canvas.getByRole("button", { name: /^Sort Amount,/ }));
+      await user.keyboard("{/Shift}");
+      await waitFor(() =>
+        expect(
+          JSON.parse(
+            canvas.getByLabelText("Accepted query").textContent ?? "null",
+          ).sorting,
+        ).toEqual([
+          { id: "description", desc: false },
+          { id: "amount", desc: true },
+        ]),
       );
     }),
 };
@@ -186,11 +186,27 @@ export const GroupedColumns: Story = {
       const canvas = within(canvasElement),
         body = within(canvasElement.ownerDocument.body);
       await canvas.findByRole("columnheader", { name: "Values" });
+      await waitFor(() =>
+        expect(
+          canvas.getByRole("button", { name: "Move column: Amount" }),
+        ).toBeEnabled(),
+      );
       await userEvent.click(
         canvas.getByRole("button", { name: "Move column: Amount" }),
       );
-      await userEvent.click(
-        await body.findByRole("menuitem", { name: "Move after" }),
+      const after = await body.findByRole("menuitem", { name: "Move after" });
+      await waitFor(() => expect(after).toBeVisible());
+      await expect(after).toBeEnabled();
+      await expect(
+        body.getByRole("menuitem", { name: "Move before" }),
+      ).toBeDisabled();
+      await userEvent.click(after);
+      await waitFor(() =>
+        expect(
+          canvas
+            .getAllByRole("button", { name: /^Sort (?:Account|Amount),/ })
+            .map((button) => button.getAttribute("aria-label")?.split(",")[0]),
+        ).toEqual(["Sort Account", "Sort Amount"]),
       );
       await expect(
         canvas.getByRole("columnheader", { name: "Values" }),
@@ -248,7 +264,11 @@ export const Narrow: Story = {
       await within(canvasElement).findByRole("rowheader", {
         name: "Transfer note 01",
       });
-      await expect(within(canvasElement).getByRole("table")).toBeVisible();
+      const table = within(canvasElement).getByRole("grid", {
+        name: /^Synthetic transactions$/,
+      });
+      await expect(table.tagName).toBe("TABLE");
+      await expect(table).toBeVisible();
     }),
 };
 export const IndependentTables: Story = {

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { checkedPlay, TransactionsWorkbench } from "./Workbench.js";
+
 const meta = {
   id: "wp11-filters",
   title: "Workbench/Filters",
@@ -19,9 +20,11 @@ export const FieldOwnership: Story = {
       await userEvent.click(
         canvas.getByRole("button", { name: "Add filter rule: Filters" }),
       );
-      await expect(
-        await body.findByRole("option", { name: "Reference (hidden column)" }),
-      ).toBeVisible();
+      // Aria mounts its collection before the animated popover is visible.
+      const reference = await body.findByRole("option", {
+        name: "Reference (hidden column)",
+      });
+      await waitFor(() => expect(reference).toBeVisible());
       for (const name of ["description", "status", "occurred"])
         await expect(
           body.queryByRole("option", { name }),

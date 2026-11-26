@@ -1,19 +1,19 @@
 import { Button } from "@heroui/react/button";
 import {
-  DataTable,
-  TableDetailsTrigger,
   arabicDataTableLocale,
-  englishDataTableLocale,
-  useDetailsAccessory,
+  DataTable,
   type DataTableProps,
   type DetailsRenderContext,
+  englishDataTableLocale,
   type FilterCustomEditorProps,
+  TableDetailsTrigger,
+  useDetailsAccessory,
 } from "@tableweave/heroui";
 import {
-  useDataTable,
-  useTableweaveState,
   type DataTableModel,
   type NativeColumnDef,
+  useDataTable,
+  useTableweaveState,
 } from "@tableweave/react";
 import {
   canonicalJson,
@@ -21,14 +21,14 @@ import {
   type QuerySchema,
 } from "@tableweave/react/contracts";
 import {
-  useEffect,
+  type ReactNode,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
   useSyncExternalStore,
-  type ReactNode,
 } from "react";
 import { I18nProvider } from "react-aria/I18nProvider";
 import {
@@ -38,30 +38,30 @@ import {
   transactionDefinition,
 } from "../../../examples/shared/definitions.js";
 import {
-  createExampleDetails,
   CustomerDetails,
+  createExampleDetails,
+  type ExampleDetails,
   InventoryDetails,
   TransactionDetails,
   useExampleDetailSource,
-  type ExampleDetails,
 } from "../../../examples/shared/details.js";
 import {
   createExampleOwner,
   type ExampleOwner,
 } from "../../../examples/shared/owner.js";
 import {
-  customers,
-  inventory,
-  transactions,
   type Customer,
+  customers,
   type InventoryItem,
+  inventory,
   type Transaction,
+  transactions,
 } from "../../../examples/shared/records.js";
 import {
-  exampleOperators,
-  ownerConflictDiagnostic,
   type CustomerSchema,
+  exampleOperators,
   type InventorySchema,
+  ownerConflictDiagnostic,
   type TransactionSchema,
 } from "../../../examples/shared/schemas.js";
 
@@ -226,14 +226,9 @@ function Surface<S extends QuerySchema, T extends object>(
     setWidth(props.width ?? 1440);
   }, [props.width]);
   useLayoutEffect(() => app.connect(), [app]);
-  useEffect(() => {
-    const a = app.numericOptions.source.connect(),
-      b = app.stringOptions.source.connect();
-    return () => {
-      a();
-      b();
-    };
-  }, [app]);
+  // The builder owns the numeric source's single passive connection, outside
+  // picker visibility. A second application lease would block that connection.
+  useEffect(() => app.stringOptions.source.connect(), [app]);
   useEffect(() => {
     app.dispatch({
       type: "query.context",
@@ -327,7 +322,7 @@ function Surface<S extends QuerySchema, T extends object>(
         <div className="mx-auto min-w-0 space-y-4" style={{ maxWidth: width }}>
           <header className="space-y-2">
             <h1 className="text-lg font-semibold">{title}</h1>
-            <p className="text-xs text-muted">
+            <p className="text-xs text-foreground">
               Synthetic application inputs. Provisional source catalog;
               dragging/G-02 is incomplete. No persistence or runtime acceptance
               is implied.

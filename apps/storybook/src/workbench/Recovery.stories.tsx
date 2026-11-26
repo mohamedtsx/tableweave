@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { checkedPlay, RecoveryWorkbench } from "./Workbench.js";
+
 const meta = {
   id: "wp11-recovery",
   title: "Workbench/Recovery",
@@ -86,13 +87,22 @@ export const RefreshError: Story = {
     checkedPlay(canvasElement, async () => {
       const canvas = within(canvasElement);
       await canvas.findByRole("rowheader", { name: "Transfer note 01" });
+      const notice = await canvas.findByText(
+        "Records could not be updated. Showing the last available data.",
+        { exact: true },
+      );
+      await expect(notice).toBeVisible();
+      const recovery = notice.parentElement;
+      if (!recovery) throw new Error("Missing failed-refresh notice container");
+      await userEvent.click(
+        within(recovery).getByRole("button", { name: /^Retry$/ }),
+      );
       await expect(
-        await canvas.findByText(
-          "Records could not be updated. Showing the last available data.",
-          { exact: true },
-        ),
+        await canvas.findByText("Updating records…", { exact: true }),
       ).toBeVisible();
-      await userEvent.click(canvas.getByRole("button", { name: "Retry" }));
+      await expect(
+        canvas.getByRole("rowheader", { name: "Transfer note 01" }),
+      ).toBeVisible();
       await userEvent.click(
         canvas.getByText("Synthetic application controls", {
           selector: "summary",
@@ -108,6 +118,14 @@ export const RefreshError: Story = {
           ),
         ).not.toBeInTheDocument(),
       );
+      await waitFor(async () =>
+        expect(
+          canvas.queryByText("Updating records…", { exact: true }),
+        ).not.toBeInTheDocument(),
+      );
+      await expect(
+        canvas.getByRole("rowheader", { name: "Transfer note 01" }),
+      ).toBeVisible();
     }),
 };
 export const Empty: Story = {

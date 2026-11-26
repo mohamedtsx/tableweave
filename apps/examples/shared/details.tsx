@@ -318,7 +318,11 @@ function DetailTransport<S extends QuerySchema, T extends object>({
   return (
     <fieldset className="flex flex-wrap gap-2">
       <legend>Synthetic detail transport</legend>
-      <Button variant="tertiary" onPress={() => driver.load(state.authority)}>
+      <Button
+        className="text-foreground"
+        variant="tertiary"
+        onPress={() => driver.load(state.authority)}
+      >
         Refresh detail
       </Button>
       {state.source?.status === "loading" ? (
