@@ -1,4 +1,10 @@
 import type { QuerySchema } from "../contracts/types.js";
+import {
+  type CriteriaAuthority,
+  type CriteriaOrigin,
+  getCriteriaAuthorityOrigin,
+  requireCriteriaAuthority,
+} from "../controller/criteria.js";
 import type { CriteriaPublication } from "../controller/criteria-publication.js";
 import type {
   StateProposal,
@@ -9,18 +15,28 @@ import type {
 } from "../controller/types.js";
 import { getControlsAuthorityOwner } from "../presentation/authority.js";
 import {
+  type CriteriaFrameSnapshot,
+  type CriteriaFrames,
+  getCriteriaFramesOwner,
   requireCriteriaSource,
   requireCriteriaTool,
 } from "../presentation/criteria-frame.js";
 import {
+  acknowledgement as captureAcknowledgement,
   frame as captureReorderFrame,
+  settlement as captureSettlement,
   observePromise,
   ReorderError,
+  reorderLimits,
+  sameStamp,
 } from "../reordering/capture.js";
 import { createRowMoveCoordinator } from "../reordering/rows.js";
 import type {
   RowMoveBeginResult,
+  RowMoveEventResult,
+  RowMoveFeedbackCode,
   RowMoveOperation,
+  RowMoveState,
   RowReorderFrame,
 } from "../reordering/types.js";
 import {
@@ -131,6 +147,8 @@ interface Receipt {
 }
 interface Registration<S extends QuerySchema> {
   readonly publication: CriteriaPublication<S>;
+  readonly criteria: CriteriaAuthority<S>;
+  readonly origin: CriteriaOrigin<S>;
   release: (() => void) | null;
   stop: (() => void) | null;
   purged: boolean;
@@ -338,6 +356,57 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     committedRevision = -1;
   let registration: Registration<S> | null = null;
   let retiredRegistration: Registration<S> | null = null;
+  interface Witness {
+    readonly registration: Registration<S>;
+    readonly lease: ReorderAdmissionLease<S, T>;
+    readonly source: NonNullable<DataTableModel<S, T>["sourceTarget"]>["owner"];
+    readonly sourceAuthority: NonNullable<
+      DataTableModel<S, T>["sourceTarget"]
+    >["authority"];
+    readonly tool: object;
+    readonly mode: string;
+    readonly readSource: () => CriteriaFrameSnapshot;
+  }
+  interface Issued {
+    readonly operation: RowMoveOperation;
+    readonly witness: Witness;
+    moves: RowMoveState;
+    retired: boolean;
+    consumed: boolean;
+  }
+  // One issued obligation, never an accepted row/query/order mirror. Query/UI cuts
+  // may retire pure pending, but only a correlated terminal event releases debt.
+  let witness: Witness | null = null;
+  let issued: Issued | null = null;
+  let endedDebt = false;
+  let readmissionThrough = -1;
+  let readmissionOwed = false;
+  let terminalMoves: RowMoveState | null = null;
+  const readmissionRequired = () =>
+    !disposed && !endedDebt && witness !== null && readmissionOwed;
+  const effectivePending = () =>
+    endedDebt || issued !== null || coordinator.getSnapshot().pending !== null;
+  const effectiveMoves = (): RowMoveState => {
+    if (issued) return issued.moves;
+    const current = coordinator.getSnapshot();
+    return current.pending ? current : (terminalMoves ?? current);
+  };
+  const preserveIssued = (retired = false) => {
+    if (!issued) return;
+    const current = coordinator.getSnapshot();
+    if (current.pending?.operation === issued.operation && !issued.retired)
+      issued.moves = current;
+    if (retired || current.pending?.operation !== issued.operation)
+      issued.retired = true;
+  };
+  const endWitness = () => {
+    if (issued) endedDebt = true;
+    issued = null; // Private payload retirement is NOT backend completion.
+    witness = null;
+    readmissionThrough = -1;
+    readmissionOwed = false;
+    terminalMoves = null;
+  };
   let identity: {
     source: object;
     tool: object;
@@ -494,11 +563,10 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     if (
       latestMetadata &&
       (value.ownerEpoch < latestMetadata.ownerEpoch ||
-        (value.ownerEpoch === latestMetadata.ownerEpoch &&
-          (value.sourceVersion < latestMetadata.sourceVersion ||
-            (value.sourceVersion === latestMetadata.sourceVersion &&
-              (!Object.is(value.revision, latestMetadata.revision) ||
-                value.baseRevision !== latestMetadata.baseRevision)))))
+        value.sourceVersion < latestMetadata.sourceVersion ||
+        (value.sourceVersion === latestMetadata.sourceVersion &&
+          (!Object.is(value.revision, latestMetadata.revision) ||
+            value.baseRevision !== latestMetadata.baseRevision)))
     )
       return deny();
     latestMetadata = value;
@@ -511,7 +579,9 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       !value ||
       !expected.lease ||
       !metadata ||
-      metadata.ownerEpoch <= retiredThrough
+      metadata.ownerEpoch <= retiredThrough ||
+      metadata.ownerEpoch <= readmissionThrough ||
+      (role === "act" && readmissionOwed)
     )
       return deny();
     requireDataTableModel(value, definition);
@@ -654,6 +724,20 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       const attempt = ids.length ? ownBegin : null;
       try {
         const frame = readFrame(ids);
+        const pending = coordinator.getSnapshot().pending;
+        if (
+          pending &&
+          sameStamp(frame.stamp, pending.operation.origin) &&
+          (frame.pageIds.length !== pending.operation.move.pageIds.length ||
+            frame.pageIds.some(
+              (id, index) => id !== pending.operation.move.pageIds[index],
+            ))
+        ) {
+          // Preserve Stage1's exact same-stamp/page-ID rejection at the port exit,
+          // before pure's opaque observe/detach can hide its retired epoch. Read
+          // the genuine core token, never a second accepted-order/input mirror.
+          return deny();
+        }
         // Last ACT exit after frame extraction, before pure parses owned data.
         // Never replace this with a fresh UI cut or a post-creation port read.
         if (attempt)
@@ -682,6 +766,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     version: Object.freeze({}),
     phase: "unmounted",
     interaction: false,
+    readmissionRequired: false,
     moves: coordinator.getSnapshot(),
   });
   const update = (force = false) => {
@@ -691,15 +776,17 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       ? "disposed"
       : !lease
         ? "unmounted"
-        : model
+        : model && !endedDebt && !readmissionRequired()
           ? "ready"
           : "unready";
-    const moves = coordinator.getSnapshot();
+    const moves = effectiveMoves();
     const active = interaction !== null;
+    const needsReadmission = readmissionRequired();
     if (
       !force &&
       snapshot.phase === phase &&
       snapshot.moves === moves &&
+      snapshot.readmissionRequired === needsReadmission &&
       snapshot.interaction === active
     )
       return;
@@ -707,6 +794,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       version: Object.freeze({}),
       phase,
       interaction: active,
+      readmissionRequired: needsReadmission,
       moves,
     });
     dirty = true;
@@ -752,6 +840,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   const purge = () => {
     purging++;
     try {
+      preserveIssued(true);
+      endWitness();
       retireUI();
       if (metadata)
         retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
@@ -767,8 +857,25 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       purging--;
     }
   };
-  failObservation = purge;
+  const retireObservation = () => {
+    preserveIssued(true);
+    // Stage1 permanently fences an invalidated observation epoch. Expose that
+    // negative obligation; only a truthful newer APP publication can satisfy it.
+    if (witness && metadata) {
+      readmissionThrough = Math.max(readmissionThrough, metadata.ownerEpoch);
+      readmissionOwed = true;
+    }
+    model = null;
+    retireInteraction();
+    advanceSource();
+    clearModelJoin();
+    coordinator.invalidate("context");
+    touchUI();
+    update();
+  };
+  failObservation = retireObservation;
   coordinator.subscribe(() => {
+    preserveIssued();
     const pending = coordinator.getSnapshot().pending?.operation ?? null;
     if (disposed) {
       lastPending = pending;
@@ -818,6 +925,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     // Terminal private-generation exhaustion is owner shutdown, not a UI cleanup
     // outcome. Do not wrap/regrant or leave a newly created undelivered token.
     disposed = true;
+    endWitness();
     if (metadata)
       retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
     model = null;
@@ -842,7 +950,24 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       return action();
     } catch (error) {
       observePromise(error);
-      if (!takeUIInterruption(error)) retire();
+      if (!takeUIInterruption(error)) {
+        if (issued || (witness && readmissionRequired())) {
+          // A failed current-query read is not a backend outcome or a new grant.
+          // Explicit source/P retirement still uses purge() and ends the witness.
+          const retained = issued;
+          const fixed = witness;
+          try {
+            requireWitness(fixed ?? deny());
+          } catch (failure) {
+            observePromise(failure);
+          }
+          // Only requireWitness's positively identified terminal branches purge.
+          // A busy/current-metadata read may fail while that exact domain lives.
+          if (issued === retained && witness === fixed && fixed)
+            retireObservation();
+          else retire();
+        } else retire();
+      }
       return deny();
     } finally {
       boundary = previous;
@@ -874,7 +999,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     uiRecord.metadata = Object.freeze({
       version: Object.freeze({}),
       joined: modelJoin !== null,
-      pending: coordinator.getSnapshot().pending !== null,
+      pending: effectivePending(),
     });
     dirty = true;
   }
@@ -1042,9 +1167,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       // P/lease retirement may already have purged. Otherwise close this cut,
       // not the backend domain, until the retained producer genuinely commits.
       if (lease && model && !registration?.purged) {
-        advanceSource();
-        clearModelJoin();
-        touchUI();
+        retireObservation();
       }
       return false;
     }
@@ -1105,7 +1228,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           metadata: Object.freeze({
             version: Object.freeze({}),
             joined: false,
-            pending: coordinator.getSnapshot().pending !== null,
+            pending: effectivePending(),
           }),
         };
         uiBindings.set(handle, record);
@@ -1231,7 +1354,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         receipt.source !== sourceFence ||
         !receipt.metadata ||
         beginLatch ||
-        coordinator.getSnapshot().pending
+        effectivePending()
       )
         return deny();
       bridgeEntry(() => {
@@ -1255,7 +1378,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           model !== value ||
           controller?.getSnapshot().revision !== receipt.revision ||
           beginLatch ||
-          coordinator.getSnapshot().pending
+          effectivePending()
         )
           return deny();
       });
@@ -1278,7 +1401,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       lease: receipt.lease,
     };
     if (receipt.navigation) {
-      if (beginLatch || coordinator.getSnapshot().pending) return deny();
+      if (beginLatch || effectivePending()) return deny();
       const value = checkModel(expected);
       value.authority?.require({ type: "navigate" });
       checkModel(expected);
@@ -1328,6 +1451,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
   const publish = (transition: StateTransition<S>) => {
     if (transition.state.revision === committedRevision) return;
     committedRevision = transition.state.revision;
+    preserveIssued(transition.queryChanged);
+    if (transition.queryChanged && !issued) terminalMoves = null;
     advanceSource();
     if (transition.queryChanged && metadata)
       retiredThrough = Math.max(retiredThrough, metadata.ownerEpoch);
@@ -1365,10 +1490,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           };
           commandReceipts.set(command, receipt);
           currentReceipt = receipt;
-          if (
-            navigation &&
-            (beginLatch || coordinator.getSnapshot().pending || !model)
-          )
+          if (navigation && (beginLatch || effectivePending() || !model))
             return deny();
           let captured: ReorderApplicationMetadata | null;
           const expected = cut();
@@ -1445,6 +1567,191 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       });
     },
   };
+  const ignored = (
+    reason: Extract<RowMoveEventResult, { status: "ignored" }>["reason"],
+  ): RowMoveEventResult => Object.freeze({ status: "ignored", reason });
+  const changed: RowMoveEventResult = Object.freeze({ status: "changed" });
+  function requireWitness(value: Witness): void {
+    const fixed = () => {
+      live();
+      if (
+        witness !== value ||
+        lease !== value.lease ||
+        registration !== value.registration ||
+        value.registration.purged
+      )
+        deny();
+      requireCriteriaAuthority(
+        value.registration.criteria,
+        value.registration.origin,
+      );
+    };
+    const domain = () => {
+      try {
+        fixed();
+      } catch (error) {
+        if (witness === value) purge();
+        throw error;
+      }
+    };
+    // This is the original registration handle/origin, NEVER a later model's
+    // criteria. It is required afresh even when no current query model exists.
+    domain();
+    let phase: CriteriaFrameSnapshot["phase"];
+    try {
+      phase = Reflect.apply(value.readSource, value.source, []).phase;
+    } finally {
+      domain();
+    }
+    if (phase === "closed") {
+      purge();
+      deny();
+    }
+    try {
+      // A temporarily busy/unavailable source read is not proof of source end.
+      // Keep the debt/consumed bit on failure; physical disconnect/advance, closed
+      // owner or original C/P revocation perform the irreversible retirement.
+      const source = requireCriteriaSource(value.sourceAuthority, value.source);
+      if (source.mode !== value.mode) deny();
+    } finally {
+      domain();
+    }
+  }
+  function requireCandidate(value: DataTableModel<S, T>, fixed: Witness): void {
+    requireWitness(fixed);
+    const origin = value.metadata?.origin;
+    const original = fixed.registration.origin;
+    if (
+      value.sourceTarget?.owner !== fixed.source ||
+      value.toolTarget?.owner !== fixed.tool ||
+      value.metadata?.mode !== fixed.mode ||
+      !origin ||
+      origin.controller !== original.controller ||
+      origin.definition !== original.definition ||
+      origin.epoch !== original.epoch ||
+      origin.context.definitionKey !== original.context.definitionKey ||
+      origin.context.scopeKey !== original.context.scopeKey ||
+      origin.context.access !== original.context.access
+    ) {
+      purge(); // A genuine replacement cannot inherit an old operation's grant.
+      deny();
+    }
+    // Exact source-owner identity also fixes its PRIVATE immutable mode/resource
+    // pin (CriteriaFrames never replaces that pin). No alleged resource flag or
+    // query-derived token is accepted as an alternative identity proof.
+  }
+  function finishIssued(slot: Issued, code: RowMoveFeedbackCode): void {
+    if (issued !== slot) deny();
+    issued = null;
+    terminalMoves = Object.freeze({
+      pending: null,
+      feedback: Object.freeze({
+        operationId: slot.operation.move.operationId,
+        code,
+      }),
+    });
+    // An old pure token may remain until the next real query commit. Retire only
+    // that token, not a newer origin; never acknowledge a new-query pure frame.
+    if (coordinator.getSnapshot().pending?.operation === slot.operation) {
+      if (witness) {
+        readmissionThrough = Math.max(
+          readmissionThrough,
+          metadata?.ownerEpoch ?? slot.operation.origin.ownerEpoch,
+        );
+        readmissionOwed = true;
+      }
+      coordinator.invalidate("context");
+    }
+    advanceFence();
+    touchUI();
+    update(true);
+  }
+  function eventRun(action: () => RowMoveEventResult): RowMoveEventResult {
+    if (disposed) return ignored("disposed");
+    if (working || notifying || commandDepth || purging || beginLatch)
+      return ignored("reentrant");
+    working = true;
+    const previous = boundary;
+    boundary = Object.freeze({});
+    try {
+      return action();
+    } catch (error) {
+      observePromise(error);
+      takeUIInterruption(error);
+      // An unavailable/invalid event never releases debt or purges a live witness.
+      return ignored("authority");
+    } finally {
+      boundary = previous;
+      working = false;
+      schedule();
+    }
+  }
+  function eventCapture(slot: Issued) {
+    const source = sourceFence;
+    const check = () => {
+      requireWitness(slot.witness);
+      if (issued !== slot || sourceFence !== source) return deny();
+    };
+    // Copy only envelopes, under a fence around EACH reflection (not a batch of
+    // descriptor traps). The pure exported parsers then enforce their original
+    // shape/type/text budgets against these owned captures, never rereading input.
+    const reflect = <V>(read: () => V): V => {
+      check();
+      try {
+        return read();
+      } finally {
+        check();
+      }
+    };
+    const fields = (input: unknown, allowed: readonly string[]) => {
+      if (!input || typeof input !== "object") return deny();
+      if (reflect(() => Array.isArray(input))) return deny();
+      const prototype: unknown = reflect(() => Object.getPrototypeOf(input));
+      if (prototype !== Object.prototype && prototype !== null) return deny();
+      const names = reflect(() => Reflect.ownKeys(input));
+      if (names.length > reorderLimits.items) return deny();
+      const result: Record<string, unknown> = Object.create(null);
+      for (const name of names) {
+        if (typeof name !== "string" || !allowed.includes(name)) return deny();
+        const descriptor = reflect(() =>
+          Object.getOwnPropertyDescriptor(input, name),
+        );
+        if (!descriptor?.enumerable || !Object.hasOwn(descriptor, "value"))
+          return deny();
+        result[name] = descriptor.value;
+      }
+      return result;
+    };
+    return {
+      check,
+      settlement(input: unknown) {
+        return captureSettlement(fields(input, ["kind", "revision", "code"]));
+      },
+      acknowledgement(input: unknown) {
+        const captured = fields(input, ["stamp", "disposition"]);
+        const stamp = fields(captured.stamp, [
+          "ownerEpoch",
+          "sourceVersion",
+          "definitionKey",
+          "scopeKey",
+          "queryIdentity",
+          "pageIndex",
+          "pageSize",
+          "revision",
+          "extent",
+        ]);
+        if (
+          !Object.hasOwn(stamp, "extent") &&
+          reflect(() => Reflect.has(captured.stamp as object, "extent"))
+        )
+          return deny();
+        return captureAcknowledgement({
+          ...captured,
+          stamp,
+        });
+      },
+    };
+  }
   const implementation = {
     getSnapshot() {
       if (interaction?.physical.revoked) update();
@@ -1467,7 +1774,7 @@ export function createAdmission<S extends QuerySchema, T extends object>(
     },
     mount() {
       return run(() => {
-        if (lease) return deny();
+        if (lease || endedDebt) return deny();
         advanceSource();
         lease = Object.freeze({}) as ReorderAdmissionLease<S, T>;
         update();
@@ -1509,8 +1816,15 @@ export function createAdmission<S extends QuerySchema, T extends object>(
           !value.presentation?.displayed
         )
           return deny();
+        // An authenticated replacement cannot bypass the terminal fixed-domain
+        // policy merely by failing the older same-epoch identity/counter checks.
+        if (witness) requireCandidate(value, witness);
         const current = readMetadata(expected, "observe");
-        if (current.ownerEpoch <= retiredThrough) return deny();
+        if (
+          current.ownerEpoch <= retiredThrough ||
+          current.ownerEpoch <= readmissionThrough
+        )
+          return deny();
         const nextIdentity = {
           source: value.sourceTarget.owner,
           tool: value.toolTarget.owner,
@@ -1541,15 +1855,18 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         if (registration && registration.publication !== publication)
           return deny();
         if (!registration) {
+          const criteria = publication.issue(value.metadata.origin);
+          const origin = getCriteriaAuthorityOrigin(criteria) ?? deny();
           const record: Registration<S> = {
             publication,
+            criteria,
+            origin,
             release: null,
             stop: null,
             purged: false,
             cleaned: false,
           };
           registration = record;
-          const criteria = publication.issue(value.metadata.origin);
           record.release = publication.registerParticipant(criteria, {
             purge() {
               if (registration === record) {
@@ -1572,6 +1889,22 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         }
         checkSource(expected);
         requireDataTableModel(value, definition);
+        if (endedDebt) return deny();
+        if (!witness) {
+          const sourceOwner = value.sourceTarget.owner as CriteriaFrames<S, T>;
+          if (getCriteriaFramesOwner(sourceOwner) !== sourceOwner)
+            return deny();
+          witness = Object.freeze({
+            registration: registration ?? deny(),
+            lease: token,
+            source: value.sourceTarget.owner,
+            sourceAuthority: value.sourceTarget.authority,
+            tool: value.toolTarget.owner,
+            mode: value.metadata.mode,
+            readSource: sourceOwner.getSnapshot,
+          });
+        }
+        requireCandidate(value, witness);
         let wrapperOnly = false;
         if (model && metadata && sameMetadata(metadata, current)) {
           try {
@@ -1589,9 +1922,18 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         metadata = current;
         identity = nextIdentity;
         checkModel(cut(), "observe");
+        preserveIssued();
         coordinator.reconcile();
-        if (!model || !metadata || metadata.ownerEpoch <= retiredThrough)
+        if (
+          !model ||
+          !metadata ||
+          metadata.ownerEpoch <= retiredThrough ||
+          metadata.ownerEpoch <= readmissionThrough
+        )
           return deny();
+        // Discharge only after the entire genuine commit/pure observation has
+        // succeeded. Candidate metadata must not clear an existing obligation.
+        readmissionOwed = false;
         update(true);
       });
     },
@@ -1630,6 +1972,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       handle: ReorderInteraction<S, T>,
       placement: Parameters<typeof coordinator.begin>[1],
     ): RowMoveBeginResult {
+      if (effectivePending())
+        return Object.freeze({ status: "blocked", reason: "pending" });
       if (
         interactionProof.get(handle) === lease &&
         interactionCuts.get(handle)?.revoked
@@ -1656,6 +2000,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         )
           return deny();
         const mounted = lease;
+        const fixed = witness ?? deny();
+        requireWitness(fixed);
         advanceFence(slot.physical);
         const attempt = {
           fence,
@@ -1695,6 +2041,19 @@ export function createAdmission<S extends QuerySchema, T extends object>(
         // End the consumed cut only after final checks, never before the ACT read.
         // The delivered operation is independent of this release-only flag.
         attempt.physical.revoked = true;
+        if (result.status === "started") {
+          // Issuance linearizes HERE, after all callback-free final checks and
+          // before run's scheduling or renderer/app delivery. Internal publication
+          // above is provisional only; blocked/noop attempts acquire no debt.
+          terminalMoves = null;
+          issued = {
+            operation: result.operation,
+            witness: fixed,
+            moves: coordinator.getSnapshot(),
+            retired: false,
+            consumed: false,
+          };
+        }
         return result;
       });
     },
@@ -1702,19 +2061,70 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       operation: RowMoveOperation,
       outcome: Parameters<typeof coordinator.settle>[1],
     ) {
-      return run(() => {
-        if (coordinator.getSnapshot().pending?.operation !== operation)
-          return Object.freeze({
-            status: "ignored",
-            reason: "operation",
-          } as const);
-        if (!readyToObserve())
-          return Object.freeze({
-            status: "ignored",
-            reason: "authority",
-          } as const);
-        const result = coordinator.settle(operation, outcome);
-        if (!model) purge();
+      const slot = issued;
+      // Identity precedes ALL alleged payload reads, including proxy traps.
+      if (!slot || slot.operation !== operation || slot.consumed)
+        return ignored("operation");
+      return eventRun(() => {
+        requireWitness(slot.witness);
+        // An already-retired token can settle without a model. A failed ACTIVE
+        // preflight, however, retains the original ignored/unconsumed semantics;
+        // it must not consume this delivery merely because the read detached core.
+        if (!slot.retired && !readyToObserve()) return ignored("authority");
+        if (issued !== slot) return ignored("authority");
+        const capture = eventCapture(slot);
+        let captured: ReturnType<typeof captureSettlement>;
+        try {
+          captured = capture.settlement(outcome);
+        } catch (error) {
+          observePromise(error);
+          capture.check();
+          return ignored("invalid");
+        }
+        capture.check();
+        if (slot.retired) {
+          slot.consumed = true;
+          if (captured.kind === "rejected") finishIssued(slot, captured.code);
+          else {
+            const pending = slot.moves.pending ?? deny();
+            slot.moves = Object.freeze({
+              pending: Object.freeze({
+                ...pending,
+                phase: "awaiting-authority",
+              }),
+              feedback:
+                captured.kind === "indeterminate"
+                  ? Object.freeze({
+                      operationId: operation.move.operationId,
+                      code: "unavailable",
+                    })
+                  : null,
+            });
+            advanceFence();
+            touchUI();
+            update(true);
+          }
+          return changed;
+        }
+        const result = coordinator.settle(operation, captured);
+        const current = coordinator.getSnapshot();
+        if (
+          current.pending?.operation === operation &&
+          current.pending.phase === "awaiting-authority"
+        ) {
+          // Pure sets settled=true only on this correlated transition. A changed
+          // result caused by observe/detach is NOT settlement consumption.
+          slot.consumed = true;
+          slot.moves = current;
+        } else if (
+          captured.kind === "rejected" &&
+          current.feedback?.operationId === operation.move.operationId &&
+          current.feedback.code === captured.code
+        ) {
+          slot.consumed = true;
+          finishIssued(slot, captured.code);
+        } else preserveIssued();
+        update();
         return result;
       });
     },
@@ -1722,20 +2132,75 @@ export function createAdmission<S extends QuerySchema, T extends object>(
       operation: RowMoveOperation,
       acknowledgement: Parameters<typeof coordinator.acknowledge>[1],
     ) {
-      return run(() => {
-        if (coordinator.getSnapshot().pending?.operation !== operation)
-          return Object.freeze({
-            status: "ignored",
-            reason: "operation",
-          } as const);
-        if (!readyToObserve())
-          return Object.freeze({
-            status: "ignored",
-            reason: "authority",
-          } as const);
-        const result = coordinator.acknowledge(operation, acknowledgement);
-        if (!model) purge();
+      const slot = issued;
+      if (!slot || slot.operation !== operation) return ignored("operation");
+      return eventRun(() => {
+        requireWitness(slot.witness);
+        if (slot.retired || !readyToObserve()) return ignored("authority");
+        const capture = eventCapture(slot);
+        let captured: ReturnType<typeof captureAcknowledgement>;
+        try {
+          captured = capture.acknowledgement(acknowledgement);
+        } catch (error) {
+          observePromise(error);
+          capture.check();
+          return ignored("invalid");
+        }
+        capture.check();
+        const result = coordinator.acknowledge(operation, captured);
+        const code =
+          captured.disposition === "not-applied"
+            ? "rejected"
+            : captured.disposition;
+        if (
+          coordinator.getSnapshot().feedback?.operationId ===
+            operation.move.operationId &&
+          coordinator.getSnapshot().feedback?.code === code
+        )
+          finishIssued(slot, code);
+        else preserveIssued();
+        update();
         return result;
+      });
+    },
+    reconcileRetired(
+      operation: RowMoveOperation,
+      acknowledgement: Parameters<typeof coordinator.acknowledge>[1],
+    ) {
+      const slot = issued;
+      if (!slot || slot.operation !== operation) return ignored("operation");
+      return eventRun(() => {
+        requireWitness(slot.witness);
+        if (!slot.retired || !model) return ignored("authority");
+        const currentModel = model;
+        requireCandidate(currentModel, slot.witness);
+        const capture = eventCapture(slot);
+        let captured: ReturnType<typeof captureAcknowledgement>;
+        try {
+          captured = capture.acknowledgement(acknowledgement);
+        } catch (error) {
+          observePromise(error);
+          capture.check();
+          return ignored("invalid");
+        }
+        capture.check();
+        const frame = readFrame([]);
+        capture.check();
+        if (
+          model !== currentModel ||
+          !sameStamp(captured.stamp, frame.stamp) ||
+          frame.stamp.sourceVersion <= operation.origin.sourceVersion
+        )
+          return ignored("authority");
+        requireCandidate(currentModel, slot.witness);
+        capture.check();
+        finishIssued(
+          slot,
+          captured.disposition === "not-applied"
+            ? "rejected"
+            : captured.disposition,
+        );
+        return changed;
       });
     },
     reconcile() {
@@ -1746,7 +2211,8 @@ export function createAdmission<S extends QuerySchema, T extends object>(
             reason: "authority",
           } as const);
         const result = coordinator.reconcile();
-        if (!model) purge();
+        preserveIssued();
+        if (!model && issued) retireObservation();
         return result;
       });
     },

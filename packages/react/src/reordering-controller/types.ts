@@ -49,6 +49,11 @@ export interface ReorderAdmissionSnapshot {
   readonly version: object;
   readonly phase: "unmounted" | "unready" | "ready" | "disposed";
   readonly interaction: boolean;
+  /** Negative source-publication obligation, never a grant or operation outcome.
+   * Recover with a genuinely coherent application ownerEpoch above the retired
+   * observation; do not advance sourceVersion merely to readmit unchanged input.
+   */
+  readonly readmissionRequired: boolean;
   readonly moves: RowMoveState;
 }
 declare const admissionBrand: unique symbol;
@@ -76,6 +81,14 @@ export interface ReorderAdmission<S extends QuerySchema, T extends object> {
     outcome: RowMoveSettlement,
   ) => RowMoveEventResult;
   readonly acknowledge: (
+    operation: RowMoveOperation,
+    acknowledgement: RowMoveAcknowledgement,
+  ) => RowMoveEventResult;
+  /** Exact retired token + original live domain/lease + a fresh genuine model.
+   * A strictly newer authoritative sourceVersion and every current stamp field
+   * must match. Query publication, transport acceptance and UI remount are not ack.
+   */
+  readonly reconcileRetired: (
     operation: RowMoveOperation,
     acknowledgement: RowMoveAcknowledgement,
   ) => RowMoveEventResult;
