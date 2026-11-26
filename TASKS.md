@@ -29,6 +29,13 @@
   Storybook config, interactive examples, owner diagnostic, query-safe producer/
   fixtures/contract, grouped host/fixtures, catalog harness, and current handoff docs.
   No new emission or runtime acceptance is inferred from this Git handoff.
+- Git handoff: the9 selected focused commits are created and pushed to
+  origin/feat/wp-15-integrated (through ba91e6b). Draft integration
+  [PR #9](https://github.com/mohamedtsx/tableweave/pull/9) now targets develop;
+  this final documentation receipt is a separate follow-up commit. Existing
+  packet PRs/branches are unchanged. No merge/deployment/release occurred. Leave
+  preview001 running; next implementation remains the harness correction and
+  genuine query-safe/grouped runtime before application/consolidated readiness.
 - Full frozen build008 catalog inventory: **43/63 PASS,20 FAIL**. All53 story IDs
   exist. Last selected safety suite: **335/338 PASS,3 attributed original failures**;
   not a green full suite. JSX/role/recovery/play fixes await a new current build.
