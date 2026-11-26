@@ -9,8 +9,23 @@
     "paths": {
       "react-aria-components": [
         "../../packages/heroui/node_modules/react-aria-components/dist/types/exports/index.d.ts"
+      ],
+      "@heroui/react/calendar": [
+        "../../packages/heroui/node_modules/@heroui/react/dist/components/calendar/index.d.ts"
+      ],
+      "@heroui/react/range-calendar": [
+        "../../packages/heroui/node_modules/@heroui/react/dist/components/range-calendar/index.d.ts"
+      ],
+      "@heroui/react/calendar-year-picker": [
+        "../../packages/heroui/node_modules/@heroui/react/dist/components/calendar-year-picker/index.d.ts"
+      ],
+      "@heroui/react/list-box": [
+        "../../packages/heroui/node_modules/@heroui/react/dist/components/list-box/index.d.ts"
+      ],
+      "@heroui/react/list-box-item": [
+        "../../packages/heroui/node_modules/@heroui/react/dist/components/list-box-item/index.d.ts"
       ]
     }
   },
-  "include": ["types.ts"]
+  "include": ["types.ts", "calendar-types.ts", "listbox-types.ts"]
 }

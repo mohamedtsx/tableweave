@@ -98,12 +98,13 @@ is enabled by these local commands.
 | `pnpm test:controller` | Build plus accepted-state/reset/controlled-transaction/lifecycle tests |
 | `pnpm test:native` | Build plus v9 definition/carrier/client/manual/native transition tests; not G-01 by itself |
 | `pnpm test:resource` | Build plus tagged resource generations/retention/precedence/permission/lifecycle tests; not framework SSR |
-| `pnpm pack:check` | Inspect tarballs; isolated headless/styled installs, TS 5.9/6 declaration checks, Node import guards and Vite bundles |
 | `pnpm test:start` | Actual Start build, dev/production HTTP+Chromium SSR/hydration fixtures and server-only bundle markers |
 | `pnpm pack:start` | Actual-tarball Start strict install/types/build/dev+production HTTP/browser proof; no workspace aliases |
+| `pnpm test:filter-tools` | Candidate helper/option-source/date vectors; UI/packet acceptance remains separate |
+| `pnpm pack:check` | Inspect tarballs; isolated strict TS 5.9/6 installs/declarations, runtime/bundle/CSS guards and actual packed filter-tool production Chromium |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
-| `pnpm test:browser` | Chromium vendor/controller smoke, native (6011), grouped collection (6009) and resource lifecycle (6415) fixtures; build packages/Storybook first |
+| `pnpm test:browser` | Chromium smoke/native (6011), collection (6009), resource (6415), toolbar (6429), builder (6433) and combined emitted tools (6443); build packages/Storybook first |
 | `pnpm check:docs` | Structural Markdown checks and checker regression probes |
 | `pnpm check` | Full local sequence above, including fresh-install verification |
 | `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
@@ -125,6 +126,13 @@ declaration failures; Tableweave packages and packed consumers retain it.
 WP-04's [recorded compatibility repair](docs/engineering/wp-04-native.md#vendor-declaration-compatibility)
 uses an exact declaration-only RAC patch and HeroUI-only Bundler build resolution;
 public tarball declarations must still pass unpatched strict NodeNext consumers.
+WP-07's [private tool boundary](docs/engineering/wp-07-tools.md) adds genuine own
+filter-component types/CSS and an exact scoped HeroUI declaration-entry repair.
+Both packages pass strict unpatched NodeNext TS6/5.9 tool-prop/runtime/bundle checks
+and real emitted/actual-tarball interactions after independent UI corrections.
+The isolated and combined WP-06 full workflows pass; remote PR delivery is verified
+separately, without merging.
+No full DataTable facade or personal maintainer acceptance is implied.
 
 The vendor smoke alone is not G-01/full G-05, a full vendor-barrel declaration pass,
 SSR, complete browser/manual accessibility, performance or real-consumer acceptance.

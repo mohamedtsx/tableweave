@@ -25,6 +25,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node ../../tests/foundation/copy-styles.mjs"
   },
+  "dependencies": {
+    "@internationalized/date": "3.12.4"
+  },
   "peerDependencies": {
     "@heroui/react": "3.2.8",
     "@heroui/styles": "3.2.8",
@@ -38,7 +41,6 @@
   "devDependencies": {
     "@heroui/react": "3.2.8",
     "@heroui/styles": "3.2.8",
-    "@internationalized/date": "3.12.4",
     "@react-aria/ssr": "3.10.1",
     "@react-aria/utils": "3.34.1",
     "@react-spectrum/provider": "3.11.1",

@@ -38,3 +38,22 @@ a complete release legal audit. The standalone Start harness carries only these
 app-required patches/extension explicitly; no root repair propagates through a
 Tableweave tarball automatically. Removal requires a reviewed stable replacement
 passing strict app/config, frozen install and actual HTTP/browser/tarball checks.
+
+## HeroUI calendar type-entry repair
+
+Exact `@heroui/react@3.2.8.patch` changes only Calendar/RangeCalendar scoped entry
+declarations to reference the genuine CalendarYearPicker scoped types instead of
+the entire component barrel. This removes unrelated TS6 declaration conflicts
+from the actual used graph without erasing or replacing types. Runtime/version
+and strict flags are unchanged. See the
+[WP-07 disposition](../docs/planning/wp-07-implementation-plan.md#calendar-declaration-repair-disposition--2026-11-24).
+Upstream material is **Copyright 2025 NextUI Inc.**, Apache-2.0 under the
+accompanying license terms; see [attribution](NOTICE-HEROUI). All modified
+declarations carry prominent modification comments. These notes
+and the exact diff identify our declaration modification; no vendor runtime is
+copied or modified. Direct raw-barrel users retain upstream limitations. Remove
+only after a reviewed stable replacement passes the same strict/packed/browser
+proof; no patch failure waiver or publication/legal acceptance is implied.
+The same patch also scopes ListBox item/section references to their genuine
+existing exports, for the same reason. Its complete expectation is exactly the
+Calendar, RangeCalendar and ListBox entry declarations; no runtime file changes.

@@ -1,0 +1,67 @@
+.tw-filter-search,
+.tw-filter-tabs,
+.tw-filter-date {
+  min-inline-size: 0;
+  color: var(--foreground);
+}
+.tw-filter-search {
+  inline-size: min(100%, 22rem);
+}
+.tw-filter-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.tw-filter-tabs-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-inline-size: 0;
+}
+.tw-filter-tabs-scroll {
+  min-inline-size: 0;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+.tw-filter-tabs-navigation > button {
+  flex: none;
+  min-inline-size: 2.5rem;
+  min-block-size: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--foreground);
+}
+.tw-filter-tabs-navigation > button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.tw-filter-tabs-count {
+  margin-inline-start: 0.375rem;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in oklch, var(--muted), var(--foreground) 24%);
+}
+.tw-filter-tabs
+  [role="tab"]:not([aria-selected="true"]):not([aria-disabled="true"]) {
+  color: color-mix(in oklch, var(--muted), var(--foreground) 24%);
+}
+.tw-filter-tabs [role="tab"] {
+  white-space: nowrap;
+}
+.tw-filter-date-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.tw-filter-date-summary {
+  overflow-wrap: anywhere;
+}
+@media (width <= 40rem) {
+  .tw-filter-tabs-navigation > button,
+  .tw-filter-date [data-slot="button"] {
+    min-block-size: 2.75rem;
+  }
+}

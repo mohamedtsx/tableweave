@@ -1,3 +1,5 @@
+@layer theme, base, components, tableweave, utilities;
+
 @import "tailwindcss";
 @import "@heroui/styles";
 @import "@tableweave/heroui/styles.css";

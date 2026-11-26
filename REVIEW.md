@@ -400,3 +400,269 @@ release evidence. Commit/separate stacked PR follows; **no PR merge**.
   checks remain required; the prior cc88f21 CI failures are not overwritten.
   Corrected222c97f source now passes both complete remote push/PR jobs. Final
   documentation-head verification follows; all PRs remain unmerged.
+
+## WP-07 — delegated agent review session 1
+
+Open; numbering restarts at n1. Headless producer interfaces are handed off and
+the UI is under implementation, not packet approval. No personal maintainer/
+final Figma/manual-AT acceptance, and no PR merge.
+
+### n1 — Option envelopes validate then reread mutable/accessor values (P2)
+
+- **Independent reproduction:** a hasMore getter returns false for validation and
+  a mutable object on the next read; succeed returns true and stores that payload
+  in the supposedly primitive immutable page. Context access can likewise return
+  true then a nonboolean string, which is stored and permits begin.
+- **Disposition:** returned to the producer owner for independently failing
+  regressions and single-capture validation/consistent accessor rejection. Store
+  exactly validated values; preserve atomicity and safe errors. Audit other
+  envelopes for the same pattern. No interface drift or weakened validation.
+  Worker reproduced both reported cases and the broader envelope audit before
+  correction; own descriptor capture/accessor rejection now passes130 tests and
+  strict TS6/5.9 without a signature change. Independent rereview and refreshed
+  emitted/packed checks remain required; original pack evidence is superseded.
+  **Resolved:** independent rereview confirms both original rejections without
+  getter invocation, atomic snapshot/token preservation, proxy safety and prior
+  identity/label/lifecycle vectors.130 tests and both strict TS versions pass.
+  Main matches four-module SHA-256
+  `2caa67e47d4f6ab949beecd8add1b8edc05af4f240f1158ba9b3b50c8e166f5d`,
+  rebuilds the React package and passes420 default unit tests plus refreshed
+  unpatched public TS6/5.9/type/runtime/bundle tarball checks. Scoped headless
+  correction approved technically; WP-07 UI/React/packed interaction is still pending.
+
+### n2 — Scoped calendar declarations unnecessarily load conflicting barrel (P1)
+
+- **Main reproduction:** TS6 toolbar/date check reaches four unrelated HeroUI
+  TS2320 interfaces through Calendar/RangeCalendar `import("..")` type references.
+- **Disposition:** exact HeroUI3.2.8 declaration patch selects the same genuine
+  CalendarYearPicker scoped types with prominent modification notices. All528
+  upstream files compared: only the two reviewed entries differ, runtime/license
+  bytes match. Scoped toolbar and positive/negative calendar-type checks pass
+  TS6/5.9; patch-path/hash tests pass. No strictness/version/type-erasure waiver.
+  Frozen application and actual public/UI/packed proof remain required.
+  The same verified barrel problem also affects builder ListBox item/section
+  references. The pre-install disposition extends the exact repair to its scoped
+  entry (three declarations total); builder TS6/5.9 now pass without flag changes.
+
+### n3 — Suspense reveal strands the surviving search draft (P2)
+
+- **Independent reproduction:** type before debounce, hide/reveal via Suspense,
+  wait and press Enter. The visible draft remains but produces no command because
+  reveal advances a sequence without rearming that draft.
+- **Disposition:** worker independently reproduced debounce/Enter failures, then
+  preserved the surviving draft sequence and rearmed debounce on reveal. True
+  unmount/context replacement still cancel.24 Chromium/5 units/both strict TS
+  versions pass; independent original-repro rereview is active. No UI approval yet.
+  **Resolved:** fresh independent rereview passes both original reproductions,
+  receipt identity/interleaved/stale/external-clone/callback/IME/Suspense probes,
+  five units and strict TS6/5.9.40 Chromium checks across two runs passed; search
+  SHA-256 is `c8f221fa67d943f2d161f0c6c673f6a6ae3609b0612d694d6645188104bbbb9b`.
+  Scoped source correction approved technically; emitted/packed proof remains.
+
+### n4 — Rejected search history conceals external replacement (P2)
+
+- **Independent reproduction:** submit external, reject, type a newer draft, then
+  externally accept external. Text-history matching wrongly treats the external
+  change as the rejected submission's acknowledgement and resubmits the draft.
+- **Disposition:** worker reproduced and replaced history matching with exact own
+  proposal-query/revision correlation. The corrected search bytes are under
+  independent rereview, including older genuine acceptance during newer typing.
+  **Resolved** by the same independent receipt-identity/revision rereview as n3;
+  no residual search defect. This does not approve builder or full WP-07.
+
+### n5 — Stale connected Apply overwrites an externally accepted rule (P1)
+
+- **Independent reproduction:** edit Amount10 to12 while proposals are held; in
+  one browser turn externally accept30 and click the still-connected Apply before
+  React commits. Accepting its stale proposal restores12. Render-only baseline
+  checks miss the current accepted state at submission.
+- **Disposition:** returned for independently failing same-turn regression and
+  event-time controller ownership/baseline validation. No optimistic rollback or
+  controller mirror; unrelated page/presentation changes must remain harmless.
+  **Resolved:** independent rereview's original same-turn stale-Apply reproduction
+  now preserves the newer accepted rule. Broader discrete option freshness is
+  separately tracked as n10, not hidden by this disposition.
+
+### n6 — Retained option-page failure hides warning and Retry (P2)
+
+- **Independent reproduction:** load termA, close/reopen, refreshA then fail. Source
+  truthfully has failure/display=options/load-failed/canRetry, but picker only
+  renders the display=error branch, silently disabling the retained choices.
+- **Disposition:** returned for explicit retained-failure notice and actual supplied
+  Retry without erasing usable provenance/selected labels or the accepted rule.
+  **Resolved:** independent retained-failure/Retry replay passes with truthful
+  retained options and current supplied request recovery.
+
+### n7 — Reopened choice pagination mixes old cursor and blank term (P2)
+
+- **Independent reproduction:** load termA/first with hasMore, close/reopen and
+  Next. Local term resets to blank while retained page staysA; request combines
+  blank term withA's cursor. Opaque cursor provenance is broken.
+- **Disposition:** returned for matching displayed/request term+cursor handling and
+  exact-token/context regression, never guessed cursors or fabricated new pages.
+  **Resolved:** independent reopened-cursor and superseded-Next replay preserve
+  actual term/request provenance. Full component approval remains blocked by n10.
+
+### n8 — Shared date-unit discovery cannot resolve its installed vendor (P1)
+
+- **Main reproduction:** expanded default Vitest discovery fails before date tests
+  because their root-relative import cannot resolve Internationalized Date, although
+  the scoped runner resolves its declaring package's exact installed dependency.
+- **Resolved:** default runner now uses that same exact vendor resolution; no new
+  dependency, production alias or strictness waiver.426 tests pass with four-worker
+  budgeting. A simultaneous graph-only five-second timeout under22 workers is
+  addressed by that worker cap, not by changing assertions/deadlines/retries or
+  hiding a runtime behavior failure. Full corrected workflow remains required.
+
+### n9 — Consumer typechecks borrow workspace React declarations (P2)
+
+- **Main reproduction:** --traceResolution on the initial actual styled archive
+  resolves React declarations to the workspace's unpatched @types/react19.3.0,
+  because the test app has no explicit type dev dependencies. Existing ABI/type
+  assertions still ran against genuine matching types, but full install isolation
+  was not established by those checks.
+- **Disposition:** declare exact already-approved React/DOM type dev dependencies
+  in both clean apps and inspect every compiler program file. Only the chosen
+  compiler's standard library may be outside that app. The new guard independently
+  rejects the original artifact. Fresh standalone TS6/5.9/runtime/bundle rerun is
+  active; no patch inheritance, alias or compatibility-version change.
+  **Resolved:** fresh actual archives pass both compilers with explicit local
+  type dependencies and the resolved-file guard:210 headless/223 styled program
+  files per compiler, nothing outside the app except compiler standard libraries.
+  Runtime/import/bundle checks also pass. This hardens the shared proof; corrected
+  UI production/tarball interaction and full packet review still remain.
+
+### n10 — Same-turn stale option click ignores current request eligibility (P2)
+
+- **Independent reproduction:** with enabled termA options and accepted membership
+  99, begin termB in the actual source then click the still-connected A option1
+  before React commits. Although current source is pending/page=null/canChoose=false,
+  the held proposal accepts1+99. Context/baseline guards do not check live choice
+  request/page eligibility; render-captured enabled is insufficient.
+- **Disposition:** original n5/n6/n7 reproductions pass, but this residual blocks
+  approval. Returned for failing same-turn regression and discrete choice checks
+  against the actual current source/token/page/context/canChoose/disabled ID.
+  Preserve local drafts through loading and keep separate Remove reachable; do not
+  globally hide/discard a valid editor to avoid this event-time guard requirement.
+  **Correction handoff:** worker reproduced three failures before fixing only the
+  discrete value-editor runtime path.45 Chromium/both strict TS checks and scoped
+  Biome pass, including a selected-label-recovery positive control and all prior
+  regressions. Main rebuilds both packages successfully; independent rereview and
+  actual packed/browser proof remain required. Public signatures are unchanged.
+
+### n11 — Duplicate async rules repeat IDs in live field union (P2)
+
+- Independent n10 replay passes, then Duplicate creates two Person99 rules. A
+  current valid option click throws because the live field-wide union is99,99 and
+  the headless projection correctly rejects duplicate IDs.
+- **Resolved:** shared Set<ScalarId> union preserves numeric/string identity without
+  mutating either rule or weakening headless validation. Independent duplicate-
+  target/deselection/label-retention probes,47 behavioral cases and both strict TS
+  checks pass, matching source aggregate
+  `d1c186132863774c4b7596169be7695d26e094b01b8573107e9ba4e0cf3c8895`.
+  This approves the scoped correction, not the additional integrated findings below.
+
+### n12 — RTL fixture omits matching inherited Aria locale (P2)
+
+- CSS/controller use ar-EG but the browser is en-US and Tabs/table have no matching
+  provider (the private date editor alone has one). Real ArrowRight therefore uses
+  the wrong direction. Main inspected pinned default-locale resolution and the
+  captured before probe fails.
+- App fixture now wraps the whole workbench in its accepted locale provider.
+  After probes pass3/3: actual RTL/English navigation and accepted-only locale/
+  message/bidi updates without remounts. Full emitted run is pending; no maintained
+  Arabic dictionary or actual-device acceptance is implied.
+
+### n13 — Escape clears an already accepted membership rule (P1)
+
+- Completed emitted integration captures Tags red accepted, then focused ListBox
+  Escape removes that rule. Escape is local dismiss/Cancel, not accepted Remove.
+- Returned to builder owner for before-failing source regression and disabling
+  implicit Escape-selection clearing while retaining real overlay dismissal and
+  explicit final-membership deselection. Never rollback submitted commands.
+  **Resolved:** independent static red/async99 Escape and Cancel replays preserve
+  rules/proposals/commands/results/source eligibility and restore focus; explicit
+  final deselection still removes its target.54 behavioral cases pass, including
+  earlier n10/n11. Scope is source correction, not complete packet acceptance.
+
+### n14 — Builder accessible names omit visible trigger/value text (P1)
+
+- Captured real axe label-content-name-mismatch: visible Filters named Add filter
+  rule; visible30/alpha named only Value: Amount/Note. Visible text is absent.
+- Returned for meaningful names including visible labels/rich summaries, preserving
+  own replaceable messages and compact layout. Exact new name/selector handoff
+  precedes fixture updates; do not hide meaningful text or suppress the rule.
+  **Resolved:** independent rich zero/false summaries and five scoped axe scans
+  pass with actual visible content in contextual names, both strict TS versions,
+  unchanged aggregate92908b00a017b2ce9ac7f33f73dd6f57db8bb689a6db0875df0fba43dc60e210.
+  Direct native-config CSS preflight was excluded by the reviewer due to isolated
+  resolution; main's genuine installed-tarball CSS/browser proof is separate.
+
+### n15 — Default table headers/dark confirmation have low contrast (P1)
+
+- Main decodes actual axe attachments: light muted headers score4.05/4.20 against
+  their real backgrounds; dark Apply scores3.58, versus the tested4.5 threshold.
+- Main owns a scoped native-table foreground class and shared confirmation token
+  pair; only builder/date confirmation actions use it. No arbitrary brand hex,
+  global vendor/theme patch or disabled axe. Source changes are prepared while the
+  frozen emitted run finishes; before/after actual emitted/packed checks remain.
+  **Packed correction proof:** genuine standalone production app passes all43
+  browser checks including full axe scans, with no test skips/flakiness, source/
+  dist/vendor aliases or external runtime modules. Actual CSS includes all owned
+  selectors. Main also inspects desktop light/dark/RTL and narrow320/enlarged-text
+  screenshots; no full-device/manual-AT conformance claim follows.
+
+### Verification-harness follow-ups (not additional product defects)
+
+- The first packed-fixture typecheck omitted Node ambient activation even though
+  browser helper types reference Playwright. The consumer already declares exact
+  Node types; activating them fixes that strict harness error without a waiver.
+  Both compilers now pass370 app program files, only compiler stdlib outside.
+- The combined graph/runtime assertion still exceeded its unchanged5-second
+  deadline once under load despite four workers. Split it into separate exact
+  runtime-export, headless/styled graph and sortable-directive tests; no assertion
+  or deadline removed/relaxed. All429 tests pass after that split.
+- Main's Storybook wrapper also rebuilds packages. A later emitted run overlaps
+  that rebuild; matching final hashes cannot prove continuous output availability.
+  Preserve it as overlapped, then rerun clean after build completion. The earlier
+  completed43/43 actual-tarball run is unaffected and not workspace-emitted proof.
+- Shared fixtures outside the Storybook app need actual declaring-app dependency
+  resolution and emitted public entry aliases in that dev runner. Storybook build
+  and types initially fail; main fixes runtime/declaration resolution without a
+  production/packed source alias or strictness change. Direct Storybook build and
+  app typecheck pass; full ordered workflow remains required.
+
+### Completed isolated-source disposition
+
+The frozen candidate completes the ordered `pnpm check`:429 units,171 browser
+checks (including43 combined emitted and six built Storybook plays), plus43 actual
+tarball production checks. Strict clean install/unchanged lock, both public compiler
+versions/confinement, runtime/default-sortable/CSS guards and documentation checks
+pass. The clean standalone emitted43 byte guard also remains unchanged. Caught
+Storybook play exceptions are explicitly checked; negative late-assertion evidence
+is retained rather than misread as terminal success.
+
+All session1 n1–n15 receive scoped resolved disposition. Main grants
+**agent-approved under delegated authority** for this isolated private WP-07 source/
+component/public-type/packed boundary and provisional visual treatment. This is
+not personal maintainer/Figma/manual-AT/device/performance/real-consumer/release
+acceptance. Main next commits the source handoff and stacks onto final WP-06
+9eb71e1 without merging, reconciles shared ownership and reruns combined checks
+before final integration approval, push and separate PR.
+
+### Completed combined-stack disposition
+
+Stack7b3b981 has exact parent9eb71e1. Independent static review verifies both
+runtime/fixture baselines byte-for-byte and all shared script/patch/lock/guard/docs
+unions. Main's complete stacked `pnpm check` exits0 with430 units,171 baseline/tool
+Chromium,43 genuine packed-tool production cases and27 development+27 production
+source Start plus27+27 actual-packed Start. Both strict compiler versions and
+confinement pass (210 headless/223 styled/372 tool app/721 Start program files).
+Cold generated routes come only from the actual framework. No version, strictness,
+behavior deadline or retry change was used;45-minute CI budget remains unchanged.
+
+Main extends scoped **agent-approved under delegated authority** to this combined
+WP-07 private integration after reviewing the actual completed result. Final
+documentation/PR push/remote checks remain delivery verification, not personal
+maintainer, manual AT/device/performance/real-consumer/legal/publication/full G-05
+acceptance. PRs remain unmerged; no residual WP-07 finding is verified.

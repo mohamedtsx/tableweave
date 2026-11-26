@@ -1,5 +1,27 @@
 # Tableweave tasks
 
+## Ordered correction integration — 2026-11-26
+
+User authorizes reviewed sequential develop merges and bug corrections. PR #6
+correction0967326 passes both actual foundation workflows and is merged to develop
+as821dfa2 with tested-tree equality. Main integrates0967326 into this clean #7
+branch using an ordinary merge, preserving both parents. The only conflict is root
+Vitest discovery; retain BOTH filter-tools entries, all existing aliases and the
+new genuine Query alias/seven owner-unit registration. No source conflict or grant
+weakening is selected. Main owns tests/config/Git; no dependency install, vendor/
+drag work, deployment or release. Next: combined exact source review, actual root
+lint/units/docs/types using existing dependencies, commit/push and corrected-head CI.
+No #7 merge before those checks; #8 remains inherited-fix blocked.
+
+Combined intake passes actual437/437 root units (23 files, zero pending/retries),
+whole-root Biome245 files, strict Start app TS6/5.9,92 Markdown/563 local links and
+18 checker probes. All five corrected app/test bodies match sealed0967326 exactly;
+root config conflict resolution preserves every original #7 alias/test entry and
+adds only the real declaring-app Query alias/new Start unit. Existing library
+emission/dependencies are reused, not rebuilt or installed by these checks. Main
+selects the ordinary two-parent integration commit and push for full corrected-head
+CI. Current combined browser/packed gates remain unrun until that CI succeeds.
+
 This is the only live work ledger. Requirements live in `product/`, contracts in
 `docs/`, procedures in `.agents/skills/`, and observations in `docs/evidence/`.
 Planned work is not authorization to implement, install, publish, or modify Gamila.
@@ -161,14 +183,12 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   still-open PR #3. Final head `bf7712e` is pushed/verified and the tree was clean.
   Resource transport `71f076c` is stacked as `e6eeabf` plus approval `2be951a` in
   [PR #5](https://github.com/mohamedtsx/tableweave/pull/5), based on open PR #4;
-  combined checks pass. WP-06 actual Start corrections n1–n5 are independently
-  reviewed; no residual source defect is verified. Main's full corrected guarded
-  workflow/fresh actual-tarball checks pass and bounded G-04 is agent-approved
-  under delegated authority. Source `a7d0863` is pushed in open
-  [PR #6](https://github.com/mohamedtsx/tableweave/pull/6) against PR #5's branch;
-  corrected source222c97f has two successful remote checks. A final documentation
-  handoff records their exact run IDs; verify that last handoff head too. Other packets
-  continue only in their bounded isolated/primary paths. No deployment/publication.
+  combined checks pass. WP-06 final9eb71e1 is delivered in open/unmerged PR #6
+  with both final remote checks passing; clean-checkout generation n7 is resolved.
+  WP-07 tool UI/combined fixture and WP-08 core corrections remain in progress;
+  WP-09 details-only implementation is separately allocated in its isolated tree.
+  Finish numbered reviews/integration before packet approvals/stacked PRs. PR #3,
+  #4 and #5 remain open; no PR merge, deployment or publication.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
@@ -192,11 +212,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
-| TASK-014 | WP-06 Start/Query SSR integration | in progress | Corrected source/remote checks pass; final docs-head verification | Delegated G-04; PR #6 remains OPEN/unmerged |
-| TASK-015 | WP-07 filter tools/async choices | planned | Assigned after producer handoffs | WP-04/WP-05 and provisional visual disposition |
-| TASK-016 | WP-08 table controls | planned | Assigned after producer handoffs | WP-04/WP-05 |
-| TASK-017 | WP-09 details/localization/responsive shell | planned | Assigned after producer handoffs | WP-04/WP-05 |
-| TASK-018 | WP-10 optional sortable | planned | Assigned after producer handoffs | WP-04/WP-05; G-02 |
+| TASK-014 | WP-06 Start/Query SSR integration | done | PR #6 final9eb71e1 open/unmerged; both remote checks pass | Delegated bounded G-04; no personal/release acceptance |
+| TASK-015 | WP-07 filter tools/async choices | in review | Combined stack approved; separate PR/remote delivery next | Exact9eb71e1 parent;430 units/171 baseline-tools/43 packed-tools/108 Start |
+| TASK-016 | WP-08 table controls | in progress | Core approved; selection/pager UI, additive owner-intent review | Reviewed WP-04/WP-05; exact producer ports only |
+| TASK-017 | WP-09 details/localization/responsive shell | in progress | Approved isolated details-only producer first; shell waits for WP-07/08 | Reviewed WP-04/WP-05, exact later control/tool handoffs |
+| TASK-018 | WP-10 optional sortable | in progress | Pure coordinator/column-helper stage only; no adapter/install yet | Reviewed authority + explicit app stamp; G-02 remains |
 | TASK-019 | WP-11 examples/docs/workbench | planned | Assigned after feature handoffs | WP-06–WP-10 |
 | TASK-020 | WP-12 integrated browser/manual accessibility | planned | Verification owner assigned after WP-11 | Manual/support-matrix evidence cannot be fabricated |
 | TASK-021 | WP-13 packed compatibility/release tooling | planned | Package owner assigned after WP-11 | No publication rights inferred |
@@ -817,6 +837,325 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   is OPEN to `feat/wp-04-native-bridge`. This handoff records its actual URL and
   completion; final pushed-head equality is checked after this Markdown commit.
   No merges, publication, deployments or extra consumer/reference changes.
+  Final local/remote/PR #5 head verified equal at
+  `3e4aaa8e697670035346d4e9a26055d1ad2e6b4a`; PR OPEN and tree clean before
+  the independent WP-07 work branch was created.
+
+## TASK-015 — WP-07 filter tools and async choices
+
+- **Authority/status:** main approved the [bounded plan](docs/planning/wp-07-implementation-plan.md)
+  and provisional reference-informed code visual disposition before runtime edits.
+  This is delegated engineering/visual review, not personal maintainer or final
+  Figma approval. WP-04/WP-05 are reviewed; WP-06 is independent, not a prerequisite.
+- **Scope:** AC-02–AC-08, F-02–F-07; segmented builder/drafts/AllAny/actions/Clear,
+  search/tabs/date and pure scoped option protocol. No whole-table facade/cache/
+  fetching/persistence or controller/native/resource policy changes.
+- **Paths/ownership:** headless worker first owns the four new filter helper/source
+  modules and `tests/filter-tools/unit/**`; UI/date/fixture owners are assigned
+  only after precise producer handoff. Main owns public indexes/config/manifests/
+  lock/styles/discovery/packed consumers/docs/ledger/Git. Port6427; ignored outputs.
+- **Visual/reference:** relevant local read-only patterns and actual HeroUI3.2.8
+  Storybook/types inform the plan; main's connected reference browser inspection
+  and new supplementary Figma read-only session are recorded. No reference assets/
+  runtime or business policy imported; final rendered responsive/RTL/theme review
+  remains a check, not assumed from the plan.
+- **Next action:** implement/verify exact server-safe helper/draft/option interfaces
+  before UI consumption. Existing operatorAllowed is an internal registry export;
+  reuse it, not copied policy. Main declares date runtime metadata before any new
+  styled date import. Work branch `work/wp-07-tools` starts reviewed `3e4aaa8`;
+  final delivery stacks onto WP-06 without merging PRs.
+  **Assignment:** headless worker is implementing only the four new helper/source
+  files and scoped unit/types. Separate toolbar/date research is read-only until
+  producer handoff. Main declares existing Internationalized Date3.12.4 as styled
+  runtime dependency (moved from dev-only) before date imports; no version upgrade.
+  Strict install passed without version churn. Main prepared owned CSS-root copying
+  (no assets/symlinks/unallocated roots): two scoped tests, CLI and lint pass.
+  Initial docs checks pass (81 Markdown/514 local links/18 probes); no filter UI/
+  packed acceptance is inferred. Preparation is recorded in the
+  [WP-07 evidence](docs/evidence/wp-07-filter-tools-2026-11-24.md).
+  Toolbar/date research is complete. Main approved explicit neutral-tab handling,
+  one stable shared results panel, wire-only private date editor/context and
+  same-context invalidation epoch. Search/tabs/private date code may proceed
+  independently in disjoint paths; operator/helper integration still waits for the
+  exact headless handoff. No implicit vendor today/bounds/precision acceptance.
+  **Next-packet planning:** read-only WP-08 plan identified the native/resource
+  presentation/freshness bridge, truthful retained-page footer, single-selection
+  capability and localization/row-header guard work. No WP-08 code is assigned.
+  Main must explicitly allocate shared renderer changes and WP-09 default shell/
+  whole-table facade work before implementation, rather than expect examples to
+  manufacture missing public APIs. WP-07 retains its tool-specific ownership.
+  The subsequent WP-08 plan has now been approved in its isolated worktree before
+  core edits; only presentation/mode producer work is assigned, not control UI.
+  **Headless handoff:** four new helper/source modules now have precise typed
+  interfaces and107 scoped unit tests/TS6+5.9 strict checks reported passing.
+  Main integrates `/filters` exports/discovery; independent helper/source review
+  is active. Builder UI may consume that exact handoff now, while date primitives
+  remain separately owned; no source/API guesses or producer acceptance yet.
+  Independent headless review reproduced option envelope getter validation/reread
+  inconsistency (WP-07 n1): arbitrary mutable hasMore/access payload can enter the
+  snapshot. Original worker is adding failing regressions/fixing capture/validation
+  without interface drift; UI consumers can continue against stable typed ports.
+  **n1 correction handoff:** worker reproduced both reports plus a failing envelope
+  audit, then captured own data descriptors and rejected accessors without invoking
+  them. Original107 plus23 regressions now pass with strict TS6/5.9. Public
+  signatures are unchanged. Independent rereview is active; main will rebuild
+  emitted/packed checks for these new bytes, not promote the earlier pack.
+  Independent n1 rereview resolves the defect with130 tests/both TS versions and
+  original getter/proxy/atomicity probes; no residual headless defect. Main matches
+  its source fingerprint, rebuilds and passes420 default unit tests plus refreshed
+  unpatched public TS6/5.9/runtime/bundle packing. Scoped headless correction is
+  technically approved; entire WP-07 still awaits UI/lifecycle/visual/packed proof.
+  **Toolbar/date handoff:** actual FilterSearch/FilterTabs/FilterDate and private
+  DateOperandEditor contract are complete with five unit/15 source Chromium
+  scenarios reported. Main handed the exact private date props to builder owner.
+  Independent toolbar/date review is active. Main reproduced/repaired a scoped
+  HeroUI calendar declaration barrel issue without runtime/version/strictness
+  change; both TS versions now pass toolbar and real calendar-type regressions.
+  All528 vendor files compared, only two .d.ts entries differ; integrity tests pass.
+  Main wired candidate root exports/owned CSS layering and default discovery;
+  source/browser aliases still require emitted/actual packed interaction proof.
+  Main inspected the real desktop source toolbar/date scene (not final layout or
+  complete responsive/manual-AT acceptance) and stopped only its owned6441 preview.
+  **UI review:** independent toolbar review verified n3 Suspense-stranded search
+  and n4 rejected-history/external replacement. Worker reproduced before fixing;
+  24 Chromium/five unit/both strict TS checks pass, rereview active. Independent
+  builder review verifies n5 same-turn stale Apply overwrite, n6 hidden retained-
+  option failure/Retry, n7 reopened term/cursor mismatch. Builder owner is adding
+  failing regressions/fixes. No UI/packet approval. Main's strict package build
+  passes and emitted public declarations contain only own/React/Tableweave types;
+  refreshed styled packing is active, not proof of unfinished corrected bytes.
+  A separate fixture owner now has exact completed builder/date/tool interfaces
+  for real workbench/combined emitted stories; source aliases are not tarball proof.
+  Search n3/n4 independent rereview resolves both findings:40 Chromium checks
+  across two runs, five units/both strict TS/Biome and exact source hash match.
+  Scoped source correction approved technically; actual emitted/packed search and
+  builder integration still remain. Builder/control findings remain open.
+  Expanded default unit discovery initially exposed missing test-root date vendor
+  resolution and a five-second emitted-graph timeout under22 workers. Main fixed
+  the exact installed-dependency test alias and verified426 tests with four-worker
+  budgeting, now the default; no assertion/runtime deadline or retry was relaxed.
+  Complete strict frozen clean install/unchanged lockfile and style/patch integrity
+  checks pass. Corrected UI/combined/actual-packed acceptance still remains.
+  **Packing audit:** main traced the initial clean app's React types to the
+  matching unpatched workspace declarations. ABI checks ran, but complete type-
+  install isolation was too strong a claim. Both consumers now declare exact
+  React/DOM type dev dependencies; a new resolved-file guard (only compiler stdlib
+  may escape) independently rejects the old artifact. Fresh guarded packing is
+  active. Actual packed production browser driver is prepared, awaiting the
+  completed shared fixture/corrected UI build before execution.
+  The explicit-type/resolved-file rerun now passes both compilers (210 headless/
+  223 styled files, only compiler stdlib outside each app). Both actual package
+  roots rebuild strictly. Builder rereview resolves original n5–n7 but verifies
+  new n10: a same-turn old option click can submit while the actual new source is
+  pending/canChoose=false. Owner is adding failing event-time eligibility checks;
+  builder/whole-packet approval remains blocked. Combined fixture work continues.
+  n10 correction handoff now passes45 source Chromium checks/both strict TS/Biome
+  after three before-failing regressions. Only the discrete value-editor runtime
+  changes, no API drift. Main rebuilds actual package roots/CSS and hands fresh
+  bytes to the combined fixture owner; independent n10 rereview remains active.
+  Independent n10 replay resolves its stale-choice path but finds n11 duplicated
+  field-wide IDs. Shared typed Set union now passes independent47 behavioral/
+  duplicate-target/label-retention and TS6/5.9 probes; scoped fix only. Frozen
+  emitted40 run is37 pass/three failures, bytes unchanged: Escape accepted-member
+  removal, label-in-name, and light/dark contrast. They remain asserted as n13–15.
+  Main's RTL-provider gap n12 has one before failure and three after passing probes;
+  updated43-case emitted run is active. Builder owns keyboard/names; main owns
+  shared header/confirmation contrast. No dist rebuild during active byte guard.
+  Builder n13/n14 now pass independent54 behavioral cases/original Escape/rich-name
+  probes, five scoped axe scans and both strict compilers. Main rebuilds corrected
+  widgets and passes43 actual-tarball production browser cases, strict standalone
+  TS6/5.9/confinement (370 browser-app files), runtime graph/CSS guards and429 units.
+  Main reviews desktop/dark/RTL/narrow/enlarged screenshots. A Storybook wrapper
+  rebuild overlaps a later43/43 emitted run: retain as overlapped, not immutable
+  acceptance.76 headless/50 styled files then match the passing archive exactly;
+  a clean emitted rerun is active with package rebuilds held. Main also fixes
+  Storybook shared-fixture runtime/type dependency resolution; direct build/types
+  pass. Full ordered workflow/stack approval remains required.
+  Clean emitted43 now passes with unchanged guard7a453f5174eb228626eed6cecc3c15b033cb4b3e746f4d9aeea2032e7cb9c8e0.
+  Built Storybook confirmation adds real F-03/F-07 plays. A new empty-Clear check
+  incorrectly expected disabled instead of absent; story/probe are corrected.
+  Read-only pinned Storybook completion/exception checks now detect caught play
+  failures even when its terminal status says success. Negative proof is retained.
+  Next direct Storybook rebuild/six probes, full ordered check and WP-06 stack.
+  Duplicate main-owned story probes were consolidated; no product assertion dropped.
+  Positive rebuilt Storybook now passes6/6 with completed-play/exception checks.
+  Main starts the full ordered `pnpm check` with45-minute headroom; all WP-07
+  runtime/config/fixture sources are frozen. No immutable-candidate claim from
+  overlapping rebuilds is reused. Next inspect the completed result, grant bounded
+  integration disposition only if clean, then stack/push/open WP-07 separately on
+  final WP-06 head9eb71e1 and rerun combined checks. Never merge any PR.
+  **Completed isolated proof:** ordered `pnpm check` exits0,429 units/171 browser
+  checks plus43 actual-tarball production interactions; frozen install/strict types/
+  runtime/CSS/docs pass. Main resolves session1 n1–n15 and grants bounded delegated
+  source/public-component/packed approval, not personal or release acceptance.
+  Next source handoff commit, isolated stack onto9eb71e1, shared-file reconciliation
+  and combined Start/tools check before final integration PR approval.
+  **Stack integration:** source handoff ea9dc57 is being replayed onto final WP-06
+  9eb71e1 in `/tmp/opencode/tableweave-wp07-stacked`, feat/wp-07-filter-tools.
+  Main reconciles script/patch/lock/test/documentation unions, preserving both
+  producer histories and all source/runtime requirements. Frozen install passes
+  without lock modification. Next full combined workflow; no integrated approval
+  or push follows from the isolated result alone. No PR merges.
+  **Combined result:** independent static reconciliation review passes; actual
+  complete stacked `pnpm check` now passes430 units,171 baseline/tool Chromium,
+  43 actual-packed tools and27+27 source/27+27 actual-packed Start. Both strict
+  compiler/confinement/frozen-install/CSS/runtime/build/docs paths pass. Tool and
+  Start source remain byte-identical to reviewed baselines; main grants bounded
+  combined integration approval. Next final docs commit, push/separate PR against
+  feat/wp-06-start-query and verify remote head/checks. No merge or later gates.
+
+## TASK-016 — WP-08 controls/presentation producer
+
+- **Authority/readiness:** main approved the bounded plan/provisional direction
+  before code in `/tmp/opencode/tableweave-wp08`, branch `work/wp-08-controls`,
+  from reviewed WP-05 `3e4aaa8`. Final PR stacks after WP-07. No new dependencies.
+- **Initial scope:** AC-09–11/13/15/24/25; pure native/resource presentation and
+  latest-authority guards, explicit request/query binding, truthful displayed
+  metadata/selected subsets, plus immutable single/multiple native selection mode.
+  No second state/pipeline/cache/resource lifetime or controller-policy rewrite.
+- **Paths:** core worker owns only `packages/react/src/presentation/**`, approved
+  native-mode edits in `tanstack/**` and `tests/controls/core/**`. Main owns all
+  shared paths/exports/manifests/lockfile/ledger/Git. UI waits for exact handoff.
+- **Next:** tested actual producer interfaces and backward-compatible single-mode
+  constraints; then allocate independent control UI and shared renderer guards.
+  Details/default shell/facade allocation is WP-09/main before examples; no silent
+  missing-API workaround. Final full/packed/browser/independent review required.
+  **Core handoff:**32 new controls tests,24 prior native tests, seven isolated
+  Chromium regressions and strict TS6/5.9 reported passing; exact request bindings,
+  pure facts and event authority are ready for review. The worker identified a
+  generic controller selection.page gap for a one-ID single-mode intent. Main
+  approved a bounded pure validateCommand guard (including no-ops/final accept),
+  separately preserving validateState semantics, before code. Worker additionally
+  owns controller/store.ts/types.ts in the isolated tree for this closure; no UI
+  consumer is assigned until the completed contract is tested/handed off.
+  Command closure handoff passes65 core/56 prior controller/24 native and seven
+  Chromium scenarios, but independent review reproduced six controls defects:
+  command TOCTOU, old-scope Cancel, foreign snapshot view projection, mutable guard
+  options, relative-time token rebinding and selection getter rereads. Approval
+  withheld. Main approves precise correction/protocol change before code: atomic
+  beginControlsRequest captures identity/time before resource.begin; no transport/
+  cache/extra owner. Control UI remains unassigned until corrected handoff/review.
+  **Correction handoff:** all six reproduced defects now have nine before-failing
+  regressions and87 core/56 controller/24 native/seven Chromium passing checks.
+  Atomic beginControlsRequest plus read-only registered-token lookup replace unsafe
+  post-hoc binding; command/config capture, owner Cancel and view provenance are
+  corrected. Independent rereview is active, no core/packet approval yet.
+  Rereview verifies original six corrections but adds n7/n8: stale-view early
+  return skips selected/query privacy and same-scope Cancel facts; saved initial
+  server snapshot ignores current resource scope. Four new assertions fail while
+  167 candidate tests/eight strict typechecks/seven Chromium pass. Owner is fixing
+  guard ordering/current-context authority before another review; UI remains held.
+  n7/n8 independent replays now pass, but n9 exposes checked/mixed bits from a
+  foreign scope in an otherwise masked authority. Owner's exhaustive neutral-facts
+  constructor now passes129 core+prior suites and strict/browser checks; independent
+  n9 rereview is active. No UI consumers or packet approval yet.
+  Final n1–n9 independent rereview now passes263 units including54 fresh probes,
+  eight strict TS checks/seven Chromium and exact38-file fingerprint. Main grants
+  bounded core source technical approval for integration, not WP-08 completion.
+  Isolated actual root exports are wired; exact sort/columns owner-domain intent
+  closure is separately assigned before those UI consumers. Main approves initial
+  selection/** and pagination/** producers with disjoint tests/ports6463/6465,
+  no shared renderer/index/core/dependency writes and no guessed API contracts.
+  Additive sort/columns intent closure now passes independent316 tests, eight
+  strict checks/seven Chromium and41 matching fingerprints; main approves it for
+  sorting/chooser consumers. Separate columns/sorting UI and shared collection
+  adapter owners receive disjoint paths/tests on6467/6469. Main retains roots,
+  CSS/config/manifests/ledger/Git; optional guarded NativeCollection/single-mode/
+  row-header/messages/diagnostic contract is approved before those edits.
+  Sorting/chooser correctly stops on a separate-target owner proof gap. Main adds
+  genuine-factory getControlsAuthorityOwner, frozen definition/controller pair,
+  no getters/ports or authorization. Independent326 tests/six strict checks pass;
+  consumers compare both target identities then require the intent. Sorting/chooser
+  resumes and guarded collection adds definition to its controls envelope.
+  Pager review reproduces cross-owner clamp, denied-context getter reread and method-
+  port receiver crash; SelectionToolbar review proves denied-context facts remount
+  old normal criteria, including SSR. Owners reproduce/fix before rereview. Pairing
+  unrelated presentation/authority is a documented host precondition diagnostic,
+  not an automatic binding guarantee or permission to use query equality as proof.
+  Selection privacy correction is independently approved (29 browser plus fresh
+  SSR/focus replay/eight units/both strict compilers). Sorting/chooser independent
+  review passes36 units/19 browser/five compiler checks with exact61-file manifest;
+  main grants scoped source approval. Collection review is active after main fixes
+  grouped-header token contrast. Pager n1–n3 resolve, while avoidable Promise hook
+  invocation and precise synchronous-port limitation are in final review. No full
+  WP-08 or actual-packed/combined acceptance is implied by producer approvals.
+
+## TASK-017 — WP-09 details producer before shell integration
+
+- **Authority/readiness:** main approved the bounded plan/provisional direction
+  before code in isolated `/tmp/opencode/tableweave-wp09`, `work/wp-09-details`,
+  from reviewed WP-05 `3e4aaa8`. Final stack follows WP-08; no merge/deploy.
+- **Initial allocation:** worker owns only `packages/heroui/src/details/**` and
+  `tests/details/**` (port6447). Main owns shared renderer/exports/styles/manifests/
+  docs/ledger/Git. Existing controller/native/resource are read-only. No installs.
+- **Contract:** accepted target, arbitrary slots and real optional native row;
+  context/session-tagged app detail port, shared guarded async close/replace policy,
+  one logical-end/fullscreen Drawer, private pointer-handler adaptation disabling
+  swipe without disabling backdrop/Escape. Actual pinned props spread supports
+  that adapter; browser proof must establish it before acceptance.
+- **Next:** exact tested DetailsShell/trigger/port handoff and independent review.
+  DataTable/default state UI/localization/facade are explicitly allocated later
+  after precise WP-07/WP-08 handoffs, not guessed or delegated to examples.
+  SSR/packed/browser/focus/resize/privacy proof required; no manual AT/device claim.
+  **Initial handoff:** isolated private details index provides useDetailsSession,
+  DetailsShell/Trigger, own English messages/types and context/session/generation-
+  tagged application ports. Worker reports22 Chromium/two units and strict source/
+  NodeNext TS6/5.9 declaration checks passing, with no vendor type leakage. Main
+  owns root exports/CSS/discovery/actual-packed proof; independent review is active.
+  Default shell/aggregate localization/facade are still separate/unassigned.
+  **Independent review:** original22 Chromium/two units/types pass, but four new
+  assertions demonstrate n1 metadata getter/denied-source faults, n2 dirty-form
+  loss during loading refetch and n3 retained native Row.table exposing old scope.
+  Main approves the narrow pre-consumer current-read/native-frame provenance
+  handshake before fixes; source/metadata capture and stable form subtree are
+  required. Owner fixes original producer; no UI/packet approval or facade work.
+  **Correction handoff:** four before-failing invariants now pass in worker scope;
+  30 Chromium/six units and both source/NodeNext declaration versions pass. Metadata
+  descriptor capture, stable form subtree and atomic current-read/tagged native
+  frame replace unsafe paths. Independent rereview active; no root/public/packed
+  proof, shell/localization/facade or whole-packet approval.
+  Original privacy/source/native-frame reproductions now pass independently, but
+  n4 generation-before-parent lag still unmounts dirty forms and n5 policy getter
+  rereads can skip denial. Worker reproduces both before fixing lifetime/freshness
+  separation and callback capture:52 Chromium/nine units/both strict versions pass.
+  Independent rereview active; no API/root/packed or full packet approval yet.
+  Final n1–n5 independent details rereview now passes68 Chromium across two runs,
+  nine units/source+public strict TS6/5.9 and exact source aggregate11ddb455e5bc.
+  Main approves this initial source producer technically for integration; public
+  root/packed/default shell/aggregate locale/facade and full WP-09 remain separate.
+  Main emits actual root DetailsShell/Trigger/session/messages and owned CSS,
+  verifies runtime imports plus six reachable own declaration files without vendor
+  prop leaks. This is isolated emitted evidence only, not actual tarball/full UI.
+
+## TASK-018 — WP-10 read-only preparation
+
+- **Status:** planned, no implementation/install assigned. Separate research and
+  main's registry recheck identify new-generation dnd-kit0.5.3 React/DOM peers
+  compatible by metadata and a candidate controlled-preview configuration.
+- Research in `/tmp/opencode/tableweave-wp10/docs/planning/wp-10-research.md`
+  records the default DOM-reparenting/
+  feedback hazard, genuine row/header ref seam, optional-peer split and G-02 proof.
+  Metadata/source reading is not strict/browser/collection compatibility acceptance.
+- **Next:** after corrected WP-08 guard handoff, approve exact pure producer/ref/
+  adapter ownership and install scope before code. No guessed APIs, alternate
+  legacy drag manager, mandatory default peer or requirement waiver. New suggested
+  ports6451–6457 avoid existing fixtures. No G-02 or publication claim.
+  Read-only handshake research is complete. Main approves stage1's isolated
+  implementation plan before code: dependency-free metadata-only row coordinator
+  and complete-order column helper, explicit app committed stamp/epoch/source/
+  revision port, no query/record mirror or persistence. Worker owns only
+  reordering/{types,capture,rows,columns,index}.ts and tests/reordering/core/**.
+  Installs/renderer/optional adapter remain held for separate exact handoff/proof.
+  Stage1 now hands off131 unit tests, strict source/config/emitted TS6/5.9,
+  controller parity5040 permutations/108 valid moves and Node/global-access guards.
+  Five-file source aggregatef0b483b71de105c8e760be837a0adf64225420fd86f7007cec387e8ebd30569d;
+  independent source review active. No actual WP-08 port/ref/optional peer/packed/
+  browser G-02 proof or successful application persistence is inferred.
+  Independent stage1 review now passes151 tests,5040-permutation/108-proposal parity
+  plus1920 hidden-slot probes, six strict checks and isolated Node/global guards.
+  Both fingerprints match. Main grants scoped stage1 source technical approval;
+  real WP-08 stamp binding/ref seam/pager interlock and optional-peer/install/browser
+  G-02 remain held. No whole-packet, actual persistence or publication approval.
 
 ## TASK-014 — WP-06 actual Start/Query SSR integration
 
@@ -852,7 +1191,7 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   paths and may run isolated builds/SSR/browser proof on6013. Main retains all
   manifests/lock/shared checks/docs and Git; root integration happens after the
   producer PR handoff. WP-07 has a separate read-only planning agent, no runtime
-   implementation assigned yet.
+  implementation assigned yet.
   **Current candidate:** WP-05 final handoff is incorporated (`9c62b31` carries
   `3e4aaa8`). Actual Start app/production host and shared/root/actual-tarball
   runners are implemented. Exact declaration/dependency repair passes unchanged
@@ -905,3 +1244,85 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   runs45315481726 and45315488925. PR #6 remains OPEN, auto-merge null, exact head
   222c97f4390ee32668d2c5a6908b878dc475516e. This final documentation-only handoff
   preserves those results; main verifies its final pushed head/checks separately.
+  **Earlier producer observations retained from the primary coordination lane:**
+  **App handoff:** actual Start development/production source fixtures each report
+  13 browser checks and production build passed, but strict app/config typing is
+  blocked by 11 installed upstream diagnostics. No G-04 approval. Main is handling
+  exact dependency/declaration repair; independent app-semantic review and separate
+  read-only repair research are active. Actual tarball consumer is only prepared,
+  not installed/tested. Root discovery/frozen-install/packed runner integration is
+  main-owned in the isolated worktree. UI worker is now separately assigned below.
+  Main's exact repair now passes app/config TS6 and5.9; only three reviewed .d.ts
+  files differ among426 compared upstream files, no runtime-byte changes. Initial
+  actual-tarball strict install/type/build/dev+production checks pass, but independent
+  review verified actor-scope runtime retention, real-denial handling and early
+  no-store rejection gaps (WP-06 review n2–n4). App worker is reproducing/fixing
+  those before approval; passing the older suite is not G-04 acceptance.
+  **Correction handoff:** worker reproduced four dev and four production failures
+  before fixing accepted-scope retirement, actual typed denial and outer response
+  policy.21 dev+21 production checks (original13 retained), strict TS6/5.9 and
+  build/client markers pass in the worker scope. Main matches the22-file source
+  fingerprint and starts the full corrected workflow/fresh actual tarball runs;
+  independent rereview is active. G-04 is not yet approved.
+  The first corrected full workflow reached289 passing unit tests, strict types,
+  packed library guards and initial browser suites but exceeded the600-second
+  host command limit during collection tests (no reported assertion failure).
+  Main verified/stopped its leftover6009 Vite process by exact cwd and restarted
+  with1800-second headroom. No full-workflow pass or later Start/packed result is
+  inferred from the interrupted run.
+  **Second independent result:** n2–n4 repairs verified, but new n5 reproduces real
+  bootstrap authorization denial leaving Alpha cache/canary and access=true server
+  metadata; reconnecting the old wrapper resumes cached rows. Main stopped the
+  exact owned obsolete check process tree (verified cwd/PIDs; all its test ports
+  are free) and returned the blocker for failing regression/typed terminal
+  handling. No mixed-revision/full-workflow pass is claimed. G-04 remains blocked.
+  **n5 handoff:** worker independently reproduced both modes, then passed27 dev/
+  27 production, strict TS6/5.9 and build/client checks. Typed bootstrap/canary
+  denials now revoke a router-local authorization grant; old wrappers stay terminal,
+  late denials cannot revoke a newer grant, and definition/read-count regressions
+  are included. Independent rereview is active. Measured cold-module timing backs
+  initial-hydration-only use of the existing30-second deadline; transition assertions
+  remain unchanged. Main adds both compiler versions to actual packed Start proof.
+  **Independent n5 resolution:**27 dev+27 production and two extra probes per mode
+  pass original terminal-wrapper and delayed-denial Alpha→Beta→Alpha checks.
+  Both compilers/build/Biome/client hashes match the25-file candidate; no residual
+  source defect verified. Scoped technical approval recommended; main's full
+  corrected workflow/fresh actual tarball run is active, not yet a G-04 pass.
+  The30-minute run times out only in the final packed-production suite, after all
+  earlier stages/43 baseline/54 source/27 packed-development cases pass. Main
+  cleans only its verified owned6013 server, backports explicit shared consumer
+  React types/resolved-file isolation and verifies721 actual Start program files
+  under each compiler. The next full host/CI budget is45 minutes, without changing
+  behavior deadlines/retries. G-04 still awaits completed guarded workflow.
+  **Final source/PR result:** corrected guarded full pnpm check now passes289 units,
+  43 baseline browser +27 dev/27 production source +27 dev/27 production actual-
+  tarball cases, with both compiler/confinement guards. Source and packed25-file
+  hashes match independent review. Main grants scoped **agent-approved under
+  delegated authority** WP-06/G-04, not personal maintainer/external release gates.
+  Transport f3507c1 stacks byte-identically as a7d0863 on actual PR #5 head3e4aaa8;
+  pushed feat/wp-06-start-query, [PR #6](https://github.com/mohamedtsx/tableweave/pull/6)
+  OPEN to feat/wp-05-resources with auto-merge disabled. Remote checks running;
+  next verify final handoff head, then stack WP-07 without merging any PR.
+  **CI n7 correction:** final handoff cc88f21's two remote checks fail because a
+  clean checkout lacks ignored routeTree.gen. Main independently reproduces exact
+  TS2307 without generated input, then verifies real framework build-before-tsc
+  generates it and passes. Packed preparation now excludes/asserts its absence;
+  a fresh actual packed run is active. Runtime25 source files/strict settings are
+  unchanged; local prior full proof is retained, but clean CI delivery is blocked
+  until corrected fresh/remote checks pass. PR #6 stays OPEN/unmerged.
+  Fresh cold source/root typechecking and54 genuine packed browser executions now
+  pass; independent n7 review verifies generation/exclusion/CI ordering and unchanged
+  runtime/archive hashes. Main approves the narrow correction technically. Next
+  push it to existing PR #6 and verify the corrected final remote workflow.
+  Correction222c97f is now pushed to open PR #6; corrected final remote checks are
+  being watched. Prior failing CI remains historical evidence, not a green pass.
+  Corrected source222c97f now passes both full remote push/PR foundation jobs,
+  runs45315481726/45315488925. PR #6 OPEN, auto-merge null. Main records a final
+  documentation-only handoff then verifies its final head/checks before closure;
+  no merge/publication/deployment. WP-07 now also passes43 actual-tarball production
+  browser cases and both confined TS versions; full integrated approval remains.
+  **Final delivery verified:** PR #6 head/local/remote9eb71e16bac43466443d9547256ead3f9733225e,
+  clean isolated tree, both final foundation jobs SUCCESS (45316752896/45316761214).
+  PR OPEN to feat/wp-05-resources, auto-merge null. TASK-014 is done for bounded
+  delegated WP-06 delivery; no merge or personal/external-gate acceptance. Preserve
+  earlier CI failures and their n7 correction evidence. No further WP-06 edits.

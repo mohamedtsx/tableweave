@@ -9,6 +9,12 @@ hook producer. Neither is a full table implementation or release approval.
   `canonicalJson` and schema-specific types (`QueryFor`, `RuleFor`, `FieldAccessors`).
 - `/filters`: operator registry/presets, `compileFilter`, `createFilterEvaluator`,
   `translateQuery`, `invertRule`, explicit date resolution and associated types.
+  WP-07 adds `getBuilderFields`, `getFieldOperators`, `validateRuleDraft`,
+  `createOptionSource`, `projectOptionSourceView` and own typed option/editor
+  contracts. Their scoped headless correction is technically reviewed; full UI
+  integration/packet acceptance is separate. See the
+  [tool protocol](../../docs/engineering/wp-07-tools.md) for pure validation,
+  exact-token generations, bounded labels and passive source ownership.
 - Root (client entry): `defineController`, `createTableState`, `reduceTableState`,
   `createTableController`, `replaceTableDefinition`, `ControllerError`,
   `useTableweaveState`, `useTableweaveQuery`, `useTableweaveSelector` and types.

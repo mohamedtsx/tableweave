@@ -82,3 +82,16 @@ changing runtime versions/bytes or strict flags. Alternate-bundler installation,
 unplugin overrides, ambient-any modules and hiding config checks are rejected.
 Independent strict app/config and real packed Start evidence remain mandatory.
 Only the Vite profile is covered; upstream and release/legal review are separate.
+
+## WP-07 ADR-07 calendar declaration disposition
+
+**2026-11-24; delegated engineering choice, source verification completed.** Scoped vendor
+calendars unnecessarily reach the entire HeroUI3.2.8 declaration barrel through
+CalendarYearPicker type references. The
+[bounded repair](../planning/wp-07-implementation-plan.md#calendar-declaration-repair-disposition--2026-11-24)
+uses the genuine scoped entry for the same types, leaving runtime bytes, versions
+and strict flags unchanged. No raw-barrel TS6 claim, type erasure or generic
+interface rewrite follows. The same issue affects ListBox's scoped entry: three
+declaration-only files differ, with all528 upstream runtime/license bytes otherwise
+matching. Both strict compiler versions, public/actual-packed/browser and frozen
+installation checks now pass; final combined-stack delivery remains separate.

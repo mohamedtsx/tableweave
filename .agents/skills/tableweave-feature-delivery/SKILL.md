@@ -17,6 +17,9 @@ and linked technical contract, then the assigned [packet](../../../docs/planning
 3. Use one owner per group. Trace definition validation → draft/command → accepted
    transition → native projection or app query → identity-tagged resource → view/
    actions. Preserve atomic resets, stable IDs, field ownership and scope guards.
+   Capture primitive envelope metadata once and validate exactly what is stored;
+   never validate then reread an accessor. Rejecting accessor descriptors is valid.
+   This does not authorize cloning/freezing application-owned record objects.
 4. Match actual v9/v3/selected sortable generation docs/types. No removed native
    global callbacks, second engine/state mirror, implicit fetching/persistence or
    unauthorized `.repo/` imports. Keep contracts server-safe and sortable optional.

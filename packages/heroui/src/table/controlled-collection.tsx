@@ -174,7 +174,7 @@ export function ControlledCollection(props: ControlledCollectionProps) {
     );
   }
   return (
-    <Table variant="secondary">
+    <Table variant="secondary" className="tw-native-collection">
       <Table.ScrollContainer
         onKeyDownCapture={(event) =>
           skipPlaceholderHeader(event, projected.columns)

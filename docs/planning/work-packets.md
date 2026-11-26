@@ -143,6 +143,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-07 Builder, tabs, search, date and async choices
 
+- **Execution plan:** [WP-07 bounded plan](wp-07-implementation-plan.md); TASKS
+  records delegated plan/visual authority, producer handshakes and review status.
+
 - **Role/dependencies:** tools UI worker; WP-04/WP-05, relevant reviewed/provisional
   visual dispositions. Coordinator allocates toolbar/shared files.
 - **Read:** operators, shared rules, design F-02–F-07; AC-02–AC-08.
