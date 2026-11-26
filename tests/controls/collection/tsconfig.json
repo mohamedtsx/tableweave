@@ -1,0 +1,18 @@
+{
+  "extends": "../harness/source.tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "ES2023.Intl", "DOM", "DOM.Iterable"],
+    "types": ["node"]
+  },
+  "include": [
+    "*.ts",
+    "*.tsx",
+    "../../../packages/heroui/src/table/native-collection.tsx",
+    "../../../packages/heroui/src/table/controlled-collection.tsx",
+    "../../../packages/heroui/src/table/collection-messages.ts"
+  ]
+}

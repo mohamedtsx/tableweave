@@ -1,0 +1,1143 @@
+tests/benchmarks/wp14-guards/guards.test.ts:49:25 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    47 │   assert.throws(() => validateProfileConfig("rac-runtime", `${rac}packageExtensions: {}\n`, unitNpmrc()));
+    48 │   assert.throws(() => validateProfileConfig("rac-runtime", ordinary, unitNpmrc()));
+  > 49 │   for (const config of [unitNpmrc() + "ignore-scripts=false\n", unitNpmrc() + "strict-peer-dependencies=false\n", unitNpmrc() + "unknown=true\n", unitNpmrc().replace("package-import-method=copy", "package-import-method=hardlink")]) assert.throws(() => validateProfileConfig("ordinary", ordinary, config));
+       │                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    50 │ });
+    51 │ it("timeout remains immutable failure after deferred UNIT_SYNTHETIC task resolves late", async () => {
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    47 47 │     assert.throws(() => validateProfileConfig("rac-runtime", `${rac}packageExtensions: {}\n`, unitNpmrc()));
+    48 48 │     assert.throws(() => validateProfileConfig("rac-runtime", ordinary, unitNpmrc()));
+    49    │ - ··for·(const·config·of·[unitNpmrc()·+·"ignore-scripts=false\n",·unitNpmrc()·+·"strict-peer-dependencies=false\n",·unitNpmrc()·+·"unknown=true\n",·unitNpmrc().replace("package-import-method=copy",·"package-import-method=hardlink")])·assert.throws(()·=>·validateProfileConfig("ordinary",·ordinary,·config));
+       49 │ + ··for·(const·config·of·[`${unitNpmrc()}ignore-scripts=false\n`,·unitNpmrc()·+·"strict-peer-dependencies=false\n",·unitNpmrc()·+·"unknown=true\n",·unitNpmrc().replace("package-import-method=copy",·"package-import-method=hardlink")])·assert.throws(()·=>·validateProfileConfig("ordinary",·ordinary,·config));
+    50 50 │   });
+    51 51 │   it("timeout remains immutable failure after deferred UNIT_SYNTHETIC task resolves late", async () => {
+  
+
+tests/benchmarks/wp14-guards/guards.test.ts:49:65 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    47 │   assert.throws(() => validateProfileConfig("rac-runtime", `${rac}packageExtensions: {}\n`, unitNpmrc()));
+    48 │   assert.throws(() => validateProfileConfig("rac-runtime", ordinary, unitNpmrc()));
+  > 49 │   for (const config of [unitNpmrc() + "ignore-scripts=false\n", unitNpmrc() + "strict-peer-dependencies=false\n", unitNpmrc() + "unknown=true\n", unitNpmrc().replace("package-import-method=copy", "package-import-method=hardlink")]) assert.throws(() => validateProfileConfig("ordinary", ordinary, config));
+       │                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    50 │ });
+    51 │ it("timeout remains immutable failure after deferred UNIT_SYNTHETIC task resolves late", async () => {
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    47 47 │     assert.throws(() => validateProfileConfig("rac-runtime", `${rac}packageExtensions: {}\n`, unitNpmrc()));
+    48 48 │     assert.throws(() => validateProfileConfig("rac-runtime", ordinary, unitNpmrc()));
+    49    │ - ··for·(const·config·of·[unitNpmrc()·+·"ignore-scripts=false\n",·unitNpmrc()·+·"strict-peer-dependencies=false\n",·unitNpmrc()·+·"unknown=true\n",·unitNpmrc().replace("package-import-method=copy",·"package-import-method=hardlink")])·assert.throws(()·=>·validateProfileConfig("ordinary",·ordinary,·config));
+       49 │ + ··for·(const·config·of·[unitNpmrc()·+·"ignore-scripts=false\n",·`${unitNpmrc()}strict-peer-dependencies=false\n`,·unitNpmrc()·+·"unknown=true\n",·unitNpmrc().replace("package-import-method=copy",·"package-import-method=hardlink")])·assert.throws(()·=>·validateProfileConfig("ordinary",·ordinary,·config));
+    50 50 │   });
+    51 51 │   it("timeout remains immutable failure after deferred UNIT_SYNTHETIC task resolves late", async () => {
+  
+
+tests/benchmarks/wp14-guards/guards.test.ts:49:115 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    47 │   assert.throws(() => validateProfileConfig("rac-runtime", `${rac}packageExtensions: {}\n`, unitNpmrc()));
+    48 │   assert.throws(() => validateProfileConfig("rac-runtime", ordinary, unitNpmrc()));
+  > 49 │   for (const config of [unitNpmrc() + "ignore-scripts=false\n", unitNpmrc() + "strict-peer-dependencies=false\n", unitNpmrc() + "unknown=true\n", unitNpmrc().replace("package-import-method=copy", "package-import-method=hardlink")]) assert.throws(() => validateProfileConfig("ordinary", ordinary, config));
+       │                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    50 │ });
+    51 │ it("timeout remains immutable failure after deferred UNIT_SYNTHETIC task resolves late", async () => {
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    47 47 │     assert.throws(() => validateProfileConfig("rac-runtime", `${rac}packageExtensions: {}\n`, unitNpmrc()));
+    48 48 │     assert.throws(() => validateProfileConfig("rac-runtime", ordinary, unitNpmrc()));
+    49    │ - ··for·(const·config·of·[unitNpmrc()·+·"ignore-scripts=false\n",·unitNpmrc()·+·"strict-peer-dependencies=false\n",·unitNpmrc()·+·"unknown=true\n",·unitNpmrc().replace("package-import-method=copy",·"package-import-method=hardlink")])·assert.throws(()·=>·validateProfileConfig("ordinary",·ordinary,·config));
+       49 │ + ··for·(const·config·of·[unitNpmrc()·+·"ignore-scripts=false\n",·unitNpmrc()·+·"strict-peer-dependencies=false\n",·`${unitNpmrc()}unknown=true\n`,·unitNpmrc().replace("package-import-method=copy",·"package-import-method=hardlink")])·assert.throws(()·=>·validateProfileConfig("ordinary",·ordinary,·config));
+    50 50 │   });
+    51 51 │   it("timeout remains immutable failure after deferred UNIT_SYNTHETIC task resolves late", async () => {
+  
+
+tests/benchmarks/wp14-guards/static.mjs:35:239 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    33 │   if (file.endsWith(".ts")) assert(!/as unknown as|\bas any\b|@ts-ignore|@ts-expect-error|\b(?:it|test)\.(?:skip|only|todo)/.test(source), file);
+    34 │ }
+  > 35 │ for (const file of (await files(own)).filter((path) => path.endsWith(".md"))) for (const match of (await read(file)).matchAll(/\]\(([^)]+)\)/g)) { const target = resolve(root, file, "..", match[1].split("#")[0]); assert(target.startsWith(resolve(root, own) + "/")); await readFile(target); }
+       │                                                                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^
+    36 │ console.log("AST source guards: canonical profile set/config/independent before-current-after checks; bounded trace/context/server orchestration/debt retention. NOT executed conformance or cleanup proof.");
+    37 │ 
+  
+  i Template literals are easier to read than a chain of + operators and quotes, and they avoid mistakes with spaces and escaped quotes.
+  
+  i Unsafe fix: Use a template literal.
+  
+    33 33 │     if (file.endsWith(".ts")) assert(!/as unknown as|\bas any\b|@ts-ignore|@ts-expect-error|\b(?:it|test)\.(?:skip|only|todo)/.test(source), file);
+    34 34 │   }
+    35    │ - for·(const·file·of·(await·files(own)).filter((path)·=>·path.endsWith(".md")))·for·(const·match·of·(await·read(file)).matchAll(/\]\(([^)]+)\)/g))·{·const·target·=·resolve(root,·file,·"..",·match[1].split("#")[0]);·assert(target.startsWith(resolve(root,·own)·+·"/"));·await·readFile(target);·}
+       35 │ + for·(const·file·of·(await·files(own)).filter((path)·=>·path.endsWith(".md")))·for·(const·match·of·(await·read(file)).matchAll(/\]\(([^)]+)\)/g))·{·const·target·=·resolve(root,·file,·"..",·match[1].split("#")[0]);·assert(target.startsWith(`${resolve(root,·own)}/`));·await·readFile(target);·}
+    36 36 │   console.log("AST source guards: canonical profile set/config/independent before-current-after checks; bounded trace/context/server orchestration/debt retention. NOT executed conformance or cleanup proof.");
+    37 37 │   
+  
+
+tests/benchmarks/wp14-guards/api-probes.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    2  2 │   import type { BrowserContext, CDPSession, Page } from "@playwright/test";
+    3  3 │   import type { Server } from "node:http";
+    4    │ - export·function·sourceEndProbe(page:·Page)·{·return·page.evaluate(()·=>·window.wp14?.end());·}
+    5    │ - export·function·contextCloseProbe(context:·BrowserContext)·{·const·own·=·context.browser();·return·{·contextClose:·()·=>·context.close(),·ownedBrowserClose:·()·=>·own?.close()·};·}
+    6    │ - export·function·traceCloseProbe(cdp:·CDPSession)·{·return·{·end:·()·=>·cdp.send("Tracing.end"),·detach:·()·=>·cdp.detach(),·complete:·(done:·()·=>·void)·=>·cdp.once("Tracing.tracingComplete",·done)·};·}
+    7    │ - export·function·serverCloseProbe(server:·Server)·{·return·{·close:·()·=>·new·Promise<void>((resolve,·reject)·=>·{·server.close((error)·=>·error·?·reject(error)·:·resolve());·}),·idle:·()·=>·server.closeIdleConnections(),·ownedConnections:·()·=>·server.closeAllConnections()·};·}
+       4 │ + export·function·sourceEndProbe(page:·Page)·{
+       5 │ + ··return·page.evaluate(()·=>·window.wp14?.end());
+       6 │ + }
+       7 │ + export·function·contextCloseProbe(context:·BrowserContext)·{
+       8 │ + ··const·own·=·context.browser();
+       9 │ + ··return·{
+      10 │ + ····contextClose:·()·=>·context.close(),
+      11 │ + ····ownedBrowserClose:·()·=>·own?.close(),
+      12 │ + ··};
+      13 │ + }
+      14 │ + export·function·traceCloseProbe(cdp:·CDPSession)·{
+      15 │ + ··return·{
+      16 │ + ····end:·()·=>·cdp.send("Tracing.end"),
+      17 │ + ····detach:·()·=>·cdp.detach(),
+      18 │ + ····complete:·(done:·()·=>·void)·=>·cdp.once("Tracing.tracingComplete",·done),
+      19 │ + ··};
+      20 │ + }
+      21 │ + export·function·serverCloseProbe(server:·Server)·{
+      22 │ + ··return·{
+      23 │ + ····close:·()·=>
+      24 │ + ······new·Promise<void>((resolve,·reject)·=>·{
+      25 │ + ········server.close((error)·=>·(error·?·reject(error)·:·resolve()));
+      26 │ + ······}),
+      27 │ + ····idle:·()·=>·server.closeIdleConnections(),
+      28 │ + ····ownedConnections:·()·=>·server.closeAllConnections(),
+      29 │ + ··};
+      30 │ + }
+    8 31 │   
+  
+
+tests/benchmarks/wp14-guards/guards.test.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3   3 │   import { it } from "node:test";
+     4   4 │   import { readFileSync } from "node:fs";
+     5     │ - import·{·packagedRac,·RAC_FILES,·requireIndependentFiles,·requireOrdinaryRuntimeMap,·requireRuntimeMaps,·validateProfileConfig,·validateRacDescriptor·}·from·"../wp14/candidate.mjs";
+     6     │ - import·{·boundedOwnedWait,·closeOwnedContext,·closeOwnedServer,·finishOwnedTrace,·retainPrimary,·runOwnedCleanup·}·from·"../wp14/driver.mjs";
+     7     │ - function·descriptor()·{·return·JSON.parse(readFileSync(new·URL("../../../packages/heroui/compat/rac-table-clone/profile.json",·import.meta.url),·"utf8"));·}
+     8     │ - function·status(value:·unknown):·unknown·{·assert.ok(value·&&·typeof·value·===·"object"·&&·"status"·in·value);·return·value.status;·}
+     9     │ - function·unitNpmrc()·{·return·"registry=https://registry.npmjs.org/\nsave-exact=true\nstrict-peer-dependencies=true\nauto-install-peers=false\nengine-strict=true\npackage-manager-strict=true\nignore-scripts=true\nignore-pnpmfile=true\nshared-workspace-lockfile=false\nnode-linker=isolated\npackage-import-method=copy\nstore-dir=/tmp/opencode/UNIT_SYNTHETIC_store\n";·}
+         5 │ + import·{
+         6 │ + ··packagedRac,
+         7 │ + ··RAC_FILES,
+         8 │ + ··requireIndependentFiles,
+         9 │ + ··requireOrdinaryRuntimeMap,
+        10 │ + ··requireRuntimeMaps,
+        11 │ + ··validateProfileConfig,
+        12 │ + ··validateRacDescriptor,
+        13 │ + }·from·"../wp14/candidate.mjs";
+        14 │ + import·{
+        15 │ + ··boundedOwnedWait,
+        16 │ + ··closeOwnedContext,
+        17 │ + ··closeOwnedServer,
+        18 │ + ··finishOwnedTrace,
+        19 │ + ··retainPrimary,
+        20 │ + ··runOwnedCleanup,
+        21 │ + }·from·"../wp14/driver.mjs";
+        22 │ + function·descriptor()·{
+        23 │ + ··return·JSON.parse(
+        24 │ + ····readFileSync(
+        25 │ + ······new·URL(
+        26 │ + ········"../../../packages/heroui/compat/rac-table-clone/profile.json",
+        27 │ + ········import.meta.url,
+        28 │ + ······),
+        29 │ + ······"utf8",
+        30 │ + ····),
+        31 │ + ··);
+        32 │ + }
+        33 │ + function·status(value:·unknown):·unknown·{
+        34 │ + ··assert.ok(value·&&·typeof·value·===·"object"·&&·"status"·in·value);
+        35 │ + ··return·value.status;
+        36 │ + }
+        37 │ + function·unitNpmrc()·{
+        38 │ + ··return·"registry=https://registry.npmjs.org/\nsave-exact=true\nstrict-peer-dependencies=true\nauto-install-peers=false\nengine-strict=true\npackage-manager-strict=true\nignore-scripts=true\nignore-pnpmfile=true\nshared-workspace-lockfile=false\nnode-linker=isolated\npackage-import-method=copy\nstore-dir=/tmp/opencode/UNIT_SYNTHETIC_store\n";
+        39 │ + }
+    10  40 │   it("rejects canonical descriptor wrong id/version/upstream/runtime sets and canonical hashes", () => {
+    11  41 │     for (const mutate of [
+    12     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.id·=·"wrong";·},
+    13     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.schemaVersion·=·2;·},
+    14     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.upstream.version·=·"1.22.0";·},
+    15     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.files·=·value.files.slice(0,·1);·},
+    16     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.files[0].path·=·"dist/arbitrary.js";·},
+    17     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.files[0].beforeSha256·=·"f".repeat(64);·},
+    18     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.files[0].afterSha256·=·"f".repeat(64);·},
+    19     │ - ····(value:·ReturnType<typeof·descriptor>)·=>·{·value.assets["verify.mjs"]·=·"f".repeat(64);·},
+    20     │ - ··])·{·const·value·=·descriptor();·mutate(value);·assert.throws(()·=>·validateRacDescriptor(value));·}
+        42 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        43 │ + ······value.id·=·"wrong";
+        44 │ + ····},
+        45 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        46 │ + ······value.schemaVersion·=·2;
+        47 │ + ····},
+        48 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        49 │ + ······value.upstream.version·=·"1.22.0";
+        50 │ + ····},
+        51 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        52 │ + ······value.files·=·value.files.slice(0,·1);
+        53 │ + ····},
+        54 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        55 │ + ······value.files[0].path·=·"dist/arbitrary.js";
+        56 │ + ····},
+        57 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        58 │ + ······value.files[0].beforeSha256·=·"f".repeat(64);
+        59 │ + ····},
+        60 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        61 │ + ······value.files[0].afterSha256·=·"f".repeat(64);
+        62 │ + ····},
+        63 │ + ····(value:·ReturnType<typeof·descriptor>)·=>·{
+        64 │ + ······value.assets["verify.mjs"]·=·"f".repeat(64);
+        65 │ + ····},
+        66 │ + ··])·{
+        67 │ + ····const·value·=·descriptor();
+        68 │ + ····mutate(value);
+        69 │ + ····assert.throws(()·=>·validateRacDescriptor(value));
+        70 │ + ··}
+    21  71 │   });
+    22  72 │   it("rejects missing/synthetic packaged assets; never produces a positive archive/profile certificate", () => {
+    23  73 │     assert.throws(() => packagedRac(new Map()));
+    24     │ - ··const·members·=·new·Map([["package/compat/rac-table-clone/profile.json",·{·type:·"file",·bytes:·Buffer.from(JSON.stringify(descriptor()))·}]]);
+        74 │ + ··const·members·=·new·Map([
+        75 │ + ····[
+        76 │ + ······"package/compat/rac-table-clone/profile.json",
+        77 │ + ······{·type:·"file",·bytes:·Buffer.from(JSON.stringify(descriptor()))·},
+        78 │ + ····],
+        79 │ + ··]);
+    25  80 │     assert.throws(() => packagedRac(members));
+    26     │ - ··for·(const·name·of·["runtime.patch",·"verify.mjs",·"README.md",·"NOTICE-RAC",·"LICENSE-APACHE-2.0"])·members.set(`package/compat/rac-table-clone/${name}`,·{·type:·"file",·bytes:·Buffer.from("UNIT_SYNTHETIC_NOT_A_VENDOR_ASSET")·});
+        81 │ + ··for·(const·name·of·[
+        82 │ + ····"runtime.patch",
+        83 │ + ····"verify.mjs",
+        84 │ + ····"README.md",
+        85 │ + ····"NOTICE-RAC",
+        86 │ + ····"LICENSE-APACHE-2.0",
+        87 │ + ··])
+        88 │ + ····members.set(`package/compat/rac-table-clone/${name}`,·{
+        89 │ + ······type:·"file",
+        90 │ + ······bytes:·Buffer.from("UNIT_SYNTHETIC_NOT_A_VENDOR_ASSET"),
+        91 │ + ····});
+    27  92 │     assert.throws(() => packagedRac(members));
+    28  93 │   });
+    29  94 │   it("rejects partial/loose before/after/asset maps and wrong runtime hashes", () => {
+    30     │ - ··const·before·=·RAC_FILES.map((file)·=>·`node_modules/UNIT_ordinary/${file.path}`),·after·=·RAC_FILES.map((file)·=>·`node_modules/UNIT_private/${file.path}`);
+    31     │ - ··assert.throws(()·=>·requireRuntimeMaps({·assets:·{},·before:·{},·after:·{}·},·before,·after));
+    32     │ - ··assert.throws(()·=>·requireRuntimeMaps({·assets:·{·arbitrary:·{}·},·before:·{·arbitrary:·{}·},·after:·{·arbitrary:·{}·}·},·before,·after));
+    33     │ - ··const·assets·=·Object.fromEntries(["profile.json",·"runtime.patch",·"verify.mjs",·"README.md",·"NOTICE-RAC",·"LICENSE-APACHE-2.0"].map((name)·=>·[`patches/tableweave-rac-table-clone/${name}`,·{}]));
+    34     │ - ··const·bad·=·{·assets,·before:·Object.fromEntries(RAC_FILES.map((file,·index)·=>·[before[index],·{·sha256:·file.beforeSha256·}])),·after:·Object.fromEntries(RAC_FILES.map((file,·index)·=>·[after[index],·{·sha256:·file.afterSha256·}]))·};
+    35     │ - ··const·first·=·after[0];·if·(!first)·throw·new·Error("UNIT_SYNTHETIC_PATH");·bad.after[first]·=·{·sha256:·"f".repeat(64)·};
+        95 │ + ··const·before·=·RAC_FILES.map(
+        96 │ + ······(file)·=>·`node_modules/UNIT_ordinary/${file.path}`,
+        97 │ + ····),
+        98 │ + ····after·=·RAC_FILES.map((file)·=>·`node_modules/UNIT_private/${file.path}`);
+        99 │ + ··assert.throws(()·=>
+       100 │ + ····requireRuntimeMaps({·assets:·{},·before:·{},·after:·{}·},·before,·after),
+       101 │ + ··);
+       102 │ + ··assert.throws(()·=>
+       103 │ + ····requireRuntimeMaps(
+       104 │ + ······{
+       105 │ + ········assets:·{·arbitrary:·{}·},
+       106 │ + ········before:·{·arbitrary:·{}·},
+       107 │ + ········after:·{·arbitrary:·{}·},
+       108 │ + ······},
+       109 │ + ······before,
+       110 │ + ······after,
+       111 │ + ····),
+       112 │ + ··);
+       113 │ + ··const·assets·=·Object.fromEntries(
+       114 │ + ····[
+       115 │ + ······"profile.json",
+       116 │ + ······"runtime.patch",
+       117 │ + ······"verify.mjs",
+       118 │ + ······"README.md",
+       119 │ + ······"NOTICE-RAC",
+       120 │ + ······"LICENSE-APACHE-2.0",
+       121 │ + ····].map((name)·=>·[`patches/tableweave-rac-table-clone/${name}`,·{}]),
+       122 │ + ··);
+       123 │ + ··const·bad·=·{
+       124 │ + ····assets,
+       125 │ + ····before:·Object.fromEntries(
+       126 │ + ······RAC_FILES.map((file,·index)·=>·[
+       127 │ + ········before[index],
+       128 │ + ········{·sha256:·file.beforeSha256·},
+       129 │ + ······]),
+       130 │ + ····),
+  189 more lines truncated
+  
+
+tests/benchmarks/wp14-guards/inputs.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7   7 │   import { root, own, changed, files, measure, capacity } from "./scope.mjs";
+     8   8 │   export async function inputs(target, verify = false) {
+     9     │ - ··const·original·=·JSON.parse(await·readFile(resolve(root,·"tests/benchmarks/wp14/evidence/light-008/inputs.json"),·"utf8"));
+    10     │ - ··const·path·=·resolve(root,·`${own}tsconfig.source-light.json`),·raw·=·ts.readConfigFile(path,·ts.sys.readFile);·assert.equal(raw.error,·undefined);
+    11     │ - ··const·config·=·ts.parseJsonConfigFileContent(raw.config,·ts.sys,·dirname(path));·assert.equal(config.errors.length,·0);
+    12     │ - ··for·(const·key·of·["strict",·"noEmit",·"exactOptionalPropertyTypes",·"noUncheckedIndexedAccess",·"noUnusedLocals",·"noUnusedParameters"])·assert.equal(config.options[key],·true);
+    13     │ - ··assert.equal(config.options.skipLibCheck,·false);·assert.equal(ts.version,·"6.0.3");
+    14     │ - ··const·program·=·ts.createProgram(config.fileNames,·config.options),·paths·=·new·Set([...Object.keys(original.records),·...program.getSourceFiles().map((file)·=>·relative(root,·file.fileName))]);
+    15     │ - ··for·(const·name·of·await·files(own))·if·(!name.startsWith(`${own}evidence/`))·paths.add(name);
+    16     │ - ··for·(const·name·of·["profile.json",·"runtime.patch",·"verify.mjs",·"README.md",·"NOTICE-RAC",·"LICENSE-APACHE-2.0"])·paths.add(`packages/heroui/compat/rac-table-clone/${name}`);
+         9 │ + ··const·original·=·JSON.parse(
+        10 │ + ····await·readFile(
+        11 │ + ······resolve(root,·"tests/benchmarks/wp14/evidence/light-008/inputs.json"),
+        12 │ + ······"utf8",
+        13 │ + ····),
+        14 │ + ··);
+        15 │ + ··const·path·=·resolve(root,·`${own}tsconfig.source-light.json`),
+        16 │ + ····raw·=·ts.readConfigFile(path,·ts.sys.readFile);
+        17 │ + ··assert.equal(raw.error,·undefined);
+        18 │ + ··const·config·=·ts.parseJsonConfigFileContent(
+        19 │ + ····raw.config,
+        20 │ + ····ts.sys,
+        21 │ + ····dirname(path),
+        22 │ + ··);
+        23 │ + ··assert.equal(config.errors.length,·0);
+        24 │ + ··for·(const·key·of·[
+        25 │ + ····"strict",
+        26 │ + ····"noEmit",
+        27 │ + ····"exactOptionalPropertyTypes",
+        28 │ + ····"noUncheckedIndexedAccess",
+        29 │ + ····"noUnusedLocals",
+        30 │ + ····"noUnusedParameters",
+        31 │ + ··])
+        32 │ + ····assert.equal(config.options[key],·true);
+        33 │ + ··assert.equal(config.options.skipLibCheck,·false);
+        34 │ + ··assert.equal(ts.version,·"6.0.3");
+        35 │ + ··const·program·=·ts.createProgram(config.fileNames,·config.options),
+        36 │ + ····paths·=·new·Set([
+        37 │ + ······...Object.keys(original.records),
+        38 │ + ······...program.getSourceFiles().map((file)·=>·relative(root,·file.fileName)),
+        39 │ + ····]);
+        40 │ + ··for·(const·name·of·await·files(own))
+        41 │ + ····if·(!name.startsWith(`${own}evidence/`))·paths.add(name);
+        42 │ + ··for·(const·name·of·[
+        43 │ + ····"profile.json",
+        44 │ + ····"runtime.patch",
+        45 │ + ····"verify.mjs",
+        46 │ + ····"README.md",
+        47 │ + ····"NOTICE-RAC",
+        48 │ + ····"LICENSE-APACHE-2.0",
+        49 │ + ··])
+        50 │ + ····paths.add(`packages/heroui/compat/rac-table-clone/${name}`);
+    17  51 │     paths.add("tests/consumers/wp13/profiles/rac-runtime.json");
+    18     │ - ··for·(const·name·of·["package.json",·"dist/private/Table.js",·"dist/private/Table.mjs",·"dist/private/Table.cjs"])·paths.add(`apps/storybook/node_modules/react-aria-components/${name}`);
+    19     │ - ··const·vendor·=·createRequire(await·realpath(resolve(root,·"node_modules/@biomejs/biome/package.json")));·paths.add(relative(root,·vendor.resolve("@biomejs/cli-linux-x64/biome")));
+    20     │ - ··const·records·=·Object.fromEntries(await·Promise.all([...paths].sort().map(async·(name)·=>·[name,·await·measure(name)])));
+    21     │ - ··for·(const·[name,·expected]·of·Object.entries(original.records))·{·if·(changed.includes(name))·assert.notDeepEqual(records[name],·expected);·else·assert.deepEqual(records[name],·expected,·`Original1335·pin·drift·${name}`);·}
+    22     │ - ··const·value·=·{·status:·"SOURCE/noEmit·only;·helper·MJS·unchecked;·no·profile/helper/unit/native/cleanup/runtime·execution",·compiler:·ts.version,·originalPins:·1335,·expectedBodyDrift:·changed,·programFiles:·program.getSourceFiles().length,·records·};
+        52 │ + ··for·(const·name·of·[
+        53 │ + ····"package.json",
+        54 │ + ····"dist/private/Table.js",
+        55 │ + ····"dist/private/Table.mjs",
+        56 │ + ····"dist/private/Table.cjs",
+        57 │ + ··])
+        58 │ + ····paths.add(`apps/storybook/node_modules/react-aria-components/${name}`);
+        59 │ + ··const·vendor·=·createRequire(
+        60 │ + ····await·realpath(resolve(root,·"node_modules/@biomejs/biome/package.json")),
+        61 │ + ··);
+        62 │ + ··paths.add(relative(root,·vendor.resolve("@biomejs/cli-linux-x64/biome")));
+        63 │ + ··const·records·=·Object.fromEntries(
+        64 │ + ····await·Promise.all(
+        65 │ + ······[...paths].sort().map(async·(name)·=>·[name,·await·measure(name)]),
+        66 │ + ····),
+        67 │ + ··);
+        68 │ + ··for·(const·[name,·expected]·of·Object.entries(original.records))·{
+        69 │ + ····if·(changed.includes(name))·assert.notDeepEqual(records[name],·expected);
+        70 │ + ····else
+        71 │ + ······assert.deepEqual(
+        72 │ + ········records[name],
+        73 │ + ········expected,
+        74 │ + ········`Original1335·pin·drift·${name}`,
+        75 │ + ······);
+        76 │ + ··}
+        77 │ + ··const·value·=·{
+        78 │ + ····status:
+        79 │ + ······"SOURCE/noEmit·only;·helper·MJS·unchecked;·no·profile/helper/unit/native/cleanup/runtime·execution",
+        80 │ + ····compiler:·ts.version,
+        81 │ + ····originalPins:·1335,
+        82 │ + ····expectedBodyDrift:·changed,
+        83 │ + ····programFiles:·program.getSourceFiles().length,
+        84 │ + ····records,
+        85 │ + ··};
+    23  86 │     assert(target.startsWith(`${own}evidence/`));
+    24     │ - ··if·(verify)·assert.deepEqual(value,·JSON.parse(await·readFile(resolve(root,·target),·"utf8")));
+    25     │ - ··else·{·await·capacity();·await·writeFile(resolve(root,·target),·`${JSON.stringify(value,·null,·2)}\n`,·{·flag:·"wx"·});·}
+    26     │ - ··console.log(`${value.programFiles}·actual·program·files;·${paths.size}·pinned·tool/SDK/profile/runtime/source·inputs;·original1335·ONLY·two·disclosed·body·drifts.`);
+        87 │ + ··if·(verify)
+        88 │ + ····assert.deepEqual(
+        89 │ + ······value,
+        90 │ + ······JSON.parse(await·readFile(resolve(root,·target),·"utf8")),
+        91 │ + ····);
+        92 │ + ··else·{
+        93 │ + ····await·capacity();
+        94 │ + ····await·writeFile(
+        95 │ + ······resolve(root,·target),
+        96 │ + ······`${JSON.stringify(value,·null,·2)}\n`,
+        97 │ + ······{·flag:·"wx"·},
+        98 │ + ····);
+        99 │ + ··}
+       100 │ + ··console.log(
+       101 │ + ····`${value.programFiles}·actual·program·files;·${paths.size}·pinned·tool/SDK/profile/runtime/source·inputs;·original1335·ONLY·two·disclosed·body·drifts.`,
+       102 │ + ··);
+    27 103 │   }
+    28     │ - if·(process.argv[1]·&&·resolve(process.argv[1])·===·fileURLToPath(import.meta.url))·await·inputs(process.argv[2],·process.argv[3]·===·"verify");
+       104 │ + if·(
+       105 │ + ··process.argv[1]·&&
+       106 │ + ··resolve(process.argv[1])·===·fileURLToPath(import.meta.url)
+       107 │ + )
+       108 │ + ··await·inputs(process.argv[2],·process.argv[3]·===·"verify");
+    29 109 │   
+  
+
+tests/benchmarks/wp14-guards/light.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6  6 │   import { root, own, changed, files, capacity } from "./scope.mjs";
+     7  7 │   export async function light(label) {
+     8    │ - ··assert(/^[a-z0-9-]+$/.test(label));·await·capacity();·const·output·=·`${own}evidence/${label}/`;·await·mkdir(resolve(root,·output),·{·recursive:·false·});
+     9    │ - ··const·supported·=·[...changed,·...(await·files(own)).filter((file)·=>·!file.startsWith(`${own}evidence/`)·&&·/\.(ts|mjs|json)$/.test(file))];
+    10    │ - ...ts.mjs`,·`${output}inputs.json`]],·["positive",·["node_modules/typescript/bin/tsc",·"-p",·`${own}tsc...
+        8 │ + ··assert(/^[a-z0-9-]+$/.test(label));
+        9 │ + ··await·capacity();
+       10 │ + ··const·output·=·`${own}evidence/${label}/`;
+       11 │ + ··await·mkdir(resolve(root,·output),·{·recursive:·false·});
+       12 │ + ··const·supported·=·[
+       13 │ + ····...changed,
+       14 │ + ····...(await·files(own)).filter(
+       15 │ + ······(file)·=>
+       16 │ + ········!file.startsWith(`${own}evidence/`)·&&·/\.(ts|mjs|json)$/.test(file),
+       17 │ + ····),
+       18 │ + ··];
+       19 │ + ··const·commands·=·[
+       20 │ + ····["pins-before",·[`${own}inputs.mjs`,·`${output}inputs.json`]],
+       21 │ + ····[
+       22 │ + ······"positive",
+       23 │ + ······[
+       24 │ + ········"node_modules/typescript/bin/tsc",
+       25 │ + ········"-p",
+       26 │ + ········`${own}tsconfig.source-light.json`,
+       27 │ + ········"--pretty",
+       28 │ + ········"false",
+       29 │ + ······],
+       30 │ + ····],
+       31 │ + ····["scope",·[`${own}scope.mjs`,·"verify"]],
+       32 │ + ····...supported
+       33 │ + ······.filter((path)·=>·path.endsWith(".mjs"))
+       34 │ + ······.map((path)·=>·[
+       35 │ + ········`syntax-${path.replaceAll("/",·"-")}`,
+       36 │ + ········["--check",·path],
+       37 │ + ······]),
+       38 │ + ····["static",·[`${own}static.mjs`]],
+       39 │ + ····[
+       40 │ + ······"biome",
+       41 │ + ······[
+       42 │ + ········"node_modules/@biomejs/biome/bin/biome",
+       43 │ + ········"check",
+       44 │ + ········"--assist-enabled=false",
+       45 │ + ········...supported,
+       46 │ + ········"--max-diagnostics=100",
+       47 │ + ······],
+       48 │ + ····],
+       49 │ + ····["pins-after",·[`${own}inputs.mjs`,·`${output}inputs.json`,·"verify"]],
+       50 │ + ··];
+    11 51 │     const results = [];
+    12    │ - ··for·(const·[name,·args]·of·commands)·{·await·capacity();·const·result·=·spawnSync(process.execPath...
+    13    │ - ··console.log(`Correction·SOURCE·LIGHT·${output}·passes·on${supported.length}·code/config·files;·all·helper/unit/profile/cleanup/runtime/performance·execution·UNRUN.`);
+       52 │ + ··for·(const·[name,·args]·of·commands)·{
+       53 │ + ····await·capacity();
+       54 │ + ····const·result·=·spawnSync(process.execPath,·args,·{
+       55 │ + ······cwd:·root,
+       56 │ + ······encoding:·"utf8",
+       57 │ + ······timeout:·300000,
+       58 │ + ····});
+       59 │ + ····await·capacity();
+       60 │ + ····await·writeFile(
+       61 │ + ······resolve(root,·`${output}${name}.log`),
+       62 │ + ······`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,
+       63 │ + ······{·flag:·"wx"·},
+       64 │ + ····);
+       65 │ + ····results.push({·name,·args,·status:·result.status,·signal:·result.signal·});
+       66 │ + ····await·writeFile(
+       67 │ + ······resolve(root,·`${output}results.json`),
+       68 │ + ······`${JSON.stringify(results,·null,·2)}\n`,
+       69 │ + ····);
+       70 │ + ····assert.equal(
+       71 │ + ······result.status,
+       72 │ + ······0,
+       73 │ + ······`${name}:·preserved·failure·${output}${name}.log`,
+       74 │ + ····);
+       75 │ + ··}
+       76 │ + ··console.log(
+       77 │ + ····`Correction·SOURCE·LIGHT·${output}·passes·on${supported.length}·code/config·files;·all·helper/unit/profile/cleanup/runtime/performance·execution·UNRUN.`,
+       78 │ + ··);
+    14 79 │   }
+    15    │ - if·(process.argv[1]·&&·resolve(process.argv[1])·===·fileURLToPath(import.meta.url))·await·light(process.argv[2]);
+       80 │ + if·(
+       81 │ + ··process.argv[1]·&&
+       82 │ + ··resolve(process.argv[1])·===·fileURLToPath(import.meta.url)
+       83 │ + )
+       84 │ + ··await·light(process.argv[2]);
+    16 85 │   
+  
+
+tests/benchmarks/wp14-guards/scope.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import assert from "node:assert/strict";
+     2   2 │   import { createHash } from "node:crypto";
+     3     │ - import·{·mkdir,·readFile,·readdir,·stat,·statfs,·writeFile·}·from·"node:fs/promises";
+         3 │ + import·{
+         4 │ + ··mkdir,
+         5 │ + ··readFile,
+         6 │ + ··readdir,
+         7 │ + ··stat,
+         8 │ + ··statfs,
+         9 │ + ··writeFile,
+        10 │ + }·from·"node:fs/promises";
+     4  11 │   import { resolve, relative } from "node:path";
+     5  12 │   import { fileURLToPath } from "node:url";
+     6     │ - export·const·root·=·fileURLToPath(new·URL("../../../",·import.meta.url)),·own·=·"tests/benchmarks/wp14-guards/";
+     7     │ - export·const·changed·=·["tests/benchmarks/wp14/candidate.mjs",·"tests/benchmarks/wp14/driver.mjs"];
+        13 │ + export·const·root·=·fileURLToPath(new·URL("../../../",·import.meta.url)),
+        14 │ + ··own·=·"tests/benchmarks/wp14-guards/";
+        15 │ + export·const·changed·=·[
+        16 │ + ··"tests/benchmarks/wp14/candidate.mjs",
+        17 │ + ··"tests/benchmarks/wp14/driver.mjs",
+        18 │ + ];
+     8  19 │   export const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+     9     │ - export·async·function·capacity()·{·const·s·=·await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728,·"Below128MiB:·no·cleanup·authority");·}
+    10     │ - export·async·function·measure(path)·{·const·bytes·=·await·readFile(resolve(root,·path)),·value·=·await·stat(resolve(root,·path));·return·{·sha256:·sha(bytes),·size:·bytes.length,·mode:·value.mode·&·0o777·};·}
+        20 │ + export·async·function·capacity()·{
+        21 │ + ··const·s·=·await·statfs(root);
+        22 │ + ··assert(s.bavail·*·s.bsize·>=·134217728,·"Below128MiB:·no·cleanup·authority");
+        23 │ + }
+        24 │ + export·async·function·measure(path)·{
+        25 │ + ··const·bytes·=·await·readFile(resolve(root,·path)),
+        26 │ + ····value·=·await·stat(resolve(root,·path));
+        27 │ + ··return·{·sha256:·sha(bytes),·size:·bytes.length,·mode:·value.mode·&·0o777·};
+        28 │ + }
+    11  29 │   export async function files(path = ".", excludeOwn = false) {
+    12  30 │     const result = [];
+    13     │ - ··for·(const·entry·of·await·readdir(resolve(root,·path),·{·withFileTypes:·true·}))·{
+    14     │ - ····if·(["node_modules",·".git",·".repo",·".npmrc"].includes(entry.name)·||·entry.name.startsWith(".env"))·continue;
+    15     │ - ····const·name·=·relative(root,·resolve(root,·path,·entry.name));·if·(excludeOwn·&&·`${name}/`·===·own)·continue;
+    16     │ - ····if·(entry.isDirectory())·result.push(...await·files(name,·excludeOwn));·else·if·(entry.isFile())·result.push(name);
+        31 │ + ··for·(const·entry·of·await·readdir(resolve(root,·path),·{
+        32 │ + ····withFileTypes:·true,
+        33 │ + ··}))·{
+        34 │ + ····if·(
+        35 │ + ······["node_modules",·".git",·".repo",·".npmrc"].includes(entry.name)·||
+        36 │ + ······entry.name.startsWith(".env")
+        37 │ + ····)
+        38 │ + ······continue;
+        39 │ + ····const·name·=·relative(root,·resolve(root,·path,·entry.name));
+        40 │ + ····if·(excludeOwn·&&·`${name}/`·===·own)·continue;
+        41 │ + ····if·(entry.isDirectory())·result.push(...(await·files(name,·excludeOwn)));
+        42 │ + ····else·if·(entry.isFile())·result.push(name);
+    17  43 │     }
+    18  44 │     return result.sort();
+    19  45 │   }
+    20  46 │   export async function scope(capture = false) {
+    21     │ - ··const·canonical·=·await·readFile("/tmp/opencode/wp10-move-reason-integrated-source155.json");·assert.equal(sha(canonical),·"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837");
+    22     │ - ··const·library·=·JSON.parse(canonical);·assert.equal(Object.keys(library).length,·155);
+    23     │ - ··for·(const·[path,·expected]·of·Object.entries(library))·{·const·value·=·await·measure(path);·assert.equal(value.sha256,·expected.sha256);·assert.equal(value.mode·&·0o111·?·"100755"·:·"100644",·expected.mode);·}
+    24     │ - ··const·sealPath·=·"tests/benchmarks/wp14/evidence/handoff-hashes.json",·sealBytes·=·await·readFile(resolve(root,·sealPath)),·original·=·JSON.parse(sealBytes);
+    25     │ - ··assert.equal(Object.keys(original.inputs).length,·31);·assert.equal(Object.keys(original.artifacts).length,·117);
+    26     │ - ··assert.equal(original.inputAggregate,·"1cd83de1ef83361d8fb0fc81440109289c755874326ba222452c3bd65d360c08");·assert.equal(original.artifactAggregate,·"68f1e5571a5a11ef905531b5aa3b685d9d25601cbf9f32871abf0d7004e7be58");
+    27     │ - ··for·(const·[path,·expected]·of·Object.entries({·...original.inputs,·...original.artifacts·}))·{·if·(!capture·&&·changed.includes(path))·continue;·assert.deepEqual(await·measure(path),·expected,·path);·}
+    28     │ - ··const·pinPath·=·"tests/benchmarks/wp14/evidence/light-008/inputs.json",·pinBytes·=·await·readFile(resolve(root,·pinPath)),·pins·=·JSON.parse(pinBytes);·assert.equal(Object.keys(pins.records).length,·1335);
+    29     │ - ··for·(const·[path,·expected]·of·Object.entries(pins.records))·{·if·(!capture·&&·changed.includes(path))·continue;·assert.deepEqual(await·measure(path),·expected,·path);·}
+    30     │ - ··const·current·=·Object.fromEntries(await·Promise.all((await·files(".",·true)).map(async·(path)·=>·[path,·await·measure(path)])));
+        47 │ + ··const·canonical·=·await·readFile(
+        48 │ + ····"/tmp/opencode/wp10-move-reason-integrated-source155.json",
+        49 │ + ··);
+        50 │ + ··assert.equal(
+        51 │ + ····sha(canonical),
+        52 │ + ····"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+        53 │ + ··);
+        54 │ + ··const·library·=·JSON.parse(canonical);
+        55 │ + ··assert.equal(Object.keys(library).length,·155);
+        56 │ + ··for·(const·[path,·expected]·of·Object.entries(library))·{
+        57 │ + ····const·value·=·await·measure(path);
+        58 │ + ····assert.equal(value.sha256,·expected.sha256);
+        59 │ + ····assert.equal(value.mode·&·0o111·?·"100755"·:·"100644",·expected.mode);
+        60 │ + ··}
+        61 │ + ··const·sealPath·=·"tests/benchmarks/wp14/evidence/handoff-hashes.json",
+        62 │ + ····sealBytes·=·await·readFile(resolve(root,·sealPath)),
+        63 │ + ····original·=·JSON.parse(sealBytes);
+        64 │ + ··assert.equal(Object.keys(original.inputs).length,·31);
+        65 │ + ··assert.equal(Object.keys(original.artifacts).length,·117);
+        66 │ + ··assert.equal(
+        67 │ + ····original.inputAggregate,
+        68 │ + ····"1cd83de1ef83361d8fb0fc81440109289c755874326ba222452c3bd65d360c08",
+        69 │ + ··);
+        70 │ + ··assert.equal(
+        71 │ + ····original.artifactAggregate,
+        72 │ + ····"68f1e5571a5a11ef905531b5aa3b685d9d25601cbf9f32871abf0d7004e7be58",
+        73 │ + ··);
+        74 │ + ··for·(const·[path,·expected]·of·Object.entries({
+        75 │ + ····...original.inputs,
+        76 │ + ····...original.artifacts,
+        77 │ + ··}))·{
+        78 │ + ····if·(!capture·&&·changed.includes(path))·continue;
+        79 │ + ····assert.deepEqual(await·measure(path),·expected,·path);
+        80 │ + ··}
+        81 │ + ··const·pinPath·=·"tests/benchmarks/wp14/evidence/light-008/inputs.json",
+        82 │ + ····pinBytes·=·await·readFile(resolve(root,·pinPath)),
+        83 │ + ····pins·=·JSON.parse(pinBytes);
+        84 │ + ··assert.equal(Object.keys(pins.records).length,·1335);
+        85 │ + ··for·(const·[path,·expected]·of·Object.entries(pins.records))·{
+        86 │ + ····if·(!capture·&&·changed.includes(path))·continue;
+        87 │ + ····assert.deepEqual(await·measure(path),·expected,·path);
+        88 │ + ··}
+        89 │ + ··const·current·=·Object.fromEntries(
+        90 │ + ····await·Promise.all(
+        91 │ + ······(await·files(".",·true)).map(async·(path)·=>·[path,·await·measure(path)]),
+        92 │ + ····),
+        93 │ + ··);
+    31  94 │     const target = resolve(root, `${own}evidence/before.json`);
+    32  95 │     if (capture) {
+    33     │ - ····await·capacity();·await·mkdir(resolve(root,·`${own}evidence/preimages`),·{·recursive:·true·});
+    34     │ - ····for·(const·path·of·changed)·await·writeFile(resolve(root,·`${own}evidence/preimages/${path.split("/").at(-1)}.txt`),·await·readFile(resolve(root,·path)),·{·flag:·"wx"·});
+    35     │ - ····await·writeFile(target,·`${JSON.stringify({·suppliedHead:·"f60df08·(main-reported;·no·worker·Git)",·canonical155:·sha(canonical),·originalSeal:·{·path:·sealPath,·sha256:·sha(sealBytes),·inputs:·original.inputs,·artifacts:·original.artifacts·},·originalPin:·{·path:·pinPath,·sha256:·sha(pinBytes)·},·files:·current·},·null,·2)}\n`,·{·flag:·"wx"·});
+    36     │ - ····console.log(`BEFORE·${Object.keys(current).length}·old·regular·inputs/modes;·original31/117/1335·pin·and155·verified;·two·exact·preimages·captured.`);
+        96 │ + ····await·capacity();
+        97 │ + ····await·mkdir(resolve(root,·`${own}evidence/preimages`),·{·recursive:·true·});
+        98 │ + ····for·(const·path·of·changed)
+        99 │ + ······await·writeFile(
+       100 │ + ········resolve(root,·`${own}evidence/preimages/${path.split("/").at(-1)}.txt`),
+       101 │ + ········await·readFile(resolve(root,·path)),
+       102 │ + ········{·flag:·"wx"·},
+       103 │ + ······);
+       104 │ + ····await·writeFile(
+       105 │ + ······target,
+       106 │ + ······`${JSON.stringify({·suppliedHead:·"f60df08·(main-reported;·no·worker·Git)",·canonical155:·sha(canonical),·originalSeal:·{·path:·sealPath,·sha256:·sha(sealBytes),·inputs:·original.inputs,·artifacts:·original.artifacts·},·originalPin:·{·path:·pinPath,·sha256:·sha(pinBytes)·},·files:·current·},·null,·2)}\n`,
+       107 │ + ······{·flag:·"wx"·},
+       108 │ + ····);
+       109 │ + ····console.log(
+       110 │ + ······`BEFORE·${Object.keys(current).length}·old·regular·inputs/modes;·original31/117/1335·pin·and155·verified;·two·exact·preimages·captured.`,
+       111 │ + ····);
+    37 112 │     } else {
+    38     │ - ····const·before·=·JSON.parse(await·readFile(target,·"utf8")),·drift·=·[];
+    39     │ - ····assert.equal(sha(sealBytes),·before.originalSeal.sha256);·assert.equal(sha(pinBytes),·before.originalPin.sha256);
+    40     │ - ····for·(const·path·of·new·Set([...Object.keys(before.files),·...Object.keys(current)]))·{
+    41     │ - ······if·(changed.includes(path))·{·assert.equal(current[path].mode,·before.files[path].mode);·assert.notEqual(current[path].sha256,·before.files[path].sha256);·assert.equal((await·measure(`${own}evidence/preimages/${path.split("/").at(-1)}.txt`)).sha256,·before.files[path].sha256);·continue;·}
+    42     │ - ······if·(JSON.stringify(current[path])·===·JSON.stringify(before.files[path]))·continue;
+    43     │ - ······assert(["TASKS.md",·"REVIEW.md",·"README.md"].includes(path)·||·path.startsWith("docs/"),·`FROZEN·${path}`);·drift.push(path);
+       113 │ + ····const·before·=·JSON.parse(await·readFile(target,·"utf8")),
+       114 │ + ······drift·=·[];
+       115 │ + ····assert.equal(sha(sealBytes),·before.originalSeal.sha256);
+       116 │ + ····assert.equal(sha(pinBytes),·before.originalPin.sha256);
+       117 │ + ····for·(const·path·of·new·Set([
+       118 │ + ······...Object.keys(before.files),
+       119 │ + ······...Object.keys(current),
+       120 │ + ····]))·{
+       121 │ + ······if·(changed.includes(path))·{
+  43 more lines truncated
+  
+
+tests/benchmarks/wp14-guards/static.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5   5 │   import { root, own, changed, files } from "./scope.mjs";
+     6   6 │   const read = (file) => readFile(resolve(root, file), "utf8");
+     7     │ - const·candidate·=·ts.createSourceFile("candidate.mjs",·await·read(changed[0]),·ts.ScriptTarget.Latest,·true,·ts.ScriptKind.JS),·driver·=·ts.createSourceFile("driver.mjs",·await·read(changed[1]),·ts.ScriptTarget.Latest,·true,·ts.ScriptKind.JS);
+     8     │ - function·named(file,·name)·{·const·value·=·file.statements.find((node)·=>·ts.isFunctionDeclaration(node)·&&·node.name?.text·===·name);·assert(value,·name);·return·value;·}
+     9     │ - function·calls(node,·file)·{·const·result·=·[];·function·visit(child)·{·if·(ts.isCallExpression(child))·result.push({·name:·child.expression.getText(file),·node:·child·});·ts.forEachChild(child,·visit);·}·visit(node);·return·result;·}
+    10     │ - function·requiresCall(node,·file,·name)·{·const·found·=·calls(node,·file).filter((call)·=>·call.name·===·name);·assert(found.length·>·0,·`${name}·missing`);·return·found;·}
+    11     │ - const·profile·=·named(candidate,·"verifyProfile"),·baseline·=·calls(profile,·candidate).filter((call)·=>·call.name·===·"baseline"),·current·=·requiresCall(profile,·candidate,·"current");
+    12     │ - assert(baseline.length·>=·3);·assert(baseline[0].node.pos·<·current[0].node.pos·&&·baseline.at(-1).node.pos·>·current[0].node.pos);
+    13     │ - for·(const·name·of·["validateProfileConfig",·"localRac",·"requireRuntimeMaps",·"requireOrdinaryRuntimeMap",·"requireIndependentFiles",·"verifyMap",·"inventory"])·requiresCall(profile,·candidate,·name);
+    14     │ - requiresCall(named(candidate,·"selectCandidate"),·candidate,·"packagedRac");·requiresCall(named(candidate,·"selectCandidate"),·candidate,·"verifyProfile");
+    15     │ - const·descriptor·=·named(candidate,·"validateRacDescriptor");·requiresCall(descriptor,·candidate,·"equivalent");
+         7 │ + const·candidate·=·ts.createSourceFile(
+         8 │ + ····"candidate.mjs",
+         9 │ + ····await·read(changed[0]),
+        10 │ + ····ts.ScriptTarget.Latest,
+        11 │ + ····true,
+        12 │ + ····ts.ScriptKind.JS,
+        13 │ + ··),
+        14 │ + ··driver·=·ts.createSourceFile(
+        15 │ + ····"driver.mjs",
+        16 │ + ····await·read(changed[1]),
+        17 │ + ····ts.ScriptTarget.Latest,
+        18 │ + ····true,
+        19 │ + ····ts.ScriptKind.JS,
+        20 │ + ··);
+        21 │ + function·named(file,·name)·{
+        22 │ + ··const·value·=·file.statements.find(
+        23 │ + ····(node)·=>·ts.isFunctionDeclaration(node)·&&·node.name?.text·===·name,
+        24 │ + ··);
+        25 │ + ··assert(value,·name);
+        26 │ + ··return·value;
+        27 │ + }
+        28 │ + function·calls(node,·file)·{
+        29 │ + ··const·result·=·[];
+        30 │ + ··function·visit(child)·{
+        31 │ + ····if·(ts.isCallExpression(child))
+        32 │ + ······result.push({·name:·child.expression.getText(file),·node:·child·});
+        33 │ + ····ts.forEachChild(child,·visit);
+        34 │ + ··}
+        35 │ + ··visit(node);
+        36 │ + ··return·result;
+        37 │ + }
+        38 │ + function·requiresCall(node,·file,·name)·{
+        39 │ + ··const·found·=·calls(node,·file).filter((call)·=>·call.name·===·name);
+        40 │ + ··assert(found.length·>·0,·`${name}·missing`);
+        41 │ + ··return·found;
+        42 │ + }
+        43 │ + const·profile·=·named(candidate,·"verifyProfile"),
+        44 │ + ··baseline·=·calls(profile,·candidate).filter(
+        45 │ + ····(call)·=>·call.name·===·"baseline",
+        46 │ + ··),
+        47 │ + ··current·=·requiresCall(profile,·candidate,·"current");
+        48 │ + assert(baseline.length·>=·3);
+        49 │ + assert(
+        50 │ + ··baseline[0].node.pos·<·current[0].node.pos·&&
+        51 │ + ····baseline.at(-1).node.pos·>·current[0].node.pos,
+        52 │ + );
+        53 │ + for·(const·name·of·[
+        54 │ + ··"validateProfileConfig",
+        55 │ + ··"localRac",
+        56 │ + ··"requireRuntimeMaps",
+        57 │ + ··"requireOrdinaryRuntimeMap",
+        58 │ + ··"requireIndependentFiles",
+        59 │ + ··"verifyMap",
+        60 │ + ··"inventory",
+        61 │ + ])
+        62 │ + ··requiresCall(profile,·candidate,·name);
+        63 │ + requiresCall(named(candidate,·"selectCandidate"),·candidate,·"packagedRac");
+        64 │ + requiresCall(named(candidate,·"selectCandidate"),·candidate,·"verifyProfile");
+        65 │ + const·descriptor·=·named(candidate,·"validateRacDescriptor");
+        66 │ + requiresCall(descriptor,·candidate,·"equivalent");
+    16  67 │   let constants;
+    17     │ - for·(const·statement·of·candidate.statements)·if·(ts.isVariableStatement(statement))·for·(const·declaration·of·statement.declarationList.declarations)·if·(declaration.name.getText(candidate)·===·"RAC_FILES")·constants·=·declaration.initializer;
+    18     │ - assert(constants);·const·paths·=·[];·function·fields(node)·{·if·(ts.isPropertyAssignment(node)·&&·node.name.getText(candidate)·===·"path"·&&·ts.isStringLiteral(node.initializer))·paths.push(node.initializer.text);·ts.forEachChild(node,·fields);·}·fields(constants);
+    19     │ - assert.deepEqual(paths,·["dist/private/Table.js",·"dist/private/Table.mjs",·"dist/private/Table.cjs"]);
+    20     │ - for·(const·name·of·["boundedOwnedWait",·"runOwnedCleanup",·"finishOwnedTrace",·"closeOwnedContext",·"closeOwnedServer"])·named(driver,·name);
+        68 │ + for·(const·statement·of·candidate.statements)
+        69 │ + ··if·(ts.isVariableStatement(statement))
+        70 │ + ····for·(const·declaration·of·statement.declarationList.declarations)
+        71 │ + ······if·(declaration.name.getText(candidate)·===·"RAC_FILES")
+        72 │ + ········constants·=·declaration.initializer;
+        73 │ + assert(constants);
+        74 │ + const·paths·=·[];
+        75 │ + function·fields(node)·{
+        76 │ + ··if·(
+        77 │ + ····ts.isPropertyAssignment(node)·&&
+        78 │ + ····node.name.getText(candidate)·===·"path"·&&
+        79 │ + ····ts.isStringLiteral(node.initializer)
+        80 │ + ··)
+        81 │ + ····paths.push(node.initializer.text);
+        82 │ + ··ts.forEachChild(node,·fields);
+        83 │ + }
+        84 │ + fields(constants);
+        85 │ + assert.deepEqual(paths,·[
+        86 │ + ··"dist/private/Table.js",
+        87 │ + ··"dist/private/Table.mjs",
+        88 │ + ··"dist/private/Table.cjs",
+        89 │ + ]);
+        90 │ + for·(const·name·of·[
+        91 │ + ··"boundedOwnedWait",
+        92 │ + ··"runOwnedCleanup",
+        93 │ + ··"finishOwnedTrace",
+        94 │ + ··"closeOwnedContext",
+        95 │ + ··"closeOwnedServer",
+        96 │ + ])
+        97 │ + ··named(driver,·name);
+    21  98 │   requiresCall(named(driver, "runOwnedCleanup"), driver, "boundedOwnedWait");
+    22     │ - for·(const·name·of·["finishOwnedTrace",·"closeOwnedContext",·"closeOwnedServer"])·requiresCall(named(driver,·name),·driver,·"runOwnedCleanup");
+    23     │ - const·session·=·named(driver,·"session");·for·(const·name·of·["requireOwnedWait",·"finishOwnedTrace",·"closeOwnedContext",·"retainPrimary"])·requiresCall(session,·driver,·name);
+    24     │ - const·execute·=·named(driver,·"execute");·requiresCall(execute,·driver,·"retainPrimary");
+    25     │ - const·text·=·driver.text;·assert(!/\.kill\(|process\.kill|pkill|rmSync|unlinkSync/.test(text));
+    26     │ - assert(text.includes("HOLD_UNRESOLVED_OWNED_CLEANUP_DEBT")·&&·text.includes("cleanupDebts.length"));
+        99 │ + for·(const·name·of·[
+       100 │ + ··"finishOwnedTrace",
+       101 │ + ··"closeOwnedContext",
+       102 │ + ··"closeOwnedServer",
+       103 │ + ])
+       104 │ + ··requiresCall(named(driver,·name),·driver,·"runOwnedCleanup");
+       105 │ + const·session·=·named(driver,·"session");
+       106 │ + for·(const·name·of·[
+       107 │ + ··"requireOwnedWait",
+       108 │ + ··"finishOwnedTrace",
+       109 │ + ··"closeOwnedContext",
+       110 │ + ··"retainPrimary",
+       111 │ + ])
+       112 │ + ··requiresCall(session,·driver,·name);
+       113 │ + const·execute·=·named(driver,·"execute");
+       114 │ + requiresCall(execute,·driver,·"retainPrimary");
+       115 │ + const·text·=·driver.text;
+       116 │ + assert(!/\.kill\(|process\.kill|pkill|rmSync|unlinkSync/.test(text));
+       117 │ + assert(
+       118 │ + ··text.includes("HOLD_UNRESOLVED_OWNED_CLEANUP_DEBT")·&&
+       119 │ + ····text.includes("cleanupDebts.length"),
+       120 │ + );
+    27 121 │   // Reject direct formerly-unbounded close/end awaits in session; operations live in
+    28 122 │   // explicit bounded task callbacks instead. This inspects actual call nesting.
+    29     │ - function·awaitSites(node)·{·if·(ts.isAwaitExpression(node)·&&·ts.isCallExpression(node.expression))·{·const·name·=·node.expression.expression.getText(driver);·assert(!["context.close",·"cdp.send",·"cdp.detach",·"preflight.detach"].includes(name),·`Unbounded·session·await·${name}`);·}·ts.forEachChild(node,·awaitSites);·}
+       123 │ + function·awaitSites(node)·{
+       124 │ + ··if·(ts.isAwaitExpression(node)·&&·ts.isCallExpression(node.expression))·{
+       125 │ + ····const·name·=·node.expression.expression.getText(driver);
+       126 │ + ····assert(
+       127 │ + ······!["context.close",·"cdp.send",·"cdp.detach",·"preflight.detach"].includes(
+       128 │ + ········name,
+       129 │ + ······),
+       130 │ + ······`Unbounded·session·await·${name}`,
+       131 │ + ····);
+       132 │ + ··}
+       133 │ + ··ts.forEachChild(node,·awaitSites);
+       134 │ + }
+    30 135 │   awaitSites(session);
+  38 more lines truncated
+  
+
+tests/benchmarks/wp14/candidate.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    169  169 │     return JSON.stringify(sorted(a)) === JSON.stringify(sorted(b));
+    170  170 │   }
+    171      │ - export·const·RAC_FILES·=·Object.freeze([
+    172      │ - ··{·path:·"dist/private/Table.js",·format:·"legacy-esm",·beforeSha256:·"93ef6ab34eb5da85006dc7615e76d2e52eb506114cb0a8a71d0a0f13f7f5152d",·afterSha256:·"4cbd2a4ba6e9a7e74082c497f3ec0c596c2048fb7d5f30c6e64176374091eacd"·},
+    173      │ - ··{·path:·"dist/private/Table.mjs",·format:·"esm",·beforeSha256:·"aa49fcfc87cc494b97c6e77eb79e79b9dec6d13de9a0090ae249ee7683d32623",·afterSha256:·"22edf3fc5423744d2682beadddac018332431bb3e9ebb33c8335d12c776035b6"·},
+    174      │ - ··{·path:·"dist/private/Table.cjs",·format:·"commonjs",·beforeSha256:·"ba44d79b191776374c4fdf998a38e8af4dd323665f3191627dca37f7400aa4cf",·afterSha256:·"dc263287e3d9b966416c47818f3adbb7d6d058ce24ffde6b90b183dacbb28ead"·},
+    175      │ - ].map((file)·=>·Object.freeze(file)));
+         171 │ + export·const·RAC_FILES·=·Object.freeze(
+         172 │ + ··[
+         173 │ + ····{
+         174 │ + ······path:·"dist/private/Table.js",
+         175 │ + ······format:·"legacy-esm",
+         176 │ + ······beforeSha256:
+         177 │ + ········"93ef6ab34eb5da85006dc7615e76d2e52eb506114cb0a8a71d0a0f13f7f5152d",
+         178 │ + ······afterSha256:
+         179 │ + ········"4cbd2a4ba6e9a7e74082c497f3ec0c596c2048fb7d5f30c6e64176374091eacd",
+         180 │ + ····},
+         181 │ + ····{
+         182 │ + ······path:·"dist/private/Table.mjs",
+         183 │ + ······format:·"esm",
+         184 │ + ······beforeSha256:
+         185 │ + ········"aa49fcfc87cc494b97c6e77eb79e79b9dec6d13de9a0090ae249ee7683d32623",
+         186 │ + ······afterSha256:
+         187 │ + ········"22edf3fc5423744d2682beadddac018332431bb3e9ebb33c8335d12c776035b6",
+         188 │ + ····},
+         189 │ + ····{
+         190 │ + ······path:·"dist/private/Table.cjs",
+         191 │ + ······format:·"commonjs",
+         192 │ + ······beforeSha256:
+         193 │ + ········"ba44d79b191776374c4fdf998a38e8af4dd323665f3191627dca37f7400aa4cf",
+         194 │ + ······afterSha256:
+         195 │ + ········"dc263287e3d9b966416c47818f3adbb7d6d058ce24ffde6b90b183dacbb28ead",
+         196 │ + ····},
+         197 │ + ··].map((file)·=>·Object.freeze(file)),
+         198 │ + );
+    176  199 │   export const RAC_COMPANIONS = Object.freeze({
+    177      │ - ··"runtime.patch":·"f3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35",
+    178      │ - ··"verify.mjs":·"edb10823e1abc6801905641c8a90fce59a72f4eb5dc2fca0250899ccb556c95b",
+    179      │ - ··"README.md":·"bd2c78e6ef2168f7f62c8f2a42cdb703a67a08107c89af1551a5a2da02dc8671",
+    180      │ - ··"NOTICE-RAC":·"f8a0dd6c0c050362918b561b015b11e9d95412e655e5af263e5c88134d68dfdb",
+    181      │ - ··"LICENSE-APACHE-2.0":·"7dfe6526888bac51759c99f9a51262ba2711a8c12a067f2181609dd9a4066b84",
+         200 │ + ··"runtime.patch":
+         201 │ + ····"f3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35",
+         202 │ + ··"verify.mjs":
+         203 │ + ····"edb10823e1abc6801905641c8a90fce59a72f4eb5dc2fca0250899ccb556c95b",
+         204 │ + ··"README.md":
+         205 │ + ····"bd2c78e6ef2168f7f62c8f2a42cdb703a67a08107c89af1551a5a2da02dc8671",
+         206 │ + ··"NOTICE-RAC":
+         207 │ + ····"f8a0dd6c0c050362918b561b015b11e9d95412e655e5af263e5c88134d68dfdb",
+         208 │ + ··"LICENSE-APACHE-2.0":
+         209 │ + ····"7dfe6526888bac51759c99f9a51262ba2711a8c12a067f2181609dd9a4066b84",
+    182  210 │   });
+    183      │ - const·RAC_ASSETS·=·Object.freeze(["profile.json",·...Object.keys(RAC_COMPANIONS)]);
+         211 │ + const·RAC_ASSETS·=·Object.freeze([
+         212 │ + ··"profile.json",
+         213 │ + ··...Object.keys(RAC_COMPANIONS),
+         214 │ + ]);
+    184  215 │   const RAC_PREFIX = "patches/tableweave-rac-table-clone/";
+    185  216 │   export function exactKeys(value, required, code) {
+    186      │ - ··object(value);·demand(equivalent(Object.keys(value).sort(),·[...required].sort()),·code);
+         217 │ + ··object(value);
+         218 │ + ··demand(equivalent(Object.keys(value).sort(),·[...required].sort()),·code);
+    187  219 │   }
+    188  220 │   export function validateRacDescriptor(profile) {
+    189  221 │     object(profile);
+    190      │ - ··demand(profile.schemaVersion·===·1·&&·profile.id·===·"rac-1.22.1-table-clone-v1"·&&·profile.status·===·"private-unlicensed-candidate"·&&·profile.layout·===·"isolated-pnpm-project"·&&·profile.upstream?.name·===·"react-aria-components"·&&·profile.upstream.version·===·"1.22.1",·"E_CANONICAL_RAC_PROFILE");
+    191      │ - ··demand(equivalent(profile.files,·RAC_FILES)·&&·equivalent(profile.assets,·RAC_COMPANIONS),·"E_CANONICAL_RAC_CLOSURE");
+         222 │ + ··demand(
+         223 │ + ····profile.schemaVersion·===·1·&&
+         224 │ + ······profile.id·===·"rac-1.22.1-table-clone-v1"·&&
+         225 │ + ······profile.status·===·"private-unlicensed-candidate"·&&
+         226 │ + ······profile.layout·===·"isolated-pnpm-project"·&&
+         227 │ + ······profile.upstream?.name·===·"react-aria-components"·&&
+         228 │ + ······profile.upstream.version·===·"1.22.1",
+         229 │ + ····"E_CANONICAL_RAC_PROFILE",
+         230 │ + ··);
+         231 │ + ··demand(
+         232 │ + ····equivalent(profile.files,·RAC_FILES)·&&
+         233 │ + ······equivalent(profile.assets,·RAC_COMPANIONS),
+         234 │ + ····"E_CANONICAL_RAC_CLOSURE",
+         235 │ + ··);
+    192  236 │   }
+    193  237 │   export function packagedRac(members) {
+    194  238 │     const prefix = "package/compat/rac-table-clone/";
+    195      │ - ··const·names·=·[...members].filter(([file,·member])·=>·file.startsWith(prefix)·&&·member.type·===·"file").map(([file])·=>·file.slice(prefix.length));
+    196      │ - ··demand(equivalent(names.sort(),·[...RAC_ASSETS].sort()),·"E_PACKAGED_RAC_SIX_ASSETS");
+         239 │ + ··const·names·=·[...members]
+         240 │ + ····.filter(
+         241 │ + ······([file,·member])·=>·file.startsWith(prefix)·&&·member.type·===·"file",
+         242 │ + ····)
+         243 │ + ····.map(([file])·=>·file.slice(prefix.length));
+         244 │ + ··demand(
+         245 │ + ····equivalent(names.sort(),·[...RAC_ASSETS].sort()),
+         246 │ + ····"E_PACKAGED_RAC_SIX_ASSETS",
+         247 │ + ··);
+    197  248 │     const bytes = {};
+    198      │ - ··for·(const·name·of·RAC_ASSETS)·{·const·member·=·members.get(`${prefix}${name}`);·demand(member?.type·===·"file"·&&·Buffer.isBuffer(member.bytes),·"E_PACKAGED_RAC_ASSET");·bytes[name]·=·member.bytes;·}
+    199      │ - ··const·profile·=·object(JSON.parse(bytes["profile.json"].toString("utf8")));·validateRacDescriptor(profile);
+    200      │ - ··for·(const·[name,·expected]·of·Object.entries(RAC_COMPANIONS))·demand(hash(bytes[name])·===·expected·&&·profile.assets[name]·===·expected,·"E_PACKAGED_RAC_COMPANION_HASH");
+         249 │ + ··for·(const·name·of·RAC_ASSETS)·{
+         250 │ + ····const·member·=·members.get(`${prefix}${name}`);
+         251 │ + ····demand(
+         252 │ + ······member?.type·===·"file"·&&·Buffer.isBuffer(member.bytes),
+         253 │ + ······"E_PACKAGED_RAC_ASSET",
+         254 │ + ····);
+         255 │ + ····bytes[name]·=·member.bytes;
+         256 │ + ··}
+         257 │ + ··const·profile·=·object(JSON.parse(bytes["profile.json"].toString("utf8")));
+         258 │ + ··validateRacDescriptor(profile);
+         259 │ + ··for·(const·[name,·expected]·of·Object.entries(RAC_COMPANIONS))
+         260 │ + ····demand(
+         261 │ + ······hash(bytes[name])·===·expected·&&·profile.assets[name]·===·expected,
+         262 │ + ······"E_PACKAGED_RAC_COMPANION_HASH",
+         263 │ + ····);
+    201  264 │     return { profile, bytes };
+    202  265 │   }
+    203  266 │   /** Pure strict config check; no config application, environment inheritance or install. */
+    204      │ - export·function·validateProfileConfig(profile,·workspace,·npmrc,·expectedStore·=·null)·{
+         267 │ + export·function·validateProfileConfig(
+         268 │ + ··profile,
+         269 │ + ··workspace,
+         270 │ + ··npmrc,
+         271 │ + ··expectedStore·=·null,
+         272 │ + )·{
+    205  273 │     const ordinary = "packages: []\n";
+    206  274 │     const rac = `${ordinary}patchedDependencies:\n  'react-aria-components@1.22.1': patches/tableweave-rac-table-clone/runtime.patch\n`;
+    207      │ - ··demand(["ordinary",·"rac-runtime"].includes(profile)·&&·workspace·===·(profile·===·"ordinary"·?·ordinary·:·rac),·"E_EXACT_PROFILE_REGISTRATION");
+    208      │ - ··demand(typeof·npmrc·===·"string"·&&·npmrc.endsWith("\n")·&&·!npmrc.includes("\r")·&&·!npmrc.includes("\0"),·"E_NPMRC_SHAPE");
+    209      │ - ··const·entries·=·npmrc.slice(0,·-1).split("\n").map((line)·=>·{·demand(/^[a-z][a-z-]*=[^\s$;#]+$/.test(line),·"E_NPMRC_LINE");·const·at·=·line.indexOf("=");·return·[line.slice(0,·at),·line.slice(at·+·1)];·});
+    210      │ - ··demand(new·Set(entries.map(([key])·=>·key)).size·===·entries.length,·"E_NPMRC_DUPLICATE");
+    211      │ - ··const·config·=·Object.fromEntries(entries),·required·=·{·registry:·"https://registry.npmjs.org/",·"save-exact":·"true",·"strict-peer-dependencies":·"true",·"auto-install-peers":·"false",·"engine-strict":·"true",·"package-manager-strict":·"true",·"ignore-scripts":·"true",·"ignore-pnpmfile":·"true",·"shared-workspace-lockfile":·"false",·"node-linker":·"isolated",·"package-import-method":·"copy"·};
+         275 │ + ··demand(
+         276 │ + ····["ordinary",·"rac-runtime"].includes(profile)·&&
+         277 │ + ······workspace·===·(profile·===·"ordinary"·?·ordinary·:·rac),
+         278 │ + ····"E_EXACT_PROFILE_REGISTRATION",
+         279 │ + ··);
+         280 │ + ··demand(
+         281 │ + ····typeof·npmrc·===·"string"·&&
+         282 │ + ······npmrc.endsWith("\n")·&&
+         283 │ + ······!npmrc.includes("\r")·&&
+         284 │ + ······!npmrc.includes("\0"),
+         285 │ + ····"E_NPMRC_SHAPE",
+         286 │ + ··);
+         287 │ + ··const·entries·=·npmrc
+         288 │ + ····.slice(0,·-1)
+         289 │ + ····.split("\n")
+         290 │ + ····.map((line)·=>·{
+         291 │ + ······demand(/^[a-z][a-z-]*=[^\s$;#]+$/.test(line),·"E_NPMRC_LINE");
+         292 │ + ······const·at·=·line.indexOf("=");
+         293 │ + ······return·[line.slice(0,·at),·line.slice(at·+·1)];
+  328 more lines truncated
+  
+
+tests/benchmarks/wp14/driver.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     67  67 │   /** Deadline snapshot is permanent. Late settlement is consumed, never a success upgrade. */
+     68  68 │   export function boundedOwnedWait(label, task, milliseconds = OWNED_WAIT_MS) {
+     69     │ - ··demand(typeof·label·===·"string"·&&·Number.isSafeInteger(milliseconds)·&&·milliseconds·>·0·&&·milliseconds·<=·OWNED_WAIT_MS,·"E_OWNED_DEADLINE");
+         69 │ + ··demand(
+         70 │ + ····typeof·label·===·"string"·&&
+         71 │ + ······Number.isSafeInteger(milliseconds)·&&
+         72 │ + ······milliseconds·>·0·&&
+         73 │ + ······milliseconds·<=·OWNED_WAIT_MS,
+         74 │ + ····"E_OWNED_DEADLINE",
+         75 │ + ··);
+     70  76 │     return new Promise((resolve) => {
+     71  77 │       let decided = false;
+     72     │ - ····const·finish·=·(status,·pendingAtDeadline·=·false)·=>·{·if·(decided)·return;·decided·=·true;·clearTimeout(timer);·resolve(Object.freeze({·label,·status,·deadlineMs:·milliseconds,·pendingAtDeadline·}));·};
+         78 │ + ····const·finish·=·(status,·pendingAtDeadline·=·false)·=>·{
+         79 │ + ······if·(decided)·return;
+         80 │ + ······decided·=·true;
+         81 │ + ······clearTimeout(timer);
+         82 │ + ······resolve(
+         83 │ + ········Object.freeze({
+         84 │ + ··········label,
+         85 │ + ··········status,
+         86 │ + ··········deadlineMs:·milliseconds,
+         87 │ + ··········pendingAtDeadline,
+         88 │ + ········}),
+         89 │ + ······);
+         90 │ + ····};
+     73  91 │       const timer = setTimeout(() => finish("timeout", true), milliseconds);
+     74     │ - ····Promise.resolve().then(task).then(()·=>·finish("completed"),·()·=>·finish("failed"));
+         92 │ + ····Promise.resolve()
+         93 │ + ······.then(task)
+         94 │ + ······.then(
+         95 │ + ········()·=>·finish("completed"),
+         96 │ + ········()·=>·finish("failed"),
+         97 │ + ······);
+     75  98 │     });
+     76  99 │   }
+     77 100 │   export async function runOwnedCleanup(steps, milliseconds = OWNED_WAIT_MS) {
+     78 101 │     const attempts = [];
+     79     │ - ··for·(const·step·of·steps)·attempts.push(await·boundedOwnedWait(step.label,·step.action,·milliseconds));
+     80     │ - ··return·Object.freeze({·attempts:·Object.freeze(attempts),·debts:·Object.freeze(attempts.filter((value)·=>·value.status·!==·"completed"))·});
+        102 │ + ··for·(const·step·of·steps)
+        103 │ + ····attempts.push(
+        104 │ + ······await·boundedOwnedWait(step.label,·step.action,·milliseconds),
+        105 │ + ····);
+        106 │ + ··return·Object.freeze({
+        107 │ + ····attempts:·Object.freeze(attempts),
+        108 │ + ····debts:·Object.freeze(
+        109 │ + ······attempts.filter((value)·=>·value.status·!==·"completed"),
+        110 │ + ····),
+        111 │ + ··});
+     81 112 │   }
+     82     │ - function·ownedFailure(debts,·attempts·=·debts)·{·const·error·=·new·Error("E_OWNED_LIFECYCLE_DEBT");·error.ownedDebts·=·Object.freeze([...debts]);·error.ownedAttempts·=·Object.freeze([...attempts]);·return·error;·}
+     83     │ - export·function·retainPrimary(primary,·fallback)·{·return·primary·??·fallback;·}
+        113 │ + function·ownedFailure(debts,·attempts·=·debts)·{
+        114 │ + ··const·error·=·new·Error("E_OWNED_LIFECYCLE_DEBT");
+        115 │ + ··error.ownedDebts·=·Object.freeze([...debts]);
+        116 │ + ··error.ownedAttempts·=·Object.freeze([...attempts]);
+        117 │ + ··return·error;
+        118 │ + }
+        119 │ + export·function·retainPrimary(primary,·fallback)·{
+        120 │ + ··return·primary·??·fallback;
+        121 │ + }
+     84 122 │   async function requireOwnedWait(label, task) {
+     85 123 │     const result = await boundedOwnedWait(label, task);
+     86 124 │     if (result.status !== "completed") throw ownedFailure([result]);
+     87 125 │   }
+     88     │ - export·async·function·finishOwnedTrace(cdp,·completion,·milliseconds·=·OWNED_WAIT_MS)·{
+     89     │ - ··return·runOwnedCleanup([
+     90     │ - ····{·label:·"trace-end",·action:·()·=>·cdp.send("Tracing.end")·},
+     91     │ - ····{·label:·"trace-completion",·action:·()·=>·{·demand(completion·&&·typeof·completion.then·===·"function",·"E_TRACE_COMPLETION_UNAVAILABLE");·return·completion;·}·},
+     92     │ - ····{·label:·"trace-detach",·action:·()·=>·cdp.detach()·},
+     93     │ - ··],·milliseconds);
+        126 │ + export·async·function·finishOwnedTrace(
+        127 │ + ··cdp,
+        128 │ + ··completion,
+        129 │ + ··milliseconds·=·OWNED_WAIT_MS,
+        130 │ + )·{
+        131 │ + ··return·runOwnedCleanup(
+        132 │ + ····[
+        133 │ + ······{·label:·"trace-end",·action:·()·=>·cdp.send("Tracing.end")·},
+        134 │ + ······{
+        135 │ + ········label:·"trace-completion",
+        136 │ + ········action:·()·=>·{
+        137 │ + ··········demand(
+        138 │ + ············completion·&&·typeof·completion.then·===·"function",
+        139 │ + ············"E_TRACE_COMPLETION_UNAVAILABLE",
+        140 │ + ··········);
+        141 │ + ··········return·completion;
+        142 │ + ········},
+        143 │ + ······},
+        144 │ + ······{·label:·"trace-detach",·action:·()·=>·cdp.detach()·},
+        145 │ + ····],
+        146 │ + ····milliseconds,
+        147 │ + ··);
+     94 148 │   }
+     95     │ - export·async·function·closeOwnedContext(context,·browser,·milliseconds·=·OWNED_WAIT_MS)·{
+     96     │ - ··const·first·=·await·runOwnedCleanup([{·label:·"browser-context-close",·action:·()·=>·context.close()·}],·milliseconds);
+        149 │ + export·async·function·closeOwnedContext(
+        150 │ + ··context,
+        151 │ + ··browser,
+        152 │ + ··milliseconds·=·OWNED_WAIT_MS,
+        153 │ + )·{
+        154 │ + ··const·first·=·await·runOwnedCleanup(
+        155 │ + ····[{·label:·"browser-context-close",·action:·()·=>·context.close()·}],
+        156 │ + ····milliseconds,
+        157 │ + ··);
+     97 158 │     if (!first.debts.length || !browser) return first;
+     98     │ - ··const·fallback·=·await·runOwnedCleanup([{·label:·"owned-browser-close-fallback",·action:·()·=>·browser.close()·}],·milliseconds);
+     99     │ - ··return·Object.freeze({·attempts:·Object.freeze([...first.attempts,·...fallback.attempts]),·debts:·Object.freeze([...first.debts,·...fallback.debts])·});
+        159 │ + ··const·fallback·=·await·runOwnedCleanup(
+        160 │ + ····[{·label:·"owned-browser-close-fallback",·action:·()·=>·browser.close()·}],
+        161 │ + ····milliseconds,
+        162 │ + ··);
+        163 │ + ··return·Object.freeze({
+        164 │ + ····attempts:·Object.freeze([...first.attempts,·...fallback.attempts]),
+        165 │ + ····debts:·Object.freeze([...first.debts,·...fallback.debts]),
+        166 │ + ··});
+    100 167 │   }
+    101 168 │   export async function closeOwnedServer(server, milliseconds = OWNED_WAIT_MS) {
+    102     │ - ··const·closed·=·new·Promise((resolve,·reject)·=>·{·try·{·server.close((error)·=>·error·?·reject(error)·:·resolve());·}·catch·(error)·{·reject(error);·}·});
+        169 │ + ··const·closed·=·new·Promise((resolve,·reject)·=>·{
+        170 │ + ····try·{
+        171 │ + ······server.close((error)·=>·(error·?·reject(error)·:·resolve()));
+        172 │ + ····}·catch·(error)·{
+        173 │ + ······reject(error);
+        174 │ + ····}
+        175 │ + ··});
+    103 176 │     // Attach immediately, even if closeIdleConnections throws independently.
+    104 177 │     closed.catch(() => {});
+    105     │ - ··const·first·=·await·runOwnedCleanup([
+    106     │ - ····{·label:·"http-close-idle",·action:·()·=>·server.closeIdleConnections()·},
+    107     │ - ····{·label:·"http-close",·action:·()·=>·closed·},
+    108     │ - ··],·milliseconds);
+        178 │ + ··const·first·=·await·runOwnedCleanup(
+        179 │ + ····[
+        180 │ + ······{·label:·"http-close-idle",·action:·()·=>·server.closeIdleConnections()·},
+        181 │ + ······{·label:·"http-close",·action:·()·=>·closed·},
+        182 │ + ····],
+        183 │ + ····milliseconds,
+        184 │ + ··);
+    109 185 │     if (!first.debts.length) return first;
+    110     │ - ··const·fallback·=·await·runOwnedCleanup([
+    111     │ - ····{·label:·"http-close-owned-connections",·action:·()·=>·server.closeAllConnections()·},
+    112     │ - ····{·label:·"http-close-after-fallback",·action:·()·=>·closed·},
+    113     │ - ··],·milliseconds);
+    114     │ - ··return·Object.freeze({·attempts:·Object.freeze([...first.attempts,·...fallback.attempts]),·debts:·Object.freeze([...first.debts,·...fallback.debts])·});
+        186 │ + ··const·fallback·=·await·runOwnedCleanup(
+        187 │ + ····[
+        188 │ + ······{
+        189 │ + ········label:·"http-close-owned-connections",
+  138 more lines truncated
+  
+
+Checked 9 files in 37ms. No fixes applied.
+Found 8 errors.
+Found 4 infos.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

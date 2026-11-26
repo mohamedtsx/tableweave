@@ -57,7 +57,7 @@ class WorkspaceTests(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             text = path.read_text(encoding="utf-8")
             target.write_text(text, encoding="utf-8")
-            # Preserve real linked license/config targets, not only Markdown.
+            # Preserve explicitly linked files/directory entries, not only Markdown.
             # Never copy external/escaping paths or generated trees wholesale.
             for link, _ in check_docs.extract_links(text):
                 parsed = urlsplit(link)
@@ -72,6 +72,12 @@ class WorkspaceTests(unittest.TestCase):
                     destination = self.root / linked.relative_to(check_docs.ROOT.resolve())
                     destination.parent.mkdir(parents=True, exist_ok=True)
                     destination.write_bytes(linked.read_bytes())
+                elif (
+                    linked.is_relative_to(check_docs.ROOT.resolve())
+                    and linked.is_dir()
+                ):
+                    destination = self.root / linked.relative_to(check_docs.ROOT.resolve())
+                    destination.mkdir(parents=True, exist_ok=True)
 
     def append(self, name, content):
         path = self.root / name
@@ -112,6 +118,15 @@ class WorkspaceTests(unittest.TestCase):
     def test_unreachable_document_fails(self):
         (self.root / "orphan.md").write_text("# Orphan\n", encoding="utf-8")
         self.assert_failure("unreachable Markdown from entrypoints: orphan.md")
+
+    def test_local_directory_targets_are_checked(self):
+        target = self.root / "synthetic-linked-directory"
+        target.mkdir()
+        self.append("README.md", "\n[Directory](synthetic-linked-directory/)\n")
+        result, output = self.run_check()
+        self.assertEqual(result, 0, output)
+        target.rmdir()
+        self.assert_failure("missing target: synthetic-linked-directory/")
 
     def test_generated_runtime_artifacts_are_not_documentation_inputs(self):
         for directory in (".artifacts", "storybook-static", "test-results", "playwright-report"):

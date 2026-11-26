@@ -1,0 +1,5 @@
+{
+  "extends": "../wp14/tsconfig.source-light.json",
+  "include": ["../wp14/*.ts", "../wp14/*.tsx", "./*.ts"],
+  "exclude": ["evidence", "node_modules"]
+}

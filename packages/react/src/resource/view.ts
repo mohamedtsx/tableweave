@@ -4,6 +4,7 @@ import type {
   ResourceContext,
   ResourceError,
   ResourceErrorCode,
+  ResourceRequest,
   ResourceView,
 } from "./types.js";
 
@@ -55,6 +56,19 @@ export type ResourceCore<T, Q extends WireQuery> = Pick<
   | "invalidationFailed"
 >;
 
+function sameExtent(a: ResourceRequest, b: ResourceRequest): boolean {
+  const left = a.extent;
+  const right = b.extent;
+  if (left?.kind === "complete" || right?.kind === "complete")
+    return left?.kind === right?.kind;
+  return (
+    (left?.pageIndex ?? a.query.pagination.pageIndex) ===
+      (right?.pageIndex ?? b.query.pagination.pageIndex) &&
+    (left?.pageSize ?? a.query.pagination.pageSize) ===
+      (right?.pageSize ?? b.query.pagination.pageSize)
+  );
+}
+
 export function resourceView<T, Q extends WireQuery>(
   core: ResourceCore<T, Q>,
   retryAvailable = false,
@@ -67,6 +81,7 @@ export function resourceView<T, Q extends WireQuery>(
     request !== null &&
     (snapshot.queryKey !== request.queryKey ||
       snapshot.requestKey !== request.requestKey ||
+      !sameExtent(snapshot, request) ||
       canonicalJson(snapshot.query) !== canonicalJson(request.query));
   const usable =
     active &&
@@ -96,7 +111,8 @@ export function resourceView<T, Q extends WireQuery>(
     obsolete,
     canSelect: usable,
     canReorder: usable && !busy && kind === "ready",
-    canNavigate: usable && kind === "ready",
+    canNavigate:
+      usable && kind === "ready" && snapshot?.extent?.kind !== "complete",
     canRetry: kind === "failure" && active && context.access && retryAvailable,
   });
 }

@@ -70,3 +70,165 @@ dependency matching React Table9.3.1, not an undeclared transitive import. The
 [correction plan](../planning/wp-04-implementation-plan.md#native-commit-boundary-correction--2026-11-24)
 and suspended-render/native-action/browser evidence must demonstrate the boundary
 before approval. No extra application store, filtering engine or scope waiver.
+
+## WP-06 ADR-07 Vite integration compatibility disposition
+
+**2026-11-24; delegated engineering decision, verification pending.** Installed
+Start declarations omit a required internal algorithm alias and two declaring-
+package dependency edges, and unnecessarily reach all optional bundler types
+through Router's barrel. The [bounded repair](../planning/wp-06-implementation-plan.md#strict-vite-declaration-repair-disposition--2026-11-24)
+restores exact source types and selects the genuine public Vite type entry without
+changing runtime versions/bytes or strict flags. Alternate-bundler installation,
+unplugin overrides, ambient-any modules and hiding config checks are rejected.
+Independent strict app/config and real packed Start evidence remain mandatory.
+Only the Vite profile is covered; upstream and release/legal review are separate.
+
+## WP-07 ADR-07 calendar declaration disposition
+
+**2026-11-24; delegated engineering choice, source verification completed.** Scoped vendor
+calendars unnecessarily reach the entire HeroUI3.2.8 declaration barrel through
+CalendarYearPicker type references. The
+[bounded repair](../planning/wp-07-implementation-plan.md#calendar-declaration-repair-disposition--2026-11-24)
+uses the genuine scoped entry for the same types, leaving runtime bytes, versions
+and strict flags unchanged. No raw-barrel TS6 claim, type erasure or generic
+interface rewrite follows. The same issue affects ListBox's scoped entry: three
+declaration-only files differ, with all528 upstream runtime/license bytes otherwise
+matching. Both strict compiler versions, public/actual-packed/browser and frozen
+installation checks now pass; final combined-stack delivery remains separate.
+
+## WP-08 ADR-07 temporary runtime compatibility direction
+
+**User-selected direction; verification and delivery pending.** The maintainer
+explicitly chooses an application-side temporary patch for private/prerelease
+delivery, conditional on independent review and genuine packed-consumer tests.
+This extends neither WP-04's declaration-only approval nor ordinary unpatched
+runtime support by implication. FR-01/06/15 and the grouped/controlled/lifetime
+acceptance remain intact; no product behavior is removed to fit the dependency.
+
+RAC1.22.1's grouped table clone copies a clean header cache without its dirty flag,
+causing plain StrictMode and genuine native empty/populated failures. The registry
+[current release](https://registry.npmjs.org/react-aria-components/latest) remains
+1.22.1; inspected earlier stable releases share the omission. A private minimal
+copy of the actual boolean preserves clean and dirty states and passes tested
+current NativeCollection same-group order/visibility/current-record/Strict paths.
+The [bounded experiments and construction plan](../planning/wp-08-implementation-plan.md#candidate-clone-only-profile-construction-allocation)
+record causal evidence and limits; independent repair review is still required.
+
+The proposed profile retains compound HeroUI/Aria presentation and the one native
+processing owner. Documented dynamic header/cache APIs were tested privately but
+retained both Strict failures. A wider public-hooks renderer is not selected.
+A second vendor traversal defect affects an additional raw cached-Collection
+probe; its broader repair is excluded because it is not shown necessary for this
+tested public Tableweave contract. Neither custom vendor structures nor hot native
+definition replacement become supported APIs through the profile.
+
+Any eventual profile must ship explicit assets, exact byte verification and
+application-owned pre-install registration; no automatic mutation or fake enabled
+flag. Root patches do not propagate through archives. Keep actual unpatched public
+declaration consumers separate from profiled runtime production tests, and retain
+negative unpatched behavior and removal criteria. Headless remains unaffected.
+Candidate construction alone approves no registration, install or package shipping.
+Stable/full G-05, third-party legal/publication, manual/device/performance and
+personal PR review remain separate; all PRs stay unmerged.
+
+## WP-10 ADR-08 operation lifecycle elaboration
+
+TASK-018, FR-02/03/06, AC-12/13/21. Main preserves the previously approved bounded
+pure producer as isolated7c98628/intakea7b8627; five source hashes still match its
+recorded identity. Historical source approval is not current adapter/G-02 proof.
+The [actual lifecycle](../engineering/reordering.md#row-move-contract) separates
+backend settlement from authoritative acknowledgement and keeps uncertain cancellation
+pending. This replaces only the illustrative HLD `ok` result, retaining application
+persistence/revision/authorization ownership, no rollback cache and one row processor.
+
+A pure explicit subpath avoids importing UI/native/drag code for operation metadata.
+The next vendor-free authority/ref/interlock and optional adapter stages stay held
+until their actual protocols/dependencies are selected. Existing controllers cannot
+be assumed retrofitted with pending/queued-proposal guards. New dnd-kit0.5.3 registry
+metadata remains a candidate, not installed/API/DOM-identity evidence. No product
+constraint, optional-entry isolation, manual/real-consumer gate or final-phase
+verification/approval requirement is weakened by this elaboration.
+
+## WP-10 ADR-03/08 command-origin composition selection
+
+Main confirms existing core captures a command once and reuses that exact object
+at final acceptance; final state validation and query-first observers are existing
+seams. The selected [bounded helper](../planning/wp-10-command-admission-plan.md)
+explicitly creates the real C through its actual factory with private command/
+proposal/fence composition. This is not a wrapper, retrofit or second accepted-state
+store. Pure application validators stay pure; private receipt bookkeeping performs
+no command, network or accepted-state mutation. Existing core/native producers and
+their acceptance semantics remain unchanged. Callback ordering, reentry, source/
+lease purity, stale proposal and cleanup enforcement are unverified implementation
+obligations; no runtime/G-02 or independent approval is granted by this selection.
+
+## WP-10 ADR-08 unpaged extent compatibility selection
+
+Held admissione9d1721 exposes a mismatch between canonical dormant pageSize and
+the genuine unsliced collection. Main selects [explicit stamp extent](../planning/wp-10-unpaged-extent-plan.md)
+instead of slicing/inflating query metadata or excluding required unpaged moves.
+Page remains the omission/default with historical output shape; complete is explicit,
+bounded and part of origin/authoritative acknowledgement equality. Application
+integer epochs/revisions, exact tokens and backend authorization remain separate.
+Original pure/held source seals and failures remain intact; correction runtime/
+independent verification and whole-packet G-02 approval remain deferred.
+
+## WP-10 ADR-03/08 application lease versus optional renderer lifetime
+
+Actual admission owner disconnect retires epoch/model/pending metadata; it cannot
+serve as a temporary DataTable effect cleanup. Main selects the
+[retained application-source/UI bridge](../planning/wp-10-admission-ui-bridge-plan.md):
+application-owned lease and source producer, separate exclusive UI claim, exact-model
+joins and independent metadata-only navigation origins. UI detach preserves backend
+uncertainty; source waits delay app-owned correlated notices until genuine publication.
+Generic offline/new-owner continuation is not inferred from equal IDs/strings and
+needs a separate closed protocol if required. Existing actual C/coordinator, source
+revocation and backend authorization remain intact. Implementation/runtime/Strict/
+origin/consumer/independent evidence is not granted by this engineering selection.
+
+## WP-10 ADR-03/08 operation handoff versus UI observer ordering
+
+Held bridgeccede5c demonstrates a source-traced shared-fence failure. Main selects
+[separate source/UI cuts and atomic handoff](../planning/wp-10-ui-source-fences-plan.md):
+empty-ID source observation ignores UI-only revocation; original command receipts
+still reject old interaction cuts. After pending creation, begin performs no external
+callback before returning its exact token; admission subscribers deliver afterward.
+This revises an unaccepted early-subscriber-veto choice, not the pure coordinator API,
+core query-first callbacks, stale-before-grant checks or backend authorization.
+
+Consumers must atomically hand the token to the captured app notification without a
+post-begin reentrant lookup/await. A prepared-operation API would be required if that
+delivery cannot be proved; no fake terminal outcome is allowed. Preserve original
+early-listener assertions and record their current-contract conflict for final review.
+Pre-entry waiting is distinct from real in-flight incoherent source failure, which
+keeps the existing pure detach semantics. No offline continuation, runtime/corrective
+verification, package approval or requirement waiver is inferred.
+
+## WP-10 ADR-08 vendor ownership boundary — provisional engineering selection
+
+FR-02/03/06, AC-12/13/21/25 and G-02 retain source isolation, real collection
+identity and input parity. The upstream investigation finds no fixed upgrade and
+does not authorize a patch. Main selects **proved table-owned retirement**, not a
+promise that every vendor microtask, shared platform shim or externally retained
+object has vanished. This matches the existing native lifetime's owned-reference
+boundary; it is not permission for late private/native effects.
+
+Before cleanup can acknowledge success, Tableweave's private routes/configuration/
+joins/tickets must be cleared, exact owned native callbacks/enrollments retired and
+any remaining work proved unable to read private geometry, invoke application
+actions or mutate owned DOM. In-progress vendor dispatch still needs tombstones;
+unsubscription alone is insufficient. Throwing/partial/armed cleanup retains exact
+debt, blocks conflicting enrollment and cannot acknowledge P cleanup as successful.
+No timer guess, shared scheduler flush, invented disposer receipt or backend outcome
+may discharge it. A retired manager is never reused for a new incarnation.
+
+The [dependency investigation](../planning/wp-10-adapter-dependency-plan.md#scroller-prevention-and-live-shape-limitation)
+identifies supported idle Scroller removal but also the missing live shape under
+Feedback.none. A fixed same-family DOM backend remains only a candidate: actual
+geometry ownership/update order, all retained native routes and partial-construction
+cleanup must be source-accounted before a code lease. Root/runtime/type optionality,
+no reparenting, keyboard/touch/overflow/RTL/focus and genuine packed G-02 evidence
+remain required. No normal Feedback fallback, vendor patch/install, custom permissive
+plugin, arbitrary app geometry/disposer callback or adapter implementation is
+authorized by this ownership selection. Independent final review may reject its
+proof; no numbered finding or packet is approved here.

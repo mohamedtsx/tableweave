@@ -1,0 +1,2 @@
+{"protectedRegularInputs":2286,"source155":155,"installedInputs":14,"disclosedMainMetadataDrift":["TASKS.md"]}
+Static parse/inert-module/public-export/profile/positive-source guards passed for 26 owned files. NO CLI/helper/framework/test execution; MJS semantics remain untyped.

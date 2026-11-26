@@ -15,6 +15,10 @@ direct feedback rather than substituting generic HeroUI or design-skill defaults
 The Figma prototype is supplementary and exploratory, not the primary taste
 source or final visual approval. Keep all reference no-copy/read-only boundaries.
 
+The user-authorized [Tableweave shell reference](wp-09-shell-reference.md) now
+provides editable initial desktop/phone/RTL/recovery scenes **for review**, not full
+F-01–F-22 coverage, personal approval or runtime/AA acceptance.
+
 | Reference | Use | Do not inherit |
 | --- | --- | --- |
 | [Transactions reference](https://shadcnuikit.com/dashboard/payment/transactions) | Quiet hierarchy, compact rows/status, segmented builder, selection replacement, pagination | Commercial code/assets, dashboard shell, Export, business terms/default dates or always-enabled tools |

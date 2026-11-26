@@ -1,0 +1,186 @@
+{
+  "status": "PROVISIONAL parent-only retirement correction, review28n1/n2 author response NOT closure; generated assembly/all runtime FINAL UNRUN",
+  "suppliedHead": "3929614 (no worker Git)",
+  "canonical155": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+  "oldRegularInputs": 1845,
+  "changedOldBodies": [
+    "apps/example-start-facade/src/application/bootstrap-session.ts"
+  ],
+  "original39Aggregate": "06b55f21e8e7a21e6d752a8bba0fbe315120d7377a07ff24e803cb97d36d0f6f",
+  "original69Aggregate": "3718197b7a1168127f9358d8817bc57d35aaa3b8bd7b3ccedaa74c1f23e379a7",
+  "originalSealSHA256": "dcc4f5b58defaba716f2df1e21db9b0f00534b1f255bd632f57e210f7d2562f3",
+  "newInputAggregate": "26e2e62da72e7bc5ec497f28ae1cdb87af7f35c3a65c0040f1cecc0c1367e659",
+  "artifactAggregate": "445aedf10fb45ca8c917439db600a8f9f1645d32ab18dd0ad23ef7f464f38486",
+  "inputs": {
+    "apps/example-start-facade/src/application/bootstrap-session.ts": {
+      "sha256": "f479f9db6ed9d713caae36174c0580f83facf2c526bde0bbd5cea4fa849036a8",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/README.md": {
+      "sha256": "56adb7a511ef46b49b897fd74d3d23670f21e24eba30c4c56fdd1bff0b69c85f",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/before.json": {
+      "sha256": "3a87de75e1db3a6fcf84c295a4b690fe91ae7958d49e8a2a7a615153a3332e43",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/final/retirement.test.ts": {
+      "sha256": "516dc525bc015913f2022161caca0b374a8515718ba8d080c251851f11a96074",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/final/synthetic-reader.ts": {
+      "sha256": "5c42a102f18c3bed127746f7d86738b6742df32818a4b7b55e4c6664bcd2788f",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/inputs.mjs": {
+      "sha256": "21b1c0a3bd41ba535b70602b37aa9304b4fe35f944b33133a282c690e39420ea",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/light.mjs": {
+      "sha256": "d82a677e313b441c751532b84a7ec3dbdc540a5ec9d6a6fa5b03d1d2550867ba",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/preimages/bootstrap-session.ts.txt": {
+      "sha256": "06960bc3d7cd5f8d789d24e832f6786aa38232c61bdae2facdcb162a5b42a99c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/scope.mjs": {
+      "sha256": "01628bd0bc2d1631b8e62949b87331fbcbe6dfc798935b02c33cd38b60f553c3",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/seal.mjs": {
+      "sha256": "11dd0862cbb3482cef37275b6c4cad59a19243a931f6160c38fccbd1f1e077cc",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/source.delta.patch": {
+      "sha256": "77b12d7870baacb42a4ea549263dcfb3c361a95118323d53b7a71eb5b4576746",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/static.mjs": {
+      "sha256": "ac9a570fa2079ad8efeb8ed0667fac8edb3649a988bc5a93db56825d4d000732",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/tsconfig.source-light.json": {
+      "sha256": "15eed2363bf1a9995139c1246e0a87bcc7da40a53b441d1770e571b1aa20100a",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/vitest.config.mjs": {
+      "sha256": "86789b658fc95661affb2aeddff2efb313f178024e090e9e1ff58e1c53ef5fe6",
+      "mode": 436
+    }
+  },
+  "artifacts": {
+    "tests/workbench/wp11-start-retirement/.artifacts/light-001/inputs-before.log": {
+      "sha256": "52f778758f5fedd1dc829851994bc930618c6b8fa32358c14165b6df3c0fdb7f",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-001/results.json": {
+      "sha256": "cad9f6f6ae821cf1d5fadc697be6256376578cca17408ef915c9cf34c0a57236",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/biome.log": {
+      "sha256": "42bcb29bb2a8a8f05c2715bc7b0f3b476e0b024fef9b4d30c2ac93be0665dc12",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/inputs-before.log": {
+      "sha256": "f08c3714ac4565a73300dba56151fda67d40cec5857044b46f3f318cbfd81658",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/inputs.json": {
+      "sha256": "d84838fe995b977b3ca8e86fe5c1433d9560947e3b3d8e2eb119382ad703e83e",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/results.json": {
+      "sha256": "ebcf376ebc8671865eafec14a82e6125e30aff63bf5e6f92c45eefe6f621fbcd",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/scope.log": {
+      "sha256": "4ef2845be1ed3ee7c071b08faea8c93e957a0016b2590716e115c158e807d75d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/static.log": {
+      "sha256": "e2610acc6f8699c513f0ec8f7dba8bddc9ae1af5a606569dc89be1ebbf11b80a",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-002/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/biome.log": {
+      "sha256": "349f96556bab373a53f8b2cc98cf41abb36a8fb6c908d0d67b2f869393d0ba7f",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/inputs-after.log": {
+      "sha256": "f08c3714ac4565a73300dba56151fda67d40cec5857044b46f3f318cbfd81658",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/inputs-before.log": {
+      "sha256": "f08c3714ac4565a73300dba56151fda67d40cec5857044b46f3f318cbfd81658",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/inputs.json": {
+      "sha256": "3ff239688ddac219440c403e7a0935474da4cc06a2c1c42d4e6943fed425ffa7",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/results.json": {
+      "sha256": "b27a65da88abdf2ac9229cd0db5b0069047cbf4314702fdde65f491a191f2da3",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/scope.log": {
+      "sha256": "4ef2845be1ed3ee7c071b08faea8c93e957a0016b2590716e115c158e807d75d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/static.log": {
+      "sha256": "e2610acc6f8699c513f0ec8f7dba8bddc9ae1af5a606569dc89be1ebbf11b80a",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-start-retirement/.artifacts/light-003/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    }
+  }
+}

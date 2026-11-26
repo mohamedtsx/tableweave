@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "lib": ["ES2022", "ES2023.Intl", "DOM"],
+    "types": ["node", "react", "react-dom"]
+  },
+  "include": ["./*.ts", "../../controls/core/authority-mask-review.test.ts"]
+}

@@ -1,0 +1,37 @@
+{
+  "extends": "../fence-domains/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@tableweave/react": ["../../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../../packages/react/src/filters/index.ts"
+      ],
+      "@tableweave/react/reordering-controller": [
+        "../../../packages/react/src/reordering-controller/index.ts"
+      ],
+      "@tableweave/react/reordering": [
+        "../../../packages/react/src/reordering/index.ts"
+      ],
+      "@heroui/react/*": [
+        "../../../packages/heroui/node_modules/@heroui/react/dist/components/*/index.d.ts"
+      ],
+      "@internationalized/date": [
+        "../../../packages/heroui/node_modules/@internationalized/date"
+      ],
+      "@tanstack/react-table": [
+        "../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../../packages/react/src/reordering-controller/*.ts",
+    "../../../packages/heroui/src/**/*.ts",
+    "../../../packages/heroui/src/**/*.tsx"
+  ],
+  "exclude": ["./negative/**", "./packed/**", "./.artifacts"]
+}

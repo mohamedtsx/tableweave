@@ -1,0 +1,8 @@
+--- before/apps/storybook/src/styles.css
++++ after/apps/storybook/src/styles.css
+@@ -5,3 +5,5 @@
+ @import "@tableweave/heroui/styles.css";
+ 
+ @source "./";
++
++@source "../../examples/shared";

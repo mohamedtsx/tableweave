@@ -9,6 +9,9 @@ follows automatically from that result.
 WP-05 separately records [scoped G-03 resource evidence](../evidence/wp-05-resource-2026-11-24.md),
 including the combined native/resource workflow; framework/UI/release gates remain
 independent.
+WP-06 now records [bounded actual Start G-04 evidence](../evidence/wp-06-start-2026-11-24.md)
+and delegated technical approval after independent isolation corrections and real
+tarball/HTTP/hydration proof. Synthetic authorization is not real-consumer acceptance.
 
 ## G-01 Native processing and collection bridge
 

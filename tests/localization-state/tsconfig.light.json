@@ -1,0 +1,5 @@
+{
+  "extends": "../criteria-commit/tsconfig.json",
+  "include": ["./locales.test.ts", "./types.ts", "./vitest.config.mjs"],
+  "exclude": ["./types.negative.ts", "./.artifacts"]
+}

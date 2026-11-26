@@ -15,7 +15,12 @@ for (const file of [
   "packages/react/package.json",
   "packages/heroui/package.json",
   "apps/storybook/package.json",
+  "apps/example-start/package.json",
   "patches/react-aria-components@1.22.1.patch",
+  "patches/@tanstack__start-server-core@1.169.40.patch",
+  "patches/@tanstack__start-plugin-core@1.171.50.patch",
+  "patches/react-aria-components@1.22.1-tableweave.patch",
+  "patches/@heroui__react@3.2.8.patch",
 ]) {
   await mkdir(dirname(join(target, file)), { recursive: true });
   await cp(join(root, file), join(target, file));

@@ -1,0 +1,9 @@
+{
+  "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+  "args": [
+    "tests/consumers/wp13-storage-correction/static.mjs"
+  ],
+  "status": 0,
+  "signal": null,
+  "error": null
+}

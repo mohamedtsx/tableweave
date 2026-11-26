@@ -1,0 +1,22 @@
+{
+  "base": "76c3823 (main supplied; no Git command)",
+  "source126": "4a956137a365746d964c084a161884853650138c36e1aebe6a586d178345b731",
+  "protectedFiles": 1052,
+  "protectedFilesAggregate": "bd619d358218be811e872f6b6c0d46dad71c5ae396350afabb7d4cb1bb435f34",
+  "protectedSources": 120,
+  "protectedSourcesAggregate": "12121c5ce0821e40e0e57111088030725205ba2e1d1dda436cda29b9cd950d83",
+  "existing": [
+    "packages/heroui/src/filters/criteria-commit-core.ts",
+    "packages/heroui/src/details/types.ts",
+    "packages/heroui/src/details/use-details-session.ts",
+    "packages/heroui/src/details/session-identity.ts",
+    "packages/heroui/src/details/details-shell.tsx",
+    "packages/heroui/src/details/identity.ts"
+  ],
+  "additions": [
+    "packages/heroui/src/details/committed-details.ts",
+    "packages/heroui/src/data-table/details-binding.ts",
+    "packages/heroui/src/data-table/details-provider.tsx",
+    "packages/heroui/src/data-table/details-trigger.tsx"
+  ]
+}

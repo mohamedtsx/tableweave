@@ -1,0 +1,1447 @@
+tests/integration/wp12/application.tsx:113:5 lint/a11y/useAriaPropsSupportedByRole ━━━━━━━━━━━━━━━━━
+
+  × The ARIA attribute 'aria-label' is not supported by this element.
+  
+    111 │   const focusFallback = useCallback(() => fallback.current?.focus({ preventScroll: true }), []);
+    112 │   const renderBody = useCallback((context: DetailsRenderContext<TransactionSchema, Transaction>) => <>
+  > 113 │     <p className="wp12-metadata" aria-label="Detail native row">{context.row ? context.row.id : "none"}</p>
+        │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    114 │     <TransactionDetails context={context} owner={owner} driver={driver} />
+    115 │   </>, [owner, driver]);
+  
+  i Assistive technologies may ignore an ARIA attribute that the role of the element does not support, or report incorrect information to the user.
+  
+  i Remove the attribute, or use a role that supports it.
+  
+
+tests/integration/wp12/application.tsx:158:43 lint/a11y/useAriaPropsSupportedByRole ━━━━━━━━━━━━━━━━
+
+  × The ARIA attribute 'aria-label' is not supported by this element.
+  
+    156 │       <Button variant="tertiary" onPress={() => setDark(value => !value)}>Toggle theme</Button>
+    157 │       <Button variant="tertiary" onPress={() => setRtl(value => !value)}>Toggle direction</Button>
+  > 158 │     </div><p><bdi>TX-001 / REF-24</bdi> · <span aria-label="Locale number">{new Intl.NumberFormat(recipeLocale(rtl).locale, { minimumFractionDigits: 2 }).format(-1234.5)}</span> · <span aria-label="Locale date">{new Intl.DateTimeFormat(recipeLocale(rtl).locale, { timeZone: "UTC", dateStyle: "medium" }).format(new Date("2026-11-25T12:00:00Z"))}</span></p></header>
+        │                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    159 │     <Surface app={a} rtl={rtl} /><Surface app={b} rtl={rtl} />
+    160 │   </main></I18nProvider></LocaleContext.Provider>;
+  
+  i Assistive technologies may ignore an ARIA attribute that the role of the element does not support, or report incorrect information to the user.
+  
+  i Remove the attribute, or use a role that supports it.
+  
+
+tests/integration/wp12/application.tsx:158:181 lint/a11y/useAriaPropsSupportedByRole ━━━━━━━━━━━━━━━
+
+  × The ARIA attribute 'aria-label' is not supported by this element.
+  
+    156 │       <Button variant="tertiary" onPress={() => setDark(value => !value)}>Toggle theme</Button>
+    157 │       <Button variant="tertiary" onPress={() => setRtl(value => !value)}>Toggle direction</Button>
+  > 158 │     </div><p><bdi>TX-001 / REF-24</bdi> · <span aria-label="Locale number">{new Intl.NumberFormat(recipeLocale(rtl).locale, { minimumFractionDigits: 2 }).format(-1234.5)}</span> · <span aria-label="Locale date">{new Intl.DateTimeFormat(recipeLocale(rtl).locale, { timeZone: "UTC", dateStyle: "medium" }).format(new Date("2026-11-25T12:00:00Z"))}</span></p></header>
+        │                                                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    159 │     <Surface app={a} rtl={rtl} /><Surface app={b} rtl={rtl} />
+    160 │   </main></I18nProvider></LocaleContext.Provider>;
+  
+  i Assistive technologies may ignore an ARIA attribute that the role of the element does not support, or report incorrect information to the user.
+  
+  i Remove the attribute, or use a role that supports it.
+  
+
+tests/integration/wp12/application.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      1   1 │   import { Button } from "@heroui/react/button";
+      2     │ - import·{·DataTable,·TableDetailsTrigger,·useDetailsAccessory,·type·DataTableProps,·type·DetailsRenderContext·}·from·"@tableweave/heroui";
+      3     │ - import·{·defineTable,·useDataTable,·useTableweaveState,·type·NativeColumnDef·}·from·"@tableweave/react";
+          2 │ + import·{
+          3 │ + ··DataTable,
+          4 │ + ··TableDetailsTrigger,
+          5 │ + ··useDetailsAccessory,
+          6 │ + ··type·DataTableProps,
+          7 │ + ··type·DetailsRenderContext,
+          8 │ + }·from·"@tableweave/heroui";
+          9 │ + import·{
+         10 │ + ··defineTable,
+         11 │ + ··useDataTable,
+         12 │ + ··useTableweaveState,
+         13 │ + ··type·NativeColumnDef,
+         14 │ + }·from·"@tableweave/react";
+      4  15 │   import { canonicalJson } from "@tableweave/react/contracts";
+      5     │ - import·{·createContext,·useContext,·useCallback,·useEffect,·useLayoutEffect,·useMemo,·useRef,·useState,·useSyncExternalStore·}·from·"react";
+         16 │ + import·{
+         17 │ + ··createContext,
+         18 │ + ··useContext,
+         19 │ + ··useCallback,
+         20 │ + ··useEffect,
+         21 │ + ··useLayoutEffect,
+         22 │ + ··useMemo,
+         23 │ + ··useRef,
+         24 │ + ··useState,
+         25 │ + ··useSyncExternalStore,
+         26 │ + }·from·"react";
+      6  27 │   import { I18nProvider } from "react-aria/I18nProvider";
+      7  28 │   import { transactionDefinition } from "../../../apps/examples/shared/definitions.js";
+      8     │ - import·{·createExampleDetails,·TransactionDetails,·useExampleDetailSource·}·from·"../../../apps/examples/shared/details.js";
+         29 │ + import·{
+         30 │ + ··createExampleDetails,
+         31 │ + ··TransactionDetails,
+         32 │ + ··useExampleDetailSource,
+         33 │ + }·from·"../../../apps/examples/shared/details.js";
+      9  34 │   import { createExampleOwner } from "../../../apps/examples/shared/owner.js";
+     10     │ - import·{·transactions,·type·Transaction·}·from·"../../../apps/examples/shared/records.js";
+     11     │ - import·{·exampleOperators,·transactionSchema,·type·TransactionSchema·}·from·"../../../apps/examples/shared/schemas.js";
+         35 │ + import·{
+         36 │ + ··transactions,
+         37 │ + ··type·Transaction,
+         38 │ + }·from·"../../../apps/examples/shared/records.js";
+         39 │ + import·{
+         40 │ + ··exampleOperators,
+         41 │ + ··transactionSchema,
+         42 │ + ··type·TransactionSchema,
+         43 │ + }·from·"../../../apps/examples/shared/schemas.js";
+     12  44 │   import { transactionRecipeTools } from "../../../apps/examples/recipes/custom-filter.js";
+     13  45 │   import { recipeLocale } from "../../../apps/examples/recipes/locale-recovery.js";
+     14     │ - import·{·syntheticBulkActions,·reviewSyntheticRow·}·from·"../../../apps/examples/recipes/row-bulk-actions.js";
+     15     │ - import·{·createDrafts,·createEvents,·type·Drafts,·type·Owner·}·from·"./events.js";
+         46 │ + import·{
+         47 │ + ··syntheticBulkActions,
+         48 │ + ··reviewSyntheticRow,
+         49 │ + }·from·"../../../apps/examples/recipes/row-bulk-actions.js";
+         50 │ + import·{
+         51 │ + ··createDrafts,
+         52 │ + ··createEvents,
+         53 │ + ··type·Drafts,
+         54 │ + ··type·Owner,
+         55 │ + }·from·"./events.js";
+     16  56 │   
+     17  57 │   type Props = DataTableProps<TransactionSchema, Transaction>;
+    ······· │ 
+     19  59 │   function LocalizedAmount({ value }: { value: number }) {
+     20  60 │     const locale = useContext(LocaleContext);
+     21     │ - ··return·<bdi>{new·Intl.NumberFormat(locale,·{·minimumFractionDigits:·2·}).format(value)}</bdi>;
+         61 │ + ··return·(
+         62 │ + ····<bdi>
+         63 │ + ······{new·Intl.NumberFormat(locale,·{·minimumFractionDigits:·2·}).format(
+         64 │ + ········value,
+         65 │ + ······)}
+         66 │ + ····</bdi>
+         67 │ + ··);
+     22  68 │   }
+     23  69 │   function LocalizedDate({ value }: { value: string }) {
+     24  70 │     const locale = useContext(LocaleContext);
+     25     │ - ··return·<bdi>{new·Intl.DateTimeFormat(locale,·{·dateStyle:·"medium",·timeZone:·"UTC"·}).format(new·Date(value))}</bdi>;
+         71 │ + ··return·(
+         72 │ + ····<bdi>
+         73 │ + ······{new·Intl.DateTimeFormat(locale,·{
+         74 │ + ········dateStyle:·"medium",
+         75 │ + ········timeZone:·"UTC",
+         76 │ + ······}).format(new·Date(value))}
+         77 │ + ····</bdi>
+         78 │ + ··);
+     26  79 │   }
+     27     │ - function·InlineNote({·owner,·drafts,·id·}:·{·owner:·Owner;·drafts:·Drafts;·id:·string·})·{
+     28     │ - ··const·values·=·useSyncExternalStore(drafts.subscribe,·drafts.getSnapshot,·drafts.getSnapshot);
+     29     │ - ··return·<input·className="wp12-note"·aria-label={`Native·note·${id}`}·value={values[id]·??·""}·onChange={event·=>·drafts.edit(owner,·id,·event.target.value)}·/>;
+         80 │ + function·InlineNote({
+         81 │ + ··owner,
+         82 │ + ··drafts,
+         83 │ + ··id,
+         84 │ + }:·{
+         85 │ + ··owner:·Owner;
+         86 │ + ··drafts:·Drafts;
+         87 │ + ··id:·string;
+         88 │ + })·{
+         89 │ + ··const·values·=·useSyncExternalStore(
+         90 │ + ····drafts.subscribe,
+         91 │ + ····drafts.getSnapshot,
+         92 │ + ····drafts.getSnapshot,
+         93 │ + ··);
+         94 │ + ··return·(
+         95 │ + ····<input
+         96 │ + ······className="wp12-note"
+         97 │ + ······aria-label={`Native·note·${id}`}
+         98 │ + ······value={values[id]·??·""}
+         99 │ + ······onChange={(event)·=>·drafts.edit(owner,·id,·event.target.value)}
+        100 │ + ····/>
+        101 │ + ··);
+     30 102 │   }
+     31 103 │   
+    ······· │ 
+     35 107 │     const drafts = createDrafts();
+     36 108 │     const utilities: readonly NativeColumnDef<Transaction>[] = [
+     37     │ - ····{·id:·"details",·header:·"Details",·meta:·{·utility:·true·},·cell:·({·row·})·=>·<TableDetailsTrigger·rowId={row.id}·label={`View·details·${row.id}`}>View·details</TableDetailsTrigger>·},
+     38     │ - ····{·id:·"review",·header:·"Application·action",·meta:·{·utility:·true·},·cell:·({·row·})·=>·<Button·size="sm"·variant="tertiary"·onPress={()·=>·reviewSyntheticRow(owner,·row.id)}>Review·{row.id}</Button>·},
+     39     │ - ····...(id·===·"b"·?·[{·id:·"nativeNote",·header:·"Working·note",·meta:·{·utility:·true·},·cell:·({·row·})·=>·<InlineNote·owner={owner}·drafts={drafts}·id={row.id}·/>·}·satisfies·NativeColumnDef<Transaction>]·:·[]),
+        109 │ + ····{
+        110 │ + ······id:·"details",
+        111 │ + ······header:·"Details",
+        112 │ + ······meta:·{·utility:·true·},
+        113 │ + ······cell:·({·row·})·=>·(
+        114 │ + ········<TableDetailsTrigger·rowId={row.id}·label={`View·details·${row.id}`}>
+        115 │ + ··········View·details
+        116 │ + ········</TableDetailsTrigger>
+        117 │ + ······),
+        118 │ + ····},
+        119 │ + ····{
+        120 │ + ······id:·"review",
+        121 │ + ······header:·"Application·action",
+        122 │ + ······meta:·{·utility:·true·},
+        123 │ + ······cell:·({·row·})·=>·(
+        124 │ + ········<Button
+        125 │ + ··········size="sm"
+        126 │ + ··········variant="tertiary"
+        127 │ + ··········onPress={()·=>·reviewSyntheticRow(owner,·row.id)}
+        128 │ + ········>
+        129 │ + ··········Review·{row.id}
+        130 │ + ········</Button>
+        131 │ + ······),
+        132 │ + ····},
+        133 │ + ····...(id·===·"b"
+        134 │ + ······?·[
+        135 │ + ··········{
+        136 │ + ············id:·"nativeNote",
+        137 │ + ············header:·"Working·note",
+        138 │ + ············meta:·{·utility:·true·},
+  628 more lines truncated
+  
+
+tests/integration/wp12/browser.spec.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      5    5 │   // Authored acceptance obligations only. No skips, expected-fail annotations or
+      6    6 │   // runtime result follows from LIGHT typing this module.
+      7      │ - const·faults·=·new·WeakMap<Page,·{·page:·number;·console:·number;·source:·number·}>();
+           7 │ + const·faults·=·new·WeakMap<
+           8 │ + ··Page,
+           9 │ + ··{·page:·number;·console:·number;·source:·number·}
+          10 │ + >();
+      8   11 │   test.beforeEach(async ({ page }) => {
+      9   12 │     const counts = { page: 0, console: 0, source: 0 };
+     10   13 │     faults.set(page, counts);
+     11      │ - ··page.on("pageerror",·()·=>·{·counts.page++;·});
+     12      │ - ··page.on("console",·message·=>·{·if·(message.type()·===·"error")·counts.console++;·});
+     13      │ - ··page.on("request",·request·=>·{
+          14 │ + ··page.on("pageerror",·()·=>·{
+          15 │ + ····counts.page++;
+          16 │ + ··});
+          17 │ + ··page.on("console",·(message)·=>·{
+          18 │ + ····if·(message.type()·===·"error")·counts.console++;
+          19 │ + ··});
+          20 │ + ··page.on("request",·(request)·=>·{
+     14   21 │       const path = new URL(request.url()).pathname;
+     15      │ - ····if·(/\/packages\/(react|heroui)\/src\//.test(path)·||·/\/src\/(workbench|controls)\//.test(path)·||·/\/(?:storybook|@storybook)\//.test(path))·counts.source++;
+          22 │ + ····if·(
+          23 │ + ······/\/packages\/(react|heroui)\/src\//.test(path)·||
+          24 │ + ······/\/src\/(workbench|controls)\//.test(path)·||
+          25 │ + ······/\/(?:storybook|@storybook)\//.test(path)
+          26 │ + ····)
+          27 │ + ······counts.source++;
+     16   28 │     });
+     17   29 │     await page.addInitScript(() => {
+     18      │ - ····window.addEventListener("wp12-react-error",·()·=>·{·throw·new·Error("WP12·recoverable·React·error");·});
+          30 │ + ····window.addEventListener("wp12-react-error",·()·=>·{
+          31 │ + ······throw·new·Error("WP12·recoverable·React·error");
+          32 │ + ····});
+     19   33 │     });
+     20   34 │   });
+     21      │ - test.afterEach(({·page·})·=>·{·expect(faults.get(page)).toEqual({·page:·0,·console:·0,·source:·0·});·});
+     22      │ - const·root·=·(page:·Page,·id:·"a"·|·"b"·=·"a")·=>·page.locator(`#instance-${id}`);
+     23      │ - const·button·=·(page:·Page,·name:·string·|·RegExp,·id:·"a"·|·"b"·=·"a")·=>·root(page,·id).getByRole("button",·{·name,·exact:·typeof·name·===·"string"·});
+     24      │ - const·rows·=·(page:·Page,·id:·"a"·|·"b"·=·"a")·=>·root(page,·id).getByRole("rowheader");
+          35 │ + test.afterEach(({·page·})·=>·{
+          36 │ + ··expect(faults.get(page)).toEqual({·page:·0,·console:·0,·source:·0·});
+          37 │ + });
+          38 │ + const·root·=·(page:·Page,·id:·"a"·|·"b"·=·"a")·=>
+          39 │ + ··page.locator(`#instance-${id}`);
+          40 │ + const·button·=·(page:·Page,·name:·string·|·RegExp,·id:·"a"·|·"b"·=·"a")·=>
+          41 │ + ··root(page,·id).getByRole("button",·{·name,·exact:·typeof·name·===·"string"·});
+          42 │ + const·rows·=·(page:·Page,·id:·"a"·|·"b"·=·"a")·=>
+          43 │ + ··root(page,·id).getByRole("rowheader");
+     25   44 │   async function state(page: Page, id: "a" | "b" = "a") {
+     26      │ - ··return·page.evaluate(id·=>·{
+     27      │ - ····const·{·owner·}·=·window.wp12[id],·resource·=·owner.remote.resource.getSnapshot();
+     28      │ - ····return·{·accepted:·owner.C.getSnapshot(),·access:·owner.getSnapshot().access,·notice:·owner.getS...
+          45 │ + ··return·page.evaluate((id)·=>·{
+          46 │ + ····const·{·owner·}·=·window.wp12[id],
+          47 │ + ······resource·=·owner.remote.resource.getSnapshot();
+          48 │ + ····return·{
+          49 │ + ······accepted:·owner.C.getSnapshot(),
+          50 │ + ······access:·owner.getSnapshot().access,
+          51 │ + ······notice:·owner.getSnapshot().notice,
+          52 │ + ······resource:·{
+          53 │ + ········kind:·resource.kind,
+          54 │ + ········busy:·resource.busy,
+          55 │ + ········stale:·resource.stale,
+          56 │ + ········obsolete:·resource.obsolete,
+          57 │ + ········requestKey:·resource.request?.requestKey,
+          58 │ + ········requestPage:·resource.request?.query.pagination,
+          59 │ + ········shownPage:·resource.snapshot?.query.pagination,
+          60 │ + ········shownIds:·resource.snapshot?.records.map((record)·=>·record.id),
+          61 │ + ········page:·resource.snapshot?.page,
+          62 │ + ········emptyKind:·resource.snapshot?.emptyKind,
+          63 │ + ······},
+          64 │ + ····};
+     29   65 │     }, id);
+     30   66 │   }
+    ········ │ 
+     32   68 │     await page.goto(grouped ? "/?view=grouped" : "/");
+     33   69 │     await expect(rows(page, "b").first()).toHaveText("Transfer note 01");
+     34      │ - ··await·root(page).locator("summary").getByText("Application·A·controls",·{·exact:·true·}).click();
+     35      │ - ··await·root(page,·"b").locator("summary").getByText("Application·B·controls",·{·exact:·true·}).click();
+          70 │ + ··await·root(page)
+          71 │ + ····.locator("summary")
+          72 │ + ····.getByText("Application·A·controls",·{·exact:·true·})
+          73 │ + ····.click();
+          74 │ + ··await·root(page,·"b")
+          75 │ + ····.locator("summary")
+          76 │ + ····.getByText("Application·B·controls",·{·exact:·true·})
+          77 │ + ····.click();
+     36   78 │     await expect(button(page, "Deliver known page")).toHaveCount(1);
+     37   79 │     if (ready) await deliver(page);
+     38   80 │   }
+     39   81 │   async function deliver(page: Page, unknown = false) {
+     40      │ - ··const·target·=·button(page,·unknown·?·"Deliver·unknown·page"·:·"Deliver·known·page");
+          82 │ + ··const·target·=·button(
+          83 │ + ····page,
+          84 │ + ····unknown·?·"Deliver·unknown·page"·:·"Deliver·known·page",
+          85 │ + ··);
+     41   86 │     await expect(target).toBeEnabled();
+     42   87 │     await target.click();
+    ········ │ 
+     49   94 │   async function sort(page: Page, column: string, id: "a" | "b" = "a") {
+     50   95 │     await button(page, new RegExp(`^Sort ${column},`), id).click();
+     51      │ - ··await·page.getByRole("button",·{·name:·`Ascending:·${column}`,·exact:·true·}).click();
+          96 │ + ··await·page
+          97 │ + ····.getByRole("button",·{·name:·`Ascending:·${column}`,·exact:·true·})
+          98 │ + ····.click();
+     52   99 │     await page.keyboard.press("Escape");
+     53  100 │   }
+    ········ │ 
+     55  102 │     await button(page, "Add filter rule: Filters").click();
+     56  103 │     await page.getByRole("option", { name: "Amount", exact: true }).click();
+     57      │ - ··await·page.getByRole("option",·{·name:·"is·greater·than",·exact:·true·}).click();
+     58      │ - ··await·page.getByRole("textbox",·{·name:·"Recipe·numeric·value",·exact:·true·}).fill(value);
+         104 │ + ··await·page
+         105 │ + ····.getByRole("option",·{·name:·"is·greater·than",·exact:·true·})
+         106 │ + ····.click();
+         107 │ + ··await·page
+         108 │ + ····.getByRole("textbox",·{·name:·"Recipe·numeric·value",·exact:·true·})
+         109 │ + ····.fill(value);
+     59  110 │     await page.getByRole("button", { name: "Apply filter", exact: true }).click();
+     60  111 │     await deliver(page);
+     61  112 │   }
+     62  113 │   async function search(page: Page, text: string, id: "a" | "b" = "a") {
+     63      │ - ··const·input·=·root(page,·id).getByRole("searchbox",·{·name:·"Search·descriptions"·});
+         114 │ + ··const·input·=·root(page,·id).getByRole("searchbox",·{
+         115 │ + ····name:·"Search·descriptions",
+         116 │ + ··});
+     64  117 │     await input.fill(text);
+     65  118 │     await input.press("Enter");
+    ········ │ 
+     71  124 │   }
+     72  125 │   async function columns(page: Page, id: "a" | "b") {
+     73      │ - ··return·root(page,·id).locator("thead·th[data-column-id]").evaluateAll(nodes·=>·nodes.map(node·=>·node.getAttribute("data-column-id")));
+         126 │ + ··return·root(page,·id)
+         127 │ + ····.locator("thead·th[data-column-id]")
+         128 │ + ····.evaluateAll((nodes)·=>
+         129 │ + ······nodes.map((node)·=>·node.getAttribute("data-column-id")),
+         130 │ + ····);
+     74  131 │   }
+     75  132 │   async function chooseVisibility(page: Page, column: string, id: "a" | "b") {
+     76  133 │     await button(page, "Columns", id).click();
+     77      │ - ··await·page.getByRole("dialog",·{·name:·"Shown·columns",·exact:·true·}).getByRole("checkbox",·{·name:·column,·exact:·true·}).locator("xpath=ancestor::label[1]").click();
+         134 │ + ··await·page
+         135 │ + ····.getByRole("dialog",·{·name:·"Shown·columns",·exact:·true·})
+         136 │ + ····.getByRole("checkbox",·{·name:·column,·exact:·true·})
+         137 │ + ····.locator("xpath=ancestor::label[1]")
+         138 │ + ····.click();
+     78  139 │     await page.keyboard.press("Escape");
+     79  140 │   }
+     80  141 │   
+     81      │ - test("I1·—·public·criteria,·hidden-field·ownership,·selection·provenance·and·atomic·exits",·async·({·page·})·=>·{
+         142 │ + test("I1·—·public·criteria,·hidden-field·ownership,·selection·provenance·and·atomic·exits",·async·({
+         143 │ + ··page,
+         144 │ + })·=>·{
+  1088 more lines truncated
+  
+
+tests/integration/wp12/events.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      5   5 │   import type { ExampleDetails } from "../../../apps/examples/shared/details.js";
+      6   6 │   import type { ExampleOwner } from "../../../apps/examples/shared/owner.js";
+      7     │ - import·{·receivedAt,·type·Transaction·}·from·"../../../apps/examples/shared/records.js";
+          7 │ + import·{
+          8 │ + ··receivedAt,
+          9 │ + ··type·Transaction,
+         10 │ + }·from·"../../../apps/examples/shared/records.js";
+      8  11 │   import type { TransactionSchema } from "../../../apps/examples/shared/schemas.js";
+      9  12 │   import { reviewSyntheticRow } from "../../../apps/examples/recipes/row-bulk-actions.js";
+    ······· │ 
+     22  25 │       subscribe(listener: () => void) {
+     23  26 │         listeners.add(listener);
+     24     │ - ······return·()·=>·{·listeners.delete(listener);·};
+         27 │ + ······return·()·=>·{
+         28 │ + ········listeners.delete(listener);
+         29 │ + ······};
+     25  30 │       },
+     26  31 │       edit(owner: Owner, id: string, value: string) {
+    ······· │ 
+     61  66 │   /** Bounded read-only subscription diagnostics. No authority, model or frame cache. */
+     62  67 │   export function createEvents(owner: Owner, driver: Driver, drafts: Drafts) {
+     63     │ - ··let·revoking·=·false,·errors·=·0,·overflow·=·0,·submissions·=·0;
+         68 │ + ··let·revoking·=·false,
+         69 │ + ····errors·=·0,
+         70 │ + ····overflow·=·0,
+         71 │ + ····submissions·=·0;
+     64  72 │     const observations: Observation[] = [];
+     65  73 │     const counts = (): BufferCounts => {
+     66     │ - ····const·source·=·owner.getSnapshot(),·state·=·owner.C.getSnapshot();
+     67     │ - ····const·resource·=·owner.remote.resource.getSnapshot(),·options·=·owner.numericOptions.source.getSnapshot();
+     68     │ - ····const·detail·=·driver.getSnapshot(),·binding·=·owner.remote.bindings();
+         74 │ + ····const·source·=·owner.getSnapshot(),
+         75 │ + ······state·=·owner.C.getSnapshot();
+         76 │ + ····const·resource·=·owner.remote.resource.getSnapshot(),
+         77 │ + ······options·=·owner.numericOptions.source.getSnapshot();
+         78 │ + ····const·detail·=·driver.getSnapshot(),
+         79 │ + ······binding·=·owner.remote.bindings();
+     69  80 │       return {
+     70  81 │         records: source.records.length,
+     71  82 │         retained: resource.snapshot?.records.length ?? 0,
+     72  83 │         rowPending: Number(resource.request !== null),
+     73     │ - ······optionLabels:·options.selected.filter(option·=>·option.known).length·+·(options.page?.options.length·??·0),
+         84 │ + ······optionLabels:
+         85 │ + ········options.selected.filter((option)·=>·option.known).length·+
+         86 │ + ········(options.page?.options.length·??·0),
+     74  87 │         optionPending: Number(options.request !== null),
+     75  88 │         detailSource: Number(detail.source !== null),
+    ······· │ 
+     82  95 │         requestBinding: Number(binding.request !== null),
+     83  96 │         snapshotBinding: Number(binding.snapshot !== null),
+     84     │ - ······movePending:·Number(owner.reorder?.admission.getSnapshot().moves.pending·!=·null),
+         97 │ + ······movePending:·Number(
+         98 │ + ········owner.reorder?.admission.getSnapshot().moves.pending·!=·null,
+         99 │ + ······),
+     85 100 │       };
+     86 101 │     };
+     87 102 │     function observe(channel: Channel) {
+     88     │ - ····if·(observations.length·>=·512)·{·overflow++;·return;·}
+     89     │ - ····try·{·observations.push({·channel,·revoking,·counts:·counts()·});·}
+     90     │ - ····catch·{·errors++;·observations.push({·channel,·revoking,·counts:·null·});·}
+        103 │ + ····if·(observations.length·>=·512)·{
+        104 │ + ······overflow++;
+        105 │ + ······return;
+        106 │ + ····}
+        107 │ + ····try·{
+        108 │ + ······observations.push({·channel,·revoking,·counts:·counts()·});
+        109 │ + ····}·catch·{
+        110 │ + ······errors++;
+        111 │ + ······observations.push({·channel,·revoking,·counts:·null·});
+        112 │ + ····}
+     91 113 │     }
+     92 114 │   
+    ······· │ 
+     94 116 │     // They deliberately outlive the app to exercise rejected late callbacks. They are
+     95 117 │     // not exposed by inspect(), app buffers, an accepted/native mirror or a new grant.
+     96     │ - ··let·heldRow:·{·request:·ResourceRequest<QueryFor<TransactionSchema>>;·result:·ResourceSuccess<Transaction>·}·|·null·=·null;
+     97     │ - ··let·heldOption:·{·request:·OptionRequest;·options:·readonly·{·id:·number;·label:·string·}[]·}·|·null·=·null;
+        118 │ + ··let·heldRow:·{
+        119 │ + ····request:·ResourceRequest<QueryFor<TransactionSchema>>;
+        120 │ + ····result:·ResourceSuccess<Transaction>;
+        121 │ + ··}·|·null·=·null;
+        122 │ + ··let·heldOption:·{
+        123 │ + ····request:·OptionRequest;
+        124 │ + ····options:·readonly·{·id:·number;·label:·string·}[];
+        125 │ + ··}·|·null·=·null;
+     98 126 │     let heldDetail: DetailsAuthority | null = null;
+     99     │ - ··let·heldDecision:·{·authority:·DetailsAuthority;·ticket:·object·}·|·null·=·null;
+        127 │ + ··let·heldDecision:·{·authority:·DetailsAuthority;·ticket:·object·}·|·null·=
+        128 │ + ····null;
+    100 129 │     let heldAction: (() => void) | null = null;
+    101 130 │     return {
+    ······· │ 
+    103 132 │       inspect() {
+    104 133 │         const operation = owner.reorder?.operation;
+    105     │ - ······return·{·observations:·[...observations],·errors,·overflow,·counts:·counts(),·phase:·owner.P.getSnapshot().phase,·submissions,·exactPendingOperation:·!!operation·&&·owner.reorder?.admission.getSnapshot().moves.pending?.operation·===·operation·};
+        134 │ + ······return·{
+        135 │ + ········observations:·[...observations],
+        136 │ + ········errors,
+        137 │ + ········overflow,
+        138 │ + ········counts:·counts(),
+        139 │ + ········phase:·owner.P.getSnapshot().phase,
+        140 │ + ········submissions,
+        141 │ + ········exactPendingOperation:
+        142 │ + ··········!!operation·&&
+        143 │ + ··········owner.reorder?.admission.getSnapshot().moves.pending?.operation·===
+        144 │ + ············operation,
+        145 │ + ······};
+    106 146 │       },
+    107 147 │       submitted(_operation: RowMoveOperation) {
+    ······· │ 
+    112 152 │         const stops = [
+    113 153 │           owner.C.subscribe(() => observe("C")),
+    114     │ - ········owner.P.subscribe({·notify()·{·observe("P");·return·undefined;·}·}),
+        154 │ + ········owner.P.subscribe({
+        155 │ + ··········notify()·{
+        156 │ + ············observe("P");
+        157 │ + ············return·undefined;
+        158 │ + ··········},
+        159 │ + ········}),
+    115 160 │           owner.subscribe(() => observe("source")),
+    116 161 │           owner.remote.resource.subscribe(() => observe("resource")),
+    ······· │ 
+    119 164 │         ];
+    120 165 │         observe("source");
+    121     │ - ······return·()·=>·{·for·(const·stop·of·stops)·stop();·};
+        166 │ + ······return·()·=>·{
+        167 │ + ········for·(const·stop·of·stops)·stop();
+        168 │ + ······};
+    122 169 │       },
+    123 170 │       revoke() {
+    124 171 │         revoking = true;
+    125     │ - ······try·{·owner.revoke();·}
+    126     │ - ······finally·{·revoking·=·false;·}
+        172 │ + ······try·{
+        173 │ + ········owner.revoke();
+        174 │ + ······}·finally·{
+        175 │ + ········revoking·=·false;
+        176 │ + ······}
+    127 177 │       },
+    128 178 │       captureRow() {
+    ······· │ 
+    132 182 │         // Capture a CORRECT neutral-page response from app INPUT at issuance. No
+    133 183 │         // second evaluator or output cache. Other query shapes are not this control.
+    134     │ - ······if·(query.search·||·query.tabId·!==·null·||·query.date·!==·null·||·query.builder.rules.length·||·query.sorting.length)·return·false;
+        184 │ + ······if·(
+        185 │ + ········query.search·||
+        186 │ + ········query.tabId·!==·null·||
+        187 │ + ········query.date·!==·null·||
+        188 │ + ········query.builder.rules.length·||
+        189 │ + ········query.sorting.length
+        190 │ + ······)
+        191 │ + ········return·false;
+    135 192 │         const records = owner.getSnapshot().records;
+    136 193 │         const { pageIndex, pageSize } = query.pagination;
+    137     │ - ······heldRow·=·{·request,·result:·{·source:·"fresh",·records:·records.slice(pageIndex·*·pageSize,·(pageIndex·+·1)·*·pageSize),·page:·{·kind:·"known",·total:·records.length·},·emptyKind:·records.length·?·"filtered"·:·"dataset",·receivedAt·}·};
+        194 │ + ······heldRow·=·{
+        195 │ + ········request,
+        196 │ + ········result:·{
+  60 more lines truncated
+  
+
+tests/integration/wp12/evidence/inputs.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     9  9 │   const configFile = ts.readConfigFile(resolve(root, name), ts.sys.readFile);
+    10 10 │   assert.equal(configFile.error, undefined);
+    11    │ - const·config·=·ts.parseJsonConfigFileContent(configFile.config,·ts.sys,·resolve(root,·"tests/integration/wp12"));
+       11 │ + const·config·=·ts.parseJsonConfigFileContent(
+       12 │ + ··configFile.config,
+       13 │ + ··ts.sys,
+       14 │ + ··resolve(root,·"tests/integration/wp12"),
+       15 │ + );
+    12 16 │   assert.equal(config.errors.length, 0);
+    13 17 │   assert.equal(config.options.noEmit, true);
+    ····· │ 
+    16 20 │   assert.equal(config.options.exactOptionalPropertyTypes, true);
+    17 21 │   const program = ts.createProgram(config.fileNames, config.options);
+    18    │ - const·files·=·program.getSourceFiles().map(file·=>·relative(root,·file.fileName)).sort();
+    19    │ - const·inspection·=·[name,·"package.json",·"tsconfig.base.json",·"biome.json",·"pnpm-lock.yaml",·"pnp...
+       22 │ + const·files·=·program
+       23 │ + ··.getSourceFiles()
+       24 │ + ··.map((file)·=>·relative(root,·file.fileName))
+       25 │ + ··.sort();
+       26 │ + const·inspection·=·[
+       27 │ + ··name,
+       28 │ + ··"package.json",
+       29 │ + ··"tsconfig.base.json",
+       30 │ + ··"biome.json",
+       31 │ + ··"pnpm-lock.yaml",
+       32 │ + ··"pnpm-workspace.yaml",
+       33 │ + ··"apps/storybook/package.json",
+       34 │ + ··"packages/react/package.json",
+       35 │ + ··"packages/heroui/package.json",
+       36 │ + ··"packages/heroui/compat/rac-table-clone/profile.json",
+       37 │ + ··"node_modules/typescript/package.json",
+       38 │ + ··"node_modules/typescript/lib/typescript.js",
+       39 │ + ··"node_modules/typescript/lib/tsc.js",
+       40 │ + ··"node_modules/typescript/lib/_tsc.js",
+       41 │ + ··"node_modules/@biomejs/biome/package.json",
+       42 │ + ··"node_modules/@playwright/test/package.json",
+       43 │ + ··"node_modules/@axe-core/playwright/package.json",
+       44 │ + ··"apps/storybook/node_modules/vite/package.json",
+       45 │ + ··"apps/storybook/node_modules/@vitejs/plugin-react/package.json",
+       46 │ + ··"apps/storybook/node_modules/@tailwindcss/vite/package.json",
+       47 │ + ··"apps/storybook/node_modules/@heroui/react/package.json",
+       48 │ + ··"apps/storybook/node_modules/@heroui/react/dist/components/button/button.d.ts",
+       49 │ + ··"apps/storybook/node_modules/@heroui/react/dist/components/table/table.js",
+       50 │ + ··"apps/storybook/vite.examples.config.ts",
+       51 │ + ];
+    20 52 │   const records = {};
+    21    │ - for·(const·path·of·[...new·Set([...files,·...inspection])].sort())·records[path]·=·await·measure(path);
+    22    │ - const·record·=·{·compiler:·ts.version,·boundary:·"strict·positive·SOURCE·only;·configuration/app/vendor/test·module·bodies·NOT·executed",·files,·inspection,·records·};
+       53 │ + for·(const·path·of·[...new·Set([...files,·...inspection])].sort())
+       54 │ + ··records[path]·=·await·measure(path);
+       55 │ + const·record·=·{
+       56 │ + ··compiler:·ts.version,
+       57 │ + ··boundary:
+       58 │ + ····"strict·positive·SOURCE·only;·configuration/app/vendor/test·module·bodies·NOT·executed",
+       59 │ + ··files,
+       60 │ + ··inspection,
+       61 │ + ··records,
+       62 │ + };
+    23 63 │   const target = process.argv[2];
+    24    │ - assert(target?.startsWith("tests/integration/wp12/evidence/.artifacts/")·&&·!target.includes(".."));
+    25    │ - if·(process.argv[3]·===·"verify")·assert.deepEqual(record,·JSON.parse(await·readFile(resolve(root,·target),·"utf8")));
+    26    │ - else·await·writeFile(resolve(root,·target),·`${JSON.stringify(record,·null,·2)}\n`,·{·flag:·"wx"·});
+    27    │ - console.log(`TS${ts.version}:·${files.length}·actual·program·files;·${Object.keys(records).length}·unique·pinned·byte/mode·inputs.`);
+       64 │ + assert(
+       65 │ + ··target?.startsWith("tests/integration/wp12/evidence/.artifacts/")·&&
+       66 │ + ····!target.includes(".."),
+       67 │ + );
+       68 │ + if·(process.argv[3]·===·"verify")
+       69 │ + ··assert.deepEqual(
+       70 │ + ····record,
+       71 │ + ····JSON.parse(await·readFile(resolve(root,·target),·"utf8")),
+       72 │ + ··);
+       73 │ + else
+       74 │ + ··await·writeFile(
+       75 │ + ····resolve(root,·target),
+       76 │ + ····`${JSON.stringify(record,·null,·2)}\n`,
+       77 │ + ····{·flag:·"wx"·},
+       78 │ + ··);
+       79 │ + console.log(
+       80 │ + ··`TS${ts.version}:·${files.length}·actual·program·files;·${Object.keys(records).length}·unique·pinned·byte/mode·inputs.`,
+       81 │ + );
+    28 82 │   
+  
+
+tests/integration/wp12/evidence/light.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    11 11 │   const output = `${own}.artifacts/${label}/`;
+    12 12 │   await mkdir(`${root}/${output}`);
+    13    │ - const·helpers·=·(await·walk(own,·false)).filter(path·=>·path.endsWith(".mjs")·&&·!path.includes("/.artifacts/")·&&·!path.includes("/preimages/"));
+    14    │ - const·supported·=·[...leased.filter(path·=>·/\.(?:tsx?|json|css)$/.test(path)),·...helpers];
+       13 │ + const·helpers·=·(await·walk(own,·false)).filter(
+       14 │ + ··(path)·=>
+       15 │ + ····path.endsWith(".mjs")·&&
+       16 │ + ····!path.includes("/.artifacts/")·&&
+       17 │ + ····!path.includes("/preimages/"),
+       18 │ + );
+       19 │ + const·supported·=·[
+       20 │ + ··...leased.filter((path)·=>·/\.(?:tsx?|json|css)$/.test(path)),
+       21 │ + ··...helpers,
+       22 │ + ];
+    15 23 │   const commands = [
+    16 24 │     ["pins-before", [`${own}inputs.mjs`, `${output}inputs.json`]],
+    17    │ - ··["positive",·["node_modules/typescript/bin/tsc",·"-p",·"tests/integration/wp12/tsconfig.light.json",·"--pretty",·"false"]],
+       25 │ + ··[
+       26 │ + ····"positive",
+       27 │ + ····[
+       28 │ + ······"node_modules/typescript/bin/tsc",
+       29 │ + ······"-p",
+       30 │ + ······"tests/integration/wp12/tsconfig.light.json",
+       31 │ + ······"--pretty",
+       32 │ + ······"false",
+       33 │ + ····],
+       34 │ + ··],
+    18 35 │     ["static", [`${own}static.mjs`]],
+    19 36 │     ["scope", [`${own}scope.mjs`]],
+    20    │ - ··...helpers.map(path·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+    21    │ - ··["biome",·["node_modules/@biomejs/biome/bin/biome",·"check",·"--vcs-enabled=false",·"--assist-enabled=false",·...supported,·"--max-diagnostics=100"]],
+       37 │ + ··...helpers.map((path)·=>·[
+       38 │ + ····`syntax-${path.split("/").at(-1)}`,
+       39 │ + ····["--check",·path],
+       40 │ + ··]),
+       41 │ + ··[
+       42 │ + ····"biome",
+       43 │ + ····[
+       44 │ + ······"node_modules/@biomejs/biome/bin/biome",
+       45 │ + ······"check",
+       46 │ + ······"--vcs-enabled=false",
+       47 │ + ······"--assist-enabled=false",
+       48 │ + ······...supported,
+       49 │ + ······"--max-diagnostics=100",
+       50 │ + ····],
+       51 │ + ··],
+    22 52 │     ["pins-after", [`${own}inputs.mjs`, `${output}inputs.json`, "verify"]],
+    23 53 │   ];
+    ····· │ 
+    25 55 │   for (const [name, args] of commands) {
+    26 56 │     await capacity();
+    27    │ - ··const·result·=·spawnSync(process.execPath,·args,·{·cwd:·root,·encoding:·"utf8",·maxBuffer:·8·*·1024·*·1024·});
+    28    │ - ··await·writeFile(`${root}/${output}${name}.log`,·`${result.stdout·??·""}${result.stderr·??·""}`,·{·flag:·"wx"·});
+    29    │ - ··results.push({·name,·args,·status:·result.status,·signal:·result.signal,·executionError:·result.error?.code·??·null·});
+    30    │ - ··await·writeFile(`${root}/${output}results.json`,·`${JSON.stringify(results,·null,·2)}\n`);
+    31    │ - ··assert.equal(result.status,·0,·`${name}·failed;·preserved·${output}${name}.log`);
+       57 │ + ··const·result·=·spawnSync(process.execPath,·args,·{
+       58 │ + ····cwd:·root,
+       59 │ + ····encoding:·"utf8",
+       60 │ + ····maxBuffer:·8·*·1024·*·1024,
+       61 │ + ··});
+       62 │ + ··await·writeFile(
+       63 │ + ····`${root}/${output}${name}.log`,
+       64 │ + ····`${result.stdout·??·""}${result.stderr·??·""}`,
+       65 │ + ····{·flag:·"wx"·},
+       66 │ + ··);
+       67 │ + ··results.push({
+       68 │ + ····name,
+       69 │ + ····args,
+       70 │ + ····status:·result.status,
+       71 │ + ····signal:·result.signal,
+       72 │ + ····executionError:·result.error?.code·??·null,
+       73 │ + ··});
+       74 │ + ··await·writeFile(
+       75 │ + ····`${root}/${output}results.json`,
+       76 │ + ····`${JSON.stringify(results,·null,·2)}\n`,
+       77 │ + ··);
+       78 │ + ··assert.equal(
+       79 │ + ····result.status,
+       80 │ + ····0,
+       81 │ + ····`${name}·failed;·preserved·${output}${name}.log`,
+       82 │ + ··);
+    32 83 │   }
+    33    │ - console.log(`LIGHT·PASS·${label}:·strict·TS6·SOURCE/noEmit,·scope/static/syntax/full·Biome·formatter·ON·assist·OFF,·stable·actual·pins.·Browser/React/config/framework/test·bodies·NOT·executed.`);
+       84 │ + console.log(
+       85 │ + ··`LIGHT·PASS·${label}:·strict·TS6·SOURCE/noEmit,·scope/static/syntax/full·Biome·formatter·ON·assist·OFF,·stable·actual·pins.·Browser/React/config/framework/test·bodies·NOT·executed.`,
+       86 │ + );
+    34 87 │   
+  
+
+tests/integration/wp12/evidence/scope.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import assert from "node:assert/strict";
+     2   2 │   import { createHash } from "node:crypto";
+     3     │ - import·{·access,·mkdir,·readFile,·readdir,·stat,·statfs,·writeFile·}·from·"node:fs/promises";
+         3 │ + import·{
+         4 │ + ··access,
+         5 │ + ··mkdir,
+         6 │ + ··readFile,
+         7 │ + ··readdir,
+         8 │ + ··stat,
+         9 │ + ··statfs,
+        10 │ + ··writeFile,
+        11 │ + }·from·"node:fs/promises";
+     4  12 │   import { relative, resolve } from "node:path";
+     5  13 │   import { fileURLToPath } from "node:url";
+    ······ │ 
+     7  15 │   export const root = fileURLToPath(new URL("../../../../", import.meta.url));
+     8  16 │   export const own = "tests/integration/wp12/";
+     9     │ - export·const·leased·=·["index.html",·"main.tsx",·"application.tsx",·"events.ts",·"styles.css",·"styles.d.ts",·"vite.config.ts",·"playwright.config.ts",·"browser.spec.ts",·"tsconfig.light.json",·"README.md",·"manual.md"].map(name·=>·own·+·name);
+    10     │ - export·const·hash·=·bytes·=>·createHash("sha256").update(bytes).digest("hex");
+        17 │ + export·const·leased·=·[
+        18 │ + ··"index.html",
+        19 │ + ··"main.tsx",
+        20 │ + ··"application.tsx",
+        21 │ + ··"events.ts",
+        22 │ + ··"styles.css",
+        23 │ + ··"styles.d.ts",
+        24 │ + ··"vite.config.ts",
+        25 │ + ··"playwright.config.ts",
+        26 │ + ··"browser.spec.ts",
+        27 │ + ··"tsconfig.light.json",
+        28 │ + ··"README.md",
+        29 │ + ··"manual.md",
+        30 │ + ].map((name)·=>·own·+·name);
+        31 │ + export·const·hash·=·(bytes)·=>·createHash("sha256").update(bytes).digest("hex");
+    11  32 │   export async function capacity() {
+    12  33 │     const available = await statfs(root);
+    ······ │ 
+    17  38 │   export async function measure(path) {
+    18  39 │     const absolute = resolve(root, path);
+    19     │ - ··return·{·sha256:·hash(await·readFile(absolute)),·mode:·(await·stat(absolute)).mode·&·0o7777·};
+        40 │ + ··return·{
+        41 │ + ····sha256:·hash(await·readFile(absolute)),
+        42 │ + ····mode:·(await·stat(absolute)).mode·&·0o7777,
+        43 │ + ··};
+    20  44 │   }
+    21  45 │   export async function walk(directory, excludeOwn = true) {
+    22  46 │     const result = [];
+    23     │ - ··for·(const·entry·of·await·readdir(resolve(root,·directory),·{·withFileTypes:·true·}))·{
+    24     │ - ····if·(["node_modules",·".git",·".repo",·".npmrc"].includes(entry.name)·||·/^(?:\.env|credentials|secrets)/i.test(entry.name)·||·/\.(?:pem|key|crt)$/.test(entry.name))·continue;
+        47 │ + ··for·(const·entry·of·await·readdir(resolve(root,·directory),·{
+        48 │ + ····withFileTypes:·true,
+        49 │ + ··}))·{
+        50 │ + ····if·(
+        51 │ + ······["node_modules",·".git",·".repo",·".npmrc"].includes(entry.name)·||
+        52 │ + ······/^(?:\.env|credentials|secrets)/i.test(entry.name)·||
+        53 │ + ······/\.(?:pem|key|crt)$/.test(entry.name)
+        54 │ + ····)
+        55 │ + ······continue;
+    25  56 │       const path = relative(root, resolve(root, directory, entry.name));
+    26  57 │       if (excludeOwn && `${path}/` === own) continue;
+    27     │ - ····if·(entry.isDirectory())·result.push(...await·walk(path,·excludeOwn));
+        58 │ + ····if·(entry.isDirectory())·result.push(...(await·walk(path,·excludeOwn)));
+    28  59 │       else if (entry.isFile()) result.push(path);
+    29  60 │     }
+    ······ │ 
+    32  63 │   async function scope() {
+    33  64 │     const availableBytes = await capacity();
+    34     │ - ··const·canonicalBytes·=·await·readFile("/tmp/opencode/wp10-move-reason-integrated-source155.json");
+    35     │ - ··assert.equal(hash(canonicalBytes),·"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837");
+        65 │ + ··const·canonicalBytes·=·await·readFile(
+        66 │ + ····"/tmp/opencode/wp10-move-reason-integrated-source155.json",
+        67 │ + ··);
+        68 │ + ··assert.equal(
+        69 │ + ····hash(canonicalBytes),
+        70 │ + ····"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+        71 │ + ··);
+    36  72 │     const canonical = JSON.parse(canonicalBytes);
+    37  73 │     assert.equal(Object.keys(canonical).length, 155);
+    ······ │ 
+    39  75 │       const actual = await measure(path);
+    40  76 │       assert.equal(actual.sha256, expected.sha256, path);
+    41     │ - ····assert.equal(actual.mode·&·0o111·?·"100755"·:·"100644",·expected.mode,·path);
+        77 │ + ····assert.equal(
+        78 │ + ······actual.mode·&·0o111·?·"100755"·:·"100644",
+        79 │ + ······expected.mode,
+        80 │ + ······path,
+        81 │ + ····);
+    42  82 │     }
+    43  83 │     const inputs = {};
+    ······ │ 
+    45  85 │     const target = new URL("./before.json", import.meta.url);
+    46  86 │     if (process.argv[2] === "before") {
+    47     │ - ····for·(const·path·of·leased)·await·assert.rejects(access(resolve(root,·path)),·{·code:·"ENOENT"·});
+        87 │ + ····for·(const·path·of·leased)
+        88 │ + ······await·assert.rejects(access(resolve(root,·path)),·{·code:·"ENOENT"·});
+    48  89 │       await mkdir(new URL("./preimages/", import.meta.url));
+    49     │ - ····await·writeFile(new·URL("./preimages/source155.json",·import.meta.url),·canonicalBytes,·{·flag:·"wx"·});
+    50     │ - ····await·writeFile(target,·`${JSON.stringify({·suppliedBase:·"a5e347d·+·main·docs/TASKS/REVIEW·WIP;·no·Git·inspection",·availableBytes,·canonical155:·hash(canonicalBytes),·leased,·inputs·},·null,·2)}\n`,·{·flag:·"wx"·});
+    51     │ - ····console.log(`Baseline:155canonical·hashes/modes;·${Object.keys(inputs).length}·old·regular·files;·${availableBytes}·available·bytes.·No·old·map·rebaselined.`);
+        90 │ + ····await·writeFile(
+        91 │ + ······new·URL("./preimages/source155.json",·import.meta.url),
+        92 │ + ······canonicalBytes,
+        93 │ + ······{·flag:·"wx"·},
+        94 │ + ····);
+        95 │ + ····await·writeFile(
+        96 │ + ······target,
+        97 │ + ······`${JSON.stringify({·suppliedBase:·"a5e347d·+·main·docs/TASKS/REVIEW·WIP;·no·Git·inspection",·availableBytes,·canonical155:·hash(canonicalBytes),·leased,·inputs·},·null,·2)}\n`,
+        98 │ + ······{·flag:·"wx"·},
+        99 │ + ····);
+       100 │ + ····console.log(
+       101 │ + ······`Baseline:155canonical·hashes/modes;·${Object.keys(inputs).length}·old·regular·files;·${availableBytes}·available·bytes.·No·old·map·rebaselined.`,
+       102 │ + ····);
+    52 103 │     } else {
+    53 104 │       const before = JSON.parse(await readFile(target, "utf8"));
+    54 105 │       assert.deepEqual(before.leased, leased);
+    55     │ - ····const·bookkeeping·=·path·=>·path.startsWith("docs/")·||·["TASKS.md",·"REVIEW.md"].includes(path);
+    56     │ - ····const·frozen·=·input·=>·Object.fromEntries(Object.entries(input).filter(([path])·=>·!bookkeeping(path)));
+    57     │ - ····assert.deepEqual(frozen(inputs),·frozen(before.inputs),·"Frozen·old·input·drift");
+    58     │ - ····const·drift·=·[...new·Set([...Object.keys(inputs),·...Object.keys(before.inputs)])].filter(bookkeeping).filter(path·=>·JSON.stringify(inputs[path])·!==·JSON.stringify(before.inputs[path]));
+    59     │ - ····console.log(`155canonical·and·${Object.keys(frozen(inputs)).length}·frozen·old·inputs·unchanged;·main-only·drift:·${JSON.stringify(drift)}`);
+    60     │ - ····assert.equal(hash(await·readFile(new·URL("./preimages/source155.json",·import.meta.url))),·hash(canonicalBytes));
+       106 │ + ····const·bookkeeping·=·(path)·=>
+       107 │ + ······path.startsWith("docs/")·||·["TASKS.md",·"REVIEW.md"].includes(path);
+       108 │ + ····const·frozen·=·(input)·=>
+       109 │ + ······Object.fromEntries(
+       110 │ + ········Object.entries(input).filter(([path])·=>·!bookkeeping(path)),
+       111 │ + ······);
+       112 │ + ····assert.deepEqual(
+       113 │ + ······frozen(inputs),
+       114 │ + ······frozen(before.inputs),
+       115 │ + ······"Frozen·old·input·drift",
+       116 │ + ····);
+       117 │ + ····const·drift·=·[
+       118 │ + ······...new·Set([...Object.keys(inputs),·...Object.keys(before.inputs)]),
+       119 │ + ····]
+       120 │ + ······.filter(bookkeeping)
+       121 │ + ······.filter(
+       122 │ + ········(path)·=>
+       123 │ + ··········JSON.stringify(inputs[path])·!==·JSON.stringify(before.inputs[path]),
+       124 │ + ······);
+       125 │ + ····console.log(
+       126 │ + ······`155canonical·and·${Object.keys(frozen(inputs)).length}·frozen·old·inputs·unchanged;·main-only·drift:·${JSON.stringify(drift)}`,
+       127 │ + ····);
+       128 │ + ····assert.equal(
+       129 │ + ······hash(
+       130 │ + ········await·readFile(new·URL("./preimages/source155.json",·import.meta.url)),
+       131 │ + ······),
+       132 │ + ······hash(canonicalBytes),
+       133 │ + ····);
+    61 134 │       const additions = await walk(own, false);
+    62     │ - ····assert(additions.every(path·=>·leased.includes(path)·||·path.startsWith(`${own}evidence/`)),·"Outside·exact·new·lease");
+       135 │ + ····assert(
+       136 │ + ······additions.every(
+       137 │ + ········(path)·=>·leased.includes(path)·||·path.startsWith(`${own}evidence/`),
+       138 │ + ······),
+  11 more lines truncated
+  
+
+tests/integration/wp12/evidence/seal.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5  5 │   await capacity();
+     6  6 │   const target = `${own}evidence/handoff-hashes.json`;
+     7    │ - const·inputs·=·{},·artifacts·=·{};
+        7 │ + const·inputs·=·{},
+        8 │ + ··artifacts·=·{};
+     8  9 │   for (const path of await walk(own, false)) {
+     9 10 │     if (path === target) continue;
+    ····· │ 
+    11 12 │     group[path] = await measure(path);
+    12 13 │   }
+    13    │ - const·before·=·JSON.parse(await·readFile(`${root}/${own}evidence/before.json`,·"utf8"));
+    14    │ - const·record·=·{·status:·"implementation-ready-PROVISIONAL;·runtime/manual/independent·UNRUN;·review27n1·obligation·retained;·drag/G02·blocked",·suppliedBase:·before.suppliedBase,·canonical155:·before.canonical155,·oldInputCount:·Object.keys(before.inputs).length,·newInputAggregate:·hash(JSON.stringify(inputs)),·artifactAggregate:·hash(JSON.stringify(artifacts)),·inputs,·artifacts·};
+    15    │ - if·(process.argv[2]·===·"capture")·await·writeFile(`${root}/${target}`,·`${JSON.stringify(record,·null,·2)}\n`,·{·flag:·"wx"·});
+    16    │ - else·assert.deepEqual(record,·JSON.parse(await·readFile(`${root}/${target}`,·"utf8")));
+    17    │ - console.log(`${Object.keys(inputs).length}·new·inputs·${record.newInputAggregate};·${Object.keys(artifacts).length}·artifacts·${record.artifactAggregate}.·Immutable·original155/old-source·maps·not·replaced.`);
+       14 │ + const·before·=·JSON.parse(
+       15 │ + ··await·readFile(`${root}/${own}evidence/before.json`,·"utf8"),
+       16 │ + );
+       17 │ + const·record·=·{
+       18 │ + ··status:
+       19 │ + ····"implementation-ready-PROVISIONAL;·runtime/manual/independent·UNRUN;·review27n1·obligation·retained;·drag/G02·blocked",
+       20 │ + ··suppliedBase:·before.suppliedBase,
+       21 │ + ··canonical155:·before.canonical155,
+       22 │ + ··oldInputCount:·Object.keys(before.inputs).length,
+       23 │ + ··newInputAggregate:·hash(JSON.stringify(inputs)),
+       24 │ + ··artifactAggregate:·hash(JSON.stringify(artifacts)),
+       25 │ + ··inputs,
+       26 │ + ··artifacts,
+       27 │ + };
+       28 │ + if·(process.argv[2]·===·"capture")
+       29 │ + ··await·writeFile(`${root}/${target}`,·`${JSON.stringify(record,·null,·2)}\n`,·{
+       30 │ + ····flag:·"wx",
+       31 │ + ··});
+       32 │ + else
+       33 │ + ··assert.deepEqual(
+       34 │ + ····record,
+       35 │ + ····JSON.parse(await·readFile(`${root}/${target}`,·"utf8")),
+       36 │ + ··);
+       37 │ + console.log(
+       38 │ + ··`${Object.keys(inputs).length}·new·inputs·${record.newInputAggregate};·${Object.keys(artifacts).length}·artifacts·${record.artifactAggregate}.·Immutable·original155/old-source·maps·not·replaced.`,
+       39 │ + );
+    18 40 │   
+  
+
+tests/integration/wp12/evidence/static.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6   6 │   
+     7   7 │   await capacity();
+     8     │ - const·read·=·path·=>·readFile(resolve(root,·path),·"utf8");
+         8 │ + const·read·=·(path)·=>·readFile(resolve(root,·path),·"utf8");
+     9   9 │   const runtime = await read("tests/integration/wp12/vite.config.ts");
+    10     │ - const·parsed·=·ts.createSourceFile("vite.config.ts",·runtime,·ts.ScriptTarget.Latest,·true);
+        10 │ + const·parsed·=·ts.createSourceFile(
+        11 │ + ··"vite.config.ts",
+        12 │ + ··runtime,
+        13 │ + ··ts.ScriptTarget.Latest,
+        14 │ + ··true,
+        15 │ + );
+    11  16 │   let entries;
+    12  17 │   function visit(node) {
+    13     │ - ··if·(ts.isVariableDeclaration(node)·&&·node.name.getText(parsed)·===·"entries"·&&·node.initializer·&&·ts.isAsExpression(node.initializer))·{
+        18 │ + ··if·(
+        19 │ + ····ts.isVariableDeclaration(node)·&&
+        20 │ + ····node.name.getText(parsed)·===·"entries"·&&
+        21 │ + ····node.initializer·&&
+        22 │ + ····ts.isAsExpression(node.initializer)
+        23 │ + ··)·{
+    14  24 │       assert(ts.isArrayLiteralExpression(node.initializer.expression));
+    15     │ - ····entries·=·node.initializer.expression.elements.map(pair·=>·{·assert(ts.isArrayLiteralExpression(pair));·return·pair.elements.map(value·=>·{·assert(ts.isStringLiteral(value));·return·value.text;·});·});
+        25 │ + ····entries·=·node.initializer.expression.elements.map((pair)·=>·{
+        26 │ + ······assert(ts.isArrayLiteralExpression(pair));
+        27 │ + ······return·pair.elements.map((value)·=>·{
+        28 │ + ········assert(ts.isStringLiteral(value));
+        29 │ + ········return·value.text;
+        30 │ + ······});
+        31 │ + ····});
+    16  32 │     }
+    17  33 │     ts.forEachChild(node, visit);
+    ······ │ 
+    19  35 │   visit(parsed);
+    20  36 │   assert.equal(entries?.length, 7);
+    21     │ - const·react·=·JSON.parse(await·read("packages/react/package.json")),·heroui·=·JSON.parse(await·read("packages/heroui/package.json"));
+        37 │ + const·react·=·JSON.parse(await·read("packages/react/package.json")),
+        38 │ + ··heroui·=·JSON.parse(await·read("packages/heroui/package.json"));
+    22  39 │   for (const [specifier, target] of entries) {
+    23     │ - ··const·styled·=·specifier.startsWith("@tableweave/heroui"),·pkg·=·styled·?·heroui·:·react;
+        40 │ + ··const·styled·=·specifier.startsWith("@tableweave/heroui"),
+        41 │ + ····pkg·=·styled·?·heroui·:·react;
+    24  42 │     const name = styled ? "@tableweave/heroui" : "@tableweave/react";
+    25  43 │     const key = specifier === name ? "." : `.${specifier.slice(name.length)}`;
+    26  44 │     const exported = pkg.exports[key];
+    27  45 │     assert(exported, specifier);
+    28     │ - ··assert.equal(target,·`${styled·?·"heroui"·:·"react"}/${(typeof·exported·===·"string"·?·exported·:·exported.import).slice(2)}`);
+        46 │ + ··assert.equal(
+        47 │ + ····target,
+        48 │ + ····`${styled·?·"heroui"·:·"react"}/${(typeof·exported·===·"string"·?·exported·:·exported.import).slice(2)}`,
+        49 │ + ··);
+    29  50 │   }
+    30  51 │   assert(!/packages\/[^"\n]*\/src\//.test(runtime));
+    31  52 │   assert(runtime.includes("6574") && runtime.includes("strictPort: true"));
+    32  53 │   const browserConfig = await read("tests/integration/wp12/playwright.config.ts");
+    33     │ - for·(const·fragment·of·["reuseExistingServer:·false",·"workers:·1",·"retries:·0",·'name:·"chromium"',·'name:·"firefox"',·'name:·"webkit"'])·assert(browserConfig.includes(fragment),·fragment);
+        54 │ + for·(const·fragment·of·[
+        55 │ + ··"reuseExistingServer:·false",
+        56 │ + ··"workers:·1",
+        57 │ + ··"retries:·0",
+        58 │ + ··'name:·"chromium"',
+        59 │ + ··'name:·"firefox"',
+        60 │ + ··'name:·"webkit"',
+        61 │ + ])
+        62 │ + ··assert(browserConfig.includes(fragment),·fragment);
+    34  63 │   const tests = await read("tests/integration/wp12/browser.spec.ts");
+    35  64 │   assert(!/\b(?:test|it)\.(?:skip|fixme|fail|only)\s*\(/.test(tests));
+    36  65 │   for (let flow = 1; flow <= 6; flow++) assert(tests.includes(`I${flow} —`));
+    37     │ - for·(const·width·of·[320,·390,·768,·1024,·1440])·assert(tests.includes(String(width)));
+    38     │ - assert(tests.includes('event.channel·===·"C"')·&&·tests.includes('event.channel·===·"P"'));
+        66 │ + for·(const·width·of·[320,·390,·768,·1024,·1440])
+        67 │ + ··assert(tests.includes(String(width)));
+        68 │ + assert(
+        69 │ + ··tests.includes('event.channel·===·"C"')·&&
+        70 │ + ····tests.includes('event.channel·===·"P"'),
+        71 │ + );
+    39  72 │   assert(tests.includes("review27n1") && tests.includes("toBeGreaterThan(0)"));
+    40  73 │   
+    ······ │ 
+    44  77 │     if (seen.has(path)) return;
+    45  78 │     seen.add(path);
+    46     │ - ··assert(!path.includes("/src/workbench/")·&&·!path.includes("/src/controls/")·&&·!path.startsWith("packages/"),·path);
+    47     │ - ··const·source·=·ts.createSourceFile(path,·await·read(path),·ts.ScriptTarget.Latest,·true,·path.endsWith("tsx")·?·ts.ScriptKind.TSX·:·ts.ScriptKind.TS);
+        79 │ + ··assert(
+        80 │ + ····!path.includes("/src/workbench/")·&&
+        81 │ + ······!path.includes("/src/controls/")·&&
+        82 │ + ······!path.startsWith("packages/"),
+        83 │ + ····path,
+        84 │ + ··);
+        85 │ + ··const·source·=·ts.createSourceFile(
+        86 │ + ····path,
+        87 │ + ····await·read(path),
+        88 │ + ····ts.ScriptTarget.Latest,
+        89 │ + ····true,
+        90 │ + ····path.endsWith("tsx")·?·ts.ScriptKind.TSX·:·ts.ScriptKind.TS,
+        91 │ + ··);
+    48  92 │     for (const node of source.statements) {
+    49     │ - ····if·(!ts.isImportDeclaration(node)·||·!ts.isStringLiteral(node.moduleSpecifier)·||·node.importClause?.isTypeOnly)·continue;
+        93 │ + ····if·(
+        94 │ + ······!ts.isImportDeclaration(node)·||
+        95 │ + ······!ts.isStringLiteral(node.moduleSpecifier)·||
+        96 │ + ······node.importClause?.isTypeOnly
+        97 │ + ····)
+        98 │ + ······continue;
+    50  99 │       const name = node.moduleSpecifier.text;
+    51     │ - ····assert(!name.includes("storybook")·&&·!name.includes("sortable")·&&·!name.includes("dnd"),·name);
+    52     │ - ····if·(name.startsWith("@tableweave/"))·assert(entries.some(([entry])·=>·entry·===·name),·name);
+       100 │ + ····assert(
+       101 │ + ······!name.includes("storybook")·&&
+       102 │ + ········!name.includes("sortable")·&&
+       103 │ + ········!name.includes("dnd"),
+       104 │ + ······name,
+       105 │ + ····);
+       106 │ + ····if·(name.startsWith("@tableweave/"))
+       107 │ + ······assert(
+       108 │ + ········entries.some(([entry])·=>·entry·===·name),
+       109 │ + ········name,
+       110 │ + ······);
+    53 111 │       if (name.startsWith(".") && !name.endsWith(".css")) {
+    54     │ - ······const·base·=·relative(root,·resolve(root,·dirname(path),·name)).replace(/\.js$/,·"");
+       112 │ + ······const·base·=·relative(root,·resolve(root,·dirname(path),·name)).replace(
+       113 │ + ········/\.js$/,
+       114 │ + ········"",
+       115 │ + ······);
+    55 116 │         let resolved;
+    56 117 │         for (const extension of [".ts", ".tsx"]) {
+    57     │ - ········try·{·await·read(base·+·extension);·resolved·=·base·+·extension;·break;·}·catch·(error)·{·if·(error.code·!==·"ENOENT")·throw·error;·}
+       118 │ + ········try·{
+       119 │ + ··········await·read(base·+·extension);
+       120 │ + ··········resolved·=·base·+·extension;
+       121 │ + ··········break;
+       122 │ + ········}·catch·(error)·{
+       123 │ + ··········if·(error.code·!==·"ENOENT")·throw·error;
+       124 │ + ········}
+    58 125 │         }
+    59 126 │         assert(resolved, name);
+    ······ │ 
+    64 131 │   await graph("tests/integration/wp12/main.tsx");
+    65 132 │   const app = await read("tests/integration/wp12/application.tsx");
+    66     │ - const·application·=·ts.createSourceFile("application.tsx",·app,·ts.ScriptTarget.Latest,·true,·ts.ScriptKind.TSX);
+       133 │ + const·application·=·ts.createSourceFile(
+       134 │ + ··"application.tsx",
+       135 │ + ··app,
+       136 │ + ··ts.ScriptTarget.Latest,
+       137 │ + ··true,
+       138 │ + ··ts.ScriptKind.TSX,
+       139 │ + );
+    67 140 │   function inspectApplication(node) {
+    68     │ - ··assert(!ts.isAsExpression(node)·&&·!ts.isTypeAssertionExpression(node),·"No·fixture·casts");
+    69     │ - ··assert(!(ts.isJsxAttribute(node)·&&·node.name.getText(application)·===·"key"),·"No·live·owner·rekey");
+       141 │ + ··assert(
+       142 │ + ····!ts.isAsExpression(node)·&&·!ts.isTypeAssertionExpression(node),
+       143 │ + ····"No·fixture·casts",
+  19 more lines truncated
+  
+
+tests/integration/wp12/main.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     8  8 │   // Fixed initial diagnostic shape, not query persistence or a live-owner rekey.
+     9  9 │   const grouped = new URLSearchParams(location.search).get("view") === "grouped";
+    10    │ - createRoot(root,·{·onRecoverableError()·{·window.dispatchEvent(new·Event("wp12-react-error"));·}·}).render(<StrictMode><Application·grouped={grouped}·/></StrictMode>);
+       10 │ + createRoot(root,·{
+       11 │ + ··onRecoverableError()·{
+       12 │ + ····window.dispatchEvent(new·Event("wp12-react-error"));
+       13 │ + ··},
+       14 │ + }).render(
+       15 │ + ··<StrictMode>
+       16 │ + ····<Application·grouped={grouped}·/>
+       17 │ + ··</StrictMode>,
+       18 │ + );
+    11 19 │   
+  
+
+tests/integration/wp12/playwright.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3  3 │   
+     4  4 │   const run = process.env.WP12_RUN;
+     5    │ - if·(!run·||·!/^[a-zA-Z0-9-]{1,64}$/.test(run))·throw·new·Error("Select·a·fresh·WP12_RUN·before·final·runtime");
+        5 │ + if·(!run·||·!/^[a-zA-Z0-9-]{1,64}$/.test(run))
+        6 │ + ··throw·new·Error("Select·a·fresh·WP12_RUN·before·final·runtime");
+     6  7 │   export default defineConfig({
+     7    │ - ··testDir:·".",·testMatch:·"browser.spec.ts",·workers:·1,·retries:·0,·timeout:·90_000,
+        8 │ + ··testDir:·".",
+        9 │ + ··testMatch:·"browser.spec.ts",
+       10 │ + ··workers:·1,
+       11 │ + ··retries:·0,
+       12 │ + ··timeout:·90_000,
+     8 13 │     outputDir: `./evidence/.runtime/${run}/browser-results`,
+     9    │ - ··reporter:·[["line"],·["html",·{·outputFolder:·`./evidence/.runtime/${run}/report`,·open:·"never"·}]],
+    10    │ - ··use:·{·baseURL:·"http://127.0.0.1:6574",·trace:·"retain-on-failure",·viewport:·{·width:·1440,·height:·1000·}·},
+       14 │ + ··reporter:·[
+       15 │ + ····["line"],
+       16 │ + ····[
+       17 │ + ······"html",
+       18 │ + ······{·outputFolder:·`./evidence/.runtime/${run}/report`,·open:·"never"·},
+       19 │ + ····],
+       20 │ + ··],
+       21 │ + ··use:·{
+       22 │ + ····baseURL:·"http://127.0.0.1:6574",
+       23 │ + ····trace:·"retain-on-failure",
+       24 │ + ····viewport:·{·width:·1440,·height:·1000·},
+       25 │ + ··},
+    11 26 │     projects: [
+    12 27 │       { name: "chromium", use: { browserName: "chromium" } },
+    ····· │ 
+    16 31 │     webServer: {
+    17 32 │       cwd: fileURLToPath(new URL("../../../", import.meta.url)),
+    18    │ - ····command:·"node·apps/storybook/node_modules/vite/bin/vite.js·--config·tests/integration/wp12/vite.config.ts·--host·127.0.0.1·--port·6574·--strictPort",
+    19    │ - ····url:·"http://127.0.0.1:6574",·reuseExistingServer:·false,
+       33 │ + ····command:
+       34 │ + ······"node·apps/storybook/node_modules/vite/bin/vite.js·--config·tests/integration/wp12/vite.config.ts·--host·127.0.0.1·--port·6574·--strictPort",
+       35 │ + ····url:·"http://127.0.0.1:6574",
+       36 │ + ····reuseExistingServer:·false,
+    20 37 │       env: { WP12_RUN: run, DO_NOT_TRACK: "1" },
+    21 38 │     },
+  
+
+tests/integration/wp12/styles.css format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7  7 │   @source "../../../apps/examples/recipes";
+     8  8 │   
+     9    │ - .wp12-page·{·min-width:·0;·padding:·1rem;·color:·var(--foreground);·background:·var(--background);·font-size:·0.875rem;·}
+    10    │ - .wp12-heading,·.wp12-instance·{·width:·100%;·max-width:·88rem;·margin-inline:·auto;·}
+    11    │ - .wp12-heading·{·margin-block-end:·2rem;·}
+    12    │ - .wp12-instance·{·min-width:·0;·margin-block-end:·3rem;·}
+    13    │ - .wp12-page·h1,·.wp12-page·h2·{·font-weight:·650;·margin-block-end:·0.75rem;·}
+    14    │ - .wp12-page·h1·{·font-size:·1.25rem;·}
+    15    │ - .wp12-page·h2·{·font-size:·1.05rem;·}
+    16    │ - .wp12-page·header·p·{·color:·var(--muted);·margin-block-end:·0.75rem;·}
+    17    │ - .wp12-control-buttons·{·display:·flex;·flex-wrap:·wrap;·gap:·0.5rem;·margin-block:·0.75rem;·}
+    18    │ - .wp12-controls,·.wp12-diagnostics·{·margin-block:·1rem;·padding:·0.75rem;·border:·1px·solid·var(--border);·border-radius:·0.5rem;·}
+    19    │ - .wp12-controls·summary,·.wp12-diagnostics·summary·{·cursor:·pointer;·}
+    20    │ - .wp12-note·{·width:·10rem;·padding:·0.4rem;·border:·1px·solid·var(--border);·border-radius:·0.25rem;·background:·var(--surface);·color:·var(--foreground);·}
+    21    │ - .wp12-return·{·margin-block:·0.5rem;·text-decoration:·underline;·}
+    22    │ - .wp12-diagnostics·output·{·overflow-wrap:·anywhere;·font-size:·0.75rem;·}
+    23    │ - .wp12-diagnostics·dd·{·margin-block-end:·0.5rem;·}
+    24    │ - .wp12-metadata·{·font-size:·0.75rem;·color:·var(--muted);·}
+    25    │ - @media·(min-width:·768px)·{·.wp12-page·{·padding:·2rem;·}·}
+        9 │ + .wp12-page·{
+       10 │ + ··min-width:·0;
+       11 │ + ··padding:·1rem;
+       12 │ + ··color:·var(--foreground);
+       13 │ + ··background:·var(--background);
+       14 │ + ··font-size:·0.875rem;
+       15 │ + }
+       16 │ + .wp12-heading,
+       17 │ + .wp12-instance·{
+       18 │ + ··width:·100%;
+       19 │ + ··max-width:·88rem;
+       20 │ + ··margin-inline:·auto;
+       21 │ + }
+       22 │ + .wp12-heading·{
+       23 │ + ··margin-block-end:·2rem;
+       24 │ + }
+       25 │ + .wp12-instance·{
+       26 │ + ··min-width:·0;
+       27 │ + ··margin-block-end:·3rem;
+       28 │ + }
+       29 │ + .wp12-page·h1,
+       30 │ + .wp12-page·h2·{
+       31 │ + ··font-weight:·650;
+       32 │ + ··margin-block-end:·0.75rem;
+       33 │ + }
+       34 │ + .wp12-page·h1·{
+       35 │ + ··font-size:·1.25rem;
+       36 │ + }
+       37 │ + .wp12-page·h2·{
+       38 │ + ··font-size:·1.05rem;
+       39 │ + }
+       40 │ + .wp12-page·header·p·{
+       41 │ + ··color:·var(--muted);
+       42 │ + ··margin-block-end:·0.75rem;
+       43 │ + }
+       44 │ + .wp12-control-buttons·{
+       45 │ + ··display:·flex;
+       46 │ + ··flex-wrap:·wrap;
+       47 │ + ··gap:·0.5rem;
+       48 │ + ··margin-block:·0.75rem;
+       49 │ + }
+       50 │ + .wp12-controls,
+       51 │ + .wp12-diagnostics·{
+       52 │ + ··margin-block:·1rem;
+       53 │ + ··padding:·0.75rem;
+       54 │ + ··border:·1px·solid·var(--border);
+       55 │ + ··border-radius:·0.5rem;
+       56 │ + }
+       57 │ + .wp12-controls·summary,
+       58 │ + .wp12-diagnostics·summary·{
+       59 │ + ··cursor:·pointer;
+       60 │ + }
+       61 │ + .wp12-note·{
+       62 │ + ··width:·10rem;
+       63 │ + ··padding:·0.4rem;
+       64 │ + ··border:·1px·solid·var(--border);
+       65 │ + ··border-radius:·0.25rem;
+       66 │ + ··background:·var(--surface);
+       67 │ + ··color:·var(--foreground);
+       68 │ + }
+       69 │ + .wp12-return·{
+       70 │ + ··margin-block:·0.5rem;
+       71 │ + ··text-decoration:·underline;
+       72 │ + }
+       73 │ + .wp12-diagnostics·output·{
+       74 │ + ··overflow-wrap:·anywhere;
+       75 │ + ··font-size:·0.75rem;
+       76 │ + }
+       77 │ + .wp12-diagnostics·dd·{
+       78 │ + ··margin-block-end:·0.5rem;
+       79 │ + }
+       80 │ + .wp12-metadata·{
+       81 │ + ··font-size:·0.75rem;
+       82 │ + ··color:·var(--muted);
+       83 │ + }
+       84 │ + @media·(min-width:·768px)·{
+       85 │ + ··.wp12-page·{
+       86 │ + ····padding:·2rem;
+       87 │ + ··}
+       88 │ + }
+    26 89 │   
+  
+
+tests/integration/wp12/tsconfig.light.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    11 11 │       "paths": {
+    12 12 │         "@tableweave/react": ["../../../packages/react/src/index.ts"],
+    13    │ - ······"@tableweave/react/contracts":·["../../../packages/react/src/contracts/index.ts"],
+    14    │ - ······"@tableweave/react/filters":·["../../../packages/react/src/filters/index.ts"],
+    15    │ - ······"@tableweave/react/reordering-controller":·["../../../packages/react/src/reordering-controller/index.ts"],
+    16    │ - ······"@tableweave/react/reordering":·["../../../packages/react/src/reordering/index.ts"],
+       13 │ + ······"@tableweave/react/contracts":·[
+       14 │ + ········"../../../packages/react/src/contracts/index.ts"
+       15 │ + ······],
+       16 │ + ······"@tableweave/react/filters":·[
+       17 │ + ········"../../../packages/react/src/filters/index.ts"
+       18 │ + ······],
+       19 │ + ······"@tableweave/react/reordering-controller":·[
+       20 │ + ········"../../../packages/react/src/reordering-controller/index.ts"
+       21 │ + ······],
+       22 │ + ······"@tableweave/react/reordering":·[
+       23 │ + ········"../../../packages/react/src/reordering/index.ts"
+       24 │ + ······],
+    17 25 │         "@tableweave/heroui": ["../../../packages/heroui/src/index.ts"],
+    18    │ - ······"@heroui/react/*":·["../../../apps/storybook/node_modules/@heroui/react/dist/components/*/index.d.ts"],
+    19    │ - ······"react-aria/*":·["../../../apps/storybook/node_modules/react-aria/dist/types/exports/*.d.ts"],
+    20    │ - ······"@internationalized/date":·["../../../packages/heroui/node_modules/@internationalized/date"],
+    21    │ - ······"@tanstack/react-table":·["../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"],
+    22    │ - ······"@vitejs/plugin-react":·["../../../apps/storybook/node_modules/@vitejs/plugin-react/dist/index.d.ts"],
+    23    │ - ······"@tailwindcss/vite":·["../../../apps/storybook/node_modules/@tailwindcss/vite/dist/index.d.mts"]
+       26 │ + ······"@heroui/react/*":·[
+       27 │ + ········"../../../apps/storybook/node_modules/@heroui/react/dist/components/*/index.d.ts"
+       28 │ + ······],
+       29 │ + ······"react-aria/*":·[
+       30 │ + ········"../../../apps/storybook/node_modules/react-aria/dist/types/exports/*.d.ts"
+       31 │ + ······],
+       32 │ + ······"@internationalized/date":·[
+       33 │ + ········"../../../packages/heroui/node_modules/@internationalized/date"
+       34 │ + ······],
+       35 │ + ······"@tanstack/react-table":·[
+       36 │ + ········"../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+       37 │ + ······],
+       38 │ + ······"@vitejs/plugin-react":·[
+       39 │ + ········"../../../apps/storybook/node_modules/@vitejs/plugin-react/dist/index.d.ts"
+       40 │ + ······],
+       41 │ + ······"@tailwindcss/vite":·[
+       42 │ + ········"../../../apps/storybook/node_modules/@tailwindcss/vite/dist/index.d.mts"
+       43 │ + ······]
+    24 44 │       }
+    25 45 │     },
+  
+
+tests/integration/wp12/vite.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     5   5 │   
+     6   6 │   // Declaring-app tooling only. This does not import a Storybook host/config/runtime.
+     7     │ - const·vendor·=·createRequire(new·URL("../../../apps/storybook/package.json",·import.meta.url));
+     8     │ - const·react:·typeof·import("@vitejs/plugin-react")·=·await·import(pathToFileURL(vendor.resolve("@vitejs/plugin-react")).href);
+     9     │ - const·tailwind:·typeof·import("@tailwindcss/vite")·=·await·import(pathToFileURL(vendor.resolve("@tailwindcss/vite")).href);
+         7 │ + const·vendor·=·createRequire(
+         8 │ + ··new·URL("../../../apps/storybook/package.json",·import.meta.url),
+         9 │ + );
+        10 │ + const·react:·typeof·import("@vitejs/plugin-react")·=·await·import(
+        11 │ + ··pathToFileURL(vendor.resolve("@vitejs/plugin-react")).href
+        12 │ + );
+        13 │ + const·tailwind:·typeof·import("@tailwindcss/vite")·=·await·import(
+        14 │ + ··pathToFileURL(vendor.resolve("@tailwindcss/vite")).href
+        15 │ + );
+    10  16 │   const path = (value: string) => fileURLToPath(new URL(value, import.meta.url));
+    11  17 │   const run = process.env.WP12_RUN;
+    12     │ - if·(!run·||·!/^[a-zA-Z0-9-]{1,64}$/.test(run))·throw·new·Error("Select·a·fresh·WP12_RUN·before·final·runtime");
+        18 │ + if·(!run·||·!/^[a-zA-Z0-9-]{1,64}$/.test(run))
+        19 │ + ··throw·new·Error("Select·a·fresh·WP12_RUN·before·final·runtime");
+    13  20 │   // Finite PUBLIC EMITTED entries, never source/runtime or archive aliases.
+    14  21 │   const entries = [
+    ······ │ 
+    16  23 │     ["@tableweave/react/contracts", "react/dist/contracts/index.js"],
+    17  24 │     ["@tableweave/react/filters", "react/dist/filters/index.js"],
+    18     │ - ··["@tableweave/react/reordering-controller",·"react/dist/reordering-controller/index.js"],
+        25 │ + ··[
+        26 │ + ····"@tableweave/react/reordering-controller",
+        27 │ + ····"react/dist/reordering-controller/index.js",
+        28 │ + ··],
+    19  29 │     ["@tableweave/react/reordering", "react/dist/reordering/index.js"],
+    20  30 │     ["@tableweave/heroui", "heroui/dist/index.js"],
+    ······ │ 
+    24  34 │     root: path("./"),
+    25  35 │     plugins: [react.default(), tailwind.default()],
+    26     │ - ··resolve:·{·alias:·[
+    27     │ - ····...entries.map(([name,·target])·=>·({·find:·new·RegExp(`^${name.replaceAll(".",·"\\.")}$`),·replacement:·path(`../../../packages/${target}`)·})),
+    28     │ - ····{·find:·"react",·replacement:·dirname(vendor.resolve("react/package.json"))·},
+    29     │ - ····{·find:·"react-dom",·replacement:·dirname(vendor.resolve("react-dom/package.json"))·},
+    30     │ - ····{·find:·/^@heroui\/react\/button$/,·replacement:·vendor.resolve("@heroui/react/button")·},
+    31     │ - ····{·find:·/^react-aria\/I18nProvider$/,·replacement:·vendor.resolve("react-aria/I18nProvider")·},
+    32     │ - ····{·find:·/^@heroui\/styles\/css$/,·replacement:·vendor.resolve("@heroui/styles/css")·},
+    33     │ - ····{·find:·/^tailwindcss$/,·replacement:·vendor.resolve("tailwindcss/index.css")·},
+    34     │ - ··]·},
+        36 │ + ··resolve:·{
+        37 │ + ····alias:·[
+        38 │ + ······...entries.map(([name,·target])·=>·({
+        39 │ + ········find:·new·RegExp(`^${name.replaceAll(".",·"\\.")}$`),
+        40 │ + ········replacement:·path(`../../../packages/${target}`),
+        41 │ + ······})),
+        42 │ + ······{
+        43 │ + ········find:·"react",
+        44 │ + ········replacement:·dirname(vendor.resolve("react/package.json")),
+        45 │ + ······},
+        46 │ + ······{
+        47 │ + ········find:·"react-dom",
+        48 │ + ········replacement:·dirname(vendor.resolve("react-dom/package.json")),
+        49 │ + ······},
+        50 │ + ······{
+        51 │ + ········find:·/^@heroui\/react\/button$/,
+        52 │ + ········replacement:·vendor.resolve("@heroui/react/button"),
+        53 │ + ······},
+        54 │ + ······{
+        55 │ + ········find:·/^react-aria\/I18nProvider$/,
+        56 │ + ········replacement:·vendor.resolve("react-aria/I18nProvider"),
+        57 │ + ······},
+        58 │ + ······{
+        59 │ + ········find:·/^@heroui\/styles\/css$/,
+        60 │ + ········replacement:·vendor.resolve("@heroui/styles/css"),
+        61 │ + ······},
+        62 │ + ······{
+        63 │ + ········find:·/^tailwindcss$/,
+        64 │ + ········replacement:·vendor.resolve("tailwindcss/index.css"),
+        65 │ + ······},
+        66 │ + ····],
+        67 │ + ··},
+    35  68 │     cacheDir: path(`./evidence/.runtime/${run}/vite-cache/`),
+    36     │ - ··server:·{·host:·"127.0.0.1",·port:·6574,·strictPort:·true,·fs:·{
+    37     │ - ····strict:·true,
+    38     │ - ····allow:·[path("./"),·path("../../../apps/examples/shared/"),·path("../../../apps/examples/recipes/"),·path("../../../packages/react/dist/"),·path("../../../packages/heroui/dist/"),·path("../../../node_modules/"),·path("../../../apps/storybook/node_modules/")],
+    39     │ - ····deny:·[".env",·".env.*",·"**/.npmrc",·"**/.git/**",·"**/.repo/**",·"**/*.{crt,pem,key}",·"**/evidence/preimages/**",·"**/evidence/.artifacts/**",·"**/evidence/*.json",·"**/evidence/*.mjs",·"**/evidence/.runtime/**/browser-results/**",·"**/evidence/.runtime/**/report/**",·"**/evidence/.runtime/**/vite-dist/**",·"**/*.md",·"**/browser.spec.ts",·"**/*.config.ts",·"**/tsconfig*.json"],
+    40     │ - ··}·},
+        69 │ + ··server:·{
+        70 │ + ····host:·"127.0.0.1",
+        71 │ + ····port:·6574,
+        72 │ + ····strictPort:·true,
+        73 │ + ····fs:·{
+        74 │ + ······strict:·true,
+        75 │ + ······allow:·[
+        76 │ + ········path("./"),
+        77 │ + ········path("../../../apps/examples/shared/"),
+        78 │ + ········path("../../../apps/examples/recipes/"),
+        79 │ + ········path("../../../packages/react/dist/"),
+        80 │ + ········path("../../../packages/heroui/dist/"),
+        81 │ + ········path("../../../node_modules/"),
+        82 │ + ········path("../../../apps/storybook/node_modules/"),
+        83 │ + ······],
+        84 │ + ······deny:·[
+        85 │ + ········".env",
+        86 │ + ········".env.*",
+        87 │ + ········"**/.npmrc",
+        88 │ + ········"**/.git/**",
+        89 │ + ········"**/.repo/**",
+        90 │ + ········"**/*.{crt,pem,key}",
+        91 │ + ········"**/evidence/preimages/**",
+        92 │ + ········"**/evidence/.artifacts/**",
+        93 │ + ········"**/evidence/*.json",
+        94 │ + ········"**/evidence/*.mjs",
+        95 │ + ········"**/evidence/.runtime/**/browser-results/**",
+        96 │ + ········"**/evidence/.runtime/**/report/**",
+        97 │ + ········"**/evidence/.runtime/**/vite-dist/**",
+        98 │ + ········"**/*.md",
+        99 │ + ········"**/browser.spec.ts",
+       100 │ + ········"**/*.config.ts",
+       101 │ + ········"**/tsconfig*.json",
+       102 │ + ······],
+       103 │ + ····},
+       104 │ + ··},
+    41 105 │     preview: { host: "127.0.0.1", port: 6574, strictPort: true },
+    42     │ - ··build:·{·outDir:·path(`./evidence/.runtime/${run}/vite-dist/`),·emptyOutDir:·false,·manifest:·true,·rollupOptions:·{·input:·path("./index.html")·}·},
+       106 │ + ··build:·{
+       107 │ + ····outDir:·path(`./evidence/.runtime/${run}/vite-dist/`),
+       108 │ + ····emptyOutDir:·false,
+       109 │ + ····manifest:·true,
+       110 │ + ····rollupOptions:·{·input:·path("./index.html")·},
+       111 │ + ··},
+    43 112 │   });
+    44 113 │   
+  
+
+Checked 14 files in 35ms. No fixes applied.
+Found 16 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

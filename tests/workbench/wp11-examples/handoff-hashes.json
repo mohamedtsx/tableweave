@@ -1,0 +1,428 @@
+{
+  "status": "Stage-B-implementation-ready-PROVISIONAL-runtime-unrun-Start-unmounted-drag-blocked",
+  "suppliedBase": "9ce41bd (no worker Git inspection)",
+  "canonical155": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+  "library": {
+    "total": 155,
+    "changed": 0
+  },
+  "oldInputCount": 1775,
+  "newInputAggregate": "5cd65b6c7017181f13dcc698387e0ab6ced005c37936294c2fe2967cd7576e2e",
+  "artifactAggregate": "f926e22e5fa57430419bd0213b91916d010de497d3841dbbb864f85fd4785f29",
+  "inputs": {
+    "apps/example-start/src/recipes/wp11/README.md": {
+      "sha256": "4eaef11cc4bb9ed6edf249ccd0e0254e7baa62b694b156391c953c1d75da9807",
+      "mode": 436
+    },
+    "apps/example-start/src/recipes/wp11/TableRecipe.tsx": {
+      "sha256": "4a414f66b459d16b7e3b580be49d0f00eb5bc4feb6198e6cfc6f25824affdbac",
+      "mode": 436
+    },
+    "apps/example-start/src/recipes/wp11/query-options.ts": {
+      "sha256": "969a4c3af1669d9e594c324f2fbadf509242b2b3e9898f21712ac9efedc436b3",
+      "mode": 436
+    },
+    "apps/example-start/src/recipes/wp11/table-owner.ts": {
+      "sha256": "ea73317a6b183bf62c14bb6774713439872cc6267fb83a8aafc4baece67233e2",
+      "mode": 436
+    },
+    "apps/example-start/tsconfig.wp11-light.json": {
+      "sha256": "f584d97acbc30310abf4f4bb9cf437c1ee8a4bb859f30f67af6501c5067790aa",
+      "mode": 436
+    },
+    "apps/examples/recipes/README.md": {
+      "sha256": "984664d816b4dd3ae5d511226f7364aa33d4741f1aac83fcbfaf8f917c462374",
+      "mode": 436
+    },
+    "apps/examples/recipes/custom-cells.tsx": {
+      "sha256": "68c8362d28373fb54c3d176275ede0e7fb66f4f62ed7ecddfd7283e83e0874b8",
+      "mode": 436
+    },
+    "apps/examples/recipes/custom-filter.tsx": {
+      "sha256": "84016dc2c4b4101b2e2488adcc20c1020cc9f71378c761a425fea8b9e6d5d40d",
+      "mode": 436
+    },
+    "apps/examples/recipes/locale-recovery.tsx": {
+      "sha256": "fec84f70b388e894641d3d4ba57114a6e79352727ea3fe04bc07cdf4a3d9b502",
+      "mode": 436
+    },
+    "apps/examples/recipes/row-bulk-actions.tsx": {
+      "sha256": "16b041192695602e4baabd476ca8828a2ce7eef9bb1c789bd447d1ae50cc67f0",
+      "mode": 436
+    },
+    "apps/examples/vite/README.md": {
+      "sha256": "7a6afdb61aaadcedf26866a9aa406dc8c9a2d2e84e375fa0013ff2a796fb9d80",
+      "mode": 436
+    },
+    "apps/examples/vite/headless.html": {
+      "sha256": "767fdb95311a386c727d11e9b15ac8db8e2b9c7c9987ab61e7f55ddf4b9def92",
+      "mode": 436
+    },
+    "apps/examples/vite/headless.tsx": {
+      "sha256": "ca79e6e6bf5748341ba164f6d368eb973f2d95b8e0ca5e1af30b1b7f9fff709b",
+      "mode": 436
+    },
+    "apps/examples/vite/index.html": {
+      "sha256": "654992f9279b8bdd752fe2ae920802fa4ea7d1ae812b82b8442b52288fc9a34e",
+      "mode": 436
+    },
+    "apps/examples/vite/main.tsx": {
+      "sha256": "556d0c6ac9b868e86195c60a6e08a5125c26df7849d72054b3adb695a69e129b",
+      "mode": 436
+    },
+    "apps/examples/vite/styles.css": {
+      "sha256": "26865a744c79f9464a61fe79b10d194b5f097ad115f24ec86560359e968123e0",
+      "mode": 436
+    },
+    "apps/storybook/tsconfig.examples-light.json": {
+      "sha256": "e6a03ee11cf2775389691f5f22def05d47ed3ee6968c9096cd1444eb462fff8a",
+      "mode": 436
+    },
+    "apps/storybook/vite.examples.config.ts": {
+      "sha256": "a23ee1c5c39757ff3866ea36f560bb839e9ba12be117891878af252027432616",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/README.md": {
+      "sha256": "523b14c14ee9f55c85b101bb9724bb4395d53cd8a438bdc0432e38cacf24c1d0",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/before.json": {
+      "sha256": "fb6ff75ea7af93512e77e6205865642407d2e2175ecdeef36df4c772e551b12e",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/browser.spec.ts": {
+      "sha256": "0920c10bc88e554d1a885a29a09cf7898a6f77a43ad99dce812131ba6c5ecb64",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/consumer/consumer.tsx": {
+      "sha256": "97f5b5a42e93c97a53e0953ce3e1c41bb7c737b46da161387533e9096763cdcb",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/consumer/driver.mjs": {
+      "sha256": "cbcbd8980a55774ee349a5c159779c345d7d56efddd06d115cd2f82d86eef4f2",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/emitted-graph.mjs": {
+      "sha256": "8c0f588bd5ac5dc723d862a3766bafb639c7799c2a04ba1a23f9fd9cc76f6ed2",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/inputs.mjs": {
+      "sha256": "9a16890675e091ec14ad6efd57890a134b98ebbae8f5a663eca25806dd44cf29",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/light.mjs": {
+      "sha256": "ec0fb31e8819b25a863fa67d15b9807c481753392065a87bc41d486ea28b3bfc",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/negative/check.mjs": {
+      "sha256": "d558708de466f919f2c34ad104667206dc22fcfff22c2a814c75092531d0aa02",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/negative/tsconfig.json": {
+      "sha256": "cec1f58b685267ec3e72a745db9ba8e27ff0ff48d25e5c08e9c6a88a3f8cf0e9",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/negative/types.ts": {
+      "sha256": "8ea6fc08449394f6a515719bad736f3a6b83a292590b48dbdba212add0ac00a7",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/playwright.config.ts": {
+      "sha256": "4c7af5a3fbeefece7e6446c49c1e7618240bd470e443fa504a59de84e941d55f",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/preimages/source155.json": {
+      "sha256": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/scope.mjs": {
+      "sha256": "faae1d832f24404231ee4fd887babdc7b1457e8715244eba778e8c396cd2b6e0",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/seal.mjs": {
+      "sha256": "b4c0e21572773bf753c3be59baf0b7bfb2c419ce529fe8e055050ebdea857e63",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/source.delta.patch": {
+      "sha256": "0246915ca15ac10697eca4450389e16c62a443bcb3f4d397496f87b2a44d9b1e",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/ssr.test.tsx": {
+      "sha256": "03329315a81ca242de52299bcc66246be68b2e7c11f2a4d9dc33f1b1cf9e7794",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/static.mjs": {
+      "sha256": "ac1a41494f4e8c942f9ae9184a45cc97f52bf5c2f948e2da2c26f45cbb0d9638",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/vitest.config.mjs": {
+      "sha256": "ede554acc14d6f1d0d99c5f48974999e694b9914c43505f333821da78ffd14dc",
+      "mode": 436
+    }
+  },
+  "artifacts": {
+    "tests/workbench/wp11-examples/.artifacts/light-001/biome.log": {
+      "sha256": "3e3adf2132de39537dc32368e40d9dc0b08263b4075af9e734de6c5cd9727f83",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/inputs-before.log": {
+      "sha256": "b122c7eae4b7e8d76f738714bd4f7884c1baad423685d67972effade100c601c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/inputs.json": {
+      "sha256": "33167eac3a59549f6745bab3758eaa01a57032b5aa6eaaad6511c92897bfd1ee",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/results.json": {
+      "sha256": "08af3a0abf5f384c2742e85e22875c58fd8f646304acbe64dee001c89fa4cd61",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/scope.log": {
+      "sha256": "6c7cdac4cb6b5a79f52aee1e8dad53be614c8218d9e3fc29af50f32735a60f4d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/start-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/static.log": {
+      "sha256": "311094c8b6004ec2d8ab376abf5f6ddffb5a374514ebe44daae8478a29b73299",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-emitted-graph.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-001/vite-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/inputs-before.log": {
+      "sha256": "5ba0e42d9fed14a80d1c9724be8fba92481b2d1c08a527ab7086f5fda34b234c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/inputs.json": {
+      "sha256": "ce8dc427d4616a3f05533458f59e7f6bb73f43796a7d625da27cbd07533566ee",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/results.json": {
+      "sha256": "d7e5ea2181cc1476f97f86c4ea5e882216ef82fe2ea47cda9b0c88b102cbd307",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/scope.log": {
+      "sha256": "6c7cdac4cb6b5a79f52aee1e8dad53be614c8218d9e3fc29af50f32735a60f4d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/start-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/static.log": {
+      "sha256": "03d0fb09735df971894479abce5448e0adc039cd20bf09b9ebc7d56cb68be914",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-002/vite-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/biome.log": {
+      "sha256": "279318c64a1629c82da55b6b4acea5b4fc9ec48e19281251d30416504aa26ecc",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/inputs-after.log": {
+      "sha256": "5ba0e42d9fed14a80d1c9724be8fba92481b2d1c08a527ab7086f5fda34b234c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/inputs-before.log": {
+      "sha256": "5ba0e42d9fed14a80d1c9724be8fba92481b2d1c08a527ab7086f5fda34b234c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/inputs.json": {
+      "sha256": "4b2f687264e21d196e23c0fa301c9fb6154c017ce2293637db37146195587ff9",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/results.json": {
+      "sha256": "b353fcb6f72d2c870214640143775ce8762519c127df46e3f203b7145269c3ae",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/scope.log": {
+      "sha256": "6c7cdac4cb6b5a79f52aee1e8dad53be614c8218d9e3fc29af50f32735a60f4d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/start-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/static.log": {
+      "sha256": "311094c8b6004ec2d8ab376abf5f6ddffb5a374514ebe44daae8478a29b73299",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-check.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-emitted-graph.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-003/vite-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/biome.log": {
+      "sha256": "dd0aa0b16413cb60433ffc81638ab011e857b48b656bb2b43ef59a1553d0c4b6",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/inputs-after.log": {
+      "sha256": "5ba0e42d9fed14a80d1c9724be8fba92481b2d1c08a527ab7086f5fda34b234c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/inputs-before.log": {
+      "sha256": "5ba0e42d9fed14a80d1c9724be8fba92481b2d1c08a527ab7086f5fda34b234c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/inputs.json": {
+      "sha256": "5752ad8c766564bd946808d36fd3386ad87624f835004d928e69b584968a122b",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/results.json": {
+      "sha256": "cdc8d175356666e8ac5861e8a1707245a105a487883b9b1c546afc87e2a136e5",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/scope.log": {
+      "sha256": "6c7cdac4cb6b5a79f52aee1e8dad53be614c8218d9e3fc29af50f32735a60f4d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/start-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/static.log": {
+      "sha256": "311094c8b6004ec2d8ab376abf5f6ddffb5a374514ebe44daae8478a29b73299",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-check.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-emitted-graph.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/light-004/vite-positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-001/start-host-timeout.md": {
+      "sha256": "5db2aa724705f70c2ce01b273e7222318a4440dea1ed97ff7760d4bb74b752c2",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-001/vite.json": {
+      "sha256": "3ad2a4cb72b163a9eea6ebbcd82c81ae37e52c13211c48351a9933be6f85d2a8",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-001/vite.log": {
+      "sha256": "b8278316834679afa046053dde31be86c0e935da7d58c0f6ad371e1d3bf49ae9",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-002/start.json": {
+      "sha256": "18cfd50f617732c1d78bab326a71ee3301fc9750b774efec375b8c903ec3133b",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-002/start.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-002/vite.json": {
+      "sha256": "9e316addeb72a0655b434ea0009ac889d0bf20506a39064222d1110282dfb295",
+      "mode": 436
+    },
+    "tests/workbench/wp11-examples/.artifacts/positive-002/vite.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    }
+  }
+}

@@ -33,9 +33,15 @@ const hook = registerHooks({
 });
 const { createQuery, defineQuerySchema, parseQuery, getFilterIdentity } =
   await import("@tableweave/react/contracts");
-const { createFilterEvaluator, resolveDateValue } = await import(
-  "@tableweave/react/filters"
-);
+const {
+  createFilterEvaluator,
+  createOptionSource,
+  getBuilderFields,
+  getFieldOperators,
+  projectOptionSourceView,
+  resolveDateValue,
+  validateRuleDraft,
+} = await import("@tableweave/react/filters");
 const schema = defineQuerySchema({
   id: "packed",
   version: 1,
@@ -106,6 +112,69 @@ assert.throws(
     ),
   { name: "ContractError" },
 );
+assert.deepEqual(
+  getBuilderFields(schema).map((field) => field.id),
+  ["amount"],
+);
+assert(
+  getFieldOperators(schema, "amount").some(({ id }) => id === "number.eq"),
+);
+const zeroDraft = validateRuleDraft(
+  schema,
+  query,
+  {
+    id: "zero-draft",
+    field: "amount",
+    operator: "number.eq",
+    value: 0,
+  },
+  { now: 0 },
+);
+assert.equal(zeroDraft.status, "valid");
+assert.equal(zeroDraft.rule.value, 0);
+assert.equal(query.builder.rules.length, 1);
+const optionContext = {
+  definitionKey: "synthetic-option-definition",
+  scopeKey: "synthetic-option-scope",
+  fieldId: "owner",
+  access: true,
+};
+const options = createOptionSource(optionContext);
+options.setSelectedIds(optionContext, [0, "0"]);
+const oldOptions = options.begin({ ...optionContext, term: "a", pageKey: "1" });
+const newOptions = options.begin({ ...optionContext, term: "b", pageKey: "1" });
+assert.equal(
+  options.succeed(newOptions, {
+    options: [
+      { id: 0, label: "Zero" },
+      { id: "0", label: "String zero" },
+    ],
+    hasMore: false,
+  }),
+  true,
+);
+assert.equal(
+  options.succeed(oldOptions, { options: [], hasMore: false }),
+  false,
+);
+assert.deepEqual(
+  options.getSnapshot().selected.map(({ id, label }) => [id, label]),
+  [
+    [0, "Zero"],
+    ["0", "String zero"],
+  ],
+);
+const hiddenOptions = projectOptionSourceView(
+  options.getSnapshot(),
+  {
+    ...optionContext,
+    scopeKey: "another-synthetic-scope",
+  },
+  [0],
+);
+assert.equal(hiddenOptions.page, null);
+assert.deepEqual(hiddenOptions.selected, [{ id: 0, label: "0", known: false }]);
+options.dispose();
 hook.deregister();
 const { createTableController, useTableweaveQuery } = await import(
   "@tableweave/react"
@@ -175,8 +244,40 @@ await assert.rejects(import("@tableweave/react/src/contracts/index.js"), {
 });
 if (process.argv.includes("--styled")) {
   const styled = await import("@tableweave/heroui");
-  assert.deepEqual(Object.keys(styled), ["NativeCollection"]);
-  assert.equal(typeof styled.NativeCollection, "function");
+  assert.deepEqual(
+    Object.keys(styled).sort(),
+    [
+      "ColumnChooser",
+      "defaultColumnChooserMessages",
+      "defaultCollectionMessages",
+      "defaultSortingMessages",
+      "FilterBuilder",
+      "FilterDate",
+      "FilterSearch",
+      "FilterTabs",
+      "formatPaginationNumber",
+      "NativeCollection",
+      "Pagination",
+      "paginationMessages",
+      "SelectionToolbar",
+      "Sorting",
+      "usePaginationCorrection",
+    ].sort(),
+  );
+  for (const name of [
+    "ColumnChooser",
+    "FilterBuilder",
+    "FilterDate",
+    "FilterSearch",
+    "FilterTabs",
+    "formatPaginationNumber",
+    "NativeCollection",
+    "Pagination",
+    "SelectionToolbar",
+    "Sorting",
+    "usePaginationCorrection",
+  ])
+    assert.equal(typeof styled[name], "function");
   assert.deepEqual(
     Object.keys(await import("@tableweave/heroui/sortable")),
     [],

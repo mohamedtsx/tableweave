@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["../../controller/*.test.ts", "../../controller/fixtures.ts"]
+}

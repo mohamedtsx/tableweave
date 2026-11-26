@@ -13,6 +13,7 @@ import { storeReactivityBindings } from "@tanstack/table-core/store-reactivity-b
 import type { ReactNode } from "react";
 import type { QuerySchema } from "../contracts/types.js";
 import type { TableController, TableState } from "../controller/types.js";
+import type { CriteriaNativeCallbacks } from "../presentation/criteria-callbacks.js";
 import { createNativeAdapter } from "./adapter.js";
 import { nativeFail } from "./definition.js";
 import { nativeFeatures } from "./features.js";
@@ -28,6 +29,7 @@ interface NativeFrame<S extends QuerySchema, T extends RowData> {
   readonly table: ReactTable<NativeFeatures, T>;
   readonly input: NativeInput<T>;
   readonly state: TableState<S>;
+  readonly work?: CriteriaNativeCallbacks<S, T>;
 }
 
 function NativeSubscription<Source, Selected = Source>(
@@ -118,25 +120,36 @@ export function createNativeBoundary<S extends QuerySchema, T extends RowData>(
   function prepare(
     input: NativeInput<T>,
     state: TableState<S>,
+    work?: CriteriaNativeCallbacks<S, T>,
   ): NativeFrame<S, T> {
-    const snapshot: NativeInput<T> = Object.freeze(
-      input.mode === "client"
-        ? { mode: "client", records: input.records }
-        : {
-            mode: "server",
-            records: input.records,
-            pageInfo: Object.freeze({ ...input.pageInfo }),
-          },
-    );
-    const options = adapter.getOptions(snapshot, state);
+    work?.check();
+    if (!input || typeof input !== "object") nativeFail("native.rows");
+    const { mode, records } = input;
+    if (!Array.isArray(records)) nativeFail("native.rows");
+    let snapshot: NativeInput<T>;
+    if (mode === "client") snapshot = Object.freeze({ mode, records });
+    else if (mode === "server" || mode === "server-complete") {
+      const page = input.pageInfo;
+      // Capture the page once as well; unrecognized modes never become server.
+      const pageInfo = page && Object.freeze({ ...page });
+      if (mode === "server")
+        snapshot = Object.freeze({ mode, records, pageInfo });
+      else {
+        if (pageInfo?.kind !== "known") return nativeFail("native.page");
+        snapshot = Object.freeze({ mode, records, pageInfo });
+      }
+    } else return nativeFail("native.rows");
+    const options = adapter.getOptions(snapshot, state, work);
     const table = constructTable<NativeFeatures, T>({
       ...options,
       features,
     });
-    adapter.bindTable(table);
+    work?.check();
+    adapter.bindTable(table, work);
     const frame = Object.freeze({
       input: snapshot,
       state,
+      ...(work ? { work } : {}),
       table: Object.assign(table, {
         Subscribe: NativeSubscribe,
         FlexRender,
@@ -144,6 +157,7 @@ export function createNativeBoundary<S extends QuerySchema, T extends RowData>(
       }),
     });
     bootstrap ??= frame;
+    work?.check();
     return frame;
   }
   const latest = (identity: string) => {
@@ -153,10 +167,15 @@ export function createNativeBoundary<S extends QuerySchema, T extends RowData>(
       controller.getSnapshot().queryIdentity !== identity
     )
       nativeFail("native.page");
-    return adapter.getView(frame.table, frame.input, frame.state);
+    return adapter.getView(frame.table, frame.input, frame.state, frame.work);
   };
   function getView(frame: NativeFrame<S, T>): NativeTableView<S, T> {
-    const view = adapter.getView(frame.table, frame.input, frame.state);
+    const view = adapter.getView(
+      frame.table,
+      frame.input,
+      frame.state,
+      frame.work,
+    );
     const identity = frame.state.queryIdentity;
     return Object.freeze({
       ...view,
@@ -172,8 +191,10 @@ export function createNativeBoundary<S extends QuerySchema, T extends RowData>(
     prepare,
     getView,
     commit(frame: NativeFrame<S, T>) {
+      frame.work?.check();
       bootstrap = frame;
       committed.set(frame);
+      frame.work?.check();
     },
   };
 }

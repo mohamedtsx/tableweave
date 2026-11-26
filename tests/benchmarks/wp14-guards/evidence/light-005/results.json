@@ -1,0 +1,144 @@
+[
+  {
+    "name": "pins-before",
+    "args": [
+      "tests/benchmarks/wp14-guards/inputs.mjs",
+      "tests/benchmarks/wp14-guards/evidence/light-005/inputs.json"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "positive",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "tests/benchmarks/wp14-guards/tsconfig.source-light.json",
+      "--pretty",
+      "false"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "scope",
+    "args": [
+      "tests/benchmarks/wp14-guards/scope.mjs",
+      "verify"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-candidate.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/candidate.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-driver.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/driver.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-guards-format.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14-guards/format.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-guards-inputs.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14-guards/inputs.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-guards-light.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14-guards/light.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-guards-scope.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14-guards/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-guards-seal.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14-guards/seal.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-tests-benchmarks-wp14-guards-static.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14-guards/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "static",
+    "args": [
+      "tests/benchmarks/wp14-guards/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "biome",
+    "args": [
+      "node_modules/@biomejs/biome/bin/biome",
+      "check",
+      "--assist-enabled=false",
+      "tests/benchmarks/wp14/candidate.mjs",
+      "tests/benchmarks/wp14/driver.mjs",
+      "tests/benchmarks/wp14-guards/api-probes.ts",
+      "tests/benchmarks/wp14-guards/format.mjs",
+      "tests/benchmarks/wp14-guards/guards.test.ts",
+      "tests/benchmarks/wp14-guards/inputs.mjs",
+      "tests/benchmarks/wp14-guards/light.mjs",
+      "tests/benchmarks/wp14-guards/scope.mjs",
+      "tests/benchmarks/wp14-guards/seal.mjs",
+      "tests/benchmarks/wp14-guards/static.mjs",
+      "tests/benchmarks/wp14-guards/tsconfig.source-light.json",
+      "--max-diagnostics=100"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "pins-after",
+    "args": [
+      "tests/benchmarks/wp14-guards/inputs.mjs",
+      "tests/benchmarks/wp14-guards/evidence/light-005/inputs.json",
+      "verify"
+    ],
+    "status": 0,
+    "signal": null
+  }
+]

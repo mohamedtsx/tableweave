@@ -1,0 +1,13 @@
+{
+  "baseline": "8ba59fd",
+  "status": "provisional-source-discovery-only",
+  "inputs": {
+    "packages/react/package.json": "92b255bbbe1479e93240e7f8b419b5ec884ecc31c188b2110c35c4d3924f1cab",
+    "tests/reordering/admission-entry/README.md": "fc3e4a299d20d4f179ea57dadb8bab20f5cd266d9db3e8d210b18abb99ec86f8",
+    "tests/reordering/admission-entry/check-static.mjs": "32aa398faca2bfe2c3d6f3c810154140e2f53da48c35e99477b3c9a33edf8962",
+    "tests/reordering/admission-entry/negative.ts": "dc77368609d2f5f403b64b2578a666b49e70a524b1a78e7d99284b4aee3b4587",
+    "tests/reordering/admission-entry/positive.ts": "d9dc546c0e6dc6996a4220094d9b64fce99f544b0117e92a6201fcfdf27dcddb",
+    "tests/reordering/admission-entry/tsconfig.json": "0c7eaa483dc6cde7ccf6eaf8ecbe27e98ee4dd1a209000a0d9912d63d9b8c50d"
+  },
+  "aggregate": "61a36055ff92d1fe930d1a885aa0b8608dfca8e57edd5d19a50df8693d75a36b"
+}

@@ -1,0 +1,30 @@
+tests/details-session-identity/types.negative.ts:9:28 lint/correctness/noSelfAssign ━━━━━━━━━━━━━━━━
+
+  × controller is assigned to itself.
+  
+     7 │ if (owner) {
+     8 │   // @ts-expect-error D1-N1: immutable captured controller association
+   > 9 │   owner.controller = owner.controller;
+       │                            ^^^^^^^^^^
+    10 │   // @ts-expect-error D1-N2: immutable inert mount association
+    11 │   owner.mount = {};
+  
+  i This is where is assigned.
+  
+     7 │ if (owner) {
+     8 │   // @ts-expect-error D1-N1: immutable captured controller association
+   > 9 │   owner.controller = owner.controller;
+       │         ^^^^^^^^^^
+    10 │   // @ts-expect-error D1-N2: immutable inert mount association
+    11 │   owner.mount = {};
+  
+  i Self assignments have no effect and can be removed.
+  
+
+Checked 19 files in 39ms. Fixed 10 files.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

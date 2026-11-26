@@ -1,0 +1,69 @@
+diff --git a/dist/components/calendar/index.d.ts b/dist/components/calendar/index.d.ts
+--- a/dist/components/calendar/index.d.ts
++++ b/dist/components/calendar/index.d.ts
+@@ -1,1 +1,2 @@
++// Tableweave compatibility modification: reference the same CalendarYearPicker types through their scoped entry.
+ import type { CalendarRootProps } from "./calendar";
+@@ -46,1 +47,1 @@
+-        ({ children, className, onKeyDown, onPress, ...props }: import("..").CalendarYearPickerTriggerProps): import("react").JSX.Element;
++        ({ children, className, onKeyDown, onPress, ...props }: import("../calendar-year-picker").CalendarYearPickerTriggerProps): import("react").JSX.Element;
+@@ -50,1 +51,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, format, offset, ...props }: import("..").CalendarYearPickerTriggerHeadingProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").CalendarYearPickerTriggerHeadingProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, format, offset, ...props }: import("../calendar-year-picker").CalendarYearPickerTriggerHeadingProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../calendar-year-picker").CalendarYearPickerTriggerHeadingProps<E>>): import("react").JSX.Element;
+@@ -54,1 +55,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("..").CalendarYearPickerTriggerIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").CalendarYearPickerTriggerIndicatorProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("../calendar-year-picker").CalendarYearPickerTriggerIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../calendar-year-picker").CalendarYearPickerTriggerIndicatorProps<E>>): import("react").JSX.Element;
+@@ -58,1 +59,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "div">({ children, className, format, onKeyDown, visibleYears: visibleYearsProp, ...props }: import("..").CalendarYearPickerGridProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").CalendarYearPickerGridProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "div">({ children, className, format, onKeyDown, visibleYears: visibleYearsProp, ...props }: import("../calendar-year-picker").CalendarYearPickerGridProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../calendar-year-picker").CalendarYearPickerGridProps<E>>): import("react").JSX.Element;
+@@ -62,1 +63,1 @@
+-        ({ children }: import("..").CalendarYearPickerGridBodyProps): import("react").JSX.Element;
++        ({ children }: import("../calendar-year-picker").CalendarYearPickerGridBodyProps): import("react").JSX.Element;
+@@ -66,1 +67,1 @@
+-        ({ children, className, excludeFromTabOrder, onFocus, onPress, year, ...props }: import("..").CalendarYearPickerCellProps): import("react").JSX.Element;
++        ({ children, className, excludeFromTabOrder, onFocus, onPress, year, ...props }: import("../calendar-year-picker").CalendarYearPickerCellProps): import("react").JSX.Element;
+diff --git a/dist/components/list-box/index.d.ts b/dist/components/list-box/index.d.ts
+--- a/dist/components/list-box/index.d.ts
++++ b/dist/components/list-box/index.d.ts
+@@ -1,1 +1,2 @@
++// Tableweave compatibility modification: reference the same ListBox item/section types through their scoped entries.
+ import type { ComponentProps } from "react";
+@@ -8,1 +9,1 @@
+-        ({ children, className, variant, ...props }: import("..").ListBoxItemRootProps): import("react").JSX.Element;
++        ({ children, className, variant, ...props }: import("../list-box-item").ListBoxItemRootProps): import("react").JSX.Element;
+@@ -12,1 +13,1 @@
+-            ({ children, className, variant, ...props }: import("..").ListBoxItemRootProps): import("react").JSX.Element;
++            ({ children, className, variant, ...props }: import("../list-box-item").ListBoxItemRootProps): import("react").JSX.Element;
+@@ -16,1 +17,1 @@
+-            <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("..").ListBoxItemIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").ListBoxItemIndicatorProps<E>>): import("react").JSX.Element;
++            <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("../list-box-item").ListBoxItemIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../list-box-item").ListBoxItemIndicatorProps<E>>): import("react").JSX.Element;
+@@ -21,1 +22,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("..").ListBoxItemIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").ListBoxItemIndicatorProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("../list-box-item").ListBoxItemIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../list-box-item").ListBoxItemIndicatorProps<E>>): import("react").JSX.Element;
+@@ -25,1 +26,1 @@
+-        ({ children, className, ...props }: import("..").ListBoxSectionRootProps): import("react").JSX.Element;
++        ({ children, className, ...props }: import("../list-box-section").ListBoxSectionRootProps): import("react").JSX.Element;
+diff --git a/dist/components/range-calendar/index.d.ts b/dist/components/range-calendar/index.d.ts
+--- a/dist/components/range-calendar/index.d.ts
++++ b/dist/components/range-calendar/index.d.ts
+@@ -1,1 +1,2 @@
++// Tableweave compatibility modification: reference the same CalendarYearPicker types through their scoped entry.
+ import type { ComponentProps } from "react";
+@@ -43,1 +44,1 @@
+-        ({ children, className, onKeyDown, onPress, ...props }: import("..").CalendarYearPickerTriggerProps): import("react").JSX.Element;
++        ({ children, className, onKeyDown, onPress, ...props }: import("../calendar-year-picker").CalendarYearPickerTriggerProps): import("react").JSX.Element;
+@@ -47,1 +48,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, format, offset, ...props }: import("..").CalendarYearPickerTriggerHeadingProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").CalendarYearPickerTriggerHeadingProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, format, offset, ...props }: import("../calendar-year-picker").CalendarYearPickerTriggerHeadingProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../calendar-year-picker").CalendarYearPickerTriggerHeadingProps<E>>): import("react").JSX.Element;
+@@ -51,1 +52,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("..").CalendarYearPickerTriggerIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").CalendarYearPickerTriggerIndicatorProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "span">({ children, className, ...props }: import("../calendar-year-picker").CalendarYearPickerTriggerIndicatorProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../calendar-year-picker").CalendarYearPickerTriggerIndicatorProps<E>>): import("react").JSX.Element;
+@@ -55,1 +56,1 @@
+-        <E extends keyof React.JSX.IntrinsicElements = "div">({ children, className, format, onKeyDown, visibleYears: visibleYearsProp, ...props }: import("..").CalendarYearPickerGridProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("..").CalendarYearPickerGridProps<E>>): import("react").JSX.Element;
++        <E extends keyof React.JSX.IntrinsicElements = "div">({ children, className, format, onKeyDown, visibleYears: visibleYearsProp, ...props }: import("../calendar-year-picker").CalendarYearPickerGridProps<E> & Omit<React.JSX.IntrinsicElements[E], keyof import("../calendar-year-picker").CalendarYearPickerGridProps<E>>): import("react").JSX.Element;
+@@ -59,1 +60,1 @@
+-        ({ children }: import("..").CalendarYearPickerGridBodyProps): import("react").JSX.Element;
++        ({ children }: import("../calendar-year-picker").CalendarYearPickerGridBodyProps): import("react").JSX.Element;
+@@ -63,1 +64,1 @@
+-        ({ children, className, excludeFromTabOrder, onFocus, onPress, year, ...props }: import("..").CalendarYearPickerCellProps): import("react").JSX.Element;
++        ({ children, className, excludeFromTabOrder, onFocus, onPress, year, ...props }: import("../calendar-year-picker").CalendarYearPickerCellProps): import("react").JSX.Element;

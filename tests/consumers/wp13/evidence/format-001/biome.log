@@ -1,0 +1,305 @@
+tests/consumers/wp13/lib/types.mjs:5:3 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    3 │ import {
+    4 │   demand,
+  > 5 │   json,
+      │   ^^^^
+    6 │   regular,
+    7 │   digest,
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+      3   3 │   import {
+      4   4 │     demand,
+      5     │ - ··json,
+      6   5 │     regular,
+      7   6 │     digest,
+  
+
+tests/consumers/wp13/driver-filesystem.test.mjs:126:30 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    124 │     other = fixture();
+    125 │   write(root, "vendor.js", "before");
+  > 126 │   const map = { "vendor.js": describe(root, "vendor.js") };
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    127 │   assert.throws(() => verifyMap(root, {}), /E_EMPTY_MAP/);
+    128 │   fs.linkSync(path.join(root, "vendor.js"), path.join(other, "vendor.js"));
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/driver-filesystem.test.mjs:140:7 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    138 │     ["owner.json", "pnpm-workspace.yaml", ".npmrc"].map((file) => [
+    139 │       file,
+  > 140 │       describe(root, file),
+        │       ^^^^^^^^^^^^^^^^^^^^
+    141 │     ]),
+    142 │   );
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/generation.mjs:236:19 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    234 │       "E_SOURCE_INPUT_MISSING",
+    235 │     );
+  > 236 │     const value = describe(ctx.producer, file);
+        │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    237 │     demand(
+    238 │       value.sha256 === expected.sha256 &&
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/generation.mjs:325:13 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    323 │         demand(
+    324 │           emitted[file]?.sha256 ===
+  > 325 │             describe(path.join(pkg, "src"), file).sha256,
+        │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    326 │           "E_STYLES_COPY_CLOSURE",
+    327 │         );
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/generation.mjs:346:37 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    344 │     for (const [item, value] of Object.entries(emitted))
+    345 │       expected[`package/dist/${item}`] = value;
+  > 346 │     expected["package/README.md"] = describe(pkg, "README.md");
+        │                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    347 │     if (name === "heroui")
+    348 │       for (const item of [
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/generation.mjs:356:62 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    354 │         "LICENSE-APACHE-2.0",
+    355 │       ])
+  > 356 │         expected[`package/compat/rac-table-clone/${item}`] = describe(
+        │                                                              ^^^^^^^^^
+  > 357 │           pkg,
+  > 358 │           `compat/rac-table-clone/${item}`,
+  > 359 │         );
+        │         ^
+    360 │     expected["package/package.json"] = {
+    361 │       mode: parsed.members.get("package/package.json").mode,
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/installer.mjs:265:23 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    263 │         "E_INSTALLED_VERSION",
+    264 │       );
+  > 265 │     installed[file] = describe(state.target, file);
+        │                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    266 │     if (name.startsWith("@tableweave/")) {
+    267 │       const key = name.slice("@tableweave/".length),
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/installer.mjs:276:23 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    274 │           path.join(root, member.slice(8)),
+    275 │         );
+  > 276 │         const value = describe(state.target, relative);
+        │                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    277 │         demand(
+    278 │           value.sha256 === expected.sha256 && value.size === expected.size,
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/installer.mjs:294:29 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    292 │       const actual = local(state.target, `node_modules/${compiler}/${file}`),
+    293 │         relative = path.relative(state.target, actual);
+  > 294 │       installed[relative] = describe(state.target, relative);
+        │                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    295 │     }
+    296 │   if (!usesStyled(ctx.family))
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/installer.mjs:308:11 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    306 │     profile: ctx.profile,
+    307 │     inputs: installed,
+  > 308 │     lock: describe(state.target, "pnpm-lock.yaml"),
+        │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    309 │     status: "installed-not-runtime-approved",
+    310 │   });
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/receipts.mjs:47:12 lint/suspicious/noControlCharactersInRegex ━━━━━━━━━━━━━
+
+  × Unexpected control character in a regular expression.
+  
+    45 │     typeof value === "string" &&
+    46 │       value.length > 0 &&
+  > 47 │       !/[\\\x00-\x1f]/.test(value) &&
+       │            ^^^^
+    48 │       !value.startsWith("/") &&
+    49 │       !value.includes(":"),
+  
+  i Control characters are unusual and potentially incorrect inputs, so they are disallowed.
+  
+
+tests/consumers/wp13/lib/receipts.mjs:47:17 lint/suspicious/noControlCharactersInRegex ━━━━━━━━━━━━━
+
+  × Unexpected control character in a regular expression.
+  
+    45 │     typeof value === "string" &&
+    46 │       value.length > 0 &&
+  > 47 │       !/[\\\x00-\x1f]/.test(value) &&
+       │                 ^^^^
+    48 │       !value.startsWith("/") &&
+    49 │       !value.includes(":"),
+  
+  i Control characters are unusual and potentially incorrect inputs, so they are disallowed.
+  
+
+tests/consumers/wp13/lib/receipts.mjs:173:24 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    171 │       else {
+    172 │         demand(item.isFile() && !item.isSymbolicLink(), "E_TREE_LINK");
+  > 173 │         result[file] = describe(root, file);
+        │                        ^^^^^^^^^^^^^^^^^^^^
+    174 │       }
+    175 │     }
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/receipts.mjs:188:20 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    186 │     relative(file);
+    187 │     object(expected);
+  > 188 │     const actual = describe(root, file);
+        │                    ^^^^^^^^^^^^^^^^^^^^
+    189 │     demand(
+    190 │       actual.mode === expected.mode &&
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/receipts.mjs:217:18 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    215 │   const selected = object(object(ctx.approval.familyInputs)[ctx.family]);
+    216 │   demand(Object.hasOwn(selected, file), "E_FAMILY_SOURCE_NOT_SELECTED");
+  > 217 │   const actual = describe(ctx.producer, file),
+        │                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    218 │     expected = object(selected[file]);
+    219 │   demand(
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/types.mjs:178:32 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    176 │       );
+    177 │       const relative = path.relative(state.target, actual);
+  > 178 │       beforeInputs[relative] = describe(state.target, relative);
+        │                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    179 │     }
+    180 │     execute(ctx, "compiler", { compiler, stage: "positive" });
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+tests/consumers/wp13/lib/types.mjs:219:26 lint/correctness/usePlaywrightValidDescribeCallback ━━━━━━━━━━
+
+  × Describe callback must be a function.
+  
+    217 │       );
+    218 │       const relative = path.relative(state.target, actual);
+  > 219 │       inputs[relative] = describe(state.target, relative);
+        │                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    220 │     }
+    221 │     verifyMap(state.target, state.installed.inputs);
+  
+  i The describe callback must be a function, not a string, number, object, or other type.
+  
+  i Replace the callback with a function expression or arrow function.
+  
+
+Skipped 1 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 28 files in 38ms. Fixed 27 files.
+Found 17 errors.
+Found 1 warning.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

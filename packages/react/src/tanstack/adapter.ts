@@ -16,12 +16,18 @@ import type { QuerySchema } from "../contracts/types.js";
 import type { TableController, TableState } from "../controller/types.js";
 import { createFilterEvaluator } from "../filters/evaluate.js";
 import {
+  type CriteriaCheck,
+  type CriteriaNativeCallbacks,
+  guardCriteriaCallback,
+} from "../presentation/criteria-callbacks.js";
+import {
   assertNativeController,
   assertNativeDefinition,
   assertNativeState,
   nativeFail,
 } from "./definition.js";
 import { nativeFeatures, predicateCarrierId } from "./features.js";
+import { guardTableSortFn } from "./sort.js";
 import type {
   NativeDefinition,
   NativeFeatures,
@@ -95,6 +101,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
   let predicateQuery: TableState<S>["query"] | undefined;
   let predicateTime: number | undefined;
   let predicate: Predicate<T> | undefined;
+  let predicateGate: CriteriaCheck | undefined;
   const current = () => {
     if (
       controller.isDisposed() ||
@@ -107,7 +114,10 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
   };
   current();
 
-  const onSortingChange = (updater: Updater<SortingState>): void => {
+  const onSortingChange = (
+    updater: Updater<SortingState>,
+    work?: CriteriaNativeCallbacks<S, T>,
+  ): void => {
     current();
     controller.dispatch({
       type: "sorting.change",
@@ -120,7 +130,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         const query = normalizeQuery(
           definition.controllerDefinition.schema,
           { ...state.query, sorting },
-          definition.evaluation,
+          work?.evaluation ?? definition.evaluation,
         );
         assertNativeState(definition, { ...state, query });
         return query.sorting;
@@ -186,18 +196,92 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
     onColumnFiltersChange: managedWrite,
     onGlobalFilterChange: managedWrite,
   };
-  const bindTable = (table: Table<NativeFeatures, T>) => {
+  const guardedCallbacks = (work?: CriteriaNativeCallbacks<S, T>) => {
+    if (!work) return callbacks;
+    const guardedUpdater = <Value>(updater: Updater<Value>): Updater<Value> =>
+      typeof updater === "function"
+        ? guardCriteriaCallback(
+            updater as (value: Value) => Value,
+            undefined,
+            work.check,
+          )
+        : updater;
+    const invoke = <Value>(
+      fn: (update: Updater<Value>) => void,
+      update: Updater<Value>,
+    ) => {
+      work.check();
+      try {
+        fn(guardedUpdater(update));
+      } finally {
+        work.check();
+      }
+    };
+    return {
+      ...callbacks,
+      onSortingChange: (update: Updater<SortingState>) =>
+        invoke((next) => onSortingChange(next, work), update),
+      onPaginationChange: (update: Updater<PaginationState>) =>
+        invoke(onPaginationChange, update),
+      onRowSelectionChange: (update: Updater<RowSelectionState>) =>
+        invoke(onRowSelectionChange, update),
+      onColumnVisibilityChange: (update: Updater<ColumnVisibilityState>) =>
+        invoke(onColumnVisibilityChange, update),
+      onColumnOrderChange: (update: Updater<ColumnOrderState>) =>
+        invoke(onColumnOrderChange, update),
+    };
+  };
+  const bindTable = (
+    table: Table<NativeFeatures, T>,
+    work?: CriteriaNativeCallbacks<S, T>,
+  ) => {
+    work?.check();
+    const mutations = guardedCallbacks(work);
+    if (definition.selectionMode !== "multiple") {
+      table.toggleAllPageRowsSelected = managedWrite;
+      table.toggleAllRowsSelected = managedWrite;
+      table.getToggleAllPageRowsSelectedHandler = () => managedWrite;
+      table.getToggleAllRowsSelectedHandler = () => managedWrite;
+      table.getIsAllPageRowsSelected = () => false;
+      table.getIsSomePageRowsSelected = () => false;
+    }
     // Vendor toggles can derive direction/visibility/selection from stale state.
     // Route model-context intent through the accepted owner instead.
     // This decorates actual native model methods; it does not process any rows.
-    for (const column of table.getAllFlatColumns()) {
+    const flatColumns = table.getAllFlatColumns();
+    if (work) {
+      for (const column of flatColumns) {
+        if (column.accessorFn)
+          column.accessorFn = guardCriteriaCallback(
+            column.accessorFn,
+            undefined,
+            work.check,
+            true,
+          );
+      }
+      // v9's sorted model calls the static column_getSortFn, not the method slot.
+      // Resolve auto/string through the real vendor, then capture the selected
+      // comparator into this actual vendor-owned column def. No registry rewrite.
+      if (!table.options.manualSorting)
+        for (const sort of table.atoms.sorting.get()) {
+          const column = table.getColumn(sort.id);
+          if (column && typeof column.columnDef.sortFn !== "function") {
+            work.check();
+            const resolved = column.getSortFn();
+            work.check();
+            column.columnDef.sortFn = guardTableSortFn(resolved, work.check);
+          }
+        }
+    }
+    for (const column of flatColumns) {
+      // Wrap the actual resolved vendor accessor, including accessorKey defaults.
       column.toggleVisibility = (visible) => {
         current();
         if (visible !== undefined && typeof visible !== "boolean")
           nativeFail("native.managed");
         if (!column.getCanHide()) return;
         const leaves = column.getLeafColumns();
-        onColumnVisibilityChange((previous) => {
+        mutations.onColumnVisibilityChange((previous) => {
           const next = { ...previous };
           const nextVisible =
             visible ?? !leaves.some((leaf) => previous[leaf.id] !== false);
@@ -224,7 +308,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         if (!column.getCanSort()) return;
         const first = column.getFirstSortDir() === "desc";
         const multiple = multi === true && column.getCanMultiSort();
-        onSortingChange((previous) => {
+        mutations.onSortingChange((previous) => {
           const existing = previous.find((sort) => sort.id === column.id);
           const nextDesc = desc ?? (existing ? !existing.desc : first);
           const remove =
@@ -258,10 +342,15 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         current();
         if (selected !== undefined && typeof selected !== "boolean")
           nativeFail("native.managed");
-        onRowSelectionChange((previous) => {
+        mutations.onRowSelectionChange((previous) => {
           const nextSelected = selected ?? !previous[row.id];
           if (nextSelected && !row.getCanSelect()) return previous;
-          const next = { ...previous };
+          const next = Object.assign(
+            Object.create(null) as RowSelectionState,
+            nextSelected && definition.selectionMode === "single"
+              ? {}
+              : previous,
+          );
           if (nextSelected) next[row.id] = true;
           else delete next[row.id];
           return next;
@@ -281,20 +370,56 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         row.toggleSelected(target.checked);
       };
     }
+    work?.check();
     return table;
   };
-  const assertInput = (input: NativeInput<T>) => {
+  const assertInput = (
+    input: NativeInput<T>,
+    work?: CriteriaNativeCallbacks<S, T>,
+  ) => {
+    work?.check();
     if (
       !input ||
       !Array.isArray(input.records) ||
-      (input.mode !== "client" && input.mode !== "server")
+      (input.mode !== "client" &&
+        input.mode !== "server" &&
+        input.mode !== "server-complete")
     )
       nativeFail("native.rows");
+    if (!definition.paginationEnabled && input.mode === "server")
+      nativeFail("native.page");
+    if (input.mode === "server-complete") {
+      if (definition.paginationEnabled) nativeFail("native.page");
+      const page = input.pageInfo;
+      if (
+        page?.kind !== "known" ||
+        !Number.isSafeInteger(page.total) ||
+        page.total < 0 ||
+        page.total !== input.records.length
+      )
+        nativeFail("native.page");
+      // Complete shape/count denial precedes all private record callbacks.
+      if (Object.keys(input.records).length !== input.records.length)
+        nativeFail("native.rows");
+      for (let index = 0; index < input.records.length; index++) {
+        const field = Object.getOwnPropertyDescriptor(
+          input.records,
+          String(index),
+        );
+        if (
+          !field ||
+          !Object.hasOwn(field, "value") ||
+          field.value === null ||
+          typeof field.value !== "object"
+        )
+          nativeFail("native.rows");
+      }
+    }
     const seen = new Set<string>();
     const ids = input.records.map((record) => {
       let id: unknown;
       try {
-        id = definition.getRowId(record);
+        id = work ? work.getRowId(record) : definition.getRowId(record);
       } catch {
         return nativeFail("native.rows");
       }
@@ -316,16 +441,19 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       )
         nativeFail("native.page");
     }
+    work?.check();
     return ids;
   };
 
   const getOptions = (
     input: NativeInput<T>,
     state: TableState<S> = current(),
+    work?: CriteriaNativeCallbacks<S, T>,
   ): TableOptions<NativeFeatures, T> => {
     current();
     assertNativeState(definition, state);
-    const ids = assertInput(input);
+    work?.check();
+    const ids = assertInput(input, work);
     if (projected !== state) {
       const rowSelection: RowSelectionState = Object.create(
         null,
@@ -364,26 +492,40 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
     }
     if (
       input.mode === "client" &&
-      (predicateQuery !== state.query || predicateTime !== state.evaluatedAt)
+      (predicateQuery !== state.query ||
+        predicateTime !== state.evaluatedAt ||
+        predicateGate !== work?.check)
     ) {
       predicate = Object.freeze({
         test: createFilterEvaluator(
           definition.controllerDefinition.schema,
           state.query,
-          { ...definition.evaluation, now: state.evaluatedAt },
+          {
+            ...(work?.evaluation ?? definition.evaluation),
+            now: state.evaluatedAt,
+          },
         ),
       });
       predicateQuery = state.query;
       predicateTime = state.evaluatedAt;
+      predicateGate = work?.check;
     }
-    const manual = input.mode === "server";
+    const manual = input.mode === "server" || input.mode === "server-complete";
     const options: TableOptions<NativeFeatures, T> = {
       features: nativeFeatures,
-      columns,
+      columns: work
+        ? Object.freeze([
+            ...work.columns,
+            columns[columns.length - 1] ?? nativeFail("native.definition"),
+          ])
+        : columns,
       data: input.records,
-      getRowId: (_record, index) => ids[index] ?? nativeFail("native.rows"),
+      getRowId: (_record, index) => {
+        work?.check();
+        return ids[index] ?? nativeFail("native.rows");
+      },
       state: { ...slices, globalFilter: manual ? undefined : predicate },
-      ...callbacks,
+      ...guardedCallbacks(work),
       autoResetAll: false,
       autoResetPageIndex: false,
       autoResetSorting: false,
@@ -395,9 +537,14 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       enableMultiSort: definition.multiSort,
       enableRowSelection: definition.controllerDefinition.selection
         ? (row) => {
-            if (!definition.isRowSelectable) return true;
+            work?.check();
+            const isRowSelectable =
+              work?.isRowSelectable ?? definition.isRowSelectable;
+            if (!isRowSelectable) return true;
             try {
-              const eligible = definition.isRowSelectable(row.original);
+              const eligible = work
+                ? isRowSelectable(row.original)
+                : definition.isRowSelectable?.(row.original);
               if (typeof eligible !== "boolean") nativeFail("native.rows");
               return eligible;
             } catch {
@@ -406,10 +553,11 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
           }
         : false,
       enableRowRangeSelection: false,
+      enableMultiRowSelection: definition.selectionMode === "multiple",
       enableSubRowSelection: false,
       manualFiltering: manual,
       manualSorting: manual,
-      manualPagination: manual,
+      manualPagination: manual || !definition.paginationEnabled,
     };
     // v9 shallow-merges options. Omission would retain an earlier total/-1 when
     // metadata or processing mode changes. Its exact optional declarations do
@@ -419,7 +567,8 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       rowCount: {
         enumerable: true,
         value:
-          input.mode === "server" && input.pageInfo.kind === "known"
+          (input.mode === "server" || input.mode === "server-complete") &&
+          input.pageInfo.kind === "known"
             ? input.pageInfo.total
             : undefined,
       },
@@ -435,6 +584,7 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
             : undefined,
       },
     });
+    work?.check();
     return options;
   };
 
@@ -442,30 +592,35 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
     table: ReactTable<NativeFeatures, T>,
     input: NativeInput<T>,
     state: TableState<S>,
+    work?: CriteriaNativeCallbacks<S, T>,
   ): NativeTableView<S, T> => {
+    work?.check();
     const rows = table.getRowModel().rows;
-    const eligibleIds = definition.controllerDefinition.selection
-      ? rows.filter((row) => row.getCanSelect()).map((row) => row.id)
-      : [];
+    const eligibleIds =
+      definition.selectionMode === "multiple"
+        ? rows.filter((row) => row.getCanSelect()).map((row) => row.id)
+        : [];
     const selectedOnPage = eligibleIds.filter(
       (id) => state.selection[id],
     ).length;
     const pageInfo: NativePageInfo =
-      input.mode === "server"
+      input.mode === "server" || input.mode === "server-complete"
         ? Object.freeze({ ...input.pageInfo })
         : Object.freeze({
             kind: "known",
             total: table.getFilteredRowModel().rows.length,
           });
     const pageCount =
-      pageInfo.kind === "known"
+      definition.paginationEnabled && pageInfo.kind === "known"
         ? Math.ceil(pageInfo.total / state.query.pagination.pageSize)
         : null;
-    const canPreviousPage = state.query.pagination.pageIndex > 0;
+    const canPreviousPage =
+      definition.paginationEnabled && state.query.pagination.pageIndex > 0;
     const canNextPage =
-      pageInfo.kind === "unknown"
+      definition.paginationEnabled &&
+      (pageInfo.kind === "unknown"
         ? pageInfo.hasNextPage
-        : state.query.pagination.pageIndex + 1 < (pageCount ?? 0);
+        : state.query.pagination.pageIndex + 1 < (pageCount ?? 0));
     const native: NativeTableHandle<T> = Object.freeze({
       Subscribe: table.Subscribe,
       FlexRender: table.FlexRender,
@@ -484,7 +639,8 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
       setColumnVisibility: table.setColumnVisibility,
       setColumnOrder: table.setColumnOrder,
     });
-    return Object.freeze({
+    const view: NativeTableView<S, T> = Object.freeze({
+      selectionMode: definition.selectionMode,
       native,
       controller,
       state,
@@ -499,13 +655,17 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
         mixed: selectedOnPage > 0 && selectedOnPage < eligibleIds.length,
       }),
       pagination: Object.freeze({
+        enabled: definition.paginationEnabled,
         pageInfo,
         pageCount,
         canPreviousPage,
         canNextPage,
       }),
       selectPage(selected: boolean) {
+        work?.check();
         current();
+        if (definition.selectionMode !== "multiple")
+          nativeFail("native.managed");
         return controller.dispatch({
           type: "selection.page",
           pageIds: rows.map((row) => row.id),
@@ -514,10 +674,15 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
           queryIdentity: state.queryIdentity,
         });
       },
-      cancelSelection: () => controller.dispatch({ type: "selection.cancel" }),
+      cancelSelection: () => {
+        work?.check();
+        return controller.dispatch({ type: "selection.cancel" });
+      },
       previousPage() {
+        work?.check();
         if (current().queryIdentity !== state.queryIdentity)
           nativeFail("native.page");
+        if (!definition.paginationEnabled) nativeFail("native.page");
         if (canPreviousPage)
           onPaginationChange((previous) => ({
             ...previous,
@@ -525,8 +690,10 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
           }));
       },
       nextPage() {
+        work?.check();
         if (current().queryIdentity !== state.queryIdentity)
           nativeFail("native.page");
+        if (!definition.paginationEnabled) nativeFail("native.page");
         if (canNextPage)
           onPaginationChange((previous) => ({
             ...previous,
@@ -534,6 +701,8 @@ export function createNativeAdapter<S extends QuerySchema, T extends RowData>(
           }));
       },
     });
+    work?.check();
+    return view;
   };
   return { getOptions, getView, bindTable };
 }

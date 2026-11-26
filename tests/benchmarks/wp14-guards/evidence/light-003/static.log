@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(executeThrow && executeThrow.pos > executeTry.finallyBlock.end)
+
+    at file:///tmp/opencode/tableweave-wp11-workbench/tests/benchmarks/wp14-guards/static.mjs:241:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.22.0

@@ -1,0 +1,62 @@
+{
+  "tests/integration/wp12/main.tsx": {
+    "sha256": "0a3e7ced1716c1c717010ac0417355c038dfc5cbf5665dd5f65153fd59fb095a",
+    "mode": 436
+  },
+  "tests/integration/wp12/application.tsx": {
+    "sha256": "5ff436df235819eb390ef4fc37267fc470b23d5b64f59d0f63fc5cd5e8dfa376",
+    "mode": 436
+  },
+  "tests/integration/wp12/events.ts": {
+    "sha256": "28afb7ba1582b8a7f4b8b5f92e360ec35452e2c97fdc56728025ccf428c5d748",
+    "mode": 436
+  },
+  "tests/integration/wp12/styles.css": {
+    "sha256": "d2a96286fe474ac00ec38eb86491ea47143ef513ecb0c5c19dfe4e6f8d752151",
+    "mode": 436
+  },
+  "tests/integration/wp12/styles.d.ts": {
+    "sha256": "35d26ea66c86da9701e4f4b467913481ffeae910761cea34c775c5dacb7f8eaa",
+    "mode": 436
+  },
+  "tests/integration/wp12/vite.config.ts": {
+    "sha256": "2ce882abcb913d5bce2fddc76a1e5829df062f304d41ba5abeec8a8ce29d6c43",
+    "mode": 436
+  },
+  "tests/integration/wp12/playwright.config.ts": {
+    "sha256": "eb299a41cfbdf2791c27e058f107e4cc0ae303b114be7574445304f18f65d907",
+    "mode": 436
+  },
+  "tests/integration/wp12/browser.spec.ts": {
+    "sha256": "cf8bc7f1ff0a4c27959c559257c85b65c28d431e19609af418b6c702bed4e533",
+    "mode": 436
+  },
+  "tests/integration/wp12/tsconfig.light.json": {
+    "sha256": "24a0d897620e5b5159771d83d324300f66e83fcdc280dfebb0642a764aa69f23",
+    "mode": 436
+  },
+  "tests/integration/wp12/evidence/format.mjs": {
+    "sha256": "4d0e75777db3bb6d18ea50bdec5d79710178de734e0592a4c57a629ff9d486df",
+    "mode": 436
+  },
+  "tests/integration/wp12/evidence/inputs.mjs": {
+    "sha256": "42f6454407309038e965b42d0b6be626b5a44efe004e16abf8027035bcb5a14c",
+    "mode": 436
+  },
+  "tests/integration/wp12/evidence/light.mjs": {
+    "sha256": "ea62e9ab5d457e2475b2bb4179389b204f39540db265e0dc777739fe9115cf49",
+    "mode": 436
+  },
+  "tests/integration/wp12/evidence/scope.mjs": {
+    "sha256": "9470074009f10016335f1f70c11fe15c522c3f493d75d331550e4e3c3f3c0ef5",
+    "mode": 436
+  },
+  "tests/integration/wp12/evidence/seal.mjs": {
+    "sha256": "ee3669d69ca973523b00cc11901129a1d4f57a6ac2853e013a7f19b8a714dceb",
+    "mode": 436
+  },
+  "tests/integration/wp12/evidence/static.mjs": {
+    "sha256": "dd63c29e7748cbd76ea5fbede82ebb0abd317c8d8f0b909722979313e2a186dd",
+    "mode": 436
+  }
+}

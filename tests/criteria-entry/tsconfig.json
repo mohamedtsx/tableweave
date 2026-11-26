@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "../..",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022", "ES2023.Intl"],
+    "types": ["node"],
+    "paths": {
+      "@tableweave/react/criteria": [
+        "../../packages/react/src/criteria/index.ts"
+      ]
+    }
+  },
+  "include": ["./positive.ts", "../../packages/react/src/criteria/index.ts"],
+  "exclude": ["./negative.ts", "./.artifacts"]
+}

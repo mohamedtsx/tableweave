@@ -1,0 +1,2 @@
+apps/example-next/lib/client-owner.ts(15,24): error TS2554: Expected 3 arguments, but got 2.
+apps/example-next/lib/server-contract.ts(21,20): error TS2554: Expected 3 arguments, but got 2.

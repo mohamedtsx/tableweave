@@ -21,6 +21,18 @@
     "./filters": {
       "types": "./dist/filters/index.d.ts",
       "import": "./dist/filters/index.js"
+    },
+    "./criteria": {
+      "types": "./dist/criteria/index.d.ts",
+      "import": "./dist/criteria/index.js"
+    },
+    "./reordering": {
+      "types": "./dist/reordering/index.d.ts",
+      "import": "./dist/reordering/index.js"
+    },
+    "./reordering-controller": {
+      "types": "./dist/reordering-controller/index.d.ts",
+      "import": "./dist/reordering-controller/index.js"
     }
   },
   "scripts": {

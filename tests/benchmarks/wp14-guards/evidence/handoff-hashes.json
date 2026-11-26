@@ -1,0 +1,448 @@
+{
+  "status": "PROVISIONAL two-body source correction only; helper MJS semantics/profile/cleanup/unit/runtime/benchmark tests UNRUN",
+  "suppliedHead": "f60df08 (main-reported; no worker Git)",
+  "changedOldBodies": [
+    "tests/benchmarks/wp14/candidate.mjs",
+    "tests/benchmarks/wp14/driver.mjs"
+  ],
+  "protectedOldInputs": 2675,
+  "canonical155": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+  "originalSealSHA256": "99b158a16cbae4ac8b6bd983a61c1d79026f895f1c0be9f52686ed34ff0aeeaa",
+  "originalPinSHA256": "a78cffd7f64cde8d7628c15e898b910795ae14706c6af86cbb4ccafe15fb1794",
+  "inputAggregate": "af0ad5b424242b72eae0dd0662b276c8cf76a8a367c6badf463098c287645fe5",
+  "artifactAggregate": "f2e06396d99dfd43f504d3c3327a097c858f4f221f3073c0ca4e43684a44a1d3",
+  "inputs": {
+    "tests/benchmarks/wp14-guards/README.md": {
+      "sha256": "7855969a45875b828af63ed14904a291655dab891bb609f886a609b3077a085f",
+      "size": 10404,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/api-probes.ts": {
+      "sha256": "3f458cb336f5d2d4f907e6cae3789b67553dccc2774ae44b731af8cd733c0d98",
+      "size": 1024,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/before.json": {
+      "sha256": "6db53c7b064e358a11205404f0ae0df802ef4d6544e0670b6af994a42fea9435",
+      "size": 529828,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/completion.md": {
+      "sha256": "0863f17d0fdf069cd9ff469ec29ca6a4e49f601b02cbba6b57225be156ec44f2",
+      "size": 5072,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/preimages/candidate.mjs.txt": {
+      "sha256": "e2d277275121b0a4588338dceb0cf071b000309609d75b5bc77e00e0a9300cb3",
+      "size": 22021,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/preimages/driver.mjs.txt": {
+      "sha256": "839caa260bbfbf758f0707b7e137a602a3c298a413def2de46020b443d0cde4d",
+      "size": 24872,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/source.delta.patch": {
+      "sha256": "aeb7b2de6bd77cadbc7ef7bdd7f5375345a613ce157e4188679d1142827bb2b2",
+      "size": 680620,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/format.mjs": {
+      "sha256": "6efcffbaf65997b284d24554a70a10aa04e948dae1ea3868ec3e82f192b328fc",
+      "size": 1266,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/guards.test.ts": {
+      "sha256": "83c5311d5ea064bc87e5b93e0d2f4ddd78ea8941bcec58d6d43bf07412cdd28b",
+      "size": 10636,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/inputs.mjs": {
+      "sha256": "d3313460f29c10e49e008788816d9578fe4ec8c18c937dce8401448240b36118",
+      "size": 3538,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/light.mjs": {
+      "sha256": "5b3bac7ada23e7aebe2f9edaed80573a571f1dad4fae589e5993380fc52dfb16",
+      "size": 2521,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/scope.mjs": {
+      "sha256": "cce461496edd4fb65635a14b40218ad6f1ecba6564c708cf3d1fef267f3fa6c4",
+      "size": 5911,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/seal.mjs": {
+      "sha256": "6d0a5be6d18b2c469664f2ce0e4fc2cb1905c9c072f4fc26092f20d01114e76e",
+      "size": 3241,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/static.mjs": {
+      "sha256": "507c21c1bc6af563cec7516aef65192efbc7c1abdc9629fb64da2309b5ac4ce2",
+      "size": 10512,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/tsconfig.source-light.json": {
+      "sha256": "3885f1c13b4d5692ffe601e4a5790f85bb4ae97f1eb5730b8baee91601c95022",
+      "size": 155,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14/candidate.mjs": {
+      "sha256": "c30bf651af60b3582dac587f29b30ec02e166b0c2598c7e3591c76937ac9f34a",
+      "size": 35628,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14/driver.mjs": {
+      "sha256": "d4b912764138b192c7e32ff462ca51746ea73dcf7d45568a7175e2c5dd8bfe7b",
+      "size": 31960,
+      "mode": 436
+    }
+  },
+  "artifacts": {
+    "tests/benchmarks/wp14-guards/evidence/format-001/format.log": {
+      "sha256": "5e99ba94ad894ad794b8affe511754c06b0dccdae367e2a2a51c636d9bce5c87",
+      "size": 44,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/format-001/result.json": {
+      "sha256": "fc51836090567e3a8399429e485bb7977185b483781d4d706c1cc5db2662b0dd",
+      "size": 1258,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/format-002/format.log": {
+      "sha256": "08901850890fd53e436f8d9666a42eccac34f473da990b2be98e1322b35fb106",
+      "size": 42,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/format-002/result.json": {
+      "sha256": "fc51836090567e3a8399429e485bb7977185b483781d4d706c1cc5db2662b0dd",
+      "size": 1258,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/format-003/format.log": {
+      "sha256": "fbe0087ba1aada2bddb0acf5c585615dbbfc3f2ddf7de9154d4fdb070853cf8f",
+      "size": 43,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/format-003/result.json": {
+      "sha256": "fc51836090567e3a8399429e485bb7977185b483781d4d706c1cc5db2662b0dd",
+      "size": 1258,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/biome.log": {
+      "sha256": "ac5b8631b582583f1e473550dabe16f26b87ee95d173a84b992cda19943f89c8",
+      "size": 82854,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/inputs.json": {
+      "sha256": "59ea6f8b0f28c340f95ae0066f27d768761ab98c5503cc56ea2c5f293b015b1a",
+      "size": 339054,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/pins-before.log": {
+      "sha256": "c24da6f6f932ca9bdacb69c315d21ebbb2e9f6d6f4568f71251e9886620d9b1a",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/results.json": {
+      "sha256": "605be26c1895281f74a05c7ba997834298e4a69d1e4a7df0c3bb779a7f88a4d2",
+      "size": 2533,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/scope.log": {
+      "sha256": "9333e7049195f727e0afe1c1e4644f79c8ad9a344d49dcac26d67166d1911c1b",
+      "size": 345,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/static.log": {
+      "sha256": "609471759252366b9afa3ad3aa45813daf6c1da00b57a2caeddfa9c6fff06e1e",
+      "size": 191,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/syntax-tests-benchmarks-wp14-candidate.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/syntax-tests-benchmarks-wp14-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/syntax-tests-benchmarks-wp14-guards-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/syntax-tests-benchmarks-wp14-guards-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/syntax-tests-benchmarks-wp14-guards-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-001/syntax-tests-benchmarks-wp14-guards-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-002/inputs.json": {
+      "sha256": "523f7a51768ccea899b3bf78bdd6dc530aff1c514a1440161364d84282d946ee",
+      "size": 339586,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-002/pins-before.log": {
+      "sha256": "049f2fbbcb589f8b04fb72b5a64831133c6fc18bbb3e3fe2b5819cba5602f7ec",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-002/positive.log": {
+      "sha256": "3ac03cd98c519b869c16b29507d08fdf0810be10029ac9a809d9be1eb5027c60",
+      "size": 198,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-002/results.json": {
+      "sha256": "20b53ad6cc3f618540002d1bcc135db24a8c59c85fdb0d7e1dfd9683b44d46c2",
+      "size": 453,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/inputs.json": {
+      "sha256": "69b17267c341e1ced763e36849d1fe451d26aaa33b0783435456e13b74f1e9ed",
+      "size": 339587,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/pins-before.log": {
+      "sha256": "049f2fbbcb589f8b04fb72b5a64831133c6fc18bbb3e3fe2b5819cba5602f7ec",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/results.json": {
+      "sha256": "fe1ec3a109120c02db17774cb6b23890377c0fe1162c04d695e6fbf0031f80d7",
+      "size": 2253,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/scope.log": {
+      "sha256": "9333e7049195f727e0afe1c1e4644f79c8ad9a344d49dcac26d67166d1911c1b",
+      "size": 345,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/static.log": {
+      "sha256": "30019f918173df2ddb95a67dd6273fdb65fe15f5f2e39816ee5917acd1877310",
+      "size": 465,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-candidate.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-guards-format.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-guards-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-guards-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-guards-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-guards-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-003/syntax-tests-benchmarks-wp14-guards-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/biome.log": {
+      "sha256": "11ad6428a0b2eec48c0912c2e262b901345d8e13408cd87b2aa83ad1510971b0",
+      "size": 44,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/inputs.json": {
+      "sha256": "f762df9518ed3e26d78d0ae13b75e40d097f2c574176ef8023c8f159b714601d",
+      "size": 339587,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/pins-after.log": {
+      "sha256": "049f2fbbcb589f8b04fb72b5a64831133c6fc18bbb3e3fe2b5819cba5602f7ec",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/pins-before.log": {
+      "sha256": "049f2fbbcb589f8b04fb72b5a64831133c6fc18bbb3e3fe2b5819cba5602f7ec",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/results.json": {
+      "sha256": "5a70d39acc334fea941f46c3d123a3254e5b131abc703765668e85d0a653ff0e",
+      "size": 3236,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/scope.log": {
+      "sha256": "9333e7049195f727e0afe1c1e4644f79c8ad9a344d49dcac26d67166d1911c1b",
+      "size": 345,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/static.log": {
+      "sha256": "609471759252366b9afa3ad3aa45813daf6c1da00b57a2caeddfa9c6fff06e1e",
+      "size": 191,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-candidate.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-guards-format.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-guards-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-guards-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-guards-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-guards-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-004/syntax-tests-benchmarks-wp14-guards-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/biome.log": {
+      "sha256": "eabfff7216cbd736885506a612d9fc4835182d6033a531c61921a0a0ac776835",
+      "size": 44,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/inputs.json": {
+      "sha256": "fd1e3b8e6f7b3751618c57eb7e5342cb4da664fbeda0a17b56599fddf008a465",
+      "size": 339589,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/pins-after.log": {
+      "sha256": "049f2fbbcb589f8b04fb72b5a64831133c6fc18bbb3e3fe2b5819cba5602f7ec",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/pins-before.log": {
+      "sha256": "049f2fbbcb589f8b04fb72b5a64831133c6fc18bbb3e3fe2b5819cba5602f7ec",
+      "size": 124,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/results.json": {
+      "sha256": "73594850258c29dcf65902286681a118f6321e01e3a1e8c379116fe3636cb45a",
+      "size": 3236,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/scope.log": {
+      "sha256": "9333e7049195f727e0afe1c1e4644f79c8ad9a344d49dcac26d67166d1911c1b",
+      "size": 345,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/static.log": {
+      "sha256": "609471759252366b9afa3ad3aa45813daf6c1da00b57a2caeddfa9c6fff06e1e",
+      "size": 191,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-candidate.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-driver.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-guards-format.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-guards-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-guards-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-guards-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-guards-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    },
+    "tests/benchmarks/wp14-guards/evidence/light-005/syntax-tests-benchmarks-wp14-guards-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "mode": 436
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "HOLD_USER_DEFERRED",
+  "reason": "Dedicated runner, exact browser/image, main-reviewed archive materialization and actual paint validation are not selected or observed by this authoring task.",
+  "runner": null,
+  "candidate": null,
+  "browserVersion": null,
+  "observations": null,
+  "samples": null,
+  "metrics": null,
+  "dataChecksum": null,
+  "dataChecksumReason": "Generator and independent oracles authored, not executed; no computed fixture digest is claimed.",
+  "reorder": "BLOCKED_USER_KEEP_DRAG_BLOCKED",
+  "approval": null
+}

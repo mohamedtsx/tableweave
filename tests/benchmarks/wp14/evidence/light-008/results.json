@@ -1,0 +1,166 @@
+[
+  {
+    "name": "pins-before",
+    "args": [
+      "tests/benchmarks/wp14/inputs.mjs",
+      "tests/benchmarks/wp14/evidence/light-008/inputs.json"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "positive",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "tests/benchmarks/wp14/tsconfig.source-light.json",
+      "--pretty",
+      "false"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "scope",
+    "args": [
+      "tests/benchmarks/wp14/scope.mjs",
+      "verify"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-candidate.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/candidate.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-driver.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/driver.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-inputs.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/inputs.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-light.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/light.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-report.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/report.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-scope.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-seal.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/seal.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-static.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-statistics.mjs",
+    "args": [
+      "--check",
+      "tests/benchmarks/wp14/statistics.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "static",
+    "args": [
+      "tests/benchmarks/wp14/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "biome",
+    "args": [
+      "node_modules/@biomejs/biome/bin/biome",
+      "check",
+      "--assist-enabled=false",
+      "tests/benchmarks/wp14/Benchmark.tsx",
+      "tests/benchmarks/wp14/candidate.mjs",
+      "tests/benchmarks/wp14/definition.ts",
+      "tests/benchmarks/wp14/driver.mjs",
+      "tests/benchmarks/wp14/fixture.ts",
+      "tests/benchmarks/wp14/inputs.mjs",
+      "tests/benchmarks/wp14/light.mjs",
+      "tests/benchmarks/wp14/main.tsx",
+      "tests/benchmarks/wp14/playwright.config.ts",
+      "tests/benchmarks/wp14/report.mjs",
+      "tests/benchmarks/wp14/scenarios.ts",
+      "tests/benchmarks/wp14/schema.ts",
+      "tests/benchmarks/wp14/scope.mjs",
+      "tests/benchmarks/wp14/seal.mjs",
+      "tests/benchmarks/wp14/source.ts",
+      "tests/benchmarks/wp14/static.mjs",
+      "tests/benchmarks/wp14/statistics.mjs",
+      "tests/benchmarks/wp14/statistics.test.ts",
+      "tests/benchmarks/wp14/styles.css",
+      "tests/benchmarks/wp14/timing.ts",
+      "tests/benchmarks/wp14/tsconfig.source-light.json",
+      "tests/benchmarks/wp14/vite.config.ts",
+      "tests/benchmarks/wp14/evidence/runner-input.schema.json",
+      "tests/benchmarks/wp14/evidence/blocked.json",
+      "--max-diagnostics=100"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "pins-after",
+    "args": [
+      "tests/benchmarks/wp14/inputs.mjs",
+      "tests/benchmarks/wp14/evidence/light-008/inputs.json",
+      "verify"
+    ],
+    "status": 0,
+    "signal": null
+  }
+]

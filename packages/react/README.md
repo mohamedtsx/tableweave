@@ -9,6 +9,12 @@ hook producer. Neither is a full table implementation or release approval.
   `canonicalJson` and schema-specific types (`QueryFor`, `RuleFor`, `FieldAccessors`).
 - `/filters`: operator registry/presets, `compileFilter`, `createFilterEvaluator`,
   `translateQuery`, `invertRule`, explicit date resolution and associated types.
+  WP-07 adds `getBuilderFields`, `getFieldOperators`, `validateRuleDraft`,
+  `createOptionSource`, `projectOptionSourceView` and own typed option/editor
+  contracts. Their scoped headless correction is technically reviewed; full UI
+  integration/packet acceptance is separate. See the
+  [tool protocol](../../docs/engineering/wp-07-tools.md) for pure validation,
+  exact-token generations, bounded labels and passive source ownership.
 - Root (client entry): `defineController`, `createTableState`, `reduceTableState`,
   `createTableController`, `replaceTableDefinition`, `ControllerError`,
   `useTableweaveState`, `useTableweaveQuery`, `useTableweaveSelector` and types.
@@ -24,6 +30,14 @@ hook producer. Neither is a full table implementation or release approval.
   [resource contract](../../docs/engineering/resources.md) and
   [plan](../../docs/planning/wp-05-implementation-plan.md). This is not the full
   table facade, a fetch cache, framework SSR integration or styled UI.
+- Root's private WP-08 producer adds `projectControls`, `createControlsAuthority`,
+  `getControlsAuthorityOwner`, atomic `beginControlsRequest`, read-only exact-token
+  `getControlsRequestBinding`, `ControlsError` and owned control/native-mode types.
+  See the [controls contract](../../docs/engineering/wp-08-controls.md). Render facts
+  use the current genuine native view; event commands reread application-committed
+  authority. Factory owner metadata is not authorization. Single mode rejects all
+  page-selection commands, including no-ops/final controlled acceptance. No second
+  query/native/resource owner, transport, cache or whole-table facade is added.
 
 Contracts/filters contain no client directive or React/UI import. Their only
 runtime dependencies are Valibot `1.5.0` and Internationalized Date `3.12.4`.

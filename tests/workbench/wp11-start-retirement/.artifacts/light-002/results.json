@@ -1,0 +1,104 @@
+[
+  {
+    "name": "inputs-before",
+    "args": [
+      "tests/workbench/wp11-start-retirement/inputs.mjs",
+      "tests/workbench/wp11-start-retirement/.artifacts/light-002/inputs.json"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "positive",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "tests/workbench/wp11-start-retirement/tsconfig.source-light.json",
+      "--pretty",
+      "false"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "scope",
+    "args": [
+      "tests/workbench/wp11-start-retirement/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "static",
+    "args": [
+      "tests/workbench/wp11-start-retirement/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-inputs.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-retirement/inputs.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-light.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-retirement/light.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-scope.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-retirement/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-static.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-retirement/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-vitest.config.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-retirement/vitest.config.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "biome",
+    "args": [
+      "node_modules/@biomejs/biome/bin/biome",
+      "check",
+      "--assist-enabled=false",
+      "apps/example-start-facade/src/application/bootstrap-session.ts",
+      "tests/workbench/wp11-start-retirement/final/retirement.test.ts",
+      "tests/workbench/wp11-start-retirement/final/synthetic-reader.ts",
+      "tests/workbench/wp11-start-retirement/inputs.mjs",
+      "tests/workbench/wp11-start-retirement/light.mjs",
+      "tests/workbench/wp11-start-retirement/scope.mjs",
+      "tests/workbench/wp11-start-retirement/static.mjs",
+      "tests/workbench/wp11-start-retirement/tsconfig.source-light.json",
+      "tests/workbench/wp11-start-retirement/vitest.config.mjs",
+      "--max-diagnostics=100"
+    ],
+    "status": 1,
+    "signal": null
+  }
+]

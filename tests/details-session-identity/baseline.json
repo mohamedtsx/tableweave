@@ -1,0 +1,16 @@
+{
+  "base": "e8529b0 (main-supplied; no Git command executed)",
+  "hook": "packages/heroui/src/details/use-details-session.ts",
+  "originalHookSha256": "53284c89ae9442a05bf1621047521473e3d90987e1f528428b68295eb6b01e85",
+  "protectedFileCount": 1001,
+  "protectedFilesAggregate": "383596007435d71a58b8784e015394d97793d4c8592d822e1b929368125e5324",
+  "protectedSourceCount": 121,
+  "protectedSourcesAggregate": "4b0cfa86126559e9536aa25945ef10b2e0d3fdbf6f4ffd66209d926ef86482cc",
+  "exclusions": [
+    ".git",
+    "node_modules",
+    ".repo",
+    "tests/details-session-identity/",
+    "packages/heroui/src/details/use-details-session.ts"
+  ]
+}

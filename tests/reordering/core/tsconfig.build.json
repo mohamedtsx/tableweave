@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "../../../packages/react/src/reordering",
+    "outDir": "./.artifacts/declarations",
+    "declaration": true,
+    "noEmitOnError": true,
+    "lib": ["ES2022"],
+    "types": []
+  },
+  "include": ["../../../packages/react/src/reordering/**/*.ts"]
+}

@@ -1,11 +1,26 @@
 "use client";
 
+export { flexRender as renderNativeComponent } from "@tanstack/react-table";
+
 export { reduceTableState } from "./controller/reducer.js";
 export {
   createTableController,
   replaceTableDefinition,
 } from "./controller/store.js";
 export type * from "./controller/types.js";
+export type * from "./controller/criteria.js";
+export {
+  createCriteriaAuthority,
+  CriteriaAuthorityError,
+  getCriteriaAuthorityOrigin,
+  requireCriteriaAuthority,
+} from "./controller/criteria.js";
+export type * from "./controller/criteria-publication.js";
+export {
+  createCriteriaPublication,
+  CriteriaPublicationError,
+  getCriteriaPublicationBinding,
+} from "./controller/criteria-publication.js";
 export type { StateErrorCode } from "./controller/validation.js";
 export {
   ControllerError,
@@ -17,6 +32,68 @@ export {
   useTableweaveSelector,
   useTableweaveState,
 } from "./hooks/state.js";
+export {
+  beginControlsRequest,
+  ControlsError,
+  createControlsAuthority,
+  getControlsAuthorityOwner,
+  getControlsRequestBinding,
+  projectControls,
+} from "./presentation/index.js";
+export type * from "./presentation/types.js";
+export type {
+  CriteriaCommittedFrame,
+  CriteriaFrameInput,
+  CriteriaFrameObserver,
+  CriteriaFrameOwner,
+  CriteriaFramePair,
+  CriteriaFrames,
+  CriteriaFramesOptions,
+  CriteriaFrameSnapshot,
+  CriteriaFrameTicket,
+  CriteriaSourceAuthority,
+  CriteriaSourceInput,
+  CriteriaSourceMetadata,
+  CriteriaToolAuthority,
+} from "./presentation/criteria-frame.js";
+export {
+  createCriteriaFrames,
+  CriteriaFrameError,
+  getCriteriaSourceOwner,
+  getCriteriaToolOwner,
+  requireCriteriaSource,
+  requireCriteriaTool,
+} from "./presentation/criteria-frame.js";
+export type {
+  CriteriaFrameReactInput,
+  CriteriaFrameReactResult,
+} from "./presentation/criteria-frame-react.js";
+export { useCriteriaFrame } from "./presentation/criteria-frame-react.js";
+export {
+  defineTable,
+  TableDefinitionError,
+} from "./table/definition.js";
+export type {
+  DataTableEmptyCause,
+  DataTableModel,
+  DataTableOptions,
+  DataTablePublicError,
+  DataTableRecovery,
+  DataTableSourceTarget,
+  DataTableToolTarget,
+  DefineTableInput,
+  TableDefinition,
+  TableToolPlacement,
+  ToolPlacement,
+} from "./table/types.js";
+export {
+  assertDataTableModel,
+  DataTableModelError,
+  getDataTableModelOwner,
+  requireDataTableModel,
+  useDataTable,
+} from "./table/use-data-table.js";
+export { createTableSortFn } from "./tanstack/sort.js";
 export type {
   EmptyKind,
   PageInfo,
@@ -53,6 +130,7 @@ export type {
   NativeInput,
   NativePageInfo,
   NativeRow,
+  NativeSelectionMode,
   NativeTableHandle,
   NativeTableView,
 } from "./tanstack/index.js";

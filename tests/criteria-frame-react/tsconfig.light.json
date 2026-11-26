@@ -1,0 +1,5 @@
+{
+  "extends": "../criteria-frame/tsconfig.light.json",
+  "include": ["./*.ts"],
+  "exclude": ["./types.negative.ts"]
+}

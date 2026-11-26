@@ -1,0 +1,74 @@
+{
+  "next": {
+    "version": "16.4.6",
+    "license": "MIT",
+    "sha256": "ed29e68845a44d4cd30518dd0df0554fcf6f6ada99b81f4e8798d26dc6964f82",
+    "file": "apps/example-next/node_modules/next/package.json",
+    "mode": 436
+  },
+  "@tailwindcss/postcss": {
+    "version": "4.3.5",
+    "license": "MIT",
+    "sha256": "25b37d15d103391954216411949c65a80b7ba530aeec288c1936a443d5dfb601",
+    "file": "apps/example-next/node_modules/@tailwindcss/postcss/package.json",
+    "mode": 436
+  },
+  "react": {
+    "version": "19.3.1",
+    "license": "MIT",
+    "sha256": "9cc9c3de5441a2eea7f41f52f3f2a15a4fc51f90c0b72741f0d7638643a85e67",
+    "file": "apps/example-next/node_modules/react/package.json",
+    "mode": 436
+  },
+  "react-dom": {
+    "version": "19.3.1",
+    "license": "MIT",
+    "sha256": "89d54f11575c9b0f7819962d9d72a31970dfb4d103f07e8b1d1b37e6d1fc3258",
+    "file": "apps/example-next/node_modules/react-dom/package.json",
+    "mode": 436
+  },
+  "@heroui/react": {
+    "version": "3.2.8",
+    "license": "Apache-2.0",
+    "sha256": "0f059c95288bc9b539ceb20563b660fd37da3c60c0353e6d55f8b088d3d341fd",
+    "file": "apps/example-next/node_modules/@heroui/react/package.json",
+    "mode": 436
+  },
+  "@tableweave/react": {
+    "version": "0.0.0-wp01.0",
+    "license": "UNLICENSED",
+    "sha256": "92b255bbbe1479e93240e7f8b419b5ec884ecc31c188b2110c35c4d3924f1cab",
+    "file": "apps/example-next/node_modules/@tableweave/react/package.json",
+    "mode": 436
+  },
+  "next/index.d.ts": {
+    "file": "apps/example-next/node_modules/next/index.d.ts",
+    "sha256": "d3b315763d91265d6b0e7e7fa93cfdb8a80ce7cdd2d9f55ba0f37a22db00bdb8",
+    "bytes": 708,
+    "mode": 436
+  },
+  "next/types.d.ts": {
+    "file": "apps/example-next/node_modules/next/types.d.ts",
+    "sha256": "3dc14e1ab45e497e5d5e4295271d54ff689aeae00b4277979fdd10fa563540ae",
+    "bytes": 68,
+    "mode": 436
+  },
+  "@tailwindcss/postcss/dist/index.d.mts": {
+    "file": "apps/example-next/node_modules/@tailwindcss/postcss/dist/index.d.mts",
+    "sha256": "8469a7cdc540652ed45f9e1f1116bb5f9f21eaae242efcbf4603d0126a28f976",
+    "bytes": 572,
+    "mode": 436
+  },
+  "next:postcss": {
+    "file": "/tmp/opencode/tableweave-wp11-next-example/node_modules/.pnpm/postcss@8.5.23/node_modules/postcss/package.json",
+    "version": "8.5.23",
+    "sha256": "df43e035f054943454c49556c89cea8a288d91f5d4b1a6f4e56d48b85c7ebd75",
+    "license": "MIT"
+  },
+  "@tailwindcss/postcss:postcss": {
+    "file": "/tmp/opencode/tableweave-wp11-next-example/node_modules/.pnpm/postcss@8.5.33/node_modules/postcss/package.json",
+    "version": "8.5.33",
+    "sha256": "8c54659dbae525ebc655d3d329a5c329967471ebc85efcac2066b3f1e9ffab6a",
+    "license": "MIT"
+  }
+}

@@ -1,0 +1,3 @@
+packages/heroui/src/details/details-shell.tsx(308,25): error TS2379: Argument of type '{ direction: string; session: DetailsSession<S, T>; title: string; description?: string; messages?: Partial<DetailsMessages>; className?: string; dismissOnOutside?: boolean; ... 5 more ...; renderInterior?: (context: DetailsRenderContext<...>) => ReactNode; }' is not assignable to parameter of type 'DetailsShellProps<S, T>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'direction' are incompatible.
+    Type 'string' is not assignable to type '"ltr" | "rtl"'.

@@ -1,4 +1,4 @@
-# Exact upstream declaration repair
+# Exact upstream compatibility profiles
 
 `react-aria-components@1.22.1.patch` modifies only `Group.d.ts` and
 `OverlayArrow.d.ts` to avoid contradictory inherited optional properties under
@@ -21,3 +21,58 @@ The root pnpm patch does **not** propagate through Tableweave tarballs. Public
 declarations must compile in unpatched NodeNext TS5.9/6 consumers; direct raw
 HeroUI/RAC imports retain their upstream limitations. Package builds use Bundler
 resolution without relaxing exact optional checks or skipLibCheck:false.
+
+## Start Vite declaration repairs
+
+The two exact TanStack patches retain runtime bytes and genuine source types:
+server-core1.169.40 restores its omitted algorithm union; plugin-core1.171.50
+references the public Router Vite entry for the same CodeSplittingOptions type.
+The root extension also declares Standard Schema1.1.0/cookie-es3.1.1 on server-core,
+where its declarations import them. These are app-only Start compatibility needs,
+not Tableweave library dependencies. See the
+[WP-06 disposition](../docs/planning/wp-06-implementation-plan.md#strict-vite-declaration-repair-disposition--2026-11-24).
+TanStack upstream material is **Copyright (c) 2021-present Tanner Linsley**, under
+the accompanying [MIT license](LICENSE-TANSTACK-MIT). Exact modifications are
+identified in these patch notes/diffs; no runtime file is modified. This is not
+a complete release legal audit. The standalone Start harness carries only these
+app-required patches/extension explicitly; no root repair propagates through a
+Tableweave tarball automatically. Removal requires a reviewed stable replacement
+passing strict app/config, frozen install and actual HTTP/browser/tarball checks.
+
+## HeroUI calendar type-entry repair
+
+Exact `@heroui/react@3.2.8.patch` changes only Calendar/RangeCalendar scoped entry
+declarations to reference the genuine CalendarYearPicker scoped types instead of
+the entire component barrel. This removes unrelated TS6 declaration conflicts
+from the actual used graph without erasing or replacing types. Runtime/version
+and strict flags are unchanged. See the
+[WP-07 disposition](../docs/planning/wp-07-implementation-plan.md#calendar-declaration-repair-disposition--2026-11-24).
+Upstream material is **Copyright 2025 NextUI Inc.**, Apache-2.0 under the
+accompanying license terms; see [attribution](NOTICE-HEROUI). All modified
+declarations carry prominent modification comments. These notes
+and the exact diff identify our declaration modification; no vendor runtime is
+copied or modified. Direct raw-barrel users retain upstream limitations. Remove
+only after a reviewed stable replacement passes the same strict/packed/browser
+proof; no patch failure waiver or publication/legal acceptance is implied.
+The same patch also scopes ListBox item/section references to their genuine
+existing exports, for the same reason. Its complete expectation is exactly the
+Calendar, RangeCalendar and ListBox entry declarations; no runtime file changes.
+
+## WP-08 explicit clone-only runtime profile
+
+The user selects the temporary application-side compatibility path for private/
+prerelease delivery, conditional on independent review and real archive tests.
+`react-aria-components@1.22.1-tableweave.patch` is the exact byte concatenation of
+the preserved original two-declaration repair and the reviewed styled-package
+[runtime asset](../packages/heroui/compat/rac-table-clone/runtime.patch). Only this
+combined file is registered for the one workspace RAC selector. Hash
+2ea5eb125d410033ad4968533b578c2698ba1eefabeb8f0c4dd273bd8870eeca is locked;
+no version changes, forced flags or broader traversal repair are introduced.
+
+The separate shipped asset is runtime-only. Consumers extract it from the actual
+styled archive before installation, register it in their own configuration and
+invoke the verifier. It is not propagated automatically by the development lock.
+Read [setup and limits](../packages/heroui/compat/rac-table-clone/README.md) before
+using the private renderer. Unpatched public types remain separately tested, while
+ordinary unpatched grouped/Strict runtime is known failing. Attribution and the
+Apache license accompany the compat asset; no legal/publication audit is claimed.

@@ -1,0 +1,86 @@
+{
+  "action": "pins",
+  "status": "source-only-passed",
+  "results": [
+    {
+      "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/consumers/wp13-storage/tsconfig.json",
+        "--listFilesOnly",
+        "--pretty",
+        "false"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/consumers/wp13/tsconfig.light.json",
+        "--listFilesOnly",
+        "--pretty",
+        "false"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "scopeBefore": {
+    "oldFiles": 2886,
+    "canonical155": 155,
+    "delta": [
+      "tests/consumers/wp13/README.md",
+      "tests/consumers/wp13/cli.mjs",
+      "tests/consumers/wp13/lib/boundary.mjs",
+      "tests/consumers/wp13/lib/generation.mjs",
+      "tests/consumers/wp13/lib/installer.mjs",
+      "tests/consumers/wp13/protocol.json",
+      "tests/consumers/wp13/lib/storage-roots.mjs"
+    ],
+    "metadata": [
+      "TASKS.md",
+      "docs/planning/wp-13-hdd-storage-plan.md"
+    ],
+    "pinDrift": [
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/cli.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/boundary.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/generation.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/installer.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/protocol.json",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/README.md"
+    ]
+  },
+  "scopeAfter": {
+    "oldFiles": 2886,
+    "canonical155": 155,
+    "delta": [
+      "tests/consumers/wp13/README.md",
+      "tests/consumers/wp13/cli.mjs",
+      "tests/consumers/wp13/lib/boundary.mjs",
+      "tests/consumers/wp13/lib/generation.mjs",
+      "tests/consumers/wp13/lib/installer.mjs",
+      "tests/consumers/wp13/protocol.json",
+      "tests/consumers/wp13/lib/storage-roots.mjs"
+    ],
+    "metadata": [
+      "TASKS.md",
+      "docs/planning/wp-13-hdd-storage-plan.md"
+    ],
+    "pinDrift": [
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/cli.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/boundary.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/generation.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/lib/installer.mjs",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/protocol.json",
+      "/tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/README.md"
+    ]
+  },
+  "noRuntime": true,
+  "changedInputs": []
+}

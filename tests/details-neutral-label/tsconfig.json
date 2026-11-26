@@ -1,0 +1,5 @@
+{
+  "extends": "../data-table/details-accessory/tsconfig.light.json",
+  "include": ["./*.ts", "./*.tsx"],
+  "exclude": ["./types.negative.ts", "./preimages", "./.artifacts"]
+}

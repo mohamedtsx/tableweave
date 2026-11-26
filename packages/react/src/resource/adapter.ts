@@ -1,6 +1,8 @@
+import type { QueryExecutionExtent } from "../contracts/execution.js";
 import { cloneJson, freeze } from "../contracts/json.js";
 import type { WireQuery } from "../contracts/types.js";
 import type {
+  PageInfo,
   ResourceAdapter,
   ResourceAdapterOptions,
   ResourceContext,
@@ -18,6 +20,78 @@ import {
 
 function invalid(): never {
   throw new Error("Invalid Tableweave resource input.");
+}
+
+const adapterIdentities = new WeakSet<object>();
+
+/** Source-private factory identity only; context, access and liveness are separate. */
+export function hasResourceAdapterIdentity(value: unknown): boolean {
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    adapterIdentities.has(value)
+  );
+}
+
+// Capture only consumed own data; unrelated envelope fields (including retry's
+// generation) are not enumerated. The cache also covers aliased payload objects.
+class Capture {
+  private readonly fields = new WeakMap<
+    object,
+    Map<string, PropertyDescriptor | undefined>
+  >();
+
+  descriptor(input: unknown, key: string): PropertyDescriptor | undefined {
+    if (
+      input === null ||
+      (typeof input !== "object" && typeof input !== "function")
+    )
+      return invalid();
+    let fields = this.fields.get(input);
+    if (!fields) {
+      fields = new Map();
+      this.fields.set(input, fields);
+    }
+    if (!fields.has(key))
+      fields.set(key, Object.getOwnPropertyDescriptor(input, key));
+    return fields.get(key);
+  }
+
+  data(input: unknown, key: string, optional = false): unknown {
+    const field = this.descriptor(input, key);
+    if (!field && optional) return undefined;
+    if (!field || !Object.hasOwn(field, "value")) return invalid();
+    return field.value;
+  }
+
+  extent(input: unknown, query: WireQuery): QueryExecutionExtent {
+    if (!input || typeof input !== "object" || Array.isArray(input))
+      return invalid();
+    const prototype: unknown = Object.getPrototypeOf(input);
+    if (prototype !== Object.prototype && prototype !== null) return invalid();
+    const keys = Reflect.ownKeys(input);
+    for (const key of keys) {
+      if (
+        typeof key !== "string" ||
+        !["kind", "pageIndex", "pageSize"].includes(key) ||
+        !this.descriptor(input, key)?.enumerable
+      )
+        return invalid();
+      this.data(input, key);
+    }
+    const kind = this.data(input, "kind");
+    if (kind === "complete" && keys.length === 1)
+      return Object.freeze({ kind });
+    if (kind !== "page" || keys.length !== 3) return invalid();
+    const pageIndex = this.data(input, "pageIndex");
+    const pageSize = this.data(input, "pageSize");
+    if (
+      pageIndex !== query.pagination.pageIndex ||
+      pageSize !== query.pagination.pageSize
+    )
+      return invalid();
+    return Object.freeze({ kind, pageIndex, pageSize });
+  }
 }
 function contextCopy(context: ResourceContext): ResourceContext {
   if (
@@ -137,22 +211,43 @@ export function createResourceAdapter<T, Q extends WireQuery = WireQuery>(
         notifying ||
         !core.active ||
         !core.context.access ||
-        core.invalidationFailed ||
-        input.definitionKey !== core.context.definitionKey ||
-        input.scopeKey !== core.context.scopeKey
+        core.invalidationFailed
       )
         return null;
-      if (
-        typeof input.queryKey !== "string" ||
-        !input.queryKey ||
-        typeof input.requestKey !== "string" ||
-        !input.requestKey ||
-        (input.retry !== undefined && typeof input.retry !== "function")
-      )
-        invalid();
+      const currentContext = core.context;
+      const capture = new Capture();
       let query: Q;
+      let definitionKey: string;
+      let scopeKey: string;
+      let queryKey: string;
+      let requestKey: string;
+      let retry: ResourceRequestInput<Q>["retry"];
+      let metadata: {
+        readonly extent?: QueryExecutionExtent;
+        readonly evaluatedAt?: number;
+      } = {};
       try {
-        query = freeze(cloneJson(input.query));
+        const definition = capture.data(input, "definitionKey", true);
+        if (definition !== currentContext.definitionKey) return null;
+        const scope = capture.data(input, "scopeKey", true);
+        if (scope !== currentContext.scopeKey) return null;
+        definitionKey = definition;
+        scopeKey = scope;
+        const key = capture.data(input, "queryKey");
+        const request = capture.data(input, "requestKey");
+        const callback = capture.data(input, "retry", true);
+        if (
+          typeof key !== "string" ||
+          !key ||
+          typeof request !== "string" ||
+          !request ||
+          (callback !== undefined && typeof callback !== "function")
+        )
+          invalid();
+        queryKey = key;
+        requestKey = request;
+        retry = callback as ResourceRequestInput<Q>["retry"];
+        query = freeze(cloneJson(capture.data(input, "query"))) as Q;
         if (
           query.version !== 1 ||
           !Number.isSafeInteger(query.pagination.pageIndex) ||
@@ -161,19 +256,44 @@ export function createResourceAdapter<T, Q extends WireQuery = WireQuery>(
           query.pagination.pageSize < 1
         )
           invalid();
+        const extent = capture.descriptor(input, "extent");
+        const time = capture.descriptor(input, "evaluatedAt");
+        if (extent || time) {
+          if (!extent?.enumerable || !time?.enumerable) invalid();
+          const now = capture.data(input, "evaluatedAt");
+          if (
+            typeof now !== "number" ||
+            !Number.isFinite(now) ||
+            !Number.isFinite(new Date(now).getTime())
+          )
+            invalid();
+          metadata = {
+            extent: capture.extent(capture.data(input, "extent"), query),
+            evaluatedAt: now,
+          };
+        }
       } catch {
         return invalid();
       }
+      if (
+        core.context !== currentContext ||
+        !core.active ||
+        !core.context.access ||
+        core.invalidationFailed ||
+        notifying
+      )
+        return null;
       const request = Object.freeze({
-        definitionKey: input.definitionKey,
-        scopeKey: input.scopeKey,
-        queryKey: input.queryKey,
-        requestKey: input.requestKey,
+        definitionKey,
+        scopeKey,
+        queryKey,
+        requestKey,
         generation: ++sequence,
         query,
+        ...metadata,
       });
       open = true;
-      retryCallback = input.retry;
+      retryCallback = retry;
       core = { ...core, kind: "pending", request, error: null };
       publish();
       // Observers may synchronously revoke/switch scope. Do not hand an obsolete
@@ -208,34 +328,80 @@ export function createResourceAdapter<T, Q extends WireQuery = WireQuery>(
     begin,
     succeed(request: ResourceRequest<Q>, result: ResourceSuccess<T>) {
       return change(false, () => {
-        if (!accepts(request) || result.source === "placeholder") return false;
-        if (
-          result.source !== "fresh" ||
-          !Array.isArray(result.records) ||
-          !["dataset", "filtered", "unknown"].includes(result.emptyKind) ||
-          typeof result.receivedAt !== "string" ||
-          !Number.isFinite(Date.parse(result.receivedAt))
-        )
-          invalid();
-        const page = result.page;
-        if (
-          !page ||
-          (page.kind !== "known" && page.kind !== "unknown") ||
-          (page.kind === "known" &&
-            (!Number.isSafeInteger(page.total) || page.total < 0)) ||
-          (page.kind === "unknown" && typeof page.hasNextPage !== "boolean")
-        )
-          invalid();
+        if (!accepts(request)) return false;
+        const currentContext = core.context;
+        const capture = new Capture();
+        const records: T[] = [];
+        let page: PageInfo;
+        let emptyKind: ResourceSuccess<T>["emptyKind"];
+        let receivedAt: string;
+        try {
+          const source = capture.data(result, "source");
+          if (source === "placeholder") return false;
+          if (
+            source !== "fresh" ||
+            capture.descriptor(result, "extent") ||
+            capture.descriptor(result, "evaluatedAt")
+          )
+            invalid();
+          const provided = capture.data(result, "records");
+          const empty = capture.data(result, "emptyKind");
+          const received = capture.data(result, "receivedAt");
+          if (
+            !Array.isArray(provided) ||
+            typeof empty !== "string" ||
+            !["dataset", "filtered", "unknown"].includes(empty) ||
+            typeof received !== "string" ||
+            !Number.isFinite(Date.parse(received))
+          )
+            invalid();
+          emptyKind = empty as ResourceSuccess<T>["emptyKind"];
+          receivedAt = received;
+          const suppliedPage = capture.data(result, "page");
+          const kind = capture.data(suppliedPage, "kind");
+          if (kind === "known") {
+            const total = capture.data(suppliedPage, "total");
+            if (
+              typeof total !== "number" ||
+              !Number.isSafeInteger(total) ||
+              total < 0
+            )
+              invalid();
+            page = Object.freeze({ kind, total });
+          } else if (kind === "unknown") {
+            const hasNextPage = capture.data(suppliedPage, "hasNextPage");
+            if (typeof hasNextPage !== "boolean") invalid();
+            page = Object.freeze({ kind, hasNextPage });
+          } else invalid();
+          const length = capture.data(provided, "length");
+          if (
+            typeof length !== "number" ||
+            !Number.isSafeInteger(length) ||
+            length < 0
+          )
+            invalid();
+          for (let index = 0; index < length; index++) {
+            const field = capture.descriptor(provided, String(index));
+            if (!field && request.extent?.kind === "complete") invalid();
+            // Legacy/page holes still materialize undefined, as the old array
+            // spread did. Accessor indices are never invoked in either mode.
+            records.push(capture.data(provided, String(index), true) as T);
+          }
+          if (
+            request.extent?.kind === "complete" &&
+            (page.kind !== "known" || page.total !== records.length)
+          )
+            invalid();
+        } catch {
+          return invalid();
+        }
+        if (!accepts(request) || core.context !== currentContext) return false;
         const snapshot = Object.freeze({
           ...request,
-          records: Object.freeze([...result.records]),
-          page: Object.freeze(
-            page.kind === "known"
-              ? { kind: "known" as const, total: page.total }
-              : { kind: "unknown" as const, hasNextPage: page.hasNextPage },
-          ),
-          emptyKind: result.emptyKind,
-          receivedAt: result.receivedAt,
+          records: Object.freeze(records),
+          page,
+          emptyKind,
+          receivedAt,
         });
         open = false;
         retryCallback = undefined;
@@ -313,5 +479,7 @@ export function createResourceAdapter<T, Q extends WireQuery = WireQuery>(
       });
     },
   };
-  return Object.freeze(adapter);
+  Object.freeze(adapter);
+  adapterIdentities.add(adapter);
+  return adapter;
 }

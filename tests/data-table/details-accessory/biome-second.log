@@ -1,0 +1,26 @@
+packages/heroui/src/data-table/details-provider.tsx:125:9 lint/a11y/useSemanticElements ━━━━━━━━━━━━
+
+  × The elements with this role can be changed to the following elements:
+    <fieldset>
+  
+    123 │       <span
+    124 │         ref={neutral}
+  > 125 │         role="group"
+        │         ^^^^^^^^^^^^
+    126 │         tabIndex={-1}
+    127 │         aria-label="Record details region"
+  
+  i For examples and more information, see WAI-ARIA Roles
+  
+  i Replace with one of these elements:
+  
+  - <fieldset>
+  
+
+Checked 21 files in 58ms. Fixed 6 files.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
+  
+

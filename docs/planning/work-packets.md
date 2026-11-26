@@ -125,6 +125,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-06 Primary Start and Query SSR integration
 
+- **Execution plan:** [WP-06 bounded plan](wp-06-implementation-plan.md); TASKS
+  records delegated authority, producer handoffs, exact installs and G-04 review.
+
 - **Role/dependencies:** integration worker; WP-04/WP-05.
 - **Read:** [integration contract](../engineering/integrations.md), security,
   [G-04](../engineering/feasibility.md#g-04-ssr-and-hydration), AC-22–AC-24.
@@ -140,6 +143,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-07 Builder, tabs, search, date and async choices
 
+- **Execution plan:** [WP-07 bounded plan](wp-07-implementation-plan.md); TASKS
+  records delegated plan/visual authority, producer handshakes and review status.
+
 - **Role/dependencies:** tools UI worker; WP-04/WP-05, relevant reviewed/provisional
   visual dispositions. Coordinator allocates toolbar/shared files.
 - **Read:** operators, shared rules, design F-02–F-07; AC-02–AC-08.
@@ -154,6 +160,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
   Export. Return story IDs/FRs, interactions and component integration contracts.
 
 ## WP-08 Selection, sort, pagination and visibility
+
+- **Execution plan:** [WP-08 bounded plan](wp-08-implementation-plan.md); only
+  core presentation/selection-mode producer work is initially assigned. TASKS
+  records actual authority, interface handoffs and independent review status.
 
 - **Role/dependencies:** table-controls worker; WP-04/WP-05, relevant visual review.
 - **Read:** shared rules, rendering/reordering column section, AC-08–AC-11/AC-13/
@@ -186,6 +196,11 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-10 Optional sortable feasibility and delivery
 
+The [staged plan](wp-10-implementation-plan.md) and [research](wp-10-research.md)
+record the delivered pure Stage1. Its [explicit core entry](wp-10-core-entry-plan.md)
+adds source discovery only; authority/ref/interlock and optional adapter remain
+separate actual contract/code allocations, not G-02 acceptance.
+
 - **Role/dependencies:** reorder worker; WP-04/WP-05.
 - **Read:** [reordering](../engineering/reordering.md), G-02, AC-12/AC-13/AC-21.
 - **Paths:** `packages/heroui/src/sortable`, optional export integration and move
@@ -200,6 +215,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
   product downgrade. Synthetic persistence is labeled; no business backend write.
 
 ## WP-11 Examples, recipes and complete workbench
+
+The [staged implementation plan](wp-11-implementation-plan.md) selects the actual
+provisional shared-fixture/facade catalog lease. TASKS owns live status; blocked
+WP-10 drag is not completed by downstream example authoring.
 
 - **Role/dependencies:** developer-experience worker; WP-06–WP-10 and design map.
 - **Read:** release gates, [Storybook contract](../design/storybook.md), AC-01/AC-27.
@@ -216,6 +235,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-12 Integrated browser and manual accessibility acceptance
 
+The [bounded source-authoring plan](wp-12-implementation-plan.md) selects a new
+two-instance integrated fixture/manual workbook. Runtime/manual acceptance remains
+in the user's final phase; blocked WP-10/G-02 and unfinished framework proof stay open.
+
 - **Role/dependencies:** verification reviewer; integrated WP-11.
 - **Read:** [testing](../testing/README.md), AC-01–AC-27, quality and scenes.
 - **Paths:** interaction/accessibility/browser fixtures and dated evidence;
@@ -229,6 +252,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
   never infer WCAG from axe. Return exact tested matrix and unresolved limitations.
 
 ## WP-13 Packed compatibility and release tooling
+
+The [additive current-archive source plan](wp-13-implementation-plan.md) preserves
+historical generations and separates ordinary/private-profile installs. Source
+authoring is provisional; build/pack/install/type-negative/runtime proof stays final.
 
 - **Role/dependencies:** package worker; integrated WP-11; early harness allowed
   after WP-04 with explicit scope. Exclusive manifests/lockfile ownership.
@@ -246,6 +273,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-14 Reproducible performance acceptance
 
+The [source-authoring plan](wp-14-implementation-plan.md) fixes workload/timing/
+sample/report obligations. Dedicated runner and actual measurement remain deferred;
+authored instrumentation cannot pass performance acceptance.
+
 - **Role/dependencies:** performance reviewer; integrated WP-11/WP-13.
 - **Read:** [fixed protocol](../engineering/performance.md), AC-28.
 - **Paths:** `tests/benchmarks`, deterministic fixtures, sanitized raw samples/
@@ -258,6 +289,10 @@ Required missing proof prevents that packet's completion, not unrelated work.
   portion of G-05 for integrated readiness review.
 
 ## WP-15 Real consumer and stable readiness
+
+The [eligible documentation lease](wp-15-readiness-plan.md) authors candidate/
+consumer protocols only. No actual target/consumer/release acceptance follows;
+separately deferred authority and engineering gates remain required.
 
 - **Role/dependencies:** integration/release reviewer; WP-12–WP-14 and separate
   actual consumer target/access/change authorization.

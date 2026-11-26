@@ -1,0 +1,306 @@
+{
+  "status": "authored-current-public-surface-unrun",
+  "packages": {
+    "react": {
+      "sideEffects": false,
+      "plain": ["./contracts", "./filters", "./criteria", "./reordering"],
+      "exports": {
+        ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+        "./contracts": {
+          "types": "./dist/contracts/index.d.ts",
+          "import": "./dist/contracts/index.js"
+        },
+        "./filters": {
+          "types": "./dist/filters/index.d.ts",
+          "import": "./dist/filters/index.js"
+        },
+        "./criteria": {
+          "types": "./dist/criteria/index.d.ts",
+          "import": "./dist/criteria/index.js"
+        },
+        "./reordering": {
+          "types": "./dist/reordering/index.d.ts",
+          "import": "./dist/reordering/index.js"
+        },
+        "./reordering-controller": {
+          "types": "./dist/reordering-controller/index.d.ts",
+          "import": "./dist/reordering-controller/index.js"
+        }
+      },
+      "runtimeRequired": {
+        ".": [
+          "defineTable",
+          "useDataTable",
+          "requireDataTableModel",
+          "renderNativeComponent",
+          "createCriteriaAuthority",
+          "createCriteriaPublication",
+          "createCriteriaFrames",
+          "useCriteriaFrame",
+          "useNativeTable",
+          "createResourceAdapter"
+        ],
+        "./contracts": [
+          "defineQuerySchema",
+          "createQuery",
+          "parseQuery",
+          "getQueryIdentity"
+        ],
+        "./filters": [
+          "createFilterEvaluator",
+          "createOperatorRegistry",
+          "defineOperator",
+          "createOptionSource"
+        ],
+        "./criteria": [
+          "createCriteriaAuthority",
+          "createCriteriaPublication",
+          "getCriteriaPublicationBinding"
+        ],
+        "./reordering": [
+          "ReorderError",
+          "reorderLimits",
+          "moveVisibleColumn",
+          "createRowMoveCoordinator"
+        ]
+      }
+    },
+    "heroui": {
+      "sideEffects": ["./dist/styles.css"],
+      "plain": [],
+      "exports": {
+        ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+        "./sortable": {
+          "types": "./dist/sortable/index.d.ts",
+          "import": "./dist/sortable/index.js"
+        },
+        "./styles.css": "./dist/styles.css"
+      },
+      "runtimeRequired": {
+        ".": [
+          "DataTable",
+          "RecordDetails",
+          "useDetailsAccessory",
+          "TableDetailsTrigger",
+          "DetailsShell",
+          "DetailsTrigger",
+          "useDetailsSession",
+          "englishDataTableLocale",
+          "arabicDataTableLocale",
+          "NativeCollection",
+          "FilterBuilder",
+          "Pagination"
+        ],
+        "./sortable": []
+      }
+    }
+  },
+  "helper": {
+    "runtime": [
+      "createReorderController",
+      "captureReorderNavigation",
+      "claimReorderUI",
+      "getReorderAdmissionOwner",
+      "joinReorderModel",
+      "observeReorderUI",
+      "releaseReorderUI",
+      "ReorderAdmissionError",
+      "requireReorderAdmission",
+      "requireReorderModel",
+      "requireReorderNavigation",
+      "revokeReorderInteraction",
+      "suspendReorderUI"
+    ],
+    "types": [
+      "ReorderAdmission",
+      "ReorderAdmissionLease",
+      "ReorderAdmissionOwner",
+      "ReorderAdmissionSnapshot",
+      "ReorderAdvanceReason",
+      "ReorderApplicationMetadata",
+      "ReorderControllerOptions",
+      "ReorderControllerResult",
+      "ReorderInteraction",
+      "ReorderModelJoin",
+      "ReorderNavigationOrigin",
+      "ReorderUIBinding",
+      "ReorderUIMetadata"
+    ]
+  },
+  "headlessForbidden": [
+    "@tableweave/heroui",
+    "@heroui/react",
+    "@heroui/styles",
+    "tailwindcss",
+    "react-aria",
+    "react-aria-components",
+    "@dnd-kit",
+    "@tanstack/react-query",
+    "@tanstack/react-router",
+    "next",
+    "node:http",
+    "node:https",
+    "node:net"
+  ],
+  "defaultStyledForbidden": [
+    "@dnd-kit",
+    "@tableweave/heroui/sortable",
+    "@tanstack/react-query",
+    "@tanstack/react-router",
+    "next"
+  ],
+  "pins": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "@tanstack/react-table": "9.3.1",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "6.0.3",
+    "typescript-5-9": "npm:typescript@5.9.3",
+    "vite": "7.3.8",
+    "@heroui/react": "3.2.8",
+    "@heroui/styles": "3.2.8",
+    "@internationalized/date": "3.12.4",
+    "@react-aria/ssr": "3.10.1",
+    "@react-aria/utils": "3.34.1",
+    "react-aria": "3.53.1",
+    "react-aria-components": "1.22.1",
+    "tailwindcss": "4.3.5",
+    "@tailwindcss/vite": "4.3.5",
+    "@tailwindcss/postcss": "4.3.5",
+    "@vitejs/plugin-react": "5.2.0",
+    "next": "16.4.6",
+    "@tanstack/query-core": "5.108.4",
+    "@tanstack/react-query": "5.108.4",
+    "@tanstack/react-router": "1.170.42",
+    "@tanstack/react-router-ssr-query": "1.167.3",
+    "@tanstack/react-start": "1.168.61",
+    "@tanstack/router-core": "1.171.35",
+    "@playwright/test": "1.65.1"
+  },
+  "familyDependencies": {
+    "headless": [
+      "@tableweave/react",
+      "@tanstack/react-table",
+      "react",
+      "react-dom",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
+      "typescript",
+      "typescript-5-9",
+      "vite"
+    ],
+    "styled": [
+      "@tableweave/react",
+      "@tableweave/heroui",
+      "@tanstack/react-table",
+      "react",
+      "react-dom",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
+      "typescript",
+      "typescript-5-9",
+      "vite",
+      "@heroui/react",
+      "@heroui/styles",
+      "@internationalized/date",
+      "@react-aria/ssr",
+      "@react-aria/utils",
+      "react-aria",
+      "react-aria-components",
+      "tailwindcss",
+      "@tailwindcss/vite"
+    ],
+    "vite-headless": [
+      "@tableweave/react",
+      "@tanstack/react-table",
+      "react",
+      "react-dom",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
+      "typescript",
+      "typescript-5-9",
+      "vite",
+      "@vitejs/plugin-react",
+      "@playwright/test"
+    ],
+    "vite-styled": [
+      "@tableweave/react",
+      "@tableweave/heroui",
+      "@tanstack/react-table",
+      "react",
+      "react-dom",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
+      "typescript",
+      "typescript-5-9",
+      "vite",
+      "@heroui/react",
+      "@heroui/styles",
+      "@internationalized/date",
+      "@react-aria/ssr",
+      "@react-aria/utils",
+      "react-aria",
+      "react-aria-components",
+      "tailwindcss",
+      "@tailwindcss/vite",
+      "@vitejs/plugin-react",
+      "@playwright/test"
+    ],
+    "next": [
+      "@tableweave/react",
+      "@tableweave/heroui",
+      "@tanstack/react-table",
+      "react",
+      "react-dom",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
+      "typescript",
+      "typescript-5-9",
+      "vite",
+      "@heroui/react",
+      "@heroui/styles",
+      "@internationalized/date",
+      "@react-aria/ssr",
+      "@react-aria/utils",
+      "react-aria",
+      "react-aria-components",
+      "tailwindcss",
+      "@tailwindcss/vite",
+      "@tailwindcss/postcss",
+      "next",
+      "@playwright/test"
+    ],
+    "start": [
+      "@tableweave/react",
+      "@tanstack/react-table",
+      "react",
+      "react-dom",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
+      "typescript",
+      "typescript-5-9",
+      "vite",
+      "@vitejs/plugin-react",
+      "@tanstack/query-core",
+      "@tanstack/react-query",
+      "@tanstack/react-router",
+      "@tanstack/react-router-ssr-query",
+      "@tanstack/react-start",
+      "@tanstack/router-core",
+      "@playwright/test"
+    ]
+  },
+  "historicalDisposition": {
+    "DataTableAbsenceNegative": "superseded only in NEW fixtures; original tests/consumers/styled.ts unchanged",
+    "useTableweaveNegative": "still absent; retain as an intentional negative",
+    "rootCheck": "not reconciled by this lease; CURRENT remainsfc01"
+  }
+}

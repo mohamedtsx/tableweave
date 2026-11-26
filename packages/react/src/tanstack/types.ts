@@ -23,6 +23,7 @@ export interface NativeColumnMeta {
   readonly utility?: boolean;
   readonly rowHeader?: boolean;
 }
+export type NativeSelectionMode = false | "single" | "multiple";
 export type NativeFeatures = typeof nativeFeatures;
 export type NativeColumnDef<T extends RowData, Value = unknown> = ColumnDef<
   NativeFeatures,
@@ -49,17 +50,19 @@ export interface NativeDefinitionInput<
   readonly columns: readonly NativeColumnDef<T>[];
   readonly getRowId: (record: T) => string;
   readonly isRowSelectable?: (record: T) => boolean;
-  readonly selection?: boolean;
+  readonly selection?: boolean | "single" | "multiple";
   readonly details?: boolean;
   readonly multiSort?: boolean;
   readonly evaluation?: Omit<EvaluationOptions<S, T>, "now">;
 }
 export interface NativeDefinition<S extends QuerySchema, T extends RowData> {
   readonly controllerDefinition: ControllerDefinition<S>;
+  readonly paginationEnabled: boolean;
   readonly columns: readonly NativeColumnDef<T>[];
   readonly getRowId: (record: T) => string;
   readonly isRowSelectable?: (record: T) => boolean;
   readonly multiSort: boolean;
+  readonly selectionMode: NativeSelectionMode;
   readonly evaluation: Omit<EvaluationOptions<S, T>, "now">;
 }
 export type NativeControllerOptions<S extends QuerySchema> = Omit<
@@ -75,6 +78,11 @@ export type NativeInput<T> =
       readonly mode: "server";
       readonly records: readonly T[];
       readonly pageInfo: NativePageInfo;
+    }
+  | {
+      readonly mode: "server-complete";
+      readonly records: readonly T[];
+      readonly pageInfo: Extract<NativePageInfo, { readonly kind: "known" }>;
     };
 
 // Supported native methods route only through controller callbacks. Native row /
@@ -101,6 +109,7 @@ export type NativeTableHandle<T extends RowData> = Pick<
   readonly atoms: Readonly<ReactTable<NativeFeatures, T>["atoms"]>;
 };
 export interface NativeTableView<S extends QuerySchema, T extends RowData> {
+  readonly selectionMode: NativeSelectionMode;
   readonly native: NativeTableHandle<T>;
   readonly controller: TableController<S>;
   readonly state: TableState<S>;
@@ -114,6 +123,7 @@ export interface NativeTableView<S extends QuerySchema, T extends RowData> {
     readonly mixed: boolean;
   };
   readonly pagination: {
+    readonly enabled: boolean;
     readonly pageInfo: NativePageInfo;
     readonly pageCount: number | null;
     readonly canPreviousPage: boolean;

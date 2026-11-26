@@ -1,0 +1,12 @@
+{
+  "positive": {
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  "static": {
+    "status": 0,
+    "signal": null,
+    "error": null
+  }
+}

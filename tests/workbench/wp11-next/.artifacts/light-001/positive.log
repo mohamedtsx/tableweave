@@ -1,0 +1,2 @@
+node_modules/.pnpm/next@16.4.6_@playwright+test@1.65.1_@types+node@24.19.2_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/client/components/segment-cache/cache.d.ts(161,21): error TS2304: Cannot find name 'PromiseWithResolvers'.
+node_modules/.pnpm/next@16.4.6_@playwright+test@1.65.1_@types+node@24.19.2_react-dom@19.3.1_react@19.3.1__react@19.3.1/node_modules/next/dist/server/dynamic-rendering-utils.d.ts(120,35): error TS2304: Cannot find name 'PromiseWithResolvers'.

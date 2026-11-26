@@ -143,6 +143,10 @@ export interface ControllerOptions<S extends QuerySchema> {
   readonly now: () => number;
   /** Pure synchronous constraint; throw to reject before proposal or commit. */
   readonly validateState?: (state: TableState<S>) => void;
+  /** Pure synchronous capability guard on a captured immutable command envelope,
+   * including no-ops and final acceptance. Function updater references survive.
+   * Not backend authorization; never fetch or mutate from this callback. */
+  readonly validateCommand?: (command: TableCommand<S>) => void;
   readonly onRequest?: (proposal: StateProposal<S>) => void;
   readonly onCommit?: (transition: StateTransition<S>) => void;
   readonly onQueryChange?: (

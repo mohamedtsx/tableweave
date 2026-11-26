@@ -1,0 +1,175 @@
+[
+  {
+    "name": "inputs-before",
+    "args": [
+      "tests/workbench/wp11-start-facade/inputs.mjs",
+      "tests/workbench/wp11-start-facade/.artifacts/light-003/inputs.json"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "positive",
+    "args": [
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "apps/example-start-facade/tsconfig.source-light.json",
+      "--pretty",
+      "false"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "scope",
+    "args": [
+      "tests/workbench/wp11-start-facade/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "static",
+    "args": [
+      "tests/workbench/wp11-start-facade/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-consumer.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/consumer.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-inputs.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/inputs.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-light.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/light.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-negative.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/negative.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-production-host.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/production-host.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-scope.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/scope.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-seal.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/seal.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-static.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/static.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "syntax-vitest.config.mjs",
+    "args": [
+      "--check",
+      "tests/workbench/wp11-start-facade/vitest.config.mjs"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "biome",
+    "args": [
+      "node_modules/@biomejs/biome/bin/biome",
+      "check",
+      "--assist-enabled=false",
+      "apps/example-start-facade/src/application/bootstrap-session.ts",
+      "apps/example-start-facade/src/application/codec.ts",
+      "apps/example-start-facade/src/application/functions.ts",
+      "apps/example-start-facade/src/application/query-options.ts",
+      "apps/example-start-facade/src/application/reader.server.ts",
+      "apps/example-start-facade/src/application/table-source.ts",
+      "apps/example-start-facade/src/application/transport.ts",
+      "apps/example-start-facade/src/application/types.ts",
+      "apps/example-start-facade/src/register.d.ts",
+      "apps/example-start-facade/src/router.tsx",
+      "apps/example-start-facade/src/routes/__root.tsx",
+      "apps/example-start-facade/src/routes/away.tsx",
+      "apps/example-start-facade/src/routes/index.tsx",
+      "apps/example-start-facade/src/start.ts",
+      "apps/example-start-facade/src/table/HeadlessTable.tsx",
+      "apps/example-start-facade/src/table/TablePage.tsx",
+      "apps/example-start-facade/tsconfig.json",
+      "apps/example-start-facade/tsconfig.source-light.json",
+      "apps/example-start-facade/vite.config.ts",
+      "tests/workbench/wp11-start-facade/consumer.mjs",
+      "tests/workbench/wp11-start-facade/final/browser.spec.ts",
+      "tests/workbench/wp11-start-facade/final/contracts.test.ts",
+      "tests/workbench/wp11-start-facade/final/negative.ts",
+      "tests/workbench/wp11-start-facade/final/tsconfig.negative.json",
+      "tests/workbench/wp11-start-facade/inputs.mjs",
+      "tests/workbench/wp11-start-facade/light.mjs",
+      "tests/workbench/wp11-start-facade/negative.mjs",
+      "tests/workbench/wp11-start-facade/playwright.config.ts",
+      "tests/workbench/wp11-start-facade/production-host.mjs",
+      "tests/workbench/wp11-start-facade/scope.mjs",
+      "tests/workbench/wp11-start-facade/sdk-contracts.ts",
+      "tests/workbench/wp11-start-facade/seal.mjs",
+      "tests/workbench/wp11-start-facade/static.mjs",
+      "tests/workbench/wp11-start-facade/vitest.config.mjs",
+      "--max-diagnostics=100"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  {
+    "name": "inputs-after",
+    "args": [
+      "tests/workbench/wp11-start-facade/inputs.mjs",
+      "tests/workbench/wp11-start-facade/.artifacts/light-003/inputs.json",
+      "verify"
+    ],
+    "status": 0,
+    "signal": null
+  }
+]

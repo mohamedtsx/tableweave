@@ -12,12 +12,23 @@ transition/snapshot/query/selector hooks; [its contract](wp-03-controller.md) ow
 their exact names, ownership and lifecycle. `defineTable`, `useTableweave`, the
 whole-table facade, `DataTable` and sortable integration remain unavailable.
 
+WP-09 now has [provisional source composition](wp-09-private-composition.md),
+including actual `defineTable`/`useDataTable`/`DataTable`, details and locale source
+exports. They are not an accepted packet, rebuilt installed package or packed/public
+release contract; full runtime/visual/SSR/independent proof remains deferred. This source status
+supersedes only the blanket unavailability wording above, not prior gate limits.
+
 The separate [WP-04 producer](wp-04-native.md) exposes bounded root native
 definition/controller/hook helpers with delegated scoped G-01 approval; this is
 not personal maintainer acceptance or the proposed whole-table facade. WP-05's
 [plain resource producer](resources.md#implemented-private-producer) now adds
 `createResourceAdapter`, `projectResourceView`, `useTableweaveResource` and tagged
 types with scoped delegated G-03 proof; it is not a fetch cache or SSR integration.
+
+The [WP-07 tool candidate](wp-07-tools.md) adds actual server-safe editor/option
+helpers and independent styled FilterBuilder/Search/Tabs/Date components with own
+public prop types. Pure/public type checks pass, but UI findings/corrected packed
+interaction remain open; this is not a full table facade or release API freeze.
 
 ## Schema versus rendering definition
 

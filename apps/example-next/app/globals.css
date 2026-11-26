@@ -1,0 +1,33 @@
+@layer theme, base, components, tableweave, utilities;
+
+@import "tailwindcss" source(none);
+@import "@heroui/styles";
+@import "@tableweave/heroui/styles.css";
+
+@source "./";
+@source "../../examples/shared";
+
+body {
+  margin: 0;
+}
+.example-shell {
+  max-width: 90rem;
+  margin-inline: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+.example-panel {
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  min-width: 0;
+}
+.example-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.example-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}

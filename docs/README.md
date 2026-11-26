@@ -12,7 +12,7 @@ technical contract. Load references/evidence only for the question at hand.
 | Planning | Dependency sequence and bounded work packets | [Delivery plan](planning/delivery-plan.md) |
 | Agent work | Roles, ownership, task lifecycle and handoff | [Worker workflow](agents/workflow.md) |
 | Testing | Risk-based verification and acceptance methods | [Testing strategy](testing/README.md) |
-| Operations | Versioning, packed consumers, publication and rollback | [Releasing](operations/releasing.md) |
+| Operations | Versioning, packed consumers, candidate/consumer provenance, publication and rollback | [Releasing](operations/releasing.md), [candidate protocol](operations/candidate-readiness.md), [consumer protocol](operations/consumer-acceptance.md) |
 | Decisions | HLD decision rationale; subsequent changes | [ADR register](adr/README.md) |
 | Reference | Source provenance and adopt/adapt/reject assessments | [Reference map](reference/README.md) |
 | Evidence | Dated actual observations and limits | [Evidence conventions](evidence/README.md) |

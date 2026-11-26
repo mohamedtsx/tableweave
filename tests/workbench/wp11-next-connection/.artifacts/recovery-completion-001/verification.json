@@ -1,0 +1,35 @@
+{
+  "kind": "actual post-replay pre-seal verification",
+  "pin": "positive-inputs-002",
+  "pinVerificationExit": 0,
+  "pinSummary": {
+    "inputs": 3322,
+    "compilerFiles": 1557,
+    "sha256": "8187ea5b877b6f0ce0624a97b3ba43d433b31d409a7235c22da45a427bf29bf9",
+    "node": "v24.22.0",
+    "typescript": "6.0.3",
+    "scope": "Actual positive compiler files, compiler bodies, protected regular and original pinned inspection inputs, own code/receipts; not runtime/native proof"
+  },
+  "recoveryCodeIdentitiesUnchanged": 9,
+  "preservedBiomeEvidence": "biome-001; no repeated or overwritten run",
+  "light": "light-003",
+  "lightStatuses": {
+    "positive": {
+      "status": 0,
+      "signal": null,
+      "error": null
+    },
+    "static": {
+      "status": 0,
+      "signal": null,
+      "error": null
+    }
+  },
+  "frozenManifestLockSHA256": {
+    "apps/example-next/package.json": "55ed9a4ee4a560846548a94c9ef223c01627ac3ad649f338c0b9f19d5224ce42",
+    "pnpm-lock.yaml": "6cc5f56f8377ce15d85576ca2d2f9b487925cf423899002dbff51db05ef1c688"
+  },
+  "matchesSelectedManifestLock": true,
+  "availableBytesBeforeReceipt": 631144448,
+  "runtime": "UNRUN"
+}

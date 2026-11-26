@@ -1,0 +1,495 @@
+{
+  "status": "Stage-A-implementation-ready-PROVISIONAL-gaps-runtime-unrun-drag-blocked",
+  "suppliedBase": "d6a53f6 (no worker Git inspection)",
+  "canonical155": "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+  "library": {
+    "total": 155,
+    "changed": 0
+  },
+  "existingDelta": {
+    "apps/storybook/src/styles.css": {
+      "before": {
+        "sha256": "a476f9b76788e77f73cb16907fba90444fde71246ccbf8c6d9591be71db6b781",
+        "mode": 436
+      },
+      "after": {
+        "sha256": "c0667665686d2ffe10a993e64224a9b2e8ae6cba01955c58ce939ef969028bfb",
+        "mode": 436
+      }
+    }
+  },
+  "newInputAggregate": "dd6b8cf59025e0221ffaa57985fac3ffa3516ece0a85cfa87a15805dd071252c",
+  "artifactAggregate": "e56a26357fc1287902ac6840f5c4c16ccdd1cce6e9048bcb3077e99979f2aa27",
+  "inputs": {
+    "apps/examples/shared/definitions.ts": {
+      "sha256": "fbfc6baf93551131730165583803854a59c893afc14bc202ff1d6aacfbde82ec",
+      "mode": 436
+    },
+    "apps/examples/shared/details.tsx": {
+      "sha256": "dd00a0b8ee0525cb53028aaccab48703412f6f00a2289553c5ec42f06303575c",
+      "mode": 436
+    },
+    "apps/examples/shared/options.ts": {
+      "sha256": "000f3a70dd99c6f3c19d9bb9ad0a5f64ac1ae5cd95078636f3b6190a37f5477a",
+      "mode": 436
+    },
+    "apps/examples/shared/owner.ts": {
+      "sha256": "88b0f0c1c7a05a08d8976b48eeac56d2baa46ea2779cfd3bfca53e7da05fd1dd",
+      "mode": 436
+    },
+    "apps/examples/shared/records.ts": {
+      "sha256": "02a3cb7d4eb1dea7db7b20b6e0bafbabe143b8935daeea23cf88be64c49b2e61",
+      "mode": 436
+    },
+    "apps/examples/shared/reordering.ts": {
+      "sha256": "ae527125356ee1ef4379ff240685ae434fa0e67a03120bc55409f244fb8bd5de",
+      "mode": 436
+    },
+    "apps/examples/shared/resource.ts": {
+      "sha256": "3748686b6e82a541851374610459dacc9f848cbb2d72a1f3cd4bb9476e1721ce",
+      "mode": 436
+    },
+    "apps/examples/shared/schemas.ts": {
+      "sha256": "830ec14585a862dc1b11cb420d755ed4d98367b8f130825769c10ad892af4549",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/Configurations.stories.tsx": {
+      "sha256": "33a954cda95408c5d2ac98f39ed4540637ba3b5778b511ff7eb11ca14d7fe793",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/Details.stories.tsx": {
+      "sha256": "c7c2071b2d64a84f2b7a541eac4fa9ad206ee11ca3db50630eb35a4212a92b48",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/Filters.stories.tsx": {
+      "sha256": "9efbd220f70c829ad7fba284f41fb6b067f96073feceb9d06d52f62a41a2ca79",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/Recovery.stories.tsx": {
+      "sha256": "0e1c6dd68a0f15cfa40d35e798b86aa518955aefe8ca95f2aeb45badd369df3a",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/Reordering.stories.tsx": {
+      "sha256": "afa24e82e687d017e2ec99667bc8516838fce14617c2ea58abe9cdfa10ecdc42",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/Workbench.tsx": {
+      "sha256": "d44295e1eacb545240152042b6ade0b18430ad0acbd3bbd264e15ac9e2e71c8c",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/scenes.md": {
+      "sha256": "c5b27a76a0d3aa68afc9bba443fe9a1785559e93c6b3bc2ee57d7d4d055cbdec",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/tsconfig.light.json": {
+      "sha256": "f9e6429573a30d525ac6b779c05401f2cb51f359d27628a98d636f28baa10693",
+      "mode": 436
+    },
+    "apps/storybook/src/workbench/types.ts": {
+      "sha256": "87ea8e2c714d82b2de4a9c912e211df23a10ee51fa5aec618cf2c2fa6835fd00",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/README.md": {
+      "sha256": "fc93ca7c4fb2a981b59da44e082ae1a1210bf9ae1d4a2f5b3eefa9530aedef94",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/before.json": {
+      "sha256": "6ffd7b77179971cf4ec66a91cc36ca36dbf68e627cf9be4956fe2fbaeca99c96",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/browser.spec.ts": {
+      "sha256": "b956c871dd650ca4bcff67df2bf0f4491c982752541daca44f6cb21e5ffcaa77",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/inputs.mjs": {
+      "sha256": "f2554f6e75315ce5e65d86d0d1baafaaeaa6265b7633fc79e9d7e1332bc3cc13",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/light.mjs": {
+      "sha256": "9257612a4352c381dd18ea990000543fd1adf54df4e3228bf0453f4b3eeb7a92",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/negative/tsconfig.json": {
+      "sha256": "54a5cb3183d570ffa8f8457541e7f67d2bad35678fbaef33e5dffe9098200544",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/negative/types.ts": {
+      "sha256": "b2adea42741d0b764e305375fe02e1cf2c024e4852f600a0202ac5c7c3e2db01",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/packed/consumer.tsx": {
+      "sha256": "1fa82e23bf84cb1e9038667327aa23629b40b113f4ac81b6f145364cfe87a211",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/playwright.config.ts": {
+      "sha256": "844bcfb049bfc4419a6e567192684b924be39ef50c57ff1086addaf75085b6fe",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/preimages/styles.css.txt": {
+      "sha256": "a476f9b76788e77f73cb16907fba90444fde71246ccbf8c6d9591be71db6b781",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/scope.mjs": {
+      "sha256": "e7a8797ef774454b3704499050d7ae6094d18317a9fad529480cd670ba56d105",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/seal.mjs": {
+      "sha256": "47c4fa23f3a9674764d2c37654dc96b72fb04a306b4b40c3bb3ccfe6d3b96142",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/source.delta.patch": {
+      "sha256": "2901852725bf5d9e895074901192991be983b9641ace65cc915e3df473d5e72e",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/ssr.test.tsx": {
+      "sha256": "9eb5c5d0259a9e717dc7ec5008c3103e26afa4ae931552c4f9408a06d316fe4c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/static.mjs": {
+      "sha256": "aeac3835ea59cf60ab7ea6560a09c2e5ab5246f47bf2e0d2a201bea2edec6fb9",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/styles.delta.patch": {
+      "sha256": "4995e9d7280fc7524af524306576226f30caaea03251280c9aaa4c296ab2334b",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/vitest.config.mjs": {
+      "sha256": "26f43a577b51e6bdaec62baf438950bdf1782499e4460f72b16f40e95ed3bf78",
+      "mode": 436
+    }
+  },
+  "artifacts": {
+    "tests/workbench/wp11-catalog/.artifacts/light-001/biome.log": {
+      "sha256": "0e1a8cc0159cf5a943a768f43d81cfc9852f6b868483750ab3fe7c0f279b3507",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/inputs-before.log": {
+      "sha256": "4bbe81124f23c7302abddd6778c97d9c33ff1db36004e56850a535ae9ccc254d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/inputs.json": {
+      "sha256": "218e524be103729c5ebafdc2ff84d7e3d0733544f5f5e901ea1b8c2df84fb501",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/results.json": {
+      "sha256": "f0fc6b8d20ae70ba2ebdac1c7cfd323688938314b3265b95efdc5bc2c3c6d45d",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/scope.log": {
+      "sha256": "1aa6d2e49f23d964848c39b3ba1a5aea1e5d0fc282908625f343a9ecd6f783f4",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/static.log": {
+      "sha256": "5c6c588465644b59e2c39f674bffe89843b5e4e659d3ea84b1a3ce654346eb50",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-001/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/biome.log": {
+      "sha256": "449ec95ab5011f4fc3b5007327e797aa8cc88154448d993bd953cb3de5feb8d5",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/inputs-before.log": {
+      "sha256": "8324138f46d365e9be671016b743c05f266d39cfee98f222adcdc74d172bedd5",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/inputs.json": {
+      "sha256": "d040672554a41ca525543ee6faa8e7040db71480db0c7f6f6190d2157be90470",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/results.json": {
+      "sha256": "87cbc373abbfa0dccf9eca3f9ec4b6a2c7169551614e6da47c9d3b0fef154c47",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/scope.log": {
+      "sha256": "1aa6d2e49f23d964848c39b3ba1a5aea1e5d0fc282908625f343a9ecd6f783f4",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/static.log": {
+      "sha256": "5c6c588465644b59e2c39f674bffe89843b5e4e659d3ea84b1a3ce654346eb50",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-002/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/biome.log": {
+      "sha256": "4bd641c44ddec652ef13547d17d7f594dc783689d059b3b9feec228d44e67f04",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/inputs-before.log": {
+      "sha256": "8324138f46d365e9be671016b743c05f266d39cfee98f222adcdc74d172bedd5",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/inputs.json": {
+      "sha256": "cfd33d5d76a68ba0f4129887d19b41103a2bd30f21a7c0a1e08c01769153827c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/results.json": {
+      "sha256": "f0d78c825b9e0060836ea6ea28174e3de4baa57badcdc27e61e522987c8f751c",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/scope.log": {
+      "sha256": "1aa6d2e49f23d964848c39b3ba1a5aea1e5d0fc282908625f343a9ecd6f783f4",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/static.log": {
+      "sha256": "5c6c588465644b59e2c39f674bffe89843b5e4e659d3ea84b1a3ce654346eb50",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-003/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/biome.log": {
+      "sha256": "5cdc48fb3a4e0e8ffaa384b6123c44c938099819a9bb3d0ec7a0eae8c8bb9218",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/inputs-after.log": {
+      "sha256": "25e9d7b03d57b201cea6930921a59aaf53589023de5146e77be29c29eea05c56",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/inputs-before.log": {
+      "sha256": "25e9d7b03d57b201cea6930921a59aaf53589023de5146e77be29c29eea05c56",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/inputs.json": {
+      "sha256": "32c9a7713808e8e8640cd93c7ba468c99192f8a79f2ffa641613ee82f67356d9",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/results.json": {
+      "sha256": "a32b7a801c55986be460884c2f69daab1f87839d54b0cd6dfb7e67a4aa84349f",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/scope.log": {
+      "sha256": "1aa6d2e49f23d964848c39b3ba1a5aea1e5d0fc282908625f343a9ecd6f783f4",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/static.log": {
+      "sha256": "5c6c588465644b59e2c39f674bffe89843b5e4e659d3ea84b1a3ce654346eb50",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-004/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/biome.log": {
+      "sha256": "7d45d462c49ed3c4378ac2369fc0b09d087cd84262d22268c5b32e1b1b94309a",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/inputs-after.log": {
+      "sha256": "25e9d7b03d57b201cea6930921a59aaf53589023de5146e77be29c29eea05c56",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/inputs-before.log": {
+      "sha256": "25e9d7b03d57b201cea6930921a59aaf53589023de5146e77be29c29eea05c56",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/inputs.json": {
+      "sha256": "d5bb62311deea7db1c28a876f99a13b715cfaff7587b02afa89460f039b4daf2",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/results.json": {
+      "sha256": "4418c934d0a7fde1f220b41ea3606f6cf836a0438de7a010757ea787e340d9a9",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/scope.log": {
+      "sha256": "1aa6d2e49f23d964848c39b3ba1a5aea1e5d0fc282908625f343a9ecd6f783f4",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/static.log": {
+      "sha256": "5c6c588465644b59e2c39f674bffe89843b5e4e659d3ea84b1a3ce654346eb50",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-005/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/biome.log": {
+      "sha256": "68e63a02ecdb419d6d539d3d2e253497142305d5c9e5b6d7fedbd7f6e0e048b1",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/inputs-after.log": {
+      "sha256": "25e9d7b03d57b201cea6930921a59aaf53589023de5146e77be29c29eea05c56",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/inputs-before.log": {
+      "sha256": "25e9d7b03d57b201cea6930921a59aaf53589023de5146e77be29c29eea05c56",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/inputs.json": {
+      "sha256": "d5bb62311deea7db1c28a876f99a13b715cfaff7587b02afa89460f039b4daf2",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/positive.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/results.json": {
+      "sha256": "6ac450c3a3347500d2d8d7229bcdb5a92e9e4c37285e8d0ccf96f5c25249cb32",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/scope.log": {
+      "sha256": "1aa6d2e49f23d964848c39b3ba1a5aea1e5d0fc282908625f343a9ecd6f783f4",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/static.log": {
+      "sha256": "5c6c588465644b59e2c39f674bffe89843b5e4e659d3ea84b1a3ce654346eb50",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/syntax-inputs.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/syntax-light.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/syntax-scope.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/syntax-seal.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/syntax-static.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/light-006/syntax-vitest.config.mjs.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/positive-001/result.json": {
+      "sha256": "9512edc186c84eb4595f0b140edc6da4a025b750eaed75a3a66abf93a8e0b834",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/positive-001/ts6.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/positive-002/result.json": {
+      "sha256": "e6fe91a2f2b29856aa1cf5c751fe9af698c154a46166cf62d5b2e7985aaa72ab",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/positive-002/ts6.log": {
+      "sha256": "b862269e7dbc5abe56a5b6885cc0629fee95dbb30780dc6c2f06496a65722070",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/positive-003/result.json": {
+      "sha256": "e6fe91a2f2b29856aa1cf5c751fe9af698c154a46166cf62d5b2e7985aaa72ab",
+      "mode": 436
+    },
+    "tests/workbench/wp11-catalog/.artifacts/positive-003/ts6.log": {
+      "sha256": "5ac0c8a607e060951179267c4bcdadf47cfb23d629d4b0a50a0eb314bcf0d153",
+      "mode": 436
+    }
+  }
+}

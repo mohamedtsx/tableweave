@@ -10,12 +10,35 @@ import {
   realpath,
   writeFile,
 } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { isAbsolute, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
+import { rootDigests } from "../controls/filter-composition/roots.mjs";
 import { forbiddenImports, inspectGraph } from "./boundaries.mjs";
+import { checkConsumerDeclarations } from "./consumer-declarations.mjs";
+import { checkPackedControlsProfile } from "./packed-controls-profile.mjs";
+import { checkPackedFilterTools } from "./packed-filter-tools.mjs";
+import { packedPublicGeneration } from "./packed-focus-handoff.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
+// This is the same captured record used by the profiled focus child, not an env SHA.
+const producerBefore = rootDigests();
+const publicBefore = Object.fromEntries(
+  Object.entries(producerBefore).filter(([path]) =>
+    /^packages\/(?:react|heroui)\/dist\//.test(path),
+  ),
+);
+assert.equal(
+  Object.keys(publicBefore).length,
+  packedPublicGeneration.outputCount,
+);
+assert.equal(
+  createHash("sha256")
+    .update(`${JSON.stringify(publicBefore, null, 2)}\n`)
+    .digest("hex"),
+  packedPublicGeneration.outputSha256,
+  "Actual output differs from the registered current generation",
+);
 const artifacts = join(root, ".artifacts");
 await mkdir(artifacts, { recursive: true });
 const run = await mkdtemp(join(artifacts, "packed-"));
@@ -30,6 +53,8 @@ function command(executable, args, cwd = root) {
 }
 const reports = [];
 const archives = {};
+const archiveDigests = {};
+const archiveOutputs = {};
 for (const name of ["react", "heroui"]) {
   const target = join(run, name);
   await mkdir(target);
@@ -46,6 +71,17 @@ for (const name of ["react", "heroui"]) {
   const listing = spawnSync("tar", ["-tzf", archive], { encoding: "utf8" });
   assert.equal(listing.status, 0);
   const files = listing.stdout.trim().split("\n");
+  const compatibilityFiles =
+    name === "heroui"
+      ? [
+          "runtime.patch",
+          "profile.json",
+          "verify.mjs",
+          "README.md",
+          "NOTICE-RAC",
+          "LICENSE-APACHE-2.0",
+        ].map((file) => `package/compat/rac-table-clone/${file}`)
+      : [];
   const emitted =
     name === "react"
       ? [
@@ -70,6 +106,10 @@ for (const name of ["react", "heroui"]) {
             "filters/evaluate",
             "filters/translate",
             "filters/inverse",
+            "filters/editor-types",
+            "filters/editor-fields",
+            "filters/editor-draft",
+            "filters/options-source",
             "controller/types",
             "controller/validation",
             "controller/reducer",
@@ -87,6 +127,12 @@ for (const name of ["react", "heroui"]) {
             "resource/adapter",
             "resource/hook",
             "resource/index",
+            "presentation/types",
+            "presentation/index",
+            "presentation/binding",
+            "presentation/project",
+            "presentation/masked",
+            "presentation/authority",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ]
       : [
@@ -95,12 +141,53 @@ for (const name of ["react", "heroui"]) {
           "sortable/index.js",
           "sortable/index.d.ts",
           "styles.css",
+          "filters/filters.css",
+          "date/date-editor.css",
+          "toolbar/filter-tools.css",
+          "columns/controls.css",
+          "pagination/styles.css",
           ...[
             "table/group-column",
             "table/collection-projection",
             "table/header-navigation",
             "table/controlled-collection",
             "table/native-collection",
+            "filters/filter-builder",
+            "filters/types",
+            "filters/messages",
+            "filters/option-owners",
+            "filters/value-editors",
+            "filters/date-value",
+            "date/date-types",
+            "date/date-wire",
+            "date/date-picker",
+            "date/date-instant",
+            "date/date-segments",
+            "date/date-operand-editor",
+            "toolbar/filter-shared",
+            "toolbar/filter-search",
+            "toolbar/filter-tabs",
+            "toolbar/filter-date",
+            "table/collection-messages",
+            "selection/types",
+            "selection/index",
+            "selection/action",
+            "selection/selection-toolbar",
+            "columns/types",
+            "columns/index",
+            "columns/model",
+            "columns/column-chooser",
+            "sorting/types",
+            "sorting/index",
+            "sorting/model",
+            "sorting/sorting",
+            "pagination/types",
+            "pagination/index",
+            "pagination/model",
+            "pagination/messages",
+            "pagination/Pagination",
+            "pagination/usePaginationCorrection",
+            "pagination/correction-capture",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ];
   assert.deepEqual(
@@ -108,6 +195,7 @@ for (const name of ["react", "heroui"]) {
     [
       "package/package.json",
       "package/README.md",
+      ...compatibilityFiles,
       ...emitted.map((file) => `package/dist/${file}`),
     ].sort(),
     "Unexpected or missing reviewed output",
@@ -117,12 +205,17 @@ for (const name of ["react", "heroui"]) {
       (file) =>
         file === "package/package.json" ||
         file === "package/README.md" ||
-        /^package\/dist\/(?:[a-z-]+\/)*[a-z.-]+\.(?:js|ts|css)$/.test(file),
+        compatibilityFiles.includes(file) ||
+        /^package\/dist\/(?:[a-z-]+\/)*[A-Za-z.-]+\.(?:js|ts|css)$/.test(file),
     ),
     `Unexpected tarball contents: ${files}`,
   );
   command("tar", ["-xzf", archive, "-C", target]);
   const pkg = join(target, "package");
+  for (const file of emitted)
+    archiveOutputs[`packages/${name}/dist/${file}`] = createHash("sha256")
+      .update(await readFile(join(pkg, "dist", file)))
+      .digest("hex");
   const manifest = JSON.parse(
     await readFile(join(pkg, "package.json"), "utf8"),
   );
@@ -169,23 +262,39 @@ for (const name of ["react", "heroui"]) {
       "@heroui/styles",
       "react-aria",
       "react-aria-components",
+      ...(name === "heroui" ? ["@internationalized/date"] : []),
     ]),
     [],
     "Public declarations leaked vendor types requiring workspace-only repairs",
   );
+  archiveDigests[name] = createHash("sha256")
+    .update(await readFile(archive))
+    .digest("hex");
   reports.push({
     package: manifest.name,
     archive,
-    sha256: createHash("sha256")
-      .update(await readFile(archive))
-      .digest("hex"),
+    sha256: archiveDigests[name],
     files,
   });
 }
 
+assert.deepEqual(
+  Object.fromEntries(
+    Object.entries(archiveOutputs).sort(([a], [b]) => a.localeCompare(b)),
+  ),
+  publicBefore,
+  "Actual archive outputs differ from the frozen registered build",
+);
+
 const vendor = JSON.parse(
   await readFile(join(root, "apps/storybook/package.json"), "utf8"),
 ).dependencies;
+const tooling = JSON.parse(
+  await readFile(join(root, "package.json"), "utf8"),
+).devDependencies;
+const storyTooling = JSON.parse(
+  await readFile(join(root, "apps/storybook/package.json"), "utf8"),
+).devDependencies;
 for (const kind of ["headless", "styled"]) {
   const dir = join(run, `consumer-${kind}`);
   await mkdir(dir);
@@ -209,6 +318,21 @@ for (const kind of ["headless", "styled"]) {
         private: true,
         type: "module",
         dependencies,
+        devDependencies: {
+          "@types/react": tooling["@types/react"],
+          "@types/react-dom": tooling["@types/react-dom"],
+          ...(kind === "styled" &&
+          (process.argv.includes("--filter-tools-browser") ||
+            process.argv.includes("--controls-browser"))
+            ? {
+                vite: tooling.vite,
+                "@playwright/test": tooling["@playwright/test"],
+                "@axe-core/playwright": tooling["@axe-core/playwright"],
+                "@types/node": tooling["@types/node"],
+                "@tailwindcss/vite": storyTooling["@tailwindcss/vite"],
+              }
+            : {}),
+        },
       },
       null,
       2,
@@ -249,8 +373,21 @@ for (const kind of ["headless", "styled"]) {
   await cp(join(root, "tests/consumers/headless.ts"), join(dir, "headless.ts"));
   await cp(join(root, "tests/consumers/native.ts"), join(dir, "native.ts"));
   await cp(join(root, "tests/consumers/resource.ts"), join(dir, "resource.ts"));
-  if (kind === "styled")
+  await cp(
+    join(root, "tests/consumers/filter-tools.ts"),
+    join(dir, "filter-tools.ts"),
+  );
+  if (kind === "styled") {
     await cp(join(root, "tests/consumers/styled.ts"), join(dir, "styled.ts"));
+    await cp(
+      join(root, "tests/consumers/styled-tools.ts"),
+      join(dir, "styled-tools.ts"),
+    );
+    await cp(
+      join(root, "tests/consumers/controls.ts"),
+      join(dir, "controls.ts"),
+    );
+  }
   await cp(join(root, "tests/consumers/runtime.mjs"), join(dir, "runtime.mjs"));
   await cp(
     join(root, "tests/consumers/native-runtime.mjs"),
@@ -285,6 +422,10 @@ for (const kind of ["headless", "styled"]) {
       [join(root, "node_modules", compiler, "bin/tsc"), "-p", "tsconfig.json"],
       dir,
     );
+    reports.push({
+      consumer: kind,
+      ...(await checkConsumerDeclarations(root, dir, compiler)),
+    });
   }
   command(
     process.execPath,
@@ -332,6 +473,15 @@ for (const kind of ["headless", "styled"]) {
     },
   });
   assert(modules.size >= entries.length + 1, "Bundle graph was not inspected");
+  const consumerRoot = `${await realpath(dir)}${sep}`;
+  for (const file of modules) {
+    if (!isAbsolute(file)) continue;
+    const resolvedModule = await realpath(file.split("?")[0]);
+    assert(
+      resolvedModule.startsWith(consumerRoot),
+      `Bundle borrowed a runtime module outside its install: ${resolvedModule}`,
+    );
+  }
   assert(![...modules].some((file) => /@dnd-kit|dnd-kit\+/.test(file)));
   if (kind === "headless")
     assert(
@@ -342,20 +492,67 @@ for (const kind of ["headless", "styled"]) {
       file.endsWith(".css"),
     );
     assert(css, "Side-effectful CSS was dropped");
-    assert(
-      (await readFile(join(dir, "bundle", css), "utf8")).includes(
-        "@layer tableweave",
-      ),
-    );
+    const content = await readFile(join(dir, "bundle", css), "utf8");
+    for (const selector of [
+      "@layer tableweave",
+      ".tw-native-collection",
+      ".tw-pagination",
+      ".tw-column-chooser",
+      ".tw-sorting",
+      "table-column-group",
+      "checkbox-control",
+    ])
+      assert(content.includes(selector), `Packed CSS omitted ${selector}`);
   }
   reports.push({
     consumer: kind,
     declarations: ["6.0.3", "5.9.3"],
     runtime: "passed",
+    runtimeModuleIsolation: "consumer-install-only",
     bundleModules: [...modules],
   });
+  if (kind === "styled" && process.argv.includes("--filter-tools-browser"))
+    reports.push({
+      consumer: kind,
+      filterTools: await checkPackedFilterTools(root, dir),
+    });
+  if (kind === "styled" && process.argv.includes("--controls-browser"))
+    reports.push({
+      consumer: kind,
+      controlsProfile: await checkPackedControlsProfile(
+        root,
+        run,
+        dir,
+        archives,
+      ),
+    });
 }
-await writeFile(join(run, "report.json"), JSON.stringify(reports, null, 2));
+assert.deepEqual(
+  rootDigests(),
+  producerBefore,
+  "Source/public bytes changed since the parent captured them before packing",
+);
+for (const [name, archive] of Object.entries(archives))
+  assert.equal(
+    createHash("sha256")
+      .update(await readFile(archive))
+      .digest("hex"),
+    archiveDigests[name],
+    `Actual ${name} archive changed during consumer verification`,
+  );
+reports.push({
+  boundary: "registered-public-generation",
+  generation: packedPublicGeneration.generation,
+  outputCount: packedPublicGeneration.outputCount,
+  outputSha256: packedPublicGeneration.outputSha256,
+  sourcePublicCount: Object.keys(producerBefore).length,
+  sourcePublicSha256: createHash("sha256")
+    .update(`${JSON.stringify(producerBefore, null, 2)}\n`)
+    .digest("hex"),
+});
+await writeFile(join(run, "report.json"), JSON.stringify(reports, null, 2), {
+  flag: "wx",
+});
 console.log(
   `Packed foundation checks passed. Evidence: ${resolve(run, "report.json")}`,
 );

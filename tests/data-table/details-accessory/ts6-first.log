@@ -1,0 +1,15 @@
+packages/heroui/src/data-table/details-trigger.tsx(48,6): error TS2375: Type '{ children: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<...>; ... 6 more ...; onPress: () => void; }' is not assignable to type 'ButtonRootProps' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'className' are incompatible.
+    Type 'string | undefined' is not assignable to type 'ClassNameOrFunction<ButtonRenderProps>'.
+      Type 'undefined' is not assignable to type 'ClassNameOrFunction<ButtonRenderProps>'.
+packages/heroui/src/details/committed-details.ts(11,3): error TS2724: '"@tableweave/react"' has no exported member named 'requireCriteriaCommittedFrame'. Did you mean 'CriteriaCommittedFrame'?
+packages/heroui/src/details/use-details-session.ts(64,9): error TS2322: Type 'Readonly<{ readonly contentKey: string; readonly isOpen: boolean; readonly context: DetailsRenderContext<S, T> | null; readonly canRetry: boolean; requestOpen: (id: any, options: any) => Promise<...> | Promise<...>; requestClose: (reason?: string) => Promise<...> | Promise<...>; retry: () => Promise<...>; }>' is not assignable to type 'DetailsSession<S, T>'.
+  The types returned by 'requestClose(...)' are incompatible between these types.
+    Type 'Promise<DetailsOutcome<S>> | Promise<{ status: string; }>' is not assignable to type 'Promise<DetailsOutcome<S>>'.
+      Type 'Promise<{ status: string; }>' is not assignable to type 'Promise<DetailsOutcome<S>>'.
+        Type '{ status: string; }' is not assignable to type 'DetailsOutcome<S>'.
+          Property 'proposal' is missing in type '{ status: string; }' but required in type '{ readonly status: "submitted"; readonly proposal: StateProposal<S>; }'.
+packages/heroui/src/details/use-details-session.ts(77,19): error TS7006: Parameter 'id' implicitly has an 'any' type.
+packages/heroui/src/details/use-details-session.ts(77,23): error TS7006: Parameter 'options' implicitly has an 'any' type.
+packages/heroui/src/details/use-details-session.ts(90,40): error TS2345: Argument of type 'string' is not assignable to parameter of type 'DetailsReason'.
+tests/data-table/details-accessory/browser.tsx(28,8): error TS2882: Cannot find module or type declarations for side-effect import of '../../../apps/storybook/src/styles.css'.

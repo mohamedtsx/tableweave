@@ -1,0 +1,716 @@
+{
+  "undefined-false-same": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "undefined-false-previous": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock", "updater"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 1
+    }
+  },
+  "undefined-false-index": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 1,
+      "request": 0,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "undefined-false-size": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 1,
+      "request": 0,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "undefined-false-clamp-zero": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "committed"
+    },
+    "log": [
+      "command:pagination.clamp",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 1,
+      "request": 0,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "undefined-false-clamp-stale": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "error": "state.stale"
+    },
+    "log": ["command:pagination.clamp", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "undefined-true-same": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "undefined-true-previous": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock", "updater"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 1
+    }
+  },
+  "undefined-true-index": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "proposed",
+      "accept": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "request",
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 2,
+      "command": 2,
+      "state": 2,
+      "request": 1,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "undefined-true-size": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "proposed",
+      "accept": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "request",
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 2,
+      "command": 2,
+      "state": 2,
+      "request": 1,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "undefined-true-clamp-zero": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "proposed",
+      "accept": "committed"
+    },
+    "log": [
+      "command:pagination.clamp",
+      "clock",
+      "state",
+      "request",
+      "command:pagination.clamp",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 2,
+      "command": 2,
+      "state": 2,
+      "request": 1,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "undefined-true-clamp-stale": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "error": "state.stale"
+    },
+    "log": ["command:pagination.clamp", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "true-false-same": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "true-false-previous": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock", "updater"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 1
+    }
+  },
+  "true-false-index": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 1,
+      "request": 0,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "true-false-size": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 1,
+      "request": 0,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "true-false-clamp-zero": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "committed"
+    },
+    "log": [
+      "command:pagination.clamp",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 1,
+      "request": 0,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "true-false-clamp-stale": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "error": "state.stale"
+    },
+    "log": ["command:pagination.clamp", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "true-true-same": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  },
+  "true-true-previous": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "status": "noop"
+    },
+    "log": ["command:pagination.change", "clock", "updater"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 1
+    }
+  },
+  "true-true-index": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":2,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "proposed",
+      "accept": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "request",
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 2,
+      "command": 2,
+      "state": 2,
+      "request": 1,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "true-true-size": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":25},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "proposed",
+      "accept": "committed"
+    },
+    "log": [
+      "command:pagination.change",
+      "clock",
+      "state",
+      "request",
+      "command:pagination.change",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 2,
+      "command": 2,
+      "state": 2,
+      "request": 1,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "true-true-clamp-zero": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":0,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": false,
+    "outcome": {
+      "status": "proposed",
+      "accept": "committed"
+    },
+    "log": [
+      "command:pagination.clamp",
+      "clock",
+      "state",
+      "request",
+      "command:pagination.clamp",
+      "clock",
+      "state",
+      "query",
+      "commit",
+      "subscriber"
+    ],
+    "counts": {
+      "clock": 2,
+      "command": 2,
+      "state": 2,
+      "request": 1,
+      "commit": 1,
+      "query": 1,
+      "subscriber": 1,
+      "updater": 0
+    }
+  },
+  "true-true-clamp-stale": {
+    "schema": "{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1}",
+    "definition": "{\"columns\":[{\"id\":\"amount\"},{\"id\":\"title\"}],\"details\":false,\"schema\":{\"date\":{\"mode\":\"single\"},\"fields\":{\"amount\":{\"owner\":\"builder\",\"sort\":true,\"type\":\"number\"},\"day\":{\"owner\":\"date\",\"relativePresets\":[\"today\"],\"type\":\"date\"},\"title\":{\"owner\":\"search\",\"sort\":true,\"type\":\"text\"}},\"id\":\"u1-pagination\",\"limits\":{\"maxMembershipValues\":100,\"maxPageRows\":100,\"maxRules\":50,\"maxSearchCharacters\":512},\"pagination\":{\"defaultSize\":10,\"sizes\":[10,25]},\"version\":1},\"selection\":true}",
+    "initialQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "initialFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "finalQuery": "{\"builder\":{\"join\":\"and\",\"rules\":[]},\"date\":null,\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":\"\",\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalIdentity": "{\"filter\":\"{\\\"builder\\\":null,\\\"date\\\":null,\\\"locale\\\":\\\"en-US\\\",\\\"schemaId\\\":\\\"u1-pagination\\\",\\\"schemaVersion\\\":1,\\\"search\\\":null,\\\"tab\\\":null,\\\"timeZone\\\":\\\"UTC\\\"}\",\"locale\":\"en-US\",\"pagination\":{\"pageIndex\":3,\"pageSize\":10},\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"sorting\":[],\"tabId\":null,\"timeZone\":\"UTC\",\"version\":1}",
+    "finalFilter": "{\"builder\":null,\"date\":null,\"locale\":\"en-US\",\"schemaId\":\"u1-pagination\",\"schemaVersion\":1,\"search\":null,\"tab\":null,\"timeZone\":\"UTC\"}",
+    "snapshotSame": true,
+    "outcome": {
+      "error": "state.stale"
+    },
+    "log": ["command:pagination.clamp", "clock"],
+    "counts": {
+      "clock": 1,
+      "command": 1,
+      "state": 0,
+      "request": 0,
+      "commit": 0,
+      "query": 0,
+      "subscriber": 0,
+      "updater": 0
+    }
+  }
+}

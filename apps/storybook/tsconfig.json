@@ -6,7 +6,29 @@
     "exactOptionalPropertyTypes": false,
     "jsx": "react-jsx",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client", "node"]
+    "types": ["vite/client", "node", "vitest"],
+    "paths": {
+      "@tableweave/react": ["../../packages/react/dist/index.d.ts"],
+      "@tableweave/react/contracts": [
+        "../../packages/react/dist/contracts/index.d.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../packages/react/dist/filters/index.d.ts"
+      ],
+      "@tableweave/react/reordering": [
+        "../../packages/react/dist/reordering/index.d.ts"
+      ],
+      "@tableweave/react/reordering-controller": [
+        "../../packages/react/dist/reordering-controller/index.d.ts"
+      ],
+      "@tableweave/heroui": ["../../packages/heroui/dist/index.d.ts"],
+      "@heroui/react/button": [
+        "./node_modules/@heroui/react/dist/components/button/index.d.ts"
+      ],
+      "react-aria-components/I18nProvider": [
+        "./node_modules/react-aria-components/dist/types/exports/I18nProvider.d.ts"
+      ]
+    }
   },
   "include": ["src", ".storybook"]
 }

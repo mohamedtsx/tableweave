@@ -1,0 +1,7 @@
+diff --git a/dist/esm/session.d.ts b/dist/esm/session.d.ts
+--- a/dist/esm/session.d.ts
++++ b/dist/esm/session.d.ts
+@@ -5,1 +5,3 @@
+ type IntegrityAlgorithm = 'sha256';
++// Tableweave compatibility modification: restore the exact alias retained in src/session.ts.
++type _Algorithm = EncryptionAlgorithm | IntegrityAlgorithm;

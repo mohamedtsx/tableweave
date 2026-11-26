@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "rac-1.22.1-table-clone-v1",
+  "status": "private-unlicensed-candidate",
+  "layout": "isolated-pnpm-project",
+  "sourceMaps": "changed-file-terminal-annotations-removed; maps-not-regenerated",
+  "upstream": {
+    "name": "react-aria-components",
+    "version": "1.22.1",
+    "tarball": "https://registry.npmjs.org/react-aria-components/-/react-aria-components-1.22.1.tgz",
+    "integrity": "sha512-UTHaYHOaM71bOCjGPF50DcLywlrwAodE63IP64LB4kO+OizatQEL8TesVEOM8+TkBeSgHoflJ45388IlJfa7aw==",
+    "shasum": "abc446c527e1804673ac84d43a6909828d1e1724"
+  },
+  "assets": {
+    "runtime.patch": "f3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35",
+    "verify.mjs": "edb10823e1abc6801905641c8a90fce59a72f4eb5dc2fca0250899ccb556c95b",
+    "README.md": "bd2c78e6ef2168f7f62c8f2a42cdb703a67a08107c89af1551a5a2da02dc8671",
+    "NOTICE-RAC": "f8a0dd6c0c050362918b561b015b11e9d95412e655e5af263e5c88134d68dfdb",
+    "LICENSE-APACHE-2.0": "7dfe6526888bac51759c99f9a51262ba2711a8c12a067f2181609dd9a4066b84"
+  },
+  "files": [
+    {
+      "path": "dist/private/Table.js",
+      "format": "legacy-esm",
+      "beforeSha256": "93ef6ab34eb5da85006dc7615e76d2e52eb506114cb0a8a71d0a0f13f7f5152d",
+      "afterSha256": "4cbd2a4ba6e9a7e74082c497f3ec0c596c2048fb7d5f30c6e64176374091eacd"
+    },
+    {
+      "path": "dist/private/Table.mjs",
+      "format": "esm",
+      "beforeSha256": "aa49fcfc87cc494b97c6e77eb79e79b9dec6d13de9a0090ae249ee7683d32623",
+      "afterSha256": "22edf3fc5423744d2682beadddac018332431bb3e9ebb33c8335d12c776035b6"
+    },
+    {
+      "path": "dist/private/Table.cjs",
+      "format": "commonjs",
+      "beforeSha256": "ba44d79b191776374c4fdf998a38e8af4dd323665f3191627dca37f7400aa4cf",
+      "afterSha256": "dc263287e3d9b966416c47818f3adbb7d6d058ce24ffde6b90b183dacbb28ead"
+    }
+  ]
+}

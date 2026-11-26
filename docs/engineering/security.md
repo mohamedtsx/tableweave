@@ -23,6 +23,12 @@ HLD engineering defaults, configurable schema policy that must match server:
 Validate visibly instead of silently truncating intent. These limits are not a
 hard cap on total dataset size; the 10,000-row reference is a workload, not a limit.
 
+For in-process envelope metadata, capture own data once and validate exactly the
+values stored. Do not validate a property then reread a getter into an immutable
+snapshot. Accessor rejection is appropriate for these plain primitive envelopes;
+malformed input must preserve the prior snapshot and outstanding valid token.
+This does not require cloning/freezing application-owned row records.
+
 ## Scope and data minimization
 
 Scope keys distinguish dataset/permission context but are not secrets or proof

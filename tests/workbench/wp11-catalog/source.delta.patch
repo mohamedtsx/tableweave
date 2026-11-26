@@ -1,0 +1,3783 @@
+--- before/apps/storybook/src/styles.css
++++ after/apps/storybook/src/styles.css
+@@ -5,3 +5,5 @@
+ @import "@tableweave/heroui/styles.css";
+ 
+ @source "./";
++
++@source "../../examples/shared";
+--- /dev/null
++++ after/apps/examples/shared/definitions.ts
+@@ -0,0 +1,168 @@
++import { defineTable, type NativeColumnDef } from "@tableweave/react";
++import type { Customer, InventoryItem, Transaction } from "./records.js";
++import {
++  customerSchema,
++  exampleOperators,
++  inventorySchema,
++  minimalTransactionSchema,
++  transactionSchema,
++} from "./schemas.js";
++
++export interface DefinitionOptions<T extends object> {
++  readonly full?: boolean;
++  readonly grouped?: boolean;
++  readonly rows?: boolean;
++  readonly utilities?: readonly NativeColumnDef<T>[];
++}
++const fullTools = {
++  builder: "toolbar",
++  search: "toolbar",
++  columnChooser: "toolbar",
++  tabs: "external",
++  date: "external",
++} as const;
++export function minimalTransactionDefinition() {
++  return defineTable<Transaction>()({
++    schema: minimalTransactionSchema,
++    getRowId: (record) => record.id,
++    columns: [
++      {
++        id: "description",
++        accessorKey: "description",
++        header: "Description",
++        enableHiding: false,
++        meta: { rowHeader: true },
++      },
++      { id: "amount", accessorKey: "amount", header: "Amount" },
++    ],
++  });
++}
++function selection<T extends object>(full: boolean): NativeColumnDef<T>[] {
++  return full
++    ? [
++        {
++          id: "selection",
++          header: "Selection",
++          meta: { utility: true },
++          cell: () => null,
++        },
++      ]
++    : [];
++}
++export function transactionDefinition(
++  options: DefinitionOptions<Transaction> = {},
++) {
++  const full = options.full ?? false;
++  const values: NativeColumnDef<Transaction>[] = [
++    {
++      id: "amount",
++      accessorKey: "amount",
++      header: "Amount",
++      cell: (context) =>
++        new Intl.NumberFormat("en-US", { minimumFractionDigits: 2 }).format(
++          context.row.original.amount,
++        ),
++    },
++    { id: "reference", accessorKey: "reference", header: "Reference" },
++    { id: "account", accessorKey: "account", header: "Account" },
++    {
++      id: "magnitude",
++      header: "Magnitude",
++      accessorFn: (record) => Math.abs(record.amount),
++      cell: (context) => String(Math.abs(context.row.original.amount)),
++    },
++  ];
++  return defineTable<Transaction>()({
++    schema: transactionSchema,
++    evaluation: { registry: exampleOperators },
++    getRowId: (record) => record.id,
++    selection: full ? "multiple" : false,
++    details: full,
++    isRowSelectable: (row) => row.id !== "tx-002",
++    multiSort: full,
++    ...(full ? { tools: fullTools } : {}),
++    reordering: {
++      rows: options.rows ?? false,
++      columns: options.grouped ?? false,
++    },
++    defaultColumns: { visibility: { reference: false } },
++    columns: [
++      ...selection<Transaction>(full),
++      {
++        id: "description",
++        accessorKey: "description",
++        header: "Description",
++        enableHiding: false,
++        meta: { rowHeader: true },
++      },
++      { id: "status", accessorKey: "status", header: "Status" },
++      { id: "occurred", accessorKey: "occurred", header: "Occurred" },
++      ...(options.grouped
++        ? [{ id: "values", header: "Values", columns: values }]
++        : values),
++      ...(options.utilities ?? []),
++    ],
++  });
++}
++export function customerDefinition(options: DefinitionOptions<Customer> = {}) {
++  return defineTable<Customer>()({
++    schema: customerSchema,
++    getRowId: (record) => record.id,
++    selection: "multiple",
++    details: true,
++    multiSort: true,
++    tools: fullTools,
++    columns: [
++      ...selection<Customer>(true),
++      {
++        id: "name",
++        accessorKey: "name",
++        header: "Customer",
++        enableHiding: false,
++        meta: { rowHeader: true },
++      },
++      { id: "segment", accessorKey: "segment", header: "Segment" },
++      { id: "balance", accessorKey: "balance", header: "Balance" },
++      {
++        id: "active",
++        accessorKey: "active",
++        header: "Active",
++        cell: (context) => (context.row.original.active ? "Active" : "Paused"),
++      },
++      { id: "note", accessorKey: "note", header: "Note" },
++      ...(options.utilities ?? []),
++    ],
++  });
++}
++export function inventoryDefinition(
++  options: DefinitionOptions<InventoryItem> = {},
++) {
++  return defineTable<InventoryItem>()({
++    schema: inventorySchema,
++    getRowId: (record) => record.id,
++    selection: "multiple",
++    details: true,
++    multiSort: true,
++    tools: fullTools,
++    columns: [
++      ...selection<InventoryItem>(true),
++      {
++        id: "title",
++        accessorKey: "title",
++        header: "Record",
++        enableHiding: false,
++        meta: { rowHeader: true },
++      },
++      { id: "category", accessorKey: "category", header: "Category" },
++      { id: "status", accessorKey: "status", header: "Status" },
++      { id: "quantity", accessorKey: "quantity", header: "Quantity" },
++      {
++        id: "availableUnits",
++        header: "Unreserved units",
++        accessorFn: (record) => (record.reserved ? 0 : record.quantity),
++      },
++      { id: "updated", accessorKey: "updated", header: "Updated" },
++      ...(options.utilities ?? []),
++    ],
++  });
++}
+--- /dev/null
++++ after/apps/examples/shared/details.tsx
+@@ -0,0 +1,548 @@
++import { Button } from "@heroui/react/button";
++import type {
++  DetailsAccessoryOptions,
++  DetailsAuthority,
++  DetailsPort,
++  DetailsRenderContext,
++  DetailsSource,
++} from "@tableweave/heroui";
++import type { QuerySchema } from "@tableweave/react/contracts";
++import { useEffect, useSyncExternalStore } from "react";
++import type { ExampleOwner } from "./owner.js";
++import type { Customer, InventoryItem, Transaction } from "./records.js";
++import type {
++  CustomerSchema,
++  InventorySchema,
++  TransactionSchema,
++} from "./schemas.js";
++
++/** Application detail source, separate from current-page native records. */
++export function createExampleDetails<S extends QuerySchema, T extends object>(
++  owner: ExampleOwner<S, T>,
++) {
++  let authority: DetailsAuthority = {
++    context: {
++      ...owner.context,
++      datasetKey: owner.context.definitionKey,
++      epoch: 0,
++    },
++    rowId: null,
++    session: 0,
++    generation: 0,
++  };
++  let source: DetailsSource<T> | null = null,
++    dirty = false,
++    confirm: ((answer: boolean) => void) | null = null;
++  let pending: DetailsAuthority | null = null;
++  let decision: object | null = null;
++  let drafts: Readonly<Record<string, string>> = Object.freeze({});
++  const issued = new WeakSet<DetailsAuthority>([authority]);
++  let snapshot: Readonly<{
++    authority: DetailsAuthority;
++    source: DetailsSource<T> | null;
++    dirty: boolean;
++    confirming: boolean;
++    drafts: Readonly<Record<string, string>>;
++    decision: object | null;
++  }> = Object.freeze({
++    authority,
++    source,
++    dirty,
++    confirming: false,
++    drafts,
++    decision,
++  });
++  const listeners = new Set<() => void>();
++  function publish() {
++    issued.add(authority);
++    snapshot = Object.freeze({
++      authority,
++      source,
++      dirty,
++      drafts,
++      decision,
++      confirming: confirm !== null,
++    });
++    for (const listener of listeners) listener();
++  }
++  function sync() {
++    if (!owner.getSnapshot().access || !authority.context.access) return;
++    const rowId = owner.C.getSnapshot().details.rowId;
++    if (rowId !== authority.rowId) {
++      const abandoned = confirm;
++      confirm = null;
++      decision = null;
++      authority = {
++        ...authority,
++        rowId,
++        session: authority.session + 1,
++        generation: authority.generation + 1,
++      };
++      dirty = false;
++      drafts = Object.freeze({});
++      pending = null;
++      const record = rowId ? owner.record(rowId) : undefined;
++      source = !rowId
++        ? null
++        : record
++          ? { authority, status: "ready", record }
++          : { authority, status: "missing" };
++      publish();
++      abandoned?.(false);
++    } else if (rowId && source?.status === "ready") {
++      const record = owner.record(rowId);
++      if (record !== source.record) {
++        authority = { ...authority, generation: authority.generation + 1 };
++        source = record
++          ? { authority, status: "ready", record }
++          : { authority, status: "missing" };
++        publish();
++      }
++    }
++  }
++  function retire(): undefined {
++    const resolve = confirm;
++    confirm = null;
++    decision = null;
++    dirty = false;
++    drafts = Object.freeze({});
++    pending = null;
++    source = null;
++    authority = {
++      ...authority,
++      rowId: null,
++      session: authority.session + 1,
++      generation: authority.generation + 1,
++      context: {
++        ...authority.context,
++        access: false,
++        epoch: authority.context.epoch + 1,
++      },
++    };
++    publish();
++    resolve?.(false);
++    return undefined;
++  }
++  function isCurrent(expected: DetailsAuthority) {
++    return (
++      issued.has(expected) &&
++      owner.getSnapshot().access &&
++      authority.context.access &&
++      expected.context.access &&
++      expected.rowId === authority.rowId &&
++      expected.session === authority.session &&
++      expected.context.epoch === authority.context.epoch &&
++      expected.context.scopeKey === authority.context.scopeKey &&
++      expected.context.definitionKey === authority.context.definitionKey &&
++      expected.context.datasetKey === authority.context.datasetKey
++    );
++  }
++  function load(expected: DetailsAuthority) {
++    if (
++      !isCurrent(expected) ||
++      expected.generation !== authority.generation ||
++      !authority.rowId ||
++      !authority.context.access ||
++      !owner.getSnapshot().access
++    )
++      return;
++    authority = { ...authority, generation: authority.generation + 1 };
++    pending = authority;
++    source = { authority, status: "loading" };
++    publish();
++  }
++  const port: DetailsPort<S, T> = {
++    read() {
++      return { authority };
++    },
++    retry(current) {
++      if (
++        current.rowId === authority.rowId &&
++        current.session === authority.session &&
++        current.generation === authority.generation &&
++        current.context.epoch === authority.context.epoch &&
++        current.context.scopeKey === authority.context.scopeKey &&
++        current.context.access &&
++        authority.context.access
++      )
++        load(authority);
++    },
++  };
++  const beforeChange: NonNullable<
++    DetailsAccessoryOptions<S, T>["beforeChange"]
++  > = () => {
++    if (!dirty) return true;
++    return new Promise<boolean>((resolve) => {
++      const abandoned = confirm;
++      decision = Object.freeze({});
++      confirm = resolve;
++      publish();
++      abandoned?.(false);
++    });
++  };
++  return {
++    port,
++    beforeChange,
++    getSnapshot: () => snapshot,
++    subscribe(listener: () => void) {
++      listeners.add(listener);
++      return () => {
++        listeners.delete(listener);
++      };
++    },
++    connect() {
++      // Real public P participant clears detail data/policies before P observers.
++      const unregister = owner.P.registerParticipant(owner.criteria(), {
++        purge: retire,
++      });
++      const stopC = owner.C.subscribe(sync),
++        stopSource = owner.subscribe(sync);
++      // Strict reconnect is an explicit detail-owner mount, not access restoration.
++      if (owner.getSnapshot().access && !authority.context.access) {
++        authority = {
++          ...authority,
++          context: { ...authority.context, access: true },
++        };
++        publish();
++      }
++      sync();
++      return () => {
++        stopC();
++        stopSource();
++        unregister();
++        retire();
++      };
++    },
++    load,
++    isCurrent,
++    editDraft(expected: DetailsAuthority, key: string, value: string) {
++      if (!isCurrent(expected)) return;
++      drafts = Object.freeze({ ...drafts, [key]: value });
++      dirty = true;
++      publish();
++    },
++    respond(expected: DetailsAuthority, kind: "ready" | "missing" | "error") {
++      const ticket = pending;
++      if (
++        !ticket ||
++        expected !== ticket ||
++        ticket !== authority ||
++        !authority.context.access ||
++        !owner.getSnapshot().access
++      )
++        return;
++      pending = null;
++      const record = ticket.rowId ? owner.record(ticket.rowId) : undefined;
++      source =
++        kind === "error"
++          ? { authority, status: "error", code: "unavailable" }
++          : kind === "missing" || !record
++            ? { authority, status: "missing" }
++            : { authority, status: "ready", record };
++      publish();
++    },
++    setDirty(expected: DetailsAuthority, value: boolean) {
++      if (!isCurrent(expected)) return;
++      dirty = value;
++      publish();
++    },
++    answer(
++      expected: DetailsAuthority,
++      ticket: object | null,
++      discard: boolean,
++    ) {
++      if (!ticket || ticket !== decision || !isCurrent(expected)) return;
++      const resolve = confirm;
++      confirm = null;
++      decision = null;
++      if (discard) dirty = false;
++      publish();
++      resolve?.(discard);
++    },
++  };
++}
++export type ExampleDetails<
++  S extends QuerySchema,
++  T extends object,
++> = ReturnType<typeof createExampleDetails<S, T>>;
++export function useExampleDetailSource<S extends QuerySchema, T extends object>(
++  driver: ExampleDetails<S, T>,
++) {
++  const snapshot = useSyncExternalStore(
++    driver.subscribe,
++    driver.getSnapshot,
++    driver.getSnapshot,
++  );
++  useEffect(() => driver.connect(), [driver]);
++  return snapshot;
++}
++function DirtyDecision<S extends QuerySchema, T extends object>({
++  driver,
++}: {
++  driver: ExampleDetails<S, T>;
++}) {
++  const state = useSyncExternalStore(
++    driver.subscribe,
++    driver.getSnapshot,
++    driver.getSnapshot,
++  );
++  return state.confirming ? (
++    <fieldset className="space-y-2 border-t border-border pt-3">
++      <legend>Unsaved draft decision</legend>
++      <p>Discard the unsaved local draft?</p>
++      <Button
++        variant="secondary"
++        onPress={() => driver.answer(state.authority, state.decision, true)}
++      >
++        Discard draft
++      </Button>
++      <Button
++        variant="tertiary"
++        onPress={() => driver.answer(state.authority, state.decision, false)}
++      >
++        Keep editing
++      </Button>
++    </fieldset>
++  ) : null;
++}
++function DetailTransport<S extends QuerySchema, T extends object>({
++  driver,
++}: {
++  driver: ExampleDetails<S, T>;
++}) {
++  const state = useSyncExternalStore(
++    driver.subscribe,
++    driver.getSnapshot,
++    driver.getSnapshot,
++  );
++  return (
++    <fieldset className="flex flex-wrap gap-2">
++      <legend>Synthetic detail transport</legend>
++      <Button variant="tertiary" onPress={() => driver.load(state.authority)}>
++        Refresh detail
++      </Button>
++      {state.source?.status === "loading" ? (
++        <>
++          <Button
++            variant="secondary"
++            onPress={() => driver.respond(state.authority, "ready")}
++          >
++            Deliver detail
++          </Button>
++          <Button
++            variant="tertiary"
++            onPress={() => driver.respond(state.authority, "error")}
++          >
++            Fail detail
++          </Button>
++          <Button
++            variant="tertiary"
++            onPress={() => driver.respond(state.authority, "missing")}
++          >
++            Report missing detail
++          </Button>
++        </>
++      ) : null}
++    </fieldset>
++  );
++}
++const fieldClass =
++  "w-full rounded-md border border-border bg-surface px-3 py-2 text-foreground";
++export function TransactionDetails({
++  context,
++  owner,
++  driver,
++}: {
++  context: DetailsRenderContext<TransactionSchema, Transaction>;
++  owner: ExampleOwner<TransactionSchema, Transaction>;
++  driver: ExampleDetails<TransactionSchema, Transaction>;
++}) {
++  const state = useSyncExternalStore(
++      driver.subscribe,
++      driver.getSnapshot,
++      driver.getSnapshot,
++    ),
++    origin = state.authority;
++  if (context.recordId !== origin.rowId || !driver.isCurrent(origin))
++    return <p>Record details are unavailable.</p>;
++  const reference = state.drafts.reference ?? context.record?.reference ?? "";
++  return (
++    <form
++      className="space-y-4"
++      onSubmit={(event) => {
++        event.preventDefault();
++        if (!driver.isCurrent(origin)) return;
++        owner.updateRecord(context.recordId, (record) => ({
++          ...record,
++          reference,
++        }));
++        driver.setDirty(origin, false);
++      }}
++    >
++      <p>
++        Application-owned reconciliation note. No payment operation is
++        performed.
++      </p>
++      <label className="block">
++        Reference draft
++        <input
++          className={fieldClass}
++          value={reference}
++          onChange={(event) => {
++            driver.editDraft(origin, "reference", event.target.value);
++          }}
++        />
++      </label>
++      <Button
++        type="submit"
++        variant="secondary"
++        isDisabled={context.status !== "ready"}
++      >
++        Save synthetic reference
++      </Button>
++      <DetailTransport driver={driver} />
++      <DirtyDecision driver={driver} />
++    </form>
++  );
++}
++export function CustomerDetails({
++  context,
++  owner,
++  driver,
++}: {
++  context: DetailsRenderContext<CustomerSchema, Customer>;
++  owner: ExampleOwner<CustomerSchema, Customer>;
++  driver: ExampleDetails<CustomerSchema, Customer>;
++}) {
++  const state = useSyncExternalStore(
++      driver.subscribe,
++      driver.getSnapshot,
++      driver.getSnapshot,
++    ),
++    origin = state.authority;
++  if (context.recordId !== origin.rowId || !driver.isCurrent(origin))
++    return <p>Record details are unavailable.</p>;
++  const note = state.drafts.note ?? context.record?.note ?? "",
++    delivery = state.drafts.delivery ?? "summary";
++  return (
++    <form
++      className="space-y-4"
++      onSubmit={(event) => {
++        event.preventDefault();
++        if (!driver.isCurrent(origin)) return;
++        owner.updateRecord(context.recordId, (record) => ({ ...record, note }));
++        driver.setDirty(origin, false);
++      }}
++    >
++      <h3 className="font-semibold">Account workspace</h3>
++      <p>
++        Customer teams and application notes are not a generated property list.
++      </p>
++      <label className="block">
++        Working note
++        <textarea
++          className={fieldClass}
++          value={note}
++          onChange={(event) => {
++            driver.editDraft(origin, "note", event.target.value);
++          }}
++        />
++      </label>
++      <label className="block">
++        Local report view
++        <select
++          className={fieldClass}
++          value={delivery}
++          onChange={(event) => {
++            driver.editDraft(origin, "delivery", event.target.value);
++          }}
++        >
++          <option value="summary">Summary</option>
++          <option value="teams">Team breakdown</option>
++        </select>
++      </label>
++      <Button
++        type="submit"
++        variant="secondary"
++        isDisabled={context.status !== "ready"}
++      >
++        Save synthetic note
++      </Button>
++      <DetailTransport driver={driver} />
++      <DirtyDecision driver={driver} />
++    </form>
++  );
++}
++export function InventoryDetails({
++  context,
++  owner,
++  driver,
++}: {
++  context: DetailsRenderContext<InventorySchema, InventoryItem>;
++  owner: ExampleOwner<InventorySchema, InventoryItem>;
++  driver: ExampleDetails<InventorySchema, InventoryItem>;
++}) {
++  const state = useSyncExternalStore(
++      driver.subscribe,
++      driver.getSnapshot,
++      driver.getSnapshot,
++    ),
++    origin = state.authority;
++  if (context.recordId !== origin.rowId || !driver.isCurrent(origin))
++    return <p>Record details are unavailable.</p>;
++  const quantity =
++      state.drafts.quantity ?? String(context.record?.quantity ?? 0),
++    note = state.drafts.note ?? context.record?.note ?? "";
++  const valid =
++    /^\d+$/.test(quantity) && Number.isSafeInteger(Number(quantity));
++  return (
++    <form
++      className="space-y-4"
++      onSubmit={(event) => {
++        event.preventDefault();
++        if (!valid || !driver.isCurrent(origin)) return;
++        owner.updateRecord(context.recordId, (record) => ({
++          ...record,
++          quantity: Number(quantity),
++          note,
++        }));
++        driver.setDirty(origin, false);
++      }}
++    >
++      <h3 className="font-semibold">Stock worksheet</h3>
++      <div className="grid gap-3 sm:grid-cols-2">
++        <label>
++          Count draft
++          <input
++            className={fieldClass}
++            inputMode="numeric"
++            value={quantity}
++            onChange={(event) => {
++              driver.editDraft(origin, "quantity", event.target.value);
++            }}
++          />
++        </label>
++        <label>
++          Location note
++          <input
++            className={fieldClass}
++            value={note}
++            onChange={(event) => {
++              driver.editDraft(origin, "note", event.target.value);
++            }}
++          />
++        </label>
++      </div>
++      {!valid ? <p role="alert">Enter a non-negative whole count.</p> : null}
++      <Button
++        type="submit"
++        variant="secondary"
++        isDisabled={!valid || context.status !== "ready"}
++      >
++        Apply synthetic count
++      </Button>
++      <DetailTransport driver={driver} />
++      <DirtyDecision driver={driver} />
++    </form>
++  );
++}
+--- /dev/null
++++ after/apps/examples/shared/options.ts
+@@ -0,0 +1,59 @@
++import {
++  createOptionSource,
++  type FilterOption,
++  type OptionRequest,
++  type OptionSourceContext,
++} from "@tableweave/react/filters";
++import type { ScalarId } from "@tableweave/react/contracts";
++
++/** No timers/endpoints. A UI-issued exact token is settled by the app's buttons. */
++export function createExampleOptions<Id extends ScalarId>(
++  context: OptionSourceContext,
++  choices: readonly FilterOption<Id>[],
++) {
++  const source = createOptionSource<Id>(context);
++  let pending: OptionRequest | null = null;
++  let mode: "manual" | "ready" | "fail-once" | "empty" = "manual";
++  function respond(empty = false) {
++    const token = pending;
++    if (!token || token !== source.getSnapshot().request) return false;
++    const options = empty
++      ? []
++      : choices.filter((choice) =>
++          choice.label
++            .toLocaleLowerCase("en-US")
++            .includes(token.term.toLocaleLowerCase("en-US")),
++        );
++    return source.succeed(token, { options, hasMore: false });
++  }
++  return {
++    source,
++    onRequest(request: OptionRequest) {
++      pending = request;
++      if (mode === "fail-once") {
++        mode = "ready";
++        source.fail(request, "unavailable");
++      } else if (mode === "ready" || mode === "empty")
++        respond(mode === "empty");
++    },
++    setMode(next: typeof mode) {
++      mode = next;
++    },
++    nextPageKey() {
++      return null;
++    },
++    respond,
++    fail() {
++      const token = pending;
++      return token ? source.fail(token, "unavailable") : false;
++    },
++    clear() {
++      pending = null;
++      source.clear();
++    },
++    revoke() {
++      pending = null;
++      source.setContext({ ...context, access: false });
++    },
++  };
++}
+--- /dev/null
++++ after/apps/examples/shared/owner.ts
+@@ -0,0 +1,293 @@
++import {
++  createCriteriaPublication,
++  type DataTableOptions,
++  type NativeControllerOptions,
++  type StateProposal,
++  type TableCommand,
++  type TableDefinition,
++} from "@tableweave/react";
++import { createQuery, type QuerySchema } from "@tableweave/react/contracts";
++import { createExampleOptions } from "./options.js";
++import { fixedNow } from "./records.js";
++import { createExampleReordering } from "./reordering.js";
++import { createExampleResource } from "./resource.js";
++
++export interface ExampleOwnerOptions {
++  readonly id: string;
++  readonly server?: boolean;
++  readonly manualRows?: boolean;
++  readonly controlled?: boolean;
++}
++/** One application source owner. Never a wrapper/proxy/replacement for C or P. */
++export function createExampleOwner<S extends QuerySchema, T extends object>(
++  D: TableDefinition<S, T>,
++  seed: readonly T[],
++  config: ExampleOwnerOptions,
++) {
++  const context = {
++    definitionKey: D.native.controllerDefinition.schema.id,
++    scopeKey: config.id,
++    access: true,
++  };
++  let records: readonly T[] = [],
++    live = true,
++    connected = false,
++    terminal = false;
++  let proposal: StateProposal<S> | null = null,
++    notice = "Synthetic local application; no network or persistence.";
++  let snapshot: Readonly<{
++    version: number;
++    records: readonly T[];
++    access: boolean;
++    proposal: StateProposal<S> | null;
++    notice: string;
++  }> = Object.freeze({ version: 0, records, access: true, proposal, notice });
++  const listeners = new Set<() => void>();
++  const refreshSnapshot = () => {
++    snapshot = Object.freeze({
++      version: snapshot.version + 1,
++      records,
++      access: live,
++      proposal,
++      notice,
++    });
++  };
++  const publish = () => {
++    refreshSnapshot();
++    for (const listener of listeners) listener();
++  };
++  function replaceRecords(next: readonly T[]) {
++    if (!live) return;
++    records = next;
++    reorder?.sourceChanged();
++    publish();
++  }
++  const controllerOptions: NativeControllerOptions<S> = {
++    initial: {
++      query: createQuery(D.native.controllerDefinition.schema, {
++        locale: "en-US",
++        timeZone: "UTC",
++      }),
++    },
++    now: () => fixedNow,
++    ...(config.controlled
++      ? { controlled: ["query", "selection", "columns", "details"] as const }
++      : {}),
++    onRequest(value) {
++      proposal = value;
++      publish();
++    },
++    onQueryChange() {
++      if (config.server && connected && live) remote.begin();
++    },
++  };
++  const reorder = config.manualRows
++    ? createExampleReordering(
++        D,
++        controllerOptions,
++        `${config.id}:${globalThis.crypto.randomUUID()}`,
++        context,
++        () => records,
++        replaceRecords,
++        publish,
++      )
++    : null;
++  const C = reorder?.controller ?? D.createController(controllerOptions);
++  const remote = createExampleResource(D, C, context, () => records);
++  const numericOptions = createExampleOptions<number>(
++    { ...context, fieldId: "account" },
++    [
++      { id: 0, label: "Account zero" },
++      { id: 1, label: "Account one" },
++      { id: 2, label: "Account two" },
++    ],
++  );
++  const stringOptions = createExampleOptions<string>(
++    { ...context, fieldId: "tags" },
++    [
++      { id: "review", label: "Review" },
++      { id: "local", label: "Local" },
++    ],
++  );
++  function clearPrivateState() {
++    live = false;
++    records = [];
++    if (proposal) C.reject(proposal);
++    proposal = null;
++    notice =
++      "Application source retired; retained private inputs and notices were cleared.";
++    refreshSnapshot();
++    reorder?.disconnect();
++    remote.clear();
++    numericOptions.clear();
++    stringOptions.clear();
++    for (const command of [
++      { type: "selection.cancel" },
++      { type: "details.change", update: { rowId: null } },
++    ] as const) {
++      const result = C.dispatch(command);
++      // Retire actual controlled proposals in sequence, never overwrite one.
++      if (result.status === "proposed") C.accept(result.proposal);
++      proposal = null;
++    }
++    refreshSnapshot();
++  }
++  const P = createCriteriaPublication({
++    controller: C,
++    definition: C.getDefinition(),
++    retirement: {
++      retire() {
++        // This is actual app retirement on initial publication, every transition
++        // and disposal, not an initial-only fixture certificate or allowing policy.
++        clearPrivateState();
++        if (
++          Object.values(C.getSnapshot().selection).some(Boolean) ||
++          C.getSnapshot().details.rowId !== null ||
++          remote.resource.getSnapshot().snapshot !== null
++        )
++          throw new Error("Application retirement incomplete");
++        return undefined;
++      },
++    },
++  });
++  const pending = P.begin({
++    controller: C,
++    definition: C.getDefinition(),
++    expected: context,
++    actual: context,
++  });
++  if (
++    pending.status !== "pending" ||
++    P.complete(pending.ticket).status !== "settled"
++  )
++    throw new Error("Application publication unavailable");
++  // Publish actual authorized synthetic INPUT after retirement completes.
++  records = seed;
++  live = true;
++  notice = "Synthetic local application; no network or persistence.";
++  reorder?.connect();
++  publish();
++  const current = P.getSnapshot().current;
++  if (!current) throw new Error("No settled application publication");
++  const authority = P.issue({
++    controller: C,
++    definition: C.getDefinition(),
++    context: current.expected,
++    epoch: current.epoch,
++  });
++  // This owner has one publication domain. A terminal loss never mints a new
++  // origin from latest state; a future real grant needs a new app owner.
++  const criteria = () => authority;
++  return {
++    D,
++    C,
++    P,
++    context,
++    remote,
++    numericOptions,
++    stringOptions,
++    reorder,
++    criteria,
++    getSnapshot: () => snapshot,
++    getServerSnapshot: () => snapshot,
++    subscribe(listener: () => void) {
++      listeners.add(listener);
++      return () => {
++        listeners.delete(listener);
++      };
++    },
++    connect() {
++      if (terminal || connected) return () => {};
++      connected = true;
++      live = true;
++      records = seed;
++      notice =
++        "Synthetic application source connected. No network or persistence.";
++      const unregister = P.registerParticipant(authority, {
++        purge() {
++          clearPrivateState();
++          return undefined;
++        },
++      });
++      const stopResource = remote.resource.connect();
++      reorder?.connect();
++      publish();
++      return () => {
++        connected = false;
++        unregister();
++        clearPrivateState();
++        stopResource();
++        publish();
++      };
++    },
++    modelOptions(): DataTableOptions<S, T> {
++      return {
++        controller: C,
++        publication: P,
++        criteria: criteria(),
++        expected: context,
++        manualOrder: config.manualRows ?? false,
++        source: config.server
++          ? {
++              mode: "server",
++              resource: remote.resource,
++              view: remote.resource.getSnapshot(),
++              bindings: remote.bindings(),
++            }
++          : { mode: "client", context: { ...context, access: live }, records },
++      };
++    },
++    dispatch(command: TableCommand<S>) {
++      if (!live || terminal) return;
++      return C.dispatch(command);
++    },
++    decide(accept: boolean) {
++      if (!proposal || !live) return;
++      const value = proposal;
++      proposal = null;
++      if (accept) C.accept(value);
++      else C.reject(value);
++      publish();
++    },
++    replaceRecords,
++    record(id: string) {
++      return live
++        ? records.find((record) => D.native.getRowId(record) === id)
++        : undefined;
++    },
++    updateRecord(id: string, update: (record: T) => T) {
++      if (!live) return;
++      replaceRecords(
++        records.map((record) =>
++          D.native.getRowId(record) === id ? update(record) : record,
++        ),
++      );
++    },
++    setNotice(value: string) {
++      if (!live) return;
++      notice = value;
++      publish();
++    },
++    revoke() {
++      if (terminal) return;
++      terminal = true;
++      live = false;
++      // App participants clear before P's observers can see a new publication.
++      const denied = { ...context, access: false };
++      const change = P.begin({
++        controller: C,
++        definition: C.getDefinition(),
++        expected: context,
++        actual: denied,
++      });
++      if (change.status === "pending") P.complete(change.ticket);
++      remote.revoke(denied);
++      numericOptions.revoke();
++      stringOptions.revoke();
++      publish();
++    },
++  };
++}
++export type ExampleOwner<S extends QuerySchema, T extends object> = ReturnType<
++  typeof createExampleOwner<S, T>
++>;
+--- /dev/null
++++ after/apps/examples/shared/records.ts
+@@ -0,0 +1,94 @@
++/** Public synthetic inputs, not accepted/native output caches or business policy. */
++export const fixedNow = Date.parse("2026-11-25T12:00:00Z");
++export const receivedAt = "2026-11-25T12:00:00Z";
++export interface Transaction {
++  readonly id: string;
++  readonly description: string;
++  readonly status: "posted" | "draft";
++  readonly occurred: string;
++  readonly amount: number;
++  readonly reference: string | null;
++  readonly account: number;
++  readonly tags: readonly string[];
++  readonly cleared: boolean | null;
++  readonly bookingDay: string;
++}
++export interface Customer {
++  readonly id: string;
++  readonly name: string;
++  readonly segment: "current" | "paused";
++  readonly joined: string;
++  readonly balance: number;
++  readonly note: string | null;
++  readonly active: boolean;
++  readonly teams: readonly string[];
++}
++export interface InventoryItem {
++  readonly id: string;
++  readonly title: string;
++  readonly status: "available" | "archived";
++  readonly updated: string;
++  readonly quantity: number;
++  readonly category: "equipment" | "supplies";
++  readonly locations: readonly string[];
++  readonly reserved: boolean;
++  readonly note: string | null;
++}
++export const transactions: readonly Transaction[] = Object.freeze(
++  Array.from({ length: 24 }, (_, index) =>
++    Object.freeze({
++      id: `tx-${String(index + 1).padStart(3, "0")}`,
++      description: `Transfer note ${String(index + 1).padStart(2, "0")}`,
++      status: index % 3 === 0 ? ("draft" as const) : ("posted" as const),
++      occurred: `2026-11-${index % 2 ? "24" : "25"}T09:00:00Z`,
++      amount: index === 0 ? 0 : (index % 2 ? 1 : -1) * index * 12.5,
++      reference: index === 0 ? null : index === 1 ? "" : `REF-${index + 1}`,
++      account: index % 3,
++      tags: index % 2 ? ["review", "local"] : [],
++      cleared: index === 0 ? null : index % 2 === 0,
++      bookingDay: "2026-11-25",
++    }),
++  ),
++);
++export const customers: readonly Customer[] = Object.freeze(
++  Array.from({ length: 14 }, (_, index) =>
++    Object.freeze({
++      id: `cu-${String(index + 1).padStart(3, "0")}`,
++      name: `Customer ${String(index + 1).padStart(2, "0")}`,
++      segment: index % 3 === 0 ? ("paused" as const) : ("current" as const),
++      joined: "2026-11-24T09:00:00Z",
++      balance: index * 25,
++      note: index === 0 ? null : `Synthetic account note ${index + 1}`,
++      active: index % 3 !== 0,
++      teams: index % 2 ? ["north"] : ["south", "north"],
++    }),
++  ),
++);
++export const inventory: readonly InventoryItem[] = Object.freeze(
++  [
++    "Desk stand",
++    "Cable tray",
++    "Task light",
++    "Document tray",
++    "Desk mat",
++    "Laptop riser",
++    "Storage box",
++    "Notebook",
++    "Clip set",
++    "Marker set",
++    "Folder",
++    "Pen holder",
++  ].map((title, index) =>
++    Object.freeze({
++      id: `it-${String(index + 1).padStart(3, "0")}`,
++      title,
++      status: index === 4 ? ("archived" as const) : ("available" as const),
++      updated: "2026-11-25T09:00:00Z",
++      quantity: index * 3,
++      category: index < 6 ? ("equipment" as const) : ("supplies" as const),
++      locations: index % 2 ? ["0", "shelf-b"] : [],
++      reserved: index % 3 === 0,
++      note: index === 0 ? null : "Synthetic stock note",
++    }),
++  ),
++);
+--- /dev/null
++++ after/apps/examples/shared/reordering.ts
+@@ -0,0 +1,241 @@
++import {
++  requireDataTableModel,
++  type DataTableModel,
++  type NativeControllerOptions,
++  type TableDefinition,
++} from "@tableweave/react";
++import type { QuerySchema } from "@tableweave/react/contracts";
++import {
++  createReorderController,
++  type ReorderAdmissionLease,
++  type ReorderApplicationMetadata,
++} from "@tableweave/react/reordering-controller";
++import type {
++  RowMoveOperation,
++  RowMoveSettlement,
++} from "@tableweave/react/reordering";
++
++/** Application transport ownership. The actual renderer, not this module, begins. */
++export function createExampleReordering<
++  S extends QuerySchema,
++  T extends object,
++>(
++  D: TableDefinition<S, T>,
++  controller: NativeControllerOptions<S>,
++  instanceId: string,
++  context: { definitionKey: string; scopeKey: string },
++  readRecords: () => readonly T[],
++  publishRecords: (records: readonly T[]) => void,
++  changed: () => void,
++) {
++  const metadata: ReorderApplicationMetadata = {
++    ownerEpoch: 1,
++    sourceVersion: 0,
++    revision: 0,
++    baseRevision: "0",
++  };
++  let current = metadata;
++  const helper = createReorderController(D, {
++    controller,
++    instanceId,
++    readCurrent() {
++      return current;
++    },
++  });
++  let lease: ReorderAdmissionLease<S, T> | null = helper.admission.mount();
++  let operation: RowMoveOperation | null = null,
++    awaitingSource: RowMoveOperation | null = null;
++  let reported = false;
++  let held: {
++    operation: RowMoveOperation;
++    outcome: RowMoveSettlement;
++    ownerEpoch: number;
++  } | null = null;
++  let notice =
++    "Synthetic transport. Use a real row move menu to submit an operation.";
++  function sourceChanged() {
++    const next = current.sourceVersion + 1;
++    current = {
++      ...current,
++      sourceVersion: next,
++      revision: next,
++      baseRevision: String(next),
++    };
++  }
++  function deliver(receipt: NonNullable<typeof held>) {
++    const result = helper.admission.settle(receipt.operation, receipt.outcome);
++    if (
++      result.status === "ignored" &&
++      (result.reason === "authority" || result.reason === "reentrant")
++    ) {
++      held = receipt;
++      notice =
++        "Exact synthetic transport notice held until a coherent model commit; no outcome was invented.";
++      return;
++    }
++    held = null;
++    notice =
++      receipt.outcome.kind === "indeterminate"
++        ? "Synthetic transport status unknown; awaiting application reconciliation."
++        : receipt.outcome.kind === "accepted"
++          ? "Synthetic transport accepted; awaiting authoritative source and acknowledgement."
++          : "Synthetic transport rejected this intent; no input order was changed.";
++    if (!helper.admission.getSnapshot().moves.pending) operation = null;
++  }
++  return {
++    ...helper,
++    get lease() {
++      return lease;
++    },
++    get operation() {
++      return operation;
++    },
++    get notice() {
++      return notice;
++    },
++    get canSettle() {
++      return operation !== null && !reported;
++    },
++    get canPublish() {
++      return operation !== null && awaitingSource === null;
++    },
++    sourceChanged,
++    connect() {
++      if (lease) return;
++      current = { ...current, ownerEpoch: current.ownerEpoch + 1 };
++      lease = helper.admission.mount();
++    },
++    disconnect() {
++      const ending = lease;
++      lease = null;
++      operation = null;
++      awaitingSource = null;
++      held = null;
++      reported = false;
++      notice =
++        "Application source owner ended; no backend cancellation is implied.";
++      if (ending) helper.admission.disconnect(ending);
++    },
++    onSubmit(value: RowMoveOperation) {
++      // Called synchronously by the real production row-config notification.
++      if (operation === value) return;
++      operation = value;
++      reported = false;
++      held = null;
++      notice = "Synthetic row intent received. Transport has not resolved.";
++      changed();
++    },
++    settle(outcome: RowMoveSettlement) {
++      if (!operation || reported) return;
++      reported = true;
++      deliver({ operation, outcome, ownerEpoch: current.ownerEpoch });
++      changed();
++    },
++    publishApplied() {
++      const value = operation;
++      if (
++        !value ||
++        awaitingSource ||
++        helper.admission.getSnapshot().moves.pending?.operation !== value
++      )
++        return;
++      const records = readRecords(),
++        moved = records.find(
++          (record) => D.native.getRowId(record) === value.move.movedId,
++        );
++      if (!moved) return;
++      const rest = records.filter(
++        (record) => D.native.getRowId(record) !== value.move.movedId,
++      );
++      const index =
++        value.move.beforeId === null
++          ? rest.length
++          : rest.findIndex(
++              (record) => D.native.getRowId(record) === value.move.beforeId,
++            );
++      if (index < 0) return;
++      const previous = rest[index - 1];
++      if (
++        (previous ? D.native.getRowId(previous) : null) !== value.move.afterId
++      ) {
++        notice =
++          "Synthetic intent no longer matches the authoritative input gap; awaiting application resolution.";
++        changed();
++        return;
++      }
++      // Authoritative synthetic INPUT event. No native output/order backup/rollback.
++      awaitingSource = value;
++      publishRecords([...rest.slice(0, index), moved, ...rest.slice(index)]);
++      notice =
++        "Synthetic authoritative input published; waiting for its genuine model commit.";
++      changed();
++    },
++    commit(model: DataTableModel<S, T>) {
++      if (
++        !lease ||
++        model.phase !== "display" ||
++        model.presentation?.busy ||
++        model.presentation?.stale
++      )
++        return;
++      requireDataTableModel(model, D);
++      // Correlate the client producer event to the actual committed page, not a
++      // guessed boolean/clock or a second accepted-order cache.
++      const state = helper.controller.getSnapshot(),
++        input = readRecords();
++      if (state.query.sorting.length || model.presentation?.obsolete) return;
++      const page = input.slice(
++        state.query.pagination.pageIndex * state.query.pagination.pageSize,
++        (state.query.pagination.pageIndex + 1) *
++          state.query.pagination.pageSize,
++      );
++      if (
++        !model.view ||
++        model.view.rows.length !== page.length ||
++        model.view.rows.some((row, index) => row.original !== page[index])
++      )
++        return;
++      helper.admission.commitModel(lease, model);
++      if (held) {
++        if (
++          held.ownerEpoch !== current.ownerEpoch ||
++          held.operation !== operation ||
++          helper.admission.getSnapshot().moves.pending?.operation !==
++            held.operation
++        ) {
++          held = null;
++          notice =
++            "Held synthetic notice no longer belongs to this pending source; it was not replayed to a new owner.";
++          changed();
++        } else {
++          const receipt = held;
++          deliver(receipt);
++          if (!held) changed();
++        }
++      }
++      const received = awaitingSource;
++      if (!received || received !== operation) return;
++      const result = helper.admission.acknowledge(received, {
++        stamp: {
++          ...context,
++          ownerEpoch: current.ownerEpoch,
++          sourceVersion: current.sourceVersion,
++          revision: current.revision,
++          queryIdentity: state.queryIdentity,
++          ...state.query.pagination,
++        },
++        disposition: "applied",
++      });
++      if (
++        result.status === "changed" &&
++        !helper.admission.getSnapshot().moves.pending
++      ) {
++        operation = null;
++        awaitingSource = null;
++        notice =
++          "Synthetic application reconciliation completed; no real persistence was performed.";
++        changed();
++      }
++    },
++  };
++}
+--- /dev/null
++++ after/apps/examples/shared/resource.ts
+@@ -0,0 +1,117 @@
++import {
++  beginControlsRequest,
++  createResourceAdapter,
++  getControlsRequestBinding,
++  type EmptyKind,
++  type ResourceContext,
++  type ResourceRequest,
++  type TableController,
++  type TableDefinition,
++} from "@tableweave/react";
++import type { QueryFor, QuerySchema } from "@tableweave/react/contracts";
++import { createFilterEvaluator } from "@tableweave/react/filters";
++import { fixedNow, receivedAt } from "./records.js";
++
++/** A deterministic in-memory SERVER transport. Never reprocess the displayed page. */
++export function createExampleResource<S extends QuerySchema, T extends object>(
++  D: TableDefinition<S, T>,
++  C: TableController<S>,
++  context: ResourceContext,
++  readRecords: () => readonly T[],
++) {
++  const resource = createResourceAdapter<T, QueryFor<S>>(context);
++  let accepted: ResourceRequest<QueryFor<S>> | null = null,
++    queued: ResourceRequest<QueryFor<S>> | null = null,
++    serial = 0;
++  const begin = () => {
++    const started = beginControlsRequest(D.native, C, resource, {
++      ...context,
++      queryKey: C.getSnapshot().queryIdentity,
++      requestKey: `synthetic-${++serial}`,
++      extent: { kind: "page", ...C.getSnapshot().query.pagination },
++      retry(request) {
++        queued = request;
++      },
++    });
++    if (started) queued = started.request;
++    return started;
++  };
++  return {
++    resource,
++    begin,
++    bindings() {
++      const current = resource.getSnapshot();
++      return {
++        request: current.request
++          ? getControlsRequestBinding(D.native, C, resource, current.request)
++          : null,
++        snapshot:
++          current.snapshot && accepted
++            ? getControlsRequestBinding(D.native, C, resource, accepted)
++            : null,
++      };
++    },
++    succeed(kind: "known" | "unknown" = "known", empty?: EmptyKind) {
++      const token = queued;
++      if (!token || token !== resource.getSnapshot().request) return false;
++      const input = readRecords();
++      const evaluate = createFilterEvaluator<S, T>(
++        D.native.controllerDefinition.schema,
++        token.query,
++        { ...D.native.evaluation, now: token.evaluatedAt ?? fixedNow },
++      );
++      const collator = new Intl.Collator(token.query.locale);
++      const records = input.filter(evaluate).sort((a, b) => {
++        for (const rule of token.query.sorting) {
++          const left: unknown = Reflect.get(a, rule.id),
++            right: unknown = Reflect.get(b, rule.id);
++          const comparison =
++            typeof left === "number" && typeof right === "number"
++              ? left - right
++              : collator.compare(String(left ?? ""), String(right ?? ""));
++          if (comparison) return rule.desc ? -comparison : comparison;
++        }
++        return collator.compare(D.native.getRowId(a), D.native.getRowId(b));
++      });
++      const { pageIndex, pageSize } = token.query.pagination;
++      if (empty && records.length !== 0)
++        throw new Error(
++          "Empty classification requires an actual empty application result",
++        );
++      const before = accepted;
++      accepted = token;
++      const success = resource.succeed(token, {
++        source: "fresh",
++        records: records.slice(
++          pageIndex * pageSize,
++          (pageIndex + 1) * pageSize,
++        ),
++        page:
++          kind === "known"
++            ? { kind, total: records.length }
++            : {
++                kind,
++                hasNextPage: (pageIndex + 1) * pageSize < records.length,
++              },
++        emptyKind: empty ?? (input.length === 0 ? "dataset" : "filtered"),
++        receivedAt,
++      });
++      if (!success) accepted = before;
++      return success;
++    },
++    fail() {
++      const token = resource.getSnapshot().request;
++      return token ? resource.fail(token, "unavailable") : false;
++    },
++    clear() {
++      accepted = null;
++      queued = null;
++      resource.clear();
++    },
++    revoke(next: ResourceContext) {
++      accepted = null;
++      queued = null;
++      resource.setContext(next);
++    },
++  };
++}
+--- /dev/null
++++ after/apps/examples/shared/schemas.ts
+@@ -0,0 +1,161 @@
++import { ContractError, defineQuerySchema } from "@tableweave/react/contracts";
++import {
++  createOperatorRegistry,
++  defineOperator,
++} from "@tableweave/react/filters";
++
++export const exampleOperators = createOperatorRegistry([
++  defineOperator({
++    id: "example.multiple-of",
++    labelKey: "Multiple of",
++    types: ["number"],
++    cardinality: "one",
++    validate(value): value is number {
++      return typeof value === "number" && Number.isFinite(value) && value > 0;
++    },
++    evaluate(record, value) {
++      return (
++        typeof record === "number" &&
++        typeof value === "number" &&
++        record % value === 0
++      );
++    },
++  }),
++] as const);
++export const minimalTransactionSchema = defineQuerySchema({
++  id: "example-minimal-transactions",
++  version: 1,
++  fields: {
++    description: { type: "text", owner: "builder" },
++    amount: { type: "number", owner: "builder" },
++  },
++});
++export const transactionSchema = defineQuerySchema(
++  {
++    id: "example-transactions",
++    version: 1,
++    fields: {
++      description: { type: "text", owner: "search", sort: true },
++      status: { type: "enum", owner: "tabs", values: ["posted", "draft"] },
++      occurred: { type: "datetime", owner: "date" },
++      amount: {
++        type: "number",
++        owner: "builder",
++        sort: true,
++        operators: [
++          "number.eq",
++          "number.gt",
++          "number.between",
++          "example.multiple-of",
++        ],
++      },
++      reference: { type: "text", owner: "builder", nullable: true },
++      account: {
++        type: "enum",
++        owner: "builder",
++        idType: "number",
++        values: [0, 1, 2],
++      },
++      tags: { type: "set", owner: "builder", values: ["review", "local"] },
++      cleared: { type: "boolean", owner: "builder", nullable: true },
++      bookingDay: { type: "date", owner: "builder" },
++    },
++    tabs: [
++      {
++        id: "posted",
++        rules: [{ field: "status", operator: "enum.is", value: "posted" }],
++      },
++      {
++        id: "draft",
++        rules: [{ field: "status", operator: "enum.is", value: "draft" }],
++      },
++    ],
++    date: { mode: "range" },
++    search: { debounceMs: 180 },
++    sorting: { multi: true },
++  },
++  exampleOperators,
++);
++export const customerSchema = defineQuerySchema({
++  id: "example-customers",
++  version: 1,
++  fields: {
++    name: { type: "text", owner: "search", sort: true },
++    segment: { type: "enum", owner: "tabs", values: ["current", "paused"] },
++    joined: { type: "datetime", owner: "date" },
++    balance: { type: "number", owner: "builder", sort: true },
++    note: { type: "text", owner: "builder", nullable: true },
++    active: { type: "boolean", owner: "builder" },
++    teams: { type: "set", owner: "builder", values: ["north", "south"] },
++  },
++  tabs: [
++    {
++      id: "current",
++      rules: [{ field: "segment", operator: "enum.is", value: "current" }],
++    },
++    {
++      id: "paused",
++      rules: [{ field: "segment", operator: "enum.is", value: "paused" }],
++    },
++  ],
++  date: { mode: "range" },
++  sorting: { multi: true },
++});
++export const inventorySchema = defineQuerySchema({
++  id: "example-inventory",
++  version: 1,
++  fields: {
++    title: { type: "text", owner: "search", sort: true },
++    status: { type: "enum", owner: "tabs", values: ["available", "archived"] },
++    updated: { type: "datetime", owner: "date" },
++    quantity: { type: "number", owner: "builder", sort: true },
++    category: {
++      type: "enum",
++      owner: "builder",
++      values: ["equipment", "supplies"],
++    },
++    locations: { type: "set", owner: "builder", values: ["0", "shelf-b"] },
++    reserved: { type: "boolean", owner: "builder" },
++    note: { type: "text", owner: "builder", nullable: true },
++  },
++  tabs: [
++    {
++      id: "available",
++      rules: [{ field: "status", operator: "enum.is", value: "available" }],
++    },
++    {
++      id: "archived",
++      rules: [{ field: "status", operator: "enum.is", value: "archived" }],
++    },
++  ],
++  date: { mode: "range" },
++  sorting: { multi: true },
++});
++export type TransactionSchema = typeof transactionSchema;
++export type CustomerSchema = typeof customerSchema;
++export type InventorySchema = typeof inventorySchema;
++
++/** A real definition error rendered as a diagnostic, never a fallback grant. */
++export function ownerConflictDiagnostic(): string {
++  try {
++    defineQuerySchema({
++      id: "example-invalid-owner",
++      version: 1,
++      fields: { amount: { type: "number", owner: "builder" } },
++      tabs: [
++        {
++          id: "conflict",
++          rules: [{ field: "amount", operator: "number.eq", value: 0 }],
++        },
++      ],
++    });
++    return "Unexpected acceptance: owner-conflict fixture needs review.";
++  } catch (error) {
++    return error instanceof ContractError &&
++      error.issues.some(
++        (issue) => issue.code === "rule.field" && issue.field === "amount",
++      )
++      ? "Configuration rejected: a tabs predicate cannot claim a builder-owned field."
++      : "Configuration failed for another reason; owner-conflict classification needs review.";
++  }
++}
+--- /dev/null
++++ after/apps/storybook/src/workbench/Configurations.stories.tsx
+@@ -0,0 +1,335 @@
++import type { Meta, StoryObj } from "@storybook/react-vite";
++import { expect, userEvent, waitFor, within } from "storybook/test";
++import {
++  checkedPlay,
++  ControlledWorkbench,
++  GroupedWorkbench,
++  IndependentWorkbench,
++  MinimalWorkbench,
++  OwnerConflict,
++  RecoveryWorkbench,
++  TransactionsWorkbench,
++} from "./Workbench.js";
++
++const meta = {
++  id: "wp11-configurations",
++  title: "Workbench/Configurations",
++  component: TransactionsWorkbench,
++  parameters: { layout: "fullscreen" },
++  argTypes: { scenario: { control: false } },
++} satisfies Meta<typeof TransactionsWorkbench>;
++export default meta;
++type Story = StoryObj<typeof meta>;
++async function controls(element: HTMLElement) {
++  await userEvent.click(
++    within(element).getByText("Synthetic application controls", {
++      selector: "summary",
++    }),
++  );
++}
++async function select(element: HTMLElement, name: string) {
++  const checkbox = within(element).getByRole("checkbox", { name });
++  const label = checkbox.closest("label");
++  if (!label) throw new Error("Actual checkbox label required");
++  await userEvent.click(label);
++}
++export const Default: Story = {
++  render: () => <MinimalWorkbench />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await expect(
++        canvas.getByRole("button", { name: "Add filter rule: Filters" }),
++      ).toBeVisible();
++      await expect(canvas.queryByRole("searchbox")).not.toBeInTheDocument();
++      await expect(canvas.queryByRole("tablist")).not.toBeInTheDocument();
++      await expect(canvas.queryByRole("checkbox")).not.toBeInTheDocument();
++    }),
++};
++export const FullyConfigured: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await expect(
++        canvas.getByRole("searchbox", { name: "Search descriptions" }),
++      ).toBeVisible();
++      await expect(
++        canvas.getByRole("tab", { name: "All records" }),
++      ).toBeVisible();
++      await expect(
++        canvas.getByRole("button", { name: "Filter by date" }),
++      ).toBeVisible();
++      await expect(
++        canvas.getByRole("button", { name: "Columns" }),
++      ).toBeVisible();
++      await expect(
++        canvas.getByRole("button", { name: "View details tx-001" }),
++      ).toBeVisible();
++      await expect(
++        canvas.getByText(/dragging\/G-02 is incomplete/),
++      ).toBeVisible();
++    }),
++};
++export const SelectedAcrossPages: Story = {
++  render: () => <RecoveryWorkbench scenario="ready" />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await select(canvasElement, "Select Transfer note 01");
++      await expect(canvas.queryByRole("searchbox")).not.toBeInTheDocument();
++      await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
++      await controls(canvasElement);
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Deliver known page" }),
++      );
++      await canvas.findByRole("rowheader", { name: "Transfer note 11" });
++      await select(canvasElement, "Select Transfer note 11");
++      await expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent(
++        "tx-001, tx-011",
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Queue synthetic review" }),
++      );
++      await expect(
++        canvas.getByLabelText("Application notice"),
++      ).toHaveTextContent("2 IDs; 1 loaded records");
++      const before = canvas.getByLabelText("Accepted query").textContent;
++      await userEvent.click(
++        canvas.getByRole("button", { name: /Clear row selection/ }),
++      );
++      await expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent(
++        "none",
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        before ?? "missing query",
++      );
++    }),
++};
++export const SelectionLifetime: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await select(canvasElement, "Select Transfer note 01");
++      await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
++      await controls(canvasElement);
++      await expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent(
++        "tx-001",
++      );
++      await userEvent.click(canvas.getByRole("tab", { name: "Draft" }));
++      await waitFor(async () =>
++        expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent("none"),
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"tabId":"draft"',
++      );
++    }),
++};
++export const Sorting: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await userEvent.click(
++        canvas.getByRole("button", { name: /^Sort Description,/ }),
++      );
++      await userEvent.click(
++        await body.findByRole("button", { name: "Ascending: Description" }),
++      );
++      await userEvent.keyboard("{Escape}");
++      await controls(canvasElement);
++      await waitFor(async () =>
++        expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++          '"sorting":[{"desc":false,"id":"description"}]',
++        ),
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: /^Sort Amount,/ }),
++      );
++      await userEvent.click(
++        await body.findByRole("button", { name: "Add descending: Amount" }),
++      );
++      await userEvent.keyboard("{Escape}");
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"desc":true,"id":"amount"',
++      );
++    }),
++};
++export const RequiredColumns: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await userEvent.click(canvas.getByRole("button", { name: "Columns" }));
++      await expect(
++        await body.findByRole("checkbox", { name: /Description/ }),
++      ).toBeDisabled();
++      const reference = body.getByRole("checkbox", { name: /Reference/ });
++      const label = reference.closest("label");
++      if (!label) throw new Error("Actual chooser label required");
++      await userEvent.click(label);
++      await userEvent.keyboard("{Escape}");
++      await expect(
++        canvas.getByRole("columnheader", { name: "Reference" }),
++      ).toBeVisible();
++    }),
++};
++export const GroupedColumns: Story = {
++  render: () => <GroupedWorkbench />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await canvas.findByRole("columnheader", { name: "Values" });
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Move column: Amount" }),
++      );
++      await userEvent.click(
++        await body.findByRole("menuitem", { name: "Move after" }),
++      );
++      await expect(
++        canvas.getByRole("columnheader", { name: "Values" }),
++      ).toBeVisible();
++      await expect(
++        canvas.queryByRole("button", { name: "Move column: Details" }),
++      ).not.toBeInTheDocument();
++    }),
++};
++export const Pagination: Story = {
++  render: () => <RecoveryWorkbench scenario="unknown-total" />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await expect(canvas.queryByText(/of 24 records/)).not.toBeInTheDocument();
++      await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
++      await controls(canvasElement);
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Deliver unknown page" }),
++      );
++      await canvas.findByRole("rowheader", { name: "Transfer note 11" });
++    }),
++};
++export const Dark: Story = {
++  args: { dark: true },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      await within(canvasElement).findByRole("rowheader", {
++        name: "Transfer note 01",
++      });
++      await expect(within(canvasElement).getByRole("main")).toHaveAttribute(
++        "data-theme",
++        "dark",
++      );
++    }),
++};
++export const RTL: Story = {
++  args: { rtl: true },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      await within(canvasElement).findByRole("rowheader", {
++        name: "Transfer note 01",
++      });
++      await expect(within(canvasElement).getByRole("main")).toHaveAttribute(
++        "dir",
++        "rtl",
++      );
++    }),
++};
++export const Narrow: Story = {
++  args: { width: 390 },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      await within(canvasElement).findByRole("rowheader", {
++        name: "Transfer note 01",
++      });
++      await expect(within(canvasElement).getByRole("table")).toBeVisible();
++    }),
++};
++export const IndependentTables: Story = {
++  render: () => <IndependentWorkbench />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        first = within(
++          canvas.getByRole("main", { name: "Synthetic transactions" }),
++        ),
++        second = within(
++          canvas.getByRole("main", { name: "Synthetic inventory" }),
++        );
++      await first.findByRole("rowheader", { name: "Transfer note 01" });
++      await second.findByRole("rowheader", { name: "Desk stand" });
++      await userEvent.type(
++        first.getByRole("searchbox", { name: "Search descriptions" }),
++        "Transfer note 01{Enter}",
++      );
++      await waitFor(async () =>
++        expect(
++          first.queryByRole("rowheader", { name: "Transfer note 03" }),
++        ).not.toBeInTheDocument(),
++      );
++      await expect(
++        second.getByRole("rowheader", { name: "Desk stand" }),
++      ).toBeVisible();
++    }),
++};
++export const AccessLoss: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await select(canvasElement, "Select Transfer note 01");
++      await controls(canvasElement);
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Revoke application access" }),
++      );
++      await waitFor(async () =>
++        expect(
++          canvas.queryByRole("rowheader", { name: "Transfer note 01" }),
++        ).not.toBeInTheDocument(),
++      );
++      await expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent(
++        "none",
++      );
++      await expect(
++        canvas.getByRole("button", { name: "Revoke application access" }),
++      ).toBeDisabled();
++    }),
++};
++export const ControlledAcceptance: Story = {
++  render: () => <ControlledWorkbench />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await controls(canvasElement);
++      await select(canvasElement, "Select Transfer note 01");
++      await expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent(
++        "none",
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Reject proposed change" }),
++      );
++      await select(canvasElement, "Select Transfer note 01");
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Accept proposed change" }),
++      );
++      await expect(canvas.getByLabelText("Selected IDs")).toHaveTextContent(
++        "tx-001",
++      );
++    }),
++};
++export const OwnerConflictDiagnostic: Story = {
++  render: () => <OwnerConflict />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      await expect(within(canvasElement).getByRole("alert")).toHaveTextContent(
++        "Configuration rejected: a tabs predicate cannot claim a builder-owned field.",
++      );
++    }),
++};
+--- /dev/null
++++ after/apps/storybook/src/workbench/Details.stories.tsx
+@@ -0,0 +1,111 @@
++import type { Meta, StoryObj } from "@storybook/react-vite";
++import { expect, userEvent, within } from "storybook/test";
++import {
++  checkedPlay,
++  CustomerWorkbench,
++  InventoryWorkbench,
++  TransactionsWorkbench,
++} from "./Workbench.js";
++const meta = {
++  id: "wp11-details",
++  title: "Workbench/Details",
++  component: TransactionsWorkbench,
++  parameters: { layout: "fullscreen" },
++  argTypes: { scenario: { control: false } },
++} satisfies Meta<typeof TransactionsWorkbench>;
++export default meta;
++type Story = StoryObj<typeof meta>;
++export const CustomDetails: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await userEvent.click(
++        await canvas.findByRole("button", { name: "View details tx-001" }),
++      );
++      const draft = await body.findByRole("textbox", {
++        name: "Reference draft",
++      });
++      await userEvent.type(draft, "local working reference");
++      await userEvent.click(
++        body.getByRole("button", { name: "Refresh detail" }),
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Deliver detail" }),
++      );
++      await expect(draft).toHaveValue("local working reference");
++      await userEvent.click(
++        body.getByRole("button", { name: "Close record details" }),
++      );
++      await userEvent.click(
++        await body.findByRole("button", { name: "Keep editing" }),
++      );
++      await expect(draft).toHaveValue("local working reference");
++      await userEvent.click(
++        body.getByRole("button", { name: "Save synthetic reference" }),
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Close record details" }),
++      );
++      await expect(
++        canvas.getByRole("button", { name: "View details tx-001" }),
++      ).toBeVisible();
++    }),
++};
++export const CustomerDetails: Story = {
++  render: () => <CustomerWorkbench />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await userEvent.click(
++        await canvas.findByRole("button", { name: "View details cu-001" }),
++      );
++      const note = await body.findByRole("textbox", { name: "Working note" });
++      await userEvent.type(note, "Review with the synthetic team");
++      await userEvent.selectOptions(
++        body.getByRole("combobox", { name: "Local report view" }),
++        "teams",
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Save synthetic note" }),
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Close record details" }),
++      );
++      await expect(
++        canvas.getByRole("rowheader", { name: "Customer 01" }),
++      ).toBeVisible();
++    }),
++};
++export const InventoryDetails: Story = {
++  render: () => <InventoryWorkbench />,
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await userEvent.click(
++        await canvas.findByRole("button", { name: "View details it-001" }),
++      );
++      const count = await body.findByRole("textbox", { name: "Count draft" });
++      await userEvent.clear(count);
++      await userEvent.type(count, "-1");
++      await expect(
++        body.getByRole("button", { name: "Apply synthetic count" }),
++      ).toBeDisabled();
++      await userEvent.clear(count);
++      await userEvent.type(count, "8");
++      await userEvent.click(
++        body.getByRole("button", { name: "Apply synthetic count" }),
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Refresh detail" }),
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Report missing detail" }),
++      );
++      await expect(
++        await body.findByText("This record is not available.", { exact: true }),
++      ).toBeVisible();
++    }),
++};
+--- /dev/null
++++ after/apps/storybook/src/workbench/Filters.stories.tsx
+@@ -0,0 +1,167 @@
++import type { Meta, StoryObj } from "@storybook/react-vite";
++import { expect, userEvent, waitFor, within } from "storybook/test";
++import { checkedPlay, TransactionsWorkbench } from "./Workbench.js";
++const meta = {
++  id: "wp11-filters",
++  title: "Workbench/Filters",
++  component: TransactionsWorkbench,
++  parameters: { layout: "fullscreen" },
++  argTypes: { scenario: { control: false } },
++} satisfies Meta<typeof TransactionsWorkbench>;
++export default meta;
++type Story = StoryObj<typeof meta>;
++export const FieldOwnership: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Add filter rule: Filters" }),
++      );
++      await expect(
++        await body.findByRole("option", { name: "Reference (hidden column)" }),
++      ).toBeVisible();
++      for (const name of ["description", "status", "occurred"])
++        await expect(
++          body.queryByRole("option", { name }),
++        ).not.toBeInTheDocument();
++      await userEvent.keyboard("{Escape}");
++    }),
++};
++export const BuilderAllAny: Story = {
++  args: { scenario: "rules" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("button", { name: "Clear filter-builder rules" });
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"join":"or"',
++      );
++      await userEvent.click(canvas.getByRole("button", { name: "All" }));
++      await waitFor(async () =>
++        expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++          '"join":"and"',
++        ),
++      );
++      await userEvent.click(canvas.getByRole("button", { name: "Any" }));
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"join":"or"',
++      );
++    }),
++};
++export const OperatorFamilies: Story = {
++  args: { scenario: "families" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("button", { name: "Clear filter-builder rules" });
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"operator":"set.anyOf"',
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"operator":"boolean.isFalse"',
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"field":"bookingDay"',
++      );
++    }),
++};
++export const InvalidDraft: Story = {
++  args: { scenario: "rules" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await canvas.findByRole("button", { name: "Clear filter-builder rules" });
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      const before = canvas.getByLabelText("Accepted query").textContent;
++      await userEvent.click(
++        canvas.getByRole("button", { name: /^Value: Amount:/ }),
++      );
++      const input = await body.findByRole("textbox", {
++        name: "Custom numeric value",
++      });
++      await userEvent.clear(input);
++      await userEvent.type(input, "1e999");
++      await userEvent.click(body.getByRole("button", { name: "Apply filter" }));
++      await expect(await body.findByRole("alert")).toBeVisible();
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        before ?? "missing query",
++      );
++      await userEvent.click(
++        body.getByRole("button", { name: "Cancel filter edit" }),
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        before ?? "missing query",
++      );
++    }),
++};
++export const AsyncOptions: Story = {
++  args: { scenario: "entities" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      await userEvent.click(
++        await canvas.findByRole("button", { name: /^Value: Account:/ }),
++      );
++      await userEvent.click(
++        await body.findByRole("button", { name: "Retry options" }),
++      );
++      await expect(
++        await body.findByRole("option", { name: "Account zero" }),
++      ).toBeVisible();
++      await userEvent.keyboard("{Escape}");
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await expect(canvas.getByLabelText("Accepted query")).toHaveTextContent(
++        '"value":0',
++      );
++    }),
++};
++export const BuilderClear: Story = {
++  args: { scenario: "independent" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("button", { name: "Clear filter-builder rules" });
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      const query = JSON.parse(
++        canvas.getByLabelText("Accepted query").textContent ?? "null",
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Clear filter-builder rules" }),
++      );
++      await waitFor(async () => {
++        const after = JSON.parse(
++          canvas.getByLabelText("Accepted query").textContent ?? "null",
++        );
++        await expect(after.builder).toEqual({ join: "or", rules: [] });
++        await expect(after.search).toBe(query.search);
++        await expect(after.tabId).toBe(query.tabId);
++        await expect(after.date).toEqual(query.date);
++      });
++    }),
++};
+--- /dev/null
++++ after/apps/storybook/src/workbench/Recovery.stories.tsx
+@@ -0,0 +1,163 @@
++import type { Meta, StoryObj } from "@storybook/react-vite";
++import { expect, userEvent, waitFor, within } from "storybook/test";
++import { checkedPlay, RecoveryWorkbench } from "./Workbench.js";
++const meta = {
++  id: "wp11-recovery",
++  title: "Workbench/Recovery",
++  component: RecoveryWorkbench,
++  parameters: { layout: "fullscreen" },
++  argTypes: {
++    scenario: {
++      control: { type: "select" },
++      options: [
++        "ready",
++        "loading",
++        "refreshing",
++        "initial-error",
++        "refresh-error",
++        "empty",
++        "no-results",
++        "unknown-empty",
++        "unknown-total",
++      ],
++    },
++  },
++} satisfies Meta<typeof RecoveryWorkbench>;
++export default meta;
++type Story = StoryObj<typeof meta>;
++export const InitialLoading: Story = {
++  args: { scenario: "loading" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await expect(
++        await canvas.findByText("Loading records…", { exact: true }),
++      ).toBeVisible();
++      await expect(
++        canvas.queryByRole("rowheader", { name: "Transfer note 01" }),
++      ).not.toBeInTheDocument();
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Deliver known page" }),
++      );
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++    }),
++};
++export const Refreshing: Story = {
++  args: { scenario: "refreshing" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await expect(
++        await canvas.findByText("Updating records…", { exact: true }),
++      ).toBeVisible();
++      await expect(
++        canvas.getByRole("checkbox", { name: "Select Transfer note 01" }),
++      ).toBeDisabled();
++    }),
++};
++export const InitialError: Story = {
++  args: { scenario: "initial-error" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await userEvent.click(
++        await canvas.findByRole("button", { name: "Retry" }),
++      );
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Deliver known page" }),
++      );
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++    }),
++};
++export const RefreshError: Story = {
++  args: { scenario: "refresh-error" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await expect(
++        await canvas.findByText(
++          "Records could not be updated. Showing the last available data.",
++          { exact: true },
++        ),
++      ).toBeVisible();
++      await userEvent.click(canvas.getByRole("button", { name: "Retry" }));
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Deliver known page" }),
++      );
++      await waitFor(async () =>
++        expect(
++          canvas.queryByText(
++            "Records could not be updated. Showing the last available data.",
++          ),
++        ).not.toBeInTheDocument(),
++      );
++    }),
++};
++export const Empty: Story = {
++  args: { scenario: "empty" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      await expect(
++        await within(canvasElement).findByText("There are no records.", {
++          exact: true,
++        }),
++      ).toBeVisible();
++      await expect(
++        within(canvasElement).queryByRole("rowheader"),
++      ).not.toBeInTheDocument();
++    }),
++};
++export const NoResults: Story = {
++  args: { scenario: "no-results" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await expect(
++        await canvas.findByText("No records match.", { exact: true }),
++      ).toBeVisible();
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Clear search" }),
++      );
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Deliver known page" }),
++      );
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++    }),
++};
++export const UnknownEmpty: Story = {
++  args: { scenario: "unknown-empty" },
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await expect(
++        await canvas.findByText("There are no records to display.", {
++          exact: true,
++        }),
++      ).toBeVisible();
++      await expect(
++        canvas.queryByText("No records match.", { exact: true }),
++      ).not.toBeInTheDocument();
++    }),
++};
+--- /dev/null
++++ after/apps/storybook/src/workbench/Reordering.stories.tsx
+@@ -0,0 +1,94 @@
++import type { Meta, StoryObj } from "@storybook/react-vite";
++import { expect, userEvent, waitFor, within } from "storybook/test";
++import {
++  checkedPlay,
++  ReorderWorkbench,
++  TransactionsWorkbench,
++} from "./Workbench.js";
++const meta = {
++  id: "wp11-reordering",
++  title: "Workbench/Reordering",
++  component: ReorderWorkbench,
++  parameters: { layout: "fullscreen" },
++} satisfies Meta<typeof ReorderWorkbench>;
++export default meta;
++type Story = StoryObj<typeof meta>;
++export const DragBlocked: Story = {
++  render: () => (
++    <section aria-label="Drag capability unavailable">
++      <h2>Dragging is user-blocked; WP-10/G-02 is incomplete.</h2>
++      <p>
++        No drag adapter or drag handle is registered. The table below has no
++        move configuration.
++      </p>
++      <TransactionsWorkbench />
++    </section>
++  ),
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement);
++      await canvas.findByRole("rowheader", { name: "Transfer note 01" });
++      await expect(
++        canvas.queryByRole("button", { name: /^Move row:/ }),
++      ).not.toBeInTheDocument();
++      await expect(
++        canvas.queryByRole("button", { name: /^Move column:/ }),
++      ).not.toBeInTheDocument();
++      await expect(
++        canvas.getByRole("heading", {
++          name: "Dragging is user-blocked; WP-10/G-02 is incomplete.",
++        }),
++      ).toBeVisible();
++    }),
++};
++export const ReorderFailure: Story = {
++  play: async ({ canvasElement }) =>
++    checkedPlay(canvasElement, async () => {
++      const canvas = within(canvasElement),
++        body = within(canvasElement.ownerDocument.body);
++      const move = await canvas.findByRole("button", {
++        name: "Move row: Transfer note 01",
++      });
++      await waitFor(async () => expect(move).toBeEnabled());
++      await userEvent.click(move);
++      await userEvent.click(
++        await body.findByRole("menuitem", { name: "Move down" }),
++      );
++      await userEvent.click(
++        canvas.getByText("Synthetic application controls", {
++          selector: "summary",
++        }),
++      );
++      await expect(
++        canvas.getByRole("button", { name: "Next page" }),
++      ).toBeDisabled();
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Report synthetic timeout" }),
++      );
++      await expect(
++        canvas.getByLabelText("Row transport notice"),
++      ).toHaveTextContent("status unknown");
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Hide table UI" }),
++      );
++      await expect(
++        canvas.getByRole("button", {
++          name: "Publish authoritative synthetic input",
++        }),
++      ).toBeEnabled();
++      await userEvent.click(
++        canvas.getByRole("button", { name: "Show table UI" }),
++      );
++      await userEvent.click(
++        canvas.getByRole("button", {
++          name: "Publish authoritative synthetic input",
++        }),
++      );
++      await waitFor(async () =>
++        expect(canvas.getByRole("button", { name: "Next page" })).toBeEnabled(),
++      );
++      const headers = canvas.getAllByRole("rowheader");
++      await expect(headers[0]).toHaveTextContent("Transfer note 02");
++      await expect(headers[1]).toHaveTextContent("Transfer note 01");
++    }),
++};
+--- /dev/null
++++ after/apps/storybook/src/workbench/Workbench.tsx
+@@ -0,0 +1,1034 @@
++import { Button } from "@heroui/react/button";
++import {
++  DataTable,
++  TableDetailsTrigger,
++  arabicDataTableLocale,
++  englishDataTableLocale,
++  useDetailsAccessory,
++  type DataTableProps,
++  type DetailsRenderContext,
++  type FilterCustomEditorProps,
++} from "@tableweave/heroui";
++import {
++  useDataTable,
++  useTableweaveState,
++  type DataTableModel,
++  type NativeColumnDef,
++} from "@tableweave/react";
++import {
++  canonicalJson,
++  createQuery,
++  type QuerySchema,
++} from "@tableweave/react/contracts";
++import {
++  useEffect,
++  useCallback,
++  useLayoutEffect,
++  useMemo,
++  useRef,
++  useState,
++  useSyncExternalStore,
++  type ReactNode,
++} from "react";
++import { I18nProvider } from "react-aria/I18nProvider";
++import {
++  customerDefinition,
++  inventoryDefinition,
++  minimalTransactionDefinition,
++  transactionDefinition,
++} from "../../../examples/shared/definitions.js";
++import {
++  createExampleDetails,
++  CustomerDetails,
++  InventoryDetails,
++  TransactionDetails,
++  useExampleDetailSource,
++  type ExampleDetails,
++} from "../../../examples/shared/details.js";
++import {
++  createExampleOwner,
++  type ExampleOwner,
++} from "../../../examples/shared/owner.js";
++import {
++  customers,
++  inventory,
++  transactions,
++  type Customer,
++  type InventoryItem,
++  type Transaction,
++} from "../../../examples/shared/records.js";
++import {
++  exampleOperators,
++  ownerConflictDiagnostic,
++  type CustomerSchema,
++  type InventorySchema,
++  type TransactionSchema,
++} from "../../../examples/shared/schemas.js";
++
++export type RecoveryScenario =
++  | "ready"
++  | "loading"
++  | "refreshing"
++  | "initial-error"
++  | "refresh-error"
++  | "empty"
++  | "no-results"
++  | "unknown-empty"
++  | "unknown-total";
++export interface Appearance {
++  readonly dark?: boolean;
++  readonly rtl?: boolean;
++  readonly width?: number;
++}
++export type TransactionScenario =
++  | "plain"
++  | "rules"
++  | "independent"
++  | "entities"
++  | "families";
++const transactionLabel = (record: Transaction) => record.description;
++const customerLabel = (record: Customer) => record.name;
++const inventoryLabel = (record: InventoryItem) => record.title;
++function utility<T extends { id: string }>(): readonly NativeColumnDef<T>[] {
++  return [
++    {
++      id: "details",
++      header: "Details",
++      meta: { utility: true },
++      cell: (context) => (
++        <TableDetailsTrigger
++          rowId={context.row.id}
++          label={`View details ${context.row.id}`}
++        >
++          View details
++        </TableDetailsTrigger>
++      ),
++    },
++  ];
++}
++interface SurfaceProps<S extends QuerySchema, T extends object>
++  extends Appearance {
++  readonly app: ExampleOwner<S, T>;
++  readonly title: string;
++  readonly rowHeader: string;
++  readonly label: (record: T) => string;
++  readonly tools?: DataTableProps<S, T>["tools"];
++  readonly full?: boolean;
++  readonly server?: boolean;
++  readonly children?: ReactNode;
++  readonly body?: (
++    context: DetailsRenderContext<S, T>,
++    driver: ExampleDetails<S, T>,
++  ) => ReactNode;
++}
++function BoundTable<S extends QuerySchema, T extends object>({
++  model,
++  app,
++  input,
++  body,
++  shown,
++}: {
++  model: DataTableModel<S, T>;
++  app: ExampleOwner<S, T>;
++  input: DataTableProps<S, T>;
++  body: NonNullable<SurfaceProps<S, T>["body"]>;
++  shown: boolean;
++}) {
++  const [driver] = useState(() => createExampleDetails(app));
++  const detail = useExampleDetailSource(driver);
++  const fallback = useRef<HTMLElement>(null);
++  const renderBody = useCallback(
++    (context: DetailsRenderContext<S, T>) => body(context, driver),
++    [body, driver],
++  );
++  const focusFallback = useCallback(
++    () => fallback.current?.focus({ preventScroll: true }),
++    [],
++  );
++  const renderFooter = useCallback(
++    (context: DetailsRenderContext<S, T>) => (
++      <Button
++        variant="tertiary"
++        onPress={() => {
++          void context.requestClose("footer");
++        }}
++      >
++        Close record details
++      </Button>
++    ),
++    [],
++  );
++  const configuration = useMemo(
++    () => ({
++      expected: detail.authority.context,
++      authority: detail.authority,
++      source: detail.source,
++      port: driver.port,
++      title: "Synthetic record details",
++      beforeChange: driver.beforeChange,
++      focusFallback,
++      renderBody,
++      renderFooter,
++    }),
++    [
++      detail.authority,
++      detail.source,
++      driver,
++      focusFallback,
++      renderBody,
++      renderFooter,
++    ],
++  );
++  const accessory = useDetailsAccessory(model, configuration);
++  return (
++    <>
++      <section
++        ref={fallback}
++        tabIndex={-1}
++        aria-label="Record details return location"
++      />
++      {shown ? <DataTable {...input} accessory={accessory} /> : null}
++    </>
++  );
++}
++/** The source/model hook remains mounted ABOVE optional renderer visibility. */
++function Surface<S extends QuerySchema, T extends object>(
++  props: SurfaceProps<S, T>,
++) {
++  const { app, title, rowHeader, label, tools, body } = props;
++  const own = useSyncExternalStore(
++    app.subscribe,
++    app.getSnapshot,
++    app.getServerSnapshot,
++  );
++  const state = useTableweaveState(app.C);
++  const resource = useSyncExternalStore(
++    app.remote.resource.subscribe,
++    app.remote.resource.getSnapshot,
++    app.remote.resource.getServerSnapshot,
++  );
++  const options = useSyncExternalStore(
++    app.numericOptions.source.subscribe,
++    app.numericOptions.source.getSnapshot,
++    app.numericOptions.source.getServerSnapshot,
++  );
++  const [shown, setShown] = useState(true),
++    [dark, setDark] = useState(props.dark ?? false),
++    [rtl, setRtl] = useState(props.rtl ?? false),
++    [width, setWidth] = useState(props.width ?? 1440);
++  useEffect(() => {
++    setDark(props.dark ?? false);
++  }, [props.dark]);
++  useEffect(() => {
++    setRtl(props.rtl ?? false);
++  }, [props.rtl]);
++  useEffect(() => {
++    setWidth(props.width ?? 1440);
++  }, [props.width]);
++  useLayoutEffect(() => app.connect(), [app]);
++  useEffect(() => {
++    const a = app.numericOptions.source.connect(),
++      b = app.stringOptions.source.connect();
++    return () => {
++      a();
++      b();
++    };
++  }, [app]);
++  useEffect(() => {
++    app.dispatch({
++      type: "query.context",
++      locale: rtl ? "ar-EG" : "en-US",
++      timeZone: "UTC",
++    });
++  }, [app, rtl]);
++  const model = useDataTable(app.D, app.modelOptions());
++  useLayoutEffect(() => {
++    try {
++      app.reorder?.commit(model);
++    } catch {
++      /* Genuine wait: no fabricated model/ack or alternative grant. */
++    }
++  });
++  const locale = rtl ? arabicDataTableLocale : englishDataTableLocale;
++  const collection = useMemo<DataTableProps<S, T>["collection"]>(
++    () => ({
++      label: title,
++      rowHeaderColumnId: rowHeader,
++      ...(props.full ? { selectionColumnId: "selection" } : {}),
++      rowTextValue: (row) => label(row.original),
++      columnTextValue: (column) =>
++        typeof column.columnDef.header === "string"
++          ? column.columnDef.header
++          : column.id,
++      cellTextValue: (cell) => String(cell.getValue() ?? ""),
++    }),
++    [title, rowHeader, label, props.full],
++  );
++  const lease = app.reorder?.lease;
++  const reordering = useMemo<DataTableProps<S, T>["reordering"]>(
++    () =>
++      app.reorder && lease
++        ? {
++            rows: {
++              admission: app.reorder.admission,
++              lease,
++              handleColumnId: rowHeader,
++              onSubmit(operation) {
++                app.reorder?.onSubmit(operation);
++              },
++            },
++          }
++        : app.D.reordering.columns
++          ? { columns: true }
++          : undefined,
++    [app, lease, rowHeader],
++  );
++  const actions = useMemo<NonNullable<DataTableProps<S, T>["actions"]>>(
++    () => [
++      {
++        id: "review",
++        label: "Queue synthetic review",
++        onAction(context) {
++          app.setNotice(
++            `Synthetic review queue: ${context.selectedCount} IDs; ${context.loadedSelected.length} loaded records. No off-page objects were fabricated.`,
++          );
++        },
++      },
++    ],
++    [app],
++  );
++  const input: DataTableProps<S, T> = {
++    table: model,
++    collection,
++    locale,
++    neutralMessages:
++      locale.neutralMessages ?? englishDataTableLocale.neutralMessages,
++    ...(tools ? { tools } : {}),
++    ...(props.full ? { actions } : {}),
++    ...(reordering ? { reordering } : {}),
++    ...(props.server
++      ? {
++          onRetry: () => {
++            app.remote.resource.retry();
++          },
++        }
++      : {}),
++  };
++  const transport = app.reorder;
++  return (
++    <I18nProvider locale={locale.locale}>
++      <main
++        className={`${dark ? "dark " : ""}min-w-0 bg-background p-4 text-sm text-foreground sm:p-6`}
++        data-workbench-play="idle"
++        data-theme={dark ? "dark" : "light"}
++        dir={locale.direction}
++        aria-label={title}
++      >
++        <div className="mx-auto min-w-0 space-y-4" style={{ maxWidth: width }}>
++          <header className="space-y-2">
++            <h1 className="text-lg font-semibold">{title}</h1>
++            <p className="text-xs text-muted">
++              Synthetic application inputs. Provisional source catalog;
++              dragging/G-02 is incomplete. No persistence or runtime acceptance
++              is implied.
++            </p>
++          </header>
++          {props.children}
++          {body ? (
++            <BoundTable
++              model={model}
++              app={app}
++              input={input}
++              body={body}
++              shown={shown}
++            />
++          ) : shown ? (
++            <DataTable {...input} />
++          ) : null}
++          <p role="status" aria-label="Application notice">
++            {own.notice}
++          </p>
++          {transport ? (
++            <p role="status" aria-label="Row transport notice">
++              {transport.notice}
++            </p>
++          ) : null}
++          <details className="rounded-lg border border-border p-3">
++            <summary className="cursor-pointer font-medium">
++              Synthetic application controls
++            </summary>
++            <div className="mt-3 flex flex-wrap items-center gap-2">
++              <Button
++                variant="tertiary"
++                onPress={() => setDark((value) => !value)}
++              >
++                Toggle theme
++              </Button>
++              <Button
++                variant="tertiary"
++                onPress={() => setRtl((value) => !value)}
++              >
++                Toggle direction
++              </Button>
++              <label>
++                Viewport sample
++                <select
++                  className="rounded border border-border bg-surface p-2"
++                  value={width}
++                  onChange={(event) => setWidth(Number(event.target.value))}
++                >
++                  {[320, 390, 768, 1024, 1440].map((value) => (
++                    <option key={value} value={value}>
++                      {value}px
++                    </option>
++                  ))}
++                </select>
++              </label>
++              <Button
++                variant="tertiary"
++                onPress={() => setShown((value) => !value)}
++              >
++                {shown ? "Hide table UI" : "Show table UI"}
++              </Button>
++              <Button
++                variant="secondary"
++                isDisabled={!own.access}
++                onPress={app.revoke}
++              >
++                Revoke application access
++              </Button>
++              {own.proposal ? (
++                <>
++                  <Button variant="secondary" onPress={() => app.decide(true)}>
++                    Accept proposed change
++                  </Button>
++                  <Button variant="tertiary" onPress={() => app.decide(false)}>
++                    Reject proposed change
++                  </Button>
++                </>
++              ) : null}
++              {props.server ? (
++                <>
++                  <Button
++                    variant="secondary"
++                    isDisabled={!own.access || resource.busy}
++                    onPress={() => {
++                      app.remote.begin();
++                    }}
++                  >
++                    Begin refresh
++                  </Button>
++                  <Button
++                    variant="secondary"
++                    isDisabled={!resource.busy}
++                    onPress={() => {
++                      app.remote.succeed();
++                    }}
++                  >
++                    Deliver known page
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    isDisabled={!resource.busy}
++                    onPress={() => {
++                      app.remote.succeed("unknown");
++                    }}
++                  >
++                    Deliver unknown page
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    isDisabled={!resource.busy}
++                    onPress={() => {
++                      app.remote.fail();
++                    }}
++                  >
++                    Fail request
++                  </Button>
++                </>
++              ) : null}
++              {options.busy ? (
++                <>
++                  <Button
++                    variant="secondary"
++                    onPress={() => {
++                      app.numericOptions.respond();
++                    }}
++                  >
++                    Deliver account options
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    onPress={() => {
++                      app.numericOptions.respond(true);
++                    }}
++                  >
++                    Deliver empty account options
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    onPress={() => {
++                      app.numericOptions.fail();
++                    }}
++                  >
++                    Fail account options
++                  </Button>
++                </>
++              ) : null}
++              {transport ? (
++                <>
++                  <Button
++                    variant="secondary"
++                    isDisabled={!transport.canSettle}
++                    onPress={() =>
++                      transport.settle({
++                        kind: "accepted",
++                        revision: "synthetic-transport",
++                      })
++                    }
++                  >
++                    Accept synthetic transport
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    isDisabled={!transport.canSettle}
++                    onPress={() =>
++                      transport.settle({ kind: "rejected", code: "rejected" })
++                    }
++                  >
++                    Reject synthetic transport
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    isDisabled={!transport.canSettle}
++                    onPress={() =>
++                      transport.settle({ kind: "rejected", code: "conflict" })
++                    }
++                  >
++                    Reject synthetic conflict
++                  </Button>
++                  <Button
++                    variant="tertiary"
++                    isDisabled={!transport.canSettle}
++                    onPress={() =>
++                      transport.settle({
++                        kind: "indeterminate",
++                        code: "timeout",
++                      })
++                    }
++                  >
++                    Report synthetic timeout
++                  </Button>
++                  <Button
++                    variant="secondary"
++                    isDisabled={!transport.canPublish}
++                    onPress={transport.publishApplied}
++                  >
++                    Publish authoritative synthetic input
++                  </Button>
++                </>
++              ) : null}
++            </div>
++            <dl className="mt-4 grid gap-2">
++              <dt>Accepted query</dt>
++              <dd>
++                <output
++                  aria-label="Accepted query"
++                  className="break-all font-mono text-xs"
++                >
++                  {canonicalJson(state.query)}
++                </output>
++              </dd>
++              <dt>Selected IDs (not loaded objects)</dt>
++              <dd>
++                <output aria-label="Selected IDs">
++                  {Object.entries(state.selection)
++                    .filter(([, selected]) => selected)
++                    .map(([id]) => id)
++                    .join(", ") || "none"}
++                </output>
++              </dd>
++              <dt>Visible column policy</dt>
++              <dd>
++                <output aria-label="Column visibility">
++                  {canonicalJson(state.columns.visibility)}
++                </output>
++              </dd>
++            </dl>
++          </details>
++        </div>
++      </main>
++    </I18nProvider>
++  );
++}
++
++function NumericOperand(editor: FilterCustomEditorProps<TransactionSchema>) {
++  const [text, setText] = useState(
++    typeof editor.value === "number" ? String(editor.value) : "",
++  );
++  if (editor.operator.cardinality === "range") {
++    const pair = Array.isArray(editor.value) ? editor.value : ["", ""];
++    return (
++      <div className="flex flex-wrap gap-2">
++        {[0, 1].map((index) => (
++          <label key={index}>
++            {index === 0 ? "From" : "To"}
++            <input
++              aria-label={index === 0 ? "From" : "To"}
++              disabled={editor.isDisabled}
++              value={String(pair[index] ?? "")}
++              onChange={(event) => {
++                const next = [...pair];
++                next[index] =
++                  event.target.value === "" ? "" : Number(event.target.value);
++                editor.onChange(next);
++              }}
++            />
++          </label>
++        ))}
++      </div>
++    );
++  }
++  return (
++    <label>
++      Numeric value
++      <input
++        aria-label="Custom numeric value"
++        disabled={editor.isDisabled}
++        className="rounded border border-border bg-surface px-3 py-2"
++        value={text}
++        onChange={(event) => {
++          const raw = event.target.value;
++          setText(raw);
++          const value = Number(raw);
++          editor.onChange(
++            raw === "" ? undefined : Number.isFinite(value) ? value : raw,
++          );
++        }}
++      />
++    </label>
++  );
++}
++function transactionTools(
++  app: ExampleOwner<TransactionSchema, Transaction>,
++): NonNullable<DataTableProps<TransactionSchema, Transaction>["tools"]> {
++  return {
++    search: { messages: { label: "Search descriptions" } },
++    tabs: {
++      tabs: { posted: { label: "Posted" }, draft: { label: "Draft" } },
++      neutralTab: { label: "All records" },
++      children: null,
++    },
++    date: {
++      presets: [
++        {
++          id: "today",
++          label: "November 25 UTC",
++          date: {
++            operator: "date.between",
++            value: [
++              { kind: "day", value: "2026-11-25" },
++              { kind: "day", value: "2026-11-25" },
++            ],
++          },
++        },
++      ],
++    },
++    builder: {
++      registry: exampleOperators,
++      fields: {
++        amount: {
++          label: "Amount",
++          operatorLabels: { "example.multiple-of": "Multiple of" },
++          renderEditor: (editor) => <NumericOperand {...editor} />,
++        },
++        reference: { label: "Reference (hidden column)" },
++        account: {
++          label: "Account",
++          asyncOptions: {
++            idType: "number",
++            source: app.numericOptions.source,
++            onRequest: app.numericOptions.onRequest,
++            nextPageKey: app.numericOptions.nextPageKey,
++          },
++        },
++        tags: {
++          label: "Tags",
++          choices: [
++            { id: "review", label: "Review" },
++            { id: "local", label: "Local" },
++          ],
++        },
++        cleared: { label: "Cleared" },
++        bookingDay: { label: "Booking day" },
++      },
++    },
++  };
++}
++function useTransactionScenario(
++  app: ExampleOwner<TransactionSchema, Transaction>,
++  scenario: TransactionScenario,
++) {
++  useEffect(() => {
++    app.dispatch({ type: "builder.clear" });
++    if (scenario === "plain") return;
++    if (scenario === "entities") {
++      app.numericOptions.setMode("fail-once");
++      app.dispatch({
++        type: "builder.commit",
++        rule: {
++          id: "account-zero",
++          field: "account",
++          operator: "enum.is",
++          value: 0,
++        },
++      });
++      return;
++    }
++    app.dispatch({
++      type: "builder.commit",
++      rule: {
++        id: "amount-positive",
++        field: "amount",
++        operator: "number.gt",
++        value: 10,
++      },
++    });
++    app.dispatch({
++      type: "builder.commit",
++      rule: { id: "reference-empty", field: "reference", operator: "empty" },
++    });
++    app.dispatch({ type: "builder.join", join: "or" });
++    if (scenario === "families") {
++      app.dispatch({
++        type: "builder.commit",
++        rule: {
++          id: "tag-review",
++          field: "tags",
++          operator: "set.anyOf",
++          value: ["review"],
++        },
++      });
++      app.dispatch({
++        type: "builder.commit",
++        rule: {
++          id: "uncleared",
++          field: "cleared",
++          operator: "boolean.isFalse",
++        },
++      });
++      app.dispatch({
++        type: "builder.commit",
++        rule: {
++          id: "booked",
++          field: "bookingDay",
++          operator: "date.on",
++          value: { kind: "day", value: "2026-11-25" },
++        },
++      });
++    }
++    if (scenario === "independent") {
++      app.dispatch({ type: "search.commit", search: "Transfer" });
++      app.dispatch({ type: "tabs.change", tabId: "posted" });
++      app.dispatch({
++        type: "date.commit",
++        date: {
++          operator: "date.between",
++          value: [
++            { kind: "day", value: "2026-11-25" },
++            { kind: "day", value: "2026-11-25" },
++          ],
++        },
++      });
++    }
++  }, [app, scenario]);
++}
++function TransactionHost({
++  flavor,
++  scenario = "plain",
++  ...appearance
++}: Appearance & {
++  flavor: "full" | "grouped" | "controlled" | "reorder";
++  scenario?: TransactionScenario;
++}) {
++  const [app] = useState(() =>
++    createExampleOwner(
++      transactionDefinition({
++        full: true,
++        grouped: flavor === "grouped",
++        rows: flavor === "reorder",
++        utilities: utility<Transaction>(),
++      }),
++      transactions,
++      {
++        id: `transactions-${flavor}`,
++        manualRows: flavor === "reorder",
++        controlled: flavor === "controlled",
++      },
++    ),
++  );
++  useTransactionScenario(app, scenario);
++  const tools = useMemo(() => transactionTools(app), [app]);
++  return (
++    <Surface
++      {...appearance}
++      app={app}
++      title="Synthetic transactions"
++      rowHeader="description"
++      label={transactionLabel}
++      full
++      tools={tools}
++      body={(context, driver) => (
++        <TransactionDetails context={context} owner={app} driver={driver} />
++      )}
++    >
++      {flavor === "grouped" ? (
++        <p>
++          Private installed RAC profile. Move data leaves inside Values only;
++          utilities remain fixed. Drag is not enabled.
++        </p>
++      ) : null}
++    </Surface>
++  );
++}
++export function MinimalWorkbench(props: Appearance) {
++  const [app] = useState(() =>
++    createExampleOwner(minimalTransactionDefinition(), transactions, {
++      id: "minimal-transactions",
++    }),
++  );
++  return (
++    <Surface
++      {...props}
++      app={app}
++      title="Synthetic transactions"
++      rowHeader="description"
++      label={transactionLabel}
++      tools={{
++        builder: {
++          fields: {
++            description: { label: "Description" },
++            amount: { label: "Amount" },
++          },
++        },
++      }}
++    />
++  );
++}
++export function TransactionsWorkbench(
++  props: Appearance & { scenario?: TransactionScenario },
++) {
++  return <TransactionHost {...props} flavor="full" />;
++}
++export function GroupedWorkbench(props: Appearance) {
++  return <TransactionHost {...props} flavor="grouped" />;
++}
++export function ControlledWorkbench(props: Appearance) {
++  return <TransactionHost {...props} flavor="controlled" />;
++}
++export function ReorderWorkbench(props: Appearance) {
++  return <TransactionHost {...props} flavor="reorder" />;
++}
++export function OwnerConflict() {
++  const message = useMemo(ownerConflictDiagnostic, []);
++  return (
++    <section aria-label="Rejected configuration">
++      <h2>Exclusive field ownership</h2>
++      <p role="alert">{message}</p>
++      <TransactionsWorkbench />
++    </section>
++  );
++}
++export function IndependentWorkbench(props: Appearance) {
++  return (
++    <div className="space-y-6">
++      <TransactionsWorkbench {...props} />
++      <InventoryWorkbench {...props} />
++    </div>
++  );
++}
++export function CustomerWorkbench(props: Appearance) {
++  const [app] = useState(() =>
++    createExampleOwner(
++      customerDefinition({ utilities: utility<Customer>() }),
++      customers,
++      { id: "customers" },
++    ),
++  );
++  const tools: NonNullable<DataTableProps<CustomerSchema, Customer>["tools"]> =
++    {
++      tabs: {
++        tabs: { current: { label: "Current" }, paused: { label: "Paused" } },
++        neutralTab: { label: "All customers" },
++        children: null,
++      },
++      builder: {
++        fields: {
++          balance: { label: "Balance" },
++          note: { label: "Note" },
++          active: { label: "Active" },
++          teams: {
++            label: "Teams",
++            choices: [
++              { id: "north", label: "North" },
++              { id: "south", label: "South" },
++            ],
++          },
++        },
++      },
++    };
++  return (
++    <Surface
++      {...props}
++      app={app}
++      title="Synthetic customers"
++      rowHeader="name"
++      label={customerLabel}
++      full
++      tools={tools}
++      body={(context, driver) => (
++        <CustomerDetails context={context} owner={app} driver={driver} />
++      )}
++    />
++  );
++}
++export function InventoryWorkbench(props: Appearance) {
++  const [app] = useState(() =>
++    createExampleOwner(
++      inventoryDefinition({ utilities: utility<InventoryItem>() }),
++      inventory,
++      { id: "inventory" },
++    ),
++  );
++  const tools: NonNullable<
++    DataTableProps<InventorySchema, InventoryItem>["tools"]
++  > = {
++    tabs: {
++      tabs: {
++        available: { label: "Available" },
++        archived: { label: "Archived" },
++      },
++      neutralTab: { label: "All records" },
++      children: null,
++    },
++    builder: {
++      fields: {
++        quantity: { label: "Quantity" },
++        category: {
++          label: "Category",
++          choices: [
++            { id: "equipment", label: "Equipment" },
++            { id: "supplies", label: "Supplies" },
++          ],
++        },
++        locations: {
++          label: "Locations",
++          choices: [
++            { id: "0", label: "Location zero (string ID)" },
++            { id: "shelf-b", label: "Shelf B" },
++          ],
++        },
++        reserved: { label: "Reserved" },
++        note: { label: "Note" },
++      },
++    },
++  };
++  return (
++    <Surface
++      {...props}
++      app={app}
++      title="Synthetic inventory"
++      rowHeader="title"
++      label={inventoryLabel}
++      full
++      tools={tools}
++      body={(context, driver) => (
++        <InventoryDetails context={context} owner={app} driver={driver} />
++      )}
++    />
++  );
++}
++export function RecoveryWorkbench({
++  scenario = "loading",
++  ...appearance
++}: Appearance & { scenario?: RecoveryScenario }) {
++  const [app] = useState(() =>
++    createExampleOwner(
++      transactionDefinition({ full: true, utilities: utility<Transaction>() }),
++      transactions,
++      { id: "server-resource", server: true },
++    ),
++  );
++  useEffect(() => {
++    app.replaceRecords(
++      scenario === "empty" || scenario === "unknown-empty" ? [] : transactions,
++    );
++    app.dispatch({
++      type: "query.replace",
++      update: createQuery(app.D.native.controllerDefinition.schema, {
++        locale: "en-US",
++        timeZone: "UTC",
++      }),
++    });
++    if (scenario === "no-results")
++      app.dispatch({
++        type: "search.commit",
++        search: "no matching synthetic description",
++      });
++    app.remote.begin();
++    if (scenario === "loading") return;
++    if (scenario === "initial-error") {
++      app.remote.fail();
++      return;
++    }
++    app.remote.succeed(
++      scenario === "unknown-total" || scenario === "unknown-empty"
++        ? "unknown"
++        : "known",
++      scenario === "empty"
++        ? "dataset"
++        : scenario === "unknown-empty"
++          ? "unknown"
++          : undefined,
++    );
++    if (scenario === "refreshing" || scenario === "refresh-error") {
++      app.remote.begin();
++      if (scenario === "refresh-error") app.remote.fail();
++    }
++  }, [app, scenario]);
++  const tools = useMemo(() => transactionTools(app), [app]);
++  return (
++    <Surface
++      {...appearance}
++      app={app}
++      title="Synthetic server recovery"
++      rowHeader="description"
++      label={transactionLabel}
++      full
++      server
++      tools={tools}
++      body={(context, driver) => (
++        <TransactionDetails context={context} owner={app} driver={driver} />
++      )}
++    />
++  );
++}
++
++/** Completion marker only; assertions exercise public DOM, never an app test port. */
++export async function checkedPlay(
++  element: HTMLElement,
++  action: () => Promise<void>,
++) {
++  const surfaces = element.querySelectorAll<HTMLElement>(
++    "[data-workbench-play]",
++  );
++  if (!surfaces.length) throw new Error("No actual workbench surface");
++  for (const surface of surfaces) surface.dataset.workbenchPlay = "running";
++  try {
++    await action();
++    for (const surface of surfaces) surface.dataset.workbenchPlay = "completed";
++  } catch (error) {
++    for (const surface of surfaces) surface.dataset.workbenchPlay = "exception";
++    throw error;
++  }
++}
+--- /dev/null
++++ after/apps/storybook/src/workbench/scenes.md
+@@ -0,0 +1,71 @@
++# WP-11 Stage A scene map — all runtime checks UNRUN
++
++TASK-019 / FR-01–FR-16 / AC-01/27. These are exact **CSF-defined** IDs from explicit
++metadata IDs and named story exports, not a verified built Storybook index. The old
++20 focused stories are unchanged. New five modules contain33 real annotated stories
++(the31 required labels plus controlled acceptance and an owner-conflict diagnostic).
++Every new play uses real DOM actions/awaited assertions and a completion marker.
++Compilation/static discovery are not execution, visual acceptance or completeness.
++
++| F / FR | Required scene and CSF-defined ID | Authored coverage / exact remaining gap |
++| --- | --- | --- |
++| F-01 / FR-01/07/12 | `wp11-configurations--default` | Minimal builder + pagination; no selection/search/tabs/details. Public source typechecked only. |
++| F-02 / FR-01/05–10/15 | `wp11-configurations--fully-configured` | Explicit search/tabs/date/chooser/selection/details, computed amount cell, app actions. States missing dragging/G-02. |
++| F-02 / FR-07–10 | `wp11-filters--field-ownership` | Hidden builder field offered; search/tab/date owners excluded. Neutral ownership proof remains unrun. |
++| F-03 / FR-07 | `wp11-filters--builder-all-any` | Two genuine accepted rules + join change. Duplicate/Negate/Remove permutations remain in old focused stories/final matrix, not executed here. |
++| F-04 / FR-07/14 | `wp11-filters--operator-families` | Text/value-less, numeric, set, nullable boolean, date rules; additional numeric custom editor/registry; async numeric entity separately. Full newly authored custom-operator picker and inverse/cardinality permutations still missing. Old `Filters/Tools → OperatorFamilies` complementary. |
++| F-05 / FR-07 | `wp11-filters--invalid-draft` | Invalid numeric edit, unchanged accepted query and draft Cancel. New invalid date/range and DST play still missing; existing focused InvalidDraft remains unchanged. |
++| F-06 / FR-07/13 | `wp11-filters--async-options` | Actual fail-once option request → Retry → same numeric zero ID. Search-empty, off-page selected label, continuation, late/ABA and string-vs-number interactions need fuller plays; raw fixtures contain string0 separately. |
++| F-07 / FR-11 | `wp11-filters--builder-clear` | Real Clear with independent search/tab/date, keeps Any. Sort/size/order/visibility invariants need additional final assertions. Old focused BuilderClear asserts complementary cases. |
++| F-08 / FR-15 | `wp11-configurations--selected-across-pages` | Eligible native selection, off-page IDs/count vs loaded subset, app review action and selection Cancel preserving accepted query. |
++| F-09 / FR-15 | `wp11-configurations--selection-lifetime` | Page preserves; external tab clears. Size/sort preservation and all filter exits still need broader final interaction vectors. |
++| F-10 / FR-04 | `wp11-configurations--sorting` | Native header menu, ascending + additive descending; unsortable/header priority/focus review owed. |
++| F-11 / FR-06 | `wp11-configurations--required-columns` | Required Description cannot hide; hidden Reference can reveal. Hidden field identity persists; blank-table edge owed. |
++| F-12 / FR-02/03 | `wp11-reordering--drag-blocked` | Honest user-blocked dragging: no registration/drag glyph/dead handle, no move configuration. Drag ready/preview/drop/cancel are BLOCKED, not satisfied by menus. |
++| F-12 / FR-02/13 | `wp11-reordering--reorder-failure` | Real production manual row menu, exact synchronous app operation, timeout uncertainty/pending pager, optional UI hide/show, newer authoritative INPUT and matched model before ack. Accepted/rejected/conflict controls exist; all transport/race/receiver/cleanup positions remain unrun and need fuller plays. No backend persistence claim. |
++| F-13 / FR-03 | `wp11-configurations--grouped-columns` | Genuine ordinary-C grouped leaf move menu, fixed utilities. Existing private RAC clone profile; complete hidden/group/utility boundary matrix and drag remain unproved/blocked respectively. |
++| F-14 / FR-13 | `wp11-recovery--initial-loading` | Actual resource token; empty initial view → real response. |
++| F-14 / FR-13 | `wp11-recovery--refreshing` | Same-query retained rows, updating notice, disabled new selection. |
++| F-15 / FR-13 | `wp11-recovery--initial-error` | Real fail → Retry/new request → supplied response. |
++| F-15 / FR-13 | `wp11-recovery--refresh-error` | Real retained failure + Retry/current request. Full query-change/late-result races deferred. |
++| F-16 / FR-13 | `wp11-recovery--empty` | Authoritative empty input + dataset cause; no invented Create/Import action. |
++| F-16 / FR-13 | `wp11-recovery--no-results` | Actual constraining search + empty response, real Clear search recovery. |
++| F-16 / FR-13 | `wp11-recovery--unknown-empty` | Authoritative empty input, explicitly unknown cause; no guessed dataset/no-match explanation. |
++| F-17 / FR-12 | `wp11-configurations--pagination` | Actual unknown total/explicit next, next page transport. Known totals also in client hosts; shrink/final-gated clamp/size controls need expanded final plays. |
++| F-18 / FR-05/14 | `wp11-details--custom-details` | Bound transaction utility trigger, one real accessory/provider/shell, independent detail source, retained draft through refresh, dirty Keep editing, save/close. Focus/resize/dirty discard/async veto/off-page target matrix owed. |
++| F-19 / FR-01/05 | `wp11-details--customer-details` | Different customer note/team layout and local report choice, application source update. |
++| F-19 / FR-01/05 | `wp11-details--inventory-details` | Stock worksheet/numeric validation, computed availability, explicit missing-detail response. Error/retry controls are real but full detail failure/late-generation plays still owed. |
++| F-20 / FR-14 | `wp11-configurations--dark` | Same native host, semantic classes/dark mode, no global restyling. |
++| F-20 / FR-14 | `wp11-configurations--rtl` | Whole EN/AR DataTable bundle + I18nProvider, actual query.context locale change. Library message localization, mixed-value bidi and focus still require real review. |
++| F-20 / FR-05/14 | `wp11-configurations--narrow` |390px container; selector also offers320/768/1024/1440 without owner remount. Actual overflow/zoom/text expansion/screen-size drawer proof deferred. |
++| F-21 / FR-01/14 | `wp11-configurations--independent-tables` | Transaction + inventory, separate actual D/C/P/source owners; search affects only first. Same-domain duplicate/ABA cases not yet authored. |
++| F-22 / FR-13/15 | `wp11-configurations--access-loss` | Terminal public P/app source retirement; no restored grant button. All row inputs/options/detail/pending buffers must purge. Play currently checks rows/selection; open-drawer/options/late callback coverage remains a named gap. |
++| F-02/08 / FR-15 | `wp11-configurations--controlled-acceptance` | Actual controlled selection proposal rejection then exact C acceptance; no accepted selection mirror. |
++| F-02 / FR-07–10 | `wp11-configurations--owner-conflict-diagnostic` | Real schema construction; only actual ContractError rule.field for the deliberately misowned amount predicate gets the owner-conflict explanation. Other errors are not classified as success. |
++
++## Hosts, reuse and lifecycle limits
++
++- `MinimalWorkbench`, transaction/grouped/controlled/manual hosts, server-recovery
++  host and distinct customer/inventory hosts use genuine public producers. Structural
++  variants are separate story renders, not hidden query keys or fake controller
++  rewrites. Scenario args apply real accepted commands/source requests on the retained
++  owner; visual args update appearance/accepted locale without rebuilding C.
++- Raw records/schemas/definition factories have no HeroUI/CSS imports. Domain
++  definitions accept typed utility columns once; styled triggers are supplied by
++  Workbench. Shared modules are unmounted exports until a host renders them.
++- App source owns input records/requests, independent detail records/form drafts,
++  options and exact delivered operation. It does not cache/mirror native outputs.
++  A real public app P purge participant and retirement port clear application state;
++  detail participants clear before publication observers. Application source is
++  above optional table UI; hiding it is not application unmount/cancellation.
++- SSR remains neutral until genuine library commit; no SSR grant, request isolation,
++  archive/ordinary runtime compatibility or browser execution is claimed by source
++  authoring. Actual Strict effect ordering/reconnect/P purge and public subscription
++  races are not proved by TypeScript and must be executed/fixed in the final phase.
++- The approved local compact white/gray table image guided composition. No Figma
++  edit, new visual acceptance, native hardware input or full G-02 claim follows.
++
++Existing `Foundation/Workspace`, `Filters/Tools`, `Controls/Public composition` and
++`Controls/Real filter composition` remain unchanged complementary evidence lanes.
++Stage B, mounted Start/Next, packed consumers, WP-12/13/14/15 are not skipped or
++completed by this catalog. All required missing/manual/external gates stay open.
+--- /dev/null
++++ after/apps/storybook/src/workbench/tsconfig.light.json
+@@ -0,0 +1,49 @@
++{
++  "extends": "../../../../tsconfig.base.json",
++  "compilerOptions": {
++    "noEmit": true,
++    "rootDir": "../../../..",
++    "module": "ESNext",
++    "moduleResolution": "Bundler",
++    "jsx": "react-jsx",
++    "lib": ["ES2022", "ES2023", "ES2023.Intl", "DOM", "DOM.Iterable"],
++    "types": ["node", "react", "react-dom", "vitest"],
++    "paths": {
++      "@tableweave/react": ["../../../../packages/react/src/index.ts"],
++      "@tableweave/react/contracts": [
++        "../../../../packages/react/src/contracts/index.ts"
++      ],
++      "@tableweave/react/filters": [
++        "../../../../packages/react/src/filters/index.ts"
++      ],
++      "@tableweave/react/reordering-controller": [
++        "../../../../packages/react/src/reordering-controller/index.ts"
++      ],
++      "@tableweave/react/reordering": [
++        "../../../../packages/react/src/reordering/index.ts"
++      ],
++      "@tableweave/heroui": ["../../../../packages/heroui/src/index.ts"],
++      "@heroui/react/*": [
++        "../../node_modules/@heroui/react/dist/components/*/index.d.ts"
++      ],
++      "@internationalized/date": [
++        "../../../../packages/heroui/node_modules/@internationalized/date"
++      ],
++      "@tanstack/react-table": [
++        "../../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
++      ]
++    }
++  },
++  "include": [
++    "./*.ts",
++    "./*.tsx",
++    "../../../../apps/examples/shared/**/*.ts",
++    "../../../../apps/examples/shared/**/*.tsx",
++    "../../../../tests/workbench/wp11-catalog/*.ts",
++    "../../../../tests/workbench/wp11-catalog/*.tsx"
++  ],
++  "exclude": [
++    "../../../../tests/workbench/wp11-catalog/negative/**",
++    "../../../../tests/workbench/wp11-catalog/packed/**"
++  ]
++}
+--- /dev/null
++++ after/apps/storybook/src/workbench/types.ts
+@@ -0,0 +1,19 @@
++import type {
++  DataTableProps,
++  DetailsAccessoryOptions,
++} from "@tableweave/heroui";
++import type { TableDefinition } from "@tableweave/react";
++import type { ReorderControllerOptions } from "@tableweave/react/reordering-controller";
++import type { RowMoveOperation } from "@tableweave/react/reordering";
++import type { Transaction } from "../../../examples/shared/records.js";
++import type { TransactionSchema } from "../../../examples/shared/schemas.js";
++
++/** Positive source consumer only. No deep imports or guessed root type exports. */
++export type TransactionContracts = readonly [
++  NonNullable<DataTableProps<TransactionSchema, Transaction>["reordering"]>,
++  DataTableProps<TransactionSchema, Transaction>["messages"],
++  TableDefinition<TransactionSchema, Transaction>["reordering"],
++  DetailsAccessoryOptions<TransactionSchema, Transaction>,
++  ReorderControllerOptions<TransactionSchema, Transaction>,
++  RowMoveOperation,
++];

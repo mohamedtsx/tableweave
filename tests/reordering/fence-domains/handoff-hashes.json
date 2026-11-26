@@ -1,0 +1,112 @@
+{
+  "status": "implementation-ready-PROVISIONAL-no-runtime-independent-acceptance",
+  "suppliedBase": "ccede5c (no worker Git operation)",
+  "canonical150": "9c7c0a8a0546506016d658d1cdefd15266ab8c94bbde465cfd9c2b4ea3a9692c",
+  "source": {
+    "path": "packages/react/src/reordering-controller/admission.ts",
+    "before": {
+      "mode": "100644",
+      "sha256": "1164ea0743a77dcec7a6b8c7fe259a0ceb35927ea2114d922171de5cdd92068b"
+    },
+    "after": {
+      "sha256": "7b9d990e61a257a13444b745a1ec63978acd695670e0c059fa00970ebddb6433",
+      "mode": 436
+    }
+  },
+  "sourceAggregate": "57f2b37126944f8d51433953c5f15237cd198095b4d58d06c9c07b39b057614d",
+  "inputAggregate": "dd5915038b911cea80dc5b506503aa7ed0a9394dcfd9d1797346b88d8ba9584d",
+  "inputs": {
+    "tests/reordering/fence-domains/before.json": {
+      "sha256": "22c337b9a573028ea00475f7269f4bc0b757576aa4cbaf910037cb3a964dbc92",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/browser.html": {
+      "sha256": "ed05f77915f6e222dec9c9110ee2f2334c30a6b0827206f34a47bec300773ebb",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/browser.spec.ts": {
+      "sha256": "56e38d42ddba35cee0958cda6c3fc85638a9466404c79c253488b2f693050433",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/browser.tsx": {
+      "sha256": "5da58a60cc5de9955ad5c74d5b3912b378f359f08880e4d653c3a74b7694f178",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/denial.test.ts": {
+      "sha256": "a1456dbef3a5dbad781376205dfba9caa1f8892a2936a39b1704f750b90be840",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/host.tsx": {
+      "sha256": "b257b474fed48e4a9c7682d0a6edde4f788565713d1a2bcd69945555025750c8",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/light.mjs": {
+      "sha256": "f7db3e866f75d402137c17933fbe4731271e9f84ed2658a99d28a843c2245973",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/measure.mjs": {
+      "sha256": "c60b01027ad4522bd841fe30807df1527277bfab7417f8c00867f0c4ffb45160",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/native-fixture.ts": {
+      "sha256": "95e22e79379baef4fa3bca2a4654e71b6aff0da9809120081b984c632ed14fe7",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/native-scenarios.ts": {
+      "sha256": "49adc529798a38826c149f2dea38f65cf09f7d1fad389bca02d8ad02cba7ed25",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/negative/tsconfig.json": {
+      "sha256": "2c72d7b781521546cef7057da859b11dd83ef25d5e47525160249b217d0ba3b7",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/negative/types.ts": {
+      "sha256": "bc47d94f84386e1ac97210fc3625b2c1d28da0c2f0c47cc371743be2bcbd510a",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/packed/consumer.ts": {
+      "sha256": "325d72a17ca3eba5c4fc1a9acc9dfeb5a4d2e7c2d7c7ae21ed8c027e11cbe444",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/packed/tsconfig.json": {
+      "sha256": "5299d1d8f9031673606590ff90231c1f4a0ccb11cab50da95f948983beecfd4a",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/playwright.config.ts": {
+      "sha256": "db11790ee6d06476f9ecf374c3407b5b967d14404f3ce1bc80817cb94bb137e5",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/preimages/admission.ts.txt": {
+      "sha256": "1164ea0743a77dcec7a6b8c7fe259a0ceb35927ea2114d922171de5cdd92068b",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/scenarios.ts": {
+      "sha256": "b62b50655202a73b704bc264d954fc17bced6b2ca750a10fec69b5b7f8d57e77",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/scope.mjs": {
+      "sha256": "8344a7b104c2a204fe1bffdb47af48241fb344dedd3012a6066683263140a6a4",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/ssr.test.tsx": {
+      "sha256": "f3d0a6b6aa22c4c10df1eada429a6d0d15847bd821fd02dfb421064e66bb603d",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/static.mjs": {
+      "sha256": "886ab56f96a4b77530bc35763c291f0a1c458e9cbf52c0846851928452cc2c6d",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/tsconfig.json": {
+      "sha256": "5e8d0faef17933c489b27e78ee973442560c229d88ecd7263630b916412ee7f1",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/vite.config.mjs": {
+      "sha256": "17da87f13d54c2de31d5bd0ba3672f63431225bae235c657b3375f45b14c25c0",
+      "mode": 436
+    },
+    "tests/reordering/fence-domains/vitest.config.mjs": {
+      "sha256": "3c44ab488ac7728f1b1f9f01d96142cc85029bdaa4f43a90b539123fc28d7a00",
+      "mode": 436
+    }
+  }
+}

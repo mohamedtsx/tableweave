@@ -1,0 +1,12 @@
+{
+  "kind": "retrospective note from the actual recovery tool result, not a contemporaneous raw log",
+  "command": "node tests/workbench/wp11-next-connection/pins.mjs capture positive-inputs-001",
+  "observedExitCode": 1,
+  "observedError": "Immutable before map exists",
+  "observedLocation": "tests/workbench/wp11-next-connection/scope.mjs:92",
+  "cause": "Imported scope.mjs sees argv[2]=capture and invokes its protected historical before-map capture before the pin module body can run.",
+  "state": "positive-inputs-001 directory was confirmed absent; no existing before map, source, pin, seal or raw result was overwritten.",
+  "remediation": "Leave all helpers unchanged. Preload scope.mjs with a neutral argv[2], then import the pin/seal capture module with its intended arguments. Use fresh pin label positive-inputs-002.",
+  "documentationAttempt": "A combined note/README patch failed context verification before writing; the note directory was confirmed absent afterward. The successful patch is separate.",
+  "runtime": "No application, React or Next execution"
+}

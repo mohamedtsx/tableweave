@@ -4,6 +4,40 @@ Source: HLD §7; ADR-09. Primary integration is TanStack Start + Query; core
 imports neither. Additional Vite React and Next App Router consumers exercise
 the same [public contracts](public-api.md).
 
+## Implemented bounded Start fixture
+
+WP-06's private [actual app](../../apps/example-start/README.md) is agent-approved
+under delegated engineering authority for scoped G-04/AC-22–24. It uses one
+request/router-local QueryClient/provider, explicit app-owned authorization grants
+and authorized bootstrap around the existing resource producer; the producer's
+empty server snapshot is unchanged. Normal refresh and bootstrap denials are
+distinct from recoverable unavailability, and old wrappers cannot resume revoked
+private cache. Accepted scope/definition changes retire the prior owner at commit.
+
+The corrected full workflow passes actual source and genuine-tarball Start HTTP/
+Chromium development/production cases with strict TS6/5.9 and resolved-file install
+confinement. [Evidence](../evidence/wp-06-start-2026-11-24.md) preserves independent
+failures/fixes, exact versions/hashes and limits. This is not a full styled table,
+production auth/database/backend translator, Next/device/AT/performance/real-consumer
+or release proof. All PRs remain unmerged for personal maintainer review.
+
+## Provisional WP-11 facade consumers
+
+WP-11's [public examples](../../README.md#provisional-wp-11-examples) add source-only
+styled/headless Vite pages and real Next/standard-file-route Start app wiring.
+These use the actual private facade, not the old bounded native runtime. The
+[Start source intake](../planning/wp-11-start-facade-plan.md#current-provisional-packet-intake)
+distinguishes request/router-owned Query cache from retained child table sources;
+its original retirement/fixture maps and two corrections stay separate. The
+[Next connection correction](../../tests/workbench/wp11-next-connection/README.md)
+removes terminal-disposal timing heuristics without minting a new source grant.
+
+Actual generated Start routing/whole-app typing, framework builds/HTTP/SSR/hydration,
+RSC/runtime graphs, consumer installs and independent acceptance remain unrun.
+Source-alias positive compiles and in-memory protocols do not inherit WP-06's G-04
+approval or establish production authorization. The WP-11 final inventory owns the
+[exact remaining proof](../planning/wp-11-deferred-verification.md).
+
 ## State before data
 
 Create accepted query state before the request, then adapt the result into a

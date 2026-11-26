@@ -1,0 +1,24 @@
+{
+  "args": [
+    "node_modules/@biomejs/biome/bin/biome",
+    "format",
+    "--vcs-enabled=false",
+    "--write",
+    "tests/integration/wp12/main.tsx",
+    "tests/integration/wp12/application.tsx",
+    "tests/integration/wp12/events.ts",
+    "tests/integration/wp12/styles.css",
+    "tests/integration/wp12/styles.d.ts",
+    "tests/integration/wp12/vite.config.ts",
+    "tests/integration/wp12/playwright.config.ts",
+    "tests/integration/wp12/browser.spec.ts",
+    "tests/integration/wp12/tsconfig.light.json",
+    "tests/integration/wp12/evidence/format.mjs",
+    "tests/integration/wp12/evidence/inputs.mjs",
+    "tests/integration/wp12/evidence/light.mjs",
+    "tests/integration/wp12/evidence/scope.mjs",
+    "tests/integration/wp12/evidence/seal.mjs",
+    "tests/integration/wp12/evidence/static.mjs"
+  ],
+  "status": 0
+}

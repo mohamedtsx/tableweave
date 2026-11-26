@@ -1,0 +1,2 @@
+tests/benchmarks/wp14-guards/guards.test.ts(142,32): error TS2532: Object is possibly 'undefined'.
+tests/benchmarks/wp14-guards/guards.test.ts(147,39): error TS2532: Object is possibly 'undefined'.

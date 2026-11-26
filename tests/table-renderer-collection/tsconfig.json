@@ -1,0 +1,5 @@
+{
+  "extends": "../table-renderer-commit/tsconfig.json",
+  "include": ["./*.ts", "./*.tsx"],
+  "exclude": ["./negative-types.tsx", "./.artifacts"]
+}

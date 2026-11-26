@@ -1,0 +1,30 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@heroui/react/*": [
+        "../../packages/heroui/node_modules/@heroui/react/dist/components/*/index.d.ts"
+      ],
+      "@tableweave/react": [
+        "../../packages/react/node_modules/@tableweave/react/dist/index.d.ts",
+        "/home/mohamed/Desktop/tableweave/packages/react/dist/index.d.ts"
+      ],
+      "@tableweave/react/contracts": [
+        "/home/mohamed/Desktop/tableweave/packages/react/dist/contracts/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "../../packages/heroui/src/details/**/*.ts",
+    "../../packages/heroui/src/details/**/*.tsx"
+  ],
+  "exclude": ["./.artifacts"]
+}

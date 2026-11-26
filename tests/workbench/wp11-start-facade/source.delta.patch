@@ -1,0 +1,3802 @@
+--- /dev/null
++++ after/apps/example-start-facade/.gitignore
+@@ -0,0 +1,5 @@
++node_modules/
++dist/
++.tanstack/
++.output/
++src/routeTree.gen.ts
+--- /dev/null
++++ after/apps/example-start-facade/README.md
+@@ -0,0 +1,105 @@
++# Headless Start facade — wired source, runtime UNRUN
++
++WP-11 / TASK-019 / FR-01/13/14/16, AC-01/22–27. This is a new actual Start app
++source: createStart/getRouter, standard file routes, root document, loader, error/
++retry/navigation, one SDK Query SSR provider/integration, real server functions and
++two useDataTable headless views. It is **not another unmounted recipe**, but its
++generated assembly, build and execution are intentionally not performed yet.
++Do not equate source wiring/handwritten typing with a mounted or SSR-compatible app.
++
++Main owns the exact manifest/lock. Pins equal the old Start app: Start1.168.61,
++Router1.170.42/core1.171.35, SSR-query1.167.3, Query/core5.108.4, React/DOM19.3.1,
++Table9.3.1, Vite7.3.8/plugin5.2.0, TS6.0.3. Existing framework declaration patches/
++packageExtensions stay unchanged. No HeroUI/Tailwind/CSS/DnD or new dependencies.
++The original G-04 app/routes/runtime/drivers/seals and Stage A/B remain unchanged;
++their results are not inherited. KEEP DRAG BLOCKED remains binding; G-02 incomplete.
++
++## Actual source/reader ownership
++
++- Every getRouter call allocates its own QueryClient and parent bootstrap session.
++  No request/cache/controller/lease is module-global. Public immutable synthetic
++  transaction/inventory inputs are shared; server-only transformation/filter/sort/
++  paging happens once over full INPUT, not over a displayed server page.
++- Bootstrap is a real server-function response with unique receipt, dataset/scope,
++  fixed UTC clock, normalized query and canary. The root loader awaits both domains
++  and a **constant-key request-local canary** Query result. A global QueryClient
++  would reuse a foreign canary and fail adoption, not quietly pass key isolation.
++  Optional synthetic cookies `wp11-facade-dataset=alpha|beta` and
++  `wp11-facade-availability=closed` are fixture inputs, not production credentials
++  or backend authorization. UI choices are local requested inputs, never persisted.
++- Query integration calls original hydrate to validate/prepare descriptors; an outer
++  callback awaits actual SDK initial hydration before cache adoption and a private
++  local lease. deserializeData validates exact prepared response envelopes BEFORE
++  Query mutation and rejects ended/foreign/invalid/duplicate-row data. No first-time
++  certificate, row-count grant or unsafe DTO cast is used.
++- Route verification still follows the hydrate callback. Only the actual committed
++  TablePage attach, with matching loader receipt and live local parent lease, creates
++  retained child D/C/P/resources. Strict re-attach and Hide/Show find the same owners.
++  UI cleanup does not disconnect sources or erase parent Query data.
++- Child initial P retirement always clears its own resource/request bindings/drafts/
++  real C selection/details. It never calls parent removeQueries. Activation issues
++  actual beginControlsRequest bindings; queryClient.query uses the same key/clock/
++  30-second freshness options. Cached fresh hydration should avoid a second reader;
++  stale input is a real refresh, not relabelled hydration success. This needs execution.
++- Search/page/selection/retry use genuine public models/authority/native rows. Two
++  independently retained child controllers share only the explicitly parent-owned
++  authorized synthetic cache. No accepted query mirror/native-output cache/fake row.
++- Real source end closes parent lease/command guards first, retires every child,
++  cancels/removes parent cache/canary, then notifies parent observers. Failed child
++  disposal stays closed with explicit debt and Retry source cleanup. Late/aborted
++  candidates cannot close a newer source; unsupported speculative route preload
++  rejects before touching current state. Explicit recheck requires a real new reply.
++- onBeforeNavigate conservatively retires a departing path before next loading.
++  Server parent cleanup is registered before SQ appends its teardown, through typed
++  onServerSsrAttach/onCleanup. No middleware-finally stream disposal/framework-only
++  cleanup calls. Browser pagehide/HMR close the actual application; event removers
++  are owned by the session. BFCache restoration requests a fresh document. HMR is
++  an end boundary, not a promise that SDK's retained HMR router can revive this owner.
++
++The server allocates no C/P/DOM authority. Server snapshot and first client view are
++neutral; actual rows require the library's genuine committed useDataTable frame.
++No owner/model/authority/function/signal is serialized. Signals stay local through
++createIsomorphicFn → server reader or client RPC call options. DTO/record validation
++is real and rejecting; public synthetic isolation is NOT a production auth promise.
++
++## Authoring and final commands
++
++Only the scoped source lane may run now:
++
++```sh
++node tests/workbench/wp11-start-facade/light.mjs FRESH_LABEL
++```
++
++`tsconfig.source-light.json` includes handwritten application/source/reader/view,
++start/config declarations and a public SDK method-type probe. Strict/noEmit/exact
++optional/skipLibCheck:false remain. It excludes router.tsx/register.d.ts/file routes
++and missing real routeTree.gen.ts. Static syntax/full scoped Biome still cover those
++handwritten files. The normal tsconfig.json has no source alias and includes the
++whole app; it has NOT passed. No generated tree/types/ambient mock are hand-authored,
++old global Register is not imported/renamed, and no type suppression/context cast
++substitutes for generated assembly. Vite plugins have not been invoked.
++
++Only in the user's FINAL phase after main authorization, from repository root:
++
++```sh
++pnpm build
++pnpm --filter @tableweave/example-start-facade build
++pnpm --filter @tableweave/example-start-facade typecheck
++node node_modules/@playwright/test/cli.js test --config tests/workbench/wp11-start-facade/playwright.config.ts
++WP11_START_PRODUCTION=1 node node_modules/@playwright/test/cli.js test --config tests/workbench/wp11-start-facade/playwright.config.ts
++node node_modules/vitest/vitest.mjs run --config tests/workbench/wp11-start-facade/vitest.config.mjs
++```
++
++Real generation is enabled and supplies the SDK's production route manifest. Strict
++development/production fixture port6573; production host is a local acceptance host,
++not deployment. Bare runtime library imports resolve actual ESM public emitted
++exports through finite aliases (also for plain shared fixtures outside the app's
++dependency directory), with declaring-app React. There is no runtime source alias.
++Current emitted outputs are not inspected as proof of this revision.
++
++Details/builder/sort/menu/date/dark/RTL catalog coverage remains in unchanged Stage A;
++this headless app does not claim to replace the complete WP-11 scene matrix. Actual
++generation/whole-app typing/SSR hydration, HTTP abort/stream cleanup, late/ABA/debt,
++BFCache/HMR, current ordinary archive/dual TS, independent/manual/AT/device/CI and
++full release requirements remain final/unrun. Exact evidence/gaps/portable receipts
++are in `tests/workbench/wp11-start-facade/README.md`.
+--- /dev/null
++++ after/apps/example-start-facade/src/application/bootstrap-session.ts
+@@ -0,0 +1,478 @@
++import { queryOptions, type QueryClient } from "@tanstack/react-query";
++import {
++  inventoryDefinition,
++  transactionDefinition,
++} from "../../../examples/shared/definitions.js";
++import type {
++  InventoryItem,
++  Transaction,
++} from "../../../examples/shared/records.js";
++import type {
++  InventorySchema,
++  TransactionSchema,
++} from "../../../examples/shared/schemas.js";
++import {
++  bootstrap as decodeBootstrap,
++  bootstrapOutcome,
++  cacheValue,
++  canaryOutcome,
++  sameInput,
++  wireEqual,
++} from "./codec.js";
++import {
++  cachePrefix,
++  initialInputs,
++  rowsKey,
++  rowsOptions,
++} from "./query-options.js";
++import { createTableSource, type TableSource } from "./table-source.js";
++import {
++  SourceEnded,
++  SourceUnavailable,
++  type Bootstrap,
++  type CacheValue,
++  type Dataset,
++  type Envelope,
++  type ReadInput,
++  type ReaderPort,
++} from "./types.js";
++
++export interface Sources {
++  readonly transactions: TableSource<TransactionSchema, Transaction>;
++  readonly inventory: TableSource<InventorySchema, InventoryItem>;
++}
++export interface SessionSnapshot {
++  readonly phase: "absent" | "preparing" | "adopted" | "retiring" | "ended";
++  readonly receipt: Bootstrap | null;
++  readonly sources: Sources | null;
++  readonly notice: string;
++}
++const canaryKey = ["wp11-facade-request-canary"] as const;
++/** Request/router-owned cache, distinct from every child resource's ownership. */
++export function createBootstrapSession(
++  client: QueryClient,
++  reader: ReaderPort,
++  realm: "server" | "client",
++) {
++  let phase: SessionSnapshot["phase"] = "absent",
++    receipt: Bootstrap | null = null,
++    sources: Sources | null = null;
++  let operation: { readonly controller: AbortController } | null = null;
++  let lease: object | null = null;
++  const children: { retire(): boolean }[] = [];
++  let retiredIds = new Set<string>(),
++    ending = false,
++    retiringNow = false,
++    choice: Dataset | null = null;
++  let notice =
++    "Public synthetic data only; no production authentication or persistence.";
++  let snapshot: SessionSnapshot = Object.freeze({
++    phase,
++    receipt,
++    sources,
++    notice,
++  });
++  const neutral: SessionSnapshot = Object.freeze({
++    phase: "absent",
++    receipt: null,
++    sources: null,
++    notice,
++  });
++  const listeners = new Set<() => void>(),
++    removers = new Set<() => void>();
++  function stageSnapshot() {
++    snapshot = Object.freeze({ phase, receipt, sources, notice });
++  }
++  function publish() {
++    stageSnapshot();
++    for (const listener of listeners) listener();
++  }
++  const current = (value: Bootstrap) =>
++    !ending &&
++    receipt === value &&
++    (phase === "preparing" || phase === "adopted");
++  function owns(value: CacheValue, boot: Bootstrap, initial = false) {
++    if (value.kind === "canary")
++      return (
++        value.bootstrapId === boot.id &&
++        value.dataset === boot.dataset &&
++        value.value === boot.canary
++      );
++    const input = boot[value.domain];
++    return (
++      value.input.bootstrapId === input.bootstrapId &&
++      value.input.dataset === input.dataset &&
++      value.input.scopeKey === input.scopeKey &&
++      value.input.clock === input.clock &&
++      (!initial || sameInput(value.input, input))
++    );
++  }
++  function clearCache(id: string | null) {
++    if (id) {
++      void client.cancelQueries({ queryKey: cachePrefix(id) }).catch(() => {});
++      client.removeQueries({ queryKey: cachePrefix(id) });
++    }
++    void client
++      .cancelQueries({ queryKey: canaryKey, exact: true })
++      .catch(() => {});
++    client.removeQueries({ queryKey: canaryKey, exact: true });
++  }
++  function retire(reason = "Application source ended."): boolean {
++    if (retiringNow) return false;
++    retiringNow = true;
++    try {
++      const old = receipt;
++      // Close app command/read guards before any child or Query observer can reenter.
++      phase = "retiring";
++      lease = null;
++      if (old) retiredIds.add(old.id);
++      const abandoned = operation;
++      operation = null;
++      sources = null;
++      let complete = true;
++      for (const child of children) {
++        try {
++          if (!child.retire()) complete = false;
++        } catch {
++          complete = false;
++        }
++      }
++      notice = reason;
++      receipt = null;
++      // Query cancellation/removal can synchronously notify its own observers.
++      // Their parent read must already see cleared bootstrap/source references.
++      stageSnapshot();
++      abandoned?.controller.abort();
++      clearCache(old?.id ?? null);
++      if (!complete) {
++        notice =
++          "Application retirement is blocked; retry cleanup. No new source is allowed.";
++        publish();
++        return false;
++      }
++      children.length = 0;
++      if (ending) {
++        let removed = true;
++        for (const remove of [...removers]) {
++          try {
++            remove();
++            removers.delete(remove);
++          } catch {
++            removed = false;
++          }
++        }
++        if (!removed) {
++          notice =
++            "Application callbacks remain in cleanup debt; source stays closed.";
++          publish();
++          return false;
++        }
++      }
++      phase = "ended";
++      publish();
++      return true;
++    } finally {
++      retiringNow = false;
++    }
++  }
++  function validateCache(boot: Bootstrap) {
++    const transaction = cacheValue(
++      client.getQueryData(rowsKey(boot.transactions)),
++    );
++    const inventory = cacheValue(client.getQueryData(rowsKey(boot.inventory)));
++    const canary = cacheValue(client.getQueryData(canaryKey));
++    if (
++      !owns(transaction, boot, true) ||
++      !owns(inventory, boot, true) ||
++      !owns(canary, boot, true)
++    )
++      throw new SourceEnded();
++  }
++  async function read(
++    input: ReadInput,
++    boot: Bootstrap,
++    force: boolean,
++  ): Promise<Envelope> {
++    const origin = lease;
++    if (!origin || !current(boot) || phase !== "adopted")
++      throw new SourceEnded();
++    if (force)
++      await client.invalidateQueries({
++        queryKey: rowsKey(input),
++        exact: true,
++        refetchType: "none",
++      });
++    if (!current(boot)) throw new SourceEnded();
++    const result = await client.query(
++      rowsOptions(input, reader, () => current(boot)),
++    );
++    if (lease !== origin || !current(boot) || !owns(result, boot))
++      throw new SourceEnded();
++    return result;
++  }
++  return {
++    getSnapshot: () => snapshot,
++    getServerSnapshot: () => neutral,
++    subscribe(listener: () => void) {
++      listeners.add(listener);
++      return () => {
++        listeners.delete(listener);
++      };
++    },
++    requestedDataset: () => choice,
++    selectDataset(selected: Dataset) {
++      if (ending || !retire("Requesting another public synthetic dataset."))
++        throw new SourceEnded();
++      choice = selected;
++    },
++    serialize() {
++      return { bootstrap: receipt && current(receipt) ? receipt : null };
++    },
++    shouldDehydrate(data: unknown) {
++      try {
++        const boot = receipt,
++          origin = lease;
++        if (!boot || !current(boot)) return false;
++        const parsed = cacheValue(data);
++        return (
++          receipt === boot &&
++          lease === origin &&
++          current(boot) &&
++          owns(parsed, boot, true)
++        );
++      } catch {
++        return false;
++      }
++    },
++    prepareHydration(value: unknown) {
++      if (ending || children.length || receipt !== null || phase !== "absent")
++        throw new SourceEnded();
++      if (value === null) return;
++      const parsed = decodeBootstrap(value);
++      if (
++        ending ||
++        children.length ||
++        receipt !== null ||
++        phase !== "absent" ||
++        retiredIds.has(parsed.id)
++      )
++        throw new SourceEnded();
++      receipt = parsed;
++      choice = parsed.dataset;
++      phase = "preparing";
++      publish();
++    },
++    deserializeData(value: unknown): CacheValue {
++      const boot = receipt,
++        origin = lease;
++      if (!boot || !current(boot)) throw new SourceEnded();
++      const parsed = cacheValue(value);
++      // Query's actual deserialize hook runs BEFORE cache lookup/write, not after.
++      if (
++        receipt !== boot ||
++        lease !== origin ||
++        !current(boot) ||
++        retiredIds.has(boot.id) ||
++        !owns(parsed, boot, true)
++      )
++        throw new SourceEnded();
++      return parsed;
++    },
++    adoptHydration() {
++      const boot = receipt,
++        origin = lease;
++      if (!boot) return;
++      if (phase !== "preparing" || !current(boot)) throw new SourceEnded();
++      try {
++        validateCache(boot);
++        if (
++          receipt !== boot ||
++          lease !== origin ||
++          phase !== "preparing" ||
++          !current(boot)
++        )
++          throw new SourceEnded();
++        lease = Object.freeze({});
++        phase = "adopted";
++        publish();
++      } catch (error) {
++        if (receipt === boot && lease === origin) retire();
++        throw error;
++      }
++    },
++    async load(
++      selected: Dataset,
++      signal: AbortSignal,
++      preload: boolean,
++    ): Promise<Bootstrap> {
++      // This demo disables route preloading; a speculative candidate cannot retire
++      // the committed app or manufacture an activation receipt.
++      if (preload) throw new SourceUnavailable();
++      if (ending || !retire("Preparing a genuine new synthetic bootstrap."))
++        throw new SourceEnded();
++      choice = selected;
++      const controller = new AbortController(),
++        token = { controller };
++      operation = token;
++      const abort = () => {
++        controller.abort(signal.reason);
++        if (operation === token)
++          retire("Bootstrap request aborted; old data remains retired.");
++      };
++      signal.addEventListener("abort", abort, { once: true });
++      if (signal.aborted) abort();
++      try {
++        controller.signal.throwIfAborted();
++        const boot = bootstrapOutcome(
++          await reader.bootstrap(selected, controller.signal),
++        );
++        controller.signal.throwIfAborted();
++        if (
++          operation !== token ||
++          ending ||
++          retiredIds.has(boot.id) ||
++          boot.dataset !== selected
++        )
++          throw new SourceEnded();
++        receipt = boot;
++        phase = "preparing";
++        const proof = () =>
++          operation === token && current(boot) && !controller.signal.aborted;
++        await Promise.all(
++          initialInputs(boot).map((input) =>
++            client.query(rowsOptions(input, reader, proof)),
++          ),
++        );
++        await client.query(
++          queryOptions({
++            queryKey: canaryKey,
++            staleTime: 30_000,
++            retry: false,
++            queryFn: async ({ signal: querySignal }) => {
++              if (!proof()) throw new SourceEnded();
++              const value = canaryOutcome(
++                await reader.canary(boot, querySignal),
++              );
++              if (!proof() || !owns(value, boot)) throw new SourceEnded();
++              return value;
++            },
++          }),
++        );
++        if (!proof()) throw new SourceEnded();
++        validateCache(boot);
++        if (!proof()) throw new SourceEnded();
++        lease = Object.freeze({});
++        phase = "adopted";
++        operation = null;
++        publish();
++        return boot;
++      } catch (error) {
++        if (operation === token)
++          retire(
++            error instanceof SourceEnded
++              ? "Synthetic server source denied access."
++              : "Synthetic bootstrap unavailable; recheck explicitly.",
++          );
++        throw error;
++      } finally {
++        signal.removeEventListener("abort", abort);
++      }
++    },
++    attach(value: Bootstrap): () => void {
++      const boot = receipt,
++        origin = lease;
++      if (
++        realm !== "client" ||
++        !origin ||
++        !boot ||
++        phase !== "adopted" ||
++        !current(boot) ||
++        !wireEqual(decodeBootstrap(value), boot)
++      )
++        throw new SourceEnded();
++      if (lease !== origin || !current(boot) || phase !== "adopted")
++        throw new SourceEnded();
++      if (!sources) {
++        let transaction: Sources["transactions"] | null = null;
++        try {
++          transaction = createTableSource(
++            transactionDefinition({ full: true }),
++            {
++              ...boot.transactions,
++              isCurrent: () =>
++                lease === origin && current(boot) && phase === "adopted",
++              lost: () => {
++                retire("Synthetic server source ended.");
++              },
++              read: async (request, force) => {
++                if (request.evaluatedAt === undefined) throw new SourceEnded();
++                const result = await read(
++                  {
++                    ...boot.transactions,
++                    query: request.query,
++                    clock: request.evaluatedAt,
++                  },
++                  boot,
++                  force,
++                );
++                if (result.domain !== "transactions") throw new SourceEnded();
++                return result.result;
++              },
++            },
++          );
++          children.push(transaction);
++          const inventory = createTableSource(inventoryDefinition(), {
++            ...boot.inventory,
++            isCurrent: () =>
++              lease === origin && current(boot) && phase === "adopted",
++            lost: () => {
++              retire("Synthetic server source ended.");
++            },
++            read: async (request, force) => {
++              if (request.evaluatedAt === undefined) throw new SourceEnded();
++              const result = await read(
++                {
++                  ...boot.inventory,
++                  query: request.query,
++                  clock: request.evaluatedAt,
++                },
++                boot,
++                force,
++              );
++              if (result.domain !== "inventory") throw new SourceEnded();
++              return result.result;
++            },
++          });
++          children.push(inventory);
++          sources = { transactions: transaction, inventory };
++          transaction.activate();
++          inventory.activate();
++          publish();
++        } catch (error) {
++          if (lease === origin && current(boot)) retire();
++          throw error;
++        }
++      }
++      // Deliberately NOT a source disconnect/cache removal. Strict replay and UI
++      // hiding detach the borrower, while the actual application owner remains.
++      let attached = true;
++      return () => {
++        if (!attached) return;
++        attached = false;
++      };
++    },
++    retire,
++    addRemover(remove: () => void) {
++      removers.add(remove);
++    },
++    dispose() {
++      ending = true;
++      const complete = retire();
++      if (complete) {
++        retiredIds = new Set();
++      }
++      return complete;
++    },
++  };
++}
++export type BootstrapSession = ReturnType<typeof createBootstrapSession>;
+--- /dev/null
++++ after/apps/example-start-facade/src/application/codec.ts
+@@ -0,0 +1,351 @@
++import {
++  canonicalJson,
++  getQueryIdentity,
++  parseQuery,
++  type JsonValue,
++} from "@tableweave/react/contracts";
++import {
++  fixedNow,
++  type InventoryItem,
++  type Transaction,
++} from "../../../examples/shared/records.js";
++import {
++  exampleOperators,
++  inventorySchema,
++  transactionSchema,
++} from "../../../examples/shared/schemas.js";
++import {
++  SourceUnavailable,
++  type Bootstrap,
++  type Canary,
++  type Dataset,
++  type Envelope,
++  type ReadInput,
++} from "./types.js";
++
++/** Own JSON capture: accessors/prototype tricks/cycles/non-finite values are rejected. */
++function capture(value: unknown, seen = new Set<object>()): JsonValue {
++  if (value === null || typeof value === "string" || typeof value === "boolean")
++    return value;
++  if (typeof value === "number" && Number.isFinite(value)) return value;
++  if (typeof value !== "object" || value === null || seen.has(value))
++    throw new SourceUnavailable();
++  seen.add(value);
++  try {
++    if (
++      !Array.isArray(value) &&
++      Object.getPrototypeOf(value) !== Object.prototype &&
++      Object.getPrototypeOf(value) !== null
++    )
++      throw new SourceUnavailable();
++    const result: Record<string, JsonValue> = {};
++    const elements: JsonValue[] = [];
++    const length = Array.isArray(value)
++      ? Object.getOwnPropertyDescriptor(value, "length")
++      : null;
++    if (
++      length &&
++      (!Object.hasOwn(length, "value") ||
++        !Number.isSafeInteger(length.value) ||
++        length.value < 0 ||
++        length.value > 10000)
++    )
++      throw new SourceUnavailable();
++    const keys = length
++      ? Array.from({ length: length.value }, (_, index) => String(index))
++      : Object.keys(value);
++    if (keys.length > 10000) throw new SourceUnavailable();
++    for (const key of keys) {
++      const descriptor = Object.getOwnPropertyDescriptor(value, key);
++      if (
++        !descriptor ||
++        !Object.hasOwn(descriptor, "value") ||
++        !descriptor.enumerable ||
++        key === "__proto__"
++      )
++        throw new SourceUnavailable();
++      const child = capture(descriptor.value, seen);
++      if (Array.isArray(value)) elements.push(child);
++      else result[key] = child;
++    }
++    return Array.isArray(value) ? elements : result;
++  } finally {
++    seen.delete(value);
++  }
++}
++function object(value: unknown): Readonly<Record<string, JsonValue>> {
++  const copy = capture(value);
++  if (!copy || typeof copy !== "object" || list(copy))
++    throw new SourceUnavailable();
++  return copy;
++}
++function list(value: JsonValue): value is readonly JsonValue[] {
++  return Array.isArray(value);
++}
++function text(value: JsonValue | undefined): string {
++  if (typeof value !== "string") throw new SourceUnavailable();
++  return value;
++}
++function number(value: JsonValue | undefined): number {
++  if (typeof value !== "number" || !Number.isFinite(value))
++    throw new SourceUnavailable();
++  return value;
++}
++function bool(value: JsonValue | undefined): boolean {
++  if (typeof value !== "boolean") throw new SourceUnavailable();
++  return value;
++}
++function strings(value: JsonValue | undefined): readonly string[] {
++  if (!Array.isArray(value)) throw new SourceUnavailable();
++  return value.map(text);
++}
++function nullableText(value: JsonValue | undefined): string | null {
++  return value === null ? null : text(value);
++}
++export function dataset(value: unknown): Dataset {
++  if (value !== "alpha" && value !== "beta") throw new SourceUnavailable();
++  return value;
++}
++export function readInput(value: unknown): ReadInput {
++  const input = object(value);
++  const selected = dataset(input.dataset),
++    domain = input.domain;
++  const bootstrapId = text(input.bootstrapId),
++    scopeKey = text(input.scopeKey),
++    clock = number(input.clock);
++  if (
++    input.version !== 1 ||
++    !/^[a-f0-9-]{36}$/.test(bootstrapId) ||
++    clock !== fixedNow ||
++    scopeKey !== `synthetic:${selected}:${domain}`
++  )
++    throw new SourceUnavailable();
++  const base = {
++    version: 1 as const,
++    bootstrapId,
++    dataset: selected,
++    scopeKey,
++    clock,
++  };
++  if (domain === "transactions") {
++    const parsed = parseQuery(transactionSchema, input.query, {
++      registry: exampleOperators,
++    });
++    if (
++      !parsed.success ||
++      parsed.data.locale !== "en-US" ||
++      parsed.data.timeZone !== "UTC"
++    )
++      throw new SourceUnavailable();
++    return Object.freeze({ ...base, domain, query: parsed.data });
++  }
++  if (domain === "inventory") {
++    const parsed = parseQuery(inventorySchema, input.query);
++    if (
++      !parsed.success ||
++      parsed.data.locale !== "en-US" ||
++      parsed.data.timeZone !== "UTC"
++    )
++      throw new SourceUnavailable();
++    return Object.freeze({ ...base, domain, query: parsed.data });
++  }
++  throw new SourceUnavailable();
++}
++export function inputIdentity(input: ReadInput): string {
++  return input.domain === "transactions"
++    ? getQueryIdentity(transactionSchema, input.query, {
++        now: input.clock,
++        registry: exampleOperators,
++      })
++    : getQueryIdentity(inventorySchema, input.query, { now: input.clock });
++}
++export function sameInput(a: ReadInput, b: ReadInput): boolean {
++  return (
++    a.bootstrapId === b.bootstrapId &&
++    a.domain === b.domain &&
++    a.scopeKey === b.scopeKey &&
++    a.dataset === b.dataset &&
++    a.clock === b.clock &&
++    inputIdentity(a) === inputIdentity(b)
++  );
++}
++export function bootstrap(value: unknown): Bootstrap {
++  const input = object(value),
++    id = text(input.id),
++    selected = dataset(input.dataset),
++    clock = number(input.clock);
++  const transactions = readInput(input.transactions),
++    inventory = readInput(input.inventory);
++  const canary = text(input.canary);
++  if (
++    input.version !== 1 ||
++    transactions.domain !== "transactions" ||
++    inventory.domain !== "inventory" ||
++    clock !== fixedNow ||
++    transactions.bootstrapId !== id ||
++    inventory.bootstrapId !== id ||
++    transactions.dataset !== selected ||
++    inventory.dataset !== selected ||
++    canary !== `public-canary:${selected}:${id}`
++  )
++    throw new SourceUnavailable();
++  return Object.freeze({
++    version: 1,
++    id,
++    dataset: selected,
++    clock,
++    canary,
++    transactions,
++    inventory,
++  });
++}
++function transaction(value: JsonValue): Transaction {
++  const row = object(value),
++    status = row.status,
++    cleared = row.cleared;
++  if (
++    (status !== "posted" && status !== "draft") ||
++    (cleared !== null && typeof cleared !== "boolean")
++  )
++    throw new SourceUnavailable();
++  return Object.freeze({
++    id: text(row.id),
++    description: text(row.description),
++    status,
++    occurred: text(row.occurred),
++    amount: number(row.amount),
++    reference: nullableText(row.reference),
++    account: number(row.account),
++    tags: strings(row.tags),
++    cleared,
++    bookingDay: text(row.bookingDay),
++  });
++}
++function inventoryItem(value: JsonValue): InventoryItem {
++  const row = object(value),
++    status = row.status,
++    category = row.category;
++  if (
++    (status !== "available" && status !== "archived") ||
++    (category !== "equipment" && category !== "supplies")
++  )
++    throw new SourceUnavailable();
++  return Object.freeze({
++    id: text(row.id),
++    title: text(row.title),
++    status,
++    category,
++    updated: text(row.updated),
++    quantity: number(row.quantity),
++    locations: strings(row.locations),
++    reserved: bool(row.reserved),
++    note: nullableText(row.note),
++  });
++}
++export function envelope(value: unknown): Envelope {
++  const raw = object(value),
++    input = readInput(raw.input),
++    result = object(raw.result),
++    page = object(result.page);
++  if (
++    raw.kind !== "rows" ||
++    raw.domain !== input.domain ||
++    result.source !== "fresh" ||
++    !Array.isArray(result.records)
++  )
++    throw new SourceUnavailable();
++  const total = number(page.total);
++  if (
++    page.kind !== "known" ||
++    !Number.isSafeInteger(total) ||
++    total < 0 ||
++    result.records.length > input.query.pagination.pageSize
++  )
++    throw new SourceUnavailable();
++  const emptyKind = result.emptyKind;
++  if (
++    emptyKind !== "dataset" &&
++    emptyKind !== "filtered" &&
++    emptyKind !== "unknown"
++  )
++    throw new SourceUnavailable();
++  const common = {
++    source: "fresh",
++    page: { kind: "known", total },
++    emptyKind,
++    receivedAt: text(result.receivedAt),
++  } as const;
++  function checked<T extends { readonly id: string }>(
++    records: readonly T[],
++  ): readonly T[] {
++    const ids = new Set(records.map((row) => row.id));
++    const prefix = `${input.dataset}:${input.domain === "transactions" ? "tx" : "it"}-`;
++    if (
++      ids.size !== records.length ||
++      records.some((row) => !row.id.startsWith(prefix)) ||
++      (records.length > 0 &&
++        total <
++          input.query.pagination.pageIndex * input.query.pagination.pageSize +
++            records.length)
++    )
++      throw new SourceUnavailable();
++    return Object.freeze(records);
++  }
++  if (input.domain === "transactions")
++    return Object.freeze({
++      kind: "rows",
++      domain: input.domain,
++      input,
++      result: { ...common, records: checked(result.records.map(transaction)) },
++    });
++  return Object.freeze({
++    kind: "rows",
++    domain: input.domain,
++    input,
++    result: { ...common, records: checked(result.records.map(inventoryItem)) },
++  });
++}
++export function bootstrapOutcome(value: unknown): Bootstrap {
++  const raw = object(value);
++  if (raw.kind === "denied") throw new SourceEndedError();
++  if (raw.kind !== "ready") throw new SourceUnavailable();
++  return bootstrap(raw.bootstrap);
++}
++// Keep typed denial distinct from malformed/unavailable transport; no raw error data.
++import { SourceEnded as SourceEndedError } from "./types.js";
++export function rowsOutcome(value: unknown): Envelope {
++  const raw = object(value);
++  if (raw.kind === "denied") throw new SourceEndedError();
++  if (raw.kind !== "ready") throw new SourceUnavailable();
++  return envelope(raw.envelope);
++}
++export const wireEqual = (a: Bootstrap, b: Bootstrap) =>
++  canonicalJson(a) === canonicalJson(b);
++export function canary(value: unknown): Canary {
++  const raw = object(value),
++    id = text(raw.bootstrapId),
++    selected = dataset(raw.dataset),
++    label = text(raw.value);
++  if (
++    raw.kind !== "canary" ||
++    !/^[a-f0-9-]{36}$/.test(id) ||
++    label !== `public-canary:${selected}:${id}`
++  )
++    throw new SourceUnavailable();
++  return Object.freeze({
++    kind: "canary",
++    bootstrapId: id,
++    dataset: selected,
++    value: label,
++  });
++}
++export function cacheValue(value: unknown) {
++  const raw = object(value);
++  return raw.kind === "canary" ? canary(raw) : envelope(raw);
++}
++export function canaryOutcome(value: unknown): Canary {
++  const raw = object(value);
++  if (raw.kind === "denied") throw new SourceEndedError();
++  if (raw.kind !== "ready") throw new SourceUnavailable();
++  return canary(raw.canary);
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/application/functions.ts
+@@ -0,0 +1,17 @@
++import { createServerFn } from "@tanstack/react-start";
++import { bootstrap, dataset, readInput } from "./codec.js";
++import {
++  bootstrapReader,
++  canaryReader,
++  requestSignal,
++  rowsReader,
++} from "./reader.server.js";
++export const bootstrapRpc = createServerFn({ method: "POST" })
++  .validator(dataset)
++  .handler(({ data }) => bootstrapReader(data));
++export const rowsRpc = createServerFn({ method: "POST" })
++  .validator(readInput)
++  .handler(({ data }) => rowsReader(data, requestSignal()));
++export const canaryRpc = createServerFn({ method: "POST" })
++  .validator(bootstrap)
++  .handler(({ data }) => canaryReader(data, requestSignal()));
+--- /dev/null
++++ after/apps/example-start-facade/src/application/query-options.ts
+@@ -0,0 +1,39 @@
++import { queryOptions } from "@tanstack/react-query";
++import { inputIdentity, rowsOutcome, sameInput } from "./codec.js";
++import {
++  SourceEnded,
++  SourceUnavailable,
++  type Bootstrap,
++  type ReadInput,
++  type ReaderPort,
++} from "./types.js";
++export const cachePrefix = (id: string) => ["wp11-start-facade", id] as const;
++export const rowsKey = (input: ReadInput) =>
++  [
++    ...cachePrefix(input.bootstrapId),
++    input.domain,
++    input.scopeKey,
++    input.clock,
++    inputIdentity(input),
++  ] as const;
++export function rowsOptions(
++  input: ReadInput,
++  reader: ReaderPort,
++  current: () => boolean,
++) {
++  return queryOptions({
++    queryKey: rowsKey(input),
++    retry: false,
++    staleTime: 30_000,
++    queryFn: async ({ signal }) => {
++      if (!current()) throw new SourceEnded();
++      const result = rowsOutcome(await reader.rows(input, signal));
++      signal.throwIfAborted();
++      if (!current()) throw new SourceEnded();
++      if (!sameInput(input, result.input)) throw new SourceUnavailable();
++      return result;
++    },
++  });
++}
++export const initialInputs = (value: Bootstrap) =>
++  [value.transactions, value.inventory] as const;
+--- /dev/null
++++ after/apps/example-start-facade/src/application/reader.server.ts
+@@ -0,0 +1,175 @@
++import { createQuery } from "@tableweave/react/contracts";
++import { createFilterEvaluator } from "@tableweave/react/filters";
++import {
++  getCookie,
++  getRequest,
++  setResponseHeader,
++} from "@tanstack/react-start/server";
++import {
++  fixedNow,
++  inventory,
++  receivedAt,
++  transactions,
++} from "../../../examples/shared/records.js";
++import {
++  exampleOperators,
++  inventorySchema,
++  transactionSchema,
++} from "../../../examples/shared/schemas.js";
++import { dataset, readInput } from "./codec.js";
++import type {
++  Bootstrap,
++  BootstrapOutcome,
++  Dataset,
++  ReadInput,
++  RowsOutcome,
++} from "./types.js";
++
++const serverOnlyMarker = "WP11_START_FACADE_READER_SERVER_ONLY";
++function unavailable() {
++  setResponseHeader("Cache-Control", "private, no-store");
++  return getCookie("wp11-facade-availability") === "closed";
++}
++export const requestSignal = () => getRequest().signal;
++export const initialDatasetReader = () =>
++  dataset(getCookie("wp11-facade-dataset") ?? "alpha");
++export async function canaryReader(input: Bootstrap, signal: AbortSignal) {
++  signal.throwIfAborted();
++  if (unavailable()) return { kind: "denied" as const };
++  return {
++    kind: "ready" as const,
++    canary: {
++      kind: "canary" as const,
++      bootstrapId: input.id,
++      dataset: input.dataset,
++      value: `public-canary:${input.dataset}:${input.id}`,
++    },
++  };
++}
++export function bootstrapReader(selected: Dataset): BootstrapOutcome {
++  if (unavailable()) return { kind: "denied" };
++  const id = crypto.randomUUID();
++  const base = {
++    version: 1 as const,
++    bootstrapId: id,
++    dataset: selected,
++    clock: fixedNow,
++  };
++  return {
++    kind: "ready",
++    bootstrap: {
++      version: 1,
++      id,
++      dataset: selected,
++      clock: fixedNow,
++      canary: `public-canary:${selected}:${id}`,
++      transactions: {
++        ...base,
++        domain: "transactions",
++        scopeKey: `synthetic:${selected}:transactions`,
++        query: createQuery(transactionSchema, {
++          locale: "en-US",
++          timeZone: "UTC",
++        }),
++      },
++      inventory: {
++        ...base,
++        domain: "inventory",
++        scopeKey: `synthetic:${selected}:inventory`,
++        query: createQuery(inventorySchema, {
++          locale: "en-US",
++          timeZone: "UTC",
++        }),
++      },
++    },
++  };
++}
++function compare(left: unknown, right: unknown): number {
++  return typeof left === "number" && typeof right === "number"
++    ? left - right
++    : String(left ?? "").localeCompare(String(right ?? ""), "en-US");
++}
++/** Full authoritative synthetic INPUT is filtered/sorted/paged exactly once here. */
++export async function rowsReader(
++  value: ReadInput,
++  signal: AbortSignal,
++): Promise<RowsOutcome> {
++  const input = readInput(value);
++  signal.throwIfAborted();
++  if (unavailable()) return { kind: "denied" };
++  if (!serverOnlyMarker) throw new Error("Missing synthetic server reader");
++  const prefix = input.dataset === "alpha" ? "Alpha" : "Beta";
++  if (input.domain === "transactions") {
++    const all = transactions.map((row) => ({
++      ...row,
++      id: `${input.dataset}:${row.id}`,
++      description: `${prefix} ${row.description}`,
++    }));
++    const evaluate = createFilterEvaluator(transactionSchema, input.query, {
++      now: input.clock,
++      registry: exampleOperators,
++    });
++    const filtered = all.filter(evaluate).sort((a, b) => {
++      for (const sort of input.query.sorting) {
++        const result = compare(a[sort.id], b[sort.id]);
++        if (result) return sort.desc ? -result : result;
++      }
++      return a.id.localeCompare(b.id);
++    });
++    signal.throwIfAborted();
++    const { pageIndex, pageSize } = input.query.pagination;
++    return {
++      kind: "ready",
++      envelope: {
++        kind: "rows",
++        domain: input.domain,
++        input,
++        result: {
++          source: "fresh",
++          records: filtered.slice(
++            pageIndex * pageSize,
++            (pageIndex + 1) * pageSize,
++          ),
++          page: { kind: "known", total: filtered.length },
++          emptyKind: "filtered",
++          receivedAt,
++        },
++      },
++    };
++  }
++  const all = inventory.map((row) => ({
++    ...row,
++    id: `${input.dataset}:${row.id}`,
++    title: `${prefix} ${row.title}`,
++  }));
++  const evaluate = createFilterEvaluator(inventorySchema, input.query, {
++    now: input.clock,
++  });
++  const filtered = all.filter(evaluate).sort((a, b) => {
++    for (const sort of input.query.sorting) {
++      const result = compare(a[sort.id], b[sort.id]);
++      if (result) return sort.desc ? -result : result;
++    }
++    return a.id.localeCompare(b.id);
++  });
++  signal.throwIfAborted();
++  const { pageIndex, pageSize } = input.query.pagination;
++  return {
++    kind: "ready",
++    envelope: {
++      kind: "rows",
++      domain: input.domain,
++      input,
++      result: {
++        source: "fresh",
++        records: filtered.slice(
++          pageIndex * pageSize,
++          (pageIndex + 1) * pageSize,
++        ),
++        page: { kind: "known", total: filtered.length },
++        emptyKind: "filtered",
++        receivedAt,
++      },
++    },
++  };
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/application/table-source.ts
+@@ -0,0 +1,221 @@
++import {
++  beginControlsRequest,
++  createCriteriaPublication,
++  createResourceAdapter,
++  getControlsRequestBinding,
++  type DataTableOptions,
++  type ResourceRequest,
++  type ResourceSuccess,
++  type TableDefinition,
++} from "@tableweave/react";
++import type { QueryFor, QuerySchema } from "@tableweave/react/contracts";
++import { SourceEnded } from "./types.js";
++
++export interface SourcePort<S extends QuerySchema, T extends object> {
++  readonly scopeKey: string;
++  readonly clock: number;
++  readonly query: QueryFor<S>;
++  isCurrent(): boolean;
++  read(
++    request: ResourceRequest<QueryFor<S>>,
++    force: boolean,
++  ): Promise<ResourceSuccess<T>>;
++  lost(): void;
++}
++/** Retained APPLICATION source. Its UI borrower never owns connect/dispose. */
++export function createTableSource<S extends QuerySchema, T extends object>(
++  D: TableDefinition<S, T>,
++  port: SourcePort<S, T>,
++) {
++  const context = {
++    definitionKey: D.native.controllerDefinition.schema.id,
++    scopeKey: port.scopeKey,
++    access: true,
++  };
++  let live = true,
++    disposed = false,
++    activated = false;
++  let pending: ResourceRequest<QueryFor<S>> | null = null,
++    accepted: ResourceRequest<QueryFor<S>> | null = null;
++  const drafts = new Set<() => void>();
++  const resource = createResourceAdapter<T, QueryFor<S>>(context);
++  const C = D.createController({
++    initial: { query: port.query },
++    now: () => port.clock,
++    validateCommand(command) {
++      if (
++        (!live || !port.isCurrent()) &&
++        command.type !== "selection.cancel" &&
++        !(
++          command.type === "details.change" &&
++          typeof command.update === "object" &&
++          command.update.rowId === null
++        )
++      )
++        throw new SourceEnded();
++    },
++    onQueryChange() {
++      if (activated && live && port.isCurrent()) load();
++    },
++  });
++  function purge(): undefined {
++    pending = null;
++    accepted = null;
++    resource.clear();
++    for (const clear of drafts) clear();
++    C.dispatch({ type: "selection.cancel" });
++    C.dispatch({ type: "details.change", update: { rowId: null } });
++    return undefined;
++  }
++  const P = createCriteriaPublication({
++    controller: C,
++    definition: C.getDefinition(),
++    retirement: {
++      retire() {
++        purge();
++        if (
++          resource.getSnapshot().snapshot !== null ||
++          C.getSnapshot().details.rowId !== null ||
++          Object.values(C.getSnapshot().selection).some(Boolean)
++        )
++          throw new SourceEnded();
++        return undefined;
++      },
++    },
++  });
++  const begin = P.begin({
++    controller: C,
++    definition: C.getDefinition(),
++    expected: context,
++    actual: context,
++  });
++  if (
++    begin.status !== "pending" ||
++    P.complete(begin.ticket).status !== "settled"
++  )
++    throw new SourceEnded();
++  const current = P.getSnapshot().current;
++  if (!current || !port.isCurrent()) throw new SourceEnded();
++  const criteria = P.issue({
++    controller: C,
++    definition: C.getDefinition(),
++    context,
++    epoch: current.epoch,
++  });
++  const unregister = P.registerParticipant(criteria, { purge });
++  const stop = resource.connect();
++  let serial = 0;
++  async function execute(
++    request: ResourceRequest<QueryFor<S>>,
++    force: boolean,
++  ) {
++    if (!live || !port.isCurrent()) return;
++    pending = request;
++    try {
++      const result = await port.read(request, force);
++      if (
++        !live ||
++        !port.isCurrent() ||
++        pending !== request ||
++        resource.getSnapshot().request !== request
++      )
++        return;
++      const previous = accepted;
++      accepted = request;
++      try {
++        if (
++          !resource.succeed(request, result) &&
++          live &&
++          port.isCurrent() &&
++          pending === request
++        )
++          accepted = previous;
++      } catch (error) {
++        if (live && port.isCurrent() && pending === request)
++          accepted = previous;
++        throw error;
++      }
++    } catch (error) {
++      if (!live || !port.isCurrent() || pending !== request) return;
++      if (error instanceof SourceEnded) port.lost();
++      else resource.fail(request, "unavailable");
++    }
++  }
++  function load(force = false) {
++    if (!live || !port.isCurrent()) return;
++    const state = C.getSnapshot();
++    const started = beginControlsRequest(D.native, C, resource, {
++      ...context,
++      queryKey: state.queryIdentity,
++      requestKey: `read-${++serial}`,
++      extent: { kind: "page", ...state.query.pagination },
++      retry(request) {
++        void execute(request, true);
++      },
++    });
++    if (started) void execute(started.request, force);
++  }
++  return {
++    D,
++    C,
++    P,
++    resource,
++    criteria,
++    activate() {
++      if (!activated && live && port.isCurrent()) {
++        activated = true;
++        load();
++      }
++    },
++    refresh() {
++      load(true);
++    },
++    isCurrent: () => live && port.isCurrent(),
++    registerDraft(clear: () => void) {
++      drafts.add(clear);
++      return () => {
++        drafts.delete(clear);
++        clear();
++      };
++    },
++    modelOptions(): DataTableOptions<S, T> {
++      const view = resource.getSnapshot();
++      return {
++        controller: C,
++        publication: P,
++        criteria,
++        expected: context,
++        source: {
++          mode: "server",
++          resource,
++          view,
++          bindings: {
++            request: view.request
++              ? getControlsRequestBinding(D.native, C, resource, view.request)
++              : null,
++            snapshot:
++              view.snapshot && accepted
++                ? getControlsRequestBinding(D.native, C, resource, accepted)
++                : null,
++          },
++        },
++      };
++    },
++    retire(): boolean {
++      if (disposed) return true;
++      live = false;
++      const ended = P.dispose();
++      if (ended.status !== "disposed") return false;
++      unregister();
++      stop();
++      drafts.clear();
++      resource.dispose();
++      C.dispose();
++      disposed = true;
++      return true;
++    },
++  };
++}
++export type TableSource<S extends QuerySchema, T extends object> = ReturnType<
++  typeof createTableSource<S, T>
++>;
+--- /dev/null
++++ after/apps/example-start-facade/src/application/transport.ts
+@@ -0,0 +1,33 @@
++import { createIsomorphicFn } from "@tanstack/react-start";
++import { bootstrapRpc, canaryRpc, rowsRpc } from "./functions.js";
++import {
++  bootstrapReader,
++  canaryReader,
++  initialDatasetReader,
++  rowsReader,
++} from "./reader.server.js";
++import type { Bootstrap, Dataset, ReadInput, ReaderPort } from "./types.js";
++const bootstrap = createIsomorphicFn()
++  .server(async (selected: Dataset, signal: AbortSignal) => {
++    signal.throwIfAborted();
++    return bootstrapReader(selected);
++  })
++  .client((selected: Dataset, signal: AbortSignal) =>
++    bootstrapRpc({ data: selected, signal }),
++  );
++const rows = createIsomorphicFn()
++  .server((input: ReadInput, signal: AbortSignal) => rowsReader(input, signal))
++  .client((input: ReadInput, signal: AbortSignal) =>
++    rowsRpc({ data: input, signal }),
++  );
++const canary = createIsomorphicFn()
++  .server((input: Bootstrap, signal: AbortSignal) =>
++    canaryReader(input, signal),
++  )
++  .client((input: Bootstrap, signal: AbortSignal) =>
++    canaryRpc({ data: input, signal }),
++  );
++export const reader: ReaderPort = { bootstrap, canary, rows };
++export const initialDataset = createIsomorphicFn()
++  .server(initialDatasetReader)
++  .client((): Dataset => "alpha");
+--- /dev/null
++++ after/apps/example-start-facade/src/application/types.ts
+@@ -0,0 +1,79 @@
++import type { ResourceSuccess } from "@tableweave/react";
++import type { QueryFor } from "@tableweave/react/contracts";
++import type {
++  InventoryItem,
++  Transaction,
++} from "../../../examples/shared/records.js";
++import type {
++  InventorySchema,
++  TransactionSchema,
++} from "../../../examples/shared/schemas.js";
++
++export type Dataset = "alpha" | "beta";
++export type Domain = "transactions" | "inventory";
++export interface InputBase {
++  readonly version: 1;
++  readonly bootstrapId: string;
++  readonly dataset: Dataset;
++  readonly scopeKey: string;
++  readonly clock: number;
++}
++export interface TransactionInput extends InputBase {
++  readonly domain: "transactions";
++  readonly query: QueryFor<TransactionSchema>;
++}
++export interface InventoryInput extends InputBase {
++  readonly domain: "inventory";
++  readonly query: QueryFor<InventorySchema>;
++}
++export type ReadInput = TransactionInput | InventoryInput;
++export interface Bootstrap {
++  readonly version: 1;
++  readonly id: string;
++  readonly dataset: Dataset;
++  readonly clock: number;
++  readonly canary: string;
++  readonly transactions: TransactionInput;
++  readonly inventory: InventoryInput;
++}
++export type Envelope =
++  | {
++      readonly kind: "rows";
++      readonly domain: "transactions";
++      readonly input: TransactionInput;
++      readonly result: ResourceSuccess<Transaction>;
++    }
++  | {
++      readonly kind: "rows";
++      readonly domain: "inventory";
++      readonly input: InventoryInput;
++      readonly result: ResourceSuccess<InventoryItem>;
++    };
++export interface ReaderPort {
++  bootstrap(dataset: Dataset, signal: AbortSignal): Promise<unknown>;
++  canary(input: Bootstrap, signal: AbortSignal): Promise<unknown>;
++  rows(input: ReadInput, signal: AbortSignal): Promise<unknown>;
++}
++export type BootstrapOutcome =
++  | { readonly kind: "ready"; readonly bootstrap: Bootstrap }
++  | { readonly kind: "denied" };
++export type RowsOutcome =
++  | { readonly kind: "ready"; readonly envelope: Envelope }
++  | { readonly kind: "denied" };
++export interface Canary {
++  readonly kind: "canary";
++  readonly bootstrapId: string;
++  readonly dataset: Dataset;
++  readonly value: string;
++}
++export type CacheValue = Envelope | Canary;
++export class SourceUnavailable extends Error {
++  constructor() {
++    super("Synthetic source unavailable.");
++  }
++}
++export class SourceEnded extends Error {
++  constructor() {
++    super("Synthetic source ended.");
++  }
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/register.d.ts
+@@ -0,0 +1,14 @@
++import type { getRouter } from "./router.js";
++import type { startInstance } from "./start.js";
++declare module "@tanstack/react-router" {
++  interface Register {
++    router: Awaited<ReturnType<typeof getRouter>>;
++  }
++}
++declare module "@tanstack/react-start" {
++  interface Register {
++    ssr: true;
++    router: Awaited<ReturnType<typeof getRouter>>;
++    config: Awaited<ReturnType<typeof startInstance.getOptions>>;
++  }
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/router.tsx
+@@ -0,0 +1,85 @@
++import { QueryClient } from "@tanstack/react-query";
++import { createRouter } from "@tanstack/react-router";
++import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
++import { routeTree } from "./routeTree.gen";
++import { createBootstrapSession } from "./application/bootstrap-session.js";
++import { reader } from "./application/transport.js";
++import type { Bootstrap } from "./application/types.js";
++
++function freshDocumentOnRestore(event: PageTransitionEvent) {
++  if (event.persisted) window.location.reload();
++}
++export function getRouter() {
++  const queryClient = new QueryClient({
++    defaultOptions: { queries: { retry: false, staleTime: 30_000 } },
++  });
++  const realm = typeof document === "undefined" ? "server" : "client";
++  const session = createBootstrapSession(queryClient, reader, realm);
++  const router = createRouter({
++    routeTree,
++    context: { queryClient, session },
++    defaultPreload: false,
++    defaultPreloadStaleTime: 0,
++    dehydrate: () => session.serialize(),
++    hydrate: (data: { bootstrap: Bootstrap | null }) => {
++      session.prepareHydration(data.bootstrap);
++    },
++  });
++  // Register our parent close before SQ appends its own Query teardown. Preserve
++  // existing attachers; neither callback ends a stream before SDK onCleanup.
++  router.serverSsrLifecycle = {
++    ...router.serverSsrLifecycle,
++    onServerSsrAttach: [
++      ...(router.serverSsrLifecycle?.onServerSsrAttach ?? []),
++      (ssr) =>
++        ssr.onCleanup(() => {
++          session.dispose();
++        }),
++    ],
++  };
++  setupRouterSsrQueryIntegration({
++    router,
++    queryClient,
++    dehydrateOptions: {
++      shouldDehydrateQuery: (query) =>
++        query.state.status === "success" &&
++        session.shouldDehydrate(query.state.data),
++    },
++    hydrateOptions: {
++      defaultOptions: { deserializeData: session.deserializeData },
++    },
++  });
++  const sdkHydrate = router.options.hydrate;
++  router.update({
++    context: { session, queryClient },
++    hydrate: async (data) => {
++      try {
++        await sdkHydrate?.(data);
++        session.adoptHydration();
++      } catch (error) {
++        session.retire("Hydration input was rejected; source remains closed.");
++        throw error;
++      }
++    },
++  });
++  session.addRemover(
++    router.subscribe("onBeforeNavigate", (event) => {
++      if (event.pathChanged) session.retire("Leaving the application domain.");
++    }),
++  );
++  if (realm === "client") {
++    const pagehide = (event: PageTransitionEvent) => {
++      if (event.persisted)
++        window.addEventListener("pageshow", freshDocumentOnRestore, {
++          once: true,
++        });
++      session.dispose();
++    };
++    window.addEventListener("pagehide", pagehide);
++    session.addRemover(() => window.removeEventListener("pagehide", pagehide));
++    import.meta.hot?.dispose(() => {
++      session.dispose();
++    });
++  }
++  return router;
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/routes/__root.tsx
+@@ -0,0 +1,34 @@
++import type { QueryClient } from "@tanstack/react-query";
++import {
++  createRootRouteWithContext,
++  HeadContent,
++  Outlet,
++  Scripts,
++} from "@tanstack/react-router";
++import { StrictMode } from "react";
++import type { BootstrapSession } from "../application/bootstrap-session.js";
++export const Route = createRootRouteWithContext<{
++  queryClient: QueryClient;
++  session: BootstrapSession;
++}>()({
++  head: () => ({
++    meta: [
++      { charSet: "utf-8" },
++      { name: "viewport", content: "width=device-width, initial-scale=1" },
++      { title: "Tableweave public synthetic Start facade" },
++    ],
++  }),
++  component: () => (
++    <html lang="en">
++      <head>
++        <HeadContent />
++      </head>
++      <body>
++        <StrictMode>
++          <Outlet />
++        </StrictMode>
++        <Scripts />
++      </body>
++    </html>
++  ),
++});
+--- /dev/null
++++ after/apps/example-start-facade/src/routes/away.tsx
+@@ -0,0 +1,19 @@
++import { createFileRoute, useRouter } from "@tanstack/react-router";
++export const Route = createFileRoute("/away")({ component: Away });
++function Away() {
++  const router = useRouter();
++  return (
++    <main>
++      <h1>Outside the table application</h1>
++      <p>The previous source is retired, not merely hidden.</p>
++      <button
++        type="button"
++        onClick={() => {
++          void router.navigate({ to: "/" });
++        }}
++      >
++        Request a fresh source
++      </button>
++    </main>
++  );
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/routes/index.tsx
+@@ -0,0 +1,58 @@
++import { createFileRoute, useRouter } from "@tanstack/react-router";
++import { initialDataset } from "../application/transport.js";
++import { TablePage } from "../table/TablePage.js";
++export const Route = createFileRoute("/")({
++  loader: ({ context, abortController, preload }) =>
++    context.session.load(
++      context.session.requestedDataset() ?? initialDataset(),
++      abortController.signal,
++      preload,
++    ),
++  headers: () => ({ "Cache-Control": "private, no-store" }),
++  component: Page,
++  errorComponent: Failure,
++});
++function Page() {
++  const receipt = Route.useLoaderData(),
++    { session } = Route.useRouteContext(),
++    router = useRouter();
++  return (
++    <TablePage
++      session={session}
++      receipt={receipt}
++      recheck={(selected) => {
++        session.selectDataset(selected);
++        void router.invalidate();
++      }}
++      away={() => {
++        void router.navigate({ to: "/away" });
++      }}
++    />
++  );
++}
++function Failure() {
++  const { session } = Route.useRouteContext(),
++    router = useRouter();
++  return (
++    <main>
++      <h1>Synthetic application unavailable</h1>
++      <p>No source grant is inferred from an error response.</p>
++      <button
++        type="button"
++        onClick={() => {
++          if (session.retire()) void router.invalidate();
++        }}
++      >
++        Recheck source
++      </button>
++      <button
++        type="button"
++        onClick={() => {
++          void router.navigate({ to: "/away" });
++        }}
++      >
++        Leave application route
++      </button>
++    </main>
++  );
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/start.ts
+@@ -0,0 +1,23 @@
++import {
++  createCsrfMiddleware,
++  createMiddleware,
++  createStart,
++} from "@tanstack/react-start";
++import { setResponseHeader } from "@tanstack/react-start/server";
++const privateResponses = createMiddleware({ type: "request" }).server(
++  async ({ next }) => {
++    setResponseHeader("Cache-Control", "private, no-store");
++    const result = await next();
++    result.response.headers.set("Cache-Control", "private, no-store");
++    // No disposal here: the streamed response still owns its lifetime.
++    return result;
++  },
++);
++export const startInstance = createStart(() => ({
++  requestMiddleware: [
++    privateResponses,
++    createCsrfMiddleware({
++      filter: (context) => context.handlerType === "serverFn",
++    }),
++  ],
++}));
+--- /dev/null
++++ after/apps/example-start-facade/src/table/HeadlessTable.tsx
+@@ -0,0 +1,254 @@
++import {
++  renderNativeComponent,
++  requireCriteriaTool,
++  requireDataTableModel,
++  useDataTable,
++  useTableweaveState,
++} from "@tableweave/react";
++import type { QuerySchema } from "@tableweave/react/contracts";
++import { useLayoutEffect, useState, useSyncExternalStore } from "react";
++import type { TableSource } from "../application/table-source.js";
++
++/** Borrows an already-owned source; UI detach never ends the application source. */
++export function HeadlessTable<S extends QuerySchema, T extends object>({
++  source,
++  title,
++  rowHeader,
++  rowText,
++}: {
++  readonly source: TableSource<S, T>;
++  readonly title: string;
++  readonly rowHeader: string;
++  readonly rowText: (record: T) => string;
++}) {
++  useSyncExternalStore(
++    source.resource.subscribe,
++    source.resource.getSnapshot,
++    source.resource.getServerSnapshot,
++  );
++  const state = useTableweaveState(source.C);
++  const model = useDataTable(source.D, source.modelOptions());
++  const [draft, setDraft] = useState("");
++  useLayoutEffect(() => source.registerDraft(() => setDraft("")), [source]);
++  let ready = false;
++  try {
++    requireDataTableModel(model, source.D);
++    ready = model.phase === "display";
++  } catch {
++    /* Neutral before a genuine commit, or after source end. */
++  }
++  const view = ready ? model.view : null,
++    facts = ready ? model.presentation : null;
++  return (
++    <section aria-label={title}>
++      <h2>{title}</h2>
++      <form
++        onSubmit={(event) => {
++          event.preventDefault();
++          try {
++            if (!source.isCurrent()) return;
++            requireDataTableModel(model, source.D);
++            const tool = model.toolTarget;
++            if (!tool) return;
++            requireCriteriaTool(tool.authority, tool.owner);
++            source.C.dispatch({ type: "search.commit", search: draft });
++          } catch {
++            /* Saved form cannot borrow a replacement source grant. */
++          }
++        }}
++      >
++        <label>
++          Search records
++          <input
++            value={draft}
++            disabled={!view || !source.isCurrent()}
++            onChange={(event) => {
++              if (source.isCurrent()) setDraft(event.target.value);
++            }}
++          />
++        </label>
++        <button type="submit" disabled={!view || !source.isCurrent()}>
++          Apply search
++        </button>
++        <button
++          type="button"
++          disabled={!source.isCurrent()}
++          onClick={() => {
++            if (source.isCurrent())
++              setDraft(source.C.getSnapshot().query.search);
++          }}
++        >
++          Cancel search draft
++        </button>
++      </form>
++      <p role="status">
++        {model.recovery.kind === "records"
++          ? (model.recovery.notice ?? "Current records")
++          : model.recovery.kind}
++      </p>
++      <button
++        type="button"
++        disabled={!source.isCurrent() || !!model.presentation?.busy}
++        onClick={source.refresh}
++      >
++        Refresh synthetic records
++      </button>
++      <button
++        type="button"
++        disabled={!model.presentation?.canRetry}
++        onClick={() => {
++          try {
++            model.authority?.retry();
++          } catch {
++            /* Stale retry denied. */
++          }
++        }}
++      >
++        Retry current request
++      </button>
++      {view && facts ? (
++        <>
++          <p>
++            <output aria-label="Selected count">
++              {facts.selectedIds.length} selected; {facts.loadedSelected.length}{" "}
++              loaded
++            </output>
++          </p>
++          <button
++            type="button"
++            disabled={!facts.canCancelSelection}
++            onClick={() => {
++              try {
++                model.authority?.cancelSelection();
++              } catch {
++                /* Ended owner. */
++              }
++            }}
++          >
++            Cancel row selection
++          </button>
++          <table aria-label={title}>
++            <thead>
++              {view.headerGroups.map((group) => (
++                <tr key={group.id}>
++                  {group.headers.map((header) => (
++                    <th key={header.id} colSpan={header.colSpan} scope="col">
++                      {header.isPlaceholder ? null : header.column.id ===
++                        "selection" ? (
++                        <label>
++                          Select page
++                          <input
++                            type="checkbox"
++                            checked={facts.pageSelection.checked}
++                            aria-checked={
++                              facts.pageSelection.mixed
++                                ? "mixed"
++                                : facts.pageSelection.checked
++                            }
++                            disabled={!facts.canSelect}
++                            onChange={(event) => {
++                              try {
++                                model.authority?.selectPage(
++                                  event.target.checked,
++                                );
++                              } catch {
++                                /* Ended owner. */
++                              }
++                            }}
++                          />
++                        </label>
++                      ) : (
++                        renderNativeComponent(
++                          header.column.columnDef.header,
++                          header.getContext(),
++                        )
++                      )}
++                    </th>
++                  ))}
++                </tr>
++              ))}
++            </thead>
++            <tbody>
++              {view.rows.map((row) => (
++                <tr key={row.id}>
++                  {row.getVisibleCells().map((cell) =>
++                    cell.column.id === "selection" ? (
++                      <td key={cell.id}>
++                        <label>
++                          {`Select ${rowText(row.original)}`}
++                          <input
++                            type="checkbox"
++                            checked={state.selection[row.id] === true}
++                            disabled={
++                              !facts.canSelect ||
++                              !facts.eligiblePageIds.includes(row.id)
++                            }
++                            onChange={(event) => {
++                              try {
++                                model.authority?.selectRow(
++                                  row.id,
++                                  event.target.checked,
++                                );
++                              } catch {
++                                /* Ended owner. */
++                              }
++                            }}
++                          />
++                        </label>
++                      </td>
++                    ) : cell.column.id === rowHeader ? (
++                      <th key={cell.id} scope="row">
++                        {renderNativeComponent(
++                          cell.column.columnDef.cell,
++                          cell.getContext(),
++                        )}
++                      </th>
++                    ) : (
++                      <td key={cell.id}>
++                        {renderNativeComponent(
++                          cell.column.columnDef.cell,
++                          cell.getContext(),
++                        )}
++                      </td>
++                    ),
++                  )}
++                </tr>
++              ))}
++            </tbody>
++          </table>
++          <nav aria-label="Pagination">
++            <button
++              type="button"
++              disabled={!facts.canPreviousPage}
++              onClick={() => {
++                try {
++                  model.authority?.previousPage();
++                } catch {
++                  /* Ended owner. */
++                }
++              }}
++            >
++              Previous page
++            </button>
++            <span>Page {state.query.pagination.pageIndex + 1}</span>
++            <button
++              type="button"
++              disabled={!facts.canNextPage}
++              onClick={() => {
++                try {
++                  model.authority?.nextPage();
++                } catch {
++                  /* Ended owner. */
++                }
++              }}
++            >
++              Next page
++            </button>
++          </nav>
++        </>
++      ) : (
++        <p>No granted table view is mounted yet.</p>
++      )}
++    </section>
++  );
++}
+--- /dev/null
++++ after/apps/example-start-facade/src/table/TablePage.tsx
+@@ -0,0 +1,122 @@
++import { useLayoutEffect, useState, useSyncExternalStore } from "react";
++import type {
++  InventoryItem,
++  Transaction,
++} from "../../../examples/shared/records.js";
++import type { BootstrapSession } from "../application/bootstrap-session.js";
++import type { Bootstrap, Dataset } from "../application/types.js";
++import { HeadlessTable } from "./HeadlessTable.js";
++const transactionText = (row: Transaction) => row.description;
++const inventoryText = (row: InventoryItem) => row.title;
++export function TablePage({
++  session,
++  receipt,
++  recheck,
++  away,
++}: {
++  readonly session: BootstrapSession;
++  readonly receipt: Bootstrap;
++  readonly recheck: (selected: Dataset) => void;
++  readonly away: () => void;
++}) {
++  const state = useSyncExternalStore(
++    session.subscribe,
++    session.getSnapshot,
++    session.getServerSnapshot,
++  );
++  const [hidden, setHidden] = useState(false),
++    [attachmentError, setAttachmentError] = useState(false);
++  useLayoutEffect(() => {
++    try {
++      const detach = session.attach(receipt);
++      setAttachmentError(false);
++      return detach;
++    } catch {
++      setAttachmentError(true);
++      return undefined;
++    }
++  }, [session, receipt]);
++  return (
++    <main>
++      <h1>Headless Start facade</h1>
++      <p>
++        Two independent tables of public synthetic inputs. No production
++        authentication, persistence or dragging is implemented.
++      </p>
++      <fieldset>
++        <legend>Application source controls</legend>
++        <button type="button" onClick={() => recheck("alpha")}>
++          Load Alpha synthetic source
++        </button>
++        <button type="button" onClick={() => recheck("beta")}>
++          Load Beta synthetic source
++        </button>
++        <button type="button" onClick={() => recheck(receipt.dataset)}>
++          Recheck synthetic source
++        </button>
++        <button
++          type="button"
++          onClick={() => {
++            session.retire(
++              "Local application source revoked; no backend cancellation promise.",
++            );
++          }}
++        >
++          Revoke local source
++        </button>
++        <button type="button" onClick={() => setHidden((value) => !value)}>
++          {hidden ? "Show table UI" : "Hide table UI"}
++        </button>
++        <button type="button" onClick={away}>
++          Leave application route
++        </button>
++        {state.phase === "retiring" ? (
++          <button
++            type="button"
++            onClick={() => {
++              session.retire();
++            }}
++          >
++            Retry source cleanup
++          </button>
++        ) : null}
++      </fieldset>
++      <p role="status" aria-label="Application source status">
++        {state.notice}
++      </p>
++      {attachmentError && state.phase !== "retiring" ? (
++        <p role="alert">
++          No current source attachment. Recheck the synthetic source explicitly.
++        </p>
++      ) : null}
++      {state.receipt ? (
++        <p>
++          <output aria-label="Synthetic canary">{state.receipt.canary}</output>
++        </p>
++      ) : null}
++      {hidden ? (
++        <p>
++          Table UI detached. The application source is still owned by this
++          router.
++        </p>
++      ) : state.sources ? (
++        <>
++          <HeadlessTable
++            source={state.sources.transactions}
++            title="Synthetic transactions"
++            rowHeader="description"
++            rowText={transactionText}
++          />
++          <HeadlessTable
++            source={state.sources.inventory}
++            title="Synthetic inventory"
++            rowHeader="title"
++            rowText={inventoryText}
++          />
++        </>
++      ) : (
++        <p>No granted table view is mounted yet.</p>
++      )}
++    </main>
++  );
++}
+--- /dev/null
++++ after/apps/example-start-facade/tsconfig.json
+@@ -0,0 +1,12 @@
++{
++  "extends": "../../tsconfig.base.json",
++  "compilerOptions": {
++    "noEmit": true,
++    "module": "ESNext",
++    "moduleResolution": "Bundler",
++    "jsx": "react-jsx",
++    "lib": ["ES2022", "ES2023", "ES2023.Intl", "DOM", "DOM.Iterable"],
++    "types": ["node", "vite/client", "react", "react-dom"]
++  },
++  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
++}
+--- /dev/null
++++ after/apps/example-start-facade/tsconfig.source-light.json
+@@ -0,0 +1,44 @@
++{
++  "extends": "./tsconfig.json",
++  "compilerOptions": {
++    "paths": {
++      "@tableweave/react": ["../../packages/react/src/index.ts"],
++      "@tableweave/react/contracts": [
++        "../../packages/react/src/contracts/index.ts"
++      ],
++      "@tableweave/react/filters": [
++        "../../packages/react/src/filters/index.ts"
++      ],
++      "@tableweave/react/reordering": [
++        "../../packages/react/src/reordering/index.ts"
++      ],
++      "@tableweave/react/reordering-controller": [
++        "../../packages/react/src/reordering-controller/index.ts"
++      ],
++      "@tanstack/react-table": [
++        "../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
++      ],
++      "@internationalized/date": [
++        "../../packages/react/node_modules/@internationalized/date"
++      ],
++      "@tanstack/react-query": ["./node_modules/@tanstack/react-query"],
++      "@tanstack/react-router": ["./node_modules/@tanstack/react-router"],
++      "@tanstack/react-router-ssr-query": [
++        "./node_modules/@tanstack/react-router-ssr-query"
++      ]
++    }
++  },
++  "include": [
++    "src/application/*.ts",
++    "src/table/*.tsx",
++    "src/start.ts",
++    "vite.config.ts",
++    "../../tests/workbench/wp11-start-facade/sdk-contracts.ts"
++  ],
++  "exclude": [
++    "src/router.tsx",
++    "src/register.d.ts",
++    "src/routes",
++    "src/routeTree.gen.ts"
++  ]
++}
+--- /dev/null
++++ after/apps/example-start-facade/vite.config.ts
+@@ -0,0 +1,39 @@
++import { tanstackStart } from "@tanstack/react-start/plugin/vite";
++import react from "@vitejs/plugin-react";
++import { defineConfig } from "vite";
++// Standard generation is enabled. Invoke plugins only in the FINAL phase.
++const vendor = createRequire(new URL("./package.json", import.meta.url));
++const publicEntries = [
++  "@tableweave/react",
++  "@tableweave/react/contracts",
++  "@tableweave/react/filters",
++  "@tableweave/react/criteria",
++  "@tableweave/react/reordering",
++  "@tableweave/react/reordering-controller",
++] as const;
++export default defineConfig({
++  plugins: [tanstackStart(), react()],
++  resolve: {
++    alias: [
++      // ESM resolution honors actual public exports; CJS require.resolve would reject
++      // the import-only library. Works with emitted workspace or a genuine archive.
++      ...publicEntries.map((name) => ({
++        find: new RegExp(`^${name.replaceAll(".", "\\.")}$`),
++        replacement: fileURLToPath(import.meta.resolve(name)),
++      })),
++      {
++        find: "react",
++        replacement: dirname(vendor.resolve("react/package.json")),
++      },
++      {
++        find: "react-dom",
++        replacement: dirname(vendor.resolve("react-dom/package.json")),
++      },
++    ],
++  },
++  server: { host: "127.0.0.1", port: 6573, strictPort: true },
++  preview: { host: "127.0.0.1", port: 6573, strictPort: true },
++});
++import { createRequire } from "node:module";
++import { dirname } from "node:path";
++import { fileURLToPath } from "node:url";
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/README.md
+@@ -0,0 +1,178 @@
++# WP-11 Start facade — provisional source handoff
++
++Authority: main-selected `docs/planning/wp-11-start-facade-plan.md` in the primary
++tree and the exact isolated source lease. Working tree is
++`/tmp/opencode/tableweave-wp11-start-facade`, supplied HEADf7ad033 (no worker Git).
++Main owns package.json/lock/install/docs/Git. No primary/Next/consumer-boundary WIP
++was inspected or changed. All source/runtime acceptance remains provisional.
++
++## Immutable input boundary and interrupted work
++
++Before application edits, own scope.mjs captured ACTUAL1,736 old regular files with
++full Linux modes/hashes, including155 library sources, all present A/B source/seals,
++old G-04 and main-owned dependency profile. Absent historical ignored artifacts were
++not invented. Canonical source155 SHA bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837;
++main lock190f5b3759b5071d440e17ed652eeb70dc5ffe927abf37daa02f9f6a89bdeea6;
++new importer manifest730489283fbf1223427912c49e4028461a0dcb4dbe4295a35c268c19e8611d6b.
++Neither map nor protected inputs are rebaselined. `before.json` owns the exact path
++set; it excludes dependencies/Git/reference/credential-shaped files. Installed
++compiler/declaration/SDK inputs are separately pinned by inputs.mjs.
++
++The first multi-file config/route patch stopped with ENOSPC and left only its first
++owned Vite config empty. The server restarted; the same session verified scope,
++completed that interrupted patch and retained all completed source/baseline. No
++second writer, cleanup, cache/dependency/evidence deletion or repeat baseline.
++`.artifacts/restart-incident.md` records that failure. All subsequent write batches
++check statfs and stop below128MiB free. A check of completed source is not replayed
++as a previous runtime result.
++
++Allowed new paths are the exact21 app/config/README/gitignore paths in before.leased
++and this new evidence subtree. All old files, manifests/lock/profile/exports/library,
++Stage A/B and G-04 inputs remain frozen. Source delta and input/artifact seals are
++generated without Git under this subtree; old producer seals/results stay history.
++
++## Real source wiring and event receipts
++
++See the new app README for actual public APIs, SDK hydration/cleanup call order and
++commands. New source includes standard createStart/getRouter/file routes/document,
++one SDK Query provider/integration, loader/error/retry, real POST server functions/
++isomorphic transport, rejecting JSON codecs, parent bootstrap/cache and retained
++child source factories, two native useDataTable tables and real app controls.
++
++This is **wired-to-mount source**, not an executed/mounted-success claim. Missing real
++routeTree.gen.ts is intentional until FINAL generation. No ssr:false, manually
++generated route/ambient type, old router augmentation, private registration port,
++fake NativeRow, context cast, compiler waiver or new peer/profile is used.
++
++Parent proof is a real validated bootstrap + two exact row envelopes + constant-key
++canary; hydration awaits the SDK callback and validates data before cache writes.
++Only then is an opaque local parent lease available. A raw DTO/access boolean/count
++does not activate a source. A committed page attach must match the actual loader
++receipt; speculative preload is rejected without touching source. Child P initial
++retirement clears CHILD state, never parent Query cache. Child controllers remain
++stable across query/page/UI-hide/Strict re-attach. Query state is owned by C; parent
++cache stores tagged server reader INPUT results, never accepted native output.
++
++Real end closes the lease first, performs every child disposal attempt and removes
++Query/cache/canary before parent publication. Disposal debt remains closed/retryable;
++reentrant retirement cannot issue another owner while cleanup is in progress.
++Current/late requests are checked against exact tokens/opaque lease; aborted or
++superseded bootstrap candidates cannot deny a newer one. Safe source-denial unions
++are distinct from ordinary unavailable/refresh failures. The parent-before-SQ server
++cleanup chain uses the typed resource hook, not middleware-finally or GC. BFCache
++needs a fresh document; HMR ends old ownership and does not promise Fast Refresh.
++These source traces/type checks are not runtime validation of any race position.
++
++## Allowed LIGHT, preserved failures and generated exclusion
++
++Run from this isolated root with a fresh label:
++
++```sh
++node tests/workbench/wp11-start-facade/light.mjs FRESH_LABEL
++node tests/workbench/wp11-start-facade/seal.mjs
++```
++
++LIGHT executes only source TS6/noEmit, scope/static/syntax/full Biome assist-off /
++formatter-ON, and before/after pinned compiler/SDK byte ledgers. It does NOT execute
++app/vendor/framework/config bodies. The SDK contract function is not invoked. Both
++route assembly and normal full-app tsconfig remain **untyped/unrun** until actual
++generation. Deferred tests/negative/consumer source are formatter/syntax checked,
++not executed or counted as positive runtime evidence. Future fixtures are outside
++the positive compiler include list.
++
++Initial positive-001 fails on unused import, readonly JSON-array narrowing, own
++empty-kind inference and resolving SDK types from a test outside the declaring app.
++Positive-002 isolates the real pinned router.update requirement for typed context;
++actual app/probe now pass the same existing context, not a relaxed overload/cast.
++All initial raw logs/statuses remain under their original fresh directories. Final
++LIGHT result is appended only after an actual complete allowed run.
++Light-001 passed source/type/static/scope but failed formatting only. Light-002 is a
++complete pre-final-review allowed pass on33 supported files and769 pinned inputs.
++Final source review then staged the cleared parent snapshot before Query cancellation
++observers and made callback-removal debt retryable; its post-review run is separate.
++Light-003 passes that revision on34 supported files. A final boundary review also
++captures the original parent receipt/lease before untrusted codec/cache reads and
++rechecks them afterwards, so a reentrant decode cannot retag old data or retire a
++newer source. Post-review LIGHT will be recorded under its own fresh run label.
++
++## Authored FINAL fixtures and precise gaps
++
++- Six unskipped development/production browser cases: concurrent Alpha/Beta real
++  SSR/canary isolation and neutral no-JS table; fresh hydration with zero RPC then
++  explicit refresh RPC; two independent tables/selection/query/UI-hide; source/away/
++  return transition; genuine server denial; actual held HTTP response after local
++  loss. Fresh-read test has an explicit real HTTP Date freshness precondition;
++  exceeding it is not presented as a duplicate-FRESH defect or suppressed failure.
++- Five unskipped source contract tests: malformed/forged DTO/no initial hydration
++  lease; accessor rejection without evaluation; rejected speculative preload with
++  unchanged parent snapshot; closing snapshot before Query removal observers; actual
++  failed callback remover retaining debt until release. They use real public APIs and do not fake
++  a positive granted owner or copy the old G-04 runtime/session class.
++- Deliberately invalid typed negative source rejects passing a controller/source as
++  a bootstrap and a wrong-typed scope. Its compiler invocation is FINAL only; no
++  incidental missing-peer failure is counted as a passed negative assertion.
++  negative.mjs guards exact expected diagnostic count/location/codes for either
++  already-installed compiler; it has not been invoked.
++- Production acceptance host owns port6573 and forwards HTTP/body-close cancellation
++  to the actual compiled Start fetch handler; it is not a mock SSR implementation.
++- consumer.mjs PREPARE/AUDIT is authored, not invoked. It rejects existing targets,
++  symlink/lexical redirection and ANY ancestor Git/worktree/workspace/lock/node_modules
++  boundary, rather than only this checkout prefix. It prepares genuine current
++  archive imports and plain fixtures outside the workspace, with no source aliases.
++  Audit requires its own consumer compiler and every resolved source/declaration
++  under the consumer root. It does not install, build or apply a vendor repair.
++
++Exact remaining fixture gaps (not secretly skipped/passed): exhaustive in-flight
++hydration chunk rejection, multi-generation ABA/bootstrap-HTTP abort positions,
++actual disposal-debt failure injection, server onCleanup observation after consumed/
++cancelled streaming body, genuine BFCache persisted branch, isolated-copy HMR-end,
++RSC/client server-marker chunk graph, hostile DTO/typed-query full negative matrix,
++ordinary archive full-app build/runtime and both TS6/5.9 confinement. The preparer
++does not materialize the two unchanged required Start declaration patches outside;
++main must select/review that final isolated profile before installation. Unpatched
++ordinary library/SDK compatibility is not claimed. No new profile is installed here.
++Prior Stage A/B complete scene/detail/operator/locale/manual gaps remain owed.
++
++FINAL only after main authorizes actual generation/emission:
++
++```sh
++pnpm build
++pnpm --filter @tableweave/example-start-facade build
++pnpm --filter @tableweave/example-start-facade typecheck
++node node_modules/@playwright/test/cli.js test --config tests/workbench/wp11-start-facade/playwright.config.ts
++WP11_START_PRODUCTION=1 node node_modules/@playwright/test/cli.js test --config tests/workbench/wp11-start-facade/playwright.config.ts
++node node_modules/vitest/vitest.mjs run --config tests/workbench/wp11-start-facade/vitest.config.mjs
++node tests/workbench/wp11-start-facade/negative.mjs typescript
++node tests/workbench/wp11-start-facade/negative.mjs typescript-5-9
++```
++
++Future consumer preparation requires main's real archive and NEW approved external
++directory, not a made-up current archive:
++`node tests/workbench/wp11-start-facade/consumer.mjs prepare /tmp/opencode/NEW_CONSUMER /ABS/REACT.tgz`.
++No install/type/build/server/root module should be run from this command as LIGHT.
++Audit can only follow the final isolated install/generation with no host fallback.
++
++## Intake state
++
++**Final post-review `light-004` PASSES.** It checks34 supported files with full
++Biome assist-off/formatter-ON, strict TS6/noEmit for747 actual handwritten-source/
++declaration program files and769 byte/mode-pinned program/SDK/config inputs stable
++before/after. All155 libraries and all1,736 captured old regular inputs/modes remain
++unchanged, including main's manifest/lock and every present A/B/G-04 input. Exact
++commands/statuses are `.artifacts/light-004/results.json`; pinned inputs are that
++run's `inputs.json`; source/static/scope/Biome receipts remain beside them. This
++does NOT type or execute generated-dependent router/file-route assembly.
++
++`source.delta.patch` records the complete bounded new-file additions without Git.
++`handoff-hashes.json` seals the actual new inputs/modes and all preserved local raw
++artifacts separately; its own self-reference is excluded. It includes this README
++and the immutable original before-map. No missing historical artifact is claimed
++present and no old producer evidence is re-signed. The ENOSPC/restart and first
++compiler/formatter failures remain recorded; the resumed writer did not delete
++work, dependencies or evidence or capture a replacement baseline.
++
++Main must review actual source/ownership/deltas and generated exclusion before
++preservation. No source self-approval/SSR compatibility/full WP-11/G-04 carryover,
++drag waiver or independent gate closure. No agents/Git/install/dependency mutation,
++framework/module/config invocation/build/generator/React/unit/SSR/browser/runtime/
++negative/dual/packed/CI/net writes, cleanup, `.repo` or credentials were used.
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/consumer.mjs
+@@ -0,0 +1,159 @@
++// FINAL ONLY, PREPARE/AUDIT only. No install/build/patch or guessed archive here.
++import assert from "node:assert/strict";
++import { createHash } from "node:crypto";
++import { createRequire } from "node:module";
++import {
++  access,
++  lstat,
++  mkdir,
++  readFile,
++  realpath,
++  writeFile,
++} from "node:fs/promises";
++import { dirname, isAbsolute, resolve, sep } from "node:path";
++import { fileURLToPath } from "node:url";
++const root = fileURLToPath(new URL("../../../", import.meta.url));
++const [mode, supplied, archive] = process.argv.slice(2);
++assert(["prepare", "audit"].includes(mode));
++assert(
++  supplied && isAbsolute(supplied),
++  "Explicit fresh outside target required",
++);
++const target = resolve(supplied),
++  parent = await realpath(dirname(target));
++const exists = async (path) => {
++  try {
++    await lstat(path);
++    return true;
++  } catch (error) {
++    if (error.code === "ENOENT") return false;
++    throw error;
++  }
++};
++async function outsideAncestors(directory) {
++  let path = directory;
++  for (;;) {
++    for (const marker of [
++      ".git",
++      "pnpm-workspace.yaml",
++      "pnpm-lock.yaml",
++      "lerna.json",
++      "yarn.lock",
++      "node_modules",
++    ])
++      assert(
++        !(await exists(resolve(path, marker))),
++        `Ancestor workspace/worktree/dependency boundary: ${path}/${marker}`,
++      );
++    if (await exists(resolve(path, "package.json"))) {
++      const manifest = JSON.parse(
++        await readFile(resolve(path, "package.json"), "utf8"),
++      );
++      assert(
++        !manifest.workspaces && !manifest.pnpm?.workspace,
++        `Ancestor package workspace: ${path}`,
++      );
++    }
++    const next = dirname(path);
++    if (path === next) break;
++    path = next;
++  }
++}
++assert.equal(
++  resolve(parent, target.slice(dirname(target).length + 1)),
++  target,
++  "No lexical/symlink parent redirection",
++);
++await outsideAncestors(parent);
++const below = (base, path) => path === base || path.startsWith(`${base}${sep}`);
++assert(!below(await realpath(root), target));
++if (mode === "prepare") {
++  assert(
++    !(await exists(target)),
++    "Never overwrite any existing target/symlink",
++  );
++  assert(archive && isAbsolute(archive));
++  const bytes = await readFile(await realpath(archive));
++  await mkdir(target);
++  const before = JSON.parse(
++    await readFile(new URL("./before.json", import.meta.url), "utf8"),
++  );
++  const app = "apps/example-start-facade/";
++  for (const path of [
++    ...before.leased.filter(
++      (path) =>
++        path.startsWith(app) && !path.endsWith("tsconfig.source-light.json"),
++    ),
++    "tsconfig.base.json",
++    ...["records.ts", "schemas.ts", "definitions.ts"].map(
++      (name) => `apps/examples/shared/${name}`,
++    ),
++  ]) {
++    await mkdir(dirname(resolve(target, path)), { recursive: true });
++    await writeFile(
++      resolve(target, path),
++      await readFile(resolve(root, path)),
++      { flag: "wx" },
++    );
++  }
++  const manifest = JSON.parse(
++    await readFile(resolve(root, `${app}package.json`), "utf8"),
++  );
++  manifest.dependencies["@tableweave/react"] =
++    `file:${await realpath(archive)}`;
++  await writeFile(
++    resolve(target, `${app}package.json`),
++    `${JSON.stringify(manifest, null, 2)}\n`,
++    { flag: "wx" },
++  );
++  // Root dependencies also serve the sibling plain fixture directory, without a
++  // workspace or a source alias. The nested app remains the actual Vite root.
++  await writeFile(
++    resolve(target, "package.json"),
++    `${JSON.stringify({ ...manifest, name: "wp11-start-facade-archive-consumer" }, null, 2)}\n`,
++    { flag: "wx" },
++  );
++  await writeFile(
++    resolve(target, "receipt.json"),
++    `${JSON.stringify({ status: "Prepared only; not installed/compatible/ordinary runtime proof", archive: { sha256: createHash("sha256").update(bytes).digest("hex") }, profile: "Main must explicitly materialize the unchanged required Start declaration profile; no RAC patch, no source alias, no new repair is applied by this driver" }, null, 2)}\n`,
++    { flag: "wx" },
++  );
++  console.log(
++    "Prepared only outside every detected ancestor workspace/worktree. No install/build/script/profile change executed.",
++  );
++} else {
++  assert.equal(await realpath(target), target);
++  const app = resolve(target, "apps/example-start-facade");
++  const require = createRequire(resolve(app, "package.json"));
++  const compilerPath = await realpath(require.resolve("typescript"));
++  assert(
++    below(target, compilerPath),
++    "Consumer must use its own actual compiler, not host fallback",
++  );
++  const ts = require(compilerPath);
++  const configPath = resolve(app, "tsconfig.json"),
++    raw = ts.readConfigFile(configPath, ts.sys.readFile);
++  assert.equal(raw.error, undefined);
++  const config = ts.parseJsonConfigFileContent(raw.config, ts.sys, app);
++  assert.equal(config.errors.length, 0);
++  assert.equal(config.options.paths, undefined);
++  assert.equal(config.options.skipLibCheck, false);
++  await access(resolve(app, "src/routeTree.gen.ts"));
++  const program = ts.createProgram(config.fileNames, config.options);
++  const paths = [];
++  for (const file of program.getSourceFiles()) {
++    const path = await realpath(file.fileName);
++    assert(below(target, path), `Host/worktree resolution escaped: ${path}`);
++    paths.push(path);
++  }
++  assert.equal(
++    ts.getPreEmitDiagnostics(program).length,
++    0,
++    "Actual consumer compiler must have zero diagnostics",
++  );
++  await writeFile(
++    resolve(target, `confinement-${ts.version}.json`),
++    `${JSON.stringify({ compiler: ts.version, status: "Local positive program only; no browser/runtime/ordinary compatibility inference", paths }, null, 2)}\n`,
++    { flag: "wx" },
++  );
++}
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/final/browser.spec.ts
+@@ -0,0 +1,199 @@
++import { expect, test } from "@playwright/test";
++test("actual SSR serializes isolated Alpha/Beta canaries, with no DOM table grant", async ({
++  browser,
++  request,
++}) => {
++  const [alpha, beta] = await Promise.all([
++    request.get("/", { headers: { Cookie: "wp11-facade-dataset=alpha" } }),
++    request.get("/", { headers: { Cookie: "wp11-facade-dataset=beta" } }),
++  ]);
++  expect(alpha.ok()).toBe(true);
++  expect(beta.ok()).toBe(true);
++  const [a, b] = await Promise.all([alpha.text(), beta.text()]);
++  expect(a).toContain("public-canary:alpha:");
++  expect(a).not.toContain("public-canary:beta:");
++  expect(b).toContain("public-canary:beta:");
++  expect(b).not.toContain("public-canary:alpha:");
++  expect(a).not.toContain("WP11_START_FACADE_READER_SERVER_ONLY");
++  expect(b).not.toContain("WP11_START_FACADE_READER_SERVER_ONLY");
++  const noScripts = await browser.newContext({ javaScriptEnabled: false });
++  try {
++    const page = await noScripts.newPage();
++    await page.goto("/");
++    await expect(page.getByRole("table")).toHaveCount(0);
++  } finally {
++    await noScripts.close();
++  }
++});
++test("fresh hydration has no new RPC, while explicit refresh does", async ({
++  page,
++}) => {
++  const rpc: string[] = [];
++  page.on("request", (request) => {
++    if (request.url().includes("/_serverFn/")) rpc.push(request.method());
++  });
++  const response = await page.goto("/");
++  await expect(
++    page.getByRole("rowheader", {
++      name: "Alpha Transfer note 01",
++      exact: true,
++    }),
++  ).toBeVisible({ timeout: 30000 });
++  await expect(
++    page.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toBeVisible();
++  const date = response?.headers().date;
++  expect(
++    date,
++    "Actual response Date required to establish fresh-cache precondition",
++  ).toBeTruthy();
++  expect(
++    Date.now() - Date.parse(date ?? ""),
++    "Cold hydration outside freshness window is not duplicate-FRESH proof",
++  ).toBeLessThan(30000);
++  expect(rpc).toHaveLength(0);
++  await page
++    .getByRole("region", { name: "Synthetic transactions", exact: true })
++    .getByRole("button", { name: "Refresh synthetic records" })
++    .click();
++  await expect.poll(() => rpc.length).toBeGreaterThan(0);
++});
++test("two real table owners: independent query, selection and UI-hide lifetime", async ({
++  page,
++}) => {
++  await page.goto("/");
++  const transactions = page.getByRole("region", {
++    name: "Synthetic transactions",
++    exact: true,
++  });
++  const inventory = page.getByRole("region", {
++    name: "Synthetic inventory",
++    exact: true,
++  });
++  await expect(
++    transactions.getByRole("rowheader", {
++      name: "Alpha Transfer note 01",
++      exact: true,
++    }),
++  ).toBeVisible({ timeout: 30000 });
++  await transactions
++    .getByRole("checkbox", {
++      name: "Select Alpha Transfer note 01",
++      exact: true,
++    })
++    .check();
++  await expect(transactions.getByLabel("Selected count")).toContainText(
++    "1 selected",
++  );
++  await page
++    .getByRole("button", { name: "Hide table UI", exact: true })
++    .click();
++  await expect(page.getByRole("table")).toHaveCount(0);
++  await page
++    .getByRole("button", { name: "Show table UI", exact: true })
++    .click();
++  await expect(transactions.getByLabel("Selected count")).toContainText(
++    "1 selected",
++  );
++  await transactions
++    .getByRole("textbox", { name: "Search records", exact: true })
++    .fill("Transfer note 11");
++  await transactions
++    .getByRole("button", { name: "Apply search", exact: true })
++    .click();
++  await expect(
++    transactions.getByRole("rowheader", {
++      name: "Alpha Transfer note 11",
++      exact: true,
++    }),
++  ).toBeVisible();
++  await expect(
++    inventory.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toBeVisible();
++  await page
++    .getByRole("button", { name: "Revoke local source", exact: true })
++    .click();
++  await expect(page.getByRole("table")).toHaveCount(0);
++  await expect(page.getByLabel("Synthetic canary")).toHaveCount(0);
++});
++test("actual source transition/leave requests fresh Beta then Alpha ownership", async ({
++  page,
++}) => {
++  await page.goto("/");
++  await expect(
++    page.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toBeVisible({ timeout: 30000 });
++  await page
++    .getByRole("button", { name: "Load Beta synthetic source" })
++    .click();
++  await expect(
++    page.getByRole("rowheader", { name: "Beta Desk stand", exact: true }),
++  ).toBeVisible();
++  await expect(
++    page.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toHaveCount(0);
++  await page.getByRole("button", { name: "Leave application route" }).click();
++  await expect(
++    page.getByRole("heading", { name: "Outside the table application" }),
++  ).toBeVisible();
++  await page.getByRole("button", { name: "Request a fresh source" }).click();
++  await expect(
++    page.getByRole("rowheader", { name: "Beta Desk stand", exact: true }),
++  ).toBeVisible();
++  await page
++    .getByRole("button", { name: "Load Alpha synthetic source" })
++    .click();
++  await expect(
++    page.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toBeVisible();
++});
++test("genuine typed server denial during refresh clears both sources", async ({
++  page,
++  context,
++}) => {
++  await page.goto("/");
++  await expect(
++    page.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toBeVisible({ timeout: 30000 });
++  await context.addCookies([
++    {
++      name: "wp11-facade-availability",
++      value: "closed",
++      url: "http://127.0.0.1:6573",
++    },
++  ]);
++  await page
++    .getByRole("region", { name: "Synthetic transactions", exact: true })
++    .getByRole("button", { name: "Refresh synthetic records" })
++    .click();
++  await expect(page.getByRole("table")).toHaveCount(0);
++  await expect(page.getByLabel("Synthetic canary")).toHaveCount(0);
++});
++test("in-flight old response cannot resurrect rows after local loss", async ({
++  page,
++}) => {
++  await page.goto("/");
++  await expect(
++    page.getByRole("rowheader", { name: "Alpha Desk stand", exact: true }),
++  ).toBeVisible({ timeout: 30000 });
++  let release: (() => void) | undefined;
++  const held = new Promise<void>((resolve) => {
++    release = resolve;
++  });
++  await page.route("**/_serverFn/**", async (route) => {
++    const response = await route.fetch();
++    await held;
++    await route.fulfill({ response });
++  });
++  await page
++    .getByRole("region", { name: "Synthetic transactions", exact: true })
++    .getByRole("button", { name: "Refresh synthetic records" })
++    .click();
++  await page
++    .getByRole("button", { name: "Revoke local source", exact: true })
++    .click();
++  release?.();
++  await page.unrouteAll({ behavior: "wait" });
++  await expect(page.getByRole("table")).toHaveCount(0);
++  await expect(page.getByLabel("Synthetic canary")).toHaveCount(0);
++});
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/final/contracts.test.ts
+@@ -0,0 +1,115 @@
++import { QueryClient } from "@tanstack/react-query";
++import { expect, it } from "vitest";
++import {
++  bootstrap,
++  readInput,
++} from "../../../../apps/example-start-facade/src/application/codec.js";
++import { createBootstrapSession } from "../../../../apps/example-start-facade/src/application/bootstrap-session.js";
++import {
++  SourceUnavailable,
++  type ReaderPort,
++} from "../../../../apps/example-start-facade/src/application/types.js";
++const noRead: ReaderPort = {
++  bootstrap: async () => {
++    throw new SourceUnavailable();
++  },
++  canary: async () => {
++    throw new SourceUnavailable();
++  },
++  rows: async () => {
++    throw new SourceUnavailable();
++  },
++};
++it("Query removal observers see a cleared, closed parent snapshot", () => {
++  const client = new QueryClient(),
++    session = createBootstrapSession(client, noRead, "client");
++  const key = ["wp11-facade-request-canary"] as const;
++  client.setQueryData(key, { publicSynthetic: "ungranted-cache-input" });
++  let observed = false;
++  const stop = client.getQueryCache().subscribe((event) => {
++    if (event.type !== "removed") return;
++    observed = true;
++    expect(session.getSnapshot()).toMatchObject({
++      phase: "retiring",
++      receipt: null,
++      sources: null,
++    });
++  });
++  try {
++    expect(session.retire()).toBe(true);
++    expect(observed).toBe(true);
++  } finally {
++    stop();
++    session.dispose();
++    client.clear();
++  }
++});
++it("failed application remover stays closed as debt until that remover really releases", () => {
++  const client = new QueryClient(),
++    session = createBootstrapSession(client, noRead, "client");
++  let blocked = true;
++  session.addRemover(() => {
++    if (blocked) throw new Error("Synthetic release blocked");
++  });
++  expect(session.dispose()).toBe(false);
++  expect(session.getSnapshot().phase).toBe("retiring");
++  expect(() => session.prepareHydration(null)).toThrow();
++  blocked = false;
++  expect(session.dispose()).toBe(true);
++  expect(session.getSnapshot().phase).toBe("ended");
++  client.clear();
++});
++it("DTOs, scope/clock forgery and access flags do not provide a live hydration lease", () => {
++  expect(() =>
++    readInput({
++      version: 1,
++      domain: "transactions",
++      scopeKey: "forged",
++      hasAccess: true,
++    }),
++  ).toThrow();
++  expect(() =>
++    bootstrap({
++      id: "not-a-response",
++      hasAccess: true,
++      transactions: {},
++      inventory: {},
++    }),
++  ).toThrow();
++  const client = new QueryClient(),
++    session = createBootstrapSession(client, noRead, "client");
++  expect(() =>
++    session.deserializeData({
++      kind: "canary",
++      dataset: "alpha",
++      bootstrapId: "00000000-0000-0000-0000-000000000000",
++      value: "public-canary:alpha:00000000-0000-0000-0000-000000000000",
++    }),
++  ).toThrow();
++  expect(client.getQueryCache().getAll()).toHaveLength(0);
++  session.dispose();
++  client.clear();
++});
++it("accessor DTOs are rejected without evaluating getters", () => {
++  let evaluated = false;
++  const value = Object.defineProperty({}, "id", {
++    enumerable: true,
++    get() {
++      evaluated = true;
++      return "unsafe";
++    },
++  });
++  expect(() => bootstrap(value)).toThrow();
++  expect(evaluated).toBe(false);
++});
++it("preload rejection cannot adopt or retire an active application source", async () => {
++  const client = new QueryClient(),
++    session = createBootstrapSession(client, noRead, "client");
++  const before = session.getSnapshot();
++  await expect(
++    session.load("alpha", new AbortController().signal, true),
++  ).rejects.toThrow();
++  expect(session.getSnapshot()).toBe(before);
++  session.dispose();
++  client.clear();
++});
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/final/negative.ts
+@@ -0,0 +1,10 @@
++import type {
++  Bootstrap,
++  ReadInput,
++} from "../../../../apps/example-start-facade/src/application/types.js";
++import type { TableSource } from "../../../../apps/example-start-facade/src/application/table-source.js";
++import type { TransactionSchema } from "../../../../apps/examples/shared/schemas.js";
++import type { Transaction } from "../../../../apps/examples/shared/records.js";
++declare const source: TableSource<TransactionSchema, Transaction>;
++export const notWire: Bootstrap = source;
++export const notScope: ReadInput = { domain: "transactions", scopeKey: 1 };
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/final/tsconfig.negative.json
+@@ -0,0 +1,5 @@
++{
++  "extends": "../../../../apps/example-start-facade/tsconfig.source-light.json",
++  "include": ["./negative.ts"],
++  "exclude": []
++}
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/inputs.mjs
+@@ -0,0 +1,119 @@
++import assert from "node:assert/strict";
++import { createHash } from "node:crypto";
++import { readFile, readdir, stat, statfs, writeFile } from "node:fs/promises";
++import { resolve, relative, dirname } from "node:path";
++import { fileURLToPath } from "node:url";
++import ts from "typescript";
++const root = fileURLToPath(new URL("../../../", import.meta.url));
++const configPath = resolve(
++  root,
++  "apps/example-start-facade/tsconfig.source-light.json",
++);
++const raw = ts.readConfigFile(configPath, ts.sys.readFile);
++assert.equal(raw.error, undefined);
++const config = ts.parseJsonConfigFileContent(
++  raw.config,
++  ts.sys,
++  dirname(configPath),
++);
++assert.equal(config.errors.length, 0);
++assert.equal(config.options.strict, true);
++assert.equal(config.options.skipLibCheck, false);
++assert.equal(config.options.exactOptionalPropertyTypes, true);
++const program = ts.createProgram(config.fileNames, config.options);
++const paths = new Set(program.getSourceFiles().map((file) => file.fileName));
++for (const path of paths)
++  assert(
++    !/apps\/example-start\/|routeTree\.gen|src\/router\.tsx|src\/routes\/|src\/register\.d\.ts/.test(
++      relative(root, path),
++    ),
++    `Generated-dependent/old router in SOURCE lane: ${path}`,
++  );
++for (const name of [
++  "package.json",
++  "pnpm-lock.yaml",
++  "pnpm-workspace.yaml",
++  "tsconfig.base.json",
++  "biome.json",
++  "apps/example-start-facade/package.json",
++  "apps/example-start-facade/tsconfig.json",
++  "apps/example-start-facade/tsconfig.source-light.json",
++  "apps/example-start-facade/vite.config.ts",
++  "node_modules/typescript/package.json",
++  "node_modules/@biomejs/biome/package.json",
++  "apps/example-start-facade/node_modules/@tanstack/react-start/src/plugin/vite.ts",
++  "apps/example-start-facade/node_modules/@tanstack/router-core/src/load-client.ts",
++  "apps/example-start-facade/node_modules/@tanstack/router-core/src/router.ts",
++  "apps/example-start-facade/node_modules/@tanstack/query-core/src/hydration.ts",
++  "apps/example-start-facade/node_modules/@tanstack/react-router-ssr-query/src/index.tsx",
++])
++  paths.add(resolve(root, name));
++const store = await readdir(resolve(root, "node_modules/.pnpm"));
++for (const [encoded, version, files] of [
++  ["@tanstack+router-ssr-query-core", "1.169.3", ["src/index.ts"]],
++  ["@tanstack+start-client-core", "1.170.35", ["src/client/hydrateStart.ts"]],
++  ["@tanstack+start-server-core", "1.169.40", ["src/createStartHandler.ts"]],
++  [
++    "@tanstack+start-plugin-core",
++    "1.171.50",
++    [
++      "src/schema.ts",
++      "src/planning.ts",
++      "src/vite/start-manifest-plugin/plugin.ts",
++      "src/start-manifest-plugin/manifestBuilder.ts",
++    ],
++  ],
++]) {
++  const candidates = store.filter(
++    (name) =>
++      name === `${encoded}@${version}` ||
++      name.startsWith(`${encoded}@${version}_`),
++  );
++  assert.equal(candidates.length, 1, `Exact existing SDK closure ${encoded}`);
++  for (const file of files)
++    paths.add(
++      resolve(
++        root,
++        `node_modules/.pnpm/${candidates[0]}/node_modules/${encoded.replace("+", "/")}/${file}`,
++      ),
++    );
++}
++const records = Object.fromEntries(
++  await Promise.all(
++    [...paths].sort().map(async (path) => [
++      relative(root, path),
++      {
++        sha256: createHash("sha256")
++          .update(await readFile(path))
++          .digest("hex"),
++        mode: (await stat(path)).mode & 0o777,
++      },
++    ]),
++  ),
++);
++const record = {
++  status:
++    "Actual handwritten SOURCE/noEmit program + SDK source receipts ONLY; generated routes NOT typed; no module/framework execution",
++  compiler: ts.version,
++  programFiles: program.getSourceFiles().length,
++  records,
++};
++const target = process.argv[2];
++assert(target?.startsWith("tests/workbench/wp11-start-facade/.artifacts/"));
++if (process.argv[3] === "verify")
++  assert.deepEqual(
++    record,
++    JSON.parse(await readFile(resolve(root, target), "utf8")),
++  );
++else {
++  const s = await statfs(root);
++  assert(s.bavail * s.bsize >= 134217728);
++  await writeFile(
++    resolve(root, target),
++    `${JSON.stringify(record, null, 2)}\n`,
++    { flag: "wx" },
++  );
++}
++console.log(
++  `TS${ts.version}: ${record.programFiles} actual source/declaration files; ${Object.keys(records).length} unique pinned program/SDK/config inputs. Generated assembly explicitly excluded.`,
++);
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/light.mjs
+@@ -0,0 +1,105 @@
++import assert from "node:assert/strict";
++import { spawnSync } from "node:child_process";
++import { mkdir, readdir, statfs, writeFile } from "node:fs/promises";
++import { fileURLToPath } from "node:url";
++const root = fileURLToPath(new URL("../../../", import.meta.url)),
++  own = "tests/workbench/wp11-start-facade/";
++const label = process.argv[2];
++assert(label && /^[\w-]+$/.test(label));
++async function space() {
++  const s = await statfs(root);
++  assert(
++    s.bavail * s.bsize >= 134217728,
++    "Below 128MiB free-space floor; no cleanup authorized",
++  );
++}
++await space();
++await mkdir(`${root}/${own}.artifacts/`, { recursive: true });
++const directory = `${own}.artifacts/${label}/`;
++await mkdir(`${root}/${directory}`);
++async function files(path) {
++  const result = [];
++  for (const entry of await readdir(`${root}/${path}`, {
++    withFileTypes: true,
++  })) {
++    if (
++      [
++        "node_modules",
++        ".artifacts",
++        "before.json",
++        "handoff-hashes.json",
++        "preimages",
++      ].includes(entry.name)
++    )
++      continue;
++    const name = `${path}${entry.name}`;
++    if (entry.isDirectory()) result.push(...(await files(`${name}/`)));
++    else if (
++      /\.(ts|tsx|mjs|json)$/.test(name) &&
++      name !== "apps/example-start-facade/package.json"
++    )
++      result.push(name);
++  }
++  return result;
++}
++const supported = [
++  ...(await files("apps/example-start-facade/")),
++  ...(await files(own)),
++];
++const commands = [
++  ["inputs-before", [`${own}inputs.mjs`, `${directory}inputs.json`]],
++  [
++    "positive",
++    [
++      "node_modules/typescript/bin/tsc",
++      "-p",
++      "apps/example-start-facade/tsconfig.source-light.json",
++      "--pretty",
++      "false",
++    ],
++  ],
++  ["scope", [`${own}scope.mjs`]],
++  ["static", [`${own}static.mjs`]],
++  ...supported
++    .filter((path) => path.endsWith(".mjs"))
++    .map((path) => [`syntax-${path.split("/").at(-1)}`, ["--check", path]]),
++  [
++    "biome",
++    [
++      "node_modules/@biomejs/biome/bin/biome",
++      "check",
++      "--assist-enabled=false",
++      ...supported,
++      "--max-diagnostics=100",
++    ],
++  ],
++  ["inputs-after", [`${own}inputs.mjs`, `${directory}inputs.json`, "verify"]],
++];
++const results = [];
++for (const [name, args] of commands) {
++  await space();
++  const result = spawnSync(process.execPath, args, {
++    cwd: root,
++    encoding: "utf8",
++    timeout: 300000,
++  });
++  await space();
++  await writeFile(
++    `${root}/${directory}${name}.log`,
++    `${result.stdout ?? ""}${result.stderr ?? ""}${result.error ? String(result.error) : ""}`,
++    { flag: "wx" },
++  );
++  results.push({ name, args, status: result.status, signal: result.signal });
++  await writeFile(
++    `${root}/${directory}results.json`,
++    `${JSON.stringify(results, null, 2)}\n`,
++  );
++  assert.equal(
++    result.status,
++    0,
++    `${name}: preserved raw failure at ${directory}${name}.log`,
++  );
++}
++console.log(
++  `SOURCE LIGHT passed ${directory}; ${supported.length} supported files; whole generated assembly/framework/module/runtime/SSR/browser/negative/dual/packed UNRUN.`,
++);
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/negative.mjs
+@@ -0,0 +1,51 @@
++// FINAL only. Deliberate boundary rejection is NOT positive SOURCE LIGHT.
++import assert from "node:assert/strict";
++import { spawnSync } from "node:child_process";
++import { mkdir, statfs, writeFile } from "node:fs/promises";
++import { fileURLToPath } from "node:url";
++const root = fileURLToPath(new URL("../../../", import.meta.url));
++const compiler = process.argv[2] ?? "typescript";
++assert(["typescript", "typescript-5-9"].includes(compiler));
++const s = await statfs(root);
++assert(s.bavail * s.bsize >= 134217728);
++const output = new URL(`./.artifacts/negative-${compiler}/`, import.meta.url);
++await mkdir(output);
++const args = [
++  `node_modules/${compiler}/bin/tsc`,
++  "-p",
++  "tests/workbench/wp11-start-facade/final/tsconfig.negative.json",
++  "--pretty",
++  "false",
++];
++const result = spawnSync(process.execPath, args, {
++  cwd: root,
++  encoding: "utf8",
++});
++const diagnostics = `${result.stdout ?? ""}${result.stderr ?? ""}`;
++await writeFile(new URL("compiler.log", output), diagnostics, { flag: "wx" });
++await writeFile(
++  new URL("result.json", output),
++  `${JSON.stringify({ args, status: result.status }, null, 2)}\n`,
++  { flag: "wx" },
++);
++assert.equal(result.status, 2);
++const lines = diagnostics
++  .split("\n")
++  .filter((line) => /error TS\d+/.test(line));
++assert.equal(
++  lines.length,
++  2,
++  "No missing-peer or incidental failure counts as a boundary pass",
++);
++assert(
++  lines.every((line) =>
++    line.startsWith("tests/workbench/wp11-start-facade/final/negative.ts("),
++  ),
++);
++assert(
++  lines.some((line) => /TS(2739|2740)/.test(line)) &&
++    lines.some((line) => /TS2322/.test(line)),
++);
++console.log(
++  "Exactly the two intended negative boundaries rejected; no framework/runtime/archive proof.",
++);
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/playwright.config.ts
+@@ -0,0 +1,28 @@
++import { fileURLToPath } from "node:url";
++import { defineConfig } from "@playwright/test";
++const app = fileURLToPath(
++  new URL("../../../apps/example-start-facade/", import.meta.url),
++);
++const production = process.env.WP11_START_PRODUCTION === "1";
++export default defineConfig({
++  testDir: "./final",
++  testMatch: "browser.spec.ts",
++  workers: 1,
++  retries: 0,
++  outputDir: `.artifacts/browser-${production ? "production" : "development"}`,
++  reporter: "list",
++  use: {
++    baseURL: "http://127.0.0.1:6573",
++    browserName: "chromium",
++    trace: "retain-on-failure",
++  },
++  webServer: {
++    cwd: app,
++    command: production
++      ? "node ../../tests/workbench/wp11-start-facade/production-host.mjs"
++      : "node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 6573 --strictPort",
++    url: "http://127.0.0.1:6573",
++    reuseExistingServer: false,
++    timeout: 120000,
++  },
++});
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/production-host.mjs
+@@ -0,0 +1,67 @@
++// FINAL ONLY. Real built Start fetch handler; never invoked by LIGHT.
++import { createServer } from "node:http";
++import { readFile } from "node:fs/promises";
++import { Readable } from "node:stream";
++import { fileURLToPath } from "node:url";
++import entry from "../../../apps/example-start-facade/dist/server/server.js";
++const assets = new URL(
++  "../../../apps/example-start-facade/dist/client/",
++  import.meta.url,
++);
++const server = createServer(async (incoming, outgoing) => {
++  const controller = new AbortController();
++  outgoing.once("close", () => {
++    if (!outgoing.writableEnded) controller.abort();
++  });
++  const url = new URL(incoming.url ?? "/", "http://127.0.0.1:6573");
++  try {
++    const asset = url.pathname.replace(/^\/_build\//, "/");
++    if (/^\/assets\/[A-Za-z0-9_.-]+\.(?:js|css|map|woff2?)$/.test(asset)) {
++      const bytes = await readFile(
++        fileURLToPath(new URL(asset.slice(1), assets)),
++      );
++      outgoing.writeHead(200, {
++        "Content-Type": asset.endsWith(".js")
++          ? "text/javascript"
++          : asset.endsWith(".css")
++            ? "text/css"
++            : "application/octet-stream",
++      });
++      outgoing.end(bytes);
++      return;
++    }
++    const headers = new Headers();
++    for (const [name, value] of Object.entries(incoming.headers)) {
++      if (Array.isArray(value))
++        for (const item of value) headers.append(name, item);
++      else if (value !== undefined) headers.set(name, value);
++    }
++    const request = new Request(url, {
++      method: incoming.method,
++      headers,
++      signal: controller.signal,
++      ...(!["GET", "HEAD"].includes(incoming.method ?? "GET")
++        ? { body: Readable.toWeb(incoming), duplex: "half" }
++        : {}),
++    });
++    const response = await entry.fetch(request);
++    if (controller.signal.aborted) {
++      await response.body?.cancel();
++      return;
++    }
++    outgoing.writeHead(response.status, Object.fromEntries(response.headers));
++    if (!response.body) outgoing.end();
++    else {
++      const body = Readable.fromWeb(response.body);
++      body.on("error", () => outgoing.destroy());
++      body.pipe(outgoing);
++    }
++  } catch {
++    if (!outgoing.destroyed && !controller.signal.aborted) {
++      if (!outgoing.headersSent)
++        outgoing.writeHead(500, { "Cache-Control": "private, no-store" });
++      outgoing.end("Synthetic request unavailable.");
++    }
++  }
++});
++server.listen(6573, "127.0.0.1");
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/scope.mjs
+@@ -0,0 +1,105 @@
++import assert from "node:assert/strict";
++import { createHash } from "node:crypto";
++import { access, readFile, readdir, stat, writeFile } from "node:fs/promises";
++import { relative, resolve } from "node:path";
++import { fileURLToPath } from "node:url";
++const root = fileURLToPath(new URL("../../../", import.meta.url));
++const own = "tests/workbench/wp11-start-facade/";
++const app = "apps/example-start-facade/";
++const names = [
++  "vite.config.ts",
++  "tsconfig.json",
++  "tsconfig.source-light.json",
++  "README.md",
++  ".gitignore",
++  "src/router.tsx",
++  "src/start.ts",
++  "src/register.d.ts",
++  ...["__root.tsx", "index.tsx", "away.tsx"].map(
++    (name) => `src/routes/${name}`,
++  ),
++  ...[
++    "types.ts",
++    "codec.ts",
++    "query-options.ts",
++    "bootstrap-session.ts",
++    "table-source.ts",
++    "functions.ts",
++    "transport.ts",
++    "reader.server.ts",
++  ].map((name) => `src/application/${name}`),
++  "src/table/HeadlessTable.tsx",
++  "src/table/TablePage.tsx",
++];
++const leased = names.map((name) => app + name);
++const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
++const canonicalBytes = await readFile(
++  "/tmp/opencode/wp10-move-reason-integrated-source155.json",
++);
++assert.equal(
++  hash(canonicalBytes),
++  "bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
++);
++const canonical = JSON.parse(canonicalBytes);
++assert.equal(Object.keys(canonical).length, 155);
++async function measure(path) {
++  return {
++    sha256: hash(await readFile(resolve(root, path))),
++    mode: (await stat(resolve(root, path))).mode & 0o777,
++  };
++}
++for (const [path, expected] of Object.entries(canonical)) {
++  const current = await measure(path);
++  assert.equal(current.sha256, expected.sha256, path);
++  assert.equal(current.mode & 0o111 ? "100755" : "100644", expected.mode, path);
++}
++assert.equal(
++  (await measure("pnpm-lock.yaml")).sha256,
++  "190f5b3759b5071d440e17ed652eeb70dc5ffe927abf37daa02f9f6a89bdeea6",
++);
++assert.equal(
++  (await measure(`${app}package.json`)).sha256,
++  "730489283fbf1223427912c49e4028461a0dcb4dbe4295a35c268c19e8611d6b",
++);
++async function walk(directory) {
++  const result = [];
++  for (const entry of await readdir(directory, { withFileTypes: true })) {
++    if (
++      [".git", ".repo", "node_modules"].includes(entry.name) ||
++      entry.name.startsWith(".env") ||
++      entry.name === ".npmrc"
++    )
++      continue;
++    const path = resolve(directory, entry.name),
++      rel = relative(root, path);
++    if (`${rel}/` === own) continue;
++    if (entry.isDirectory()) result.push(...(await walk(path)));
++    else if (entry.isFile() && !leased.includes(rel)) result.push(rel);
++  }
++  return result;
++}
++const current = Object.fromEntries(
++  await Promise.all(
++    (await walk(root)).sort().map(async (path) => [path, await measure(path)]),
++  ),
++);
++const target = new URL("./before.json", import.meta.url);
++if (process.argv[2] === "before") {
++  for (const path of leased)
++    await assert.rejects(access(resolve(root, path)), { code: "ENOENT" });
++  await writeFile(
++    target,
++    `${JSON.stringify({ suppliedHead: "f7ad033 (no worker Git inspection)", canonical155: canonical, canonicalSHA: hash(canonicalBytes), leased, protectedInputs: current }, null, 2)}\n`,
++    { flag: "wx" },
++  );
++  console.log(
++    `Before edits:155 libraries, protected manifest/lock and ${Object.keys(current).length} ACTUAL old regular files/modes captured. Absent producer raw artifacts are not invented.`,
++  );
++} else {
++  const before = JSON.parse(await readFile(target, "utf8"));
++  assert.deepEqual(before.leased, leased);
++  assert.deepEqual(current, before.protectedInputs);
++  console.log(
++    `155 libraries and all ${Object.keys(current).length} actual old regular inputs/modes unchanged, including all present A/B seals/profile/G-04 and main manifest/lock.`,
++  );
++}
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/sdk-contracts.ts
+@@ -0,0 +1,54 @@
++import {
++  createRootRouteWithContext,
++  createRouter,
++} from "@tanstack/react-router";
++import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
++import type { QueryClient } from "@tanstack/react-query";
++import type { BootstrapSession } from "../../../apps/example-start-facade/src/application/bootstrap-session.js";
++import type { Bootstrap } from "../../../apps/example-start-facade/src/application/types.js";
++/** SDK TYPE probe only, never invoked; does NOT replace generated route assembly. */
++export function sdkContract(
++  queryClient: QueryClient,
++  session: BootstrapSession,
++) {
++  const route = createRootRouteWithContext<{
++    session: BootstrapSession;
++    queryClient: QueryClient;
++  }>()({});
++  const router = createRouter({
++    routeTree: route.addChildren([]),
++    context: { session, queryClient },
++    dehydrate: () => session.serialize(),
++    hydrate: (value: { bootstrap: Bootstrap | null }) => {
++      session.prepareHydration(value.bootstrap);
++    },
++  });
++  router.serverSsrLifecycle = {
++    ...router.serverSsrLifecycle,
++    onServerSsrAttach: [
++      ...(router.serverSsrLifecycle?.onServerSsrAttach ?? []),
++      (ssr) =>
++        ssr.onCleanup(() => {
++          session.dispose();
++        }),
++    ],
++  };
++  setupRouterSsrQueryIntegration({
++    router,
++    queryClient,
++    hydrateOptions: {
++      defaultOptions: { deserializeData: session.deserializeData },
++    },
++  });
++  const hydrate = router.options.hydrate;
++  router.update({
++    context: { session, queryClient },
++    hydrate: async (data) => {
++      await hydrate?.(data);
++      session.adoptHydration();
++    },
++  });
++  return router.subscribe("onBeforeNavigate", (event) => {
++    if (event.pathChanged) session.retire();
++  });
++}
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/seal.mjs
+@@ -0,0 +1,101 @@
++import assert from "node:assert/strict";
++import { createHash } from "node:crypto";
++import { readFile, readdir, stat, statfs, writeFile } from "node:fs/promises";
++import { spawnSync } from "node:child_process";
++const root = new URL("../../../", import.meta.url),
++  own = "tests/workbench/wp11-start-facade/";
++const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
++async function paths(directory, artifacts = false) {
++  const result = [];
++  for (const entry of await readdir(new URL(directory, root), {
++    withFileTypes: true,
++  })) {
++    if (
++      entry.name === "handoff-hashes.json" ||
++      (!artifacts && entry.name === ".artifacts")
++    )
++      continue;
++    const name = `${directory}${entry.name}`;
++    if (entry.isDirectory())
++      result.push(...(await paths(`${name}/`, artifacts)));
++    else if (entry.isFile()) result.push(name);
++  }
++  return result;
++}
++async function measure(path) {
++  return {
++    sha256: hash(await readFile(new URL(path, root))),
++    mode: (await stat(new URL(path, root))).mode & 0o777,
++  };
++}
++const before = JSON.parse(
++  await readFile(new URL("./before.json", import.meta.url), "utf8"),
++);
++const capture = process.argv[2] === "seal";
++if (capture) {
++  const s = await statfs(root);
++  assert(s.bavail * s.bsize >= 134217728);
++  const additions = [
++    ...before.leased,
++    ...(await paths(own)).filter(
++      (path) =>
++        !path.endsWith("source.delta.patch") && !path.endsWith("before.json"),
++    ),
++  ].sort();
++  let delta = "";
++  for (const path of additions) {
++    const result = spawnSync(
++      "diff",
++      [
++        "-u",
++        "--label",
++        "/dev/null",
++        "--label",
++        `after/${path}`,
++        "/dev/null",
++        new URL(path, root).pathname,
++      ],
++      { encoding: "utf8" },
++    );
++    assert.equal(result.status, 1, path);
++    delta += result.stdout;
++  }
++  await writeFile(new URL("./source.delta.patch", import.meta.url), delta, {
++    flag: "wx",
++  });
++}
++const inputs = Object.fromEntries(
++  await Promise.all(
++    [...before.leased, ...(await paths(own))]
++      .sort()
++      .map(async (path) => [path, await measure(path)]),
++  ),
++);
++const artifacts = Object.fromEntries(
++  await Promise.all(
++    (await paths(`${own}.artifacts/`, true))
++      .sort()
++      .map(async (path) => [path, await measure(path)]),
++  ),
++);
++const record = {
++  status:
++    "PROVISIONAL-wired-standard-route-source-only-generated-assembly-and-runtime-UNRUN",
++  suppliedHead: before.suppliedHead,
++  canonical155: before.canonicalSHA,
++  library: { total: 155, changed: 0 },
++  oldRegularInputs: Object.keys(before.protectedInputs).length,
++  newInputAggregate: hash(JSON.stringify(inputs)),
++  artifactAggregate: hash(JSON.stringify(artifacts)),
++  inputs,
++  artifacts,
++};
++const output = new URL("./handoff-hashes.json", import.meta.url);
++if (capture)
++  await writeFile(output, `${JSON.stringify(record, null, 2)}\n`, {
++    flag: "wx",
++  });
++else assert.deepEqual(record, JSON.parse(await readFile(output, "utf8")));
++console.log(
++  `${Object.keys(inputs).length} new inputs ${record.newInputAggregate}; ${Object.keys(artifacts).length} preserved raw artifacts ${record.artifactAggregate};155/${record.oldRegularInputs} old protected inputs unchanged (scope is independently verified).`,
++);
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/static.mjs
+@@ -0,0 +1,156 @@
++import assert from "node:assert/strict";
++import { access, readFile, readdir } from "node:fs/promises";
++import { resolve, dirname } from "node:path";
++import { fileURLToPath } from "node:url";
++import ts from "typescript";
++const root = fileURLToPath(new URL("../../../", import.meta.url));
++const base = "apps/example-start-facade/";
++const names = [
++  "bootstrap-session.ts",
++  "codec.ts",
++  "functions.ts",
++  "query-options.ts",
++  "reader.server.ts",
++  "table-source.ts",
++  "transport.ts",
++  "types.ts",
++];
++assert.deepEqual(
++  (await readdir(resolve(root, `${base}src/application`))).sort(),
++  names,
++);
++async function files(directory) {
++  const result = [];
++  for (const entry of await readdir(resolve(root, directory), {
++    withFileTypes: true,
++  })) {
++    if (entry.name === "node_modules") continue;
++    const path = `${directory}${entry.name}`;
++    if (entry.isDirectory()) result.push(...(await files(`${path}/`)));
++    else result.push(path);
++  }
++  return result;
++}
++const code = (await files(base)).filter((path) => /\.(ts|tsx)$/.test(path));
++for (const path of code) {
++  const text = await readFile(resolve(root, path), "utf8"),
++    file = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
++  assert.equal(file.parseDiagnostics.length, 0, path);
++  assert(
++    !/as unknown as|\bas any\b|@ts-ignore|@ts-expect-error|@heroui|@tableweave\/heroui|tailwind|\.css["']|storybook|TSS_ROUTES_MANIFEST|\.repo|localStorage|sessionStorage|\.admission\.begin\(/.test(
++      text,
++    ),
++    path,
++  );
++  for (const node of file.statements)
++    if (ts.isImportDeclaration(node)) {
++      const name = node.moduleSpecifier.text;
++      assert(
++        !name.includes("/example-start/") &&
++          !name.includes("packages/") &&
++          !name.includes("tests/"),
++        `${path}: private/old import ${name}`,
++      );
++      if (name.startsWith("@tableweave/"))
++        assert(
++          [
++            "@tableweave/react",
++            "@tableweave/react/contracts",
++            "@tableweave/react/filters",
++          ].includes(name),
++          name,
++        );
++    }
++}
++await assert.rejects(access(resolve(root, `${base}src/routeTree.gen.ts`)), {
++  code: "ENOENT",
++});
++const configPath = resolve(root, `${base}tsconfig.source-light.json`),
++  raw = ts.readConfigFile(configPath, ts.sys.readFile),
++  config = ts.parseJsonConfigFileContent(
++    raw.config,
++    ts.sys,
++    dirname(configPath),
++  );
++assert.equal(config.options.noEmit, true);
++assert.equal(config.options.skipLibCheck, false);
++assert.equal(config.options.strict, true);
++assert.equal(config.options.exactOptionalPropertyTypes, true);
++assert(config.raw.exclude.includes("src/register.d.ts"));
++assert(config.raw.exclude.includes("src/router.tsx"));
++const runtime = JSON.parse(
++  await readFile(resolve(root, `${base}tsconfig.json`), "utf8"),
++);
++assert.equal(runtime.compilerOptions.paths, undefined);
++const vite = await readFile(resolve(root, `${base}vite.config.ts`), "utf8");
++assert(
++  vite.includes("tanstackStart()") &&
++    vite.includes("6573") &&
++    !vite.includes("enableRouteGeneration"),
++);
++const router = await readFile(resolve(root, `${base}src/router.tsx`), "utf8");
++assert.equal(
++  (router.match(/setupRouterSsrQueryIntegration\(/g) ?? []).length,
++  1,
++);
++assert(
++  !router.includes("QueryClientProvider") && !router.includes("hydrateRoot("),
++);
++assert(
++  router.indexOf("ssr.onCleanup") <
++    router.indexOf("setupRouterSsrQueryIntegration({"),
++);
++assert(
++  router.includes("await sdkHydrate?.(data)") &&
++    router.indexOf("await sdkHydrate?.(data)") <
++      router.indexOf("session.adoptHydration()"),
++);
++assert(
++  router.includes("deserializeData: session.deserializeData") &&
++    router.includes("onBeforeNavigate") &&
++    router.includes("pagehide"),
++);
++const source = await readFile(
++  resolve(root, `${base}src/application/table-source.ts`),
++  "utf8",
++);
++assert(!/removeQueries|queryClient|cachePrefix/.test(source));
++assert(
++  source.includes("createCriteriaPublication") &&
++    source.includes("getControlsRequestBinding") &&
++    source.includes("pending !== request"),
++);
++const session = await readFile(
++  resolve(root, `${base}src/application/bootstrap-session.ts`),
++  "utf8",
++);
++assert(
++  session.includes("queryClient.query(") === false &&
++    session.includes("client.query("),
++);
++assert(
++  session.includes('phase = "retiring"') && session.includes("lease = null"),
++);
++const page = await readFile(
++  resolve(root, `${base}src/table/TablePage.tsx`),
++  "utf8",
++);
++assert.equal((page.match(/<HeadlessTable/g) ?? []).length, 2);
++assert(!/source\.retire|resource\.connect|source\.activate/.test(page));
++const middleware = await readFile(resolve(root, `${base}src/start.ts`), "utf8");
++assert(!middleware.includes("session.dispose"));
++console.log(
++  JSON.stringify(
++    {
++      status:
++        "Static/source syntax and ownership receipts, NOT generated routing/SSR/browser proof",
++      appCodeFiles: code,
++      domains: ["transactions", "inventory"],
++      uiTablesAuthored: 2,
++      generatedAssembly: "excluded and absent",
++      runtimeResolution: "bare package emitted exports; no source aliases",
++    },
++    null,
++    2,
++  ),
++);
+--- /dev/null
++++ after/tests/workbench/wp11-start-facade/vitest.config.mjs
+@@ -0,0 +1,32 @@
++// FINAL only: emitted public library entries, no source alias proof.
++import { fileURLToPath } from "node:url";
++import { defineConfig } from "vitest/config";
++const path = (name) =>
++  fileURLToPath(new URL(`../../../${name}`, import.meta.url));
++export default defineConfig({
++  resolve: {
++    alias: [
++      {
++        find: /^@tableweave\/react$/,
++        replacement: path("packages/react/dist/index.js"),
++      },
++      ...["contracts", "filters", "reordering", "reordering-controller"].map(
++        (entry) => ({
++          find: `@tableweave/react/${entry}`,
++          replacement: path(`packages/react/dist/${entry}/index.js`),
++        }),
++      ),
++      {
++        find: /^@tanstack\/react-query$/,
++        replacement: path(
++          "apps/example-start-facade/node_modules/@tanstack/react-query",
++        ),
++      },
++    ],
++  },
++  cacheDir: "tests/workbench/wp11-start-facade/.artifacts/vitest-cache",
++  test: {
++    include: ["tests/workbench/wp11-start-facade/final/contracts.test.ts"],
++    environment: "node",
++  },
++});

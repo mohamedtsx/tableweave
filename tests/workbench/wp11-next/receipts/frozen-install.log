@@ -1,0 +1,43 @@
+Scope: all 6 workspace projects
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +382
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 382, reused 14, downloaded 0, added 0
+Progress: resolved 382, reused 43, downloaded 0, added 0
+Progress: resolved 382, reused 71, downloaded 0, added 0
+Progress: resolved 382, reused 121, downloaded 0, added 0
+Progress: resolved 382, reused 288, downloaded 0, added 0
+Progress: resolved 382, reused 355, downloaded 0, added 0
+Progress: resolved 382, reused 375, downloaded 3, added 33
+Progress: resolved 382, reused 375, downloaded 3, added 73
+Progress: resolved 382, reused 375, downloaded 3, added 135
+Progress: resolved 382, reused 375, downloaded 3, added 193
+Progress: resolved 382, reused 375, downloaded 3, added 286
+Progress: resolved 382, reused 375, downloaded 4, added 286
+Progress: resolved 382, reused 375, downloaded 4, added 366
+Progress: resolved 382, reused 375, downloaded 4, added 377
+Progress: resolved 382, reused 375, downloaded 4, added 378
+Progress: resolved 382, reused 375, downloaded 4, added 379
+Progress: resolved 382, reused 375, downloaded 5, added 379
+Progress: resolved 382, reused 375, downloaded 5, added 380
+Progress: resolved 382, reused 375, downloaded 6, added 380
+Progress: resolved 382, reused 375, downloaded 6, added 381
+Progress: resolved 382, reused 375, downloaded 7, added 381
+Progress: resolved 382, reused 375, downloaded 7, added 382
+Progress: resolved 382, reused 375, downloaded 7, added 382, done
+
+devDependencies:
++ @axe-core/playwright 4.14.0
++ @biomejs/biome 2.6.8
++ @changesets/cli 3.0.3
++ @playwright/test 1.65.1
++ @types/node 24.19.2
++ @types/react 19.3.0
++ @types/react-dom 19.3.0
++ typescript 6.0.3
++ typescript-5-9 <- typescript 5.9.3
++ vite 7.3.8
++ vitest 5.1.1
+
+Done in 1m 53s using pnpm v10.13.1

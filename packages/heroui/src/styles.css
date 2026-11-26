@@ -1,2 +1,28 @@
-/* Stable side-effectful CSS entry; component rules are intentionally not built yet. */
+/* Consumers establish layer order before importing vendor and Tableweave CSS. */
 @layer tableweave;
+@import "./columns/controls.css" layer(tableweave);
+@import "./pagination/styles.css" layer(tableweave);
+@import "./filters/filters.css" layer(tableweave);
+@import "./date/date-editor.css" layer(tableweave);
+@import "./toolbar/filter-tools.css" layer(tableweave);
+@import "./details/styles.css";
+@import "./data-table/styles.css";
+
+@layer tableweave {
+  .tw-native-collection [data-slot="table-column"],
+  .tw-native-collection [data-slot="table-column-group"],
+  .tw-native-collection [data-slot="table-sortable-column-header"] {
+    color: var(--foreground);
+  }
+
+  .tw-confirm-action {
+    --button-bg: var(--foreground);
+    --button-bg-hover: var(--foreground);
+    --button-bg-pressed: var(--foreground);
+    --button-fg: var(--background);
+  }
+
+  .tw-native-collection [data-slot="checkbox-control"] {
+    border: 1px solid var(--muted);
+  }
+}

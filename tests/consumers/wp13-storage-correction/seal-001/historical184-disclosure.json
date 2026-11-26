@@ -1,0 +1,50 @@
+{
+  "originalProducer": "af5ad20 (main supplied)",
+  "originalSealSHA256": "56f5b96b67ba168b0d428e3b828e77a7ff40a7fe6651e684a0205cdc71ba961b",
+  "status": "historical-original-file-set-not-current-pass",
+  "differences": [
+    {
+      "file": "tests/consumers/wp13-storage/README.md",
+      "status": "authorized-body-change",
+      "expected": {
+        "mode": 436,
+        "size": 19895,
+        "sha256": "26d3c9e9f74aca6337ef758354428b51cba490d3cdbdb208bb8c9807d4925fa7"
+      },
+      "actual": {
+        "mode": 436,
+        "size": 21103,
+        "sha256": "eab60da6513ee5e78726bf45c6cc41ae337fcddc259d2818500b63536d84896c"
+      }
+    },
+    {
+      "file": "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md",
+      "status": "authorized-path-relocation",
+      "current": "tests/consumers/wp13-storage/preimage-tests__consumers__wp13__README.md.txt",
+      "expected": {
+        "mode": 436,
+        "size": 19096,
+        "sha256": "e426cdbdfda3e156f1f3393ba12bb7ba94b19260d6b1766efb837e9261d7c1ad"
+      },
+      "actual": {
+        "mode": 436,
+        "size": 19096,
+        "sha256": "e426cdbdfda3e156f1f3393ba12bb7ba94b19260d6b1766efb837e9261d7c1ad"
+      }
+    },
+    {
+      "file": "tests/consumers/wp13/lib/storage-roots.mjs",
+      "status": "authorized-body-change",
+      "expected": {
+        "mode": 436,
+        "size": 17148,
+        "sha256": "eda7d7b87041915267a03409728b55ed6c22af5d007e18843211a340a4ac32d1"
+      },
+      "actual": {
+        "mode": 436,
+        "size": 17399,
+        "sha256": "a944a29fc24eacf859112c0290841d4c8e0514fd4264ebcd2221865572fabc35"
+      }
+    }
+  ]
+}

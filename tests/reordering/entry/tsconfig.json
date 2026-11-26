@@ -1,0 +1,18 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "../../..",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": [],
+    "paths": {
+      "@tableweave/react/reordering": [
+        "../../../packages/react/src/reordering/index.ts"
+      ]
+    }
+  },
+  "include": ["./positive.ts"],
+  "exclude": ["./negative.ts", "./.artifacts"]
+}

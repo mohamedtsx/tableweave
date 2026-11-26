@@ -1,0 +1,928 @@
+apps/example-start-facade/src/application/bootstrap-session.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    156 156 │     function cacheGone(): boolean {
+    157 157 │       let complete = true;
+    158     │ - ····const·filters:·{·queryKey:·readonly·string[];·exact:·boolean·}[]·=·[...pendingPartitions].map((id)·=>·({·queryKey:·cachePrefix(id),·exact:·false·}));
+        158 │ + ····const·filters:·{·queryKey:·readonly·string[];·exact:·boolean·}[]·=·[
+        159 │ + ······...pendingPartitions,
+        160 │ + ····].map((id)·=>·({·queryKey:·cachePrefix(id),·exact:·false·}));
+    159 161 │       if (pendingCanary) filters.push({ queryKey: canaryKey, exact: true });
+    160 162 │       for (const filter of filters) {
+    161 163 │         try {
+    162     │ - ········if·(client.getQueryCache().findAll(filter).length·!==·0)·complete·=·false;
+        164 │ + ········if·(client.getQueryCache().findAll(filter).length·!==·0)
+        165 │ + ··········complete·=·false;
+    163 166 │         } catch {
+    164 167 │           complete = false;
+  
+
+tests/workbench/wp11-start-retirement/final/retirement.test.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      3   3 │   import { expect, it, vi } from "vitest";
+      4   4 │   import { createBootstrapSession } from "../../../../apps/example-start-facade/src/application/bootstrap-session.js";
+      5     │ - import·{·cachePrefix,·rowsKey·}·from·"../../../../apps/example-start-facade/src/application/query-options.js";
+      6     │ - import·{·SourceEnded,·type·ReaderPort·}·from·"../../../../apps/example-start-facade/src/application/types.js";
+          5 │ + import·{
+          6 │ + ··cachePrefix,
+          7 │ + ··rowsKey,
+          8 │ + }·from·"../../../../apps/example-start-facade/src/application/query-options.js";
+          9 │ + import·{
+         10 │ + ··SourceEnded,
+         11 │ + ··type·ReaderPort,
+         12 │ + }·from·"../../../../apps/example-start-facade/src/application/types.js";
+      7  13 │   import { syntheticReader } from "./synthetic-reader.js";
+      8  14 │   const canaryKey = ["wp11-facade-request-canary"] as const;
+      9  15 │   async function mountedSource() {
+     10     │ - ··const·client·=·new·QueryClient(),·reader·=·syntheticReader();
+         16 │ + ··const·client·=·new·QueryClient(),
+         17 │ + ····reader·=·syntheticReader();
+     11  18 │     const session = createBootstrapSession(client, reader, "client");
+     12  19 │     const boot = await session.load("alpha", new AbortController().signal, false);
+     13     │ - ··const·detach·=·session.attach(boot),·sources·=·session.getSnapshot().sources;
+         20 │ + ··const·detach·=·session.attach(boot),
+         21 │ + ····sources·=·session.getSnapshot().sources;
+     14  22 │     if (!sources) throw new Error("Missing genuine committed-attachment sources");
+     15  23 │     await vi.waitFor(() => {
+    ······· │ 
+     17  25 │       expect(sources.inventory.resource.getSnapshot().snapshot).not.toBeNull();
+     18  26 │     });
+     19     │ - ··return·{·client,·reader,·session,·boot,·sources,·close()·{·detach();·session.dispose();·client.clear();·}·};
+         27 │ + ··return·{
+         28 │ + ····client,
+         29 │ + ····reader,
+         30 │ + ····session,
+         31 │ + ····boot,
+         32 │ + ····sources,
+         33 │ + ····close()·{
+         34 │ + ······detach();
+         35 │ + ······session.dispose();
+         36 │ + ······client.clear();
+         37 │ + ····},
+         38 │ + ··};
+     20  39 │   }
+     21  40 │   it("stages cleared parent before real child P/resource/C/draft callbacks; parent listeners run last", async () => {
+     22     │ - ··const·value·=·await·mountedSource(),·{·session,·sources·}·=·value;
+     23     │ - ··const·events:·string[]·=·[],·stops:·(()·=>·void)[]·=·[];
+         41 │ + ··const·value·=·await·mountedSource(),
+         42 │ + ····{·session,·sources·}·=·value;
+         43 │ + ··const·events:·string[]·=·[],
+         44 │ + ····stops:·(()·=>·void)[]·=·[];
+     24  45 │     function childEvent(name: string) {
+     25     │ - ····expect(session.getSnapshot()).toMatchObject({·phase:·"retiring",·receipt:·null,·sources:·null·});
+         46 │ + ····expect(session.getSnapshot()).toMatchObject({
+         47 │ + ······phase:·"retiring",
+         48 │ + ······receipt:·null,
+         49 │ + ······sources:·null,
+         50 │ + ····});
+     26  51 │       expect(session.serialize()).toEqual({ bootstrap: null });
+     27  52 │       events.push(name);
+    ······· │ 
+     34  59 │         stops.push(source.P.subscribe(() => childEvent(`${name}:P`)));
+     35  60 │         stops.push(source.C.subscribe(() => childEvent(`${name}:C`)));
+     36     │ - ······stops.push(source.resource.subscribe(()·=>·childEvent(`${name}:resource`)));
+         61 │ + ······stops.push(
+         62 │ + ········source.resource.subscribe(()·=>·childEvent(`${name}:resource`)),
+         63 │ + ······);
+     37  64 │         source.registerDraft(() => childEvent(`${name}:draft`));
+     38  65 │       }
+     39     │ - ····stops.push(session.subscribe(()·=>·{·events.push("parent");·expect(session.getSnapshot()).toMatchObject({·receipt:·null,·sources:·null·});·}));
+         66 │ + ····stops.push(
+         67 │ + ······session.subscribe(()·=>·{
+         68 │ + ········events.push("parent");
+         69 │ + ········expect(session.getSnapshot()).toMatchObject({
+         70 │ + ··········receipt:·null,
+         71 │ + ··········sources:·null,
+         72 │ + ········});
+         73 │ + ······}),
+         74 │ + ····);
+     40  75 │       expect(session.retire()).toBe(true);
+     41     │ - ····for·(const·domain·of·["transactions",·"inventory"])·for·(const·part·of·["P",·"C",·"resource",·"draft"])·expect(events).toContain(`${domain}:${part}`);
+     42     │ - ····expect(events.at(-1)).toBe("parent");·expect(events.filter((event)·=>·event·===·"parent")).toHaveLength(1);
+         76 │ + ····for·(const·domain·of·["transactions",·"inventory"])
+         77 │ + ······for·(const·part·of·["P",·"C",·"resource",·"draft"])
+         78 │ + ········expect(events).toContain(`${domain}:${part}`);
+         79 │ + ····expect(events.at(-1)).toBe("parent");
+         80 │ + ····expect(events.filter((event)·=>·event·===·"parent")).toHaveLength(1);
+     43  81 │       for (const source of Object.values(sources)) {
+     44  82 │         expect(source.isCurrent()).toBe(false);
+     45  83 │         expect(source.resource.getSnapshot().snapshot).toBeNull();
+     46  84 │         expect(source.C.getSnapshot().details.rowId).toBeNull();
+     47     │ - ······expect(Object.values(source.C.getSnapshot().selection).some(Boolean)).toBe(false);
+         85 │ + ······expect(
+         86 │ + ········Object.values(source.C.getSnapshot().selection).some(Boolean),
+         87 │ + ······).toBe(false);
+     48  88 │       }
+     49     │ - ··}·finally·{·for·(const·stop·of·stops)·stop();·value.close();·}
+         89 │ + ··}·finally·{
+         90 │ + ····for·(const·stop·of·stops)·stop();
+         91 │ + ····value.close();
+         92 │ + ··}
+     50  93 │   });
+     51  94 │   it("retains exact old partition after public receipt is null, attempts second domain/canary and blocks new owners", async () => {
+     52     │ - ··const·value·=·await·mountedSource(),·{·client,·reader,·session,·boot·}·=·value;
+     53     │ - ··const·key·=·rowsKey(boot.transactions),·cached·=·client.getQueryData(key);
+     54     │ - ··let·blocked·=·true,·inventoryAttempted·=·false,·canaryAttempted·=·false,·reentrant·=·false;
+         95 │ + ··const·value·=·await·mountedSource(),
+         96 │ + ····{·client,·reader,·session,·boot·}·=·value;
+         97 │ + ··const·key·=·rowsKey(boot.transactions),
+         98 │ + ····cached·=·client.getQueryData(key);
+         99 │ + ··let·blocked·=·true,
+        100 │ + ····inventoryAttempted·=·false,
+        101 │ + ····canaryAttempted·=·false,
+        102 │ + ····reentrant·=·false;
+     55 103 │     const rejected: Promise<unknown>[] = [];
+     56 104 │     const stop = client.getQueryCache().subscribe((event) => {
+     57 105 │       if (event.type !== "removed") return;
+     58     │ - ····expect(session.getSnapshot()).toMatchObject({·phase:·"retiring",·receipt:·null,·sources:·null·});
+        106 │ + ····expect(session.getSnapshot()).toMatchObject({
+        107 │ + ······phase:·"retiring",
+        108 │ + ······receipt:·null,
+        109 │ + ······sources:·null,
+        110 │ + ····});
+     59 111 │       if (event.query.queryKey[0] === canaryKey[0]) canaryAttempted = true;
+     60 112 │       if (event.query.queryKey[2] === "inventory") inventoryAttempted = true;
+    ······· │ 
+     62 114 │         client.setQueryData(key, cached); // Real reentrant cache residue, not a fake removal counter.
+     63 115 │         reentrant = session.retire() === false;
+     64     │ - ······rejected.push(session.load("beta",·new·AbortController().signal,·false).catch((error:·unknown)·=>·error));
+     65     │ - ······throw·new·Error("Synthetic·removal·observer·failed·after·reinserting·old·entry");
+        116 │ + ······rejected.push(
+        117 │ + ········session
+        118 │ + ··········.load("beta",·new·AbortController().signal,·false)
+        119 │ + ··········.catch((error:·unknown)·=>·error),
+        120 │ + ······);
+        121 │ + ······throw·new·Error(
+        122 │ + ········"Synthetic·removal·observer·failed·after·reinserting·old·entry",
+        123 │ + ······);
+     66 124 │       }
+     67 125 │     });
+    ······· │ 
+     69 127 │       expect(session.retire()).toBe(false);
+     70 128 │       expect(reentrant && inventoryAttempted && canaryAttempted).toBe(true);
+     71     │ - ····expect(session.getSnapshot()).toMatchObject({·phase:·"retiring",·receipt:·null,·sources:·null·});
+     72     │ - ····expect(client.getQueryCache().findAll({·queryKey:·cachePrefix(boot.id)·})).toHaveLength(1);
+     73     │ - ····expect(client.getQueryCache().findAll({·queryKey:·canaryKey,·exact:·true·})).toHaveLength(0);
+        129 │ + ····expect(session.getSnapshot()).toMatchObject({
+        130 │ + ······phase:·"retiring",
+        131 │ + ······receipt:·null,
+        132 │ + ······sources:·null,
+        133 │ + ····});
+        134 │ + ····expect(
+        135 │ + ······client.getQueryCache().findAll({·queryKey:·cachePrefix(boot.id)·}),
+        136 │ + ····).toHaveLength(1);
+        137 │ + ····expect(
+        138 │ + ······client.getQueryCache().findAll({·queryKey:·canaryKey,·exact:·true·}),
+  307 more lines truncated
+  
+
+tests/workbench/wp11-start-retirement/final/synthetic-reader.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2   2 │   import { createQuery } from "@tableweave/react/contracts";
+     3   3 │   import { createFilterEvaluator } from "@tableweave/react/filters";
+     4     │ - import·{·fixedNow,·inventory,·receivedAt,·transactions·}·from·"../../../../apps/examples/shared/records.js";
+     5     │ - import·{·exampleOperators,·inventorySchema,·transactionSchema·}·from·"../../../../apps/examples/shared/schemas.js";
+     6     │ - import·{·bootstrap,·envelope,·readInput·}·from·"../../../../apps/example-start-facade/src/application/codec.js";
+     7     │ - import·type·{·Bootstrap,·Dataset,·ReaderPort·}·from·"../../../../apps/example-start-facade/src/application/types.js";
+     8     │ - export·function·syntheticReader():·ReaderPort·&·{·readonly·bootstrapCalls:·number·}·{
+         4 │ + import·{
+         5 │ + ··fixedNow,
+         6 │ + ··inventory,
+         7 │ + ··receivedAt,
+         8 │ + ··transactions,
+         9 │ + }·from·"../../../../apps/examples/shared/records.js";
+        10 │ + import·{
+        11 │ + ··exampleOperators,
+        12 │ + ··inventorySchema,
+        13 │ + ··transactionSchema,
+        14 │ + }·from·"../../../../apps/examples/shared/schemas.js";
+        15 │ + import·{
+        16 │ + ··bootstrap,
+        17 │ + ··envelope,
+        18 │ + ··readInput,
+        19 │ + }·from·"../../../../apps/example-start-facade/src/application/codec.js";
+        20 │ + import·type·{
+        21 │ + ··Bootstrap,
+        22 │ + ··Dataset,
+        23 │ + ··ReaderPort,
+        24 │ + }·from·"../../../../apps/example-start-facade/src/application/types.js";
+        25 │ + export·function·syntheticReader():·ReaderPort·&·{
+        26 │ + ··readonly·bootstrapCalls:·number;
+        27 │ + }·{
+     9  28 │     let serial = 0;
+    10     │ - ··const·compare·=·(left:·unknown,·right:·unknown)·=>·typeof·left·===·"number"·&&·typeof·right·===·"number"·?·left·-·right·:·String(left·??·"").localeCompare(String(right·??·""),·"en-US");
+        29 │ + ··const·compare·=·(left:·unknown,·right:·unknown)·=>
+        30 │ + ····typeof·left·===·"number"·&&·typeof·right·===·"number"
+        31 │ + ······?·left·-·right
+        32 │ + ······:·String(left·??·"").localeCompare(String(right·??·""),·"en-US");
+    11  33 │     return {
+    12     │ - ····get·bootstrapCalls()·{·return·serial;·},
+        34 │ + ····get·bootstrapCalls()·{
+        35 │ + ······return·serial;
+        36 │ + ····},
+    13  37 │       async bootstrap(selected: Dataset, signal: AbortSignal) {
+    14  38 │         signal.throwIfAborted();
+    15  39 │         const id = `retirement-synthetic-${++serial}`;
+    16     │ - ······const·base·=·{·version:·1,·bootstrapId:·id,·dataset:·selected,·clock:·fixedNow·}·as·const;
+        40 │ + ······const·base·=·{
+        41 │ + ········version:·1,
+        42 │ + ········bootstrapId:·id,
+        43 │ + ········dataset:·selected,
+        44 │ + ········clock:·fixedNow,
+        45 │ + ······}·as·const;
+    17  46 │         const value: Bootstrap = bootstrap({
+    18     │ - ········version:·1,·id,·dataset:·selected,·clock:·fixedNow,·canary:·`public-canary:${selected}:${id}`,
+    19     │ - ········transactions:·{·...base,·domain:·"transactions",·scopeKey:·`synthetic:${selected}:transactions`,·query:·createQuery(transactionSchema,·{·locale:·"en-US",·timeZone:·"UTC"·})·},
+    20     │ - ········inventory:·{·...base,·domain:·"inventory",·scopeKey:·`synthetic:${selected}:inventory`,·query:·createQuery(inventorySchema,·{·locale:·"en-US",·timeZone:·"UTC"·})·},
+        47 │ + ········version:·1,
+        48 │ + ········id,
+        49 │ + ········dataset:·selected,
+        50 │ + ········clock:·fixedNow,
+        51 │ + ········canary:·`public-canary:${selected}:${id}`,
+        52 │ + ········transactions:·{
+        53 │ + ··········...base,
+        54 │ + ··········domain:·"transactions",
+        55 │ + ··········scopeKey:·`synthetic:${selected}:transactions`,
+        56 │ + ··········query:·createQuery(transactionSchema,·{
+        57 │ + ············locale:·"en-US",
+        58 │ + ············timeZone:·"UTC",
+        59 │ + ··········}),
+        60 │ + ········},
+        61 │ + ········inventory:·{
+        62 │ + ··········...base,
+        63 │ + ··········domain:·"inventory",
+        64 │ + ··········scopeKey:·`synthetic:${selected}:inventory`,
+        65 │ + ··········query:·createQuery(inventorySchema,·{
+        66 │ + ············locale:·"en-US",
+        67 │ + ············timeZone:·"UTC",
+        68 │ + ··········}),
+        69 │ + ········},
+    21  70 │         });
+    22  71 │         return { kind: "ready", bootstrap: value };
+    ······ │ 
+    24  73 │       async canary(value, signal) {
+    25  74 │         signal.throwIfAborted();
+    26     │ - ······return·{·kind:·"ready",·canary:·{·kind:·"canary",·bootstrapId:·value.id,·dataset:·value.dataset,·value:·value.canary·}·};
+        75 │ + ······return·{
+        76 │ + ········kind:·"ready",
+        77 │ + ········canary:·{
+        78 │ + ··········kind:·"canary",
+        79 │ + ··········bootstrapId:·value.id,
+        80 │ + ··········dataset:·value.dataset,
+        81 │ + ··········value:·value.canary,
+        82 │ + ········},
+        83 │ + ······};
+    27  84 │       },
+    28  85 │       async rows(value, signal) {
+    29  86 │         signal.throwIfAborted();
+    30     │ - ······const·input·=·readInput(value),·prefix·=·input.dataset·===·"alpha"·?·"Alpha"·:·"Beta";
+        87 │ + ······const·input·=·readInput(value),
+        88 │ + ········prefix·=·input.dataset·===·"alpha"·?·"Alpha"·:·"Beta";
+    31  89 │         const { pageIndex, pageSize } = input.query.pagination;
+    32     │ - ······const·result·=·{·source:·"fresh",·emptyKind:·"filtered",·receivedAt·}·as·const;
+        90 │ + ······const·result·=·{
+        91 │ + ········source:·"fresh",
+        92 │ + ········emptyKind:·"filtered",
+        93 │ + ········receivedAt,
+        94 │ + ······}·as·const;
+    33  95 │         if (input.domain === "transactions") {
+    34     │ - ········const·evaluate·=·createFilterEvaluator(transactionSchema,·input.query,·{·now:·input.clock,·registry:·exampleOperators·});
+    35     │ - ········const·all·=·transactions.map((row)·=>·({·...row,·id:·`${input.dataset}:${row.id}`,·description:·`${prefix}·${row.description}`·})).filter(evaluate).sort((a,·b)·=>·{
+    36     │ - ··········for·(const·sort·of·input.query.sorting)·{·const·value·=·compare(a[sort.id],·b[sort.id]);·if·(value)·return·sort.desc·?·-value·:·value;·}
+    37     │ - ··········return·a.id.localeCompare(b.id);
+    38     │ - ········});
+    39     │ - ········return·{·kind:·"ready",·envelope:·envelope({·kind:·"rows",·domain:·input.domain,·input,·result:·{·...result,·records:·all.slice(pageIndex·*·pageSize,·(pageIndex·+·1)·*·pageSize),·page:·{·kind:·"known",·total:·all.length·}·}·})·};
+        96 │ + ········const·evaluate·=·createFilterEvaluator(transactionSchema,·input.query,·{
+        97 │ + ··········now:·input.clock,
+        98 │ + ··········registry:·exampleOperators,
+        99 │ + ········});
+       100 │ + ········const·all·=·transactions
+       101 │ + ··········.map((row)·=>·({
+       102 │ + ············...row,
+       103 │ + ············id:·`${input.dataset}:${row.id}`,
+       104 │ + ············description:·`${prefix}·${row.description}`,
+       105 │ + ··········}))
+       106 │ + ··········.filter(evaluate)
+       107 │ + ··········.sort((a,·b)·=>·{
+       108 │ + ············for·(const·sort·of·input.query.sorting)·{
+       109 │ + ··············const·value·=·compare(a[sort.id],·b[sort.id]);
+       110 │ + ··············if·(value)·return·sort.desc·?·-value·:·value;
+       111 │ + ············}
+       112 │ + ············return·a.id.localeCompare(b.id);
+       113 │ + ··········});
+       114 │ + ········return·{
+       115 │ + ··········kind:·"ready",
+       116 │ + ··········envelope:·envelope({
+       117 │ + ············kind:·"rows",
+       118 │ + ············domain:·input.domain,
+       119 │ + ············input,
+       120 │ + ············result:·{
+       121 │ + ··············...result,
+       122 │ + ··············records:·all.slice(
+       123 │ + ················pageIndex·*·pageSize,
+       124 │ + ················(pageIndex·+·1)·*·pageSize,
+       125 │ + ··············),
+       126 │ + ··············page:·{·kind:·"known",·total:·all.length·},
+       127 │ + ············},
+       128 │ + ··········}),
+       129 │ + ········};
+    40 130 │         }
+    41     │ - ······const·evaluate·=·createFilterEvaluator(inventorySchema,·input.query,·{·now:·input.clock·});
+    42     │ - ······const·all·=·inventory.map((row)·=>·({·...row,·id:·`${input.dataset}:${row.id}`,·title:·`${prefix}·${row.title}`·})).filter(evaluate).sort((a,·b)·=>·{
+  39 more lines truncated
+  
+
+tests/workbench/wp11-start-retirement/inputs.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     7   7 │   import ts from "typescript";
+     8   8 │   const root = fileURLToPath(new URL("../../../", import.meta.url));
+     9     │ - const·own·=·"tests/workbench/wp11-start-retirement/",·parent·=·"apps/example-start-facade/src/application/bootstrap-session.ts";
+    10     │ - const·historical·=·JSON.parse(await·readFile(resolve(root,·"tests/workbench/wp11-start-facade/.artifacts/light-004/inputs.json"),·"utf8"));
+         9 │ + const·own·=·"tests/workbench/wp11-start-retirement/",
+        10 │ + ··parent·=·"apps/example-start-facade/src/application/bootstrap-session.ts";
+        11 │ + const·historical·=·JSON.parse(
+        12 │ + ··await·readFile(
+        13 │ + ····resolve(
+        14 │ + ······root,
+        15 │ + ······"tests/workbench/wp11-start-facade/.artifacts/light-004/inputs.json",
+        16 │ + ····),
+        17 │ + ····"utf8",
+        18 │ + ··),
+        19 │ + );
+    11  20 │   assert.equal(Object.keys(historical.records).length, 769);
+    12     │ - const·configPath·=·resolve(root,·`${own}tsconfig.source-light.json`),·raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);
+        21 │ + const·configPath·=·resolve(root,·`${own}tsconfig.source-light.json`),
+        22 │ + ··raw·=·ts.readConfigFile(configPath,·ts.sys.readFile);
+    13  23 │   assert.equal(raw.error, undefined);
+    14     │ - const·config·=·ts.parseJsonConfigFileContent(raw.config,·ts.sys,·dirname(configPath));·assert.equal(config.errors.length,·0);
+        24 │ + const·config·=·ts.parseJsonConfigFileContent(
+        25 │ + ··raw.config,
+        26 │ + ··ts.sys,
+        27 │ + ··dirname(configPath),
+        28 │ + );
+        29 │ + assert.equal(config.errors.length,·0);
+    15  30 │   assert.equal(ts.version, "6.0.3");
+    16     │ - for·(const·option·of·["strict",·"exactOptionalPropertyTypes",·"noUncheckedIndexedAccess",·"noUnusedLocals",·"noUnusedParameters",·"noEmit"])·assert.equal(config.options[option],·true,·option);
+        31 │ + for·(const·option·of·[
+        32 │ + ··"strict",
+        33 │ + ··"exactOptionalPropertyTypes",
+        34 │ + ··"noUncheckedIndexedAccess",
+        35 │ + ··"noUnusedLocals",
+        36 │ + ··"noUnusedParameters",
+        37 │ + ··"noEmit",
+        38 │ + ])
+        39 │ + ··assert.equal(config.options[option],·true,·option);
+    17  40 │   assert.equal(config.options.skipLibCheck, false);
+    18  41 │   const program = ts.createProgram(config.fileNames, config.options);
+    19     │ - const·programPaths·=·program.getSourceFiles().map((file)·=>·relative(root,·file.fileName));
+    20     │ - for·(const·path·of·programPaths)·assert(!/apps\/example-start\/|routeTree\.gen|src\/router\.tsx|src\/routes\/|src\/register\.d\.ts/.test(path),·path);
+    21     │ - assert(programPaths.includes("tests/workbench/wp11-start-facade/final/contracts.test.ts"));
+    22     │ - ...·new·Set([...Object.keys(historical.records),·...programPaths,·`${own}tsconfig.source-light.json`,·"...
+    23     │ - const·vendor·=·createRequire(await·realpath(resolve(root,·"node_modules/@biomejs/biome/package.json")));
+        42 │ + const·programPaths·=·program
+        43 │ + ··.getSourceFiles()
+        44 │ + ··.map((file)·=>·relative(root,·file.fileName));
+        45 │ + for·(const·path·of·programPaths)
+        46 │ + ··assert(
+        47 │ + ····!/apps\/example-start\/|routeTree\.gen|src\/router\.tsx|src\/routes\/|src\/register\.d\.ts/.test(
+        48 │ + ······path,
+        49 │ + ····),
+        50 │ + ····path,
+        51 │ + ··);
+        52 │ + assert(
+        53 │ + ··programPaths.includes(
+        54 │ + ····"tests/workbench/wp11-start-facade/final/contracts.test.ts",
+        55 │ + ··),
+        56 │ + );
+        57 │ + const·paths·=·new·Set([
+        58 │ + ··...Object.keys(historical.records),
+        59 │ + ··...programPaths,
+        60 │ + ··`${own}tsconfig.source-light.json`,
+        61 │ + ··"node_modules/typescript/bin/tsc",
+        62 │ + ··"node_modules/typescript/lib/_tsc.js",
+        63 │ + ··"node_modules/typescript/lib/typescript.js",
+        64 │ + ··"node_modules/@biomejs/biome/bin/biome",
+        65 │ + ··"apps/example-start-facade/node_modules/@tanstack/query-core/src/queryClient.ts",
+        66 │ + ··"apps/example-start-facade/node_modules/@tanstack/query-core/src/queryCache.ts",
+        67 │ + ··"apps/example-start-facade/node_modules/@tanstack/query-core/src/query.ts",
+        68 │ + ··"apps/example-start-facade/node_modules/@tanstack/query-core/src/retryer.ts",
+        69 │ + ]);
+        70 │ + const·vendor·=·createRequire(
+        71 │ + ··await·realpath(resolve(root,·"node_modules/@biomejs/biome/package.json")),
+        72 │ + );
+    24  73 │   paths.add(relative(root, vendor.resolve("@biomejs/cli-linux-x64/biome")));
+    25     │ - const·records·=·Object.fromEntries(await·Promise.all([...paths].sort().map(async·(path)·=>·[path,·{·sha256:·createHash("sha256").update(await·readFile(resolve(root,·path))).digest("hex"),·mode:·(await·stat(resolve(root,·path))).mode·&·0o777·}])));
+        74 │ + const·records·=·Object.fromEntries(
+        75 │ + ··await·Promise.all(
+        76 │ + ····[...paths].sort().map(async·(path)·=>·[
+        77 │ + ······path,
+        78 │ + ······{
+        79 │ + ········sha256:·createHash("sha256")
+        80 │ + ··········.update(await·readFile(resolve(root,·path)))
+        81 │ + ··········.digest("hex"),
+        82 │ + ········mode:·(await·stat(resolve(root,·path))).mode·&·0o777,
+        83 │ + ······},
+        84 │ + ····]),
+        85 │ + ··),
+        86 │ + );
+    26  87 │   for (const [path, expected] of Object.entries(historical.records)) {
+    27  88 │     if (path === parent) assert.notDeepEqual(records[path], expected);
+    28     │ - ··else·assert.deepEqual(records[path],·expected,·`Historical·SDK/program/config·bytes·changed:·${path}`);
+        89 │ + ··else
+        90 │ + ····assert.deepEqual(
+        91 │ + ······records[path],
+        92 │ + ······expected,
+        93 │ + ······`Historical·SDK/program/config·bytes·changed:·${path}`,
+        94 │ + ····);
+    29  95 │   }
+    30     │ - const·record·=·{·compiler:·ts.version,·status:·"SOURCE·noEmit·only,·including·declared·FINAL·UNRUN·test·bodies;·no·module/framework·execution·or·generated·assembly",·historicalInputs:·769,·historicalParentBodyDrift:·parent,·programFiles:·programPaths.length,·records·};
+    31     │ - const·target·=·process.argv[2];·assert(target?.startsWith(`${own}.artifacts/`));
+    32     │ - if·(process.argv[3]·===·"verify")·assert.deepEqual(record,·JSON.parse(await·readFile(resolve(root,·target),·"utf8")));
+    33     │ - else·{·const·s·=·await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728);·await·writeFile(resolve(root,·target),·`${JSON.stringify(record,·null,·2)}\n`,·{·flag:·"wx"·});·}
+    34     │ - console.log(`TS${ts.version}:·${programPaths.length}·program·files/${paths.size}·pinned·program/tool/SDK·inputs.·Original769·have·ONLY·parent·body·drift;·generated-dependent·assembly·excluded.·FINAL·tests·not·executed.`);
+        96 │ + const·record·=·{
+        97 │ + ··compiler:·ts.version,
+        98 │ + ··status:
+        99 │ + ····"SOURCE·noEmit·only,·including·declared·FINAL·UNRUN·test·bodies;·no·module/framework·execution·or·generated·assembly",
+       100 │ + ··historicalInputs:·769,
+       101 │ + ··historicalParentBodyDrift:·parent,
+       102 │ + ··programFiles:·programPaths.length,
+       103 │ + ··records,
+       104 │ + };
+       105 │ + const·target·=·process.argv[2];
+       106 │ + assert(target?.startsWith(`${own}.artifacts/`));
+       107 │ + if·(process.argv[3]·===·"verify")
+       108 │ + ··assert.deepEqual(
+       109 │ + ····record,
+       110 │ + ····JSON.parse(await·readFile(resolve(root,·target),·"utf8")),
+       111 │ + ··);
+       112 │ + else·{
+       113 │ + ··const·s·=·await·statfs(root);
+       114 │ + ··assert(s.bavail·*·s.bsize·>=·134217728);
+       115 │ + ··await·writeFile(
+       116 │ + ····resolve(root,·target),
+       117 │ + ····`${JSON.stringify(record,·null,·2)}\n`,
+       118 │ + ····{·flag:·"wx"·},
+       119 │ + ··);
+       120 │ + }
+       121 │ + console.log(
+       122 │ + ··`TS${ts.version}:·${programPaths.length}·program·files/${paths.size}·pinned·program/tool/SDK·inputs.·Original769·have·ONLY·parent·body·drift;·generated-dependent·assembly·excluded.·FINAL·tests·not·executed.`,
+       123 │ + );
+    35 124 │   
+  
+
+tests/workbench/wp11-start-retirement/light.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3  3 │   import { mkdir, readdir, statfs, writeFile } from "node:fs/promises";
+     4  4 │   import { fileURLToPath } from "node:url";
+     5    │ - const·root·=·fileURLToPath(new·URL("../../../",·import.meta.url)),·own·=·"tests/workbench/wp11-start-retirement/";
+     6    │ - const·label·=·process.argv[2];·assert(label·&&·/^[\w-]+$/.test(label));
+     7    │ - async·function·space()·{·const·s·=·await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728,·"Below128MiB;·no·cleanup·authorized");·}
+        5 │ + const·root·=·fileURLToPath(new·URL("../../../",·import.meta.url)),
+        6 │ + ··own·=·"tests/workbench/wp11-start-retirement/";
+        7 │ + const·label·=·process.argv[2];
+        8 │ + assert(label·&&·/^[\w-]+$/.test(label));
+        9 │ + async·function·space()·{
+       10 │ + ··const·s·=·await·statfs(root);
+       11 │ + ··assert(s.bavail·*·s.bsize·>=·134217728,·"Below128MiB;·no·cleanup·authorized");
+       12 │ + }
+     8 13 │   async function files(path) {
+     9 14 │     const result = [];
+    10    │ - ··for·(const·entry·of·await·readdir(`${root}/${path}`,·{·withFileTypes:·true·}))·{
+    11    │ - ····if·([".artifacts",·"before.json",·"handoff-hashes.json",·"preimages"].includes(entry.name))·continue;
+       15 │ + ··for·(const·entry·of·await·readdir(`${root}/${path}`,·{
+       16 │ + ····withFileTypes:·true,
+       17 │ + ··}))·{
+       18 │ + ····if·(
+       19 │ + ······[
+       20 │ + ········".artifacts",
+       21 │ + ········"before.json",
+       22 │ + ········"handoff-hashes.json",
+       23 │ + ········"preimages",
+       24 │ + ······].includes(entry.name)
+       25 │ + ····)
+       26 │ + ······continue;
+    12 27 │       const name = `${path}${entry.name}`;
+    13    │ - ····if·(entry.isDirectory())·result.push(...await·files(`${name}/`));·else·if·(/\.(ts|mjs|json)$/.test(name))·result.push(name);
+       28 │ + ····if·(entry.isDirectory())·result.push(...(await·files(`${name}/`)));
+       29 │ + ····else·if·(/\.(ts|mjs|json)$/.test(name))·result.push(name);
+    14 30 │     }
+    15 31 │     return result;
+    16 32 │   }
+    17    │ - await·space();·await·mkdir(`${root}/${own}.artifacts/`,·{·recursive:·true·});
+    18    │ - const·directory·=·`${own}.artifacts/${label}/`;·await·mkdir(`${root}/${directory}`);
+    19    │ - const·supported·=·["apps/example-start-facade/src/application/bootstrap-session.ts",·...await·files(own)];
+       33 │ + await·space();
+       34 │ + await·mkdir(`${root}/${own}.artifacts/`,·{·recursive:·true·});
+       35 │ + const·directory·=·`${own}.artifacts/${label}/`;
+       36 │ + await·mkdir(`${root}/${directory}`);
+       37 │ + const·supported·=·[
+       38 │ + ··"apps/example-start-facade/src/application/bootstrap-session.ts",
+       39 │ + ··...(await·files(own)),
+       40 │ + ];
+    20 41 │   const commands = [
+    21 42 │     ["inputs-before", [`${own}inputs.mjs`, `${directory}inputs.json`]],
+    22    │ - ··["positive",·["node_modules/typescript/bin/tsc",·"-p",·`${own}tsconfig.source-light.json`,·"--pretty",·"false"]],
+    23    │ - ··["scope",·[`${own}scope.mjs`]],·["static",·[`${own}static.mjs`]],
+    24    │ - ··...supported.filter((path)·=>·path.endsWith(".mjs")).map((path)·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+    25    │ - ··["biome",·["node_modules/@biomejs/biome/bin/biome",·"check",·"--assist-enabled=false",·...supported,·"--max-diagnostics=100"]],
+       43 │ + ··[
+       44 │ + ····"positive",
+       45 │ + ····[
+       46 │ + ······"node_modules/typescript/bin/tsc",
+       47 │ + ······"-p",
+       48 │ + ······`${own}tsconfig.source-light.json`,
+       49 │ + ······"--pretty",
+       50 │ + ······"false",
+       51 │ + ····],
+       52 │ + ··],
+       53 │ + ··["scope",·[`${own}scope.mjs`]],
+       54 │ + ··["static",·[`${own}static.mjs`]],
+       55 │ + ··...supported
+       56 │ + ····.filter((path)·=>·path.endsWith(".mjs"))
+       57 │ + ····.map((path)·=>·[`syntax-${path.split("/").at(-1)}`,·["--check",·path]]),
+       58 │ + ··[
+       59 │ + ····"biome",
+       60 │ + ····[
+       61 │ + ······"node_modules/@biomejs/biome/bin/biome",
+       62 │ + ······"check",
+       63 │ + ······"--assist-enabled=false",
+       64 │ + ······...supported,
+       65 │ + ······"--max-diagnostics=100",
+       66 │ + ····],
+       67 │ + ··],
+    26 68 │     ["inputs-after", [`${own}inputs.mjs`, `${directory}inputs.json`, "verify"]],
+    27 69 │   ];
+    28 70 │   const results = [];
+    29 71 │   for (const [name, args] of commands) {
+    30    │ - ··await·space();·const·result·=·spawnSync(process.execPath,·args,·{·cwd:·root,·encoding:·"utf8",·timeout:·300000·});
+    31    │ - ··await·space();·await·writeFile(`${root}/${directory}${name}.log`,·`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,·{·flag:·"wx"·});
+       72 │ + ··await·space();
+       73 │ + ··const·result·=·spawnSync(process.execPath,·args,·{
+       74 │ + ····cwd:·root,
+       75 │ + ····encoding:·"utf8",
+       76 │ + ····timeout:·300000,
+       77 │ + ··});
+       78 │ + ··await·space();
+       79 │ + ··await·writeFile(
+       80 │ + ····`${root}/${directory}${name}.log`,
+       81 │ + ····`${result.stdout·??·""}${result.stderr·??·""}${result.error·?·String(result.error)·:·""}`,
+       82 │ + ····{·flag:·"wx"·},
+       83 │ + ··);
+    32 84 │     results.push({ name, args, status: result.status, signal: result.signal });
+    33    │ - ··await·writeFile(`${root}/${directory}results.json`,·`${JSON.stringify(results,·null,·2)}\n`);
+    34    │ - ··assert.equal(result.status,·0,·`${name}:·preserved·first·failure·${directory}${name}.log`);
+       85 │ + ··await·writeFile(
+       86 │ + ····`${root}/${directory}results.json`,
+       87 │ + ····`${JSON.stringify(results,·null,·2)}\n`,
+       88 │ + ··);
+       89 │ + ··assert.equal(
+       90 │ + ····result.status,
+       91 │ + ····0,
+       92 │ + ····`${name}:·preserved·first·failure·${directory}${name}.log`,
+       93 │ + ··);
+    35 94 │   }
+    36    │ - console.log(`Correction·SOURCE·LIGHT·passes·${directory}:·${supported.length}·supported·files.·Parent-only·old·drift;·generated·assembly/ALL·runtime·tests·FINAL·UNRUN.`);
+       95 │ + console.log(
+       96 │ + ··`Correction·SOURCE·LIGHT·passes·${directory}:·${supported.length}·supported·files.·Parent-only·old·drift;·generated·assembly/ALL·runtime·tests·FINAL·UNRUN.`,
+       97 │ + );
+    37 98 │   
+  
+
+tests/workbench/wp11-start-retirement/scope.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1   1 │   import assert from "node:assert/strict";
+     2   2 │   import { createHash } from "node:crypto";
+     3     │ - import·{·mkdir,·readFile,·readdir,·stat,·statfs,·writeFile·}·from·"node:fs/promises";
+         3 │ + import·{
+         4 │ + ··mkdir,
+         5 │ + ··readFile,
+         6 │ + ··readdir,
+         7 │ + ··stat,
+         8 │ + ··statfs,
+         9 │ + ··writeFile,
+        10 │ + }·from·"node:fs/promises";
+     4  11 │   import { relative, resolve } from "node:path";
+     5  12 │   import { fileURLToPath } from "node:url";
+    ······ │ 
+     9  16 │   const originalPath = "tests/workbench/wp11-start-facade/handoff-hashes.json";
+    10  17 │   const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+    11     │ - const·canonicalBytes·=·await·readFile("/tmp/opencode/wp10-move-reason-integrated-source155.json");
+    12     │ - assert.equal(hash(canonicalBytes),·"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837");
+    13     │ - const·canonical·=·JSON.parse(canonicalBytes);·assert.equal(Object.keys(canonical).length,·155);
+    14     │ - async·function·measure(path)·{·return·{·sha256:·hash(await·readFile(resolve(root,·path))),·mode:·(await·stat(resolve(root,·path))).mode·&·0o777·};·}
+        18 │ + const·canonicalBytes·=·await·readFile(
+        19 │ + ··"/tmp/opencode/wp10-move-reason-integrated-source155.json",
+        20 │ + );
+        21 │ + assert.equal(
+        22 │ + ··hash(canonicalBytes),
+        23 │ + ··"bdfabdedcb23cb53244e9e9298cc234717a3cc526f0c97c2d46e3dfe6dcf1837",
+        24 │ + );
+        25 │ + const·canonical·=·JSON.parse(canonicalBytes);
+        26 │ + assert.equal(Object.keys(canonical).length,·155);
+        27 │ + async·function·measure(path)·{
+        28 │ + ··return·{
+        29 │ + ····sha256:·hash(await·readFile(resolve(root,·path))),
+        30 │ + ····mode:·(await·stat(resolve(root,·path))).mode·&·0o777,
+        31 │ + ··};
+        32 │ + }
+    15  33 │   for (const [path, expected] of Object.entries(canonical)) {
+    16     │ - ··const·value·=·await·measure(path);·assert.equal(value.sha256,·expected.sha256,·path);
+        34 │ + ··const·value·=·await·measure(path);
+        35 │ + ··assert.equal(value.sha256,·expected.sha256,·path);
+    17  36 │     assert.equal(value.mode & 0o111 ? "100755" : "100644", expected.mode, path);
+    18  37 │   }
+    19     │ - const·originalBytes·=·await·readFile(resolve(root,·originalPath)),·original·=·JSON.parse(originalBytes);
+    20     │ - assert.equal(Object.keys(original.inputs).length,·39);·assert.equal(Object.keys(original.artifacts).length,·69);
+    21     │ - assert.equal(original.newInputAggregate,·"06b55f21e8e7a21e6d752a8bba0fbe315120d7377a07ff24e803cb97d36d0f6f");
+    22     │ - assert.equal(original.artifactAggregate,·"3718197b7a1168127f9358d8817bc57d35aaa3b8bd7b3ccedaa74c1f23e379a7");
+        38 │ + const·originalBytes·=·await·readFile(resolve(root,·originalPath)),
+        39 │ + ··original·=·JSON.parse(originalBytes);
+        40 │ + assert.equal(Object.keys(original.inputs).length,·39);
+        41 │ + assert.equal(Object.keys(original.artifacts).length,·69);
+        42 │ + assert.equal(
+        43 │ + ··original.newInputAggregate,
+        44 │ + ··"06b55f21e8e7a21e6d752a8bba0fbe315120d7377a07ff24e803cb97d36d0f6f",
+        45 │ + );
+        46 │ + assert.equal(
+        47 │ + ··original.artifactAggregate,
+        48 │ + ··"3718197b7a1168127f9358d8817bc57d35aaa3b8bd7b3ccedaa74c1f23e379a7",
+        49 │ + );
+    23  50 │   assert.equal(hash(JSON.stringify(original.inputs)), original.newInputAggregate);
+    24     │ - assert.equal(hash(JSON.stringify(original.artifacts)),·original.artifactAggregate);
+        51 │ + assert.equal(
+        52 │ + ··hash(JSON.stringify(original.artifacts)),
+        53 │ + ··original.artifactAggregate,
+        54 │ + );
+    25  55 │   async function walk(directory) {
+    26  56 │     const result = [];
+    27  57 │     for (const entry of await readdir(directory, { withFileTypes: true })) {
+    28     │ - ····if·(["node_modules",·".git",·".repo"].includes(entry.name)·||·entry.name.startsWith(".env")·||·entry.name·===·".npmrc")·continue;
+    29     │ - ····const·path·=·resolve(directory,·entry.name),·rel·=·relative(root,·path);
+        58 │ + ····if·(
+        59 │ + ······["node_modules",·".git",·".repo"].includes(entry.name)·||
+        60 │ + ······entry.name.startsWith(".env")·||
+        61 │ + ······entry.name·===·".npmrc"
+        62 │ + ····)
+        63 │ + ······continue;
+        64 │ + ····const·path·=·resolve(directory,·entry.name),
+        65 │ + ······rel·=·relative(root,·path);
+    30  66 │       if (`${rel}/` === own) continue;
+    31     │ - ····if·(entry.isDirectory())·result.push(...await·walk(path));·else·if·(entry.isFile())·result.push(rel);
+        67 │ + ····if·(entry.isDirectory())·result.push(...(await·walk(path)));
+        68 │ + ····else·if·(entry.isFile())·result.push(rel);
+    32  69 │     }
+    33  70 │     return result;
+    34  71 │   }
+    35     │ - const·current·=·Object.fromEntries(await·Promise.all((await·walk(root)).sort().map(async·(path)·=>·[path,·await·measure(path)])));
+        72 │ + const·current·=·Object.fromEntries(
+        73 │ + ··await·Promise.all(
+        74 │ + ····(await·walk(root)).sort().map(async·(path)·=>·[path,·await·measure(path)]),
+        75 │ + ··),
+        76 │ + );
+    36  77 │   const target = new URL("./before.json", import.meta.url);
+    37  78 │   const capture = process.argv[2] === "before";
+    38     │ - for·(const·[path,·expected]·of·Object.entries({·...original.inputs,·...original.artifacts·}))·{
+        79 │ + for·(const·[path,·expected]·of·Object.entries({
+        80 │ + ··...original.inputs,
+        81 │ + ··...original.artifacts,
+        82 │ + }))·{
+    39  83 │     if (!capture && path === parent) continue;
+    40     │ - ··assert.deepEqual(await·measure(path),·expected,·`Original·sealed·input·${path}`);
+        84 │ + ··assert.deepEqual(
+        85 │ + ····await·measure(path),
+        86 │ + ····expected,
+        87 │ + ····`Original·sealed·input·${path}`,
+        88 │ + ··);
+    41  89 │   }
+    42  90 │   if (capture) {
+    43     │ - ··const·s·=·await·statfs(root);·assert(s.bavail*s.bsize·>=·134217728);
+        91 │ + ··const·s·=·await·statfs(root);
+        92 │ + ··assert(s.bavail·*·s.bsize·>=·134217728);
+    44  93 │     await mkdir(new URL("./preimages/", import.meta.url));
+    45     │ - ··await·writeFile(new·URL("./preimages/bootstrap-session.ts.txt",·import.meta.url),·await·readFile(resolve(root,·parent)),·{·flag:·"wx"·});
+    46     │ - ··await·writeFile(target,·`${JSON.stringify({·suppliedHead:·"3929614·(no·worker·Git)",·parent,·canon...
+    47     │ - ··console.log(`Before·correction:155·libraries;·original39/69·seal·bodies/modes·verified;·${Object.keys(current).length}·actual·old·regular·inputs/modes;·exact·parent·preimage·captured.·Credential-shaped·files·excluded;·main·owns·their·byte·confirmation.`);
+        94 │ + ··await·writeFile(
+        95 │ + ····new·URL("./preimages/bootstrap-session.ts.txt",·import.meta.url),
+        96 │ + ····await·readFile(resolve(root,·parent)),
+        97 │ + ····{·flag:·"wx"·},
+        98 │ + ··);
+        99 │ + ··await·writeFile(
+       100 │ + ····target,
+       101 │ + ····`${JSON.stringify({·suppliedHead:·"3929614·(no·worker·Git)",·parent,·canonical155:·hash(canonicalBytes),·originalSeal:·{·path:·originalPath,·sha256:·hash(originalBytes),·inputs:·original.inputs,·artifacts:·original.artifacts,·newInputAggregate:·original.newInputAggregate,·artifactAggregate:·original.artifactAggregate·},·protectedInputs:·current·},·null,·2)}\n`,
+       102 │ + ····{·flag:·"wx"·},
+       103 │ + ··);
+       104 │ + ··console.log(
+       105 │ + ····`Before·correction:155·libraries;·original39/69·seal·bodies/modes·verified;·${Object.keys(current).length}·actual·old·regular·inputs/modes;·exact·parent·preimage·captured.·Credential-shaped·files·excluded;·main·owns·their·byte·confirmation.`,
+       106 │ + ··);
+    48 107 │   } else {
+    49 108 │     const before = JSON.parse(await readFile(target, "utf8"));
+    50 109 │     assert.equal(hash(originalBytes), before.originalSeal.sha256);
+    51     │ - ··assert.equal(hash(await·readFile(new·URL("./preimages/bootstrap-session.ts.txt",·import.meta.url))),·before.protectedInputs[parent].sha256);
+    52     │ - ··const·frozen·=·(record)·=>·Object.fromEntries(Object.entries(record).filter(([path])·=>·path·!==·parent));
+       110 │ + ··assert.equal(
+       111 │ + ····hash(
+       112 │ + ······await·readFile(
+       113 │ + ········new·URL("./preimages/bootstrap-session.ts.txt",·import.meta.url),
+       114 │ + ······),
+       115 │ + ····),
+       116 │ + ····before.protectedInputs[parent].sha256,
+       117 │ + ··);
+       118 │ + ··const·frozen·=·(record)·=>
+       119 │ + ····Object.fromEntries(
+       120 │ + ······Object.entries(record).filter(([path])·=>·path·!==·parent),
+       121 │ + ····);
+    53 122 │     assert.deepEqual(frozen(current), frozen(before.protectedInputs));
+    54 123 │     assert.equal(current[parent].mode, before.protectedInputs[parent].mode);
+    55     │ - ··assert.notEqual(current[parent].sha256,·before.protectedInputs[parent].sha256);
+    56     │ - ··console.log(`155·libraries·and·${Object.keys(frozen(current)).length}·frozen·old·regular·inputs/modes·unchanged;·ONLY·parent·body·drift,·original·mode·retained.·Original·seal/preimages/69·raw·artifacts·unchanged·HISTORY,·not·a·current·all-original-hashes·pass.`);
+       124 │ + ··assert.notEqual(
+       125 │ + ····current[parent].sha256,
+       126 │ + ····before.protectedInputs[parent].sha256,
+       127 │ + ··);
+       128 │ + ··console.log(
+  4 more lines truncated
+  
+
+tests/workbench/wp11-start-retirement/static.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     4  4 │   import ts from "typescript";
+     5  5 │   const root = new URL("../../../", import.meta.url);
+     6    │ - const·text·=·await·readFile(new·URL("apps/example-start-facade/src/application/bootstrap-session.ts",·root),·"utf8");
+     7    │ - const·file·=·ts.createSourceFile("bootstrap-session.ts",·text,·ts.ScriptTarget.Latest,·true);
+        6 │ + const·text·=·await·readFile(
+        7 │ + ··new·URL(
+        8 │ + ····"apps/example-start-facade/src/application/bootstrap-session.ts",
+        9 │ + ····root,
+       10 │ + ··),
+       11 │ + ··"utf8",
+       12 │ + );
+       13 │ + const·file·=·ts.createSourceFile(
+       14 │ + ··"bootstrap-session.ts",
+       15 │ + ··text,
+       16 │ + ··ts.ScriptTarget.Latest,
+       17 │ + ··true,
+       18 │ + );
+     8 19 │   assert.equal(file.parseDiagnostics.length, 0);
+     9 20 │   let retirement;
+    10    │ - function·walk(node)·{·if·(ts.isFunctionDeclaration(node)·&&·node.name?.text·===·"retire")·retirement·=·node;·ts.forEachChild(node,·walk);·}
+    11    │ - walk(file);·assert(retirement?.body);
+    12    │ - const·body·=·retirement.body.getText(file),·firstChild·=·body.indexOf("for·(const·child·of·children)");
+       21 │ + function·walk(node)·{
+       22 │ + ··if·(ts.isFunctionDeclaration(node)·&&·node.name?.text·===·"retire")
+       23 │ + ····retirement·=·node;
+       24 │ + ··ts.forEachChild(node,·walk);
+       25 │ + }
+       26 │ + walk(file);
+       27 │ + assert(retirement?.body);
+       28 │ + const·body·=·retirement.body.getText(file),
+       29 │ + ··firstChild·=·body.indexOf("for·(const·child·of·children)");
+    13 30 │   assert(firstChild > 0);
+    14 31 │   const closed = body.slice(0, firstChild);
+    15    │ - for·(const·marker·of·['phase·=·"retiring"',·"lease·=·null",·"operation·=·null",·"sources·=·null",·"receipt·=·null",·"stageSnapshot()",·"pendingPartitions.add(old.id)",·"pendingCanary·=·true"])·assert(closed.includes(marker),·marker);
+       32 │ + for·(const·marker·of·[
+       33 │ + ··'phase·=·"retiring"',
+       34 │ + ··"lease·=·null",
+       35 │ + ··"operation·=·null",
+       36 │ + ··"sources·=·null",
+       37 │ + ··"receipt·=·null",
+       38 │ + ··"stageSnapshot()",
+       39 │ + ··"pendingPartitions.add(old.id)",
+       40 │ + ··"pendingCanary·=·true",
+       41 │ + ])
+       42 │ + ··assert(closed.includes(marker),·marker);
+    16 43 │   assert(closed.indexOf("stageSnapshot()") > closed.indexOf("receipt = null"));
+    17 44 │   assert(!closed.includes("publish()"));
+    18 45 │   assert(body.indexOf("clearCache()") > firstChild);
+    19 46 │   assert(body.indexOf("cacheGone()") > body.indexOf("remove()"));
+    20    │ - assert(body.indexOf("pendingPartitions.clear()")·>·body.indexOf("if·(!complete)"));
+    21    │ - assert(body.indexOf('phase·=·"ended"')·>·body.indexOf("pendingPartitions.clear()"));
+    22    │ - assert(text.includes("cache.remove(query)")·&&·text.includes("cache.findAll(filter).length·!==·0"));
+       47 │ + assert(
+       48 │ + ··body.indexOf("pendingPartitions.clear()")·>·body.indexOf("if·(!complete)"),
+       49 │ + );
+       50 │ + assert(
+       51 │ + ··body.indexOf('phase·=·"ended"')·>·body.indexOf("pendingPartitions.clear()"),
+       52 │ + );
+       53 │ + assert(
+       54 │ + ··text.includes("cache.remove(query)")·&&
+       55 │ + ····text.includes("cache.findAll(filter).length·!==·0"),
+       56 │ + );
+    23 57 │   assert(text.includes("client.getQueryCache().findAll(filter).length !== 0"));
+    24    │ - assert(!/\.C\.dispose\(|\.P\.dispose\(|removeQueries\(|setTimeout|queueMicrotask|as·unknown·as|as·any|@ts-ignore|@ts-expect-error/.test(text));
+    25    │ - assert(text.includes("receipt·===·boot·&&·lease·===·origin")·&&·text.includes("lease·!==·origin"));
+    26    │ - const·config·=·await·readFile(new·URL("./vitest.config.mjs",·import.meta.url),·"utf8");
+    27    │ - assert(config.includes("tests/workbench/wp11-start-facade/final/contracts.test.ts"));
+    28    │ - const·cases·=·await·readFile(new·URL("./final/retirement.test.ts",·import.meta.url),·"utf8");
+       58 │ + assert(
+       59 │ + ··!/\.C\.dispose\(|\.P\.dispose\(|removeQueries\(|setTimeout|queueMicrotask|as·unknown·as|as·any|@ts-ignore|@ts-expect-error/.test(
+       60 │ + ····text,
+       61 │ + ··),
+       62 │ + );
+       63 │ + assert(
+       64 │ + ··text.includes("receipt·===·boot·&&·lease·===·origin")·&&
+       65 │ + ····text.includes("lease·!==·origin"),
+       66 │ + );
+       67 │ + const·config·=·await·readFile(
+       68 │ + ··new·URL("./vitest.config.mjs",·import.meta.url),
+       69 │ + ··"utf8",
+       70 │ + );
+       71 │ + assert(
+       72 │ + ··config.includes("tests/workbench/wp11-start-facade/final/contracts.test.ts"),
+       73 │ + );
+       74 │ + const·cases·=·await·readFile(
+       75 │ + ··new·URL("./final/retirement.test.ts",·import.meta.url),
+       76 │ + ··"utf8",
+       77 │ + );
+    29 78 │   assert(!/\b(?:it|test|describe)\.(?:skip|todo|only)\b/.test(cases));
+    30    │ - assert(cases.includes("session.attach(boot)")·&&·cases.includes("source.P.subscribe")·&&·cases.includes("source.resource.subscribe")·&&·cases.includes("source.C.subscribe"));
+    31    │ - const·raw·=·ts.readConfigFile(fileURLToPath(new·URL("./tsconfig.source-light.json",·import.meta.url)),·ts.sys.readFile);
+    32    │ - assert.equal(raw.error,·undefined);·assert.equal(raw.config.compilerOptions,·undefined);
+    33    │ - console.log("Static·AST/source·order:·closed·snapshot·before·first·child·callback;·independent·cleanup/verification·and·old·assertions·retained.·NOT·runtime·callback/cache/SSR·proof.");
+       79 │ + assert(
+       80 │ + ··cases.includes("session.attach(boot)")·&&
+       81 │ + ····cases.includes("source.P.subscribe")·&&
+       82 │ + ····cases.includes("source.resource.subscribe")·&&
+       83 │ + ····cases.includes("source.C.subscribe"),
+       84 │ + );
+       85 │ + const·raw·=·ts.readConfigFile(
+       86 │ + ··fileURLToPath(new·URL("./tsconfig.source-light.json",·import.meta.url)),
+       87 │ + ··ts.sys.readFile,
+       88 │ + );
+       89 │ + assert.equal(raw.error,·undefined);
+       90 │ + assert.equal(raw.config.compilerOptions,·undefined);
+       91 │ + console.log(
+       92 │ + ··"Static·AST/source·order:·closed·snapshot·before·first·child·callback;·independent·cleanup/verification·and·old·assertions·retained.·NOT·runtime·callback/cache/SSR·proof.",
+       93 │ + );
+    34 94 │   
+  
+
+tests/workbench/wp11-start-retirement/vitest.config.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     2  2 │   import { fileURLToPath } from "node:url";
+     3  3 │   import { defineConfig } from "vitest/config";
+     4    │ - const·path·=·(name)·=>·fileURLToPath(new·URL(`../../../${name}`,·import.meta.url));
+        4 │ + const·path·=·(name)·=>
+        5 │ + ··fileURLToPath(new·URL(`../../../${name}`,·import.meta.url));
+     5  6 │   export default defineConfig({
+     6    │ - ··resolve:·{·alias:·[
+     7    │ - ····{·find:·/^@tableweave\/react$/,·replacement:·path("packages/react/dist/index.js")·},
+     8    │ - ····...["contracts",·"filters",·"reordering",·"reordering-controller"].map((entry)·=>·({·find:·`@tableweave/react/${entry}`,·replacement:·path(`packages/react/dist/${entry}/index.js`)·})),
+     9    │ - ····{·find:·/^@tanstack\/react-query$/,·replacement:·path("apps/example-start-facade/node_modules/@tanstack/react-query")·},
+    10    │ - ··]·},
+        7 │ + ··resolve:·{
+        8 │ + ····alias:·[
+        9 │ + ······{
+       10 │ + ········find:·/^@tableweave\/react$/,
+       11 │ + ········replacement:·path("packages/react/dist/index.js"),
+       12 │ + ······},
+       13 │ + ······...["contracts",·"filters",·"reordering",·"reordering-controller"].map(
+       14 │ + ········(entry)·=>·({
+       15 │ + ··········find:·`@tableweave/react/${entry}`,
+       16 │ + ··········replacement:·path(`packages/react/dist/${entry}/index.js`),
+       17 │ + ········}),
+       18 │ + ······),
+       19 │ + ······{
+       20 │ + ········find:·/^@tanstack\/react-query$/,
+       21 │ + ········replacement:·path(
+       22 │ + ··········"apps/example-start-facade/node_modules/@tanstack/react-query",
+       23 │ + ········),
+       24 │ + ······},
+       25 │ + ····],
+       26 │ + ··},
+    11 27 │     cacheDir: "tests/workbench/wp11-start-retirement/.artifacts/vitest-cache",
+    12    │ - ··test:·{·environment:·"node",·include:·["tests/workbench/wp11-start-facade/final/contracts.test.ts",·"tests/workbench/wp11-start-retirement/final/retirement.test.ts"]·},
+       28 │ + ··test:·{
+       29 │ + ····environment:·"node",
+       30 │ + ····include:·[
+       31 │ + ······"tests/workbench/wp11-start-facade/final/contracts.test.ts",
+       32 │ + ······"tests/workbench/wp11-start-retirement/final/retirement.test.ts",
+       33 │ + ····],
+       34 │ + ··},
+    13 35 │   });
+    14 36 │   
+  
+
+Checked 9 files in 16ms. No fixes applied.
+Found 8 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

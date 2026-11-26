@@ -1,0 +1,119 @@
+{
+  "status": "C1a-implementation-ready-PROVISIONAL-C1b-review22n2-open",
+  "suppliedBase": "dda8166 (no worker Git operation)",
+  "canonical150": "39adeb5db9bfb8d7b772d4cd67097741c3a34205a6e62edd6a9ceb77a45caaa4",
+  "sourceDelta": {
+    "packages/react/src/reordering-controller/admission.ts": {
+      "before": {
+        "mode": "100644",
+        "sha256": "7b9d990e61a257a13444b745a1ec63978acd695670e0c059fa00970ebddb6433"
+      },
+      "after": {
+        "sha256": "5f5042823a0ce75606cbd2cdc3349b1eef3f49e193f0e2f573f61326644e137a",
+        "mode": 436
+      }
+    },
+    "packages/react/src/reordering-controller/index.ts": {
+      "before": {
+        "mode": "100644",
+        "sha256": "1482f0f9adcc8506bc9b08cd8958ed219d24ec825c48852bf09e2df4e491e70d"
+      },
+      "after": {
+        "sha256": "5bc8ae0009208c7c37d7e938afdcaad6d7a8d78090d9290a6b152b56cec4e5de",
+        "mode": 436
+      }
+    }
+  },
+  "sourceAggregate": "3aa2521f4e07f0fdce0d91220264b7d0a2cb98dc9bdaab304306230df40dd34e",
+  "inputAggregate": "e7715a6e92ffd8312c6f4570bb6d5ad66117fc450e09fc4d5783b561e4f0d910",
+  "inputs": {
+    "tests/reordering/interaction-cut/C1B-BLOCKED.md": {
+      "sha256": "105fefb5a87a846097e4b8bce6e7c7ff0127ce8aa7d1fb3fd5d5ca71766b8d17",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/before.json": {
+      "sha256": "7c2bffedfb311977729bb5c3e79bc739a5e33777179cbec23930472a79ff8cbe",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/browser.html": {
+      "sha256": "cc98379a53f7e5697fe5acd0ba06da11f9dda58f2563e225bbc6875ad4ed27cb",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/browser.spec.ts": {
+      "sha256": "175e563cdb4082161873c68ca96ce0c5ccd53a8fccdd5f94463a22d288890c69",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/browser.tsx": {
+      "sha256": "5f3c7681445cac4ecb468f70f39ec9038c13a79b897e1ec67e9c74275c96ede1",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/denial.test.ts": {
+      "sha256": "6cba9bce3423c857d0de38b4220deac2be57ac4ad5119fb6023b664e1b6d1a00",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/light.mjs": {
+      "sha256": "a2ff5968f22c25affe2bceca2e65300ea530a72c630e28cf09398aeb0e8dc97c",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/measure.mjs": {
+      "sha256": "58683f466017177e86453618074aebfa7c49f6596048577657064c2bcb38dbc0",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/negative/tsconfig.json": {
+      "sha256": "2c72d7b781521546cef7057da859b11dd83ef25d5e47525160249b217d0ba3b7",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/negative/types.ts": {
+      "sha256": "13b808c043fb8fd5b2c92e2a8c16f48f976532a1169c8ed67bb26b6bb72e3460",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/packed/consumer.ts": {
+      "sha256": "aeab4c2f44854bc2ff31c03df7f1254ea6fd2aa90a9db5674fbb6e394efa7ef9",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/packed/tsconfig.json": {
+      "sha256": "5299d1d8f9031673606590ff90231c1f4a0ccb11cab50da95f948983beecfd4a",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/playwright.config.ts": {
+      "sha256": "e5c688e3b184e072aa2e857f5f48df529273900991f607a3131fda6c72295001",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/positive.ts": {
+      "sha256": "f358754675bae7fad624bb3958d767d0dd9a64b3242ca9216285afe08c546c94",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/preimages/admission.ts.txt": {
+      "sha256": "7b9d990e61a257a13444b745a1ec63978acd695670e0c059fa00970ebddb6433",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/preimages/index.ts.txt": {
+      "sha256": "1482f0f9adcc8506bc9b08cd8958ed219d24ec825c48852bf09e2df4e491e70d",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/scenarios.ts": {
+      "sha256": "0c40efbf489cc0a21a54c9ce7b691a1c1ba519899f196a2c84ff4744915b9311",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/scope.mjs": {
+      "sha256": "7ecb7c290e4c7ae0f8dd1f05853de984e74f8e9491a0087008535937398b74af",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/static.mjs": {
+      "sha256": "a89b7901ad7caefd29f20ab5cb6e36a9e2e9004e4bc818ab94ecd40cfba72ef2",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/tsconfig.json": {
+      "sha256": "c8ae023b08e7b40259b331eb92e71381d9c74907cfd0335ec935d3bce275a2cf",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/vite.config.mjs": {
+      "sha256": "ee361010efc86c94b5b66ab48fb05b21d62da692cf90bd989ed30fae09d80c24",
+      "mode": 436
+    },
+    "tests/reordering/interaction-cut/vitest.config.mjs": {
+      "sha256": "6e9fe9a47bed94811ba3b140d2974ba10d05b5d1128be14dd5242ff997f9b4ed",
+      "mode": 436
+    }
+  }
+}

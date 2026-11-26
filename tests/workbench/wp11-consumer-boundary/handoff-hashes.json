@@ -1,0 +1,28 @@
+{
+  "status": "source-only-provisional-filesystem-and-consumer-tests-unrun",
+  "beforeCommit": "5e72c95",
+  "driverBeforeSHA256": "cbcbd8980a55774ee349a5c159779c345d7d56efddd06d115cd2f82d86eef4f2",
+  "inputs": {
+    "tests/workbench/wp11-examples/consumer/driver.mjs": {
+      "sha256": "fbc040823bdebabb10ca0dec5d6bf369596e1f7e55531fc25b5dd32e8b72763a",
+      "mode": 436
+    },
+    "tests/workbench/wp11-consumer-boundary/README.md": {
+      "sha256": "2782c09542e2a00941e55c70a748a37571d6bd4d0415552c85c3d741ae698b8b",
+      "mode": 436
+    },
+    "tests/workbench/wp11-consumer-boundary/boundary.mjs": {
+      "sha256": "c9ffb8f84cb39bd5f3b15df1fcdda297929726f2ad946ddef2357541602b80c7",
+      "mode": 436
+    },
+    "tests/workbench/wp11-consumer-boundary/boundary.test.mjs": {
+      "sha256": "cd179f5f06dc8b1bd92360b066f070ce61fdce3c81b23a76c1271dd06a1c3d54",
+      "mode": 436
+    },
+    "tests/workbench/wp11-consumer-boundary/check-source.mjs": {
+      "sha256": "7f2568214cc96cd794b402637604c49310bb05fae983718f18fa28b2249e44f9",
+      "mode": 436
+    }
+  },
+  "aggregate": "038ef3829b34cd1d1189c5a4b4746c763ddf000b2ed149303a0aa168680c9bc1"
+}

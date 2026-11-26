@@ -1,0 +1,15 @@
+{
+  "id": "ordinary",
+  "status": "canonical-unpatched-unrun",
+  "patches": [],
+  "install": [
+    "install",
+    "--ignore-workspace",
+    "--ignore-scripts",
+    "--frozen-lockfile"
+  ],
+  "lock": "main-reviewed consumer-local exact package/archive/config binding required",
+  "workspace": "packages: []\n",
+  "fallback": "none; ordinary failures remain failures",
+  "runtimeLimit": "unpatched minimal import success is not grouped/Strict runtime support"
+}

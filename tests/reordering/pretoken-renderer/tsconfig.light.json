@@ -1,0 +1,10 @@
+{
+  "extends": "../neutral-consumer/tsconfig.light.json",
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../../packages/heroui/src/**/*.ts",
+    "../../../packages/heroui/src/**/*.tsx"
+  ],
+  "exclude": ["./negative/**", "./packed/**", "./.artifacts"]
+}

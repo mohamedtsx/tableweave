@@ -6,8 +6,9 @@ foundation/schema/operator APIs and an accepted WP-03 controller/hook producer.
 WP-04 native/minimal collection code has scoped delegated agent G-01 approval,
 **not a complete table library or personal maintainer acceptance**. README owns
 actual commands; TASKS owns acceptance/review status. WP-05 adds a private plain
-resource producer with scoped delegated G-03 approval. Full table facades, styled
-tools, framework integration and release gates remain separate packets.
+resource producer with scoped delegated G-03 approval. WP-06 adds an actual packed
+Start/Query SSR fixture with scoped delegated G-04 approval. Full table facades,
+styled tools, other framework integrations and release gates remain separate.
 
 ## Load only what the task needs
 

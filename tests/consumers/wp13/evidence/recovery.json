@@ -1,0 +1,52 @@
+{
+  "status": "retrospective-capacity-recovery-note-not-original-raw-log",
+  "lease": "unchanged NEW tests/consumers/wp13 only; unfinished formatting/source-positive/static/pin/seal and README",
+  "priorRefusal": {
+    "command": "node tests/consumers/wp13/evidence/light.mjs format format-003",
+    "error": "E_CAPACITY: no cleanup authority",
+    "availableBytes": 102400000,
+    "minimumBytes": 134217728,
+    "attemptDirectoryCreated": false,
+    "rawLogCreated": false,
+    "provenance": "prior tool terminal output; no artifact is manufactured retrospectively"
+  },
+  "suppliedMainFrame": {
+    "branch": "feat/wp-13-archives",
+    "lastCommitted": "96b111e",
+    "bookkeeping": "main TASKS recovery WIP",
+    "workerGitOperation": false,
+    "mount": "user/main report: restored data disk normally mounted RW at /mnt/data; no worker mount inspection or use",
+    "server": "main reported restart; not evidence of deletion/cleanup or a particular cause of free-space change",
+    "interruptedModal": "no response or relocation permission"
+  },
+  "recoveryObservation": {
+    "path": "/tmp/opencode/tableweave-wp11-workbench",
+    "method": "read-only os.statvfs on unchanged primary path",
+    "availableBytesBeforeResuming": 4042522624,
+    "availableBytesBeforeReadmeBatch": 3921940480,
+    "minimumBytes": 134217728
+  },
+  "preservation": {
+    "beforeMapRecaptured": false,
+    "canonical155Recaptured": false,
+    "initial14InstalledMapRecaptured": false,
+    "priorAttemptsOverwritten": false,
+    "projectWorktreeNodeModulesEvidenceRelocated": false,
+    "cleanupOrDeletion": false,
+    "sourceFeatureExpansion": false
+  },
+  "recoveredChecks": {
+    "format-004": "actual scoped Biome status0,30 files checked,15 formatted, assist disabled",
+    "light-003": "actual19 syntax statuses0; strict positive source TS6 status0; static status0",
+    "scope": "2286 original regular inputs; canonical155;14 initial installed inputs; only main TASKS.md drift"
+  },
+  "remainingEvidence": "Use actual fresh positive pin, pinned LIGHT/Biome results and aggregate seal maps; this note is not a substitute for their statuses or independent main replay.",
+  "preSealLinkAudit": {
+    "status": "terminal-only read-only supplemental audit exited1 before seal capture",
+    "failure": "AssertionError: ['evidence/source-seal-001/seal.json']",
+    "cause": "README already named the intended aggregate seal, but that file had not yet been captured; no other missing target was reported",
+    "disposition": "ordering only, no source or link rewrite; rerun the read-only target audit after actual seal creation",
+    "provenance": "retrospective transcription of actual tool output, not an original raw log or passing receipt"
+  },
+  "limits": "MJS untyped. No CLI or runtime helper import/test/install/emission/pack/negative/dual/framework/browser/HTTP/SSR/consumer/CI/manual/performance/agent/network-write/credential execution. No full WP13 acceptance. Drag/G-02 remains blocked."
+}

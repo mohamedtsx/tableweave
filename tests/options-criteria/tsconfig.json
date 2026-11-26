@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "noEmit": true, "lib": ["ES2022"], "types": ["node"] },
+  "include": [
+    "./fixtures.ts",
+    "./types.ts",
+    "./regression.test.ts",
+    "../../packages/react/src/filters/options-criteria.ts",
+    "../../packages/react/src/filters/options-source.ts"
+  ],
+  "exclude": ["./.artifacts", "./negative-types.ts"]
+}

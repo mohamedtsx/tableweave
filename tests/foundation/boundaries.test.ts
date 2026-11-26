@@ -37,17 +37,23 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
     }
   });
 
-  it("retains client directives without pulling styled/sortable dependencies into defaults", async () => {
+  it("exports the exact emitted headless runtime surface", async () => {
     const exports = await import("../../packages/react/dist/index.js");
     expect(Object.keys(exports).sort()).toEqual(
       [
         "ControllerError",
+        "ControlsError",
         "NativeBridgeError",
         "createNativeColumnHelper",
         "createNativeController",
         "createTableController",
         "createResourceAdapter",
         "createTableState",
+        "beginControlsRequest",
+        "createControlsAuthority",
+        "getControlsAuthorityOwner",
+        "getControlsRequestBinding",
+        "projectControls",
         "defineController",
         "defineNativeTable",
         "reduceTableState",
@@ -60,7 +66,11 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
         "useTableweaveResource",
       ].sort(),
     );
-    for (const name of ["react", "heroui"]) {
+  });
+
+  it.each(["react", "heroui"])(
+    "%s retains its client directive without forbidden default dependencies",
+    async (name) => {
       const path = resolve(`packages/${name}/dist/index.js`);
       const graph = await inspectGraph(path, `packages/${name}/dist`);
       expect(graph.directives.get(path)).toBe(true);
@@ -75,7 +85,10 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
       expect(
         graph.files.some((file: string) => file.includes("/sortable/")),
       ).toBe(false);
-    }
+    },
+  );
+
+  it("retains the separate sortable client directive", async () => {
     const sortable = resolve("packages/heroui/dist/sortable/index.js");
     expect(
       (await inspectGraph(sortable, "packages/heroui/dist")).directives.get(
@@ -111,7 +124,7 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
               "@tanstack/table-core": "9.3.1",
               valibot: "1.5.0",
             }
-          : undefined,
+          : { "@internationalized/date": "3.12.4" },
       );
       expect(manifest.type).toBe("module");
       for (const entry of Object.values(manifest.exports)) {

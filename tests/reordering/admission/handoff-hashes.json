@@ -1,0 +1,142 @@
+{
+  "status": "authored-provisional-held-for-unpaged-contract",
+  "canonical145": "31da43d6873e3c73604244cc72142f2e62081727bf3df7e3c5d1ebf93feb0ebe",
+  "sourceFourAggregate": "db7eee30cef45484a19c3fd5a90468cab9c7cffda7f8471a724a7e65e03fe179",
+  "sourceFour": {
+    "packages/react/src/reordering-controller/admission.ts": {
+      "sha256": "0814fc096434d3d791d1e9d9b3099d9589d19ae40f0440b2086c155266b086d4",
+      "mode": 436
+    },
+    "packages/react/src/reordering-controller/controller.ts": {
+      "sha256": "f6ef2d758b0edb28e0bc2e5bf0902177aeee2e1bab36f74bc80f21dd79730568",
+      "mode": 436
+    },
+    "packages/react/src/reordering-controller/index.ts": {
+      "sha256": "ad4fa0698d0319413c405aa8b368124fa1a69cb5bd83164ffba4c5aedf3c5026",
+      "mode": 436
+    },
+    "packages/react/src/reordering-controller/types.ts": {
+      "sha256": "2740c6a8aedc440479d8fd35105e0ac23c9817f7e5de8b82d5ead3c6ac7be4cf",
+      "mode": 436
+    }
+  },
+  "stageAggregate": "5185a970b029f27d94c1c34b108f6cfcc0afd8b037cd118161ea7b5aee3b1a8b",
+  "inputs": {
+    "packages/react/src/reordering-controller/admission.ts": {
+      "sha256": "0814fc096434d3d791d1e9d9b3099d9589d19ae40f0440b2086c155266b086d4",
+      "mode": 436
+    },
+    "packages/react/src/reordering-controller/controller.ts": {
+      "sha256": "f6ef2d758b0edb28e0bc2e5bf0902177aeee2e1bab36f74bc80f21dd79730568",
+      "mode": 436
+    },
+    "packages/react/src/reordering-controller/index.ts": {
+      "sha256": "ad4fa0698d0319413c405aa8b368124fa1a69cb5bd83164ffba4c5aedf3c5026",
+      "mode": 436
+    },
+    "packages/react/src/reordering-controller/types.ts": {
+      "sha256": "2740c6a8aedc440479d8fd35105e0ac23c9817f7e5de8b82d5ead3c6ac7be4cf",
+      "mode": 436
+    },
+    "tests/reordering/admission/BLOCKER.md": {
+      "sha256": "a866aea39517db682ecd09a1909130e991b340248e4d49e07dfb6cd69d3725b9",
+      "mode": 436
+    },
+    "tests/reordering/admission/before.json": {
+      "sha256": "cd2b7b6336ccdb46133882484b84d380161acdcd65f83e399960a48b08ff7a76",
+      "mode": 436
+    },
+    "tests/reordering/admission/boundaries.test.ts": {
+      "sha256": "5b507699feab16e74874e6a642b33890c678ffd5cde4e11c3c32af93cf33d718",
+      "mode": 436
+    },
+    "tests/reordering/admission/browser.html": {
+      "sha256": "0faa73c66074679bd255a346cee34854db2a807b9f19c259ad73adae87b830f1",
+      "mode": 436
+    },
+    "tests/reordering/admission/browser.spec.ts": {
+      "sha256": "6b30c1631a2ff70629030d0f31587bf03f2eb6a8d07041b6e9f4b06c6148cd6a",
+      "mode": 436
+    },
+    "tests/reordering/admission/browser.tsx": {
+      "sha256": "4a3da7295ea836deacb0a2117986f1e63717c78b24ecb4e4f64d049261c8322f",
+      "mode": 436
+    },
+    "tests/reordering/admission/denial.test.ts": {
+      "sha256": "5e4fed3c53fae6c8d88bc629c079f592132cc7c127b4bf08fa5a52e6b2b9c0a5",
+      "mode": 436
+    },
+    "tests/reordering/admission/fixtures.ts": {
+      "sha256": "23e04e9404dbca1f088c3c9f61caf0e3a549fee9c2d299618134ed3dfce99d0e",
+      "mode": 436
+    },
+    "tests/reordering/admission/harness.tsx": {
+      "sha256": "75a4481ee0f6e64c6e3d4759270dd48e81fe0af0a1ed1e6593f5d5419978ab62",
+      "mode": 436
+    },
+    "tests/reordering/admission/light.mjs": {
+      "sha256": "9fd721289e0c6f16a507f4cc3f7e849ff4251338ff06ffa21f82006323108479",
+      "mode": 436
+    },
+    "tests/reordering/admission/measure.mjs": {
+      "sha256": "d241cbf8f7e68104bbb590cc535471f2cd510c5064b1a169729200b5e13534fd",
+      "mode": 436
+    },
+    "tests/reordering/admission/negative/tsconfig.json": {
+      "sha256": "42404d4177863e1eeaf22aad632bacc4fc9f26d1df8cd7c65bba8c7c84cb7bbf",
+      "mode": 436
+    },
+    "tests/reordering/admission/negative/types.ts": {
+      "sha256": "c3f27c52257628dc579c9573681375e3b581e6b12bbc738a10ccf05d785cda73",
+      "mode": 436
+    },
+    "tests/reordering/admission/packed/consumer.ts": {
+      "sha256": "2cf5870159e86545b52e75e59399768e2652b6eb8456681bd476f5a9b8019704",
+      "mode": 436
+    },
+    "tests/reordering/admission/packed/exclusion.mjs": {
+      "sha256": "58c2fab89b61a58883e943b008195285410af0f2ceaae7a2ed6dae202ee89702",
+      "mode": 436
+    },
+    "tests/reordering/admission/packed/tsconfig.json": {
+      "sha256": "5299d1d8f9031673606590ff90231c1f4a0ccb11cab50da95f948983beecfd4a",
+      "mode": 436
+    },
+    "tests/reordering/admission/playwright.config.ts": {
+      "sha256": "6e4d9c0b99d3f6327d31457ff8c1b89a7d5036772407043291878846ae00740e",
+      "mode": 436
+    },
+    "tests/reordering/admission/probes.ts": {
+      "sha256": "c642fb63adab00a4ff24047d856b94c25d0649e1c7d60228a90fb80ddf945cf2",
+      "mode": 436
+    },
+    "tests/reordering/admission/scope.mjs": {
+      "sha256": "0e28ca02f20d6bbc40e0372104f678abe4fbf83c8ec98f251c8678d5c6862d4e",
+      "mode": 436
+    },
+    "tests/reordering/admission/ssr.test.tsx": {
+      "sha256": "0851ed8d04e971cba4470c43d962e41c04b3b61fa2bec427ec30947b909b5e61",
+      "mode": 436
+    },
+    "tests/reordering/admission/static.mjs": {
+      "sha256": "9e21a56fa369aa6ab079b8f90af0359634efb8dc91d2a394d3d3f4c434e61541",
+      "mode": 436
+    },
+    "tests/reordering/admission/tsconfig.json": {
+      "sha256": "9f96b0ecc0ffad68f7c6a407ed8daf23d091091c1545ec4de1cf341d488bc629",
+      "mode": 436
+    },
+    "tests/reordering/admission/types.ts": {
+      "sha256": "cb841fcb63b12771a6dde0e0c8feb336ab0c13863814e2511268dbab48570e8f",
+      "mode": 436
+    },
+    "tests/reordering/admission/vite.config.mjs": {
+      "sha256": "48759aa1d5142b4b7fcedd6bc436cf4684f5a0ced1c86e26a93d5c89fd91b09d",
+      "mode": 436
+    },
+    "tests/reordering/admission/vitest.config.mjs": {
+      "sha256": "c4e8d1f19f1f3619fd9e9270ca188c61ce317f31b23f760d7bf2fc89782a87ca",
+      "mode": 436
+    }
+  }
+}

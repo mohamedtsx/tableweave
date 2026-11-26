@@ -1,0 +1,44 @@
+{
+  "action": "before",
+  "status": "source-only-completed",
+  "results": [
+    {
+      "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/consumers/wp13-storage/tsconfig.json",
+        "--listFilesOnly",
+        "--pretty",
+        "false"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "executable": "/home/mohamed/.nvm/versions/node/v24.22.0/bin/node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/consumers/wp13/tsconfig.light.json",
+        "--listFilesOnly",
+        "--pretty",
+        "false"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "changedDuring": [],
+  "scopeBefore": null,
+  "scopeAfter": {
+    "oldRegularFiles": 3065,
+    "canonical155": 155,
+    "delta": [],
+    "metadata": [],
+    "pinDrift": [],
+    "rename": "not-yet-renamed"
+  }
+}

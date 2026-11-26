@@ -1,0 +1,25 @@
+@layer theme, base, components, tableweave, utilities;
+@import "tailwindcss" source(none);
+@import "@heroui/styles/css";
+@import "@tableweave/heroui/styles.css";
+@source "./*.tsx";
+@source "../node_modules/@tableweave/heroui/dist/**/*.js";
+html {
+  color-scheme: light;
+}
+body {
+  margin: 16px;
+}
+.wp14-table {
+  width: 100%;
+  max-width: 1408px;
+  overflow: auto;
+}
+.wp14-table table {
+  min-width: max-content;
+}
+.wp14-table th,
+.wp14-table td {
+  min-width: 8rem;
+  white-space: nowrap;
+}

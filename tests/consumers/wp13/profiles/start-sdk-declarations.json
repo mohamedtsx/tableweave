@@ -1,0 +1,25 @@
+{
+  "id": "start-sdk-declarations",
+  "status": "separately-selected-sdk-declarations-unrun",
+  "assets": {
+    "patches/@tanstack__start-server-core@1.169.40.patch": "848e61e21b1d26e29a475bf86ead4d099ecf0ee1b3fe350afad5cfc3d29cbcbd",
+    "patches/@tanstack__start-plugin-core@1.171.50.patch": "59086fb49770b8ce2218ea6deb98093c7d8b75099a3828fb6ce472aaf36df728",
+    "patches/LICENSE-TANSTACK-MIT": "a405ee70c632bb938acb7ac5f210e814409b3760ea9d2329d8ed8ffcfd11a0e7"
+  },
+  "selectors": {
+    "@tanstack/start-server-core@1.169.40": ["dist/esm/session.d.ts"],
+    "@tanstack/start-plugin-core@1.171.50": [
+      "dist/esm/schema.d.ts",
+      "dist/esm/vite/schema.d.ts"
+    ]
+  },
+  "packageExtensions": {
+    "@tanstack/start-server-core@1.169.40": {
+      "@standard-schema/spec": "1.1.0",
+      "cookie-es": "3.1.1"
+    }
+  },
+  "registration": "main-manual exact config/assets and frozen lock handoff only; not extracted from either library archive",
+  "runtime": "no SDK runtime repair; require main-approved installed declaration AFTER and runtime-unchanged byte maps",
+  "ordinary": "do not convert unpatched SDK failures into passing ordinary evidence"
+}

@@ -1,0 +1,25 @@
+{
+  "oldRegularInputs": 2425,
+  "originalSealInputs": 137,
+  "originalSealSHA256": "ca6706bd83f1041fcf6e3115f411cab4e5dccb993e2c4f87651b0a222401ca7f",
+  "originalPinSHA256": "ed3016137b3c24c26dc21e350738c87b85893da6613e68fac8cbc888af909498",
+  "originalPinnedInputs": 1179,
+  "originalProgramFiles": 1128,
+  "originalOldRegularInputs": 2286,
+  "originalInitialInstalledInputs": 14,
+  "canonicalLibraryInputs": 155,
+  "historicalMainMetadataDrift": [
+    "REVIEW.md",
+    "TASKS.md",
+    "docs/planning/wp-13-implementation-plan.md"
+  ],
+  "allowedBodyDrifts": [
+    "tests/consumers/wp13/families/vite.mjs",
+    "tests/consumers/wp13/families/next.mjs",
+    "tests/consumers/wp13/families/start.mjs",
+    "tests/consumers/wp13/lib/generation.mjs",
+    "tests/consumers/wp13/lib/installer.mjs"
+  ],
+  "mainMetadataDrift": [],
+  "installedInputs": 997
+}

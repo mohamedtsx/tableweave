@@ -1,0 +1,28 @@
+tests/consumers/wp13-storage/guards.mjs:243:9 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━━
+
+  ! Change to an optional chain.
+  
+    241 │       const allocation = selected.cases[scenario];
+    242 │       assert.ok(
+  > 243 │         allocation &&
+        │         ^^^^^^^^^^^^^
+  > 244 │           allocation.run.startsWith(`${runId}-`) &&
+        │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    245 │           !used.has(allocation.run),
+    246 │       );
+  
+  i An optional chain is shorter, and it avoids repeating the same expression in each check.
+  
+  i Unsafe fix: Change to an optional chain.
+  
+    241 241 │         const allocation = selected.cases[scenario];
+    242 242 │         assert.ok(
+    243     │ - ········allocation·&&
+    244     │ - ··········allocation.run.startsWith(`${runId}-`)·&&
+        243 │ + ········allocation?.run.startsWith(`${runId}-`)·&&
+    245 244 │             !used.has(allocation.run),
+    246 245 │         );
+  
+
+Checked 12 files in 41ms. No fixes applied.
+Found 1 warning.

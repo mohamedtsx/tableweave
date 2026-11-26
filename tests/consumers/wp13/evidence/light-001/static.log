@@ -1,0 +1,13 @@
+file:///tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/evidence/static.mjs:6
+  if (!value) throw Error(message);
+                    ^
+
+Error: Syntax tests/consumers/wp13/fixtures/headless.ts
+    at requireFact (file:///tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/evidence/static.mjs:6:21)
+    at source (file:///tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/evidence/static.mjs:17:3)
+    at file:///tmp/opencode/tableweave-wp11-workbench/tests/consumers/wp13/evidence/static.mjs:73:39
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.0

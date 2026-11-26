@@ -1,0 +1,11 @@
+{
+  "extends": "../ui-bridge/tsconfig.json",
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "../../../packages/react/src/reordering-controller/*.ts",
+    "../../../packages/heroui/src/**/*.ts",
+    "../../../packages/heroui/src/**/*.tsx"
+  ],
+  "exclude": ["./negative/**", "./packed/**", "./.artifacts"]
+}
