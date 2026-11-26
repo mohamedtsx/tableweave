@@ -137,25 +137,37 @@ export type InventorySchema = typeof inventorySchema;
 
 /** A real definition error rendered as a diagnostic, never a fallback grant. */
 export function ownerConflictDiagnostic(): string {
+  const definition = {
+    id: "example-invalid-owner",
+    version: 1,
+    fields: { amount: { type: "number", owner: "builder" } },
+    tabs: [
+      {
+        id: "conflict",
+        rules: [{ field: "amount", operator: "number.eq", value: 0 }],
+      },
+    ],
+  } as const;
+  const unclassified =
+    "Configuration failed for another reason; owner-conflict classification needs review.";
   try {
     defineQuerySchema({
-      id: "example-invalid-owner",
-      version: 1,
-      fields: { amount: { type: "number", owner: "builder" } },
-      tabs: [
-        {
-          id: "conflict",
-          rules: [{ field: "amount", operator: "number.eq", value: 0 }],
-        },
-      ],
+      ...definition,
+      fields: { amount: { ...definition.fields.amount, owner: "tabs" } },
     });
+  } catch {
+    return unclassified;
+  }
+  try {
+    defineQuerySchema(definition);
     return "Unexpected acceptance: owner-conflict fixture needs review.";
   } catch (error) {
+    // The isolated owner change proves this known amount fixture's cause;
+    // the public schema.invalid issue intentionally carries no field identity.
     return error instanceof ContractError &&
-      error.issues.some(
-        (issue) => issue.code === "rule.field" && issue.field === "amount",
-      )
+      error.issues.length === 1 &&
+      error.issues[0]?.code === "schema.invalid"
       ? "Configuration rejected: a tabs predicate cannot claim a builder-owned field."
-      : "Configuration failed for another reason; owner-conflict classification needs review.";
+      : unclassified;
   }
 }
