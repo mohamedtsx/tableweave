@@ -12,6 +12,7 @@ export interface AuthorizedRuntime {
   readonly dispose: () => void;
   readonly getQuery: () => DemoQuery;
 }
+export type AuthorizationCommit = "committed" | "current" | "obsolete";
 export class SupersededAuthorizationError extends Error {
   constructor() {
     super("Authorization request was superseded.");
@@ -35,6 +36,12 @@ export function createAuthorizationSession(client: QueryClient) {
   let sequence = 0;
   let latest: AuthorizationRequest | null = null;
   let current: AuthorizedRuntime | null = null;
+  let version = 0;
+  const listeners = new Set<() => void>();
+  const publish = () => {
+    version++;
+    for (const listener of listeners) listener();
+  };
   const revoked = new Set<number>();
   const prepared = new Map<
     number,
@@ -58,7 +65,7 @@ export function createAuthorizationSession(client: QueryClient) {
     // Initial Start hydration only: the authorized loader data/cache came from SSR.
     return current === null && sequence === 0 && latest === null;
   };
-  const revoke = (identity: AuthorizationIdentity): boolean => {
+  const retire = (identity: AuthorizationIdentity): boolean => {
     if (!isLive(identity) || !current) return false;
     revoked.add(identity.id);
     current.terminate();
@@ -67,6 +74,18 @@ export function createAuthorizationSession(client: QueryClient) {
     return true;
   };
   return {
+    // Primitive, request-local snapshots remain stable between owner changes,
+    // including SSR/first hydration. They carry no authority or private data.
+    getSnapshot: () => version,
+    getServerSnapshot: () => version,
+    subscribe(listener: () => void) {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
+    hasCurrent: () => current !== null,
+    isCurrent: (runtime: AuthorizedRuntime) => current === runtime,
     begin(): AuthorizationRequest {
       prepared.clear();
       const request = Object.freeze({
@@ -74,6 +93,7 @@ export function createAuthorizationSession(client: QueryClient) {
         previousId: current?.identity.id ?? null,
       });
       latest = request;
+      publish();
       return request;
     },
     assertLatest(request: AuthorizationRequest) {
@@ -97,6 +117,7 @@ export function createAuthorizationSession(client: QueryClient) {
               definitionKey: bootstrap.definitionKey,
             });
       prepared.set(identity.id, { identity, request });
+      publish();
       return identity;
     },
     deny(request: AuthorizationRequest): boolean {
@@ -106,7 +127,7 @@ export function createAuthorizationSession(client: QueryClient) {
         request.previousId !== (current?.identity.id ?? null)
       )
         return false;
-      if (current) revoke(current.identity);
+      if (current) retire(current.identity);
       for (const candidate of prepared.values())
         revoked.add(candidate.identity.id);
       prepared.clear();
@@ -115,18 +136,21 @@ export function createAuthorizationSession(client: QueryClient) {
       client.removeQueries({ queryKey: ["wp06-rows"] });
       void client.cancelQueries({ queryKey: ["request-canary"], exact: true });
       client.removeQueries({ queryKey: ["request-canary"], exact: true });
+      publish();
       return true;
     },
-    commit(runtime: AuthorizedRuntime) {
-      if (!canSeed(runtime.identity)) throw new SupersededAuthorizationError();
+    commit(runtime: AuthorizedRuntime): AuthorizationCommit {
+      // Recheck at acceptance, not just at construction/render. Expected
+      // supersession must not retire the live owner or touch any cache partition.
+      if (!canSeed(runtime.identity)) return "obsolete";
       const old = current;
-      if (old === runtime) return;
+      if (old === runtime) return "current";
       if (
         old &&
         !same(old.identity, runtime.identity) &&
         !revoked.has(old.identity.id)
       )
-        revoke(old.identity);
+        retire(old.identity);
       if (old && !same(old.identity, runtime.identity)) old.dispose();
       current = runtime;
       sequence = Math.max(sequence, runtime.identity.id);
@@ -142,13 +166,19 @@ export function createAuthorizationSession(client: QueryClient) {
           client.removeQueries({ queryKey: query.queryKey, exact: true });
         }
       }
+      publish();
+      return "committed";
     },
     queryFor(identity: AuthorizationIdentity): DemoQuery | null {
       return isLive(identity) ? (current?.getQuery() ?? null) : null;
     },
     canSeed,
     isLive,
-    revoke,
+    revoke(identity: AuthorizationIdentity): boolean {
+      if (!retire(identity)) return false;
+      publish();
+      return true;
+    },
   };
 }
 export type AuthorizationSession = ReturnType<

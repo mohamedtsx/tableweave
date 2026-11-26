@@ -6,6 +6,9 @@ import { defineConfig } from "vitest/config";
 const vendor = createRequire(
   new URL("./packages/react/package.json", import.meta.url),
 );
+const start = createRequire(
+  new URL("./apps/example-start/package.json", import.meta.url),
+);
 const sourceEntries = [
   ["@tableweave/react", "react/src/index.ts"],
   ["@tableweave/react/contracts", "react/src/contracts/index.ts"],
@@ -16,6 +19,10 @@ const sourceEntries = [
 export default defineConfig({
   resolve: {
     alias: [
+      {
+        find: /^@tanstack\/react-query$/,
+        replacement: start.resolve("@tanstack/react-query"),
+      },
       // Source units must share one factory registry with their source fixtures.
       // Explicit dist imports below and real packed consumers remain unaliased.
       ...sourceEntries.map(([name, path]) => ({
@@ -54,6 +61,7 @@ export default defineConfig({
       "tests/controls/columns/**/*.test.ts",
       "tests/controls/pagination/**/*.test.ts",
       "tests/controls/pagination/**/*.test.tsx",
+      "tests/start/authorization-supersession.test.ts",
     ],
     environment: "node",
   },

@@ -319,3 +319,138 @@ test("n4 CSRF rejection retains outer private/no-store response policy", async (
   expect(response.headers()["cache-control"]).toContain("private");
   expect(response.headers()["cache-control"]).toContain("no-store");
 });
+
+test("superseded suspended Beta is discarded while a newer bootstrap GET is held, then only the new definition commits", async ({
+  page,
+  baseURL,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await openApplication(page, "/lifecycle");
+  await page.getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Next page", exact: true }).click();
+  await expect(page.getByTestId("page")).toHaveText(
+    "Displayed 11–20 of 24; requested page 2",
+  );
+  const previous = await page.evaluateHandle(() => ({
+    inspect: window.__wp06Inspect,
+    reconnect: window.__wp06Reconnect,
+  }));
+  const initial = await previous.evaluate((probe) => probe.inspect?.());
+  expect(initial?.scopeKey).toBe("demo:alpha");
+  expect(initial?.controllerDisposed).toBe(false);
+  await page
+    .context()
+    .addCookies([
+      { name: "wp06-actor", value: "beta", url: baseURL ?? "missing" },
+    ]);
+  await page
+    .getByRole("button", { name: "Prepare suspended authorization" })
+    .click();
+  await expect(page.getByTestId("transition-pending")).toHaveText("pending");
+  await expect(page.getByTestId("authorized-scope")).toHaveText("demo:alpha");
+  const cachedBefore = await previous.evaluate(
+    (probe) => probe.inspect?.().cachedScopes,
+  );
+  expect(cachedBefore).toContain("demo:beta");
+
+  let release = () => {};
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let received = () => {};
+  const newerBootstrap = new Promise<void>((resolve) => {
+    received = resolve;
+  });
+  let captured = false;
+  await page.route("**/_serverFn/**", async (route) => {
+    if (route.request().method() === "GET" && !captured) {
+      captured = true;
+      // Hold before any response: begin C has run, but C cannot prepare/replace B.
+      received();
+      await held;
+    }
+    await route.continue();
+  });
+  try {
+    await page
+      .getByRole("button", { name: "Commit alternate definition" })
+      .click();
+    await newerBootstrap;
+    await page
+      .getByRole("button", { name: "Commit prepared authorization" })
+      .click();
+    await expect(page.getByTestId("transition-pending")).toHaveText("settled");
+    await expect(page.getByTestId("authorized-scope")).toHaveText("demo:alpha");
+    await expect(page.getByTestId("selection")).toHaveText("Selected 1");
+    await expect(page.getByTestId("page")).toHaveText(
+      "Displayed 11–20 of 24; requested page 2",
+    );
+    await expect(page.getByTestId("record-row").first()).toContainText(
+      "Alpha record 11",
+    );
+    await expect(page.getByTestId("canary")).toHaveText("request-canary-alpha");
+    expect(
+      await previous.evaluate(
+        (probe) => window.__wp06Inspect === probe.inspect,
+      ),
+    ).toBe(true);
+    const retained = await previous.evaluate((probe) => probe.inspect?.());
+    expect(retained?.authorizationId).toBe(initial?.authorizationId);
+    expect(retained?.controllerDisposed).toBe(false);
+    expect(retained?.access).toBe(true);
+    expect(retained?.selectionCount).toBe(1);
+    expect(retained?.cachedScopes).toEqual(cachedBefore);
+    expect(errors).toEqual([]);
+
+    release();
+    await expect(page.getByTestId("authorized-scope")).toHaveText("demo:beta");
+    await expect(
+      page.getByRole("columnheader", { name: "Amount (alternate layout)" }),
+    ).toBeVisible();
+    await expect(page.getByTestId("record-row").first()).toContainText(
+      "Beta record 01",
+    );
+    await expect(page.getByTestId("selection")).toHaveText("Selected 0");
+    await expect(page.getByTestId("canary")).toHaveText("request-canary-beta");
+    const accepted = await page.evaluate(() => window.__wp06Inspect?.());
+    // The held request alone configures this alternate definition. Do not infer
+    // grant IDs from request counts: same-grant revalidation may advance those.
+    expect(accepted?.authorizationId).toBeGreaterThan(
+      initial?.authorizationId ?? Infinity,
+    );
+    expect(accepted?.definitionKey).toBe(
+      `${initial?.definitionKey}:alternate-layout`,
+    );
+    expect(accepted?.access).toBe(true);
+    expect(accepted?.controllerDisposed).toBe(false);
+    expect(accepted?.cachedScopes).not.toContain("demo:alpha");
+    // One C partition only: the stale Beta/default-definition cache is gone too.
+    expect(accepted?.cachedScopes).toEqual(["demo:beta"]);
+    const retired = await previous.evaluate((probe) => {
+      const disconnect = probe.reconnect?.();
+      const state = probe.inspect?.();
+      disconnect?.();
+      return state;
+    });
+    expect(retired?.controllerDisposed).toBe(true);
+    expect(retired?.access).toBe(false);
+    expect(retired?.serverAccess).toBe(false);
+    expect(retired?.rows).toBe(0);
+    expect(retired?.serverRows).toBe(0);
+    expect(retired?.selectionCount).toBe(0);
+    expect(
+      (await page.evaluate(() => window.__wp06Inspect?.()))?.authorizationId,
+    ).toBe(accepted?.authorizationId);
+    expect(
+      (await page.evaluate(() => window.__wp06Inspect?.()))?.cachedScopes,
+    ).toEqual(["demo:beta"]);
+    expect(errors).toEqual([]);
+  } finally {
+    release();
+    await previous.dispose();
+  }
+});

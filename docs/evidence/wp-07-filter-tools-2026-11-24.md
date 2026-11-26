@@ -314,3 +314,23 @@ next. The final remote run rebuilds archives after these documentation changes;
 no stale archive hash is claimed for a later README. No PR merge, personal
 maintainer/Figma/manual-AT/device/performance/real-consumer/legal/publication/full
 library G-05 acceptance is inferred. WP-08 controls and WP-09 facade remain separate.
+
+## Ordered PR correction integration — 2026-11-26
+
+The user authorizes reviewed sequential merges into develop and bug corrections.
+PR #6's supersession correction `0967326` passes both complete corrected-head CI
+workflows and merges to develop as `821dfa2`, with its tested tree preserved.
+Main integrates that correction into #7 by ordinary merge, preserving the original
+packet history. The only conflict is Vitest discovery: retain both filter-tools
+entries and add the seven new Start owner units plus their real declaring-app
+Query alias. The five corrected app/test bodies match the verified #6 inputs
+exactly; no filter producer, UI, dependency, test assertion or timeout is changed.
+
+Fresh `wp07-integration-check-001` records **437/437 units pass** (23 files, zero
+pending/retries), whole-root Biome245 files, original strict Start app TS6/5.9,
+92 Markdown/563 local links and18 checker probes. Existing dependencies and
+accepted emission are reused; these focused checks are not a new install, package
+build, browser or packed-consumer result. The earlier430-unit workflow remains
+historical. Main selects a two-parent integration commit/push for current complete
+CI. #7 remains unmerged until its changed combined tree passes current checks and
+the ordinary develop merge preserves that tested tree. No release is implied.
