@@ -1,6 +1,7 @@
 import { getQueryIdentity } from "../contracts/identity.js";
 import { freeze } from "../contracts/json.js";
 import type { QuerySchema } from "../contracts/types.js";
+import { registerCriteriaControllerMethods } from "./criteria-controller-methods.js";
 import { isQueryCommand, reduceTableState } from "./reducer.js";
 import type {
   ControllerDefinitionInput,
@@ -223,7 +224,7 @@ function createController<S extends QuerySchema>(
       if (listeners.has(listener)) notify(listener.notify);
     return { status: "committed", transition, notificationFailures };
   };
-  return Object.freeze({
+  const controller = Object.freeze({
     getDefinition: () => definition,
     getSnapshot: () => state,
     getServerSnapshot: () => serverState,
@@ -321,6 +322,12 @@ function createController<S extends QuerySchema>(
       });
     },
   } satisfies TableController<S>);
+  registerCriteriaControllerMethods(
+    controller,
+    controller.getDefinition,
+    controller.isDisposed,
+  );
+  return controller;
 }
 
 function replaceDefinition<S extends QuerySchema, Next extends QuerySchema>(

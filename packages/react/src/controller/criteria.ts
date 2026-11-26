@@ -1,5 +1,7 @@
 import type { QuerySchema } from "../contracts/types.js";
 import type { ResourceContext } from "../resource/types.js";
+import { getCriteriaControllerMethods } from "./criteria-controller-methods.js";
+import { getCriteriaPublicationBinding } from "./criteria-publication.js";
 import type { ControllerDefinition, TableController } from "./types.js";
 
 /** Application-owned lifecycle metadata, not query freshness or backend permission. */
@@ -143,17 +145,35 @@ function registered<S extends QuerySchema>(
 /** This function sees only library-owned origin/callback captures. */
 function requireRegistered<S extends QuerySchema>(
   entry: Registration<S>,
+  authority: CriteriaAuthority<S>,
 ): CriteriaOrigin<S> {
   const captured = entry.origin;
   // An explicitly denied origin invokes neither the reader nor controller methods.
   if (!captured.context.access) return deny();
   const current = entry.read();
-  if (!envelope(current)) return deny();
-  const controller = data(current, "controller");
-  const definition = data(current, "definition");
-  const expected = context(data(current, "expected"));
-  const actual = context(data(current, "actual"));
-  const currentEpoch = epoch(data(current, "epoch"));
+  const publication = getCriteriaPublicationBinding(authority)?.publication;
+  const snapshot = publication?.getSnapshot();
+  let controller: unknown,
+    definition: unknown,
+    expected: ResourceContext,
+    actual: ResourceContext,
+    currentEpoch: string | number;
+  if (snapshot?.phase === "settled" && snapshot.current === current) {
+    // Exact P-owned immutable metadata only. The live reader above still checks
+    // generation/depth on every call; this reuses shape, never permission.
+    controller = snapshot.current.controller;
+    definition = snapshot.current.definition;
+    expected = snapshot.current.expected;
+    actual = snapshot.current.actual;
+    currentEpoch = snapshot.current.epoch;
+  } else {
+    if (!envelope(current)) return deny();
+    controller = data(current, "controller");
+    definition = data(current, "definition");
+    expected = context(data(current, "expected"));
+    actual = context(data(current, "actual"));
+    currentEpoch = epoch(data(current, "epoch"));
+  }
   if (
     controller !== captured.controller ||
     definition !== captured.definition ||
@@ -166,13 +186,16 @@ function requireRegistered<S extends QuerySchema>(
     return deny();
 
   // Controller callbacks are not even captured until current metadata permits it.
-  const isDisposed = data(captured.controller, "isDisposed");
+  const methods = getCriteriaControllerMethods(captured.controller);
+  const isDisposed =
+    methods?.isDisposed ?? data(captured.controller, "isDisposed");
   if (
     typeof isDisposed !== "function" ||
     Reflect.apply(isDisposed, captured.controller, []) !== false
   )
     return deny();
-  const getDefinition = data(captured.controller, "getDefinition");
+  const getDefinition =
+    methods?.getDefinition ?? data(captured.controller, "getDefinition");
   if (
     typeof getDefinition !== "function" ||
     Reflect.apply(getDefinition, captured.controller, []) !==
@@ -199,7 +222,7 @@ export function createCriteriaAuthority<S extends QuerySchema>(
       require(): CriteriaOrigin<S> {
         try {
           if (registered(this) !== entry) return deny();
-          return requireRegistered(entry);
+          return requireRegistered(entry, this);
         } catch {
           return deny();
         }
@@ -229,10 +252,12 @@ export function requireCriteriaAuthority<S extends QuerySchema>(
   try {
     const entry = registered(authority);
     if (!entry?.origin.context.access) return deny();
-    const target = origin<S>(targetOrigin);
+    // Only this exact library-owned frozen capture avoids hostile target parsing.
+    const target =
+      targetOrigin === entry.origin ? entry.origin : origin<S>(targetOrigin);
     if (!target.context.access || !sameOrigin(entry.origin, target))
       return deny();
-    return requireRegistered(entry);
+    return requireRegistered(entry, authority);
   } catch {
     return deny();
   }
