@@ -107,6 +107,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-05 Resource presentation and race safety
 
+- **Execution plan:** [WP-05 bounded plan](wp-05-implementation-plan.md); TASKS
+  records delegated authority, independent review and G-03 disposition.
+
 - **Role/dependencies:** resource worker; WP-02/WP-03.
 - **Read:** [resources](../engineering/resources.md), recovery, AC-14–AC-17/G-03.
 - **Paths:** `packages/react/src/resource`, focused hooks and controllable request

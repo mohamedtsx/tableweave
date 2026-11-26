@@ -17,15 +17,20 @@ hook producer. Neither is a full table implementation or release approval.
   `defineNativeTable`, `createNativeColumnHelper`, `createNativeController`,
   `useNativeTable`, `NativeBridgeError` and typed native definitions/models/views.
   The [candidate contract](../../docs/engineering/wp-04-native.md) and
-  [producer handoff](src/tanstack/README.md) distinguish actual APIs from pending
-  recorded delegated G-01 proof/limits. No resource/table facade or styled UI is supplied here.
+  [producer handoff](src/tanstack/README.md) document actual APIs and recorded
+  delegated G-01 proof/limits. No whole-table facade or styled UI is supplied here.
+- Root's WP-05 producer adds `createResourceAdapter`, `useTableweaveResource`,
+  `projectResourceView` and plain tagged resource types. See the
+  [resource contract](../../docs/engineering/resources.md) and
+  [plan](../../docs/planning/wp-05-implementation-plan.md). This is not the full
+  table facade, a fetch cache, framework SSR integration or styled UI.
 
 Contracts/filters contain no client directive or React/UI import. Their only
 runtime dependencies are Valibot `1.5.0` and Internationalized Date `3.12.4`.
 Vendor validation objects/types are internal. See the repository's
 [WP-02 contract](../../docs/engineering/wp-02-contracts.md) for exact context,
-normalization, translator and privacy obligations. No fetching, persistence,
-authorization is supplied. Only the WP-04 candidate root uses a native row pipeline;
+normalization, translator and privacy obligations. No fetching, persistence or
+authorization is supplied. Only the WP-04 producer root uses a native row pipeline;
 the server-safe subpaths do not import it or React.
 
 Not published or ready for application use. Peers are exact development candidates,

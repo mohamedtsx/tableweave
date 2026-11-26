@@ -12,6 +12,7 @@
     "../controller/**/*.ts",
     "../native/**/*.ts",
     "../native/**/*.tsx",
+    "../resource/**/*.ts",
     "../../vitest.config.ts",
     "../../playwright.config.ts",
     "../browser/*.ts"

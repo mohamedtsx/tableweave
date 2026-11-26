@@ -22,10 +22,13 @@ renderer functions, selected IDs, column visibility, drafts and timestamps that
 change every render. Query identity and semantic filter identity have different
 jobs: sorting/pagination change requests but preserve selection.
 
-The HLD's `useTableweaveState`, `useTableweaveQuery`, `queryKeyOf` and
-`useTableweaveResource` names remain proposed. The resource hook accepts plain
-status/data/key fields, not a Query-specific type. An already-loaded server page
-still needs the same envelope, scope and page metadata.
+WP-03 implements `useTableweaveState`/`useTableweaveQuery`; WP-02 exposes
+`getQueryIdentity` rather than an assumed `queryKeyOf` alias. WP-05 now implements
+`useTableweaveResource(adapter, expectedContext)` over the plain tagged resource
+adapter, never a Query-specific result type. See the actual
+[resource protocol](resources.md#implemented-private-producer), not the HLD's
+illustrative hook signature. An already-loaded server page still needs truthful
+scope/query identity and page metadata.
 
 ## Application port and cancellation
 

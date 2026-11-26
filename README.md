@@ -12,7 +12,8 @@ WP-01–WP-03 are accepted. The root provides controller/subscription hooks;
 [WP-03](docs/engineering/wp-03-controller.md) and [WP-02](docs/engineering/wp-02-contracts.md).
 WP-04's bounded native/collection producer is agent-approved under delegated
 authority for the recorded G-01 scope, not personal maintainer acceptance.
-`DataTable` and the resource facade remain unavailable on this branch. Nothing is
+WP-05's plain resource adapter/hook has delegated scoped G-03 approval as well.
+`DataTable` and the whole-table facade remain unavailable. Nothing is
 published; [TASKS.md](TASKS.md) owns current acceptance/review status.
 
 ## Start here
@@ -92,14 +93,15 @@ is enabled by these local commands.
 | `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
 | `pnpm typecheck` | Build, then check Storybook/harness sources with strict TypeScript 6 |
 | `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
-| `pnpm test` | Emitted-boundary guards, contract/operator conformance, controller and candidate native model tests; mounted behavior is separate |
+| `pnpm test` | Emitted-boundary guards, contracts/operators, controller/native models and resource race/lifecycle tests; browser behavior is separate |
 | `pnpm test:contracts` | Build plus schema/operator/date/identity and synthetic translator vectors |
 | `pnpm test:controller` | Build plus accepted-state/reset/controlled-transaction/lifecycle tests |
-| `pnpm test:native` | Build plus candidate v9 definition/carrier/client/manual/native transition tests; not G-01 by itself |
+| `pnpm test:native` | Build plus v9 definition/carrier/client/manual/native transition tests; not G-01 by itself |
+| `pnpm test:resource` | Build plus tagged resource generations/retention/precedence/permission/lifecycle tests; not framework SSR |
 | `pnpm pack:check` | Inspect tarballs; isolated headless/styled installs, TS 5.9/6 declaration checks, Node import guards and Vite bundles |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
-| `pnpm test:browser` | Chromium vendor/controller smoke, native fixture on 6011 and grouped collection fixture on 6009 (run package/Storybook builds first) |
+| `pnpm test:browser` | Chromium vendor/controller smoke, native (6011), grouped collection (6009) and resource lifecycle (6415) fixtures; build packages/Storybook first |
 | `pnpm check:docs` | Structural Markdown checks and checker regression probes |
 | `pnpm check` | Full local sequence above, including fresh-install verification |
 | `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
@@ -108,8 +110,9 @@ Generated consumer/tarball reports live in ignored `.artifacts/`; browser eviden
 is in ignored `test-results/`. These commands do not publish, commit or push.
 [Headless contracts](packages/react/README.md) and [styled scaffold](packages/heroui/README.md)
 document their actual exports. The [bounded WP-04 native/collection producer](docs/engineering/wp-04-native.md)
-has recorded delegated G-01 approval; tests still reject unimplemented whole-table/
-resource facades and private deep imports. This is not a full toolkit/release gate.
+has recorded delegated G-01 approval; the [resource producer](docs/engineering/resources.md)
+has scoped G-03 proof. Tests still reject unimplemented whole-table facades/private
+deep imports. This is not a full toolkit/release gate.
 
 The reviewed tooling set uses security-patched Storybook **9.1.21** with Vite
 **7.3.8**, retaining TypeScript **6.0.3**, React **19.3.1**, TanStack Table **9.3.1**,

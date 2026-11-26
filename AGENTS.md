@@ -5,8 +5,9 @@ and an optional HeroUI renderer. This repository has accepted private WP-01/WP-0
 foundation/schema/operator APIs and an accepted WP-03 controller/hook producer.
 WP-04 native/minimal collection code has scoped delegated agent G-01 approval,
 **not a complete table library or personal maintainer acceptance**. README owns
-actual commands; TASKS owns acceptance/review status. Resource/table facades and
-full styled UI remain separate packets.
+actual commands; TASKS owns acceptance/review status. WP-05 adds a private plain
+resource producer with scoped delegated G-03 approval. Full table facades, styled
+tools, framework integration and release gates remain separate packets.
 
 ## Load only what the task needs
 

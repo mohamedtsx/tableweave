@@ -46,15 +46,18 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
         "createNativeColumnHelper",
         "createNativeController",
         "createTableController",
+        "createResourceAdapter",
         "createTableState",
         "defineController",
         "defineNativeTable",
         "reduceTableState",
+        "projectResourceView",
         "replaceTableDefinition",
         "useTableweaveQuery",
         "useTableweaveSelector",
         "useTableweaveState",
         "useNativeTable",
+        "useTableweaveResource",
       ].sort(),
     );
     for (const name of ["react", "heroui"]) {
