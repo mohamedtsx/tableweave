@@ -6,13 +6,12 @@ experience without rebuilding its design and interactions each time.
 Tableweave is a planned open-source React table toolkit built on TanStack Table,
 with a genuinely headless path and an optional HeroUI default experience.
 
-**Current stage: private WP-02 contracts, not an implemented table toolkit.**
-The accepted WP-01 foundation now has candidate schema/query/operator APIs under
-`@tableweave/react/contracts` and `/filters`; see the [implemented contract](docs/engineering/wp-02-contracts.md).
-`DataTable`, controllers, hooks and the native bridge remain unavailable. Nothing
-is published; [TASKS.md](TASKS.md) owns review status and
-[foundation evidence](docs/evidence/wp-01-foundation-2026-11-23.md) records earlier
-checks, not WP-02 acceptance.
+**Current stage: private WP-03 coordinator, not an implemented table toolkit.**
+WP-01–WP-03 are accepted. The root provides controller/subscription hooks;
+`/contracts` and `/filters` retain the accepted schema/operator surface. See
+[WP-03](docs/engineering/wp-03-controller.md) and [WP-02](docs/engineering/wp-02-contracts.md).
+`DataTable`, native bridge and resource facade remain unavailable. Nothing is
+published; [TASKS.md](TASKS.md) owns current acceptance/review status.
 
 ## Start here
 
@@ -91,12 +90,13 @@ is enabled by these local commands.
 | `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
 | `pnpm typecheck` | Build, then check Storybook/harness sources with strict TypeScript 6 |
 | `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
-| `pnpm test` | Emitted-boundary guards and pure contract/operator conformance tests; not mounted table behavior |
+| `pnpm test` | Emitted-boundary guards, contract/operator conformance and pure controller tests; not mounted table behavior |
 | `pnpm test:contracts` | Build plus schema/operator/date/identity and synthetic translator vectors |
+| `pnpm test:controller` | Build plus accepted-state/reset/controlled-transaction/lifecycle tests |
 | `pnpm pack:check` | Inspect tarballs; isolated headless/styled installs, TS 5.9/6 declaration checks, Node import guards and Vite bundles |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
-| `pnpm test:browser` | Chromium pointer/keyboard/style/axe smoke against the static build (run Storybook build first) |
+| `pnpm test:browser` | Chromium vendor smoke plus isolated React controller hook fixture on port 6008 (run package/Storybook builds first) |
 | `pnpm check:docs` | Structural Markdown checks and checker regression probes |
 | `pnpm check` | Full local sequence above, including fresh-install verification |
 | `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
@@ -105,7 +105,7 @@ Generated consumer/tarball reports live in ignored `.artifacts/`; browser eviden
 is in ignored `test-results/`. These commands do not publish, commit or push.
 [Headless contracts](packages/react/README.md) and [styled scaffold](packages/heroui/README.md)
 document their actual exports. Tests exercise the real contract APIs while
-rejecting still-unimplemented controllers/UI and private deep imports.
+rejecting still-unimplemented native/resource/UI facades and private deep imports.
 
 The reviewed tooling set uses security-patched Storybook **9.1.21** with Vite
 **7.3.8**, retaining TypeScript **6.0.3**, React **19.3.1**, TanStack Table **9.3.1**,

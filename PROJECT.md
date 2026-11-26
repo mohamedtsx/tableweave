@@ -14,9 +14,11 @@ domain-driven design, nor that a specification proves a working feature.
 - PRD v1.0: completed requirements baseline, including all FR-01–FR-16.
 - HLD v1.0: completed architecture/designer handoff, ready for review; candidate
   APIs/dependencies are not frozen or implemented. G-01–G-05 remain unexecuted.
-- Local repository: private WP-01 ESM/declaration package scaffolds, synthetic
-  Storybook smoke and foundation checks alongside documentation. No table feature
-  APIs, published npm package, Figma system, benchmark or real-consumer integration.
+- Local repository: accepted WP-01 foundation/WP-02 schema/operator contracts and
+  WP-03 accepted-state controller/React hooks. Synthetic Storybook and
+  hook fixtures/checks exist; no table/native bridge, published package, Figma
+  system, benchmark or real-consumer integration. [WP-03 contract](docs/engineering/wp-03-controller.md)
+  distinguishes implemented coordination from later native/UI/resource work.
 - [TASKS.md](TASKS.md) owns live status and current authorization. A planned packet
   never authorizes execution, installs, remote writes or publication.
 

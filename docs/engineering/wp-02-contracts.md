@@ -19,6 +19,10 @@ when field semantics, ownership, operators or custom behavior change.
 | `/filters` | `builtinOperators`, `defineOperator`, `createOperatorRegistry`, `defaultOperatorRegistry`, `fieldPresets`, `relativePresets`, `compileFilter`, `createFilterEvaluator`, `translateQuery`, `invertRule`, `resolveDateValue`, `resolveDateOperand` |
 | Root | None; retained client boundary for later React work |
 
+The table records WP-02's delivery surface. Its producer is now accepted; later
+WP-03 adds [root controller/hooks](wp-03-controller.md) without changing these
+server-safe contracts/filter exports.
+
 Types include `QuerySchemaDefinition`, `QuerySchema`, `QueryFor<S>`, `QueryInput<S>`,
 `RuleFor<S>`, `WireQuery`, `WireRule`, date variants, operator/translator/evaluator
 contracts and `FieldAccessors<S, Row>`. Vendor types are not public dependencies.

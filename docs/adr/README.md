@@ -33,3 +33,14 @@ a row-processing engine. Vendor schemas stay internal; native bridging, controll
 and React/UI APIs remain proposed. Concrete wire/date/key choices and their risks
 are recorded in the [private producer contract](../engineering/wp-02-contracts.md),
 subject to packet review. No G-gate/publication disposition changes.
+
+## WP-03 implementation disposition
+
+TASK-009 realizes ADR-03's atomic controlled groups with a complete proposal and
+explicit whole-transaction acknowledgement. Uncontrolled consequences do not
+commit while a controlled group waits. Only controlled selection may explicitly
+override a proposed clear. Stable snapshots use React's existing subscription
+primitive, not a second store. The [implemented protocol](../engineering/wp-03-controller.md)
+records reentrancy/error/time/definition trade-offs. The maintainer accepted WP-03
+after session 1 n1–n2 corrections. No native bridge, UI, resource or G-gate
+acceptance follows, and dependent execution remains separately authorized.

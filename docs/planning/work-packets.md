@@ -68,6 +68,9 @@ Required missing proof prevents that packet's completion, not unrelated work.
 
 ## WP-03 Accepted state and transition coordinator
 
+- **Execution preparation:** [bounded WP-03 plan](wp-03-implementation-plan.md);
+  TASKS owns plan-first execution authority and accepted producer status.
+
 - **Role/dependencies:** controller worker; WP-02 schema revision.
 - **Read:** [state/query](../engineering/state-and-query.md), shared rules,
   AC-03/AC-05/AC-08–AC-11/AC-24/AC-25.

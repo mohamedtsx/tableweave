@@ -70,6 +70,11 @@ for (const name of ["react", "heroui"]) {
             "filters/evaluate",
             "filters/translate",
             "filters/inverse",
+            "controller/types",
+            "controller/validation",
+            "controller/reducer",
+            "controller/store",
+            "hooks/state",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ]
       : [

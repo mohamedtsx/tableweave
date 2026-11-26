@@ -30,6 +30,11 @@ mirror. Advanced atom ownership requires an explicit adapter preserving atomicit
 Controlled owner rejection must leave accepted state unchanged; define/test
 coordination across controlled groups rather than firing partial side effects.
 
+The [accepted private WP-03 producer](wp-03-controller.md) realizes the pure coordinator
+and React subscription portion: one complete proposal waits whenever any changed
+group is controlled, then accepts/rejects atomically. This is an implemented
+engineering disposition accepted by the maintainer for WP-03, not native/G-01 proof.
+
 ## Transition contract
 
 Validate capability/draft → compute one next snapshot → apply reset policies →
@@ -57,7 +62,8 @@ IDs. Each table has its own controller/IDs unless intentionally controlled toget
 The [private WP-02 implementation](wp-02-contracts.md) now realizes wire version 1
 with narrower date variants and inferred field/operator/value types. The sketch
 below remains an overview; executable producer contracts and their normalization
-choices are owned there. Controller/native coordination above is not implemented.
+choices are owned there. WP-03 implements the pure controller portion above;
+native coordination remains unimplemented.
 
 ```ts
 type JsonValue = null | boolean | number | string

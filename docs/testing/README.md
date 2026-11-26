@@ -4,7 +4,10 @@ Source: HLD §13; product acceptance and quality gates. WP-01 mounts foundation
 build/type/boundary-unit/browser-smoke/Storybook/packed-consumer checks, not feature
 acceptance suites. The [README](../../README.md#local-foundation-workflow) owns
 executable commands; [foundation evidence](../evidence/wp-01-foundation-2026-11-23.md)
-records their scope. Documentation checks remain independently runnable in Python.
+records their scope. WP-02 adds pure contract/operator conformance; WP-03 adds
+pure controller and real React hook fixture checks. Their evidence is still
+packet-scoped, not full table/native/resource/SSR acceptance. Documentation checks
+remain independently runnable in Python.
 
 ## Choose checks for meaningful risk
 

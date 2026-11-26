@@ -1,4 +1,11 @@
 import type * as headless from "@tableweave/react";
+import type { TableCommand } from "@tableweave/react";
+import {
+  createTableController,
+  useTableweaveQuery,
+  useTableweaveSelector,
+  useTableweaveState,
+} from "@tableweave/react";
 import type {
   FieldAccessors,
   QueryFor,
@@ -12,9 +19,8 @@ import {
   defineOperator,
 } from "@tableweave/react/filters";
 
-export const rootIsStillScaffold: keyof typeof headless extends never
-  ? true
-  : false = true;
+export const rootProvidesController: typeof headless.createTableController =
+  createTableController;
 const threshold = defineOperator({
   id: "custom.threshold",
   labelKey: "synthetic.threshold",
@@ -341,9 +347,39 @@ const noTabs = defineQuerySchema({
 // @ts-expect-error A literal schema without tabs accepts only null.
 export const badUnconfiguredTab: QueryFor<typeof noTabs>["tabId"] = "all";
 
-// @ts-expect-error Controllers are not implemented by WP-02.
-import { createTableController } from "@tableweave/react";
+export const controller = createTableController(
+  { schema, selection: true },
+  { initial: { query }, registry, now: () => 0 },
+);
+controller.dispatch({
+  type: "builder.commit",
+  rule: { id: "new", field: "amount", operator: "number.eq", value: 0 },
+});
+controller.dispatch({
+  type: "sorting.change",
+  update: (previous) => [...previous, { id: "amount", desc: true }],
+});
+export const badCommand: TableCommand<typeof schema> = {
+  type: "tabs.change",
+  // @ts-expect-error Controller tab commands retain literal schema IDs.
+  tabId: "missing",
+};
+// @ts-expect-error Accepted snapshots are readonly.
+controller.getSnapshot().query.search = "not-writable";
+export function TypedHooks() {
+  const state = useTableweaveState(controller);
+  const query = useTableweaveQuery(controller);
+  const count = useTableweaveSelector(
+    controller,
+    (snapshot) => Object.keys(snapshot.selection).length,
+  );
+  const id: "typed" = query.schemaId;
+  return { id, state, count };
+}
+
+// @ts-expect-error Native table/resource facade belongs to later packets.
+import { useTableweave } from "@tableweave/react";
 // @ts-expect-error Internal source paths are not public exports.
 import "@tableweave/react/src/contracts/index.js";
 
-void createTableController;
+void useTableweave;

@@ -1,15 +1,19 @@
-# @tableweave/react — private contract candidate
+# @tableweave/react — private accepted producers
 
-WP-02 adds browser-independent schemas, wire-v1 validation, pure predicates,
-operator/preset extensions, date resolution and semantic identities. These are
-private producer candidates awaiting packet review, not a table implementation.
+Accepted WP-02 provides schemas, wire-v1 validation, pure predicates, operators,
+dates and identities. Accepted WP-03 adds the private accepted-state controller/
+hook producer. Neither is a full table implementation or release approval.
 
 - `/contracts`: `defineQuerySchema`, `createQuery`, `parseQuery`, `normalizeQuery`,
   `getFilterIdentity`, `getQueryIdentity`, `ContractError`, `defaultLimits`,
   `canonicalJson` and schema-specific types (`QueryFor`, `RuleFor`, `FieldAccessors`).
 - `/filters`: operator registry/presets, `compileFilter`, `createFilterEvaluator`,
   `translateQuery`, `invertRule`, explicit date resolution and associated types.
-- Root: still an empty client entry; no controllers, hooks or native table API.
+- Root (client entry): `defineController`, `createTableState`, `reduceTableState`,
+  `createTableController`, `replaceTableDefinition`, `ControllerError`,
+  `useTableweaveState`, `useTableweaveQuery`, `useTableweaveSelector` and types.
+  See the [WP-03 protocol](../../docs/engineering/wp-03-controller.md). No native
+  bridge, resource/table facade or styled UI is supplied.
 
 Contracts/filters contain no client directive or React/UI import. Their only
 runtime dependencies are Valibot `1.5.0` and Internationalized Date `3.12.4`.

@@ -38,6 +38,20 @@ describe("emitted foundation boundaries (not feature acceptance)", () => {
   });
 
   it("retains client directives without pulling styled/sortable dependencies into defaults", async () => {
+    const exports = await import("../../packages/react/dist/index.js");
+    expect(Object.keys(exports).sort()).toEqual(
+      [
+        "ControllerError",
+        "createTableController",
+        "createTableState",
+        "defineController",
+        "reduceTableState",
+        "replaceTableDefinition",
+        "useTableweaveQuery",
+        "useTableweaveSelector",
+        "useTableweaveState",
+      ].sort(),
+    );
     for (const name of ["react", "heroui"]) {
       const path = resolve(`packages/${name}/dist/index.js`);
       const graph = await inspectGraph(path, `packages/${name}/dist`);

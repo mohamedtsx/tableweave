@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-03 private coordinator — 2026-11-23](wp-03-controller-2026-11-23.md):
+  pure controller, controlled transactions, packed types/runtime and React hook
+  fixture evidence; no native/resource/framework SSR or release acceptance.
+
 - [WP-02 private contracts — 2026-11-23](wp-02-contracts-2026-11-23.md):
   pure schema/operator/date/translator and packed-boundary evidence; no mounted
   table, backend, SSR, full gate or publication acceptance.
