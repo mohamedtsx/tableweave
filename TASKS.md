@@ -6,6 +6,41 @@
 
 ### Resume checkpoint — latest state
 
+- Latest user request authorizes **reviewing open PRs and merging eligible PRs one
+  by one into develop**. This supersedes the earlier no-merge restriction for this
+  ordered Git operation only. Keep drag/install/deployment/release restrictions;
+  do not waive failed checks or unresolved findings. Main owns retarget/merge/Git;
+  read-only reviewers may inspect exact PR source/evidence, not change or execute it.
+  Initial open chain was #3–#8 (green checks) then draft #9 (failed foundation checks).
+  Review #9's actual CI log records483 lint errors and3 warnings, so it is blocked
+  pending correction/reverification rather than made ready or merged blindly.
+  Preserve packet branches/commit identities and the running user preview. Retarget
+  stacked PRs to develop only as their preceding dependency has actually merged.
+  Main snapshots exact #3–#9 bases/heads/diffs/review comments outside the repo at
+  /tmp/opencode/tableweave-merge-review-001. Three read-only review leases cover
+  #3/#4, #5/#6 and #7/#8 independently; main reviews blocked #9 and merge mechanics.
+  PR #9 has a published factual COMMENT review (6077983479), not personal approval
+  or a request-changes impersonation. Prepared one-PR merge guard requires exact
+  reviewed head, preceding actual develop merge, all current checks SUCCESS and
+  merged-tree equality to the tested packet head. No batch/blind merge is selected.
+- Ordered merge outcome: #3 merged into develop at8851677, #4 at87ef06d, and #5
+  atb4ab97b. All three actual merge commits have the expected develop/head parents
+  and exactly the reviewed/tested packet-head tree; original branches remain.
+  #4's historical missing-patch thread is verified addressed and resolved.
+  Review of #6's actual inline thread confirms a P2 at head9eb71e1: a newer
+  authorization begin clears a returned candidate's prepared grant, then stale
+  construction/acceptance throws rather than being safely dropped. Keep that
+  thread unresolved; #6 is retargeted to develop but NOT merged. #7/#8 have no
+  new introduced blocker in their bounded source review, but inherit #6 and stay
+  dependency-blocked on their original stack. #9 remains draft with failed last-
+  tested CI and its separate runtime gaps. Review comments are published on all
+  open/merged PRs; no personal approval or new runtime result is fabricated.
+  Next step: authorize/select a scoped #6 safe-supersession correction and owner/
+  React regression, verify corrected source/packed Start/CI, then integrate that
+  fix into #7/#8 and revalidate their combined trees before resuming ordered merges.
+  Merge-review handoff docs pass302 Markdown/1,196 local links, checker19/19 and
+  diff whitespace. Main commits/pushes only TASKS/REVIEW status to the held #9 branch;
+  no source fix, failed-check waiver or further merge is claimed by that receipt.
 - User now authorizes **focused commits and a PR targeting develop**. This supersedes
   the earlier Git-publication hold only; no merge, deployment, npm publication,
   dependency installation, drag activation or readiness waiver is authorized.

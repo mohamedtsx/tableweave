@@ -10,6 +10,53 @@ When the maintainer no longer needs these notes, they can be cleared on request.
 Keep applied decisions in their canonical documentation/code first, so clearing
 the scratchpad does not lose the guidance. No notes are cleared by this move.
 
+## Merge review — review session 58 (ordered develop integration)
+
+The user explicitly authorizes review and sequential merging of the open PRs into
+develop. This overrides the earlier no-merge hold only; no failed-check waiver,
+installation, drag activation, deployment or release approval is supplied.
+
+Exact-head independent source reviews inspect #3/#4, #5/#6 and #7/#8 separately,
+using historical Git objects, not the newer integration working tree. Main reviews
+#9's failed actual CI and revalidates current checks/dependency/merge mechanics.
+No new runtime is executed during this review. Existing successful exact-head CI
+is reused only when the actual merged tree equals the tested packet head.
+
+| PR | Disposition |
+| --- | --- |
+| [#3](https://github.com/mohamedtsx/tableweave/pull/3) | Merged to develop,8851677; no bounded source blocker; checks green; tested tree preserved |
+| [#4](https://github.com/mohamedtsx/tableweave/pull/4) | Retargeted then merged to develop,87ef06d; committed patch hash verified and old missing-file thread resolved; tested tree preserved |
+| [#5](https://github.com/mohamedtsx/tableweave/pull/5) | Retargeted then merged to develop,b4ab97b; no bounded source blocker; checks green; tested tree preserved |
+| [#6](https://github.com/mohamedtsx/tableweave/pull/6) | Retargeted to develop; confirmed unresolved P2 superseded-authorization exception; NOT merged |
+| [#7](https://github.com/mohamedtsx/tableweave/pull/7) | No new blocker found in its inspected delta; blocked on inherited #6 finding |
+| [#8](https://github.com/mohamedtsx/tableweave/pull/8) | No new blocker found in its inspected delta; blocked on inherited #6 finding |
+| [#9](https://github.com/mohamedtsx/tableweave/pull/9) | Remains draft; last-tested CI fails483 lint errors, plus preserved current-runtime gaps; NOT merged |
+
+### n1 — Confirmed #6 finding supersedes initial no-blocker recommendation
+
+The first resource/SSR source report could not attribute a bot summary without its
+inline finding. Main retrieves the actual unresolved thread at the exact9eb71e1
+head. Follow-up source review confirms it and preserves the first report unchanged.
+At authorization-session.ts:70–77, begin clears prepared grants. After a completed
+different-scope/definition candidate B but before its acceptance, a newer begin C
+therefore makes B ineligible. commit(B.authority) throws at line121; reconstructing
+B instead throws at runtime.ts:66–71. The lifecycle route retains candidates across
+Suspense/useTransition, so this is an actual source-level missing benign-supersession
+path. The exact scheduler stack is unmeasured and is not claimed as a reproduced
+runtime failure. Existing tests do not cover a newer authorization begin between
+candidate completion and acceptance.
+
+Main publishes the finding on the existing thread without resolving/dismissing it.
+Required next correction must safely drop obsolete construction/acceptance while
+retaining grant guards and the old committed owner until an eligible replacement
+commits; genuine terminal denial stays terminal. Add focused owner/React coverage
+and rerun applicable genuine source/packed Start/CI before merging #6. Then integrate
+that fix into #7/#8 and revalidate their changed combined trees. Do not land the
+inherited defect indirectly via a later green stacked PR or the draft integration.
+
+All packet branches/producer identities and failed evidence remain. Source review,
+GitHub COMMENT reviews, actual merges and personal/release acceptance stay distinct.
+
 ## Final verification — review session 57 (provisional Git review handoff)
 
 The user authorizes focused commits and a PR targeting develop, not merge or release.
