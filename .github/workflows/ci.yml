@@ -26,3 +26,14 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm check
+      - name: Retain failed synthetic composition evidence
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: wp08-composition-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            tests/controls/filter-composition/.artifacts/fc01/ordered-*/composition-results/**/trace.zip
+            tests/controls/filter-composition/.artifacts/fc01/ordered-*/composition-results/**/error-context.md
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 3
