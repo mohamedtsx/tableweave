@@ -1,5 +1,232 @@
 # Tableweave tasks
 
+## Current ordered correction integration — 2026-11-26
+
+User authorizes bug correction and reviewed sequential develop merges. #6 is
+actually merged at821dfa2 after corrected0967326 passes both complete workflows.
+Main integrates corrected #7 e2eb1ae into this clean #8 branch by ordinary merge,
+preserving packet history. #7 remains unmerged pending current CI. Resolve only
+the ledger and root Vitest conflicts: retain all historical notes, exact source
+factory aliases, all controls/filter-tools discovery and the genuine declaring-app
+QueryClient alias/new Start owner units. No source/producer conflict or dependency
+change. Next: actual combined local lint/types/units/docs, commit/push and current
+complete CI. #8 cannot merge before #7 actually lands and its tested tree remains
+unchanged. No install, vendor/drag work, deployment, release or check waiver.
+
+Fresh combined intake passes659/659 root units across37 files, zero failed/pending/
+retried cases, whole-root Biome428 files, original strict Start TS6/5.9,121 Markdown/
+634 local links and18 checker probes. All five corrected app/test bodies match
+verified0967326 exactly. The config resolution preserves every existing exact
+source-factory alias and controls/filter-tools entry; only exact public QueryClient
+resolution and new Start discovery are added. Existing accepted emission/dependencies
+are reused. Main selects the ordinary two-parent integration commit/push and current
+full CI before any #8 merge; no combined browser/packed success is inferred locally.
+
+## Historical WP08 packet integration
+
+Current integration: source handoff9fbac79 is replayed onto final WP-07 46df932
+in this target. Main reconciles shared scripts/exports/CSS/patches/lock/ledger and
+preserves both packets' verification lanes. The new
+[real-tool/control composition](docs/planning/wp-08-tools-composition-plan.md)
+has authored fixtures only; execution waits for a clean target install and merged
+public build. Main owns those actions; no packet approval or merge is implied.
+
+Frozen target install/build and exact runtime byte guard now pass. Transport is
+committed as68706c5; merged units pass643 across35 files. All180 emitted files are
+frozen atad59470c7d472563ed273b8b167073953f6f574df0a1910510480082da63a8ce
+while the fixture owner executes against them. Independent stack reconciliation
+review is active. Main's additive actual-archive composition runner is prepared
+but not registered/executed; current real19 cases and four new Storybook plays are
+not yet claimed passing. Full combined workflow/remote PR approval stay pending.
+
+Preflight also passes actual Start generated-router/build/typecheck, fresh frozen
+manifest install and all165 source controls cases against the merged stack. Pager
+LIMITATION negatives retain their classification. Existing WP-07 combined browser
+fixtures run separately; no new real-tool or Storybook pass is inferred from these.
+Independent reconciliation now confirms146 WP-07-exclusive/217 WP-08-exclusive
+paths preserved, exact88+92 emitted union,42 asset tests, three-format byte guard
+and both emitted compiler programs. Main grants bounded stack-reconciliation
+approval. REVIEW session12 n1 is a verified documentation-only lane-label correction,
+now fixed without changing the retained unpatched tool/profiled control tests.
+New composition/genuine packing/full ordered stack/remote packet gates stay pending.
+All43 existing WP-07 emitted combined-tool browser cases also pass on the merged
+build, independently of the new real filter/control composition still being tested.
+The retained38 emitted-control cases also pass against the frozen merged180 outputs;
+the three existing browser baselines (165 source/43 tools/38 emitted) remain intact.
+Independent new-harness review now passes one synthetic control/18 guard negatives
+plus11 installed-byte classifier cases and real registry zero-fuzz proof. All10
+current manifest hashes match. Main grants scoped harness approval only; genuine
+packed19 still waits for the active fixture handoff and main's explicit wiring/run.
+New fixture handoff now passes18/19 actual emitted cases, both strict source/public
+compilers and22-file Biome, with all180 outputs unchanged. FC-01 loses focused real
+builder portal focus to BODY on accepted selection swap, including an unclocked
+reproduction. Main preserves the failure and independently replays before a bounded
+causal review; no producer correction or app/global/vendor workaround yet. REVIEW
+session14 n1 and BLOCKER.md own the reproduction; later case tail/Storybook4/packed19
+remain unexecuted/blocking. No user product decision is currently needed.
+FC-01 private cause is now established: focus capture/removal work, but layout
+restoration calls enabled Cancel while root is still inert; modal passive cleanup
+clears inert afterward. Private candidate passes59 executions (unclocked1/unchanged19/
+focused10/adapted29), both strict compilers and Biome. Main allocates/applies only
+SelectionToolbar restoration phase/live guards, with no vendor/timer/global patch;
+independent source review precedes new shared output. A separate new permanent
+focus-handoff test lease prepares6505 probes; execution waits for a named new
+generation. Old180/275 guards and failed traces remain historical and unchanged.
+Independent single-producer review now passes65 private browser executions,
+strict TS6/5.9/Biome and two DOM-free SSR/import smokes, with causal before failures
+and original emission identity. Main grants bounded source approval and starts
+the separately named fc01 shared rebuild, preserving old failed manifests first.
+Expected diff is one toolbar JS file, all179 other outputs unchanged. Actual
+rebuilt19/permanent10/Storybook4/genuine packing still gate integration acceptance.
+Actual fc01 build now passes: only toolbar JS changes to0249b473…, all179 other
+outputs remain identical. New180 aggregate de82ce232f3021a754b1e30df780eac27cd358604766cde4110cc922bf25f095;
+275-source/public aggregate45e209723d5aa67dfb23798099243496d9d3d78e0b583b9ea5922b2c9f452b5d.
+Old failed manifests/traces remain preserved. Main runs unchanged19 on6499 and
+old source selection29 while building real Storybook without rebuilding packages;
+permanent focused tests may now execute against supplied fc01 artifacts on6505.
+Actual fc01 unchanged19 now pass, including the previously blocked queued-search/
+action/selection Cancel/normal-focus/discarded-draft tail. The unchanged unclocked
+diagnostic, source selection/privacy29 and old built Storybook4 also pass. Main
+registers the reviewed additive genuine19 runner after retained profiled38 and
+before final CLI verification; unpatched43 tool production remains separate.
+New Storybook4 and fresh combined actual-tarball replay run next; permanent focused
+tests/default helper review/full ordered workflow still remain.
+New built Storybook4 also pass with the strict host-completion gates. Default
+evidence-runner review finds two P2 issues (inherited report FILE precedence and
+coupled before-manifest/source rebasing). Main independently reproduces both, fixes
+highest-priority unique report output and parent-retained snapshot comparison, and
+replays both corrected counterexamples plus a clean positive. Independent correction
+review is active; default registration remains held. These are evidence-harness
+issues, not a failing focus producer or invalidated completed actual19/four plays.
+Fresh genuine combined-tarball replay now passes100 production cases (43 unpatched
+tools/38 profiled controls/19 profiled real composition), with extracted CLI bytes
+verified before/after, unpatched E_VENDOR negative unchanged,265-file strict actual
+composition programs and1240 recorded runtime IDs. Headless90/styled100 archives
+match explicit allowlists. Report packed-pitxjz; permanent focus/default correction
+review/full ordered workflow and final packet/remote approval remain next.
+Permanent focus10 now pass publicly with both strict compiler modes/Biome/frozen
+180+275 guards. Whole composition independently receives bounded source/emitted
+approval (four fresh probes,19 audit, meaningful seven negative errors/compiler,
+14 host-gate negatives). Base runner findings independently resolve across88 guard
+vectors/three pinned --list checks. Main extends default helper to supply focus's
+required SHA, unique own capture and memory guard, plus types-only mode; that delta
+needs review before registration. A new unique packed-focus module is allocated
+to run10 on the existing genuine consumer6509 without rewriting the100-case report.
+The completed actual integrated-gate preflights now pass: types mode executes both
+fixtures under strict TS6/5.9, and browser mode executes exactly19+4+10 with both
+fixture snapshots anchored in parent memory before/after. New ordered paths keep
+all failed/original evidence intact. Final dual-namespace helper review remains
+active; default activation/full ordered workflow wait for it and packed-focus handoff.
+Final helper integration is now independently accepted after123 guard checks/two
+history readbacks/four real strict compiler programs; the P3 types-mode console
+wording is corrected without changing gate behavior. Permanent focus10 receive
+independent fresh10/public-source type approval. The genuine packed module passes10;
+main audits it and passes three fresh production probes, preserving the old100 report.
+Default type/public browser commands and fresh profile38+19+10 are registered.
+FC-01 is resolved at its source/emitted/Storybook/packed boundary. Main starts the
+complete ordered `pnpm check`; runtime/test/manifest/lock/archive inputs are frozen.
+Final packet, push/PR and remote checks remain required; all PRs stay unmerged.
+**Remote clean-checkout correction:** both workflows45380868486/45380893266 fail
+at the new type gate because verify-public-roots reads an ignored workstation
+roots-before.json. Build/strict prior stages pass; later gates do not run remotely.
+Main allocates only that verifier and a new foundation regression fixture: validate
+the already reviewed generation's fixed count/hash directly, never optionalize or
+autogenerate its trusted expected hash. Keep both parent-memory snapshot guards and
+all browser/type assertions. Prove absent/poisoned historical artifacts irrelevant,
+wrong/missing/renamed output and unknown generation still reject. Independent review,
+clean-path targeted gates and fresh remote runs precede final delivery acceptance.
+The corrected actual four-program strict types gate passes with both parent-held
+snapshots unchanged. Main commits the candidate harness repair for transfer into
+the separate cold worktree, then runs complete CI-mode checks there. Independent
+review remains pending; this candidate commit is not remote/packet reacceptance.
+Independent correction review is now accepted:9 permanent tests/31 guard vectors/
+two clean relocations and strict TS6/5.9 pass, original failures reproduced. Main
+grants scoped harness approval and pushes corrected candidate04f3c10 plus this
+documentation disposition; complete cold CI-mode rehearsal and replacement remote
+workflows run separately. No runtime/archive input changes or final remote claim.
+Replacement workflows45383808554/45383819715 pass the repaired cold gate/652
+units and reach existing builder browser tests. Both fail the same inverse/operand
+case: two accessible Cancel filter edit buttons during consecutive popover sessions.
+Main allocates read-only/private causal reproduction of builder exit lifecycle on
+6517, retaining actual assertions/timeouts. Determine settled-session test precondition
+versus genuine overlapping-interaction defect before any fixture/producer edit.
+No .first/retry/forceclick/delays/vendor patch or broader runtime repair is approved.
+Private causal proof identifies exit-retained noninteractive Cancel markup, not
+two current editors: pointer-events:none/inert old exit, new native keyboard focus
+and pointer event targets. The exact strict error is reproduced in a rapid diagnostic;
+the unchanged original case passes locally. Main allocates a test-only correction
+in that one builder case: assert closed after valid Apply, one focused dialog after
+Rule options, closed after Cancel. Preserve all original actions/assertions, global
+strict Cancel, deadlines/retry0 and producer/animation code. Main canonical baseline
+runs first on6521; separate correction review/full55/type and remote checks follow.
+The separate cold04b3bf7 `CI=1 pnpm check` now exits0 without the workstation
+manifest:652 units/42 Node/411 browser/110 packed production/54+54 Start, frozen
+install/types/lint/docs pass. Original uncorrected builder case also passes locally,
+so this does not erase either remote timing failure. Main's canonical fixture
+baseline passes, then actual four-added-assertion full55/strict TS/Biome pass on6521
+with no CSS import/JS/source serving adaptation. Separate correction review remains
+pending before push. Only one test's preconditions change; runtime/archives stay fixed.
+Main commits this test-only candidate to replay the exact assertions in the separate
+clean checkout, preserving prior full-run results. Independent correction review
+still gates push and final remote success; candidate commit is not acceptance.
+Clean checkout7ca8e12 corrected canonical55 also passes under CI=1 on6525, with
+no source/CSS adaptation. Independent static/type review confirms exact four lines
+and preserved assertions, but its private native Vite setup fails CSS before any
+behavior. Main supplies the already successful exact canonical CLI/cwd/cache path
+for independent replay; zero setup-blocked passes are claimed. New remote push
+waits for that correction disposition; no source/runtime broadened repair.
+Independent canonical replay now passes3/3 without CSS/alias adaptation, same spec
+f107a7aa…/2043 input/180+275 root seals. Main grants bounded test-only correction
+approval and pushes7e3ff48 plus this documentation disposition for new full remote
+workflows. No production/library/archive code changes; full cold rehearsal and
+55+55 canonical source evidence are complete. Final remote acceptance still waits.
+Push45390462746 passes repaired cold gate/builder/genuine packing, then fails two
+source pagination light-theme axe checks at the immediate-open scan. Error nodes
+report data-entering=true with4.36–4.42 contrast. Main allocates private causal
+measurement of entry versus steady open/closed Select in all four locale/themes;
+no test/contrast rule, CSS/producer or animation edit is yet authorized. Preserve
+threshold4.5, original assertions/deadlines and failure logs. PR workflow result
+is still awaited separately; no full remote pass is claimed.
+PR45390474622 now completes successfully at the same a668922 head; push45390462746
+remains failed at the two immediate-entry contrast scans. One green full workflow
+does not erase the red sibling or establish settled contrast. Main retains both
+results and the causal phase/contrast investigation; no blind workflow rerun.
+Private unmodified canonical measurements now show steady light17.71/dark17.26
+contrast for all four options/locales; only popup opacity changes during entry.
+The exact remote scan failure is not reproduced locally; its gray colors match
+measured transitional compositing, not steady tokens. Main audits raw phase/axe
+evidence and allocates only three test preconditions before open axe: visible listbox,
+no data-entering=true and actual opacity1. All original scans/rules/threshold/actions/
+deadlines remain; no CSS/animation/producer edits or all-frame WCAG claim. Canonical
+baseline precedes actual edit; main full62/type/Biome and independent review follow.
+Main's canonical unmodified four theme/locale cases pass locally (not an exact
+reproduction of the failed remote scan). Main independently audits raw phase/axe
+JSON for all16 options and applies only the three approved observed-state assertions.
+Scoped strict TS/Biome pass; canonical full62 runs on6529 with original deadlines/
+retry0 and all scans/rules intact. Runtime/archives remain unchanged. Separate
+correction review follows completion; no all-animation/manual AA claim is added.
+Canonical main62 now passes, preserving all three LIMITATION characterizations;
+actual test-only diff contains just the three added settled-open assertions. Main
+commits the candidate to replay it in the clean worktree without changing package
+outputs. Independent correction review is active; push/final acceptance remains held.
+Clean replaydb030c3 canonical62 now passes under CI=1. Independent canonical4+
+four fresh steady probes/twelve full axe scans/all16 option ratios, strict actual
+845-file TS5.9 program, Biome and10338/180/275 seals pass. Main grants scoped
+test-only correction approval at6df7914 and pushes it plus this disposition for
+fresh full workflows. No source/token/threshold/animation changes or all-frame AA
+waiver; final dual-workflow acceptance still waits, all PRs remain unmerged.
+**Complete final ordered result:** actual `pnpm check` exits0 with643 Vitest units,
+42 Node compatibility tests,411 baseline/tool/control/emitted/real-built-play cases,
+110 genuine packed production cases (43 unpatched/38+19+10 profiled),54 source and
+54 actual-packed Start HTTP/browser checks. Strict programs, frozen install/lock,
+426-file lint, source SSR/import and docs/18 probes pass. Actual180 outputs remain
+de82ce…; all scoped findings are resolved and independent reviews recorded. Main
+grants **agent-approved under delegated authority** for WP-08's bounded packet/
+composition/private-profile integration, not personal/stable/external acceptance.
+Next commit the reviewed integration, push/open PR #8 against final WP-07, verify
+both remote workflow results and keep every PR unmerged. Runtime/archive inputs
+remain unchanged; final status/evidence documentation alone is refreshed now.
+
 ## Ordered correction integration — 2026-11-26
 
 User authorizes reviewed sequential develop merges and bug corrections. PR #6
@@ -183,12 +410,12 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   still-open PR #3. Final head `bf7712e` is pushed/verified and the tree was clean.
   Resource transport `71f076c` is stacked as `e6eeabf` plus approval `2be951a` in
   [PR #5](https://github.com/mohamedtsx/tableweave/pull/5), based on open PR #4;
-  combined checks pass. WP-06 final9eb71e1 is delivered in open/unmerged PR #6
-  with both final remote checks passing; clean-checkout generation n7 is resolved.
-  WP-07 tool UI/combined fixture and WP-08 core corrections remain in progress;
-  WP-09 details-only implementation is separately allocated in its isolated tree.
-  Finish numbered reviews/integration before packet approvals/stacked PRs. PR #3,
-  #4 and #5 remain open; no PR merge, deployment or publication.
+  combined checks pass. WP-06 final9eb71e1 and WP-07 final46df932 are delivered in
+  open/unmerged PRs #6/#7 with passing remote checks. WP-08 completes its ordered
+  isolated workflow after independent source/profile corrections; next transport
+  onto exact WP-07, real tool composition and combined verification before PR #8.
+  WP-09 details/plain criteria source and WP-10 pure reorder stage remain bounded
+  parallel work; facade/adapter/full gates stay separate. No PR merge or publication.
 - **Review closed:** WP-01, WP-02 and WP-03 review session 1, following explicit
   maintainer acceptance of each packet. Detailed numbered notes
   live separately in [REVIEW.md](REVIEW.md), a temporary review scratchpad, not a
@@ -212,11 +439,11 @@ Planned work is not authorization to implement, install, publish, or modify Gami
 | TASK-011 | Coordinate delegated WP-04–WP-15 delivery | in progress | Main agent owns ledger/shared integration and PRs | Explicit multi-agent/plan/implement/review/approval/PR grant; no merges |
 | TASK-012 | WP-04 native/collection feasibility | done | Main delivered implementation/patch handoff; maintainer reviews PR #4 | Delegated G-01 approval; 241 unit/32 Chromium/public packed checks; no merge |
 | TASK-013 | WP-05 resource presentation/races | done | Main delivered combined approval/PR #5; maintainer reviews later | Scoped delegated G-03; 288 unit/43 Chromium/strict public packed checks |
-| TASK-014 | WP-06 Start/Query SSR integration | done | PR #6 final9eb71e1 open/unmerged; both remote checks pass | Delegated bounded G-04; no personal/release acceptance |
-| TASK-015 | WP-07 filter tools/async choices | in review | Combined stack approved; separate PR/remote delivery next | Exact9eb71e1 parent;430 units/171 baseline-tools/43 packed-tools/108 Start |
-| TASK-016 | WP-08 table controls | in progress | Core approved; selection/pager UI, additive owner-intent review | Reviewed WP-04/WP-05; exact producer ports only |
-| TASK-017 | WP-09 details/localization/responsive shell | in progress | Approved isolated details-only producer first; shell waits for WP-07/08 | Reviewed WP-04/WP-05, exact later control/tool handoffs |
-| TASK-018 | WP-10 optional sortable | in progress | Pure coordinator/column-helper stage only; no adapter/install yet | Reviewed authority + explicit app stamp; G-02 remains |
+| TASK-014 | WP-06 Start/Query SSR integration | done | PR #6 final9eb71e1 open/unmerged; remote checks pass | Delegated bounded G-04, no personal/release acceptance |
+| TASK-015 | WP-07 filter tools/async choices | done | PR #7 final46df932 open/unmerged; remote checks pass | Bounded delegated delivery; no personal/external-gate acceptance |
+| TASK-016 | WP-08 table controls | in review | Isolated full workflow passes; source transport and real-tool stack next | Exact WP-07 parent; temporary profile independently verified |
+| TASK-017 | WP-09 details/localization/responsive shell | in progress | Details/plain criteria producers approved; facade/adoption held | Exact later WP-08 handoff, unpaged/live-context contracts |
+| TASK-018 | WP-10 optional sortable | in progress | Pure stage1 approved; adapter/ref/interlock stages held | Actual controls stamps and browser G-02 proof remain |
 | TASK-019 | WP-11 examples/docs/workbench | planned | Assigned after feature handoffs | WP-06–WP-10 |
 | TASK-020 | WP-12 integrated browser/manual accessibility | planned | Verification owner assigned after WP-11 | Manual/support-matrix evidence cannot be fabricated |
 | TASK-021 | WP-13 packed compatibility/release tooling | planned | Package owner assigned after WP-11 | No publication rights inferred |
@@ -1326,3 +1553,256 @@ Planned work is not authorization to implement, install, publish, or modify Gami
   PR OPEN to feat/wp-05-resources, auto-merge null. TASK-014 is done for bounded
   delegated WP-06 delivery; no merge or personal/external-gate acceptance. Preserve
   earlier CI failures and their n7 correction evidence. No further WP-06 edits.
+
+
+## TASK-016 — Isolated WP-08 core producer
+
+- Main approved the [bounded plan](docs/planning/wp-08-implementation-plan.md)
+  before code in `/tmp/opencode/tableweave-wp08`, `work/wp-08-controls`, reviewed
+  WP-05 `3e4aaa8`. Final delivery stacks after WP-07; no merge or publication.
+- Worker owns presentation/**, approved native mode changes, controller/store.ts/
+  types.ts pure command guard and tests/controls/core/**. Main owns public exports,
+  all shared configuration/docs/ledger/Git. No new dependency or install.
+- 65 core/56 prior-controller/24 native/seven Chromium checks and strict TS6/5.9
+  pass, but independent review reproduced six defects in command/config capture,
+  scope Cancel, view provenance and relative-clock request binding. See
+  [review](REVIEW.md#wp-08--delegated-agent-review-session-1).
+- Main approved correction/protocol changes before code; worker reproduces/fixes
+  them before handoff. Atomic beginControlsRequest captures real accepted identity/
+  clock before resource.begin; transport/cache/lifetime stays application-owned.
+  Control UI/public/packed integration remains unassigned until tested handoff.
+  No scoped core or full packet approval is claimed.
+  **Core source correction approval:** independent n1–n9 replay passes263 tests
+  (129 core/56 controller/24 native/54 independent probes), eight strict compiler
+  checks and seven Chromium regressions;38-file manifest matches a84b448d33da.
+  Main approves this bounded source producer for integration, not the full packet.
+  Root exports are wired; actual emitted/packed proof remains pending. Narrow sort/
+  columns intent closure is separately assigned before its consumers.
+  **UI allocation:** selection/** + tests/controls/selection/** on6463, and
+  pagination/** + tests/controls/pagination/** on6465 get separate owners under
+  the amended plan. No root/renderer/core/dependency writes; precise interfaces
+  are actual reviewed ControlsPresentation/Authority, not guessed facades.
+  Sort/columns closure now independently passes316 tests/eight strict checks/
+  seven Chromium with41 matching files; main approves it for consumers. Separate
+  columns/sorting owner receives those source dirs plus tests/controls/columns/**
+  on6467. Shared collection owner receives only native-collection.tsx, controlled-
+  collection.tsx, collection-messages.ts and tests/controls/collection/** on6469.
+  Main owns scoped header/checkbox contrast CSS and roots/config. Other UI owners
+  are told unfinished table-adapter integration is separate from their own proof.
+  Pagination correction n1–n3 has all three before-failing reproductions and a
+  56-browser/eight-unit-SSR/both strict compiler correction handoff, API unchanged.
+  Independent original-reproducer rereview is active; source aggregate434530ddee3e
+  is frozen. Selection privacy correction and collection/sort/chooser producers
+  remain active. Main retains all public/packed/combined approval and Git work.
+  Selection mask correction now has before-failing DOM/SSR evidence and8-unit/
+  29-browser/both-compiler/SSR correction handoff. Neutral/denied contexts suppress
+  normal/actions/focus callbacks before effects, preserving accepted state and
+  same-owner recovery. Independent rereview active; no source approval yet.
+  Selection independent replay now resolves the leak with29 browser checks plus
+  one fresh probe, SSR/privacy/focus and both strict compiler checks; both manifests
+  match. Main grants bounded selection-source correction approval. Pager n1–n3
+  independently resolve, but n4's malformed Promise constructor/species observation
+  is under fix/feasibility review. No global suppression or app-object mutation is
+  authorized; supported synchronous behavior cannot be silently weakened.
+  Independent Promise-boundary feasibility confirms the malformed original app
+  rejection can occur without any library observer. Worker still must fix avoidable
+  constructor/species getter invocation and accurately bound best-effort observation;
+  no unconditional containment or n4 approval is inferred. Supported sync contracts
+  and all privacy/mutation guards remain mandatory.
+  Independent renderer review passes27 current/21 legacy/six fresh browser probes,
+  both strict compilers and source fingerprints. The one-line group foreground
+  correction has A/B failure/pass proof. Main approves renderer source, refreshes
+  historical CSS disposition, wires root exports/owned CSS imports and allocates
+  tests/controls/integration/** plus apps/storybook/src/controls/** to a fixture
+  owner on6483. No combined/packed approval yet. Real WP-07 composition waits for
+  final dependency stack; old-tree fixtures must not fabricate missing tool APIs.
+  Main replaces borrowed dependency links non-destructively with a genuine local
+  install. Fresh strict build reproduces known scoped ListBox/barrel errors; exact
+  already-approved WP-07 declaration patch4120eff… resolves them without version/
+  runtime/strictness change. Lock diff is patch refs only; frozen install passes.
+  Both packages emit real roots/CSS. Main's expanded default discovery now passes
+  503 tests; source units use one source factory registry after an honest mixed
+  source/dist owner-helper harness failure, while actual dist/packed checks remain
+  unaliased. Fresh guarded tarballs pass both strict compilers/confinement (210
+  headless/230 styled files), exact82/59 archive outputs,185/885 confined runtime
+  modules and all control CSS selectors. Public boundary review active; no actual
+  packed-browser/full-stack approval yet. Test-only portability owner removes
+  vendor-link/machine-path assumptions from scoped harnesses; sources remain frozen.
+  Independent public-boundary review now confirms both strict compiler programs,
+  exact emitted/installed bytes, meaningful negative type assertions, archive/CSS/
+  graph confinement and unchanged patch-only dependency profile. Main grants
+  scoped public-package boundary approval; real combined and actual packed-browser
+  interaction, portable full workflow and final stack remain required.
+  Public control fixture now hands off23 emitted Chromium checks, both strict
+  emitted type programs and29 own-file fingerprints;137 public output bytes remain
+  unchanged. It is controls-only, not real WP-07 composition or archive browser proof.
+  Fixture owner is clearing full formatting/import-order and strengthening four
+  built-Storybook probes with actual completed/exception-phase gates before final
+  frozen review. Main prepares genuine production tarball replay on6487, without
+  public/vendor/source aliases; actual execution waits for that frozen handoff.
+  Main now passes23 actual production-tarball interactions with strict250-file app
+  programs/runtime/CSS confinement, plus four actual built Storybook plays and a
+  fresh documented23-case emitted run; all137 public outputs remain unchanged.
+  Main corrects only CSS-asset typing and explicit workspace cwd in three fixture
+  server configs; canonical config hashes await independent composition review.
+  Portability replay passes503 units/21 strict compiler invocations/selection SSR
+  and146 other browser cases, but repeated columns viewport loops leave Sort inert
+  after Escape/resize.14 non-matrix cases and one isolated light replay pass, not
+  the full17. Diagnostic90-second headroom did not fix it and is not accepted
+  behavior-deadline relaxation. Independent isolated triage is active before any
+  test sequencing or source correction; full packet/stack approval remains blocked.
+  Independent controls-only composition review adds two verified P1s despite23
+  baseline passes: controlled scope invalidation leaves selection.cancel unaccepted,
+  so freshB actions still receive oldA IDs; plain uninstrumented StrictMode crashes
+  with four cells against eight columns. Main approves app-owned mandatory reset/
+  proposal retirement only in the fixture, preserving ordinary controlled rejection.
+  Separate read-only StrictMode producer/vendor isolation is active before an exact
+  adapter correction plan. Expected-only Mask diagnostic is explicitly not immediate
+  revocation proof. Both P1s and the Escape/resize residual block final acceptance.
+  Composition n1 now independently resolves:36 candidate/four additional probes
+  and main actual production-tarball36 pass, while ordinary controlled reject,
+  delayed acceptance and same-owner selection/criteria retention remain intact.
+  App mandatory reset retires pending intent and clears selection before publishing
+  new owner tags; no library guard is weakened. n2 StrictMode isolation remains.
+  Escape root cause is separately confirmed in source/vendor/frozen production:
+  rapid reopen during exit-retained dialog loses focus, so Escape misses. Main
+  approves only public shouldSkipAnimation on the two internal content sites,
+  dedicated rapid-input regressions and synchronized independent viewport closure.
+  Original30-second deadlines are restored across scoped browser configs; prior
+  90-second runs remain diagnostic observations, not final acceptance.
+  Rapid-popover owner now reports19 cases (17 original/two four-cycle physical
+  regressions) passing at30 seconds,30 units/five strict compiler invocations and
+  exactly two approved source prop changes. Independent replay is active against
+  manifestb4869fc93f7ededc44683979ef4d961296e133e0dec4e799061a8a432595d8b7;
+  shared137 emitted files are deliberately still old. Public fixture now retains38
+  cases: prior36 pass and the new plain StrictMode/rapid public-root regressions
+  fail on those old bytes. Main has not rebuilt or claimed corrected production.
+  StrictMode root cause is independently narrowed to RAC1.22.1 cloning a clean
+  grouped header cache without its columnsDirty boolean. A private exact-vendor
+  experiment is approved, not a candidate runtime patch. Registry latest1.22.1
+  and inspected1.22.0/1.21.0/1.20.0 sources all omit that copy; distribution and
+  supported-public-adapter alternatives are under separate read-only review.
+  Main wires default control source/public browser runners, strict source/public
+  compiler checks and actual production archive replay into existing check scripts.
+  Source and public boundaries remain separate; no rebuild occurs during browser
+  runners. A fresh six-scope source replay at restored30-second limits is active.
+  The packed fixture inventory is explicitly38 and guards copied source/staged
+  bytes before/after execution. Default public/packed checks deliberately retain
+  the old-output StrictMode/rapid failures until a verified correction is supplied;
+  no skip, subset or workspace-only repair is called full acceptance.
+  Fresh default `pnpm test:controls:source` now exits0 at restored30-second limits:
+  7 core-native/29 selection/62 pager/19 sorting-chooser/27 guarded-renderer/21 prior
+  renderer cases,165 total. Pager's three explicit LIMITATION characterizations
+  remain negative host-behavior proof, not rejection-containment success. This is
+  source-only and does not resolve the retained old-public StrictMode failure or
+  replace independent rapid correction review/rebuilt production verification.
+  Rapid mitigation now independently resolves: causal old preimages fail all four
+  checks; exact two props pass21 browser/30 units/five strict compiler/13-file Biome
+  checks with six unchanged declarations and matching14-file manifest. Main grants
+  bounded source approval, not actual packed-runtime approval. Shared outputs stay
+  old until the separately approved vendor-cache/distribution disposition and rebuild.
+  Private clone-boolean experiment fixes original Strict failures, but genuine
+  cached-column insertion still fails5cells/8columns; owner stops as required.
+  Main approves only a second private column-parent lastChildKey traversal-boundary
+  experiment with cached mutation/order/semantic regressions. No candidate/shared
+  vendor/package/output changes or distribution approval. A portable consumer
+  profile is only a conditional alternative; normal unpatched runtime remains failing.
+  The separate unpatched public-cache API trial is negative: dynamic Header and
+  nested Collection dependencies retain both Strict4/8 failures before/after;
+  three ordinary semantic/current-event/visibility gates and strict TS6/5.9 pass.
+  All vendor formats match the registry and shared outputs remain unchanged. No
+  broader adapter or consumer profile is selected by that failed arrangement.
+  Second private traversal experiment passes but distinguishes actual supported
+  NativeCollection A: clone-only already passes tested same-owner order/visibility/
+  stable-leaf/current-record/Strict paths. Extra traversal repairs raw vendor B,
+  not a new Tableweave API. Main excludes it from the candidate profile and approves
+  construction only of minimal clone-only compat assets/tests in separate paths.
+  Independent review of repair/scope is active; no package shipping, workspace
+  registration/install, shared vendor/output edit or final profile approval yet.
+  Main prepares a separate final-stack target from exact delivered WP-07
+  46df932cd6076450ffb67d711a6e747d7b2aaf72 at
+  /tmp/opencode/tableweave-wp08-stacked, feat/wp-08-table-controls. It contains no
+  WP-08 source handoff yet; active assets/source review stay in their owned paths.
+  This preparation grants no packet approval or permission to merge/push early.
+  **New explicit user decision:** select the temporary application-side patch for
+  private/prerelease delivery if independent review and genuine packed-consumer
+  tests pass. Main proceeds with this direction, not an automatic repair or ordinary
+  unpatched-runtime promise. Broader traversal repair stays excluded; asset/review
+  leases remain bounded. User asks work to continue and blockers requiring input
+  to be raised. All PRs remain unmerged and pending evidence still blocks acceptance.
+  Independent clone-scope review now confirms the minimal repair (unpatched2
+  Strict failures versus six core/27 renderer/21 prior/23 ordinary+23 Strict/nine
+  selection smokes/one cache probe passing). Main approves only that repair scope.
+  Six compat assets and42 Node tests are constructed; exact three-format patch
+  application/registry byte proof passes, but independent asset/verifier review
+  is active. Main prepares separate consumer-profile and workspace-byte guard
+  helpers without executing installs or changing shared dependencies/old outputs.
+  Post-review integration sequence is approved before packaging/registration code.
+  Asset review now passes42 tests/10 checksums/three-format registry proof with no
+  blocker. Main approves the separate packaging/install stage, includes exactly six
+  assets without runtime export/automatic hook, preserves old asset-review hashes
+  and updates only packaging README/descriptor metadata. Repeated42 tests and
+  registry byte proof pass; patch/verifier bytes stay unchanged. The new combined
+  development patch is verified exact original declarations+runtime asset, with
+  no versions or traversal changes. Main starts the planned pinned local install/
+  lock update before workspace-byte checks and rebuilding; old137 output evidence
+  remains historical, not a guard that can be relabeled after the rebuild.
+  Rebuild now has137 files at9068ff… with exactly sorting/chooser JS changed; other135
+  declarations/CSS/runtime files remain identical. Workspace vendor bytes match the
+  reviewed three-format profile. Fresh emitted38, built Storybook4,504 units and
+  both public compiler checks pass. The full21-invocation type runner passes after
+  a larger host budget; its earlier300-second host interruption is retained, not
+  hidden by changing strictness/deadlines. Genuine initial profile install stopped
+  E_VENDOR because --ignore-workspace ignored app registration; main fixes only
+  that harness flag and proves local workspace selection. Corrected separate
+  actual-tarball profile38 passes with extraction-before-install, frozen reinstall,
+  explicit CLI verification before/after and untouched unpatched consumer rejection.
+  Report packed-cEz7Tp; independent main integration review remains active. Source
+  outputs are frozen during it; full ordered check/real WP-07 stack remain next.
+  Independent main-profile integration now passes extracted CLI positive/negative,
+  both strict compilers in210/230/250-file lanes, two fresh production probes,
+  actual archive/installed-byte/isolation/three-runtime-file scope checks. Main
+  grants bounded private profile integration approval, not packet/fullG05 approval.
+  Main starts the full ordered isolated `pnpm check` on frozen candidate inputs;
+  afterward source handoff/stack onto exact46df932 and real WP-07 tool composition
+  precede final packet approval/push/separate PR. All PRs remain unmerged.
+  **Complete isolated source result:** ordered `pnpm check` exits0 with504 Vitest
+  units,42 Node asset checks,250 browser executions (43 baseline/165 source controls/
+  38 emitted/four built Storybook), plus38 real-profiled-tarball production cases.
+  Three pager LIMITATION characterizations are negative host-behavior proof, not
+  universal containment successes. Frozen install,275-file lint, strict21+public
+  compiler programs, source SSR/import, actual archive/CSS/runtime/isolation and
+  docs/18 probes pass. Main grants bounded delegated isolated-source/component/
+  private-profile approval. Next commit source handoff, replay onto46df932 without
+  overwriting prepared unique fixture paths, then real WP-07 composition/combined
+  checks before packet approval and PR. No full-G05/external gate or merge follows.
+
+## TASK-017 — Parallel WP-09 producer handoff
+
+- Existing isolated `/tmp/opencode/tableweave-wp09` owns approved details source
+  (nine units/68 independent browser executions, source aggregate11ddb455…)
+  and plain criteria-authority source (70 independent units, both strict compiler
+  versions/DOM-free zero-runtime-import boundary, aggregate80da37ff…). These do
+  not appear in this WP-08 runtime. Main serializes their later exports/packing.
+- Full facade/default state/aggregate locale, actual unpaged policy and all four
+  real-tool authority adoption await exact dependency and approved contracts.
+  No wrapper/fake alias or integrated AC-16/25 acceptance is inferred. Existing
+  plan/path leases remain authoritative; no new write/install authority here.
+
+## TASK-018 — Parallel WP-10 stage handoff
+
+- Isolated `/tmp/opencode/tableweave-wp10` has bounded approved pure stage1 operation
+  metadata/column movement with151 tests and explicit permutation/hidden-slot proof.
+  It owns no row/order rollback cache or backend acceptance. Actual controller/
+  native stamps, renderer refs, pager interlock and optional adapter/browser
+  feasibility remain separate held stages; no dnd dependency is installed here.
+  Independent read-only planning may trace an exact live criteria-intent seam from
+  final WP-07 producer bytes and WP-08 authority before real tool/facade composition.
+  No source allocation, controller wrapper, private authority slot or facade alias
+  is implied; main approves any later additive contract before implementation.
+  Tracing returns a proposed plain registered criteria protocol plus controls
+  adapter, preserving all existing rule/search/date/source baselines. Main keeps
+  WP-08's original raw-tool coherent-context composition scope; no new WP-07 source
+  lease is opened here. Same-controller pre-render criteria revocation remains an
+  explicit unclosed AC-16/25 facade obligation for WP-09, not a hidden-slot waiver
+  or an inferred result of guarded selection/sort/pager behavior.

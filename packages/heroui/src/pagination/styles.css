@@ -1,0 +1,43 @@
+.tw-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  min-inline-size: 0;
+}
+.tw-pagination p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.tw-pagination__summary {
+  display: grid;
+  gap: 0.25rem;
+  min-inline-size: 0;
+}
+.tw-pagination__controls,
+.tw-pagination__pages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  min-inline-size: 0;
+}
+.tw-pagination__controls {
+  gap: 0.75rem;
+}
+.tw-pagination__size {
+  inline-size: 8rem;
+}
+.tw-pagination .button {
+  min-block-size: 2.75rem;
+  color: var(--foreground);
+}
+.tw-pagination .button[aria-current="page"] {
+  color: var(--default-foreground);
+  background: var(--default);
+}

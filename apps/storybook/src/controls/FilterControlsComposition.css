@@ -1,0 +1,62 @@
+.fc-theme {
+  color: var(--foreground);
+  background: var(--background);
+  min-inline-size: 0;
+  padding: 1rem;
+}
+.fc-composition {
+  max-inline-size: 76rem;
+  min-inline-size: 0;
+  margin-inline: auto;
+}
+.fc-composition h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.fc-composition p {
+  margin-block: 0.75rem;
+  overflow-wrap: anywhere;
+}
+.fc-boundary {
+  font-size: 0.875rem;
+}
+.fc-normal {
+  display: grid;
+  gap: 0.75rem;
+  min-inline-size: 0;
+  inline-size: 100%;
+}
+.fc-inline-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.75rem;
+}
+.fc-table-scroll {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+.fc-composition button:not([data-slot]) {
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  min-block-size: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+}
+.fc-application {
+  margin-block: 1rem;
+}
+.fc-application pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-inline-size: 100%;
+}
+.fc-application output {
+  display: block;
+  overflow-wrap: anywhere;
+}

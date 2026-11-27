@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 // Explicit owned stylesheet roots, not a generic source/asset copier. Extend
 // this list deliberately when another packet introduces component styles.
-const componentRoots = ["filters", "toolbar", "date"];
+const componentRoots = ["filters", "toolbar", "date", "columns", "pagination"];
 
 export async function copyStyles(
   source = fileURLToPath(

@@ -1,4 +1,20 @@
-# @tableweave/heroui — private collection and tool candidates
+# @tableweave/heroui — private tools, collection and control producers
+
+## Required temporary runtime profile
+
+The current private/prerelease styled runtime requires the explicit
+[RAC1.22.1 clone profile](compat/rac-table-clone/README.md). The user selected this
+path conditional on independent review and genuine packed-consumer tests. Extract
+assets from the actual archive before installation into application-owned patches,
+register them explicitly, then run the included read-only verifier. No postinstall,
+automatic configuration or bundled vendor implementation applies the repair.
+
+Plain unpatched grouped/Strict runtime fails upstream. Passing unpatched TS6/5.9
+public declarations does not establish unpatched runtime support. Headless is
+unaffected. Broader raw vendor cached Collection insertion remains outside the
+tested immutable NativeCollection API; no traversal repair is included. Stable/
+G-05/legal/publication/manual/device/performance and personal PR review remain
+separate from private profile verification.
 
 The root exports WP-04's bounded `NativeCollection` and `NativeCollectionProps`.
 It renders the current headless native view through real HeroUI/Aria grouped
@@ -20,8 +36,35 @@ gates remain separate. No merge is authorized.
 transport, accepted query state or backend authorization. Mutation observers report
 submitted/proposed outcomes, not automatic application acceptance.
 
+## Private WP-08 controls
+
+The root also emits `SelectionToolbar`, `Pagination`, `usePaginationCorrection`,
+`Sorting`, `ColumnChooser`, owned messages/types and guarded `NativeCollection`.
+Independent source reviews and real strict tarball type/runtime checks are bounded
+proof, not complete integration or release acceptance. See the
+[controls boundary](../../docs/engineering/wp-08-controls.md) and
+[dated observations](../../docs/evidence/wp-08-controls-2026-11-24.md).
+
+Applications supply coherent current `projectControls` facts and genuine authority
+from the same owned input. Separate targets compare exact factory definition/
+controller refs before current intent checks; query equality is not proof. The
+collection's optional `controls` envelope includes the actual definition,
+presentation and authority. `diagnostics:false` hides only developer footers/counts.
+Selection masks private tools on withheld context, never resets accepted criteria.
+
+Correction is opt-in and needs an application-owned epoch and **synchronous own-data**
+current port. It never fetches or owns another resource lifetime. Unsupported Promise
+returns cannot authorize correction; ordinary native rejection observation is only
+best effort. Altered/proxied/cross-realm application Promises may remain host-unhandled;
+no global suppression or object/prototype mutation is used. Applications own backend
+authorization, actions, Retry transport and persistence.
+
+Root types intentionally expose no vendor component props. Combined browser/
+Storybook/filter-tool/actual packed production interaction and later manual/device/
+performance/real-consumer/legal gates remain separate.
+
 `/sortable` still exports no plugin; the default root never imports it.
-`/styles.css` imports owned tool CSS in a reserved side-effectful layer. Applications supply
+`/styles.css` includes owned tool/collection/control CSS in a side-effectful layer. Applications supply
 their actual HeroUI/Tailwind stylesheet setup. Raw vendor declaration limitations
 and the strict build/public-type boundary are documented in the candidate contract.
 
@@ -32,7 +75,7 @@ selected for owned source, but rightsholder/legal inputs remain pending; private
 
 ## Candidate filter-tool styles
 
-WP-07's isolated source integration is reviewed; final stack delivery remains.
+WP-07 is delivered; the combined WP-08 stack remains under verification.
 Applications own theme and CSS
 setup; declare layer order **before** vendor imports so utility classes can still
 override Tableweave defaults:

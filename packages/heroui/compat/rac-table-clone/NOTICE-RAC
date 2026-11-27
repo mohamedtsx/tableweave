@@ -1,0 +1,24 @@
+Tableweave candidate compatibility asset for Adobe React Aria Components 1.22.1.
+
+Upstream: https://github.com/adobe/react-spectrum
+Registry package: https://registry.npmjs.org/react-aria-components/1.22.1
+The registry package declares Apache-2.0. Original runtime files carry Adobe
+copyright notices (including Copyright 2022 Adobe); those notices are retained.
+No separate upstream NOTICE file was present in the inspected registry archive.
+The accompanying LICENSE-APACHE-2.0 is an exact copy of the existing repository
+Adobe-attributed Apache-2.0 license. This notice does not change that license.
+
+Candidate modifications to dist/private/Table.js, Table.mjs and Table.cjs:
+- Preserve the actual columnsDirty boolean beside the existing clone cache copies.
+- Add prominent modification comments in each changed upstream runtime file.
+- Remove only those three files' terminal sourceMappingURL annotations. The
+  upstream map files remain unmodified and unreferenced; maps are not regenerated.
+
+No column-parent traversal repair or vendor runtime implementation is included
+in the Tableweave package. Patch context is upstream third-party material, not
+Tableweave-owned replacement runtime code. CJS byte parity is new candidate asset
+evidence, not inherited browser/runtime approval from earlier ESM experiments.
+
+The containing Tableweave package remains private and UNLICENSED. These candidate
+assets do not grant publication, legal/distribution, runtime-profile or stable/G05
+acceptance. There is no automatic install/postinstall or runtime monkey-patch.

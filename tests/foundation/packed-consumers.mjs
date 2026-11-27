@@ -10,11 +10,12 @@ import {
   realpath,
   writeFile,
 } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { isAbsolute, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
 import { forbiddenImports, inspectGraph } from "./boundaries.mjs";
 import { checkConsumerDeclarations } from "./consumer-declarations.mjs";
+import { checkPackedControlsProfile } from "./packed-controls-profile.mjs";
 import { checkPackedFilterTools } from "./packed-filter-tools.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
@@ -48,6 +49,17 @@ for (const name of ["react", "heroui"]) {
   const listing = spawnSync("tar", ["-tzf", archive], { encoding: "utf8" });
   assert.equal(listing.status, 0);
   const files = listing.stdout.trim().split("\n");
+  const compatibilityFiles =
+    name === "heroui"
+      ? [
+          "runtime.patch",
+          "profile.json",
+          "verify.mjs",
+          "README.md",
+          "NOTICE-RAC",
+          "LICENSE-APACHE-2.0",
+        ].map((file) => `package/compat/rac-table-clone/${file}`)
+      : [];
   const emitted =
     name === "react"
       ? [
@@ -93,6 +105,12 @@ for (const name of ["react", "heroui"]) {
             "resource/adapter",
             "resource/hook",
             "resource/index",
+            "presentation/types",
+            "presentation/index",
+            "presentation/binding",
+            "presentation/project",
+            "presentation/masked",
+            "presentation/authority",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ]
       : [
@@ -104,6 +122,8 @@ for (const name of ["react", "heroui"]) {
           "filters/filters.css",
           "date/date-editor.css",
           "toolbar/filter-tools.css",
+          "columns/controls.css",
+          "pagination/styles.css",
           ...[
             "table/group-column",
             "table/collection-projection",
@@ -126,6 +146,26 @@ for (const name of ["react", "heroui"]) {
             "toolbar/filter-search",
             "toolbar/filter-tabs",
             "toolbar/filter-date",
+            "table/collection-messages",
+            "selection/types",
+            "selection/index",
+            "selection/action",
+            "selection/selection-toolbar",
+            "columns/types",
+            "columns/index",
+            "columns/model",
+            "columns/column-chooser",
+            "sorting/types",
+            "sorting/index",
+            "sorting/model",
+            "sorting/sorting",
+            "pagination/types",
+            "pagination/index",
+            "pagination/model",
+            "pagination/messages",
+            "pagination/Pagination",
+            "pagination/usePaginationCorrection",
+            "pagination/correction-capture",
           ].flatMap((name) => [`${name}.js`, `${name}.d.ts`]),
         ];
   assert.deepEqual(
@@ -133,6 +173,7 @@ for (const name of ["react", "heroui"]) {
     [
       "package/package.json",
       "package/README.md",
+      ...compatibilityFiles,
       ...emitted.map((file) => `package/dist/${file}`),
     ].sort(),
     "Unexpected or missing reviewed output",
@@ -142,7 +183,8 @@ for (const name of ["react", "heroui"]) {
       (file) =>
         file === "package/package.json" ||
         file === "package/README.md" ||
-        /^package\/dist\/(?:[a-z-]+\/)*[a-z.-]+\.(?:js|ts|css)$/.test(file),
+        compatibilityFiles.includes(file) ||
+        /^package\/dist\/(?:[a-z-]+\/)*[A-Za-z.-]+\.(?:js|ts|css)$/.test(file),
     ),
     `Unexpected tarball contents: ${files}`,
   );
@@ -245,7 +287,8 @@ for (const kind of ["headless", "styled"]) {
           "@types/react": tooling["@types/react"],
           "@types/react-dom": tooling["@types/react-dom"],
           ...(kind === "styled" &&
-          process.argv.includes("--filter-tools-browser")
+          (process.argv.includes("--filter-tools-browser") ||
+            process.argv.includes("--controls-browser"))
             ? {
                 vite: tooling.vite,
                 "@playwright/test": tooling["@playwright/test"],
@@ -305,6 +348,10 @@ for (const kind of ["headless", "styled"]) {
       join(root, "tests/consumers/styled-tools.ts"),
       join(dir, "styled-tools.ts"),
     );
+    await cp(
+      join(root, "tests/consumers/controls.ts"),
+      join(dir, "controls.ts"),
+    );
   }
   await cp(join(root, "tests/consumers/runtime.mjs"), join(dir, "runtime.mjs"));
   await cp(
@@ -342,11 +389,7 @@ for (const kind of ["headless", "styled"]) {
     );
     reports.push({
       consumer: kind,
-      declarationsIsolation: await checkConsumerDeclarations(
-        root,
-        dir,
-        compiler,
-      ),
+      ...(await checkConsumerDeclarations(root, dir, compiler)),
     });
   }
   command(
@@ -395,6 +438,15 @@ for (const kind of ["headless", "styled"]) {
     },
   });
   assert(modules.size >= entries.length + 1, "Bundle graph was not inspected");
+  const consumerRoot = `${await realpath(dir)}${sep}`;
+  for (const file of modules) {
+    if (!isAbsolute(file)) continue;
+    const resolvedModule = await realpath(file.split("?")[0]);
+    assert(
+      resolvedModule.startsWith(consumerRoot),
+      `Bundle borrowed a runtime module outside its install: ${resolvedModule}`,
+    );
+  }
   assert(![...modules].some((file) => /@dnd-kit|dnd-kit\+/.test(file)));
   if (kind === "headless")
     assert(
@@ -405,22 +457,39 @@ for (const kind of ["headless", "styled"]) {
       file.endsWith(".css"),
     );
     assert(css, "Side-effectful CSS was dropped");
-    assert(
-      (await readFile(join(dir, "bundle", css), "utf8")).includes(
-        "@layer tableweave",
-      ),
-    );
+    const content = await readFile(join(dir, "bundle", css), "utf8");
+    for (const selector of [
+      "@layer tableweave",
+      ".tw-native-collection",
+      ".tw-pagination",
+      ".tw-column-chooser",
+      ".tw-sorting",
+      "table-column-group",
+      "checkbox-control",
+    ])
+      assert(content.includes(selector), `Packed CSS omitted ${selector}`);
   }
   reports.push({
     consumer: kind,
     declarations: ["6.0.3", "5.9.3"],
     runtime: "passed",
+    runtimeModuleIsolation: "consumer-install-only",
     bundleModules: [...modules],
   });
   if (kind === "styled" && process.argv.includes("--filter-tools-browser"))
     reports.push({
       consumer: kind,
       filterTools: await checkPackedFilterTools(root, dir),
+    });
+  if (kind === "styled" && process.argv.includes("--controls-browser"))
+    reports.push({
+      consumer: kind,
+      controlsProfile: await checkPackedControlsProfile(
+        root,
+        run,
+        dir,
+        archives,
+      ),
     });
 }
 await writeFile(join(run, "report.json"), JSON.stringify(reports, null, 2));

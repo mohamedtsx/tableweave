@@ -244,15 +244,40 @@ await assert.rejects(import("@tableweave/react/src/contracts/index.js"), {
 });
 if (process.argv.includes("--styled")) {
   const styled = await import("@tableweave/heroui");
-  assert.deepEqual(Object.keys(styled).sort(), [
+  assert.deepEqual(
+    Object.keys(styled).sort(),
+    [
+      "ColumnChooser",
+      "defaultColumnChooserMessages",
+      "defaultCollectionMessages",
+      "defaultSortingMessages",
+      "FilterBuilder",
+      "FilterDate",
+      "FilterSearch",
+      "FilterTabs",
+      "formatPaginationNumber",
+      "NativeCollection",
+      "Pagination",
+      "paginationMessages",
+      "SelectionToolbar",
+      "Sorting",
+      "usePaginationCorrection",
+    ].sort(),
+  );
+  for (const name of [
+    "ColumnChooser",
     "FilterBuilder",
     "FilterDate",
     "FilterSearch",
     "FilterTabs",
+    "formatPaginationNumber",
     "NativeCollection",
-  ]);
-  for (const component of Object.values(styled))
-    assert.equal(typeof component, "function");
+    "Pagination",
+    "SelectionToolbar",
+    "Sorting",
+    "usePaginationCorrection",
+  ])
+    assert.equal(typeof styled[name], "function");
   assert.deepEqual(
     Object.keys(await import("@tableweave/heroui/sortable")),
     [],

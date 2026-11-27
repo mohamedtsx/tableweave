@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "paths": {
+      "@pagination-under-test": [
+        "./.artifacts/declarations/packages/heroui/src/pagination/index.d.ts"
+      ],
+      "@tableweave/react": [
+        "./.artifacts/declarations/packages/react/src/index.d.ts"
+      ],
+      "@tableweave/react/contracts": [
+        "./.artifacts/declarations/packages/react/src/contracts/index.d.ts"
+      ],
+      "@tanstack/react-table": [
+        "../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ],
+      "@tanstack/table-core": [
+        "../../../packages/react/node_modules/@tanstack/table-core/dist/index.d.ts"
+      ],
+      "react": ["../../../node_modules/@types/react/index.d.ts"],
+      "react/*": ["../../../node_modules/@types/react/*.d.ts"]
+    }
+  },
+  "include": ["./types.ts"]
+}

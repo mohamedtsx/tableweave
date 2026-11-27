@@ -9,6 +9,7 @@ import type {
   StateGroup,
   StateProposal,
   StateTransition,
+  TableCommand,
   TableController,
   TableState,
 } from "./types.js";
@@ -21,12 +22,82 @@ import {
   withStateErrors,
 } from "./validation.js";
 
+// Snapshot command data, never caller objects: validators, reducer and acceptance
+// must see one immutable intent. Function updaters retain identity and are not
+// invoked/frozen here. Accessors and non-data prototypes are not command data.
+function captureCommand<S extends QuerySchema>(
+  input: TableCommand<S>,
+): TableCommand<S> {
+  const active = new Set<object>();
+  let remaining = 100_000;
+  const copy = (value: unknown, depth: number): unknown => {
+    if (--remaining < 0 || depth > 64) stateFail("state.invalid");
+    if (
+      value === null ||
+      value === undefined ||
+      typeof value === "string" ||
+      typeof value === "boolean" ||
+      typeof value === "function"
+    )
+      return value;
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (typeof value !== "object" || active.has(value))
+      return stateFail("state.invalid");
+    const array = Array.isArray(value);
+    const prototype = Object.getPrototypeOf(value);
+    if (
+      prototype !== (array ? Array.prototype : Object.prototype) &&
+      (array || prototype !== null)
+    )
+      stateFail("state.invalid");
+    active.add(value);
+    const descriptors = Object.getOwnPropertyDescriptors(value);
+    const keys = Reflect.ownKeys(descriptors);
+    const result: Record<string, unknown> | unknown[] = array
+      ? []
+      : Object.create(prototype);
+    if (array && keys.length !== (value as unknown[]).length + 1)
+      stateFail("state.invalid");
+    for (const key of keys) {
+      if (typeof key !== "string") return stateFail("state.invalid");
+      const descriptor = descriptors[key];
+      if (!descriptor || !("value" in descriptor))
+        return stateFail("state.invalid");
+      if (array && key === "length") continue;
+      if (
+        !descriptor.enumerable ||
+        (array &&
+          (!/^(0|[1-9]\d*)$/.test(key) ||
+            Number(key) >= (value as unknown[]).length))
+      )
+        stateFail("state.invalid");
+      Object.defineProperty(result, key, {
+        value: copy(descriptor.value, depth + 1),
+        enumerable: true,
+      });
+    }
+    active.delete(value);
+    return Object.freeze(result);
+  };
+  const captured = copy(input, 0);
+  if (!captured || typeof captured !== "object" || Array.isArray(captured))
+    return stateFail("state.invalid");
+  return captured as TableCommand<S>;
+}
+
 function createController<S extends QuerySchema>(
   input: ControllerDefinitionInput<S>,
   options: ControllerOptions<S>,
 ): TableController<S> {
-  const { registry, now, validateState, onRequest, onCommit, onQueryChange } =
-    options;
+  const {
+    registry,
+    now,
+    validateState,
+    validateCommand,
+    onRequest,
+    onCommit,
+    onQueryChange,
+  } = options;
   const controlled = new Set(options.controlled ?? []);
   const groups: readonly StateGroup[] = [
     "query",
@@ -40,6 +111,7 @@ function createController<S extends QuerySchema>(
     (controlled.size && typeof onRequest !== "function") ||
     typeof now !== "function" ||
     (validateState !== undefined && typeof validateState !== "function") ||
+    (validateCommand !== undefined && typeof validateCommand !== "function") ||
     (onCommit !== undefined && typeof onCommit !== "function") ||
     (onQueryChange !== undefined && typeof onQueryChange !== "function")
   )
@@ -77,11 +149,30 @@ function createController<S extends QuerySchema>(
       stateFail("state.invalid");
     }
   };
+  const validateIntent = (command: TableCommand<S>) => {
+    const result: unknown = validateCommand?.(command);
+    if (result !== undefined) {
+      // As with state constraints, async/nonvoid results cannot authorize a
+      // synchronous operation. Observe rejection without exposing app errors.
+      if (
+        result !== null &&
+        (typeof result === "object" || typeof result === "function") &&
+        "then" in result
+      )
+        void Promise.resolve(result).catch(() => undefined);
+      stateFail("state.invalid");
+    }
+  };
   let state = createTableState(definition, options.initial, context(clock()));
   validate(state);
   const serverState = state;
   const listeners = new Set<{ notify: () => void }>();
-  let pending: StateProposal<S> | null = null;
+  // The readonly original command stays private; proposals/public transitions
+  // keep their existing shape and acceptance cannot substitute another intent.
+  let pending: {
+    readonly proposal: StateProposal<S>;
+    readonly command: TableCommand<S>;
+  } | null = null;
   let sequence = 0;
   let disposed = false;
   let busy = false;
@@ -96,8 +187,12 @@ function createController<S extends QuerySchema>(
     }
   };
   const currentProposal = (proposal: StateProposal<S>) => {
-    if (pending !== proposal || proposal.baseRevision !== state.revision)
+    if (
+      pending?.proposal !== proposal ||
+      proposal.baseRevision !== state.revision
+    )
       stateFail("state.stale");
+    return pending;
   };
   const commit = (transition: StateTransition<S>): MutationResult<S> => {
     pending = null;
@@ -133,8 +228,10 @@ function createController<S extends QuerySchema>(
         listeners.delete(subscription);
       };
     },
-    dispatch: (command) =>
+    dispatch: (input) =>
       mutate(() => {
+        const command = captureCommand(input);
+        validateIntent(command);
         const transition = reduceTableState(
           definition,
           state,
@@ -144,24 +241,26 @@ function createController<S extends QuerySchema>(
         if (transition.state === state) return { status: "noop" };
         validate(transition.state);
         if (transition.changedGroups.some((group) => controlled.has(group))) {
-          pending = freeze({
+          const proposal = freeze({
             id: ++sequence,
             baseRevision: state.revision,
             transition,
           });
+          pending = { proposal, command };
           try {
-            onRequest?.(pending);
+            onRequest?.(proposal);
           } catch {
             pending = null;
             return { status: "rejected", code: "callback" };
           }
-          return { status: "proposed", proposal: pending };
+          return { status: "proposed", proposal };
         }
         return commit(transition);
       }),
     accept: (proposal, override) =>
       mutate(() => {
-        currentProposal(proposal);
+        const original = currentProposal(proposal);
+        validateIntent(original.command);
         let transition = proposal.transition;
         if (
           transition.changedGroups.includes("query") &&

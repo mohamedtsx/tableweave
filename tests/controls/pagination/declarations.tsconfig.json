@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "../../../",
+    "outDir": "./.artifacts/declarations"
+  },
+  "include": [
+    "../../../packages/heroui/src/pagination/**/*.ts",
+    "../../../packages/heroui/src/pagination/**/*.tsx"
+  ]
+}

@@ -1,0 +1,71 @@
+.ct-host {
+  color: var(--foreground);
+  background: var(--background);
+  min-inline-size: 0;
+  inline-size: 100%;
+  padding: 1rem;
+}
+.ct-example {
+  min-inline-size: 0;
+  max-inline-size: 72rem;
+  margin-inline: auto;
+}
+.ct-example h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-block: 0.5rem;
+}
+.ct-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block: 0.75rem;
+}
+.ct-tools > button,
+.ct-note-dialog button {
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+  min-block-size: 2.75rem;
+  color: inherit;
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+.ct-example p {
+  margin-block: 0.5rem;
+  overflow-wrap: anywhere;
+}
+.ct-private {
+  min-inline-size: 0;
+}
+.ct-note-dialog {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  z-index: 100;
+  inline-size: min(24rem, calc(100vw - 2rem));
+  padding: 1rem;
+  color: var(--foreground);
+  background: var(--surface);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius-md);
+}
+.ct-note-dialog label,
+.ct-note-dialog textarea {
+  display: block;
+  inline-size: 100%;
+}
+.ct-note-dialog textarea {
+  border: 1px solid var(--muted);
+  padding: 0.5rem;
+  min-block-size: 6rem;
+}
+.ct-note-dialog button {
+  margin-block-start: 0.75rem;
+  margin-inline-end: 0.5rem;
+}
+.ct-scenarios summary {
+  cursor: pointer;
+  margin-block: 0.75rem;
+}

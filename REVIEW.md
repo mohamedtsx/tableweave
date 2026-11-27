@@ -666,3 +666,756 @@ WP-07 private integration after reviewing the actual completed result. Final
 documentation/PR push/remote checks remain delivery verification, not personal
 maintainer, manual AT/device/performance/real-consumer/legal/publication/full G-05
 acceptance. PRs remain unmerged; no residual WP-07 finding is verified.
+
+## WP-08 — delegated agent review session 1
+
+Core candidate only; control UI and public/packed proof remain unassigned/pending.
+Independent review verified six defects despite65 core/56 prior-controller/24
+native tests and seven Chromium regressions passing. No approval or PR merge.
+
+### n1 — Mutable command envelopes bypass/relabel capability validation (P1)
+
+- A type getter changes selection.change to selection.page between guard and
+  reduction, bypassing single mode. Changing the caller's command type after a
+  controlled proposal also makes final acceptance validate a different intent.
+- Returned for immutable captured command envelopes used by guard/reducer/proposal/
+  acceptance, retaining legitimate function updaters. Reproduce before repair.
+
+### n2 — Old-scope Cancel clears a new scope's selection (P1)
+
+- Captured scopeA authority reports context blocked afterB commits but its Cancel
+  still clearsB selection. Query freshness independence cannot discard owner/scope.
+- Returned for latest owner/controller/definition/scope checks while preserving
+  reachable same-owner selection cancellation during loading/error/access cleanup.
+
+### n3 — Structurally copied view exposes another resource's snapshot (P2)
+
+- A copiedA view carryingB's actual snapshot with colliding identity metadata
+  projectsB records and canSelect=true. Event reread rejects it, render does not.
+- Returned for actual resource-view/snapshot provenance authentication, retaining
+  genuine current/server snapshot behavior rather than structural-key trust.
+
+### n4 — Mutable native options silently remove application guard (P2)
+
+- Deleting options.validateCommand after construction disables the installed
+  rejecting guard because its closure rereads the mutable options object.
+- Returned for single-capture validated callbacks/configuration; preserve errors,
+  async rejection handling and existing validateState semantics.
+
+### n5 — Old relative token binds to a later evaluation clock (P1)
+
+- After today crosses midnight, rebinding yesterday's token gives it the new
+  identity/time and makes old results fresh/selectable before the new begin.
+- Main approved an atomic pre-UI beginControlsRequest contract: capture accepted
+  identity/time before resource.begin, return genuine token/binding to the app,
+  no transport/cache/lifetime. Post-hoc old-token binding is removed, not merely
+  memoized after its first potentially unsafe late use.
+
+### n6 — Reread selection getter admits an invalid mode (P2)
+
+- A getter returns single during validation then all during storage; immutable
+  selectionMode becomes all and a two-ID commit succeeds.
+- Returned for capture-once validation/accessor rejection and audit of related
+  primitive configuration, never cloning/freezing application row records.
+
+### n7 — Early stale-view return skips privacy and Cancel facts (P1)
+
+- Independent replay verifies n1–n6 corrections, but an ordinary saved viewA
+  projected after scopeB/access loss still exposes selected/missing IDs and the
+  requested query. Rows alone are suppressed. In same-scope refresh, the same early
+  return incorrectly disables Cancel. Three fresh assertions fail.
+- Returned for context/permission masking before every fact/early-return path,
+  with genuine same-owner/scope cancellation independent of query freshness.
+  No old-scope cancellation of a newer owner and no hiding a draft as a workaround.
+
+### n8 — Saved initial server snapshot ignores current resource context (P1)
+
+- Save initial serverA snapshot, move the same resource toB and acceptB selection,
+  then project saved serverA under expectedA: B IDs/query appear underA tags. One
+  fresh assertion fails. Server-snapshot identity is not current scope authority.
+- Returned for current resource-context/permission checks in addition to supplied
+  view provenance. Preserve genuine matching-context initial SSR/server snapshots;
+  no new resource lifetime, render mutation or disabled SSR workaround.
+  Independent rereview resolves n7/n8's four original assertions; initial same-
+  context SSR and original n1–n6 checks remain passing. The next finding is separate.
+
+### n9 — Origin-masked authority retains foreign checked/mixed bits (P2)
+
+- CaptureA authority, commitB with two eligible rows, select both/one B rows.
+  A read blocks context and masks IDs but still returnsB checked/mixed selection
+  metadata. Actions/Cancel remain denied; no ID/query leak is demonstrated here.
+- Worker reproduces1/1 failure, then adds an exhaustive shared neutral-facts
+  constructor before foreign projection instead of spreading selectively masked
+  foreign facts.129 core/56 controller/24 native/seven Chromium/eight strict TS
+  checks and Biome pass; independent final rereview is active, no UI approval yet.
+  **Resolved:** independent exhaustive replay passes263 units (including54 fresh
+  probes), eight strict TS checks/seven Chromium and all38 candidate fingerprints.
+  n1–n9 receive scoped source technical approval for main integration/consumers;
+  full UI/packed/framework/AT/performance/G-05 acceptance remains separate.
+
+### Additive source handshake disposition
+
+Main approves the narrow sort/columns owner-domain intents before consumer code.
+Independent316-test replay includes21 new intent cases plus all54 prior probes;
+eight strict checks/seven Chromium and41 candidate fingerprints match. Same-owner
+query/loading/failure changes remain available without granting retained-row
+actions; foreign owners/context stay neutral. Full packet/UI/packed proof remains.
+
+The separate-target gap receives a narrow factory owner helper, approved before
+code. Independent326-test/six-compiler replay validates cached frozen exact
+definition/controller refs, null for copied/inherited/proxy objects and no getter/
+port invocation. Consumers compare both refs then require the intent; identity
+metadata is not authorization. Main approves this source closure, not full WP-08.
+
+## WP-08 pagination — delegated review session 2
+
+Numbering restarts. Original30 Chromium/two unit/SSR and strict source/public type
+checks pass, but independent probes verify the following source defects.
+
+### n1 — Authority A authorizes a clamp on separate controller B (P1)
+
+- With matching query metadata, correction usesA authority then clampsB4→1.
+- Returned for exact genuine factory definition/controller pairing using the
+  reviewed owner helper, before require/dispatch and inside final updater guard.
+  Query/reference equality is not owner proof. No new transport or query owner.
+
+### n2 — Denied context accessor is reread as permitted (P1)
+
+- Correction validates denied metadata, rereads allowed values and commits while
+  the actual current port remains denied.
+- Returned for one-shot primitive/context/epoch/callback capture or consistent
+  accessor rejection; no raw private errors, app-record freeze or narrowed tests.
+
+### n3 — Method-style current port loses its receiver (P2)
+
+- A legitimate readCurrent method depends on this; detached invocation crashes
+  the subtree instead of returning a safe blocked correction.
+- Returned for captured function/receiver invocation and fail-closed malformed/
+  throwing/async port handling, preserving original bounded-chain behavior.
+
+**Correction handoff:** worker independently reproduces all three failures before
+repair, then reports56 Chromium/eight unit-SSR/strict source and public TS6/5.9
+checks, Biome and30 checksums passing. Actual factory owner identities, one-shot
+own-data capture and receiver-preserving calls replace the unsafe paths. Source
+aggregate434530ddee3ea96c66926f8dd36e8e1d2d628b76b0fb0017e085d2c44847a398;
+Pagination.tsx/API unchanged. Independent original-reproducer rereview is active;
+no source or packet approval follows from the worker report alone.
+Independent replay resolves n1–n3 and passes77 browser checks, but the following
+narrow malformed-async boundary remains; no unconditional containment approval.
+
+### n4 — Intrinsic Promise observation can invoke constructor hooks (P2)
+
+- A rejected native Promise with a throwing constructor accessor causes the
+  observer's intrinsic then call to invoke that getter before attaching a handler.
+  The original rejection remains unhandled. No clamp/subtree crash is reproduced.
+- Returned for avoiding arbitrary constructor/species hooks while preserving safe
+  ordinary-Promise best effort. The supported current port is synchronous data.
+  Standard then performs species construction before handler attachment; main and
+  reviewer assess whether a nonconfigurable poisoned application Promise can be
+  contained without forbidden object mutation or global error suppression.
+  Do not fake a pass, promise universal containment or silently waive supported
+  behavior. Record unavoidable contract-violating app behavior distinctly if proven.
+  **Independent feasibility:**20 negative browser cases reproduce the original
+  application rejection even with no library observer. There is no portable
+  guarantee under the no-mutation/no-global-suppression boundaries; await/wrappers
+  do not bypass species construction in general. Five ordinary/synchronous checks
+  and eight unit/SSR cases pass. The remaining owned blocker is getter-avoidance
+  code plus precise synchronous-port/best-effort wording, not automatic n4 closure.
+  **Owned source correction verified:** independent final code/contract review
+  verifies zero constructor/species/then getter calls, ordinary native rejection
+  observation, no input/prototype mutation and preserved n1–n3/owner/epoch/chain
+  guards. Exact source aggregatec7085cfc552c48c945c7629c71db8d78288384ae0a7b0fb081c743ab6d4dcf19.
+  Main approves this bounded synchronous source contract under delegated technical
+  authority, not universal rejection containment. Runtime replay retains two
+  impossible universal assertions as failures;13 extra defensive/limitation checks,
+  ten unit/SSR and strict declarations pass. Main approves test-only replacement
+  with explicitly named LIMITATION characterizations asserting the host rejection,
+  zero getter/clamp/crash and a no-observer control. Preserve failure evidence;
+  never count those as containment success. Green supported-suite handoff remains.
+  Test-only correction is now complete at unchanged source fingerprint:54 supported/
+  guard, five defensive best-effort and three explicitly named LIMITATION checks
+  pass, plus ten unit/SSR/strict compiler checks. Original failing claims remain
+  in promise-original-failure.md; none is skipped or counted as containment success.
+
+## WP-08 selection toolbar — delegated review session 3
+
+Numbering restarts. Eight units/24 Chromium/source SSR and both strict compiler
+versions pass, but the following before-effect/SSR privacy gap blocks approval.
+
+### n1 — Masked context is mistaken for authoritative zero selection (P1)
+
+- Genuine selecteda → access denied preserves accepted selection, while projection
+  masks IDs and requested query. The toolbar sees[] and remounts normal tools,
+  exposing old Amount criteria. Reproduced in DOM and server HTML before effects.
+- Returned for privacy-first unavailable-vs-zero distinction, including slot
+  invocation/focus cleanup. Preserve actual accepted criteria/selection and usable
+  same-owner pending/failure Cancel; do not gate everything on row readiness.
+  **Correction handoff:** original DOM/SSR failures are reproduced before repair.
+  Withheld query/context/definition now renders nothing before normal/action-slot
+  invocation or private focus fallback; accepted criteria/selection stay unchanged.
+  Worker8-unit/29-browser/both strict compiler/SSR/Biome checks pass. Source manifest
+  2b161d097292bd34e72557b74ee5b6311ba39773a62cdcfd1bea83bdd6742f43;
+  independent original-reproducer rereview is active, no approval yet.
+  **Resolved:** independent original DOM/SSR/focus/access-restoration replay passes
+  29 Chromium plus a fresh probe, eight units and both strict source/declaration
+  compilers. Both source/complete manifests match. Main approves the scoped
+  selection-source correction under delegated technical authority; real tool/
+  collection/packed/full-WP08/AT integration remains pending.
+
+### Cross-input pairing diagnostic (both UI sessions)
+
+Probes pair presentationB with authorityA: B copy is displayed, while commands
+intrinsically act onA. The current producer requires coherent host-paired inputs
+and does not promise automatic presentation/authority binding. This is recorded,
+not silently treated as factory proof or backend authorization. The composed host
+must derive facts/authority from one current owned input and verify genuine
+separate targets. No query-reference workaround or arbitrary new core API is
+approved; public documentation must state pairing obligations before integration.
+
+## WP-08 sorting/chooser — delegated review session 4
+
+No blocking findings. Independent36 units (30 candidate/six fresh),19 Chromium
+(17 candidate/two fresh), five strict compiler checks and20-file Biome pass.
+Exact61-file manifest3880ecfb1fc70938057a73cc4729cc1f73daacb9ae15efa71f2e9ccb5a9d7171
+matches. Main grants scoped source integration approval, including real owner
+checks, latest accepted functional updates, controlled rejection, hidden priorities
+and visibility restrictions. Coherent host pairing and complex-label string/ID
+fallback remain documented. Root/CSS/packed/shared-renderer/full-WP08/AT separate.
+
+## WP-08 guarded collection — delegated review session 5
+
+No blocking renderer defect. Independent27 current/21 legacy/six fresh Chromium
+checks, strict TS6/5.9/13-file Biome and all13 candidate fingerprints pass. Main's
+missing group-header foreground selector is causally verified by removing it to
+reproduce4.2:1 and restoring it to pass light/RTL-dark axe. Only that selector
+changes the existing collection-scoped foreground rule; unchecked1px boundaries
+remain. Historical worker26/27 and prior CSS hash are retained as failures, not
+rewritten. Main refreshes current CSS dependency/disposition and grants bounded
+renderer source approval. Added root exports/owned stylesheet imports require
+actual integrated runtime/type/packing proof, not inferred from source review.
+
+## WP-08 public package boundary — delegated review session 6
+
+No blocking findings. Independent strict TS6.0.3/5.9.3 validates both real NodeNext
+consumers (210 headless/230 styled program files), confined except compiler standard
+libraries. Removing three negative suppressions in memory yields exactly the intended
+unknown-record-field/vendor-selectedKeys/missing-definition errors, not accidental
+unresolved imports. All80 headless/57 styled emitted files match actual archives and
+installed bytes. Exact82/59 archive outputs include internal masked facts and CSS.
+
+Reviewer audits185/885 recorded bundle module IDs, confirms all169/864 absolute
+paths resolve inside their consumer, and verifies layered owned CSS imports/selectors/
+group foreground survive bundling. Type/runtime/graph confinement is enforced by
+the runner, not source aliases; exact source-unit aliases do not alter explicit dist
+or actual packed checks. HeroUI patch4120eff…caded769 is declaration-only with
+attribution and no dependency versions changed. Public CSS hash
+57ed68bf91949cf362468d89e7381b2dcaa58957cba994be8511e0cb5096d024.
+
+Main grants bounded public-package integration approval under delegated technical
+authority after this independent compiler/byte/guard review and the main-run actual
+runtime/bundle checks. No actual browser interaction, visual/AT/device/performance,
+full-WP08/G-05 or release acceptance follows. Combined fixture/harness work remains
+separate and source/runtime outputs stay frozen during it.
+
+## WP-08 controls composition — delegated review session 7
+
+Baseline23 emitted cases/110 assertion entry points pass; additional controlled
+rejection/retained provenance/no-snapshot Cancel/non-Strict Suspense and one-active-
+acquisition cleanup probes pass.137 emitted bytes remain unchanged. Nevertheless:
+
+### n1 — Controlled scope reset leaves old selected IDs actionable (P1)
+
+- `model.ts` resource invalidation dispatches selection.cancel but controlled mode
+  leaves it unaccepted. Select loaded+missing IDs, change scope, begin and settleB,
+  Queue review: actual callback receives oldA IDs a/off under the new scope.
+- Main approves mandatory app-owned reset/proposal retirement before fixture code
+  correction. Ordinary controlled Cancel/reject stays unchanged. No library
+  authorization shortcut or selected-ID/backend permission inference is allowed.
+  **Resolved n1:** fixture reset now rejects stale pending intent even when accepted
+  selection is empty, completes application-mandatory selection reset, and clears
+  private queue/note before publishing the new expected owner. Ordinary user
+  controlled rejection remains intact. Independent36 cases plus four original/
+  held-token/revoke-regrant/lifetime probes pass; handoffd0632c008decdd1c01e1a0501ab12edc6b4445939bc0755ee6983048192c84c0
+  matches app/model/assertions. Main actual-tarball production36 also passes with
+  old137 public bytes unchanged. Main resolves only n1 under delegated authority;
+  n2 and rapid-popover correction remain required. The restored Storybook30-second
+  config is an explicit metadata delta, not falsely covered by the old manifest.
+
+### n2 — Plain StrictMode composition crashes the collection (P1)
+
+- Uninstrumented StrictMode with ControlsExample throws cell-count mismatch:
+  four cells against eight columns; grid does not mount. No lifecycle instrumentation
+  or library-source alias is needed. Producer/vendor responsibility needs isolation.
+- Separate read-only diagnosis precedes an approved bounded correction. Do not
+  remove StrictMode or replace/mutate genuine collection nodes to manufacture green.
+  Independent isolation now attributes the failure to RAC1.22.1 grouped collection
+  cloning: copied clean headers lose columnsDirty=false, so flattened sibling links
+  are unnecessarily traversed across group boundaries. Four leaves become eight
+  visits while native rows stay four cells. Flat controls, stable native frames and
+  balanced one-active app acquisition rule out the app/native duplication guesses;
+  canonical ESM identities still fail. Main approves only a private clone-boolean
+  preservation experiment, not candidate/shared vendor edits or shipping a patch.
+  Registry latest is1.22.1; final distribution remains a separate blocker because
+  workspace runtime patches do not propagate through actual archives.
+  The private clone copy fixes the original two Strict positives and passes27
+  renderer/21 prior/23 ordinary+23 Strict pinned composition/nine Strict selection
+  smokes, but genuine cached public Collection insertion still fails five cells/
+  eight columns. The owner stops without another change. Main approves a separate
+  private column-parent lastChildKey traversal boundary experiment, preserving
+  actual cache invalidation and all non-column traversal. This is not distribution
+  or packed-runtime approval; shared137 outputs and dependencies remain unchanged.
+  A separate unpatched public-cache trial uses actual Header columns/render-function
+  and nested Collection items/dependencies with genuine materialization inputs.
+  Both original Strict positives still fail4/8 before and after; three ordinary
+  semantic/visibility/current-event gates pass with strict TS6/5.9 and coherent
+  public ESM identities. All three vendor runtimes remain registry-identical.
+  Main records this tested alternative as negative, not a universal impossibility
+  proof or approval to ship either private vendor experiment.
+
+The expected-only Mask before effects diagnostic can permit an old action before
+new expected context publishes; it is not immediate-revocation proof. Real Change
+scope invalidates the actual resource immediately. Keep that host-publication limit
+explicit, not a raw-library authorization defect. Static/public and main actual
+production23/Storybook4 proof remains valid but cannot approve this composition.
+
+## WP-08 portability/rapid popover — delegated review session 8
+
+### n1 — Rapid reopen can lose focus and miss Escape (P2)
+
+- Independent raw30-second viewport matrix fails3/3. Physical open, Escape,
+  immediate pointer reopen before exit completes, Escape reproduces in source,
+  uninstrumented frozen production Sorting and Chooser, and vendor-only HeroUI.
+- The exit-retained dialog reopens without reliable focus restoration; active
+  focus falls to body and overlay-local Escape misses the event. Open-modal inert
+  background is expected, not orphaned cleanup or proven permanent deadlock.
+- Legitimate close/ARIA/focus synchronization makes all three viewport matrices
+  pass while retaining axe/screenshots/contrast/text expansion. Removing those
+  checks does not avoid the physical-input bug, so sequencing alone is not a fix.
+- Main approves only two internal public shouldSkipAnimation props, a dedicated
+  rapid-input regression for both controls, explicit matrix closure synchronization
+  and restoration of30-second test limits. Vendor-only mitigation feasibility is
+  four passing rapid cycles, not Tableweave correction acceptance. Source owner
+  implements/tests before independent replay/main rebuilt genuine-package proof.
+  **Resolved source correction:** independent causal replay restores exact old
+  preimages and fails all four rapid-input checks, then restores only the approved
+  two props/comments and passes21 Chromium (19 candidate/two uninstrumented fresh
+  four-cycle probes),30 units/five strict compilers/13-file Biome. No pre-reopen
+  closure wait is introduced and the30-second limit remains. Fourteen-file manifest
+  b4869fc93f7ededc44683979ef4d961296e133e0dec4e799061a8a432595d8b7
+  matches; six public declarations are unchanged. Main grants scoped delegated
+  source approval. Shared old dist is still unfixed; final rebuild and genuine
+  production replay remain required independently of StrictMode disposition.
+
+## WP-08 clone repair scope — delegated review session 9
+
+No blocking finding in the minimal ESM clone repair. Independent reviewer restores
+unpatched runtime and fails both original Strict positives4/8; clone-only passes
+six core,27 renderer,21 prior,23 ordinary+23 Strict pinned composition,nine Strict
+selection/range/rejection/stale probes and one cache probe.44 natural clean clones
+preserve false and cached references;12 detached clones at actual dirty entries
+preserve true without publishing a manufactured snapshot or assigning flags.
+
+Raw cached vendor Collection insertion still fails5/8 and uses the internal group
+helper directly. Current public NativeCollection ownership/order/visibility/pruned
+groups/fallback/current-record/empty-cycle requirements pass. Main grants scoped
+technical approval to the actual boolean copy, not the unnecessary broader traversal
+repair. Evidence uses the old pinned app and selected ESM profile, not current38,
+CJS runtime, candidate assets/install or genuine archive acceptance. All137 shared
+dist and1446 shared vendor files remain unchanged.
+
+The user separately selects explicit temporary application-side compatibility for
+private/prerelease delivery, conditional on independent review and packed tests.
+Candidate three-format assets add modification notices and remove stale source-map
+annotations; those assets/verifier are under separate review. No shipping, automatic
+mutation, unpatched-runtime promise, fullG05 or external/manual acceptance follows.
+
+## WP-08 compatibility asset review — delegated review session 10
+
+No blocking finding. Independent42/42 Node tests (two explicit test-double positives/
+40 negative cases), genuine three-format registry/zero-fuzz patch proof,10 checksums
+and five-file Biome pass. Patch remains only the boolean copy/modification notices/
+terminal stale-map annotation removal; no traversal repair or guard weakening.
+Exact-pin/local isolated-pnpm resolution, hashes/escape rejection/sanitized read-only
+verification and bootstrap/attribution are reviewed. No vendor runtime executes.
+
+Main grants scoped asset approval for the separate packaging/install/testing stage,
+not runtime delivery. Reviewed patchf3073583972685a721995e0db935a5172cbbc777bcc679270a718a2f12736e35
+and verifier remain unchanged. Original descriptor a81cfea… and10-input manifest
+a40aa126… are preserved in ASSET-REVIEW.sha256 as historical inputs. Main then updates
+only candidate packaging README and its descriptor hash for the new file allowlist;
+new descriptor86a3d24eace0483ec4b779994c7fb2b30bc66e150c8e62318904ecb9b225078e
+requires repeated tests/byte proof before installation. Both independent reviews
+predate shared vendor/output changes; later genuine profile38 still gates acceptance.
+
+## WP-08 genuine profile integration — delegated review session 11
+
+No blocking finding. Independent extracted-CLI checks accept the actual profiled
+consumer and reject inspected unpatched styled installs with E_VENDOR, without
+mutation. Both compilers pass210/230/250-file confined programs. Two focused probes
+pass against the unchanged production build. Main's38/38 report and891-module graph
+are audited, not described as an independently regenerated complete run.
+
+React82/styled65 archive members match installed bytes; exactly six compatibility
+assets ship with no runtime export/install hook. Combined patch is exact concat;
+lock introduces no versions. Profiled/unpatched RAC differs in exactly three runtime
+files.135/137 library outputs remain unchanged; only approved animation props differ.
+One concurrent helper edit is verified formatting-only. Registry-proof harness
+adaptation is outside this review and retained as a separate test-harness change.
+
+Main grants **agent-approved under delegated authority** for this bounded private/
+prerelease compatibility integration. User-selected setup and actual current38 are
+verified, not ordinary unpatched runtime or all CJS interactions. Complete ordered
+workflow, real WP-07 stack/tools and final packet/remote review remain required;
+no fullG05/manual/device/performance/legal/publication or merge approval follows.
+
+### Completed isolated-source disposition
+
+The full ordered `pnpm check` completes on the corrected frozen candidate:504
+Vitest units,42 Node asset checks,250 browser executions (43 baseline/165 scoped
+controls/38 emitted/four built Storybook) plus38 genuine profiled-archive production
+cases. Pager's three LIMITATION cases remain negative characterizations, never
+universal rejection containment. Fresh frozen install, strict source/public types,
+source SSR/import, explicit archive/runtime/CSS/confinement guards and docs/18
+checker probes pass. Independent reviews resolve all verified source findings;
+the minimal private compatibility profile has actual extraction/install proof.
+
+Main grants bounded **agent-approved under delegated authority** for the isolated
+WP-08 source/component/public-package/private-profile boundary. Source handoff
+commit and safe replay onto exact final WP-07 precede real tool composition and
+combined verification. This is not final packet/remote delivery, personal maintainer
+review, general unpatched runtime, full CJS interaction, fullG05 or any unmeasured
+manual/device/performance/real-consumer/legal/publication gate. No PR merge.
+
+## WP-08 final stack reconciliation — delegated review session 12
+
+### n1 — Packed-lane description is ambiguous (P3)
+
+Independent review notes README's “profiled tool/control” sentence misdescribes
+the retained lanes. Main verifies that actual code runs WP-07 tools in the unpatched
+consumer and WP-08 controls in a separate explicitly profiled consumer. **Resolved:**
+correct the sentence, preserving the implementation and both regression baselines.
+
+No blocking code finding. Independent comparison preserves146 WP-07-exclusive
+and217 WP-08-exclusive paths byte-for-byte; shared producer/index/CSS/scripts/test
+discovery retain both baselines. Lock/workspace differences only replace the exact
+RAC patch reference, with no upgrades. Independent42 copied asset tests, actual
+three-format workspace guard, TS6/5.9 emitted checks (215/244 files, not installed
+consumers) and exact88-headless/92-styled output union pass. Frozen180-file aggregate
+remainsad59470c7d472563ed273b8b167073953f6f574df0a1910510480082da63a8ce.
+Main's643-unit log is audited, not independently rerun. Active new fixtures are not
+assessed by this review. Main grants bounded delegated stack-reconciliation approval;
+real composition/packed proof/full ordered workflow/remote packet approval remain.
+
+## WP-08 additive archive harness — delegated review session 13
+
+### n1 — Scoped guard review; no blocking finding reproduced
+
+Independent synthetic proof accepts one control case and rejects18 guard negatives
+for the new packed-composition runner. Generated configs retain strictness/local
+consumer isolation/exact inventory/hash guards and dedicated6501 port. No actual
+fixture/compiler/build/browser executes in that review; this is not packed19 proof.
+
+The registry harness adaptation separately passes11 classification cases: only all
+original or all reviewed bytes are accepted; six mixed sets and three unknown
+formats reject. Real registry integrity/private zero-fuzz patch proof also passes
+with truthful reviewed-clone installed labeling, unchanged maps and per-format
+unpatched rejection retained. All10 current manifest entries match; reviewed source
+and actual installed runtime remain unchanged. Main grants bounded harness approval
+for later wiring, not new composition/full stack/CJS interaction/G05/legal/packet
+acceptance. Actual19 must be executed after the fixture is ready.
+
+## WP-08 named-generation evidence guards — review session 15
+
+### n1 — Inherited JSON report FILE overrides unique NAME (P2)
+
+Pinned Playwright prioritizes OUTPUT_FILE; inheriting it can overwrite previous
+evidence before the runner fails to find its expected unique report. Independent
+review corroborates with the genuine pinned --list CLI. Main separately reproduces
+in a private copied runner: the historical sentinel is overwritten and run exits1.
+Fix the highest-priority output path explicitly for every boundary; no browser or
+source assertion is changed.
+
+### n2 — Rebased before-manifest can hide source drift (P2)
+
+If a child changes source and replaces that run's before-map to match, the copied
+runner currently exits0 despite its initial source differing. Main independently
+reproduces this coupled counterexample plus a clean positive control. Keep the
+initial snapshot in parent memory and compare both final manifests to those bytes,
+in addition to helper/public-generation guards. These findings block default
+registration, not the independently completed actual19/four plays or producer fix.
+The separate reviewer verifies77 other guard cases; those are synthetic, not real
+browser acceptance. No shared source/runtime/evidence is modified by these probes.
+
+**n1/n2 resolved for the corrected base runner:** main counter-replay passes the
+clean positive, rejects coupled rebasing and preserves prior report bytes under
+inherited FILE settings. Independent review passes88 synthetic vectors and three
+genuine pinned --list checks at runnere2b71cf3…, with parent-held snapshots and
+unique highest-priority FILE outputs. No browser/packet acceptance follows.
+The later permanent-focus integration adds explicit focus capture/type mode and
+separate snapshot retention; that delta receives another review before activation.
+
+## WP-08 whole real-tool composition — delegated review session 16
+
+### n1 — Bounded composition approval; no blocking finding
+
+Independent review executes four fresh unclocked Chromium scenarios against actual
+target app/shared outputs, audits main19 retry0 successes including the blocked
+tail, and passes strict TS6/5.9. Removing negative directives produces exactly
+seven intended errors per compiler. Four awaited Storybook plays/additive packed
+wiring are sound;14 synthetic host-gate negatives reject. Its four probes and audit
+are not a separately rerun full19, nor actual tarball/Storybook proof.
+
+Main grants bounded delegated real-composition source/emitted integration approval
+with all15 reviewed inputs unchanged. Main separately supplies actual built4 and
+genuine packed19 success. Raw-tool AC-16/25 authority, full ordered stack, final
+packet/remote and all external/full-G05 gates stay separate. No merge is authorized.
+
+## WP-08 real-tool focus integration — review session 14
+
+### n1 — Focused real builder portal falls to BODY on selection swap (P1, resolved)
+
+The real composition run passes18/19 with strict source/public TS6/5.9 and full
+22-file Biome. Its remaining case focuses an unapplied builder value input, accepts
+off-page-only selection through the genuine application seam and verifies normal
+tools/portal unmount. Focus falls to BODY rather than the new selection Cancel.
+A separate unclocked reproduction also fails. Main independently replays before
+any correction and allocates private causal review, not an application workaround
+or vendor/global focus patch. The failing assertion and unexecuted queued-search/
+Cancel/restore tail remain blocking; Storybook4/packed19 are not claimed executed.
+Main's unchanged unclocked replay independently fails at the same Cancel-focus
+assertion (`/tmp/opencode/tableweave-wp08-main-before-focus.log`); no correction has
+been applied. Private causal investigation runs on6503 with shared180 outputs frozen.
+Private causal proof now identifies the actual phase boundary: connected/enabled
+Cancel is still below root[inert] at layout restoration; focus never takes effect.
+Modal passive cleanup clears inert afterward. This agrees with the pinned public
+overlay implementation, not a need for a vendor/global/inert patch. Private clean
+candidate passes59 executions (1 unclocked/19 unchanged/10 focused/29 adapted), both
+strict compilers and Biome. Main applies only that producer correction at source
+4ce900626de4479db7d1d69a7c51db64fca4fbd41ede957280189d82ca347144:
+layout capture stays; restoration moves to passive phase with current-authority,
+config/liveness/phase/surviving-focus checks before and after fallback callbacks.
+No timers, public APIs or other producers change. Independent source review is
+active; shared180 outputs remain the failing generation. This finding stays open
+until actual rebuilt19, permanent focus regressions and later packed proof pass.
+
+### Independent producer disposition
+
+A different reviewer reproduces both original failures and proves original TSX
+emission equals the old JS byte-for-byte. Corrected private emission passes65
+Chromium cases (1 unclocked/19 unchanged/16 focused/29 adapted selection/privacy),
+zero skips/flakes, plus strict TS6/5.9, Biome and two DOM-free SSR/import smokes.
+New negatives cover throwing reads, disabled/inert destinations and fallback
+disposal/reselection, alongside live denial/external focus/Strict/unmount safety.
+Main grants bounded **agent-approved under delegated authority** for source
+4ce900626de4479db7d1d69a7c51db64fca4fbd41ede957280189d82ca347144.
+This is not a root rebuild or full composition/packed pass. Main now authorizes
+the named fc01 build generation; preserve failing manifests before rebuilding,
+verify only toolbar JS changes and rerun the actual boundary before closing n1.
+
+**Resolved at the corrected producer/integration boundary:** actual unchanged19,
+unclocked regression, source selection/privacy29 and old/new built plays4+4 pass.
+Genuine packed composition19 and permanent public focus10 pass; a different reviewer
+freshly reruns all10 and verifies meaningful types. Main separately reviews the
+packed-focus module and runs three fresh production probes against its existing
+actual-consumer build. No timer/vendor/inert/global workaround or assertion removal.
+Complete ordered workflow/final packet approval remain separate from this defect.
+
+## WP-08 permanent focus fixture — delegated review session 17
+
+### n1 — Source/public regression approval; no blocking finding
+
+Independent fresh public10 retry0/zero skip/flaky, public/source TS6/5.9 and three
+supplied intended type negatives plus an extra missing-client-context negative pass.
+All14 inputs match manifest0480312190d5b5023d945bd5b0cf68f9c109e46c322f374dd63f05eee896a4d2.
+Worker's separate10 and12-file Biome are audited, not added as unique cases. Main
+grants bounded delegated permanent source/public fixture approval. That reviewer
+does not assess the packed runner; default/packed/full workflow gates stay separate.
+
+## WP-08 actual packed focus runner — main independent review session 18
+
+### n1 — Bounded genuine packed-focus approval
+
+Main reviews the worker's exact new runner012ae501b27508a2cc9efb69d57209642de5edef3f807a0e2995cb80752319e0:
+fixed regular-file/import allowlist, no source/vendor alias or installer, both strict
+programs, actual installed dist/component checks, physical module confinement,
+unique highest-priority JSON output, exact10 single retry0 results and parent-held
+source/staged/vendor/archive/previous-report guards, including on failure cleanup.
+
+Worker's real production10 pass on6509, both265-file programs,1240 module IDs and
+471501-byte CSS are audited. Main independently serves that unchanged consumer
+production build on6515 and passes three fresh ordinary/Strict/denied-context probes,
+including real input/Cancel/normal focus and private callback suppression. Initial
+standalone test-tool CJS import interop fails before any browser; using the actual
+consumer's require entry corrects that harness-only problem. No product code changes.
+Prior100 report SHA21c8a9fcdb08ba3e8fc43b022f9402f39e03b5beb478dc74c1b4e0032de04bb4
+remains unchanged. Main grants bounded packed-focus approval and registers this
+additional10 in future fresh explicit-profile runs after38+19, before final CLI.
+No full ordered stack/packet/G05/manual/device/legal/publication approval or merge.
+
+## WP-08 final default gate integration — delegated review session 19
+
+### n1 — Types-mode final console label is too broad (P3, resolved)
+
+The report correctly classifies types-only execution, but its final console line
+mentions Storybook/focus browser gates. Main changes only that line to include the
+actual mode; no browser assertion or result classification is changed.
+
+Independent review accepts the dual-namespace integration after123 fresh synthetic
+checks/two history readbacks and four actual strict compiler programs (composition
+668/focus532 files per version). Both snapshots remain parent-anchored; source
+rebasing/report redirection/invalid modes/child failures reject. Main's actual
+types and19+4+10 browser preflights are separate completed evidence. Main grants
+bounded delegated default-gate approval, registers its public/type commands and
+starts the complete ordered stack workflow with runtime/test/config inputs frozen.
+No full packet/remote acceptance or external gate follows before that result.
+
+## WP-08 complete ordered packet disposition
+
+The actual final stacked `pnpm check` completes with exit0:643 Vitest units/42 Node
+asset checks,411 baseline/tool/control/actual-built-play browser executions,110
+genuine packed production cases (43 unpatched tools; separate38 controls/19 real
+composition/10 focus on explicit profile),54 source and54 actual-packed Start
+HTTP/browser checks. Strict type/confinement, source SSR/import, frozen install,
+426-file lint, docs/18 regression probes pass. Pager's three LIMITATION cases remain
+negative host-behavior characterizations, not universal rejection containment.
+
+All verified packet findings are corrected and independently reviewed at their
+recorded scopes. Main grants **agent-approved under delegated authority** for the
+bounded WP-08 packet/component/composition/private temporary-profile integration.
+Actual180 output remains de82ce…; archives retain their tested90/100-member bytes.
+Final Git/PR remote delivery remains to verify. No personal maintainer acceptance,
+ordinary unpatched grouped/Strict runtime, full CJS table behavior, raw vendor
+structures, fullG05/manual/device/performance/real-consumer/legal/publication or
+merge permission is inferred. Raw criteria AC-16/25 adoption remains WP-09's duty.
+
+## WP-08 remote clean-checkout harness — review session 20
+
+### n1 — Ignored local manifest required before first type gate (P1, corrected)
+
+Both initial17b846b remote workflows fail before new type/browser work because
+verify-public-roots reads ignored controls/integration/.artifacts/roots-before.json.
+Local ordered success is preserved as local evidence, not remote acceptance.
+The trusted approved count/digest already lives in committed generation.mjs. Main
+removes only the historical manifest dependency, retains that fixed anchor and the
+dual parent-memory source snapshots, and adds clean-fixture regression coverage.
+No runtime/package/type/browser assertion change is authorized by this correction.
+Main's separate clean detached17b846b worktree installs/builds successfully, then
+reproduces the same ENOENT in actual types mode without copying historical outputs.
+The new9 regressions fail2/pass7 before the fix, pass9 afterward, including CI tmpdir
+mode. All652 units across36 files and foundation strict TS pass after the correction.
+Independent correction review and clean fixed checkout/remote replay remain next.
+
+Independent review now accepts verifierb808c4592601f4bb44d3c67e376af626442e80a177ed2039855fb7b0734f1293
+and test621e54145fe08d066d6897926120dd60c7fbaaedc5fea2c7a0c5d98adc12494c:
+9 permanent cases/31 private vectors/two physical clean relocations pass; two old
+verifier reproductions fail as expected. Strict TS6 foundation619 and TS5.9 targeted
+201-file programs pass without diagnostics; default discovery retains the test.
+Actual runtime/RAC bytes stay unchanged. Main grants bounded harness-correction
+approval and pushes the same corrected code for fresh remote runs while complete
+CI-mode checks continue in the separate cold worktree. Final remote/full-clean
+acceptance is not inferred from the focused approval.
+
+## WP-08 existing builder transition — review session 21
+
+### n1 — Cancel locator matches consecutive popover exits (P2 test, corrected)
+
+Both e385104 replacement workflows pass cold type gating/652 units, then the
+existing inverse/operand builder case fails at its immediate Cancel locator. The
+preceding Apply and new Rule options trigger can leave two matching buttons during
+exit. Private causal review must distinguish an exiting noninteractive subtree
+from simultaneously live modal sessions before choosing a fix. No source/test
+assertion or behavior has been relaxed. Earlier local/full packed passes remain
+historical and do not replace current remote failures.
+
+Private causal evidence classifies this blocker as a test lifecycle precondition,
+not a verified producer/animation defect. Old Cancel is an exit-retained element
+with pointer-events:none and later inert; actual native pointer events do not hit
+its obsolete handler and rapid keyboard focus stays in the new session. Role-count
+two is not proof of two usable native/AX sessions. The rapid diagnostic reproduces
+the exact strict error, while the original first-rule case passes normally.
+Private focused5/full55 settled-assertion runs pass; its CSS import-specifier serving
+adaptation is explicitly qualified and proves no canonical or manual-AT boundary.
+All2043 fingerprints/180+275 roots remain unchanged. Main independently replays
+the canonical fixture before applying only four added lifecycle/focus assertions;
+no shouldSkipAnimation expansion/vendor/runtime or original assertion changes.
+Main's original canonical focused case passes; after only four added lifecycle/focus
+assertions, the complete canonical55, strict TS and Biome pass on6521 without private
+CSS serving adaptation. Separate independent correction review is active. The cold
+04b3bf7 complete CI-mode workflow independently passes652/42/411/110/54+54, including
+the original case; local success does not reclassify remote failures as passed.
+
+## WP-08 builder assertion correction — review session 22
+
+### n1 — Exact four added assertions preserve intent (static/type approved)
+
+Independent review confirms corrected specf107a7aaf1c1e9e0359a4c92c62b2176645677c9cec378eaf52d364a37232cae;
+removing only four new lines restores the original entire spec byte-for-byte.
+All original actions/strict Cancel/inverse/operand/error/query/native assertions
+remain. Fresh strict TS5.9 and one-file Biome pass. Bounded test-only acceptance
+is conditional on canonical behavior, not a producer/animation correction.
+
+### n2 — Private native-loader server blocks before behavioral proof (setup)
+
+Three independent browser attempts reach no correction lines: a private native Vite
+API/config/cache setup cannot resolve the fixture's stylesheet import; its overlay
+intercepts the original first click. A separate CSS preflight is HTTP500. This is
+zero behavioral passes, not a correction defect or ignored failure. Main's exact
+canonical CLI runs pass focused-before/full55-after and clean-checkout55-after;
+main supplies that unchanged CLI/cwd/standard generated-cache path for a bounded
+independent replay without CSS/alias adaptation. Historical blocked outputs remain.
+All2043 fingerprints retain only the one expected test change; runtime180/275 roots
+stay fixed. Remote final acceptance remains pending.
+
+Independent exact canonical CLI replay now passes3/3, zero failed/skipped/flaky,
+retry0/unchanged30s budget. Corrected spec hash and all2043 input/180+275 generation
+seals remain unchanged. The three earlier native-loader setup failures stay separate.
+Main grants bounded **agent-approved under delegated authority** for the test-only
+correction7e3ff48, supported by main canonical55, clean CI-mode55 and independent3.
+Fresh full remote workflows are still required; no producer/animation/AX/manual/
+performance/general rapid-interaction or merge approval follows.
+
+## WP-08 pagination open-Select contrast — review session 23
+
+### n1 — Immediate open-menu scan lacks settled-state precondition (P2 test, corrected)
+
+Push45390462746 passes builder correction and reaches pager62; its English/Arabic
+light cases fail axe color-contrast at line461 immediately after Enter opens Select.
+Failure nodes carry data-entering=true and contrast4.36–4.42 against required4.5.
+It is not yet established whether settled tokens or transitional compositing cause
+the failure. Main allocates private unmodified-source phase/contrast measurements,
+not threshold relaxation, disabled rules, arbitrary sleeps or animation overrides.
+Producer/test changes wait for causal evidence and independent correction review.
+The sibling PR workflow45390474622 subsequently passes completely at the identical
+a668922 head. This is separate successful remote evidence, not a reclassification
+of failed push45390462746; both remain part of the phase/contrast investigation.
+Private canonical measurements return stable option contrast17.71:1 light and17.26:1
+dark in both locales, all four options. Raw frames show unchanged tokens with popup
+opacity0→1 over the pinned150ms entry. Main audits actual phase/axe data: steady
+open has no entering flag/animations, opacity1, zero violations and all four passing
+option nodes. Supplemental alpha calculation explains the remote gray pair but is
+not a freshly reproduced full-axe failure. Main allocates only three observed-state
+preconditions before the existing open scan; no rule/token/animation/timeout edits.
+Main canonical original4 pass (remote failure not locally reproduced), then actual
+corrected full62/strict TS/Biome pass. Main audits raw16 steady option nodes at the
+reported ratios and confirms all180 outputs unchanged. Only visible-listbox,
+entry-complete and opacity1 assertions are added before the open scan. Separate
+independent correction review and clean-checkout replay remain active before push.
+
+## WP-08 pager contrast preconditions — review session 24
+
+### n1 — Bounded test-only correction approved; no blocking finding
+
+Independent actual canonical4 cases and four fresh steady probes pass, retaining
+twelve zero-violation default axe scans/all16 option passing nodes at original4.5.
+Measured light17.71/dark17.26 ratios hold in English/Arabic. Strict TS5.9 actual
+845-file pager program and Biome pass. Corrected spec701436ff48c6429361d823949c45889bbb45cc1553261d717f00afd1e4cbbc68;
+removing the three assertions restores the complete original exact source hash.
+All10338 fingerprints and180/275 generation aggregates stay unchanged.
+
+Main canonical62 and separate clean CI-mode62 also pass, preserving the three
+LIMITATION characterizations. Main grants bounded **agent-approved under delegated
+authority** for test-only correction6df7914. All scans/rules/actions, original4.5
+threshold, deadlines/retry0 and actual animations remain unchanged. This does not
+repair or certify every transition frame or prove manual AT/WCAG compliance.
+Original red push/green PR remain historical; replacement full remote checks are
+still required before final delivery, and no PR merge is authorized.

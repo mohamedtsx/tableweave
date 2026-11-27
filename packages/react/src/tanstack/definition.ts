@@ -6,6 +6,7 @@ import type { QuerySchema } from "../contracts/types.js";
 import { createTableController } from "../controller/store.js";
 import type {
   ColumnPolicy,
+  TableCommand,
   TableController,
   TableState,
 } from "../controller/types.js";
@@ -46,16 +47,43 @@ export function createNativeColumnHelper<T extends RowData>() {
 function defineNativeTableImpl<S extends QuerySchema, T extends RowData>(
   input: NativeDefinitionInput<S, T>,
 ): NativeDefinition<S, T> {
+  const {
+    schema,
+    columns: inputColumns,
+    getRowId,
+    isRowSelectable,
+    selection,
+    multiSort,
+    details,
+    evaluation: inputEvaluation,
+  } = input;
+  const evaluationConfig = { ...inputEvaluation };
+  const evaluation = Object.freeze({
+    ...evaluationConfig,
+    registry: evaluationConfig.registry ?? defaultOperatorRegistry,
+    ...(evaluationConfig.accessors
+      ? { accessors: Object.freeze({ ...evaluationConfig.accessors }) }
+      : {}),
+    ...(evaluationConfig.searchMatchers
+      ? {
+          searchMatchers: Object.freeze({ ...evaluationConfig.searchMatchers }),
+        }
+      : {}),
+  });
   if (
-    typeof input.getRowId !== "function" ||
-    (input.isRowSelectable !== undefined &&
-      typeof input.isRowSelectable !== "function") ||
-    !Array.isArray(input.columns) ||
-    (input.multiSort !== undefined && typeof input.multiSort !== "boolean")
+    typeof getRowId !== "function" ||
+    (isRowSelectable !== undefined && typeof isRowSelectable !== "function") ||
+    !Array.isArray(inputColumns) ||
+    (selection !== undefined &&
+      selection !== false &&
+      selection !== true &&
+      selection !== "multiple" &&
+      selection !== "single") ||
+    (multiSort !== undefined && typeof multiSort !== "boolean")
   )
     nativeFail("native.definition");
-  if (input.multiSort && input.schema.sorting?.multi !== true)
-    nativeFail("native.sorting");
+  const selectionMode = selection === true ? "multiple" : selection || false;
+  if (multiSort && schema.sorting?.multi !== true) nativeFail("native.sorting");
   const seen = new Set<string>();
   const policies: ColumnPolicy[] = [];
   const sortable = new Set<string>();
@@ -71,9 +99,11 @@ function defineNativeTableImpl<S extends QuerySchema, T extends RowData>(
     )
       nativeFail("native.definition");
     return Object.freeze(
-      columns.map((column) => {
-        if (!column || typeof column !== "object")
+      columns.map((sourceColumn) => {
+        if (!sourceColumn || typeof sourceColumn !== "object")
           nativeFail("native.definition");
+        const column = { ...sourceColumn };
+        column.meta = { ...column.meta };
         const id = column.id;
         if (
           !validId(id) ||
@@ -104,15 +134,15 @@ function defineNativeTableImpl<S extends QuerySchema, T extends RowData>(
         // Native accessors accept an input index; filter field accessors are
         // index-independent semantic values. Never silently evaluate a computed /
         // aliased native column against an unrelated direct record property.
-        const field = Object.hasOwn(input.schema.fields, id)
-          ? input.schema.fields[id]
+        const field = Object.hasOwn(schema.fields, id)
+          ? schema.fields[id]
           : undefined;
         if (
           field &&
           field.owner !== "none" &&
           (("accessorFn" in column && column.accessorFn !== undefined) ||
             ("accessorKey" in column && column.accessorKey !== id)) &&
-          typeof input.evaluation?.accessors?.[id] !== "function"
+          typeof evaluation.accessors?.[id] !== "function"
         )
           nativeFail("native.definition");
         if (accessor) sortable.add(id);
@@ -136,48 +166,31 @@ function defineNativeTableImpl<S extends QuerySchema, T extends RowData>(
           enableColumnFilter: false,
           enableSorting: canSort,
           enableMultiSort:
-            canSort &&
-            input.multiSort === true &&
-            column.enableMultiSort !== false,
+            canSort && multiSort === true && column.enableMultiSort !== false,
         });
       }),
     );
   };
-  const columns = walk(input.columns);
-  for (const [id, field] of Object.entries(input.schema.fields))
+  const columns = walk(inputColumns);
+  for (const [id, field] of Object.entries(schema.fields))
     if (field.sort && !sortable.has(id)) nativeFail("native.definition");
   if (!policies.some((column) => !column.utility))
     nativeFail("native.definition");
-  const evaluation = Object.freeze({
-    ...input.evaluation,
-    registry: input.evaluation?.registry ?? defaultOperatorRegistry,
-    ...(input.evaluation?.accessors
-      ? { accessors: Object.freeze({ ...input.evaluation.accessors }) }
-      : {}),
-    ...(input.evaluation?.searchMatchers
-      ? {
-          searchMatchers: Object.freeze({ ...input.evaluation.searchMatchers }),
-        }
-      : {}),
-  });
   const definition = Object.freeze({
     controllerDefinition: defineController(
       {
-        schema: input.schema,
+        schema,
         columns: policies,
-        ...(input.selection !== undefined
-          ? { selection: input.selection }
-          : {}),
-        ...(input.details !== undefined ? { details: input.details } : {}),
+        selection: selectionMode !== false,
+        ...(details !== undefined ? { details } : {}),
       },
       evaluation.registry,
     ),
     columns,
-    getRowId: input.getRowId,
-    ...(input.isRowSelectable
-      ? { isRowSelectable: input.isRowSelectable }
-      : {}),
-    multiSort: input.multiSort ?? false,
+    getRowId,
+    ...(isRowSelectable ? { isRowSelectable } : {}),
+    multiSort: multiSort ?? false,
+    selectionMode,
     evaluation,
   });
   definitions.add(definition);
@@ -215,6 +228,12 @@ export function assertNativeState<S extends QuerySchema, T extends RowData>(
     state.definitionIdentity !== canonicalJson(definition.controllerDefinition)
   )
     nativeFail("native.definition");
+  const selectedCount = Object.keys(state.selection).length;
+  if (
+    (definition.selectionMode === false && selectedCount !== 0) ||
+    (definition.selectionMode === "single" && selectedCount > 1)
+  )
+    nativeFail("native.managed");
   const leaves = new Map<string, NativeColumnDef<T>>();
   const walk = (columns: readonly NativeColumnDef<T>[]) => {
     for (const column of columns) {
@@ -243,17 +262,32 @@ export function createNativeController<
   options: NativeControllerOptions<S>,
 ): TableController<S> {
   assertNativeDefinition(definition);
+  let captured: NativeControllerOptions<S>;
+  try {
+    captured = { ...options };
+  } catch {
+    return stateFail("state.ownership");
+  }
+  const { validateCommand, validateState } = captured;
   if (
-    options.validateState !== undefined &&
-    typeof options.validateState !== "function"
+    (validateState !== undefined && typeof validateState !== "function") ||
+    (validateCommand !== undefined && typeof validateCommand !== "function")
   )
     stateFail("state.ownership");
   const controllerOptions = {
-    ...options,
+    ...captured,
     registry: definition.evaluation.registry ?? defaultOperatorRegistry,
+    validateCommand(command: TableCommand<S>) {
+      if (
+        definition.selectionMode !== "multiple" &&
+        command.type === "selection.page"
+      )
+        nativeFail("native.managed");
+      return validateCommand?.(command);
+    },
     validateState(state: TableState<S>) {
       assertNativeState(definition, state);
-      return options.validateState?.(state);
+      return validateState?.(state);
     },
   };
   const controller = createTableController(

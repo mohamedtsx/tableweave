@@ -1,0 +1,65 @@
+.tw-column-chooser,
+.tw-sorting {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.tw-column-controls-popover {
+  inline-size: min(24rem, calc(100vw - 2rem));
+  max-block-size: min(38rem, calc(100dvh - 3rem));
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+.tw-column-controls-popover [data-slot="popover-dialog"] {
+  min-inline-size: 0;
+}
+.tw-column-chooser-list,
+.tw-sorting-fields,
+.tw-sorting-priorities {
+  display: grid;
+  gap: 0.75rem;
+  margin-block-start: 0.75rem;
+}
+.tw-column-chooser-item,
+.tw-sorting-field {
+  min-inline-size: 0;
+  text-align: start;
+}
+.tw-column-controls-reason,
+.tw-sorting-priority {
+  margin-block: 0.25rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: start;
+}
+.tw-sorting-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-block-start: 0.375rem;
+}
+.tw-sorting-actions button {
+  min-block-size: 2.75rem;
+  max-inline-size: 100%;
+  white-space: normal;
+  height: auto;
+}
+.tw-column-chooser-item [data-slot="checkbox-content"] {
+  min-block-size: 2.75rem;
+}
+.tw-column-chooser-item [data-slot="checkbox-control"] {
+  border: 1px solid var(--muted);
+}
+.tw-column-controls-popover [data-focus-visible="true"] {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.tw-sorting-priorities {
+  padding-inline-start: 0;
+  list-style: none;
+}
+@media (min-width: 768px) {
+  .tw-sorting-actions button,
+  .tw-column-chooser-item [data-slot="checkbox-content"] {
+    min-block-size: 2rem;
+  }
+}

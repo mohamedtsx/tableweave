@@ -91,9 +91,9 @@ is enabled by these local commands.
 | --- | --- |
 | `pnpm install:check` | Fresh manifest-only workspace install with the frozen lockfile; may reuse dependency cache |
 | `pnpm build` | Clean owned package `dist/` outputs, emit ESM/declarations, copy the CSS entry |
-| `pnpm typecheck` | Build packages and Start's generated router, then strict Storybook/harness/app TypeScript 6 |
+| `pnpm typecheck` | Build packages/Start generated router; strict tool/control/public sources under TS6/5.9 |
 | `pnpm lint` / `pnpm format` | Biome check / format code and configs only, not unrelated Markdown |
-| `pnpm test` | Emitted-boundary guards, contracts/operators, controller/native models and resource race/lifecycle tests; browser behavior is separate |
+| `pnpm test` | Emitted-boundary guards, contracts/operators, controller/native/resource/control units and source selection SSR; browser behavior is separate |
 | `pnpm test:contracts` | Build plus schema/operator/date/identity and synthetic translator vectors |
 | `pnpm test:controller` | Build plus accepted-state/reset/controlled-transaction/lifecycle tests |
 | `pnpm test:native` | Build plus v9 definition/carrier/client/manual/native transition tests; not G-01 by itself |
@@ -101,10 +101,12 @@ is enabled by these local commands.
 | `pnpm test:start` | Actual Start build, dev/production HTTP+Chromium SSR/hydration fixtures and server-only bundle markers |
 | `pnpm pack:start` | Actual-tarball Start strict install/types/build/dev+production HTTP/browser proof; no workspace aliases |
 | `pnpm test:filter-tools` | Candidate helper/option-source/date vectors; UI/packet acceptance remains separate |
-| `pnpm pack:check` | Inspect tarballs; isolated strict TS 5.9/6 installs/declarations, runtime/bundle/CSS guards and actual packed filter-tool production Chromium |
+| `pnpm pack:check` | Inspect tarballs; unpatched types/imports/bundles and43 tool cases, plus separate explicit-profile38 control/19 real-composition/10 focus production cases |
 | `pnpm storybook` | Local synthetic vendor scene at `http://127.0.0.1:6006`; telemetry disabled |
 | `pnpm storybook:build` | Build the static smoke workbench, without deploying it |
-| `pnpm test:browser` | Chromium smoke/native (6011), collection (6009), resource (6415), toolbar (6429), builder (6433) and combined emitted tools (6443); build packages/Storybook first |
+| `pnpm test:browser` | Baseline/native/resource, actual tools, source controls, emitted composition and built Storybook; build first |
+| `pnpm test:controls:source` | Six serialized source control/renderer scopes; actual vendor dependencies and one source factory registry |
+| `pnpm test:controls:public` | Retained38 controls/four plays plus real19 composition/four plays/ten focus cases; frozen outputs and distinct named evidence runs |
 | `pnpm check:docs` | Structural Markdown checks and checker regression probes |
 | `pnpm check` | Full local sequence above, including fresh-install verification |
 | `pnpm changeset status` | Local Changesets status only; no versioning/publication configured for private scaffolds |
@@ -140,6 +142,21 @@ WP-06 separately has [bounded delegated G-04 proof](docs/evidence/wp-06-start-20
 from actual source/tarball Start, not from that story. Next integration and final
 UI/reference-informed design, device/AT/performance/real-consumer/release gates
 remain separate; no PR merge is authorized.
+
+WP-08's [private controls contract](docs/engineering/wp-08-controls.md) distinguishes
+approved source/public types from final integration. The default check now includes
+the actual control browser boundaries rather than excluding new regressions. It is
+**bounded private/prerelease integration**, not personal/stable acceptance: the
+retained plain StrictMode defect requires the user-selected explicit runtime profile.
+Both isolated and complete ordered stacked workflows pass after independent review,
+including real tool/control composition and permanent public/packed focus regressions.
+Final remote delivery and personal maintainer review remain separate. Follow the
+[private runtime setup](packages/heroui/compat/rac-table-clone/README.md): extract
+the reviewed assets from the actual archive before installation, explicitly register
+the patch and run the byte verifier. Tableweave does not configure or patch a
+consumer automatically. Unpatched public declarations remain separately tested;
+ordinary unpatched grouped/Strict styled runtime is not advertised as supported.
+
 
 ## Authority and licensing
 

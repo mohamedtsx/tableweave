@@ -1,0 +1,48 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@tableweave/react": ["../../../packages/react/src/index.ts"],
+      "@tableweave/react/contracts": [
+        "../../../packages/react/src/contracts/index.ts"
+      ],
+      "@tableweave/react/filters": [
+        "../../../packages/react/src/filters/index.ts"
+      ],
+      "selection-producer": ["../../../packages/heroui/src/selection/index.ts"],
+      "columns-producer": ["../../../packages/heroui/src/columns/index.ts"],
+      "sorting-producer": ["../../../packages/heroui/src/sorting/index.ts"],
+      "@pagination-under-test": [
+        "../../../packages/heroui/src/pagination/index.ts"
+      ],
+      "@heroui/react/*": [
+        "../../../packages/heroui/node_modules/@heroui/react/dist/components/*/index.d.ts"
+      ],
+      "@heroui/styles": [
+        "../../../packages/heroui/node_modules/@heroui/styles/dist/index.d.ts"
+      ],
+      "react-aria": [
+        "../../../packages/heroui/node_modules/react-aria/dist/types/exports/index.d.ts"
+      ],
+      "react-aria/*": [
+        "../../../packages/heroui/node_modules/react-aria/dist/types/exports/*.d.ts"
+      ],
+      "react-aria-components": [
+        "../../../packages/heroui/node_modules/react-aria-components/dist/types/exports/index.d.ts"
+      ],
+      "react-aria-components/*": [
+        "../../../packages/heroui/node_modules/react-aria-components/dist/types/exports/*.d.ts"
+      ],
+      "react": ["../../../node_modules/@types/react/index.d.ts"],
+      "react/*": ["../../../node_modules/@types/react/*.d.ts"],
+      "react-dom": ["../../../node_modules/@types/react-dom/index.d.ts"],
+      "react-dom/*": ["../../../node_modules/@types/react-dom/*.d.ts"],
+      "@tanstack/react-table": [
+        "../../../packages/react/node_modules/@tanstack/react-table/dist/index.d.ts"
+      ],
+      "@tanstack/table-core": [
+        "../../../packages/react/node_modules/@tanstack/table-core/dist/index.d.ts"
+      ]
+    }
+  }
+}

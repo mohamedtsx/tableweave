@@ -6,7 +6,8 @@
   "license": "UNLICENSED",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "compat/rac-table-clone"
   ],
   "sideEffects": [
     "./dist/styles.css"

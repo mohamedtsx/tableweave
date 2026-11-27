@@ -22,6 +22,10 @@ files and distinguish what is retained versus transient.
 
 ## Captures
 
+- [WP-08 final-stack observations — 2026-11-24](wp-08-stack-2026-11-24.md):
+  exact WP-07 transport/reconciliation and initial merged checks; real-tool and
+  complete combined workflow results are recorded only after execution.
+
 - [WP-06 actual Start proof — 2026-11-24](wp-06-start-2026-11-24.md):
   independent isolation corrections, strict declaration/install confinement and
   completed actual source/tarball HTTP SSR/hydration; scoped delegated G-04 only.
@@ -29,6 +33,10 @@ files and distinguish what is retained versus transient.
 - [WP-07 filter-tools source integration — 2026-11-24](wp-07-filter-tools-2026-11-24.md):
   independently corrected helpers/real components, completed isolated full workflow,
   strict public types and actual-tarball browser proof; final WP-06 stack separate.
+
+- [WP-08 controls source/package observations — 2026-11-24](wp-08-controls-2026-11-24.md):
+  independently corrected sources, real strict isolated build/types/runtime/package
+  boundaries; combined actual-browser/stack proof remains separate.
 
 - [WP-05 private resource producer — 2026-11-24](wp-05-resource-2026-11-24.md):
   independently corrected Suspense lifetime, deterministic races and isolated full

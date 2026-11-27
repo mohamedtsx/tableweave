@@ -95,3 +95,38 @@ interface rewrite follows. The same issue affects ListBox's scoped entry: three
 declaration-only files differ, with all528 upstream runtime/license bytes otherwise
 matching. Both strict compiler versions, public/actual-packed/browser and frozen
 installation checks now pass; final combined-stack delivery remains separate.
+
+## WP-08 ADR-07 temporary runtime compatibility direction
+
+**User-selected direction; verification and delivery pending.** The maintainer
+explicitly chooses an application-side temporary patch for private/prerelease
+delivery, conditional on independent review and genuine packed-consumer tests.
+This extends neither WP-04's declaration-only approval nor ordinary unpatched
+runtime support by implication. FR-01/06/15 and the grouped/controlled/lifetime
+acceptance remain intact; no product behavior is removed to fit the dependency.
+
+RAC1.22.1's grouped table clone copies a clean header cache without its dirty flag,
+causing plain StrictMode and genuine native empty/populated failures. The registry
+[current release](https://registry.npmjs.org/react-aria-components/latest) remains
+1.22.1; inspected earlier stable releases share the omission. A private minimal
+copy of the actual boolean preserves clean and dirty states and passes tested
+current NativeCollection same-group order/visibility/current-record/Strict paths.
+The [bounded experiments and construction plan](../planning/wp-08-implementation-plan.md#candidate-clone-only-profile-construction-allocation)
+record causal evidence and limits; independent repair review is still required.
+
+The proposed profile retains compound HeroUI/Aria presentation and the one native
+processing owner. Documented dynamic header/cache APIs were tested privately but
+retained both Strict failures. A wider public-hooks renderer is not selected.
+A second vendor traversal defect affects an additional raw cached-Collection
+probe; its broader repair is excluded because it is not shown necessary for this
+tested public Tableweave contract. Neither custom vendor structures nor hot native
+definition replacement become supported APIs through the profile.
+
+Any eventual profile must ship explicit assets, exact byte verification and
+application-owned pre-install registration; no automatic mutation or fake enabled
+flag. Root patches do not propagate through archives. Keep actual unpatched public
+declaration consumers separate from profiled runtime production tests, and retain
+negative unpatched behavior and removal criteria. Headless remains unaffected.
+Candidate construction alone approves no registration, install or package shipping.
+Stable/full G-05, third-party legal/publication, manual/device/performance and
+personal PR review remain separate; all PRs stay unmerged.

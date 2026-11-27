@@ -19,6 +19,7 @@ for (const file of [
   "patches/react-aria-components@1.22.1.patch",
   "patches/@tanstack__start-server-core@1.169.40.patch",
   "patches/@tanstack__start-plugin-core@1.171.50.patch",
+  "patches/react-aria-components@1.22.1-tableweave.patch",
   "patches/@heroui__react@3.2.8.patch",
 ]) {
   await mkdir(dirname(join(target, file)), { recursive: true });
